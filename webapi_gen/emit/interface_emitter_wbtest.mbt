@@ -1224,6 +1224,171 @@ test "mbt_code_gen_multi wasm FFI snapshot for overloaded methods" {
 }
 
 ///|
+test "convenience method for optional interface return" {
+  let idl =
+    #|interface Element {};
+    #|interface Node {};
+    #|interface Document : Node {
+    #|  Element? querySelector(DOMString selectors);
+    #|  NodeList querySelectorAll(DOMString selectors);
+    #|};
+    #|interface NodeList {};
+  let interface_emitter = make_interface_emitter(idl)
+  let (_, emits) = interface_emitter.emit("Document")
+  let multi = mbt_code_gen_multi(emits)
+  inspect(
+    multi.shared,
+    content=(
+      #|// Do not edit. This file is generated.
+      #|// MoonBit type: Document
+      #|
+      #|
+      #|/// [Document](https://developer.mozilla.org/en-US/docs/Web/API/Document)
+      #|#external
+      #|pub type Document
+      #|
+      #|pub impl TJsValue for Document with to_js(self: Document) -> JsValue = "%identity"
+      #|
+      #|pub impl FromJsAny for Document with from_js_any(value : JsAny) -> Document = "%identity"
+      #|
+      #|pub fn[T: TDocument] Document::into(self : Document) -> T = "%identity"
+      #|
+      #|pub impl TDocument for Document
+      #|
+      #|pub impl TNode for Document
+      #|
+      #|/// [Document](https://developer.mozilla.org/en-US/docs/Web/API/Document) interface.
+      #|pub trait TDocument: TNode {
+      #|  query_selector_opt(self : Self, selectors : String) -> Element? = _
+      #|  query_selector_all(self : Self, selectors : String) -> NodeList = _
+      #|}
+      #|
+      #|/// [Document.querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector)
+      #|impl TDocument with query_selector_opt(self : Self, 
+      #|selectors : String) -> Element? {
+      #|  document_query_selector_ffi(TJsValue::to_js(self), TJsValue::to_js(selectors)).to_option()
+      #|}
+      #|
+      #|/// [Document.querySelectorAll](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll)
+      #|impl TDocument with query_selector_all(self : Self, 
+      #|selectors : String) -> NodeList {
+      #|  document_query_selector_all_ffi(TJsValue::to_js(self), TJsValue::to_js(selectors))
+      #|}
+      #|
+      #|pub fn[T : TElement] Document::query_selector(self : Document, 
+      #|selectors : String) -> T {
+      #|  self.query_selector_opt(selectors).unwrap().into()
+      #|}
+    ),
+  )
+  // FFI should be unchanged (no _opt in FFI names)
+  inspect(
+    multi.js_ffi,
+    content=(
+      #|extern "js" fn document_query_selector_ffi(obj: JsValue, selectors: JsValue) -> JsValue = "(obj, selectors) => obj.querySelector(selectors)"
+      #|
+      #|extern "js" fn document_query_selector_all_ffi_js(obj: JsValue, selectors: JsValue) -> JsValue = "(obj, selectors) => obj.querySelectorAll(selectors)"
+      #|
+      #|///|
+      #|fn document_query_selector_all_ffi(obj: JsValue, selectors: JsValue) -> NodeList {
+      #|  document_query_selector_all_ffi_js(obj, selectors).unsafe_cast()
+      #|}
+    ),
+  )
+}
+
+///|
+test "convenience method with optional args" {
+  let idl =
+    #|interface Node {};
+    #|interface Element {};
+    #|interface ParentNode {
+    #|  Element? querySelector(DOMString selectors);
+    #|};
+  let interface_emitter = make_interface_emitter(idl)
+  let (_, emits) = interface_emitter.emit("ParentNode")
+  let multi = mbt_code_gen_multi(emits)
+  inspect(
+    multi.shared,
+    content=(
+      #|// Do not edit. This file is generated.
+      #|// MoonBit type: ParentNode
+      #|
+      #|
+      #|/// [ParentNode](https://developer.mozilla.org/en-US/docs/Web/API/ParentNode)
+      #|#external
+      #|pub type ParentNode
+      #|
+      #|pub impl TJsValue for ParentNode with to_js(self: ParentNode) -> JsValue = "%identity"
+      #|
+      #|pub impl FromJsAny for ParentNode with from_js_any(value : JsAny) -> ParentNode = "%identity"
+      #|
+      #|pub fn[T: TParentNode] ParentNode::into(self : ParentNode) -> T = "%identity"
+      #|
+      #|pub impl TParentNode for ParentNode
+      #|
+      #|/// [ParentNode](https://developer.mozilla.org/en-US/docs/Web/API/ParentNode) interface.
+      #|pub trait TParentNode: TJsValue {
+      #|  query_selector_opt(self : Self, selectors : String) -> Element? = _
+      #|}
+      #|
+      #|/// [ParentNode.querySelector](https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/querySelector)
+      #|impl TParentNode with query_selector_opt(self : Self, 
+      #|selectors : String) -> Element? {
+      #|  parent_node_query_selector_ffi(TJsValue::to_js(self), TJsValue::to_js(selectors)).to_option()
+      #|}
+      #|
+      #|pub fn[T : TElement] ParentNode::query_selector(self : ParentNode, 
+      #|selectors : String) -> T {
+      #|  self.query_selector_opt(selectors).unwrap().into()
+      #|}
+    ),
+  )
+}
+
+///|
+test "no convenience method for non-interface optional return" {
+  let idl =
+    #|interface TestInterface {
+    #|  DOMString? getName();
+    #|};
+  let interface_emitter = make_interface_emitter(idl)
+  let (_, emits) = interface_emitter.emit("TestInterface")
+  let multi = mbt_code_gen_multi(emits)
+  // String? return should NOT get _opt rename or convenience method
+  inspect(
+    multi.shared,
+    content=(
+      #|// Do not edit. This file is generated.
+      #|// MoonBit type: TestInterface
+      #|
+      #|
+      #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface)
+      #|#external
+      #|pub type TestInterface
+      #|
+      #|pub impl TJsValue for TestInterface with to_js(self: TestInterface) -> JsValue = "%identity"
+      #|
+      #|pub impl FromJsAny for TestInterface with from_js_any(value : JsAny) -> TestInterface = "%identity"
+      #|
+      #|pub fn[T: TTestInterface] TestInterface::into(self : TestInterface) -> T = "%identity"
+      #|
+      #|pub impl TTestInterface for TestInterface
+      #|
+      #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface) interface.
+      #|pub trait TTestInterface: TJsValue {
+      #|  get_name(self : Self) -> String? = _
+      #|}
+      #|
+      #|/// [TestInterface.getName](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface/getName)
+      #|impl TTestInterface with get_name(self : Self) -> String? {
+      #|  test_interface_get_name_ffi(TJsValue::to_js(self)).to_option()
+      #|}
+    ),
+  )
+}
+
+///|
 test "InterfaceEmitter resolves typedef→callback chain in attribute setter" {
   let idl =
     #|interface Event {};

@@ -1,10 +1,16 @@
 ///|
 /// File System Access API Demo - pick and read files using showOpenFilePicker
-using @webapi {document, type File, type HTMLButtonElement, type HTMLDivElement}
+using @webapi {
+  document,
+  type File,
+  type HTMLButtonElement,
+  type HTMLDivElement,
+  type Element,
+}
 
 ///|
 fn main {
-  let app = document.get_element_by_id("app").unwrap()
+  let app : Element = document.get_element_by_id("app")
   let container : HTMLDivElement = document.create_element("div").into()
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",

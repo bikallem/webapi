@@ -26,8 +26,8 @@ pub trait TPlugin: TJsValue {
   description(self : Self) -> String = _
   filename(self : Self) -> String = _
   length(self : Self) -> UInt = _
-  item(self : Self, index : UInt) -> MimeType? = _
-  named_item(self : Self, name : String) -> MimeType? = _
+  item_opt(self : Self, index : UInt) -> MimeType? = _
+  named_item_opt(self : Self, name : String) -> MimeType? = _
 }
 
 ///|
@@ -56,12 +56,22 @@ impl TPlugin with length(self : Self) -> UInt {
 
 ///|
 /// [Plugin.item](https://developer.mozilla.org/en-US/docs/Web/API/Plugin/item)
-impl TPlugin with item(self : Self, index : UInt) -> MimeType? {
+impl TPlugin with item_opt(self : Self, index : UInt) -> MimeType? {
   plugin_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }
 
 ///|
 /// [Plugin.namedItem](https://developer.mozilla.org/en-US/docs/Web/API/Plugin/namedItem)
-impl TPlugin with named_item(self : Self, name : String) -> MimeType? {
+impl TPlugin with named_item_opt(self : Self, name : String) -> MimeType? {
   plugin_named_item_ffi(TJsValue::to_js(self), TJsValue::to_js(name)).to_option()
+}
+
+///|
+pub fn[T : TMimeType] Plugin::item(self : Plugin, index : UInt) -> T {
+  self.item_opt(index).unwrap().into()
+}
+
+///|
+pub fn[T : TMimeType] Plugin::named_item(self : Plugin, name : String) -> T {
+  self.named_item_opt(name).unwrap().into()
 }

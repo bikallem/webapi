@@ -264,9 +264,9 @@ pub trait TDocument: TNode {
   capture_events(self : Self) -> Unit = _
   release_events(self : Self) -> Unit = _
   all(self : Self) -> HTMLAllCollection = _
-  element_from_point(self : Self, x : Double, y : Double) -> Element? = _
+  element_from_point_opt(self : Self, x : Double, y : Double) -> Element? = _
   elements_from_point(self : Self, x : Double, y : Double) -> Array[Element] = _
-  caret_position_from_point(
+  caret_position_from_point_opt(
     self : Self,
     x : Double,
     y : Double,
@@ -280,9 +280,9 @@ pub trait TDocument: TNode {
   set_onfullscreenchange(self : Self, onfullscreenchange : (Event) -> JsValue) -> Unit = _
   onfullscreenerror(self : Self) -> EventHandler = _
   set_onfullscreenerror(self : Self, onfullscreenerror : (Event) -> JsValue) -> Unit = _
-  get_selection(self : Self) -> Selection? = _
+  get_selection_opt(self : Self) -> Selection? = _
   timeline(self : Self) -> DocumentTimeline = _
-  get_element_by_id(self : Self, element_id : String) -> Element? = _
+  get_element_by_id_opt(self : Self, element_id : String) -> Element? = _
   custom_element_registry(self : Self) -> CustomElementRegistry = _
   active_element(self : Self) -> Element = _
   style_sheets(self : Self) -> StyleSheetList = _
@@ -301,7 +301,7 @@ pub trait TDocument: TNode {
   append(self : Self, nodes : Array[&TDocumentAppendNodes]) -> Unit = _
   replace_children(self : Self, nodes : Array[&TDocumentReplaceChildrenNodes]) -> Unit = _
   move_before(self : Self, node : &TNode, child : &TNode) -> Unit = _
-  query_selector(self : Self, selectors : String) -> Element? = _
+  query_selector_opt(self : Self, selectors : String) -> Element? = _
   query_selector_all(self : Self, selectors : String) -> NodeList = _
   create_expression(
     self : Self,
@@ -1268,7 +1268,7 @@ impl TDocument with all(self : Self) -> HTMLAllCollection {
 
 ///|
 /// [Document.elementFromPoint](https://developer.mozilla.org/en-US/docs/Web/API/Document/elementFromPoint)
-impl TDocument with element_from_point(self : Self, x : Double, y : Double) -> Element? {
+impl TDocument with element_from_point_opt(self : Self, x : Double, y : Double) -> Element? {
   document_element_from_point_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(x),
@@ -1290,7 +1290,7 @@ impl TDocument with elements_from_point(self : Self, x : Double, y : Double) -> 
 
 ///|
 /// [Document.caretPositionFromPoint](https://developer.mozilla.org/en-US/docs/Web/API/Document/caretPositionFromPoint)
-impl TDocument with caret_position_from_point(
+impl TDocument with caret_position_from_point_opt(
   self : Self,
   x : Double,
   y : Double,
@@ -1366,7 +1366,7 @@ impl TDocument with set_onfullscreenerror(
 
 ///|
 /// [Document.getSelection](https://developer.mozilla.org/en-US/docs/Web/API/Document/getSelection)
-impl TDocument with get_selection(self : Self) -> Selection? {
+impl TDocument with get_selection_opt(self : Self) -> Selection? {
   document_get_selection_ffi(TJsValue::to_js(self)).to_option()
 }
 
@@ -1378,7 +1378,7 @@ impl TDocument with timeline(self : Self) -> DocumentTimeline {
 
 ///|
 /// [Document.getElementById](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById)
-impl TDocument with get_element_by_id(self : Self, element_id : String) -> Element? {
+impl TDocument with get_element_by_id_opt(self : Self, element_id : String) -> Element? {
   document_get_element_by_id_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(element_id),
@@ -1505,7 +1505,7 @@ impl TDocument with move_before(self : Self, node : &TNode, child : &TNode) -> U
 
 ///|
 /// [Document.querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector)
-impl TDocument with query_selector(self : Self, selectors : String) -> Element? {
+impl TDocument with query_selector_opt(self : Self, selectors : String) -> Element? {
   document_query_selector_ffi(TJsValue::to_js(self), TJsValue::to_js(selectors)).to_option()
 }
 
@@ -3152,4 +3152,44 @@ impl TDocument with convert_point_from_node(
     from.to_js(),
     TJsValue::to_js(options),
   )
+}
+
+///|
+pub fn[T : TElement] Document::element_from_point(
+  self : Document,
+  x : Double,
+  y : Double,
+) -> T {
+  self.element_from_point_opt(x, y).unwrap().into()
+}
+
+///|
+pub fn[T : TCaretPosition] Document::caret_position_from_point(
+  self : Document,
+  x : Double,
+  y : Double,
+  options? : CaretPositionFromPointOptions = CaretPositionFromPointOptions::empty(),
+) -> T {
+  self.caret_position_from_point_opt(x, y, options~).unwrap().into()
+}
+
+///|
+pub fn[T : TSelection] Document::get_selection(self : Document) -> T {
+  self.get_selection_opt().unwrap().into()
+}
+
+///|
+pub fn[T : TElement] Document::get_element_by_id(
+  self : Document,
+  element_id : String,
+) -> T {
+  self.get_element_by_id_opt(element_id).unwrap().into()
+}
+
+///|
+pub fn[T : TElement] Document::query_selector(
+  self : Document,
+  selectors : String,
+) -> T {
+  self.query_selector_opt(selectors).unwrap().into()
 }

@@ -32,9 +32,9 @@ fn main {
     let count = touches.length()
     // Use changedTouches for touchend (touches list is empty)
     let touch = if count > 0 {
-      touches.item(0U)
+      touches.item_opt(0U)
     } else {
-      te.changed_touches().item(0U)
+      te.changed_touches().item_opt(0U)
     }
     guard touch is Some(t) else { () }
     let x = t.client_x().to_int()
@@ -57,7 +57,7 @@ fn main {
     touch_area.add_event_listener(event_type, fn(event) { handle_touch(event) })
   }
 
-  let app = doc.get_element_by_id("app").unwrap()
+  let app : @webapi.Element = doc.get_element_by_id("app")
   let container : @webapi.HTMLDivElement = doc.create_element("div").into()
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",

@@ -1,5 +1,10 @@
 ///|
-using @webapi {document, type HTMLCanvasElement, type CanvasRenderingContext2D}
+using @webapi {
+  document,
+  type HTMLCanvasElement,
+  type CanvasRenderingContext2D,
+  type Element,
+}
 
 ///|
 /// Canvas Drawing Demo - Beautiful Scenery
@@ -13,7 +18,7 @@ fn main {
   .set_attribute(
     "style", "border: 2px solid #333; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);",
   )
-  document.get_element_by_id("app").unwrap().append_child(canvas) |> ignore
+  (document.get_element_by_id("app") : Element).append_child(canvas) |> ignore
 
   // Get 2D context
   let ctx : CanvasRenderingContext2D = canvas.get_context("2d").unwrap().into()

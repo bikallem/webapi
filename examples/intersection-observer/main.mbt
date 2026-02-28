@@ -75,12 +75,12 @@ fn main {
   // Observe all boxes
   let boxes = container.query_selector_all(".box")
   for i = 0U; i < boxes.length(); i = i + 1 {
-    guard boxes.item(i) is Some(node) else { continue }
+    guard boxes.item_opt(i) is Some(node) else { continue }
     let el : @webapi.Element = @webapi.TJsValue::to_js(node).into()
     observer.observe(el)
   }
 
-  let app = doc.get_element_by_id("app").unwrap()
+  let app : @webapi.Element = doc.get_element_by_id("app")
   let outer : @webapi.HTMLDivElement = doc.create_element("div").into()
   outer.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",

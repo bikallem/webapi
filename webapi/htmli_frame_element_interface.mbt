@@ -102,7 +102,7 @@ pub trait THTMLIFrameElement: THTMLElement {
   set_loading(self : Self, loading : String) -> Unit = _
   content_document(self : Self) -> Document = _
   content_window(self : Self) -> WindowProxy = _
-  get_svg_document(self : Self) -> Document? = _
+  get_svg_document_opt(self : Self) -> Document? = _
   align(self : Self) -> String = _
   set_align(self : Self, align : String) -> Unit = _
   scrolling(self : Self) -> String = _
@@ -272,7 +272,7 @@ impl THTMLIFrameElement with content_window(self : Self) -> WindowProxy {
 
 ///|
 /// [HTMLIFrameElement.getSVGDocument](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/getSVGDocument)
-impl THTMLIFrameElement with get_svg_document(self : Self) -> Document? {
+impl THTMLIFrameElement with get_svg_document_opt(self : Self) -> Document? {
   htmli_frame_element_get_svg_document_ffi(TJsValue::to_js(self)).to_option()
 }
 
@@ -373,4 +373,11 @@ impl THTMLIFrameElement with set_margin_width(
     TJsValue::to_js(self),
     TJsValue::to_js(margin_width),
   )
+}
+
+///|
+pub fn[T : TDocument] HTMLIFrameElement::get_svg_document(
+  self : HTMLIFrameElement,
+) -> T {
+  self.get_svg_document_opt().unwrap().into()
 }

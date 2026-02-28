@@ -54,7 +54,7 @@ pub trait THTMLObjectElement: THTMLElement {
   set_height(self : Self, height : String) -> Unit = _
   content_document(self : Self) -> Document = _
   content_window(self : Self) -> WindowProxy = _
-  get_svg_document(self : Self) -> Document? = _
+  get_svg_document_opt(self : Self) -> Document? = _
   will_validate(self : Self) -> Bool = _
   validity(self : Self) -> ValidityState = _
   validation_message(self : Self) -> String = _
@@ -174,7 +174,7 @@ impl THTMLObjectElement with content_window(self : Self) -> WindowProxy {
 
 ///|
 /// [HTMLObjectElement.getSVGDocument](https://developer.mozilla.org/en-US/docs/Web/API/HTMLObjectElement/getSVGDocument)
-impl THTMLObjectElement with get_svg_document(self : Self) -> Document? {
+impl THTMLObjectElement with get_svg_document_opt(self : Self) -> Document? {
   html_object_element_get_svg_document_ffi(TJsValue::to_js(self)).to_option()
 }
 
@@ -377,4 +377,11 @@ impl THTMLObjectElement with set_border(self : Self, border : String) -> Unit {
     TJsValue::to_js(self),
     TJsValue::to_js(border),
   )
+}
+
+///|
+pub fn[T : TDocument] HTMLObjectElement::get_svg_document(
+  self : HTMLObjectElement,
+) -> T {
+  self.get_svg_document_opt().unwrap().into()
 }

@@ -55,7 +55,7 @@ fn main {
   )
 
   // Build DOM
-  let app = doc.get_element_by_id("app").unwrap()
+  let app : @webapi.Element = doc.get_element_by_id("app")
   let container : @webapi.HTMLDivElement = doc.create_element("div").into()
   container.set_attribute(
     "style", "max-width: 600px; margin: 2em auto; font-family: system-ui;",
@@ -78,9 +78,9 @@ fn main {
 ///|
 fn do_fetch(url : String) -> Unit {
   let doc = @webapi.document
-  let status_el = doc.get_element_by_id("status").unwrap()
-  let headers_el = doc.get_element_by_id("headers").unwrap()
-  let body_el = doc.get_element_by_id("body").unwrap()
+  let status_el : @webapi.Element = doc.get_element_by_id("status")
+  let headers_el : @webapi.Element = doc.get_element_by_id("headers")
+  let body_el : @webapi.Element = doc.get_element_by_id("body")
   status_el.set_text_content("Fetching...")
   headers_el.set_text_content("")
   body_el.set_text_content("")

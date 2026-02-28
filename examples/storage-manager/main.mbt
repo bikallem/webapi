@@ -25,7 +25,7 @@ fn main {
 
   estimate_btn.add_event_listener("click", fn(_event) { do_estimate() })
 
-  let app = doc.get_element_by_id("app").unwrap()
+  let app : @webapi.Element = doc.get_element_by_id("app")
   let container : @webapi.HTMLDivElement = doc.create_element("div").into()
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
@@ -40,7 +40,7 @@ fn main {
 ///|
 fn do_estimate() -> Unit {
   let doc = @webapi.document
-  let status_div = doc.get_element_by_id("status").unwrap()
+  let status_div : @webapi.Element = doc.get_element_by_id("status")
   status_div.set_text_content("Estimating...")
   // Use the generated StorageManager.estimate() binding
   @webapi.navigator

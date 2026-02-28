@@ -108,7 +108,7 @@ fn main {
   .set_text_content("Heading id attribute: " + id)
 
   // Build the DOM tree
-  let app = @webapi.document.get_element_by_id("app").unwrap()
+  let app : @webapi.Element = @webapi.document.get_element_by_id("app")
   let container : @webapi.HTMLDivElement = @webapi.document
     .create_element("div")
     .into()

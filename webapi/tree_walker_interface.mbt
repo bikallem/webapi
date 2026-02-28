@@ -27,13 +27,13 @@ pub trait TTreeWalker: TJsValue {
   filter(self : Self) -> NodeFilter = _
   current_node(self : Self) -> Node = _
   set_current_node(self : Self, current_node : &TNode) -> Unit = _
-  parent_node(self : Self) -> Node? = _
-  first_child(self : Self) -> Node? = _
-  last_child(self : Self) -> Node? = _
-  previous_sibling(self : Self) -> Node? = _
-  next_sibling(self : Self) -> Node? = _
-  previous_node(self : Self) -> Node? = _
-  next_node(self : Self) -> Node? = _
+  parent_node_opt(self : Self) -> Node? = _
+  first_child_opt(self : Self) -> Node? = _
+  last_child_opt(self : Self) -> Node? = _
+  previous_sibling_opt(self : Self) -> Node? = _
+  next_sibling_opt(self : Self) -> Node? = _
+  previous_node_opt(self : Self) -> Node? = _
+  next_node_opt(self : Self) -> Node? = _
 }
 
 ///|
@@ -71,42 +71,77 @@ impl TTreeWalker with set_current_node(self : Self, current_node : &TNode) -> Un
 
 ///|
 /// [TreeWalker.parentNode](https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker/parentNode)
-impl TTreeWalker with parent_node(self : Self) -> Node? {
+impl TTreeWalker with parent_node_opt(self : Self) -> Node? {
   tree_walker_parent_node_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 /// [TreeWalker.firstChild](https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker/firstChild)
-impl TTreeWalker with first_child(self : Self) -> Node? {
+impl TTreeWalker with first_child_opt(self : Self) -> Node? {
   tree_walker_first_child_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 /// [TreeWalker.lastChild](https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker/lastChild)
-impl TTreeWalker with last_child(self : Self) -> Node? {
+impl TTreeWalker with last_child_opt(self : Self) -> Node? {
   tree_walker_last_child_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 /// [TreeWalker.previousSibling](https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker/previousSibling)
-impl TTreeWalker with previous_sibling(self : Self) -> Node? {
+impl TTreeWalker with previous_sibling_opt(self : Self) -> Node? {
   tree_walker_previous_sibling_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 /// [TreeWalker.nextSibling](https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker/nextSibling)
-impl TTreeWalker with next_sibling(self : Self) -> Node? {
+impl TTreeWalker with next_sibling_opt(self : Self) -> Node? {
   tree_walker_next_sibling_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 /// [TreeWalker.previousNode](https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker/previousNode)
-impl TTreeWalker with previous_node(self : Self) -> Node? {
+impl TTreeWalker with previous_node_opt(self : Self) -> Node? {
   tree_walker_previous_node_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 /// [TreeWalker.nextNode](https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker/nextNode)
-impl TTreeWalker with next_node(self : Self) -> Node? {
+impl TTreeWalker with next_node_opt(self : Self) -> Node? {
   tree_walker_next_node_ffi(TJsValue::to_js(self)).to_option()
+}
+
+///|
+pub fn[T : TNode] TreeWalker::parent_node(self : TreeWalker) -> T {
+  self.parent_node_opt().unwrap().into()
+}
+
+///|
+pub fn[T : TNode] TreeWalker::first_child(self : TreeWalker) -> T {
+  self.first_child_opt().unwrap().into()
+}
+
+///|
+pub fn[T : TNode] TreeWalker::last_child(self : TreeWalker) -> T {
+  self.last_child_opt().unwrap().into()
+}
+
+///|
+pub fn[T : TNode] TreeWalker::previous_sibling(self : TreeWalker) -> T {
+  self.previous_sibling_opt().unwrap().into()
+}
+
+///|
+pub fn[T : TNode] TreeWalker::next_sibling(self : TreeWalker) -> T {
+  self.next_sibling_opt().unwrap().into()
+}
+
+///|
+pub fn[T : TNode] TreeWalker::previous_node(self : TreeWalker) -> T {
+  self.previous_node_opt().unwrap().into()
+}
+
+///|
+pub fn[T : TNode] TreeWalker::next_node(self : TreeWalker) -> T {
+  self.next_node_opt().unwrap().into()
 }

@@ -27,7 +27,7 @@ pub trait TDataTransferItem: TJsValue {
   kind(self : Self) -> String = _
   type_(self : Self) -> String = _
   get_as_string(self : Self, _callback : (String) -> Unit) -> Unit = _
-  get_as_file(self : Self) -> File? = _
+  get_as_file_opt(self : Self) -> File? = _
   get_as_file_system_handle(self : Self) -> JsPromise[FileSystemHandle] = _
 }
 
@@ -57,7 +57,7 @@ impl TDataTransferItem with get_as_string(
 
 ///|
 /// [DataTransferItem.getAsFile](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem/getAsFile)
-impl TDataTransferItem with get_as_file(self : Self) -> File? {
+impl TDataTransferItem with get_as_file_opt(self : Self) -> File? {
   data_transfer_item_get_as_file_ffi(TJsValue::to_js(self)).to_option()
 }
 
@@ -67,4 +67,9 @@ impl TDataTransferItem with get_as_file_system_handle(self : Self) -> JsPromise[
   FileSystemHandle,
 ] {
   data_transfer_item_get_as_file_system_handle_ffi(TJsValue::to_js(self))
+}
+
+///|
+pub fn[T : TFile] DataTransferItem::get_as_file(self : DataTransferItem) -> T {
+  self.get_as_file_opt().unwrap().into()
 }

@@ -9,13 +9,14 @@ using @webapi {
   type HTMLButtonElement,
   type HTMLDivElement,
   type HTMLLabelElement,
+  type Element,
 }
 
 ///|
 /// Forms Demo - Demonstrates form-related Web APIs
 /// HTMLInputElement, HTMLSelectElement, HTMLTextAreaElement, ValidityState, checkValidity
 fn main {
-  let app = document.get_element_by_id("app").unwrap()
+  let app : Element = document.get_element_by_id("app")
 
   // Create container
   let container : HTMLDivElement = document.create_element("div").into()

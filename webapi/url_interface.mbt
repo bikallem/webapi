@@ -65,7 +65,7 @@ pub trait TURL: TJsValue {
 
 ///|
 /// [URL.parse](https://developer.mozilla.org/en-US/docs/Web/API/URL/parse)
-pub fn URL::parse(url : String, base? : String) -> URL? {
+pub fn URL::parse_opt(url : String, base? : String) -> URL? {
   url_parse_ffi(TJsValue::to_js(url), opt_to_js(base)).to_option()
 }
 
@@ -223,4 +223,13 @@ pub fn URL::create_object_url(obj : &TURLCreateObjectURLObj) -> String {
 /// [URL.revokeObjectURL](https://developer.mozilla.org/en-US/docs/Web/API/URL/revokeObjectURL)
 pub fn URL::revoke_object_url(url : String) -> Unit {
   url_revoke_object_url_ffi(TJsValue::to_js(url))
+}
+
+///|
+pub fn[T : TURL] URL::parse(url : String, base? : String) -> T {
+  let result = match base {
+    Some(base) => URL::parse_opt(url, base~)
+    None => URL::parse_opt(url)
+  }
+  result.unwrap().into()
 }

@@ -24,8 +24,8 @@ pub impl TPluginArray for PluginArray
 pub trait TPluginArray: TJsValue {
   refresh(self : Self) -> Unit = _
   length(self : Self) -> UInt = _
-  item(self : Self, index : UInt) -> Plugin? = _
-  named_item(self : Self, name : String) -> Plugin? = _
+  item_opt(self : Self, index : UInt) -> Plugin? = _
+  named_item_opt(self : Self, name : String) -> Plugin? = _
 }
 
 ///|
@@ -42,12 +42,25 @@ impl TPluginArray with length(self : Self) -> UInt {
 
 ///|
 /// [PluginArray.item](https://developer.mozilla.org/en-US/docs/Web/API/PluginArray/item)
-impl TPluginArray with item(self : Self, index : UInt) -> Plugin? {
+impl TPluginArray with item_opt(self : Self, index : UInt) -> Plugin? {
   plugin_array_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }
 
 ///|
 /// [PluginArray.namedItem](https://developer.mozilla.org/en-US/docs/Web/API/PluginArray/namedItem)
-impl TPluginArray with named_item(self : Self, name : String) -> Plugin? {
+impl TPluginArray with named_item_opt(self : Self, name : String) -> Plugin? {
   plugin_array_named_item_ffi(TJsValue::to_js(self), TJsValue::to_js(name)).to_option()
+}
+
+///|
+pub fn[T : TPlugin] PluginArray::item(self : PluginArray, index : UInt) -> T {
+  self.item_opt(index).unwrap().into()
+}
+
+///|
+pub fn[T : TPlugin] PluginArray::named_item(
+  self : PluginArray,
+  name : String,
+) -> T {
+  self.named_item_opt(name).unwrap().into()
 }

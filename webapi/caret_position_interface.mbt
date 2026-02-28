@@ -24,7 +24,7 @@ pub impl TCaretPosition for CaretPosition
 pub trait TCaretPosition: TJsValue {
   offset_node(self : Self) -> Node = _
   offset(self : Self) -> UInt = _
-  get_client_rect(self : Self) -> DOMRect? = _
+  get_client_rect_opt(self : Self) -> DOMRect? = _
 }
 
 ///|
@@ -41,6 +41,11 @@ impl TCaretPosition with offset(self : Self) -> UInt {
 
 ///|
 /// [CaretPosition.getClientRect](https://developer.mozilla.org/en-US/docs/Web/API/CaretPosition/getClientRect)
-impl TCaretPosition with get_client_rect(self : Self) -> DOMRect? {
+impl TCaretPosition with get_client_rect_opt(self : Self) -> DOMRect? {
   caret_position_get_client_rect_ffi(TJsValue::to_js(self)).to_option()
+}
+
+///|
+pub fn[T : TDOMRect] CaretPosition::get_client_rect(self : CaretPosition) -> T {
+  self.get_client_rect_opt().unwrap().into()
 }

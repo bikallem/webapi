@@ -284,15 +284,19 @@ pub trait TElement: TNode {
   toggle_attribute(self : Self, qualified_name : String, force? : Bool) -> Bool = _
   has_attribute(self : Self, qualified_name : String) -> Bool = _
   has_attribute_ns(self : Self, namespace_ : String, local_name : String) -> Bool = _
-  get_attribute_node(self : Self, qualified_name : String) -> Attr? = _
-  get_attribute_node_ns(self : Self, namespace_ : String, local_name : String) -> Attr? = _
-  set_attribute_node(self : Self, attr : &TAttr) -> Attr? = _
-  set_attribute_node_ns(self : Self, attr : &TAttr) -> Attr? = _
+  get_attribute_node_opt(self : Self, qualified_name : String) -> Attr? = _
+  get_attribute_node_ns_opt(
+    self : Self,
+    namespace_ : String,
+    local_name : String,
+  ) -> Attr? = _
+  set_attribute_node_opt(self : Self, attr : &TAttr) -> Attr? = _
+  set_attribute_node_ns_opt(self : Self, attr : &TAttr) -> Attr? = _
   remove_attribute_node(self : Self, attr : &TAttr) -> Attr = _
   attach_shadow(self : Self, init : ShadowRootInit) -> ShadowRoot = _
   shadow_root(self : Self) -> ShadowRoot = _
   custom_element_registry(self : Self) -> CustomElementRegistry = _
-  closest(self : Self, selectors : String) -> Element? = _
+  closest_opt(self : Self, selectors : String) -> Element? = _
   matches(self : Self, selectors : String) -> Bool = _
   webkit_matches_selector(self : Self, selectors : String) -> Bool = _
   get_elements_by_tag_name(self : Self, qualified_name : String) -> HTMLCollection = _
@@ -302,7 +306,7 @@ pub trait TElement: TNode {
     local_name : String,
   ) -> HTMLCollection = _
   get_elements_by_class_name(self : Self, class_names : String) -> HTMLCollection = _
-  insert_adjacent_element(self : Self, where_ : String, element : &TElement) -> Element? = _
+  insert_adjacent_element_opt(self : Self, where_ : String, element : &TElement) -> Element? = _
   insert_adjacent_text(self : Self, where_ : String, data : String) -> Unit = _
   set_html_unsafe(self : Self, html : &TElementSetHTMLUnsafeHtml) -> Unit = _
   get_html(self : Self, options? : GetHTMLOptions) -> String = _
@@ -356,7 +360,7 @@ pub trait TElement: TNode {
   append(self : Self, nodes : Array[&TElementAppendNodes]) -> Unit = _
   replace_children(self : Self, nodes : Array[&TElementReplaceChildrenNodes]) -> Unit = _
   move_before(self : Self, node : &TNode, child : &TNode) -> Unit = _
-  query_selector(self : Self, selectors : String) -> Element? = _
+  query_selector_opt(self : Self, selectors : String) -> Element? = _
   query_selector_all(self : Self, selectors : String) -> NodeList = _
   previous_element_sibling(self : Self) -> Element = _
   next_element_sibling(self : Self) -> Element = _
@@ -589,7 +593,7 @@ impl TElement with has_attribute_ns(
 
 ///|
 /// [Element.getAttributeNode](https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttributeNode)
-impl TElement with get_attribute_node(self : Self, qualified_name : String) -> Attr? {
+impl TElement with get_attribute_node_opt(self : Self, qualified_name : String) -> Attr? {
   element_get_attribute_node_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(qualified_name),
@@ -598,7 +602,7 @@ impl TElement with get_attribute_node(self : Self, qualified_name : String) -> A
 
 ///|
 /// [Element.getAttributeNodeNS](https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttributeNodeNS)
-impl TElement with get_attribute_node_ns(
+impl TElement with get_attribute_node_ns_opt(
   self : Self,
   namespace_ : String,
   local_name : String,
@@ -612,13 +616,13 @@ impl TElement with get_attribute_node_ns(
 
 ///|
 /// [Element.setAttributeNode](https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttributeNode)
-impl TElement with set_attribute_node(self : Self, attr : &TAttr) -> Attr? {
+impl TElement with set_attribute_node_opt(self : Self, attr : &TAttr) -> Attr? {
   element_set_attribute_node_ffi(TJsValue::to_js(self), TJsValue::to_js(attr)).to_option()
 }
 
 ///|
 /// [Element.setAttributeNodeNS](https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttributeNodeNS)
-impl TElement with set_attribute_node_ns(self : Self, attr : &TAttr) -> Attr? {
+impl TElement with set_attribute_node_ns_opt(self : Self, attr : &TAttr) -> Attr? {
   element_set_attribute_node_ns_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(attr),
@@ -654,7 +658,7 @@ impl TElement with custom_element_registry(self : Self) -> CustomElementRegistry
 
 ///|
 /// [Element.closest](https://developer.mozilla.org/en-US/docs/Web/API/Element/closest)
-impl TElement with closest(self : Self, selectors : String) -> Element? {
+impl TElement with closest_opt(self : Self, selectors : String) -> Element? {
   element_closest_ffi(TJsValue::to_js(self), TJsValue::to_js(selectors)).to_option()
 }
 
@@ -710,7 +714,7 @@ impl TElement with get_elements_by_class_name(self : Self, class_names : String)
 
 ///|
 /// [Element.insertAdjacentElement](https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentElement)
-impl TElement with insert_adjacent_element(
+impl TElement with insert_adjacent_element_opt(
   self : Self,
   where_ : String,
   element : &TElement,
@@ -1107,7 +1111,7 @@ impl TElement with move_before(self : Self, node : &TNode, child : &TNode) -> Un
 
 ///|
 /// [Element.querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Element/querySelector)
-impl TElement with query_selector(self : Self, selectors : String) -> Element? {
+impl TElement with query_selector_opt(self : Self, selectors : String) -> Element? {
   element_query_selector_ffi(TJsValue::to_js(self), TJsValue::to_js(selectors)).to_option()
 }
 
@@ -1261,4 +1265,59 @@ impl TElement with get_animations(
   options? : GetAnimationsOptions = GetAnimationsOptions::empty(),
 ) -> Array[Animation] {
   element_get_animations_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
+}
+
+///|
+pub fn[T : TAttr] Element::get_attribute_node(
+  self : Element,
+  qualified_name : String,
+) -> T {
+  self.get_attribute_node_opt(qualified_name).unwrap().into()
+}
+
+///|
+pub fn[T : TAttr] Element::get_attribute_node_ns(
+  self : Element,
+  namespace_ : String,
+  local_name : String,
+) -> T {
+  self.get_attribute_node_ns_opt(namespace_, local_name).unwrap().into()
+}
+
+///|
+pub fn[T : TAttr] Element::set_attribute_node(
+  self : Element,
+  attr : &TAttr,
+) -> T {
+  self.set_attribute_node_opt(attr).unwrap().into()
+}
+
+///|
+pub fn[T : TAttr] Element::set_attribute_node_ns(
+  self : Element,
+  attr : &TAttr,
+) -> T {
+  self.set_attribute_node_ns_opt(attr).unwrap().into()
+}
+
+///|
+pub fn[T : TElement] Element::closest(self : Element, selectors : String) -> T {
+  self.closest_opt(selectors).unwrap().into()
+}
+
+///|
+pub fn[T : TElement] Element::insert_adjacent_element(
+  self : Element,
+  where_ : String,
+  element : &TElement,
+) -> T {
+  self.insert_adjacent_element_opt(where_, element).unwrap().into()
+}
+
+///|
+pub fn[T : TElement] Element::query_selector(
+  self : Element,
+  selectors : String,
+) -> T {
+  self.query_selector_opt(selectors).unwrap().into()
 }

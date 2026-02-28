@@ -27,8 +27,8 @@ pub trait TNodeIterator: TJsValue {
   pointer_before_reference_node(self : Self) -> Bool = _
   what_to_show(self : Self) -> UInt = _
   filter(self : Self) -> NodeFilter = _
-  next_node(self : Self) -> Node? = _
-  previous_node(self : Self) -> Node? = _
+  next_node_opt(self : Self) -> Node? = _
+  previous_node_opt(self : Self) -> Node? = _
   detach(self : Self) -> Unit = _
 }
 
@@ -64,13 +64,13 @@ impl TNodeIterator with filter(self : Self) -> NodeFilter {
 
 ///|
 /// [NodeIterator.nextNode](https://developer.mozilla.org/en-US/docs/Web/API/NodeIterator/nextNode)
-impl TNodeIterator with next_node(self : Self) -> Node? {
+impl TNodeIterator with next_node_opt(self : Self) -> Node? {
   node_iterator_next_node_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 /// [NodeIterator.previousNode](https://developer.mozilla.org/en-US/docs/Web/API/NodeIterator/previousNode)
-impl TNodeIterator with previous_node(self : Self) -> Node? {
+impl TNodeIterator with previous_node_opt(self : Self) -> Node? {
   node_iterator_previous_node_ffi(TJsValue::to_js(self)).to_option()
 }
 
@@ -78,4 +78,14 @@ impl TNodeIterator with previous_node(self : Self) -> Node? {
 /// [NodeIterator.detach](https://developer.mozilla.org/en-US/docs/Web/API/NodeIterator/detach)
 impl TNodeIterator with detach(self : Self) -> Unit {
   node_iterator_detach_ffi(TJsValue::to_js(self))
+}
+
+///|
+pub fn[T : TNode] NodeIterator::next_node(self : NodeIterator) -> T {
+  self.next_node_opt().unwrap().into()
+}
+
+///|
+pub fn[T : TNode] NodeIterator::previous_node(self : NodeIterator) -> T {
+  self.previous_node_opt().unwrap().into()
 }

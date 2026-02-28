@@ -111,7 +111,7 @@ pub impl THTMLAllCollectionItem for Element with to_js(self : Element) -> JsValu
 /// [HTMLAllCollection](https://developer.mozilla.org/en-US/docs/Web/API/HTMLAllCollection) interface.
 pub trait THTMLAllCollection: TJsValue {
   length(self : Self) -> UInt = _
-  get(self : Self, index : UInt) -> Element? = _
+  get_opt(self : Self, index : UInt) -> Element? = _
   named_item(self : Self, name : String) -> HTMLAllCollectionNamedItem? = _
   item(self : Self, name_or_index? : String) -> HTMLAllCollectionItem? = _
 }
@@ -124,7 +124,7 @@ impl THTMLAllCollection with length(self : Self) -> UInt {
 
 ///|
 /// [HTMLAllCollection.get](https://developer.mozilla.org/en-US/docs/Web/API/HTMLAllCollection/get)
-impl THTMLAllCollection with get(self : Self, index : UInt) -> Element? {
+impl THTMLAllCollection with get_opt(self : Self, index : UInt) -> Element? {
   html_all_collection_get_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }
 
@@ -141,4 +141,12 @@ impl THTMLAllCollection with named_item(self : Self, name : String) -> HTMLAllCo
 /// [HTMLAllCollection.item](https://developer.mozilla.org/en-US/docs/Web/API/HTMLAllCollection/item)
 impl THTMLAllCollection with item(self : Self, name_or_index? : String) -> HTMLAllCollectionItem? {
   html_all_collection_item_ffi(TJsValue::to_js(self), opt_to_js(name_or_index)).to_option()
+}
+
+///|
+pub fn[T : TElement] HTMLAllCollection::get(
+  self : HTMLAllCollection,
+  index : UInt,
+) -> T {
+  self.get_opt(index).unwrap().into()
 }

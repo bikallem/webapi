@@ -38,8 +38,8 @@ pub impl TEventTarget for SVGGraphicsElement
 pub trait TSVGGraphicsElement: TSVGElement {
   transform(self : Self) -> SVGAnimatedTransformList = _
   get_b_box(self : Self, options? : SVGBoundingBoxOptions) -> DOMRect = _
-  get_ctm(self : Self) -> DOMMatrix? = _
-  get_screen_ctm(self : Self) -> DOMMatrix? = _
+  get_ctm_opt(self : Self) -> DOMMatrix? = _
+  get_screen_ctm_opt(self : Self) -> DOMMatrix? = _
   required_extensions(self : Self) -> SVGStringList = _
   system_language(self : Self) -> SVGStringList = _
 }
@@ -64,13 +64,13 @@ impl TSVGGraphicsElement with get_b_box(
 
 ///|
 /// [SVGGraphicsElement.getCTM](https://developer.mozilla.org/en-US/docs/Web/API/SVGGraphicsElement/getCTM)
-impl TSVGGraphicsElement with get_ctm(self : Self) -> DOMMatrix? {
+impl TSVGGraphicsElement with get_ctm_opt(self : Self) -> DOMMatrix? {
   svg_graphics_element_get_ctm_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 /// [SVGGraphicsElement.getScreenCTM](https://developer.mozilla.org/en-US/docs/Web/API/SVGGraphicsElement/getScreenCTM)
-impl TSVGGraphicsElement with get_screen_ctm(self : Self) -> DOMMatrix? {
+impl TSVGGraphicsElement with get_screen_ctm_opt(self : Self) -> DOMMatrix? {
   svg_graphics_element_get_screen_ctm_ffi(TJsValue::to_js(self)).to_option()
 }
 
@@ -84,4 +84,18 @@ impl TSVGGraphicsElement with required_extensions(self : Self) -> SVGStringList 
 /// [SVGGraphicsElement.systemLanguage](https://developer.mozilla.org/en-US/docs/Web/API/SVGGraphicsElement/systemLanguage)
 impl TSVGGraphicsElement with system_language(self : Self) -> SVGStringList {
   svg_graphics_element_system_language_ffi(TJsValue::to_js(self))
+}
+
+///|
+pub fn[T : TDOMMatrix] SVGGraphicsElement::get_ctm(
+  self : SVGGraphicsElement,
+) -> T {
+  self.get_ctm_opt().unwrap().into()
+}
+
+///|
+pub fn[T : TDOMMatrix] SVGGraphicsElement::get_screen_ctm(
+  self : SVGGraphicsElement,
+) -> T {
+  self.get_screen_ctm_opt().unwrap().into()
 }

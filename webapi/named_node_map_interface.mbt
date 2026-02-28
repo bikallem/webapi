@@ -23,11 +23,11 @@ pub impl TNamedNodeMap for NamedNodeMap
 /// [NamedNodeMap](https://developer.mozilla.org/en-US/docs/Web/API/NamedNodeMap) interface.
 pub trait TNamedNodeMap: TJsValue {
   length(self : Self) -> UInt = _
-  item(self : Self, index : UInt) -> Attr? = _
-  get_named_item(self : Self, qualified_name : String) -> Attr? = _
-  get_named_item_ns(self : Self, namespace_ : String, local_name : String) -> Attr? = _
-  set_named_item(self : Self, attr : &TAttr) -> Attr? = _
-  set_named_item_ns(self : Self, attr : &TAttr) -> Attr? = _
+  item_opt(self : Self, index : UInt) -> Attr? = _
+  get_named_item_opt(self : Self, qualified_name : String) -> Attr? = _
+  get_named_item_ns_opt(self : Self, namespace_ : String, local_name : String) -> Attr? = _
+  set_named_item_opt(self : Self, attr : &TAttr) -> Attr? = _
+  set_named_item_ns_opt(self : Self, attr : &TAttr) -> Attr? = _
   remove_named_item(self : Self, qualified_name : String) -> Attr = _
   remove_named_item_ns(self : Self, namespace_ : String, local_name : String) -> Attr = _
 }
@@ -40,13 +40,13 @@ impl TNamedNodeMap with length(self : Self) -> UInt {
 
 ///|
 /// [NamedNodeMap.item](https://developer.mozilla.org/en-US/docs/Web/API/NamedNodeMap/item)
-impl TNamedNodeMap with item(self : Self, index : UInt) -> Attr? {
+impl TNamedNodeMap with item_opt(self : Self, index : UInt) -> Attr? {
   named_node_map_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }
 
 ///|
 /// [NamedNodeMap.getNamedItem](https://developer.mozilla.org/en-US/docs/Web/API/NamedNodeMap/getNamedItem)
-impl TNamedNodeMap with get_named_item(self : Self, qualified_name : String) -> Attr? {
+impl TNamedNodeMap with get_named_item_opt(self : Self, qualified_name : String) -> Attr? {
   named_node_map_get_named_item_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(qualified_name),
@@ -55,7 +55,7 @@ impl TNamedNodeMap with get_named_item(self : Self, qualified_name : String) -> 
 
 ///|
 /// [NamedNodeMap.getNamedItemNS](https://developer.mozilla.org/en-US/docs/Web/API/NamedNodeMap/getNamedItemNS)
-impl TNamedNodeMap with get_named_item_ns(
+impl TNamedNodeMap with get_named_item_ns_opt(
   self : Self,
   namespace_ : String,
   local_name : String,
@@ -69,7 +69,7 @@ impl TNamedNodeMap with get_named_item_ns(
 
 ///|
 /// [NamedNodeMap.setNamedItem](https://developer.mozilla.org/en-US/docs/Web/API/NamedNodeMap/setNamedItem)
-impl TNamedNodeMap with set_named_item(self : Self, attr : &TAttr) -> Attr? {
+impl TNamedNodeMap with set_named_item_opt(self : Self, attr : &TAttr) -> Attr? {
   named_node_map_set_named_item_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(attr),
@@ -78,7 +78,7 @@ impl TNamedNodeMap with set_named_item(self : Self, attr : &TAttr) -> Attr? {
 
 ///|
 /// [NamedNodeMap.setNamedItemNS](https://developer.mozilla.org/en-US/docs/Web/API/NamedNodeMap/setNamedItemNS)
-impl TNamedNodeMap with set_named_item_ns(self : Self, attr : &TAttr) -> Attr? {
+impl TNamedNodeMap with set_named_item_ns_opt(self : Self, attr : &TAttr) -> Attr? {
   named_node_map_set_named_item_ns_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(attr),
@@ -106,4 +106,42 @@ impl TNamedNodeMap with remove_named_item_ns(
     TJsValue::to_js(namespace_),
     TJsValue::to_js(local_name),
   )
+}
+
+///|
+pub fn[T : TAttr] NamedNodeMap::item(self : NamedNodeMap, index : UInt) -> T {
+  self.item_opt(index).unwrap().into()
+}
+
+///|
+pub fn[T : TAttr] NamedNodeMap::get_named_item(
+  self : NamedNodeMap,
+  qualified_name : String,
+) -> T {
+  self.get_named_item_opt(qualified_name).unwrap().into()
+}
+
+///|
+pub fn[T : TAttr] NamedNodeMap::get_named_item_ns(
+  self : NamedNodeMap,
+  namespace_ : String,
+  local_name : String,
+) -> T {
+  self.get_named_item_ns_opt(namespace_, local_name).unwrap().into()
+}
+
+///|
+pub fn[T : TAttr] NamedNodeMap::set_named_item(
+  self : NamedNodeMap,
+  attr : &TAttr,
+) -> T {
+  self.set_named_item_opt(attr).unwrap().into()
+}
+
+///|
+pub fn[T : TAttr] NamedNodeMap::set_named_item_ns(
+  self : NamedNodeMap,
+  attr : &TAttr,
+) -> T {
+  self.set_named_item_ns_opt(attr).unwrap().into()
 }

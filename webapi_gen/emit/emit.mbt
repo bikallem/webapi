@@ -415,6 +415,19 @@ fn render_interface_definition(
     .map(meth => meth.impl_emit().0)
     .join("\n\n")
   buf.write_string(default_trait_impls)
+  // Emit generic convenience methods for optional interface returns
+  let convenience = interface_def.methods
+    .filter_map(meth => {
+      match meth.convenience_emit() {
+        Code("") => None
+        Code(code) => Some(code)
+      }
+    })
+    .join("\n\n")
+  if convenience.length() > 0 {
+    buf.write_string("\n\n")
+    buf.write_string(convenience)
+  }
   let shared = buf.to_string()
   // JS FFI
   let js = interface_def.methods.map(meth => meth.ffi_emit_js().0).join("\n\n")

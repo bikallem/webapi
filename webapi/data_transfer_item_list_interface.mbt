@@ -27,9 +27,9 @@ pub impl TDataTransferItemList for DataTransferItemList
 /// [DataTransferItemList](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItemList) interface.
 pub trait TDataTransferItemList: TJsValue {
   length(self : Self) -> UInt = _
-  get(self : Self, index : UInt) -> DataTransferItem? = _
-  add(self : Self, data : String, type_ : String) -> DataTransferItem? = _
-  add_file(self : Self, data : &TFile) -> DataTransferItem? = _
+  get_opt(self : Self, index : UInt) -> DataTransferItem? = _
+  add_opt(self : Self, data : String, type_ : String) -> DataTransferItem? = _
+  add_file_opt(self : Self, data : &TFile) -> DataTransferItem? = _
   remove(self : Self, index : UInt) -> Unit = _
   clear(self : Self) -> Unit = _
 }
@@ -42,13 +42,17 @@ impl TDataTransferItemList with length(self : Self) -> UInt {
 
 ///|
 /// [DataTransferItemList.get](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItemList/get)
-impl TDataTransferItemList with get(self : Self, index : UInt) -> DataTransferItem? {
+impl TDataTransferItemList with get_opt(self : Self, index : UInt) -> DataTransferItem? {
   data_transfer_item_list_get_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }
 
 ///|
 /// [DataTransferItemList.add](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItemList/add)
-impl TDataTransferItemList with add(self : Self, data : String, type_ : String) -> DataTransferItem? {
+impl TDataTransferItemList with add_opt(
+  self : Self,
+  data : String,
+  type_ : String,
+) -> DataTransferItem? {
   data_transfer_item_list_add_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(data),
@@ -58,7 +62,7 @@ impl TDataTransferItemList with add(self : Self, data : String, type_ : String) 
 
 ///|
 /// [DataTransferItemList.add](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItemList/add)
-impl TDataTransferItemList with add_file(self : Self, data : &TFile) -> DataTransferItem? {
+impl TDataTransferItemList with add_file_opt(self : Self, data : &TFile) -> DataTransferItem? {
   data_transfer_item_list_add_file_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(data),
@@ -78,4 +82,29 @@ impl TDataTransferItemList with remove(self : Self, index : UInt) -> Unit {
 /// [DataTransferItemList.clear](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItemList/clear)
 impl TDataTransferItemList with clear(self : Self) -> Unit {
   data_transfer_item_list_clear_ffi(TJsValue::to_js(self))
+}
+
+///|
+pub fn[T : TDataTransferItem] DataTransferItemList::get(
+  self : DataTransferItemList,
+  index : UInt,
+) -> T {
+  self.get_opt(index).unwrap().into()
+}
+
+///|
+pub fn[T : TDataTransferItem] DataTransferItemList::add(
+  self : DataTransferItemList,
+  data : String,
+  type_ : String,
+) -> T {
+  self.add_opt(data, type_).unwrap().into()
+}
+
+///|
+pub fn[T : TDataTransferItem] DataTransferItemList::add_file(
+  self : DataTransferItemList,
+  data : &TFile,
+) -> T {
+  self.add_file_opt(data).unwrap().into()
 }

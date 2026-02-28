@@ -34,7 +34,7 @@ fn main {
 
   // Update selection info
   let update_info = fn() {
-    match @webapi.window.get_selection() {
+    match @webapi.window.get_selection_opt() {
       Some(sel) => {
         let sel_type = sel.type_()
         let range_count = sel.range_count()
@@ -63,12 +63,12 @@ fn main {
   doc.add_event_listener("selectionchange", fn(_event) { update_info() })
 
   select_all_btn.add_event_listener("click", fn(_event) {
-    guard @webapi.window.get_selection() is Some(sel) else { () }
+    guard @webapi.window.get_selection_opt() is Some(sel) else { () }
     sel.select_all_children(text_content)
     update_info()
   })
 
-  let app = doc.get_element_by_id("app").unwrap()
+  let app : @webapi.Element = doc.get_element_by_id("app")
   let container : @webapi.HTMLDivElement = doc.create_element("div").into()
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",

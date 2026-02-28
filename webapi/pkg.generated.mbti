@@ -490,6 +490,8 @@ pub impl TTrackEventTrack for AudioTrack
 
 #external
 pub type AudioTrackList
+pub fn[T : TAudioTrack] AudioTrackList::get(Self, UInt) -> T
+pub fn[T : TAudioTrack] AudioTrackList::get_track_by_id(Self, String) -> T
 pub fn[T : TAudioTrackList] AudioTrackList::into(Self) -> T
 pub impl FromJsAny for AudioTrackList
 pub impl TAudioTrackList for AudioTrackList
@@ -774,6 +776,7 @@ pub impl TJsValue for CSSRule
 #external
 pub type CSSRuleList
 pub fn[T : TCSSRuleList] CSSRuleList::into(Self) -> T
+pub fn[T : TCSSRule] CSSRuleList::item(Self, UInt) -> T
 pub impl FromJsAny for CSSRuleList
 pub impl TCSSRuleList for CSSRuleList
 pub impl TJsValue for CSSRuleList
@@ -1002,6 +1005,7 @@ pub impl TOffscreenCanvasRenderingContext2DStrokeStyle for CanvasPattern
 
 #external
 pub type CanvasRenderingContext2D
+pub fn[T : TCanvasPattern] CanvasRenderingContext2D::create_pattern(Self, &TCanvasImageSource, String) -> T
 pub fn[T : TCanvasRenderingContext2D] CanvasRenderingContext2D::into(Self) -> T
 pub impl FromJsAny for CanvasRenderingContext2D
 pub impl TCanvasRenderingContext2D for CanvasRenderingContext2D
@@ -1080,6 +1084,7 @@ pub impl Show for CanvasTextRendering
 
 #external
 pub type CaretPosition
+pub fn[T : TDOMRect] CaretPosition::get_client_rect(Self) -> T
 pub fn[T : TCaretPosition] CaretPosition::into(Self) -> T
 pub impl FromJsAny for CaretPosition
 pub impl TCaretPosition for CaretPosition
@@ -1695,6 +1700,7 @@ pub impl TJsValue for DOMRectInit
 #external
 pub type DOMRectList
 pub fn[T : TDOMRectList] DOMRectList::into(Self) -> T
+pub fn[T : TDOMRect] DOMRectList::item(Self, UInt) -> T
 pub impl FromJsAny for DOMRectList
 pub impl TDOMRectList for DOMRectList
 pub impl TJsValue for DOMRectList
@@ -1739,6 +1745,7 @@ pub impl TJsValue for DataTransfer
 
 #external
 pub type DataTransferItem
+pub fn[T : TFile] DataTransferItem::get_as_file(Self) -> T
 pub fn[T : TDataTransferItem] DataTransferItem::into(Self) -> T
 pub impl FromJsAny for DataTransferItem
 pub impl TDataTransferItem for DataTransferItem
@@ -1746,6 +1753,9 @@ pub impl TJsValue for DataTransferItem
 
 #external
 pub type DataTransferItemList
+pub fn[T : TDataTransferItem] DataTransferItemList::add(Self, String, String) -> T
+pub fn[T : TDataTransferItem] DataTransferItemList::add_file(Self, &TFile) -> T
+pub fn[T : TDataTransferItem] DataTransferItemList::get(Self, UInt) -> T
 pub fn[T : TDataTransferItemList] DataTransferItemList::into(Self) -> T
 pub impl FromJsAny for DataTransferItemList
 pub impl TDataTransferItemList for DataTransferItemList
@@ -1801,9 +1811,14 @@ pub impl TJsValue for DirectoryPickerOptions
 
 #external
 pub type Document
+pub fn[T : TCaretPosition] Document::caret_position_from_point(Self, Double, Double, options? : CaretPositionFromPointOptions) -> T
+pub fn[T : TElement] Document::element_from_point(Self, Double, Double) -> T
+pub fn[T : TElement] Document::get_element_by_id(Self, String) -> T
+pub fn[T : TSelection] Document::get_selection(Self) -> T
 pub fn[T : TDocument] Document::into(Self) -> T
 pub fn Document::new() -> Self
 pub fn Document::parse_html_unsafe(&TDocumentParseHTMLUnsafeHtml) -> Self
+pub fn[T : TElement] Document::query_selector(Self, String) -> T
 pub impl FromJsAny for Document
 pub impl TDocument for Document
 pub impl TEventTarget for Document
@@ -1817,8 +1832,10 @@ pub impl TXMLHttpRequestSendBody for Document
 
 #external
 pub type DocumentFragment
+pub fn[T : TElement] DocumentFragment::get_element_by_id(Self, String) -> T
 pub fn[T : TDocumentFragment] DocumentFragment::into(Self) -> T
 pub fn DocumentFragment::new() -> Self
+pub fn[T : TElement] DocumentFragment::query_selector(Self, String) -> T
 pub impl FromJsAny for DocumentFragment
 pub impl TDocumentFragment for DocumentFragment
 pub impl TEventTarget for DocumentFragment
@@ -1945,7 +1962,14 @@ pub impl TJsValue for EffectTimingGetDuration
 
 #external
 pub type Element
+pub fn[T : TElement] Element::closest(Self, String) -> T
+pub fn[T : TAttr] Element::get_attribute_node(Self, String) -> T
+pub fn[T : TAttr] Element::get_attribute_node_ns(Self, String, String) -> T
+pub fn[T : TElement] Element::insert_adjacent_element(Self, String, &TElement) -> T
 pub fn[T : TElement] Element::into(Self) -> T
+pub fn[T : TElement] Element::query_selector(Self, String) -> T
+pub fn[T : TAttr] Element::set_attribute_node(Self, &TAttr) -> T
+pub fn[T : TAttr] Element::set_attribute_node_ns(Self, &TAttr) -> T
 pub impl FromJsAny for Element
 pub impl TElement for Element
 pub impl TEventTarget for Element
@@ -2248,6 +2272,7 @@ pub impl TJsValue for File
 #external
 pub type FileList
 pub fn[T : TFileList] FileList::into(Self) -> T
+pub fn[T : TFile] FileList::item(Self, UInt) -> T
 pub impl FromJsAny for FileList
 pub impl TFileList for FileList
 pub impl TJsValue for FileList
@@ -2650,6 +2675,7 @@ pub impl TJsValue for GetRootNodeOptions
 
 #external
 pub type HTMLAllCollection
+pub fn[T : TElement] HTMLAllCollection::get(Self, UInt) -> T
 pub fn[T : THTMLAllCollection] HTMLAllCollection::into(Self) -> T
 pub impl FromJsAny for HTMLAllCollection
 pub impl THTMLAllCollection for HTMLAllCollection
@@ -2773,6 +2799,8 @@ pub impl TNode for HTMLCanvasElement
 #external
 pub type HTMLCollection
 pub fn[T : THTMLCollection] HTMLCollection::into(Self) -> T
+pub fn[T : TElement] HTMLCollection::item(Self, UInt) -> T
+pub fn[T : TElement] HTMLCollection::named_item(Self, String) -> T
 pub impl FromJsAny for HTMLCollection
 pub impl THTMLAllCollectionItem for HTMLCollection
 pub impl THTMLAllCollectionNamedItem for HTMLCollection
@@ -2886,6 +2914,7 @@ pub impl TJsValue for HTMLElementHidden
 
 #external
 pub type HTMLEmbedElement
+pub fn[T : TDocument] HTMLEmbedElement::get_svg_document(Self) -> T
 pub fn[T : THTMLEmbedElement] HTMLEmbedElement::into(Self) -> T
 pub fn HTMLEmbedElement::new() -> Self
 pub impl FromJsAny for HTMLEmbedElement
@@ -2938,6 +2967,7 @@ pub impl TJsValue for HTMLFormControlsCollectionNamedItem
 
 #external
 pub type HTMLFormElement
+pub fn[T : TElement] HTMLFormElement::get(Self, UInt) -> T
 pub fn[T : THTMLFormElement] HTMLFormElement::into(Self) -> T
 pub fn HTMLFormElement::new() -> Self
 pub impl FromJsAny for HTMLFormElement
@@ -3030,6 +3060,7 @@ pub impl TNode for HTMLHtmlElement
 
 #external
 pub type HTMLIFrameElement
+pub fn[T : TDocument] HTMLIFrameElement::get_svg_document(Self) -> T
 pub fn[T : THTMLIFrameElement] HTMLIFrameElement::into(Self) -> T
 pub fn HTMLIFrameElement::new() -> Self
 pub impl FromJsAny for HTMLIFrameElement
@@ -3218,6 +3249,7 @@ pub impl TNode for HTMLOListElement
 
 #external
 pub type HTMLObjectElement
+pub fn[T : TDocument] HTMLObjectElement::get_svg_document(Self) -> T
 pub fn[T : THTMLObjectElement] HTMLObjectElement::into(Self) -> T
 pub fn HTMLObjectElement::new() -> Self
 pub impl FromJsAny for HTMLObjectElement
@@ -3382,6 +3414,8 @@ pub impl TNode for HTMLScriptElement
 #external
 pub type HTMLSelectElement
 pub fn[T : THTMLSelectElement] HTMLSelectElement::into(Self) -> T
+pub fn[T : THTMLOptionElement] HTMLSelectElement::item(Self, UInt) -> T
+pub fn[T : THTMLOptionElement] HTMLSelectElement::named_item(Self, String) -> T
 pub fn HTMLSelectElement::new() -> Self
 pub impl FromJsAny for HTMLSelectElement
 pub impl TElement for HTMLSelectElement
@@ -4470,6 +4504,8 @@ pub impl TMimeType for MimeType
 #external
 pub type MimeTypeArray
 pub fn[T : TMimeTypeArray] MimeTypeArray::into(Self) -> T
+pub fn[T : TMimeType] MimeTypeArray::item(Self, UInt) -> T
+pub fn[T : TMimeType] MimeTypeArray::named_item(Self, String) -> T
 pub impl FromJsAny for MimeTypeArray
 pub impl TJsValue for MimeTypeArray
 pub impl TMimeTypeArray for MimeTypeArray
@@ -4566,7 +4602,12 @@ pub impl TMutationRecord for MutationRecord
 
 #external
 pub type NamedNodeMap
+pub fn[T : TAttr] NamedNodeMap::get_named_item(Self, String) -> T
+pub fn[T : TAttr] NamedNodeMap::get_named_item_ns(Self, String, String) -> T
 pub fn[T : TNamedNodeMap] NamedNodeMap::into(Self) -> T
+pub fn[T : TAttr] NamedNodeMap::item(Self, UInt) -> T
+pub fn[T : TAttr] NamedNodeMap::set_named_item(Self, &TAttr) -> T
+pub fn[T : TAttr] NamedNodeMap::set_named_item_ns(Self, &TAttr) -> T
 pub impl FromJsAny for NamedNodeMap
 pub impl TJsValue for NamedNodeMap
 pub impl TNamedNodeMap for NamedNodeMap
@@ -4838,6 +4879,8 @@ pub impl TJsValue for NodeFilter
 #external
 pub type NodeIterator
 pub fn[T : TNodeIterator] NodeIterator::into(Self) -> T
+pub fn[T : TNode] NodeIterator::next_node(Self) -> T
+pub fn[T : TNode] NodeIterator::previous_node(Self) -> T
 pub impl FromJsAny for NodeIterator
 pub impl TJsValue for NodeIterator
 pub impl TNodeIterator for NodeIterator
@@ -4845,6 +4888,7 @@ pub impl TNodeIterator for NodeIterator
 #external
 pub type NodeList
 pub fn[T : TNodeList] NodeList::into(Self) -> T
+pub fn[T : TNode] NodeList::item(Self, UInt) -> T
 pub impl FromJsAny for NodeList
 pub impl TJsValue for NodeList
 pub impl TNodeList for NodeList
@@ -4973,6 +5017,7 @@ pub impl TOffscreenCanvas for OffscreenCanvas
 
 #external
 pub type OffscreenCanvasRenderingContext2D
+pub fn[T : TCanvasPattern] OffscreenCanvasRenderingContext2D::create_pattern(Self, &TCanvasImageSource, String) -> T
 pub fn[T : TOffscreenCanvasRenderingContext2D] OffscreenCanvasRenderingContext2D::into(Self) -> T
 pub impl FromJsAny for OffscreenCanvasRenderingContext2D
 pub impl TJsValue for OffscreenCanvasRenderingContext2D
@@ -5295,6 +5340,8 @@ pub impl Show for PlaybackDirection
 #external
 pub type Plugin
 pub fn[T : TPlugin] Plugin::into(Self) -> T
+pub fn[T : TMimeType] Plugin::item(Self, UInt) -> T
+pub fn[T : TMimeType] Plugin::named_item(Self, String) -> T
 pub impl FromJsAny for Plugin
 pub impl TJsValue for Plugin
 pub impl TPlugin for Plugin
@@ -5302,6 +5349,8 @@ pub impl TPlugin for Plugin
 #external
 pub type PluginArray
 pub fn[T : TPluginArray] PluginArray::into(Self) -> T
+pub fn[T : TPlugin] PluginArray::item(Self, UInt) -> T
+pub fn[T : TPlugin] PluginArray::named_item(Self, String) -> T
 pub impl FromJsAny for PluginArray
 pub impl TJsValue for PluginArray
 pub impl TPluginArray for PluginArray
@@ -6241,6 +6290,8 @@ pub impl TSVGGradientElement for SVGGradientElement
 
 #external
 pub type SVGGraphicsElement
+pub fn[T : TDOMMatrix] SVGGraphicsElement::get_ctm(Self) -> T
+pub fn[T : TDOMMatrix] SVGGraphicsElement::get_screen_ctm(Self) -> T
 pub fn[T : TSVGGraphicsElement] SVGGraphicsElement::into(Self) -> T
 pub impl FromJsAny for SVGGraphicsElement
 pub impl TElement for SVGGraphicsElement
@@ -6416,6 +6467,7 @@ pub impl TSVGRectElement for SVGRectElement
 
 #external
 pub type SVGSVGElement
+pub fn[T : TElement] SVGSVGElement::get_element_by_id(Self, String) -> T
 pub fn[T : TSVGSVGElement] SVGSVGElement::into(Self) -> T
 pub impl FromJsAny for SVGSVGElement
 pub impl TElement for SVGSVGElement
@@ -6577,6 +6629,7 @@ pub impl TSVGTransform for SVGTransform
 
 #external
 pub type SVGTransformList
+pub fn[T : TSVGTransform] SVGTransformList::consolidate(Self) -> T
 pub fn[T : TSVGTransformList] SVGTransformList::into(Self) -> T
 pub impl FromJsAny for SVGTransformList
 pub impl TJsValue for SVGTransformList
@@ -7011,6 +7064,7 @@ pub impl TStyleSheet for StyleSheet
 #external
 pub type StyleSheetList
 pub fn[T : TStyleSheetList] StyleSheetList::into(Self) -> T
+pub fn[T : TCSSStyleSheet] StyleSheetList::item(Self, UInt) -> T
 pub impl FromJsAny for StyleSheetList
 pub impl TJsValue for StyleSheetList
 pub impl TStyleSheetList for StyleSheetList
@@ -7151,6 +7205,8 @@ pub impl TTextTrackCue for TextTrackCue
 
 #external
 pub type TextTrackCueList
+pub fn[T : TTextTrackCue] TextTrackCueList::get(Self, UInt) -> T
+pub fn[T : TTextTrackCue] TextTrackCueList::get_cue_by_id(Self, String) -> T
 pub fn[T : TTextTrackCueList] TextTrackCueList::into(Self) -> T
 pub impl FromJsAny for TextTrackCueList
 pub impl TJsValue for TextTrackCueList
@@ -7172,6 +7228,8 @@ pub impl Show for TextTrackKind
 
 #external
 pub type TextTrackList
+pub fn[T : TTextTrack] TextTrackList::get(Self, UInt) -> T
+pub fn[T : TTextTrack] TextTrackList::get_track_by_id(Self, String) -> T
 pub fn[T : TTextTrackList] TextTrackList::into(Self) -> T
 pub impl FromJsAny for TextTrackList
 pub impl TEventTarget for TextTrackList
@@ -7310,6 +7368,7 @@ pub impl TJsValue for TouchInit
 #external
 pub type TouchList
 pub fn[T : TTouchList] TouchList::into(Self) -> T
+pub fn[T : TTouch] TouchList::item(Self, UInt) -> T
 pub impl FromJsAny for TouchList
 pub impl TJsValue for TouchList
 pub impl TTouchList for TouchList
@@ -7415,7 +7474,14 @@ pub impl TJsValue for TransformerTransformCallback
 
 #external
 pub type TreeWalker
+pub fn[T : TNode] TreeWalker::first_child(Self) -> T
 pub fn[T : TTreeWalker] TreeWalker::into(Self) -> T
+pub fn[T : TNode] TreeWalker::last_child(Self) -> T
+pub fn[T : TNode] TreeWalker::next_node(Self) -> T
+pub fn[T : TNode] TreeWalker::next_sibling(Self) -> T
+pub fn[T : TNode] TreeWalker::parent_node(Self) -> T
+pub fn[T : TNode] TreeWalker::previous_node(Self) -> T
+pub fn[T : TNode] TreeWalker::previous_sibling(Self) -> T
 pub impl FromJsAny for TreeWalker
 pub impl TJsValue for TreeWalker
 pub impl TTreeWalker for TreeWalker
@@ -7524,7 +7590,8 @@ pub fn URL::can_parse(String, base? : String) -> Bool
 pub fn URL::create_object_url(&TURLCreateObjectURLObj) -> String
 pub fn[T : TURL] URL::into(Self) -> T
 pub fn URL::new(String, base? : String) -> Self
-pub fn URL::parse(String, base? : String) -> Self?
+pub fn[T : TURL] URL::parse(String, base? : String) -> T
+pub fn URL::parse_opt(String, base? : String) -> Self?
 pub fn URL::revoke_object_url(String) -> Unit
 pub impl FromJsAny for URL
 pub impl TJsValue for URL
@@ -7764,6 +7831,8 @@ pub impl TVideoTrack for VideoTrack
 
 #external
 pub type VideoTrackList
+pub fn[T : TVideoTrack] VideoTrackList::get(Self, UInt) -> T
+pub fn[T : TVideoTrack] VideoTrackList::get_track_by_id(Self, String) -> T
 pub fn[T : TVideoTrackList] VideoTrackList::into(Self) -> T
 pub impl FromJsAny for VideoTrackList
 pub impl TEventTarget for VideoTrackList
@@ -7888,6 +7957,7 @@ pub impl TJsValue for WheelEventInit
 #alias(WindowProxy)
 #external
 pub type Window
+pub fn[T : TSelection] Window::get_selection(Self) -> T
 pub fn[T : TWindow] Window::into(Self) -> T
 pub impl FromJsAny for Window
 pub impl TEventTarget for Window
@@ -8145,6 +8215,8 @@ pub impl TJsValue for XPathNSResolver
 #external
 pub type XPathResult
 pub fn[T : TXPathResult] XPathResult::into(Self) -> T
+pub fn[T : TNode] XPathResult::iterate_next(Self) -> T
+pub fn[T : TNode] XPathResult::snapshot_item(Self, UInt) -> T
 pub impl FromJsAny for XPathResult
 pub impl TJsValue for XPathResult
 pub impl TXPathResult for XPathResult
@@ -8275,8 +8347,8 @@ pub trait TAudioTrack : TJsValue {
 
 pub trait TAudioTrackList : TEventTarget {
   length(Self) -> UInt
-  get(Self, UInt) -> AudioTrack?
-  get_track_by_id(Self, String) -> AudioTrack?
+  get_opt(Self, UInt) -> AudioTrack?
+  get_track_by_id_opt(Self, String) -> AudioTrack?
   onchange(Self) -> EventHandlerNonNull
   set_onchange(Self, (Event) -> JsValue) -> Unit
   onaddtrack(Self) -> EventHandlerNonNull
@@ -8429,7 +8501,7 @@ pub trait TCSSRule : TJsValue {
 }
 
 pub trait TCSSRuleList : TJsValue {
-  item(Self, UInt) -> CSSRule?
+  item_opt(Self, UInt) -> CSSRule?
   length(Self) -> UInt
 }
 
@@ -8546,7 +8618,7 @@ pub trait TCanvasRenderingContext2D : TJsValue {
   create_linear_gradient(Self, Double, Double, Double, Double) -> CanvasGradient
   create_radial_gradient(Self, Double, Double, Double, Double, Double, Double) -> CanvasGradient
   create_conic_gradient(Self, Double, Double, Double) -> CanvasGradient
-  create_pattern(Self, &TCanvasImageSource, String) -> CanvasPattern?
+  create_pattern_opt(Self, &TCanvasImageSource, String) -> CanvasPattern?
   shadow_offset_x(Self) -> Double
   set_shadow_offset_x(Self, Double) -> Unit
   shadow_offset_y(Self) -> Double
@@ -8654,7 +8726,7 @@ pub impl TCanvasRenderingContext2DStrokeStyle for String
 pub trait TCaretPosition : TJsValue {
   offset_node(Self) -> Node
   offset(Self) -> UInt
-  get_client_rect(Self) -> DOMRect?
+  get_client_rect_opt(Self) -> DOMRect?
 }
 
 pub trait TCharacterData : TNode {
@@ -8982,7 +9054,7 @@ pub trait TDOMRect : TDOMRectReadOnly {
 
 pub trait TDOMRectList : TJsValue {
   length(Self) -> UInt
-  item(Self, UInt) -> DOMRect?
+  item_opt(Self, UInt) -> DOMRect?
 }
 
 pub trait TDOMRectReadOnly : TJsValue {
@@ -9040,15 +9112,15 @@ pub trait TDataTransferItem : TJsValue {
   kind(Self) -> String
   type_(Self) -> String
   get_as_string(Self, (String) -> Unit) -> Unit
-  get_as_file(Self) -> File?
+  get_as_file_opt(Self) -> File?
   get_as_file_system_handle(Self) -> JsPromise[FileSystemHandle]
 }
 
 pub trait TDataTransferItemList : TJsValue {
   length(Self) -> UInt
-  get(Self, UInt) -> DataTransferItem?
-  add(Self, String, String) -> DataTransferItem?
-  add_file(Self, &TFile) -> DataTransferItem?
+  get_opt(Self, UInt) -> DataTransferItem?
+  add_opt(Self, String, String) -> DataTransferItem?
+  add_file_opt(Self, &TFile) -> DataTransferItem?
   remove(Self, UInt) -> Unit
   clear(Self) -> Unit
 }
@@ -9157,9 +9229,9 @@ pub trait TDocument : TNode {
   capture_events(Self) -> Unit
   release_events(Self) -> Unit
   all(Self) -> HTMLAllCollection
-  element_from_point(Self, Double, Double) -> Element?
+  element_from_point_opt(Self, Double, Double) -> Element?
   elements_from_point(Self, Double, Double) -> Array[Element]
-  caret_position_from_point(Self, Double, Double, options? : CaretPositionFromPointOptions) -> CaretPosition?
+  caret_position_from_point_opt(Self, Double, Double, options? : CaretPositionFromPointOptions) -> CaretPosition?
   scrolling_element(Self) -> Element
   fullscreen_enabled(Self) -> Bool
   fullscreen(Self) -> Bool
@@ -9168,9 +9240,9 @@ pub trait TDocument : TNode {
   set_onfullscreenchange(Self, (Event) -> JsValue) -> Unit
   onfullscreenerror(Self) -> EventHandlerNonNull
   set_onfullscreenerror(Self, (Event) -> JsValue) -> Unit
-  get_selection(Self) -> Selection?
+  get_selection_opt(Self) -> Selection?
   timeline(Self) -> DocumentTimeline
-  get_element_by_id(Self, String) -> Element?
+  get_element_by_id_opt(Self, String) -> Element?
   custom_element_registry(Self) -> CustomElementRegistry
   active_element(Self) -> Element
   style_sheets(Self) -> StyleSheetList
@@ -9186,7 +9258,7 @@ pub trait TDocument : TNode {
   append(Self, Array[&TDocumentAppendNodes]) -> Unit
   replace_children(Self, Array[&TDocumentReplaceChildrenNodes]) -> Unit
   move_before(Self, &TNode, &TNode) -> Unit
-  query_selector(Self, String) -> Element?
+  query_selector_opt(Self, String) -> Element?
   query_selector_all(Self, String) -> NodeList
   create_expression(Self, String, resolver? : (String) -> String) -> XPathExpression
   create_ns_resolver(Self, &TNode) -> Node
@@ -9399,7 +9471,7 @@ pub(open) trait TDocumentCreateElementOptions {
 pub impl TDocumentCreateElementOptions for String
 
 pub trait TDocumentFragment : TNode {
-  get_element_by_id(Self, String) -> Element?
+  get_element_by_id_opt(Self, String) -> Element?
   children(Self) -> HTMLCollection
   first_element_child(Self) -> Element
   last_element_child(Self) -> Element
@@ -9408,7 +9480,7 @@ pub trait TDocumentFragment : TNode {
   append(Self, Array[&TDocumentFragmentAppendNodes]) -> Unit
   replace_children(Self, Array[&TDocumentFragmentReplaceChildrenNodes]) -> Unit
   move_before(Self, &TNode, &TNode) -> Unit
-  query_selector(Self, String) -> Element?
+  query_selector_opt(Self, String) -> Element?
   query_selector_all(Self, String) -> NodeList
 }
 
@@ -9525,21 +9597,21 @@ pub trait TElement : TNode {
   toggle_attribute(Self, String, force? : Bool) -> Bool
   has_attribute(Self, String) -> Bool
   has_attribute_ns(Self, String, String) -> Bool
-  get_attribute_node(Self, String) -> Attr?
-  get_attribute_node_ns(Self, String, String) -> Attr?
-  set_attribute_node(Self, &TAttr) -> Attr?
-  set_attribute_node_ns(Self, &TAttr) -> Attr?
+  get_attribute_node_opt(Self, String) -> Attr?
+  get_attribute_node_ns_opt(Self, String, String) -> Attr?
+  set_attribute_node_opt(Self, &TAttr) -> Attr?
+  set_attribute_node_ns_opt(Self, &TAttr) -> Attr?
   remove_attribute_node(Self, &TAttr) -> Attr
   attach_shadow(Self, ShadowRootInit) -> ShadowRoot
   shadow_root(Self) -> ShadowRoot
   custom_element_registry(Self) -> CustomElementRegistry
-  closest(Self, String) -> Element?
+  closest_opt(Self, String) -> Element?
   matches(Self, String) -> Bool
   webkit_matches_selector(Self, String) -> Bool
   get_elements_by_tag_name(Self, String) -> HTMLCollection
   get_elements_by_tag_name_ns(Self, String, String) -> HTMLCollection
   get_elements_by_class_name(Self, String) -> HTMLCollection
-  insert_adjacent_element(Self, String, &TElement) -> Element?
+  insert_adjacent_element_opt(Self, String, &TElement) -> Element?
   insert_adjacent_text(Self, String, String) -> Unit
   set_html_unsafe(Self, &TElementSetHTMLUnsafeHtml) -> Unit
   get_html(Self, options? : GetHTMLOptions) -> String
@@ -9585,7 +9657,7 @@ pub trait TElement : TNode {
   append(Self, Array[&TElementAppendNodes]) -> Unit
   replace_children(Self, Array[&TElementReplaceChildrenNodes]) -> Unit
   move_before(Self, &TNode, &TNode) -> Unit
-  query_selector(Self, String) -> Element?
+  query_selector_opt(Self, String) -> Element?
   query_selector_all(Self, String) -> NodeList
   previous_element_sibling(Self) -> Element
   next_element_sibling(Self) -> Element
@@ -9805,7 +9877,7 @@ pub trait TFile : TBlob {
 }
 
 pub trait TFileList : TJsValue {
-  item(Self, UInt) -> File?
+  item_opt(Self, UInt) -> File?
   length(Self) -> UInt
 }
 
@@ -9915,7 +9987,7 @@ pub(open) trait TGeometryNode {
 
 pub trait THTMLAllCollection : TJsValue {
   length(Self) -> UInt
-  get(Self, UInt) -> Element?
+  get_opt(Self, UInt) -> Element?
   named_item(Self, String) -> HTMLAllCollectionNamedItem?
   item(Self, name_or_index? : String) -> HTMLAllCollectionItem?
 }
@@ -10138,8 +10210,8 @@ pub trait THTMLCanvasElement : THTMLElement {
 
 pub trait THTMLCollection : TJsValue {
   length(Self) -> UInt
-  item(Self, UInt) -> Element?
-  named_item(Self, String) -> Element?
+  item_opt(Self, UInt) -> Element?
+  named_item_opt(Self, String) -> Element?
 }
 
 pub trait THTMLDListElement : THTMLElement {
@@ -10459,7 +10531,7 @@ pub trait THTMLEmbedElement : THTMLElement {
   set_width(Self, String) -> Unit
   height(Self) -> String
   set_height(Self, String) -> Unit
-  get_svg_document(Self) -> Document?
+  get_svg_document_opt(Self) -> Document?
   align(Self) -> String
   set_align(Self, String) -> Unit
   name(Self) -> String
@@ -10523,7 +10595,7 @@ pub trait THTMLFormElement : THTMLElement {
   rel_list(Self) -> DOMTokenList
   elements(Self) -> HTMLFormControlsCollection
   length(Self) -> UInt
-  get(Self, UInt) -> Element?
+  get_opt(Self, UInt) -> Element?
   get_by_name(Self, String) -> HTMLFormElementGetByName?
   submit(Self) -> Unit
   request_submit(Self, submitter? : &THTMLElement) -> Unit
@@ -10648,7 +10720,7 @@ pub trait THTMLIFrameElement : THTMLElement {
   set_loading(Self, String) -> Unit
   content_document(Self) -> Document
   content_window(Self) -> Window
-  get_svg_document(Self) -> Document?
+  get_svg_document_opt(Self) -> Document?
   align(Self) -> String
   set_align(Self, String) -> Unit
   scrolling(Self) -> String
@@ -11033,7 +11105,7 @@ pub trait THTMLObjectElement : THTMLElement {
   set_height(Self, String) -> Unit
   content_document(Self) -> Document
   content_window(Self) -> Window
-  get_svg_document(Self) -> Document?
+  get_svg_document_opt(Self) -> Document?
   will_validate(Self) -> Bool
   validity(Self) -> ValidityState
   validation_message(Self) -> String
@@ -11220,8 +11292,8 @@ pub trait THTMLSelectElement : THTMLElement {
   options(Self) -> HTMLOptionsCollection
   length(Self) -> UInt
   set_length(Self, UInt) -> Unit
-  item(Self, UInt) -> HTMLOptionElement?
-  named_item(Self, String) -> HTMLOptionElement?
+  item_opt(Self, UInt) -> HTMLOptionElement?
+  named_item_opt(Self, String) -> HTMLOptionElement?
   add(Self, &THTMLSelectElementAddElement, before? : &THTMLSelectElementAddBefore) -> Unit
   remove(Self) -> Unit
   remove_at(Self, Int) -> Unit
@@ -11999,8 +12071,8 @@ pub trait TMimeType : TJsValue {
 
 pub trait TMimeTypeArray : TJsValue {
   length(Self) -> UInt
-  item(Self, UInt) -> MimeType?
-  named_item(Self, String) -> MimeType?
+  item_opt(Self, UInt) -> MimeType?
+  named_item_opt(Self, String) -> MimeType?
 }
 
 pub trait TMouseEvent : TUIEvent {
@@ -12047,11 +12119,11 @@ pub trait TMutationRecord : TJsValue {
 
 pub trait TNamedNodeMap : TJsValue {
   length(Self) -> UInt
-  item(Self, UInt) -> Attr?
-  get_named_item(Self, String) -> Attr?
-  get_named_item_ns(Self, String, String) -> Attr?
-  set_named_item(Self, &TAttr) -> Attr?
-  set_named_item_ns(Self, &TAttr) -> Attr?
+  item_opt(Self, UInt) -> Attr?
+  get_named_item_opt(Self, String) -> Attr?
+  get_named_item_ns_opt(Self, String, String) -> Attr?
+  set_named_item_opt(Self, &TAttr) -> Attr?
+  set_named_item_ns_opt(Self, &TAttr) -> Attr?
   remove_named_item(Self, String) -> Attr
   remove_named_item_ns(Self, String, String) -> Attr
 }
@@ -12218,13 +12290,13 @@ pub trait TNodeIterator : TJsValue {
   pointer_before_reference_node(Self) -> Bool
   what_to_show(Self) -> UInt
   filter(Self) -> NodeFilter
-  next_node(Self) -> Node?
-  previous_node(Self) -> Node?
+  next_node_opt(Self) -> Node?
+  previous_node_opt(Self) -> Node?
   detach(Self) -> Unit
 }
 
 pub trait TNodeList : TJsValue {
-  item(Self, UInt) -> Node?
+  item_opt(Self, UInt) -> Node?
   length(Self) -> UInt
 }
 
@@ -12320,7 +12392,7 @@ pub trait TOffscreenCanvasRenderingContext2D : TJsValue {
   create_linear_gradient(Self, Double, Double, Double, Double) -> CanvasGradient
   create_radial_gradient(Self, Double, Double, Double, Double, Double, Double) -> CanvasGradient
   create_conic_gradient(Self, Double, Double, Double) -> CanvasGradient
-  create_pattern(Self, &TCanvasImageSource, String) -> CanvasPattern?
+  create_pattern_opt(Self, &TCanvasImageSource, String) -> CanvasPattern?
   shadow_offset_x(Self) -> Double
   set_shadow_offset_x(Self, Double) -> Unit
   shadow_offset_y(Self) -> Double
@@ -12535,15 +12607,15 @@ pub trait TPlugin : TJsValue {
   description(Self) -> String
   filename(Self) -> String
   length(Self) -> UInt
-  item(Self, UInt) -> MimeType?
-  named_item(Self, String) -> MimeType?
+  item_opt(Self, UInt) -> MimeType?
+  named_item_opt(Self, String) -> MimeType?
 }
 
 pub trait TPluginArray : TJsValue {
   refresh(Self) -> Unit
   length(Self) -> UInt
-  item(Self, UInt) -> Plugin?
-  named_item(Self, String) -> Plugin?
+  item_opt(Self, UInt) -> Plugin?
+  named_item_opt(Self, String) -> Plugin?
 }
 
 pub trait TPointerEvent : TMouseEvent {
@@ -13128,8 +13200,8 @@ pub trait TSVGGradientElement : TSVGElement {
 pub trait TSVGGraphicsElement : TSVGElement {
   transform(Self) -> SVGAnimatedTransformList
   get_b_box(Self, options? : SVGBoundingBoxOptions) -> DOMRect
-  get_ctm(Self) -> DOMMatrix?
-  get_screen_ctm(Self) -> DOMMatrix?
+  get_ctm_opt(Self) -> DOMMatrix?
+  get_screen_ctm_opt(Self) -> DOMMatrix?
   required_extensions(Self) -> SVGStringList
   system_language(Self) -> SVGStringList
 }
@@ -13303,7 +13375,7 @@ pub trait TSVGSVGElement : TSVGGraphicsElement {
   create_svg_rect(Self) -> DOMRect
   create_svg_transform(Self) -> SVGTransform
   create_svg_transform_from_matrix(Self, matrix? : DOMMatrix2DInit) -> SVGTransform
-  get_element_by_id(Self, String) -> Element?
+  get_element_by_id_opt(Self, String) -> Element?
   suspend_redraw(Self, UInt) -> UInt
   unsuspend_redraw(Self, UInt) -> Unit
   unsuspend_redraw_all(Self) -> Unit
@@ -13455,7 +13527,7 @@ pub trait TSVGTransformList : TJsValue {
   append_item(Self, &TSVGTransform) -> SVGTransform
   set(Self, UInt, &TSVGTransform) -> Unit
   create_svg_transform_from_matrix(Self, matrix? : DOMMatrix2DInit) -> SVGTransform
-  consolidate(Self) -> SVGTransform?
+  consolidate_opt(Self) -> SVGTransform?
 }
 
 pub trait TSVGUnitTypes : TJsValue {
@@ -13703,7 +13775,7 @@ pub trait TStyleSheet : TJsValue {
 }
 
 pub trait TStyleSheetList : TJsValue {
-  item(Self, UInt) -> CSSStyleSheet?
+  item_opt(Self, UInt) -> CSSStyleSheet?
   length(Self) -> UInt
 }
 
@@ -13806,14 +13878,14 @@ pub trait TTextTrackCue : TEventTarget {
 
 pub trait TTextTrackCueList : TJsValue {
   length(Self) -> UInt
-  get(Self, UInt) -> TextTrackCue?
-  get_cue_by_id(Self, String) -> TextTrackCue?
+  get_opt(Self, UInt) -> TextTrackCue?
+  get_cue_by_id_opt(Self, String) -> TextTrackCue?
 }
 
 pub trait TTextTrackList : TEventTarget {
   length(Self) -> UInt
-  get(Self, UInt) -> TextTrack?
-  get_track_by_id(Self, String) -> TextTrack?
+  get_opt(Self, UInt) -> TextTrack?
+  get_track_by_id_opt(Self, String) -> TextTrack?
   onchange(Self) -> EventHandlerNonNull
   set_onchange(Self, (Event) -> JsValue) -> Unit
   onaddtrack(Self) -> EventHandlerNonNull
@@ -13870,7 +13942,7 @@ pub trait TTouchEvent : TUIEvent {
 
 pub trait TTouchList : TJsValue {
   length(Self) -> UInt
-  item(Self, UInt) -> Touch?
+  item_opt(Self, UInt) -> Touch?
 }
 
 pub trait TTrackEvent : TEvent {
@@ -13907,13 +13979,13 @@ pub trait TTreeWalker : TJsValue {
   filter(Self) -> NodeFilter
   current_node(Self) -> Node
   set_current_node(Self, &TNode) -> Unit
-  parent_node(Self) -> Node?
-  first_child(Self) -> Node?
-  last_child(Self) -> Node?
-  previous_sibling(Self) -> Node?
-  next_sibling(Self) -> Node?
-  previous_node(Self) -> Node?
-  next_node(Self) -> Node?
+  parent_node_opt(Self) -> Node?
+  first_child_opt(Self) -> Node?
+  last_child_opt(Self) -> Node?
+  previous_sibling_opt(Self) -> Node?
+  next_sibling_opt(Self) -> Node?
+  previous_node_opt(Self) -> Node?
+  next_node_opt(Self) -> Node?
 }
 
 pub trait TTrustedHTML : TJsValue {
@@ -14065,8 +14137,8 @@ pub trait TVideoTrack : TJsValue {
 
 pub trait TVideoTrackList : TEventTarget {
   length(Self) -> UInt
-  get(Self, UInt) -> VideoTrack?
-  get_track_by_id(Self, String) -> VideoTrack?
+  get_opt(Self, UInt) -> VideoTrack?
+  get_track_by_id_opt(Self, String) -> VideoTrack?
   selected_index(Self) -> Int
   onchange(Self) -> EventHandlerNonNull
   set_onchange(Self, (Event) -> JsValue) -> Unit
@@ -14211,7 +14283,7 @@ pub trait TWindow : TEventTarget {
   outer_width(Self) -> Int
   outer_height(Self) -> Int
   device_pixel_ratio(Self) -> Double
-  get_selection(Self) -> Selection?
+  get_selection_opt(Self) -> Selection?
   show_open_file_picker(Self, options? : OpenFilePickerOptions) -> JsPromise[Array[FileSystemFileHandle]]
   show_save_file_picker(Self, options? : SaveFilePickerOptions) -> JsPromise[FileSystemFileHandle]
   show_directory_picker(Self, options? : DirectoryPickerOptions) -> JsPromise[FileSystemDirectoryHandle]
@@ -14689,8 +14761,8 @@ pub trait TXPathResult : TJsValue {
   single_node_value(Self) -> Node
   invalid_iterator_state(Self) -> Bool
   snapshot_length(Self) -> UInt
-  iterate_next(Self) -> Node?
-  snapshot_item(Self, UInt) -> Node?
+  iterate_next_opt(Self) -> Node?
+  snapshot_item_opt(Self, UInt) -> Node?
 }
 
 pub trait TXSLTProcessor : TJsValue {

@@ -144,7 +144,7 @@ pub trait TWindow: TEventTarget {
   outer_width(self : Self) -> Int = _
   outer_height(self : Self) -> Int = _
   device_pixel_ratio(self : Self) -> Double = _
-  get_selection(self : Self) -> Selection? = _
+  get_selection_opt(self : Self) -> Selection? = _
   show_open_file_picker(self : Self, options? : OpenFilePickerOptions) -> JsPromise[
     Array[FileSystemFileHandle],
   ] = _
@@ -994,7 +994,7 @@ impl TWindow with device_pixel_ratio(self : Self) -> Double {
 
 ///|
 /// [Window.getSelection](https://developer.mozilla.org/en-US/docs/Web/API/Window/getSelection)
-impl TWindow with get_selection(self : Self) -> Selection? {
+impl TWindow with get_selection_opt(self : Self) -> Selection? {
   window_get_selection_ffi(TJsValue::to_js(self)).to_option()
 }
 
@@ -3061,4 +3061,9 @@ impl TWindow with session_storage(self : Self) -> Storage {
 /// [Window.localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
 impl TWindow with local_storage(self : Self) -> Storage {
   window_local_storage_ffi(TJsValue::to_js(self))
+}
+
+///|
+pub fn[T : TSelection] Window::get_selection(self : Window) -> T {
+  self.get_selection_opt().unwrap().into()
 }

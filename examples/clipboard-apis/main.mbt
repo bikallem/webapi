@@ -59,7 +59,7 @@ fn main {
 
   paste_btn.add_event_listener("click", fn(_event) { do_paste() })
 
-  let app = doc.get_element_by_id("app").unwrap()
+  let app : @webapi.Element = doc.get_element_by_id("app")
   let container : @webapi.HTMLDivElement = doc.create_element("div").into()
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
@@ -75,7 +75,9 @@ fn main {
 
 ///|
 fn do_copy(text : String) -> Unit {
-  let result = @webapi.document.get_element_by_id("paste-result").unwrap()
+  let result : @webapi.Element = @webapi.document.get_element_by_id(
+    "paste-result",
+  )
   @webapi.navigator
   .clipboard()
   .write_text(text)
@@ -86,7 +88,9 @@ fn do_copy(text : String) -> Unit {
 
 ///|
 fn do_paste() -> Unit {
-  let result = @webapi.document.get_element_by_id("paste-result").unwrap()
+  let result : @webapi.Element = @webapi.document.get_element_by_id(
+    "paste-result",
+  )
   @webapi.navigator
   .clipboard()
   .read_text()

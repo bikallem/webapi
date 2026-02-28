@@ -1,7 +1,13 @@
 ///|
 /// URL and URLSearchParams API Demo
 /// Demonstrates parsing URLs, reading components, and manipulating search parameters
-using @webapi {document, type URL, type HTMLButtonElement, type HTMLDivElement}
+using @webapi {
+  document,
+  type URL,
+  type HTMLButtonElement,
+  type HTMLDivElement,
+  type Element,
+}
 
 ///|
 /// Create a labeled display row: a span with the label and a div for the value.
@@ -48,7 +54,7 @@ fn main {
   )
 
   // Build app container
-  let app = document.get_element_by_id("app").unwrap()
+  let app : Element = document.get_element_by_id("app")
   let container : HTMLDivElement = document.create_element("div").into()
   container.set_attribute(
     "style", "max-width: 700px; margin: 2em auto; padding: 1.5em; font-family: system-ui;",

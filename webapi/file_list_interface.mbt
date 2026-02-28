@@ -22,13 +22,13 @@ pub impl TFileList for FileList
 ///|
 /// [FileList](https://developer.mozilla.org/en-US/docs/Web/API/FileList) interface.
 pub trait TFileList: TJsValue {
-  item(self : Self, index : UInt) -> File? = _
+  item_opt(self : Self, index : UInt) -> File? = _
   length(self : Self) -> UInt = _
 }
 
 ///|
 /// [FileList.item](https://developer.mozilla.org/en-US/docs/Web/API/FileList/item)
-impl TFileList with item(self : Self, index : UInt) -> File? {
+impl TFileList with item_opt(self : Self, index : UInt) -> File? {
   file_list_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }
 
@@ -36,4 +36,9 @@ impl TFileList with item(self : Self, index : UInt) -> File? {
 /// [FileList.length](https://developer.mozilla.org/en-US/docs/Web/API/FileList/length)
 impl TFileList with length(self : Self) -> UInt {
   file_list_length_ffi(TJsValue::to_js(self))
+}
+
+///|
+pub fn[T : TFile] FileList::item(self : FileList, index : UInt) -> T {
+  self.item_opt(index).unwrap().into()
 }

@@ -8,6 +8,7 @@ using @webapi {
   type PermissionDescriptor,
   type PermissionState,
   type PermissionStatus,
+  type Element,
 }
 
 ///|
@@ -26,7 +27,7 @@ fn state_label(state : PermissionState) -> String {
 
 ///|
 fn query_permission(name : String) -> Unit {
-  let cell = document.get_element_by_id("perm-" + name).unwrap()
+  let cell : Element = document.get_element_by_id("perm-" + name)
   cell.set_text_content("querying...")
   let desc = PermissionDescriptor::new(name)
   navigator
@@ -41,7 +42,7 @@ fn query_permission(name : String) -> Unit {
 
 ///|
 fn main {
-  let app = document.get_element_by_id("app").unwrap()
+  let app : Element = document.get_element_by_id("app")
   let container : HTMLDivElement = document.create_element("div").into()
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",

@@ -14,6 +14,7 @@ Type-safe MoonBit bindings for Web Platform APIs, automatically generated from W
 - [API Patterns](#api-patterns)
   - [Global Objects](#global-objects)
   - [Type Casting with `into()`](#type-casting-with-into)
+  - [Nullable Returns and `_opt` Methods](#nullable-returns-and-_opt-methods)
   - [Event Handling](#event-handling)
   - [Promises](#promises)
   - [Variadic Arguments](#variadic-arguments)
@@ -96,7 +97,7 @@ fn readme_counter() -> Unit {
   })
 
   // Append to DOM
-  let app = document.get_element_by_id("app").unwrap()
+  let app : Element = document.get_element_by_id("app")
   app.append_child(count_display) |> ignore
   app.append_child(increment_btn) |> ignore
 }
@@ -131,7 +132,8 @@ fn readme_canvas() -> Unit {
   let canvas : HTMLCanvasElement = document.create_element("canvas").into()
   canvas.set_width(800)
   canvas.set_height(500)
-  document.get_element_by_id("app").unwrap().append_child(canvas) |> ignore
+  let app : Element = document.get_element_by_id("app")
+  app.append_child(canvas) |> ignore
 
   // Get 2D rendering context
   let ctx : CanvasRenderingContext2D = canvas.get_context("2d").unwrap().into()
@@ -240,6 +242,33 @@ fn readme_casting() -> Unit {
 
   // Cast to access type-specific methods
   let _ctx : CanvasRenderingContext2D = canvas.get_context("2d").unwrap().into()
+}
+```
+
+### Nullable Returns and `_opt` Methods
+
+Methods that return a nullable interface type (e.g., `Element?`) have two variants:
+
+- **`method_name()`** — Generic convenience method that returns `T`, panics if null. Use when you know the result exists.
+- **`method_name_opt()`** — Returns `T?` (Option). Use when you need to handle the `None` case.
+
+```moonbit nocheck
+///|
+fn readme_opt_methods() -> Unit {
+  // Convenience: returns the type directly (panics if not found)
+  let app : Element = document.get_element_by_id("app")
+
+  // With specific subtype via generic inference:
+  let canvas : HTMLCanvasElement = document.get_element_by_id("my-canvas")
+
+  // _opt variant: returns Option for null-checking
+  match document.get_element_by_id_opt("maybe-missing") {
+    Some(el) => el.set_text_content("found")
+    None => ()
+  }
+
+  ignore(app)
+  ignore(canvas)
 }
 ```
 

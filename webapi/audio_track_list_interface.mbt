@@ -26,8 +26,8 @@ pub impl TEventTarget for AudioTrackList
 /// [AudioTrackList](https://developer.mozilla.org/en-US/docs/Web/API/AudioTrackList) interface.
 pub trait TAudioTrackList: TEventTarget {
   length(self : Self) -> UInt = _
-  get(self : Self, index : UInt) -> AudioTrack? = _
-  get_track_by_id(self : Self, id : String) -> AudioTrack? = _
+  get_opt(self : Self, index : UInt) -> AudioTrack? = _
+  get_track_by_id_opt(self : Self, id : String) -> AudioTrack? = _
   onchange(self : Self) -> EventHandler = _
   set_onchange(self : Self, onchange : (Event) -> JsValue) -> Unit = _
   onaddtrack(self : Self) -> EventHandler = _
@@ -44,13 +44,13 @@ impl TAudioTrackList with length(self : Self) -> UInt {
 
 ///|
 /// [AudioTrackList.get](https://developer.mozilla.org/en-US/docs/Web/API/AudioTrackList/get)
-impl TAudioTrackList with get(self : Self, index : UInt) -> AudioTrack? {
+impl TAudioTrackList with get_opt(self : Self, index : UInt) -> AudioTrack? {
   audio_track_list_get_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }
 
 ///|
 /// [AudioTrackList.getTrackById](https://developer.mozilla.org/en-US/docs/Web/API/AudioTrackList/getTrackById)
-impl TAudioTrackList with get_track_by_id(self : Self, id : String) -> AudioTrack? {
+impl TAudioTrackList with get_track_by_id_opt(self : Self, id : String) -> AudioTrack? {
   audio_track_list_get_track_by_id_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(id),
@@ -109,4 +109,20 @@ impl TAudioTrackList with set_onremovetrack(
     TJsValue::to_js(self),
     TJsValue::to_js(event_handler_non_null_ffi(onremovetrack)),
   )
+}
+
+///|
+pub fn[T : TAudioTrack] AudioTrackList::get(
+  self : AudioTrackList,
+  index : UInt,
+) -> T {
+  self.get_opt(index).unwrap().into()
+}
+
+///|
+pub fn[T : TAudioTrack] AudioTrackList::get_track_by_id(
+  self : AudioTrackList,
+  id : String,
+) -> T {
+  self.get_track_by_id_opt(id).unwrap().into()
 }

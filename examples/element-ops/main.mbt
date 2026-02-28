@@ -156,7 +156,7 @@ fn main {
   })
 
   // --- Build the DOM tree ---
-  let app = document.get_element_by_id("app").unwrap()
+  let app : @webapi.Element = document.get_element_by_id("app")
   let wrapper = document.create_element("div")
   wrapper.set_attribute(
     "style", "max-width: 600px; margin: 2em auto; font-family: system-ui; padding: 1em;",

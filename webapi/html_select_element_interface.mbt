@@ -88,8 +88,8 @@ pub trait THTMLSelectElement: THTMLElement {
   options(self : Self) -> HTMLOptionsCollection = _
   length(self : Self) -> UInt = _
   set_length(self : Self, length : UInt) -> Unit = _
-  item(self : Self, index : UInt) -> HTMLOptionElement? = _
-  named_item(self : Self, name : String) -> HTMLOptionElement? = _
+  item_opt(self : Self, index : UInt) -> HTMLOptionElement? = _
+  named_item_opt(self : Self, name : String) -> HTMLOptionElement? = _
   add(
     self : Self,
     element : &THTMLSelectElementAddElement,
@@ -235,13 +235,13 @@ impl THTMLSelectElement with set_length(self : Self, length : UInt) -> Unit {
 
 ///|
 /// [HTMLSelectElement.item](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/item)
-impl THTMLSelectElement with item(self : Self, index : UInt) -> HTMLOptionElement? {
+impl THTMLSelectElement with item_opt(self : Self, index : UInt) -> HTMLOptionElement? {
   html_select_element_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }
 
 ///|
 /// [HTMLSelectElement.namedItem](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/namedItem)
-impl THTMLSelectElement with named_item(self : Self, name : String) -> HTMLOptionElement? {
+impl THTMLSelectElement with named_item_opt(self : Self, name : String) -> HTMLOptionElement? {
   html_select_element_named_item_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(name),
@@ -382,4 +382,20 @@ impl THTMLSelectElement with show_picker(self : Self) -> Unit {
 /// [HTMLSelectElement.labels](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/labels)
 impl THTMLSelectElement with labels(self : Self) -> NodeList {
   html_select_element_labels_ffi(TJsValue::to_js(self))
+}
+
+///|
+pub fn[T : THTMLOptionElement] HTMLSelectElement::item(
+  self : HTMLSelectElement,
+  index : UInt,
+) -> T {
+  self.item_opt(index).unwrap().into()
+}
+
+///|
+pub fn[T : THTMLOptionElement] HTMLSelectElement::named_item(
+  self : HTMLSelectElement,
+  name : String,
+) -> T {
+  self.named_item_opt(name).unwrap().into()
 }

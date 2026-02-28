@@ -22,13 +22,13 @@ pub impl TStyleSheetList for StyleSheetList
 ///|
 /// [StyleSheetList](https://developer.mozilla.org/en-US/docs/Web/API/StyleSheetList) interface.
 pub trait TStyleSheetList: TJsValue {
-  item(self : Self, index : UInt) -> CSSStyleSheet? = _
+  item_opt(self : Self, index : UInt) -> CSSStyleSheet? = _
   length(self : Self) -> UInt = _
 }
 
 ///|
 /// [StyleSheetList.item](https://developer.mozilla.org/en-US/docs/Web/API/StyleSheetList/item)
-impl TStyleSheetList with item(self : Self, index : UInt) -> CSSStyleSheet? {
+impl TStyleSheetList with item_opt(self : Self, index : UInt) -> CSSStyleSheet? {
   style_sheet_list_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }
 
@@ -36,4 +36,12 @@ impl TStyleSheetList with item(self : Self, index : UInt) -> CSSStyleSheet? {
 /// [StyleSheetList.length](https://developer.mozilla.org/en-US/docs/Web/API/StyleSheetList/length)
 impl TStyleSheetList with length(self : Self) -> UInt {
   style_sheet_list_length_ffi(TJsValue::to_js(self))
+}
+
+///|
+pub fn[T : TCSSStyleSheet] StyleSheetList::item(
+  self : StyleSheetList,
+  index : UInt,
+) -> T {
+  self.item_opt(index).unwrap().into()
 }

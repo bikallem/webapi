@@ -70,7 +70,7 @@ pub impl TDocumentFragmentReplaceChildrenNodes for String with to_js(
 ///|
 /// [DocumentFragment](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) interface.
 pub trait TDocumentFragment: TNode {
-  get_element_by_id(self : Self, element_id : String) -> Element? = _
+  get_element_by_id_opt(self : Self, element_id : String) -> Element? = _
   children(self : Self) -> HTMLCollection = _
   first_element_child(self : Self) -> Element = _
   last_element_child(self : Self) -> Element = _
@@ -82,13 +82,16 @@ pub trait TDocumentFragment: TNode {
     nodes : Array[&TDocumentFragmentReplaceChildrenNodes],
   ) -> Unit = _
   move_before(self : Self, node : &TNode, child : &TNode) -> Unit = _
-  query_selector(self : Self, selectors : String) -> Element? = _
+  query_selector_opt(self : Self, selectors : String) -> Element? = _
   query_selector_all(self : Self, selectors : String) -> NodeList = _
 }
 
 ///|
 /// [DocumentFragment.getElementById](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment/getElementById)
-impl TDocumentFragment with get_element_by_id(self : Self, element_id : String) -> Element? {
+impl TDocumentFragment with get_element_by_id_opt(
+  self : Self,
+  element_id : String,
+) -> Element? {
   document_fragment_get_element_by_id_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(element_id),
@@ -179,7 +182,7 @@ impl TDocumentFragment with move_before(
 
 ///|
 /// [DocumentFragment.querySelector](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment/querySelector)
-impl TDocumentFragment with query_selector(self : Self, selectors : String) -> Element? {
+impl TDocumentFragment with query_selector_opt(self : Self, selectors : String) -> Element? {
   document_fragment_query_selector_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(selectors),
@@ -193,4 +196,20 @@ impl TDocumentFragment with query_selector_all(self : Self, selectors : String) 
     TJsValue::to_js(self),
     TJsValue::to_js(selectors),
   )
+}
+
+///|
+pub fn[T : TElement] DocumentFragment::get_element_by_id(
+  self : DocumentFragment,
+  element_id : String,
+) -> T {
+  self.get_element_by_id_opt(element_id).unwrap().into()
+}
+
+///|
+pub fn[T : TElement] DocumentFragment::query_selector(
+  self : DocumentFragment,
+  selectors : String,
+) -> T {
+  self.query_selector_opt(selectors).unwrap().into()
 }

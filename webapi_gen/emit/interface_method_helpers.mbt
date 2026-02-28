@@ -107,6 +107,115 @@ fn trait_method_impl_args(args : Array[@type_mapping.MethodArg]) -> String {
 }
 
 ///|
+/// Check if a method return type is eligible for a convenience wrapper.
+/// Only methods returning an optional interface type (T?) qualify.
+fn is_convenience_eligible(return_type : @type_mapping.MethodReturn) -> Bool {
+  return_type.optional && return_type.type_ is @type_mapping.Interface(_)
+}
+
+///|
+/// Generate convenience method declaration args, replacing Self with concrete type.
+fn convenience_decl_args(
+  args : Array[@type_mapping.MethodArg],
+  interface_name : String,
+) -> String {
+  args
+  .map(arg => {
+    let arg_name = @type_mapping.safe_identifier(arg.name)
+    let arg_name = if arg.optional { "\{arg_name}?" } else { arg_name }
+    let type_name = match arg.type_ {
+      @type_mapping.Self => interface_name
+      _ => arg.type_.name()
+    }
+    let arg_decl = "\{arg_name} : \{type_name}"
+    match arg.default_value {
+      Some(dv) => "\{arg_decl} = \{dv}"
+      None => arg_decl
+    }
+  })
+  .join(", \n")
+}
+
+///|
+/// Check if any non-self args are optional without default values.
+/// These need match-based forwarding since `name~` can't forward `Type?` to `name? : Type`.
+fn has_optional_no_default(args : Array[@type_mapping.MethodArg]) -> Bool {
+  args[1:].iter().any(fn(arg) { arg.optional && arg.default_value is None })
+}
+
+///|
+/// Generate convenience method forwarding args (skip self, use name~ for optional with default).
+fn convenience_forward_args(args : Array[@type_mapping.MethodArg]) -> String {
+  args[1:]
+  .map(arg => {
+    let name = @type_mapping.safe_identifier(arg.name)
+    if arg.optional {
+      "\{name}~"
+    } else {
+      name
+    }
+  })
+  .join(", ")
+}
+
+///|
+/// Generate convenience method body that handles optional args without defaults via match.
+/// Returns the full function body including braces.
+fn convenience_body(
+  args : Array[@type_mapping.MethodArg],
+  call_prefix : String,
+  method_name : String,
+) -> String {
+  if !has_optional_no_default(args) {
+    // Simple forwarding: all optional args have defaults, name~ works fine
+    let fwd = convenience_forward_args(args)
+    return "  \{call_prefix}\{method_name}_opt(\{fwd}).unwrap().into()\n"
+  }
+  // Collect optional-no-default args for match branches
+  let opt_args : Array[@type_mapping.MethodArg] = args[1:].filter(fn(arg) {
+    arg.optional && arg.default_value is None
+  })
+  // For each optional-no-default arg, generate match with Some/None branches
+  // We handle 1 optional-no-default arg with a simple match pattern.
+  // Multiple would need 2^N branches but is extremely rare in practice.
+  guard opt_args.length() == 1 else {
+    // Fallback for multiple optional-no-default args: just use name~ (may not compile for all types)
+    let fwd = convenience_forward_args(args)
+    return "  \{call_prefix}\{method_name}_opt(\{fwd}).unwrap().into()\n"
+  }
+  let opt_arg = opt_args[0]
+  let opt_name = @type_mapping.safe_identifier(opt_arg.name)
+  // Build forward args for Some branch (unwrapped value, use name~)
+  let some_fwd = args[1:]
+    .map(arg => {
+      let name = @type_mapping.safe_identifier(arg.name)
+      if arg.optional {
+        "\{name}~"
+      } else {
+        name
+      }
+    })
+    .join(", ")
+  // Build forward args for None branch (skip the optional arg)
+  let none_fwd = args[1:]
+    .filter(fn(arg) {
+      !(arg.optional &&
+      arg.default_value is None &&
+      @type_mapping.safe_identifier(arg.name) == opt_name)
+    })
+    .map(arg => {
+      let name = @type_mapping.safe_identifier(arg.name)
+      if arg.optional {
+        "\{name}~"
+      } else {
+        name
+      }
+    })
+    .join(", ")
+  "  let result = match \{opt_name} {\n    Some(\{opt_name}) => \{call_prefix}\{method_name}_opt(\{some_fwd})\n    None => \{call_prefix}\{method_name}_opt(\{none_fwd})\n  }\n  result.unwrap().into()\n"
+}
+
+///|
 fn is_trait_ref_type(type_ : @type_mapping.ArgMbtType) -> Bool {
   match type_ {
     @type_mapping.ArgMbtType::Other(name) => name.has_prefix("&T")

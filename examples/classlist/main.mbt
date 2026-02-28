@@ -6,6 +6,7 @@ using @webapi {
   type HTMLDivElement,
   type HTMLButtonElement,
   type DOMTokenList,
+  type Element,
 }
 
 ///|
@@ -15,7 +16,7 @@ fn update_status(cl : DOMTokenList, status : HTMLDivElement) -> Unit {
 
 ///|
 fn main {
-  let app = document.get_element_by_id("app").unwrap()
+  let app : Element = document.get_element_by_id("app")
 
   // Create style element with CSS classes
   let style = document.create_element("style")

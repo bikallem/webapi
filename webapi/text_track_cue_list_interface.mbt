@@ -25,8 +25,8 @@ pub impl TTextTrackCueList for TextTrackCueList
 /// [TextTrackCueList](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackCueList) interface.
 pub trait TTextTrackCueList: TJsValue {
   length(self : Self) -> UInt = _
-  get(self : Self, index : UInt) -> TextTrackCue? = _
-  get_cue_by_id(self : Self, id : String) -> TextTrackCue? = _
+  get_opt(self : Self, index : UInt) -> TextTrackCue? = _
+  get_cue_by_id_opt(self : Self, id : String) -> TextTrackCue? = _
 }
 
 ///|
@@ -37,15 +37,31 @@ impl TTextTrackCueList with length(self : Self) -> UInt {
 
 ///|
 /// [TextTrackCueList.get](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackCueList/get)
-impl TTextTrackCueList with get(self : Self, index : UInt) -> TextTrackCue? {
+impl TTextTrackCueList with get_opt(self : Self, index : UInt) -> TextTrackCue? {
   text_track_cue_list_get_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }
 
 ///|
 /// [TextTrackCueList.getCueById](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackCueList/getCueById)
-impl TTextTrackCueList with get_cue_by_id(self : Self, id : String) -> TextTrackCue? {
+impl TTextTrackCueList with get_cue_by_id_opt(self : Self, id : String) -> TextTrackCue? {
   text_track_cue_list_get_cue_by_id_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(id),
   ).to_option()
+}
+
+///|
+pub fn[T : TTextTrackCue] TextTrackCueList::get(
+  self : TextTrackCueList,
+  index : UInt,
+) -> T {
+  self.get_opt(index).unwrap().into()
+}
+
+///|
+pub fn[T : TTextTrackCue] TextTrackCueList::get_cue_by_id(
+  self : TextTrackCueList,
+  id : String,
+) -> T {
+  self.get_cue_by_id_opt(id).unwrap().into()
 }

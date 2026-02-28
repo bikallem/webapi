@@ -23,8 +23,8 @@ pub impl THTMLCollection for HTMLCollection
 /// [HTMLCollection](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection) interface.
 pub trait THTMLCollection: TJsValue {
   length(self : Self) -> UInt = _
-  item(self : Self, index : UInt) -> Element? = _
-  named_item(self : Self, name : String) -> Element? = _
+  item_opt(self : Self, index : UInt) -> Element? = _
+  named_item_opt(self : Self, name : String) -> Element? = _
 }
 
 ///|
@@ -35,12 +35,28 @@ impl THTMLCollection with length(self : Self) -> UInt {
 
 ///|
 /// [HTMLCollection.item](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection/item)
-impl THTMLCollection with item(self : Self, index : UInt) -> Element? {
+impl THTMLCollection with item_opt(self : Self, index : UInt) -> Element? {
   html_collection_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }
 
 ///|
 /// [HTMLCollection.namedItem](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection/namedItem)
-impl THTMLCollection with named_item(self : Self, name : String) -> Element? {
+impl THTMLCollection with named_item_opt(self : Self, name : String) -> Element? {
   html_collection_named_item_ffi(TJsValue::to_js(self), TJsValue::to_js(name)).to_option()
+}
+
+///|
+pub fn[T : TElement] HTMLCollection::item(
+  self : HTMLCollection,
+  index : UInt,
+) -> T {
+  self.item_opt(index).unwrap().into()
+}
+
+///|
+pub fn[T : TElement] HTMLCollection::named_item(
+  self : HTMLCollection,
+  name : String,
+) -> T {
+  self.named_item_opt(name).unwrap().into()
 }

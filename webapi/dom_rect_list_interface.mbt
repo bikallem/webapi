@@ -23,7 +23,7 @@ pub impl TDOMRectList for DOMRectList
 /// [DOMRectList](https://developer.mozilla.org/en-US/docs/Web/API/DOMRectList) interface.
 pub trait TDOMRectList: TJsValue {
   length(self : Self) -> UInt = _
-  item(self : Self, index : UInt) -> DOMRect? = _
+  item_opt(self : Self, index : UInt) -> DOMRect? = _
 }
 
 ///|
@@ -34,6 +34,11 @@ impl TDOMRectList with length(self : Self) -> UInt {
 
 ///|
 /// [DOMRectList.item](https://developer.mozilla.org/en-US/docs/Web/API/DOMRectList/item)
-impl TDOMRectList with item(self : Self, index : UInt) -> DOMRect? {
+impl TDOMRectList with item_opt(self : Self, index : UInt) -> DOMRect? {
   dom_rect_list_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
+}
+
+///|
+pub fn[T : TDOMRect] DOMRectList::item(self : DOMRectList, index : UInt) -> T {
+  self.item_opt(index).unwrap().into()
 }

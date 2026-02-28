@@ -84,7 +84,7 @@ fn main {
   controls.append_child(grow_btn) |> ignore
   controls.append_child(shrink_btn) |> ignore
 
-  let app = doc.get_element_by_id("app").unwrap()
+  let app : @webapi.Element = doc.get_element_by_id("app")
   let root : @webapi.HTMLDivElement = doc.create_element("div").into()
   root.set_attribute(
     "style", "font-family: system-ui; max-width: 760px; margin: 2rem auto;",

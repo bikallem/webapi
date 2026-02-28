@@ -177,35 +177,32 @@ fn wc_todo(host : @webapi.HTMLElement) -> Unit {
   let shadow = host.attach_shadow(
     @webapi.ShadowRootInit::new(@webapi.ShadowRootMode::Open),
   )
-  let template : HTMLTemplateElement = doc
-    .get_element_by_id("wc-todo-template")
-    .unwrap()
-    .into()
+  let template : HTMLTemplateElement = doc.get_element_by_id("wc-todo-template")
   shadow.append_child(template.content().clone_node(subtree=true)) |> ignore
 
   // Query shadow DOM for elements
   let todo_input : HTMLInputElement = shadow
-    .query_selector("[data-ref=input]")
+    .query_selector_opt("[data-ref=input]")
     .unwrap()
     .into()
   let add_btn : HTMLButtonElement = shadow
-    .query_selector("[data-ref=add]")
+    .query_selector_opt("[data-ref=add]")
     .unwrap()
     .into()
   let clear_btn : HTMLButtonElement = shadow
-    .query_selector("[data-ref=clear]")
+    .query_selector_opt("[data-ref=clear]")
     .unwrap()
     .into()
   let status : HTMLDivElement = shadow
-    .query_selector("[data-ref=status]")
+    .query_selector_opt("[data-ref=status]")
     .unwrap()
     .into()
   let empty_state : HTMLDivElement = shadow
-    .query_selector("[data-ref=empty]")
+    .query_selector_opt("[data-ref=empty]")
     .unwrap()
     .into()
   let list : HTMLUListElement = shadow
-    .query_selector("[data-ref=list]")
+    .query_selector_opt("[data-ref=list]")
     .unwrap()
     .into()
 

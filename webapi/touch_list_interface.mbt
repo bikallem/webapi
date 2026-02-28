@@ -23,7 +23,7 @@ pub impl TTouchList for TouchList
 /// [TouchList](https://developer.mozilla.org/en-US/docs/Web/API/TouchList) interface.
 pub trait TTouchList: TJsValue {
   length(self : Self) -> UInt = _
-  item(self : Self, index : UInt) -> Touch? = _
+  item_opt(self : Self, index : UInt) -> Touch? = _
 }
 
 ///|
@@ -34,6 +34,11 @@ impl TTouchList with length(self : Self) -> UInt {
 
 ///|
 /// [TouchList.item](https://developer.mozilla.org/en-US/docs/Web/API/TouchList/item)
-impl TTouchList with item(self : Self, index : UInt) -> Touch? {
+impl TTouchList with item_opt(self : Self, index : UInt) -> Touch? {
   touch_list_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
+}
+
+///|
+pub fn[T : TTouch] TouchList::item(self : TouchList, index : UInt) -> T {
+  self.item_opt(index).unwrap().into()
 }

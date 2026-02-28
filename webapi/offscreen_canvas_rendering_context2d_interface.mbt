@@ -245,7 +245,11 @@ pub trait TOffscreenCanvasRenderingContext2D: TJsValue {
     x : Double,
     y : Double,
   ) -> CanvasGradient = _
-  create_pattern(self : Self, image : &TCanvasImageSource, repetition : String) -> CanvasPattern? = _
+  create_pattern_opt(
+    self : Self,
+    image : &TCanvasImageSource,
+    repetition : String,
+  ) -> CanvasPattern? = _
   shadow_offset_x(self : Self) -> Double = _
   set_shadow_offset_x(self : Self, shadow_offset_x : Double) -> Unit = _
   shadow_offset_y(self : Self) -> Double = _
@@ -765,7 +769,7 @@ impl TOffscreenCanvasRenderingContext2D with create_conic_gradient(
 
 ///|
 /// [OffscreenCanvasRenderingContext2D.createPattern](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/createPattern)
-impl TOffscreenCanvasRenderingContext2D with create_pattern(
+impl TOffscreenCanvasRenderingContext2D with create_pattern_opt(
   self : Self,
   image : &TCanvasImageSource,
   repetition : String,
@@ -1758,4 +1762,13 @@ impl TOffscreenCanvasRenderingContext2D with ellipse(
     TJsValue::to_js(end_angle),
     TJsValue::to_js(counterclockwise),
   )
+}
+
+///|
+pub fn[T : TCanvasPattern] OffscreenCanvasRenderingContext2D::create_pattern(
+  self : OffscreenCanvasRenderingContext2D,
+  image : &TCanvasImageSource,
+  repetition : String,
+) -> T {
+  self.create_pattern_opt(image, repetition).unwrap().into()
 }

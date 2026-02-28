@@ -92,7 +92,7 @@ fn link_id(dir : String, target : String) -> String {
 
 ///|
 fn main {
-  let app = document.get_element_by_id("app").unwrap()
+  let app : Element = document.get_element_by_id("app")
 
   // Build sidebar
   let nav = document.create_element("nav")
@@ -184,7 +184,7 @@ fn main {
     }
 
     // Add active class to current link
-    match document.get_element_by_id(link_id(name, target)) {
+    match document.get_element_by_id_opt(link_id(name, target)) {
       Some(el) => {
         el.class_list().add(["active"])
         prev_active[0] = Some(el)

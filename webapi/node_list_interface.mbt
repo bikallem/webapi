@@ -22,13 +22,13 @@ pub impl TNodeList for NodeList
 ///|
 /// [NodeList](https://developer.mozilla.org/en-US/docs/Web/API/NodeList) interface.
 pub trait TNodeList: TJsValue {
-  item(self : Self, index : UInt) -> Node? = _
+  item_opt(self : Self, index : UInt) -> Node? = _
   length(self : Self) -> UInt = _
 }
 
 ///|
 /// [NodeList.item](https://developer.mozilla.org/en-US/docs/Web/API/NodeList/item)
-impl TNodeList with item(self : Self, index : UInt) -> Node? {
+impl TNodeList with item_opt(self : Self, index : UInt) -> Node? {
   node_list_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }
 
@@ -36,4 +36,9 @@ impl TNodeList with item(self : Self, index : UInt) -> Node? {
 /// [NodeList.length](https://developer.mozilla.org/en-US/docs/Web/API/NodeList/length)
 impl TNodeList with length(self : Self) -> UInt {
   node_list_length_ffi(TJsValue::to_js(self))
+}
+
+///|
+pub fn[T : TNode] NodeList::item(self : NodeList, index : UInt) -> T {
+  self.item_opt(index).unwrap().into()
 }

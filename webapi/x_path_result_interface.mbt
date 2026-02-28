@@ -59,8 +59,8 @@ pub trait TXPathResult: TJsValue {
   single_node_value(self : Self) -> Node = _
   invalid_iterator_state(self : Self) -> Bool = _
   snapshot_length(self : Self) -> UInt = _
-  iterate_next(self : Self) -> Node? = _
-  snapshot_item(self : Self, index : UInt) -> Node? = _
+  iterate_next_opt(self : Self) -> Node? = _
+  snapshot_item_opt(self : Self, index : UInt) -> Node? = _
 }
 
 ///|
@@ -107,12 +107,25 @@ impl TXPathResult with snapshot_length(self : Self) -> UInt {
 
 ///|
 /// [XPathResult.iterateNext](https://developer.mozilla.org/en-US/docs/Web/API/XPathResult/iterateNext)
-impl TXPathResult with iterate_next(self : Self) -> Node? {
+impl TXPathResult with iterate_next_opt(self : Self) -> Node? {
   x_path_result_iterate_next_ffi(TJsValue::to_js(self)).to_option()
 }
 
 ///|
 /// [XPathResult.snapshotItem](https://developer.mozilla.org/en-US/docs/Web/API/XPathResult/snapshotItem)
-impl TXPathResult with snapshot_item(self : Self, index : UInt) -> Node? {
+impl TXPathResult with snapshot_item_opt(self : Self, index : UInt) -> Node? {
   x_path_result_snapshot_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
+}
+
+///|
+pub fn[T : TNode] XPathResult::iterate_next(self : XPathResult) -> T {
+  self.iterate_next_opt().unwrap().into()
+}
+
+///|
+pub fn[T : TNode] XPathResult::snapshot_item(
+  self : XPathResult,
+  index : UInt,
+) -> T {
+  self.snapshot_item_opt(index).unwrap().into()
 }

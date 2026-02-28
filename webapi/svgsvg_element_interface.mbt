@@ -69,7 +69,7 @@ pub trait TSVGSVGElement: TSVGGraphicsElement {
   create_svg_rect(self : Self) -> DOMRect = _
   create_svg_transform(self : Self) -> SVGTransform = _
   create_svg_transform_from_matrix(self : Self, matrix? : DOMMatrix2DInit) -> SVGTransform = _
-  get_element_by_id(self : Self, element_id : String) -> Element? = _
+  get_element_by_id_opt(self : Self, element_id : String) -> Element? = _
   suspend_redraw(self : Self, max_wait_milliseconds : UInt) -> UInt = _
   unsuspend_redraw(self : Self, suspend_handle_id : UInt) -> Unit = _
   unsuspend_redraw_all(self : Self) -> Unit = _
@@ -280,7 +280,7 @@ impl TSVGSVGElement with create_svg_transform_from_matrix(
 
 ///|
 /// [SVGSVGElement.getElementById](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/getElementById)
-impl TSVGSVGElement with get_element_by_id(self : Self, element_id : String) -> Element? {
+impl TSVGSVGElement with get_element_by_id_opt(self : Self, element_id : String) -> Element? {
   svgsvg_element_get_element_by_id_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(element_id),
@@ -654,4 +654,12 @@ impl TSVGSVGElement with set_onunload(
     TJsValue::to_js(self),
     TJsValue::to_js(event_handler_non_null_ffi(onunload)),
   )
+}
+
+///|
+pub fn[T : TElement] SVGSVGElement::get_element_by_id(
+  self : SVGSVGElement,
+  element_id : String,
+) -> T {
+  self.get_element_by_id_opt(element_id).unwrap().into()
 }

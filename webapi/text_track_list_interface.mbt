@@ -26,8 +26,8 @@ pub impl TEventTarget for TextTrackList
 /// [TextTrackList](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackList) interface.
 pub trait TTextTrackList: TEventTarget {
   length(self : Self) -> UInt = _
-  get(self : Self, index : UInt) -> TextTrack? = _
-  get_track_by_id(self : Self, id : String) -> TextTrack? = _
+  get_opt(self : Self, index : UInt) -> TextTrack? = _
+  get_track_by_id_opt(self : Self, id : String) -> TextTrack? = _
   onchange(self : Self) -> EventHandler = _
   set_onchange(self : Self, onchange : (Event) -> JsValue) -> Unit = _
   onaddtrack(self : Self) -> EventHandler = _
@@ -44,13 +44,13 @@ impl TTextTrackList with length(self : Self) -> UInt {
 
 ///|
 /// [TextTrackList.get](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackList/get)
-impl TTextTrackList with get(self : Self, index : UInt) -> TextTrack? {
+impl TTextTrackList with get_opt(self : Self, index : UInt) -> TextTrack? {
   text_track_list_get_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }
 
 ///|
 /// [TextTrackList.getTrackById](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackList/getTrackById)
-impl TTextTrackList with get_track_by_id(self : Self, id : String) -> TextTrack? {
+impl TTextTrackList with get_track_by_id_opt(self : Self, id : String) -> TextTrack? {
   text_track_list_get_track_by_id_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(id),
@@ -109,4 +109,20 @@ impl TTextTrackList with set_onremovetrack(
     TJsValue::to_js(self),
     TJsValue::to_js(event_handler_non_null_ffi(onremovetrack)),
   )
+}
+
+///|
+pub fn[T : TTextTrack] TextTrackList::get(
+  self : TextTrackList,
+  index : UInt,
+) -> T {
+  self.get_opt(index).unwrap().into()
+}
+
+///|
+pub fn[T : TTextTrack] TextTrackList::get_track_by_id(
+  self : TextTrackList,
+  id : String,
+) -> T {
+  self.get_track_by_id_opt(id).unwrap().into()
 }

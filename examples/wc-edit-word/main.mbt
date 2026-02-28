@@ -62,10 +62,9 @@ fn person_details(host : @webapi.HTMLElement) -> Unit {
   let shadow = host.attach_shadow(
     @webapi.ShadowRootInit::new(@webapi.ShadowRootMode::Open),
   )
-  let tmpl : @webapi.HTMLTemplateElement = @webapi.document
-    .get_element_by_id("person-template")
-    .unwrap()
-    .into()
+  let tmpl : @webapi.HTMLTemplateElement = @webapi.document.get_element_by_id(
+    "person-template",
+  )
   shadow.append_child(tmpl.content().clone_node(subtree=true)) |> ignore
 }
 

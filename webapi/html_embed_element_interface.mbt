@@ -49,7 +49,7 @@ pub trait THTMLEmbedElement: THTMLElement {
   set_width(self : Self, width : String) -> Unit = _
   height(self : Self) -> String = _
   set_height(self : Self, height : String) -> Unit = _
-  get_svg_document(self : Self) -> Document? = _
+  get_svg_document_opt(self : Self) -> Document? = _
   align(self : Self) -> String = _
   set_align(self : Self, align : String) -> Unit = _
   name(self : Self) -> String = _
@@ -112,7 +112,7 @@ impl THTMLEmbedElement with set_height(self : Self, height : String) -> Unit {
 
 ///|
 /// [HTMLEmbedElement.getSVGDocument](https://developer.mozilla.org/en-US/docs/Web/API/HTMLEmbedElement/getSVGDocument)
-impl THTMLEmbedElement with get_svg_document(self : Self) -> Document? {
+impl THTMLEmbedElement with get_svg_document_opt(self : Self) -> Document? {
   html_embed_element_get_svg_document_ffi(TJsValue::to_js(self)).to_option()
 }
 
@@ -141,4 +141,11 @@ impl THTMLEmbedElement with name(self : Self) -> String {
 /// [HTMLEmbedElement.name](https://developer.mozilla.org/en-US/docs/Web/API/HTMLEmbedElement/name)
 impl THTMLEmbedElement with set_name(self : Self, name : String) -> Unit {
   html_embed_element_set_name_ffi(TJsValue::to_js(self), TJsValue::to_js(name))
+}
+
+///|
+pub fn[T : TDocument] HTMLEmbedElement::get_svg_document(
+  self : HTMLEmbedElement,
+) -> T {
+  self.get_svg_document_opt().unwrap().into()
 }

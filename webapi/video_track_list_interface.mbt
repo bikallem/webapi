@@ -26,8 +26,8 @@ pub impl TEventTarget for VideoTrackList
 /// [VideoTrackList](https://developer.mozilla.org/en-US/docs/Web/API/VideoTrackList) interface.
 pub trait TVideoTrackList: TEventTarget {
   length(self : Self) -> UInt = _
-  get(self : Self, index : UInt) -> VideoTrack? = _
-  get_track_by_id(self : Self, id : String) -> VideoTrack? = _
+  get_opt(self : Self, index : UInt) -> VideoTrack? = _
+  get_track_by_id_opt(self : Self, id : String) -> VideoTrack? = _
   selected_index(self : Self) -> Int = _
   onchange(self : Self) -> EventHandler = _
   set_onchange(self : Self, onchange : (Event) -> JsValue) -> Unit = _
@@ -45,13 +45,13 @@ impl TVideoTrackList with length(self : Self) -> UInt {
 
 ///|
 /// [VideoTrackList.get](https://developer.mozilla.org/en-US/docs/Web/API/VideoTrackList/get)
-impl TVideoTrackList with get(self : Self, index : UInt) -> VideoTrack? {
+impl TVideoTrackList with get_opt(self : Self, index : UInt) -> VideoTrack? {
   video_track_list_get_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }
 
 ///|
 /// [VideoTrackList.getTrackById](https://developer.mozilla.org/en-US/docs/Web/API/VideoTrackList/getTrackById)
-impl TVideoTrackList with get_track_by_id(self : Self, id : String) -> VideoTrack? {
+impl TVideoTrackList with get_track_by_id_opt(self : Self, id : String) -> VideoTrack? {
   video_track_list_get_track_by_id_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(id),
@@ -116,4 +116,20 @@ impl TVideoTrackList with set_onremovetrack(
     TJsValue::to_js(self),
     TJsValue::to_js(event_handler_non_null_ffi(onremovetrack)),
   )
+}
+
+///|
+pub fn[T : TVideoTrack] VideoTrackList::get(
+  self : VideoTrackList,
+  index : UInt,
+) -> T {
+  self.get_opt(index).unwrap().into()
+}
+
+///|
+pub fn[T : TVideoTrack] VideoTrackList::get_track_by_id(
+  self : VideoTrackList,
+  id : String,
+) -> T {
+  self.get_track_by_id_opt(id).unwrap().into()
 }

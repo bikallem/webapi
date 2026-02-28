@@ -104,7 +104,7 @@ pub trait THTMLFormElement: THTMLElement {
   rel_list(self : Self) -> DOMTokenList = _
   elements(self : Self) -> HTMLFormControlsCollection = _
   length(self : Self) -> UInt = _
-  get(self : Self, index : UInt) -> Element? = _
+  get_opt(self : Self, index : UInt) -> Element? = _
   get_by_name(self : Self, name : String) -> HTMLFormElementGetByName? = _
   submit(self : Self) -> Unit = _
   request_submit(self : Self, submitter? : &THTMLElement) -> Unit = _
@@ -280,7 +280,7 @@ impl THTMLFormElement with length(self : Self) -> UInt {
 
 ///|
 /// [HTMLFormElement.get](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/get)
-impl THTMLFormElement with get(self : Self, index : UInt) -> Element? {
+impl THTMLFormElement with get_opt(self : Self, index : UInt) -> Element? {
   html_form_element_get_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }
 
@@ -327,4 +327,12 @@ impl THTMLFormElement with check_validity(self : Self) -> Bool {
 /// [HTMLFormElement.reportValidity](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/reportValidity)
 impl THTMLFormElement with report_validity(self : Self) -> Bool {
   html_form_element_report_validity_ffi(TJsValue::to_js(self))
+}
+
+///|
+pub fn[T : TElement] HTMLFormElement::get(
+  self : HTMLFormElement,
+  index : UInt,
+) -> T {
+  self.get_opt(index).unwrap().into()
 }

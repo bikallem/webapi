@@ -3,7 +3,7 @@
 /// All DOM elements are created programmatically in MoonBit
 fn main {
   // Get app container
-  let app = @webapi.document.get_element_by_id("app").unwrap()
+  let app : @webapi.Element = @webapi.document.get_element_by_id("app")
 
   // Create a container div
   let container : @webapi.HTMLDivElement = @webapi.document

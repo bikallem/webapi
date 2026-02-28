@@ -22,13 +22,13 @@ pub impl TCSSRuleList for CSSRuleList
 ///|
 /// [CSSRuleList](https://developer.mozilla.org/en-US/docs/Web/API/CSSRuleList) interface.
 pub trait TCSSRuleList: TJsValue {
-  item(self : Self, index : UInt) -> CSSRule? = _
+  item_opt(self : Self, index : UInt) -> CSSRule? = _
   length(self : Self) -> UInt = _
 }
 
 ///|
 /// [CSSRuleList.item](https://developer.mozilla.org/en-US/docs/Web/API/CSSRuleList/item)
-impl TCSSRuleList with item(self : Self, index : UInt) -> CSSRule? {
+impl TCSSRuleList with item_opt(self : Self, index : UInt) -> CSSRule? {
   css_rule_list_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }
 
@@ -36,4 +36,9 @@ impl TCSSRuleList with item(self : Self, index : UInt) -> CSSRule? {
 /// [CSSRuleList.length](https://developer.mozilla.org/en-US/docs/Web/API/CSSRuleList/length)
 impl TCSSRuleList with length(self : Self) -> UInt {
   css_rule_list_length_ffi(TJsValue::to_js(self))
+}
+
+///|
+pub fn[T : TCSSRule] CSSRuleList::item(self : CSSRuleList, index : UInt) -> T {
+  self.item_opt(index).unwrap().into()
 }

@@ -65,19 +65,18 @@ fn wc_calculator(host : @webapi.HTMLElement) -> Unit {
   let shadow = host.attach_shadow(
     @webapi.ShadowRootInit::new(@webapi.ShadowRootMode::Open),
   )
-  let template : HTMLTemplateElement = doc
-    .get_element_by_id("wc-calculator-template")
-    .unwrap()
-    .into()
+  let template : HTMLTemplateElement = doc.get_element_by_id(
+    "wc-calculator-template",
+  )
   shadow.append_child(template.content().clone_node(subtree=true)) |> ignore
 
   // Query shadow DOM for display elements
   let display : HTMLDivElement = shadow
-    .query_selector("[data-ref=display]")
+    .query_selector_opt("[data-ref=display]")
     .unwrap()
     .into()
   let status : HTMLDivElement = shadow
-    .query_selector("[data-ref=status]")
+    .query_selector_opt("[data-ref=status]")
     .unwrap()
     .into()
 
@@ -87,7 +86,7 @@ fn wc_calculator(host : @webapi.HTMLElement) -> Unit {
   // Wire up all buttons via data-key attributes
   let buttons = shadow.query_selector_all("button[data-key]")
   for i in 0U..<buttons.length() {
-    guard buttons.item(i) is Some(node) else { continue }
+    guard buttons.item_opt(i) is Some(node) else { continue }
     let el : Element = node.into()
     guard el.get_attribute("data-key") is Some(key) else { continue }
     el.add_event_listener("click", fn(_event) {

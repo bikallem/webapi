@@ -6,17 +6,16 @@ fn my_counter(host : @webapi.HTMLElement) -> Unit {
   let shadow = host.attach_shadow(
     @webapi.ShadowRootInit::new(@webapi.ShadowRootMode::Open),
   )
-  let template : @webapi.HTMLTemplateElement = doc
-    .get_element_by_id("my-counter-template")
-    .unwrap()
-    .into()
+  let template : @webapi.HTMLTemplateElement = doc.get_element_by_id(
+    "my-counter-template",
+  )
   shadow.append_child(template.content().clone_node(subtree=true)) |> ignore
 
   // Query shadow DOM for elements
-  let display = shadow.query_selector("[data-ref=display]").unwrap()
-  let dec_btn = shadow.query_selector("[data-ref=dec]").unwrap()
-  let inc_btn = shadow.query_selector("[data-ref=inc]").unwrap()
-  let reset_btn = shadow.query_selector("[data-ref=reset]").unwrap()
+  let display = shadow.query_selector_opt("[data-ref=display]").unwrap()
+  let dec_btn = shadow.query_selector_opt("[data-ref=dec]").unwrap()
+  let inc_btn = shadow.query_selector_opt("[data-ref=inc]").unwrap()
+  let reset_btn = shadow.query_selector_opt("[data-ref=reset]").unwrap()
 
   // Counter state (mutable array cell)
   let state : Array[Int] = [0]
@@ -58,8 +57,8 @@ fn main {
   @webapi.define_custom_element("my-counter", my_counter)
 
   // Listen for count-changed events (bubbles up through composed boundary)
-  let app = doc.get_element_by_id("app").unwrap()
-  let log = doc.get_element_by_id("event-log").unwrap()
+  let app : @webapi.Element = doc.get_element_by_id("app")
+  let log : @webapi.Element = doc.get_element_by_id("event-log")
   app.add_event_listener("count-changed", fn(event) {
     let ce : @webapi.CustomEvent = event.into()
     let detail = ce.detail()

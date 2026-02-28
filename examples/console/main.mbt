@@ -7,6 +7,7 @@ using @webapi {
   type HTMLButtonElement,
   type HTMLDivElement,
   document,
+  type Element,
 }
 
 ///|
@@ -23,7 +24,7 @@ fn make_button(label : String, on_click : () -> Unit) -> HTMLButtonElement {
 
 ///|
 fn main {
-  let app = document.get_element_by_id("app").unwrap()
+  let app : Element = document.get_element_by_id("app")
   let container : HTMLDivElement = document.create_element("div").into()
   container.set_attribute(
     "style", "max-width: 700px; margin: 2em auto; padding: 1.5em; font-family: system-ui;",
