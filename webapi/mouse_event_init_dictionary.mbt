@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: MouseEventInit
-// Specifications: uievents.idl, dom.idl
+// Specifications: pointerevents.idl, uievents.idl, dom.idl
 
 ///|
 /// [MouseEventInit](https://developer.mozilla.org/en-US/docs/Web/API/MouseEventInit)

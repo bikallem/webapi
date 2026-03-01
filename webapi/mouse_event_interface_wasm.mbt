@@ -5,6 +5,24 @@ fn mouse_event_new_ffi(
 ) -> MouseEvent = "webapi_MouseEvent" "new"
 
 ///|
+fn mouse_event_page_x_ffi(obj : JsValue) -> Double = "webapi_MouseEvent" "get_pageX"
+
+///|
+fn mouse_event_page_y_ffi(obj : JsValue) -> Double = "webapi_MouseEvent" "get_pageY"
+
+///|
+fn mouse_event_x_ffi(obj : JsValue) -> Double = "webapi_MouseEvent" "get_x"
+
+///|
+fn mouse_event_y_ffi(obj : JsValue) -> Double = "webapi_MouseEvent" "get_y"
+
+///|
+fn mouse_event_offset_x_ffi(obj : JsValue) -> Double = "webapi_MouseEvent" "get_offsetX"
+
+///|
+fn mouse_event_offset_y_ffi(obj : JsValue) -> Double = "webapi_MouseEvent" "get_offsetY"
+
+///|
 fn mouse_event_screen_x_ffi(obj : JsValue) -> Int = "webapi_MouseEvent" "get_screenX"
 
 ///|
@@ -65,21 +83,3 @@ fn mouse_event_init_mouse_event_ffi(
   button_arg : JsValue,
   related_target_arg : JsValue,
 ) -> Unit = "webapi_MouseEvent" "initMouseEvent"
-
-///|
-fn mouse_event_page_x_ffi(obj : JsValue) -> Double = "webapi_MouseEvent" "get_pageX"
-
-///|
-fn mouse_event_page_y_ffi(obj : JsValue) -> Double = "webapi_MouseEvent" "get_pageY"
-
-///|
-fn mouse_event_x_ffi(obj : JsValue) -> Double = "webapi_MouseEvent" "get_x"
-
-///|
-fn mouse_event_y_ffi(obj : JsValue) -> Double = "webapi_MouseEvent" "get_y"
-
-///|
-fn mouse_event_offset_x_ffi(obj : JsValue) -> Double = "webapi_MouseEvent" "get_offsetX"
-
-///|
-fn mouse_event_offset_y_ffi(obj : JsValue) -> Double = "webapi_MouseEvent" "get_offsetY"

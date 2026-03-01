@@ -5,6 +5,54 @@ extern "js" fn mouse_event_new_ffi(
 ) -> MouseEvent = "(type_, event_init_dict) => new MouseEvent(type_, event_init_dict)"
 
 ///|
+extern "js" fn mouse_event_page_x_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.pageX"
+
+///|
+fn mouse_event_page_x_ffi(obj : JsValue) -> Double {
+  mouse_event_page_x_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn mouse_event_page_y_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.pageY"
+
+///|
+fn mouse_event_page_y_ffi(obj : JsValue) -> Double {
+  mouse_event_page_y_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn mouse_event_x_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.x"
+
+///|
+fn mouse_event_x_ffi(obj : JsValue) -> Double {
+  mouse_event_x_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn mouse_event_y_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.y"
+
+///|
+fn mouse_event_y_ffi(obj : JsValue) -> Double {
+  mouse_event_y_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn mouse_event_offset_x_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.offsetX"
+
+///|
+fn mouse_event_offset_x_ffi(obj : JsValue) -> Double {
+  mouse_event_offset_x_ffi_js(obj).unsafe_cast()
+}
+
+///|
+extern "js" fn mouse_event_offset_y_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.offsetY"
+
+///|
+fn mouse_event_offset_y_ffi(obj : JsValue) -> Double {
+  mouse_event_offset_y_ffi_js(obj).unsafe_cast()
+}
+
+///|
 extern "js" fn mouse_event_screen_x_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.screenX"
 
 ///|
@@ -138,51 +186,3 @@ extern "js" fn mouse_event_init_mouse_event_ffi(
   button_arg : JsValue,
   related_target_arg : JsValue,
 ) -> Unit = "(obj, type_arg, bubbles_arg, cancelable_arg, view_arg, detail_arg, screen_x_arg, screen_y_arg, client_x_arg, client_y_arg, ctrl_key_arg, alt_key_arg, shift_key_arg, meta_key_arg, button_arg, related_target_arg) => obj.initMouseEvent(type_arg, bubbles_arg, cancelable_arg, view_arg, detail_arg, screen_x_arg, screen_y_arg, client_x_arg, client_y_arg, ctrl_key_arg, alt_key_arg, shift_key_arg, meta_key_arg, button_arg, related_target_arg)"
-
-///|
-extern "js" fn mouse_event_page_x_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.pageX"
-
-///|
-fn mouse_event_page_x_ffi(obj : JsValue) -> Double {
-  mouse_event_page_x_ffi_js(obj).unsafe_cast()
-}
-
-///|
-extern "js" fn mouse_event_page_y_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.pageY"
-
-///|
-fn mouse_event_page_y_ffi(obj : JsValue) -> Double {
-  mouse_event_page_y_ffi_js(obj).unsafe_cast()
-}
-
-///|
-extern "js" fn mouse_event_x_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.x"
-
-///|
-fn mouse_event_x_ffi(obj : JsValue) -> Double {
-  mouse_event_x_ffi_js(obj).unsafe_cast()
-}
-
-///|
-extern "js" fn mouse_event_y_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.y"
-
-///|
-fn mouse_event_y_ffi(obj : JsValue) -> Double {
-  mouse_event_y_ffi_js(obj).unsafe_cast()
-}
-
-///|
-extern "js" fn mouse_event_offset_x_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.offsetX"
-
-///|
-fn mouse_event_offset_x_ffi(obj : JsValue) -> Double {
-  mouse_event_offset_x_ffi_js(obj).unsafe_cast()
-}
-
-///|
-extern "js" fn mouse_event_offset_y_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.offsetY"
-
-///|
-fn mouse_event_offset_y_ffi(obj : JsValue) -> Double {
-  mouse_event_offset_y_ffi_js(obj).unsafe_cast()
-}

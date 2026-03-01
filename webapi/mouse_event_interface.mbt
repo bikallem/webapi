@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: MouseEvent
-// Specifications: uievents.idl, cssom-view.idl
+// Specifications: pointerevents.idl, cssom-view.idl
 
 ///|
 /// [MouseEvent](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent)
@@ -36,6 +36,12 @@ pub fn MouseEvent::new(
 ///|
 /// [MouseEvent](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent) interface.
 pub trait TMouseEvent: TUIEvent {
+  page_x(self : Self) -> Double = _
+  page_y(self : Self) -> Double = _
+  x(self : Self) -> Double = _
+  y(self : Self) -> Double = _
+  offset_x(self : Self) -> Double = _
+  offset_y(self : Self) -> Double = _
   screen_x(self : Self) -> Int = _
   screen_y(self : Self) -> Int = _
   client_x(self : Self) -> Int = _
@@ -68,12 +74,42 @@ pub trait TMouseEvent: TUIEvent {
     button_arg? : Int,
     related_target_arg? : &TEventTarget,
   ) -> Unit = _
-  page_x(self : Self) -> Double = _
-  page_y(self : Self) -> Double = _
-  x(self : Self) -> Double = _
-  y(self : Self) -> Double = _
-  offset_x(self : Self) -> Double = _
-  offset_y(self : Self) -> Double = _
+}
+
+///|
+/// [MouseEvent.pageX](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/pageX)
+impl TMouseEvent with page_x(self : Self) -> Double {
+  mouse_event_page_x_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [MouseEvent.pageY](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/pageY)
+impl TMouseEvent with page_y(self : Self) -> Double {
+  mouse_event_page_y_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [MouseEvent.x](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/x)
+impl TMouseEvent with x(self : Self) -> Double {
+  mouse_event_x_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [MouseEvent.y](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/y)
+impl TMouseEvent with y(self : Self) -> Double {
+  mouse_event_y_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [MouseEvent.offsetX](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/offsetX)
+impl TMouseEvent with offset_x(self : Self) -> Double {
+  mouse_event_offset_x_ffi(TJsValue::to_js(self))
+}
+
+///|
+/// [MouseEvent.offsetY](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/offsetY)
+impl TMouseEvent with offset_y(self : Self) -> Double {
+  mouse_event_offset_y_ffi(TJsValue::to_js(self))
 }
 
 ///|
@@ -201,40 +237,4 @@ impl TMouseEvent with init_mouse_event(
     TJsValue::to_js(button_arg),
     opt_to_js(related_target_arg),
   )
-}
-
-///|
-/// [MouseEvent.pageX](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/pageX)
-impl TMouseEvent with page_x(self : Self) -> Double {
-  mouse_event_page_x_ffi(TJsValue::to_js(self))
-}
-
-///|
-/// [MouseEvent.pageY](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/pageY)
-impl TMouseEvent with page_y(self : Self) -> Double {
-  mouse_event_page_y_ffi(TJsValue::to_js(self))
-}
-
-///|
-/// [MouseEvent.x](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/x)
-impl TMouseEvent with x(self : Self) -> Double {
-  mouse_event_x_ffi(TJsValue::to_js(self))
-}
-
-///|
-/// [MouseEvent.y](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/y)
-impl TMouseEvent with y(self : Self) -> Double {
-  mouse_event_y_ffi(TJsValue::to_js(self))
-}
-
-///|
-/// [MouseEvent.offsetX](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/offsetX)
-impl TMouseEvent with offset_x(self : Self) -> Double {
-  mouse_event_offset_x_ffi(TJsValue::to_js(self))
-}
-
-///|
-/// [MouseEvent.offsetY](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/offsetY)
-impl TMouseEvent with offset_y(self : Self) -> Double {
-  mouse_event_offset_y_ffi(TJsValue::to_js(self))
 }

@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: WheelEvent
-// Specifications: uievents.idl
+// Specifications: pointerevents.idl
 
 ///|
 /// [WheelEvent](https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent)

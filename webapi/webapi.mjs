@@ -5283,39 +5283,6 @@ export const wasmImportObject = {
     get_relatedTarget: (obj) => obj.relatedTarget
   },
 
-  webapi_MouseEvent: {
-    new: (type_, event_init_dict) => new MouseEvent(type_, event_init_dict),
-    get_screenX: (obj) => obj.screenX,
-    get_screenY: (obj) => obj.screenY,
-    get_clientX: (obj) => obj.clientX,
-    get_clientY: (obj) => obj.clientY,
-    get_layerX: (obj) => obj.layerX,
-    get_layerY: (obj) => obj.layerY,
-    get_ctrlKey: (obj) => obj.ctrlKey,
-    get_shiftKey: (obj) => obj.shiftKey,
-    get_altKey: (obj) => obj.altKey,
-    get_metaKey: (obj) => obj.metaKey,
-    get_button: (obj) => obj.button,
-    get_buttons: (obj) => obj.buttons,
-    get_relatedTarget: (obj) => obj.relatedTarget,
-    get_pageX: (obj) => obj.pageX,
-    get_pageY: (obj) => obj.pageY,
-    get_x: (obj) => obj.x,
-    get_y: (obj) => obj.y,
-    get_offsetX: (obj) => obj.offsetX,
-    get_offsetY: (obj) => obj.offsetY,
-    getModifierState: (obj, key_arg) => obj.getModifierState(key_arg),
-    initMouseEvent: (obj, type_arg, bubbles_arg, cancelable_arg, view_arg, detail_arg, screen_x_arg, screen_y_arg, client_x_arg, client_y_arg, ctrl_key_arg, alt_key_arg, shift_key_arg, meta_key_arg, button_arg, related_target_arg) => obj.initMouseEvent(type_arg, bubbles_arg, cancelable_arg, view_arg, detail_arg, screen_x_arg, screen_y_arg, client_x_arg, client_y_arg, ctrl_key_arg, alt_key_arg, shift_key_arg, meta_key_arg, button_arg, related_target_arg)
-  },
-
-  webapi_WheelEvent: {
-    new: (type_, event_init_dict) => new WheelEvent(type_, event_init_dict),
-    get_deltaX: (obj) => obj.deltaX,
-    get_deltaY: (obj) => obj.deltaY,
-    get_deltaZ: (obj) => obj.deltaZ,
-    get_deltaMode: (obj) => obj.deltaMode
-  },
-
   webapi_InputEvent: {
     new: (type_, event_init_dict) => new InputEvent(type_, event_init_dict),
     get_data: (obj) => obj.data,
@@ -5525,6 +5492,31 @@ export const wasmImportObject = {
     getClientRect: (obj) => obj.getClientRect()
   },
 
+  webapi_MouseEvent: {
+    new: (type_, event_init_dict) => new MouseEvent(type_, event_init_dict),
+    get_pageX: (obj) => obj.pageX,
+    get_pageY: (obj) => obj.pageY,
+    get_x: (obj) => obj.x,
+    get_y: (obj) => obj.y,
+    get_offsetX: (obj) => obj.offsetX,
+    get_offsetY: (obj) => obj.offsetY,
+    get_screenX: (obj) => obj.screenX,
+    get_screenY: (obj) => obj.screenY,
+    get_clientX: (obj) => obj.clientX,
+    get_clientY: (obj) => obj.clientY,
+    get_layerX: (obj) => obj.layerX,
+    get_layerY: (obj) => obj.layerY,
+    get_ctrlKey: (obj) => obj.ctrlKey,
+    get_shiftKey: (obj) => obj.shiftKey,
+    get_altKey: (obj) => obj.altKey,
+    get_metaKey: (obj) => obj.metaKey,
+    get_button: (obj) => obj.button,
+    get_buttons: (obj) => obj.buttons,
+    get_relatedTarget: (obj) => obj.relatedTarget,
+    getModifierState: (obj, key_arg) => obj.getModifierState(key_arg),
+    initMouseEvent: (obj, type_arg, bubbles_arg, cancelable_arg, view_arg, detail_arg, screen_x_arg, screen_y_arg, client_x_arg, client_y_arg, ctrl_key_arg, alt_key_arg, shift_key_arg, meta_key_arg, button_arg, related_target_arg) => obj.initMouseEvent(type_arg, bubbles_arg, cancelable_arg, view_arg, detail_arg, screen_x_arg, screen_y_arg, client_x_arg, client_y_arg, ctrl_key_arg, alt_key_arg, shift_key_arg, meta_key_arg, button_arg, related_target_arg)
+  },
+
   webapi_VisualViewport: {
     get_offsetLeft: (obj) => obj.offsetLeft,
     get_offsetTop: (obj) => obj.offsetTop,
@@ -5723,6 +5715,14 @@ export const wasmImportObject = {
     get_persistentDeviceId: (obj) => obj.persistentDeviceId,
     getCoalescedEvents: (obj) => obj.getCoalescedEvents(),
     getPredictedEvents: (obj) => obj.getPredictedEvents()
+  },
+
+  webapi_WheelEvent: {
+    new: (type_, event_init_dict) => new WheelEvent(type_, event_init_dict),
+    get_deltaX: (obj) => obj.deltaX,
+    get_deltaY: (obj) => obj.deltaY,
+    get_deltaZ: (obj) => obj.deltaZ,
+    get_deltaMode: (obj) => obj.deltaMode
   },
 
   webapi_Selection: {
@@ -7417,183 +7417,6 @@ export const wasmImportObject = {
     get_relatedTarget: (obj) => obj.relatedTarget
   },
 
-  webapi_MouseEventInit: {
-    new: (bubbles, cancelable, composed, view, detail, which, ctrlKey, shiftKey, altKey, metaKey, modifierAltGraph, modifierCapsLock, modifierFn, modifierFnLock, modifierHyper, modifierNumLock, modifierScrollLock, modifierSuper, modifierSymbol, modifierSymbolLock, screenX, screenY, clientX, clientY, button, buttons, relatedTarget) => {
-      const obj = {};
-      if (bubbles !== undefined) obj.bubbles = bubbles;
-      if (cancelable !== undefined) obj.cancelable = cancelable;
-      if (composed !== undefined) obj.composed = composed;
-      if (view !== undefined) obj.view = view;
-      if (detail !== undefined) obj.detail = detail;
-      if (which !== undefined) obj.which = which;
-      if (ctrlKey !== undefined) obj.ctrlKey = ctrlKey;
-      if (shiftKey !== undefined) obj.shiftKey = shiftKey;
-      if (altKey !== undefined) obj.altKey = altKey;
-      if (metaKey !== undefined) obj.metaKey = metaKey;
-      if (modifierAltGraph !== undefined) obj.modifierAltGraph = modifierAltGraph;
-      if (modifierCapsLock !== undefined) obj.modifierCapsLock = modifierCapsLock;
-      if (modifierFn !== undefined) obj.modifierFn = modifierFn;
-      if (modifierFnLock !== undefined) obj.modifierFnLock = modifierFnLock;
-      if (modifierHyper !== undefined) obj.modifierHyper = modifierHyper;
-      if (modifierNumLock !== undefined) obj.modifierNumLock = modifierNumLock;
-      if (modifierScrollLock !== undefined) obj.modifierScrollLock = modifierScrollLock;
-      if (modifierSuper !== undefined) obj.modifierSuper = modifierSuper;
-      if (modifierSymbol !== undefined) obj.modifierSymbol = modifierSymbol;
-      if (modifierSymbolLock !== undefined) obj.modifierSymbolLock = modifierSymbolLock;
-      if (screenX !== undefined) obj.screenX = screenX;
-      if (screenY !== undefined) obj.screenY = screenY;
-      if (clientX !== undefined) obj.clientX = clientX;
-      if (clientY !== undefined) obj.clientY = clientY;
-      if (button !== undefined) obj.button = button;
-      if (buttons !== undefined) obj.buttons = buttons;
-      if (relatedTarget !== undefined) obj.relatedTarget = relatedTarget;
-      return obj;
-    },
-    get_bubbles: (obj) => obj.bubbles,
-    get_cancelable: (obj) => obj.cancelable,
-    get_composed: (obj) => obj.composed,
-    get_view: (obj) => obj.view,
-    get_detail: (obj) => obj.detail,
-    get_which: (obj) => obj.which,
-    get_ctrlKey: (obj) => obj.ctrlKey,
-    get_shiftKey: (obj) => obj.shiftKey,
-    get_altKey: (obj) => obj.altKey,
-    get_metaKey: (obj) => obj.metaKey,
-    get_modifierAltGraph: (obj) => obj.modifierAltGraph,
-    get_modifierCapsLock: (obj) => obj.modifierCapsLock,
-    get_modifierFn: (obj) => obj.modifierFn,
-    get_modifierFnLock: (obj) => obj.modifierFnLock,
-    get_modifierHyper: (obj) => obj.modifierHyper,
-    get_modifierNumLock: (obj) => obj.modifierNumLock,
-    get_modifierScrollLock: (obj) => obj.modifierScrollLock,
-    get_modifierSuper: (obj) => obj.modifierSuper,
-    get_modifierSymbol: (obj) => obj.modifierSymbol,
-    get_modifierSymbolLock: (obj) => obj.modifierSymbolLock,
-    get_screenX: (obj) => obj.screenX,
-    get_screenY: (obj) => obj.screenY,
-    get_clientX: (obj) => obj.clientX,
-    get_clientY: (obj) => obj.clientY,
-    get_button: (obj) => obj.button,
-    get_buttons: (obj) => obj.buttons,
-    get_relatedTarget: (obj) => obj.relatedTarget
-  },
-
-  webapi_EventModifierInit: {
-    new: (bubbles, cancelable, composed, view, detail, which, ctrlKey, shiftKey, altKey, metaKey, modifierAltGraph, modifierCapsLock, modifierFn, modifierFnLock, modifierHyper, modifierNumLock, modifierScrollLock, modifierSuper, modifierSymbol, modifierSymbolLock) => {
-      const obj = {};
-      if (bubbles !== undefined) obj.bubbles = bubbles;
-      if (cancelable !== undefined) obj.cancelable = cancelable;
-      if (composed !== undefined) obj.composed = composed;
-      if (view !== undefined) obj.view = view;
-      if (detail !== undefined) obj.detail = detail;
-      if (which !== undefined) obj.which = which;
-      if (ctrlKey !== undefined) obj.ctrlKey = ctrlKey;
-      if (shiftKey !== undefined) obj.shiftKey = shiftKey;
-      if (altKey !== undefined) obj.altKey = altKey;
-      if (metaKey !== undefined) obj.metaKey = metaKey;
-      if (modifierAltGraph !== undefined) obj.modifierAltGraph = modifierAltGraph;
-      if (modifierCapsLock !== undefined) obj.modifierCapsLock = modifierCapsLock;
-      if (modifierFn !== undefined) obj.modifierFn = modifierFn;
-      if (modifierFnLock !== undefined) obj.modifierFnLock = modifierFnLock;
-      if (modifierHyper !== undefined) obj.modifierHyper = modifierHyper;
-      if (modifierNumLock !== undefined) obj.modifierNumLock = modifierNumLock;
-      if (modifierScrollLock !== undefined) obj.modifierScrollLock = modifierScrollLock;
-      if (modifierSuper !== undefined) obj.modifierSuper = modifierSuper;
-      if (modifierSymbol !== undefined) obj.modifierSymbol = modifierSymbol;
-      if (modifierSymbolLock !== undefined) obj.modifierSymbolLock = modifierSymbolLock;
-      return obj;
-    },
-    get_bubbles: (obj) => obj.bubbles,
-    get_cancelable: (obj) => obj.cancelable,
-    get_composed: (obj) => obj.composed,
-    get_view: (obj) => obj.view,
-    get_detail: (obj) => obj.detail,
-    get_which: (obj) => obj.which,
-    get_ctrlKey: (obj) => obj.ctrlKey,
-    get_shiftKey: (obj) => obj.shiftKey,
-    get_altKey: (obj) => obj.altKey,
-    get_metaKey: (obj) => obj.metaKey,
-    get_modifierAltGraph: (obj) => obj.modifierAltGraph,
-    get_modifierCapsLock: (obj) => obj.modifierCapsLock,
-    get_modifierFn: (obj) => obj.modifierFn,
-    get_modifierFnLock: (obj) => obj.modifierFnLock,
-    get_modifierHyper: (obj) => obj.modifierHyper,
-    get_modifierNumLock: (obj) => obj.modifierNumLock,
-    get_modifierScrollLock: (obj) => obj.modifierScrollLock,
-    get_modifierSuper: (obj) => obj.modifierSuper,
-    get_modifierSymbol: (obj) => obj.modifierSymbol,
-    get_modifierSymbolLock: (obj) => obj.modifierSymbolLock
-  },
-
-  webapi_WheelEventInit: {
-    new: (bubbles, cancelable, composed, view, detail, which, ctrlKey, shiftKey, altKey, metaKey, modifierAltGraph, modifierCapsLock, modifierFn, modifierFnLock, modifierHyper, modifierNumLock, modifierScrollLock, modifierSuper, modifierSymbol, modifierSymbolLock, screenX, screenY, clientX, clientY, button, buttons, relatedTarget, deltaX, deltaY, deltaZ, deltaMode) => {
-      const obj = {};
-      if (bubbles !== undefined) obj.bubbles = bubbles;
-      if (cancelable !== undefined) obj.cancelable = cancelable;
-      if (composed !== undefined) obj.composed = composed;
-      if (view !== undefined) obj.view = view;
-      if (detail !== undefined) obj.detail = detail;
-      if (which !== undefined) obj.which = which;
-      if (ctrlKey !== undefined) obj.ctrlKey = ctrlKey;
-      if (shiftKey !== undefined) obj.shiftKey = shiftKey;
-      if (altKey !== undefined) obj.altKey = altKey;
-      if (metaKey !== undefined) obj.metaKey = metaKey;
-      if (modifierAltGraph !== undefined) obj.modifierAltGraph = modifierAltGraph;
-      if (modifierCapsLock !== undefined) obj.modifierCapsLock = modifierCapsLock;
-      if (modifierFn !== undefined) obj.modifierFn = modifierFn;
-      if (modifierFnLock !== undefined) obj.modifierFnLock = modifierFnLock;
-      if (modifierHyper !== undefined) obj.modifierHyper = modifierHyper;
-      if (modifierNumLock !== undefined) obj.modifierNumLock = modifierNumLock;
-      if (modifierScrollLock !== undefined) obj.modifierScrollLock = modifierScrollLock;
-      if (modifierSuper !== undefined) obj.modifierSuper = modifierSuper;
-      if (modifierSymbol !== undefined) obj.modifierSymbol = modifierSymbol;
-      if (modifierSymbolLock !== undefined) obj.modifierSymbolLock = modifierSymbolLock;
-      if (screenX !== undefined) obj.screenX = screenX;
-      if (screenY !== undefined) obj.screenY = screenY;
-      if (clientX !== undefined) obj.clientX = clientX;
-      if (clientY !== undefined) obj.clientY = clientY;
-      if (button !== undefined) obj.button = button;
-      if (buttons !== undefined) obj.buttons = buttons;
-      if (relatedTarget !== undefined) obj.relatedTarget = relatedTarget;
-      if (deltaX !== undefined) obj.deltaX = deltaX;
-      if (deltaY !== undefined) obj.deltaY = deltaY;
-      if (deltaZ !== undefined) obj.deltaZ = deltaZ;
-      if (deltaMode !== undefined) obj.deltaMode = deltaMode;
-      return obj;
-    },
-    get_bubbles: (obj) => obj.bubbles,
-    get_cancelable: (obj) => obj.cancelable,
-    get_composed: (obj) => obj.composed,
-    get_view: (obj) => obj.view,
-    get_detail: (obj) => obj.detail,
-    get_which: (obj) => obj.which,
-    get_ctrlKey: (obj) => obj.ctrlKey,
-    get_shiftKey: (obj) => obj.shiftKey,
-    get_altKey: (obj) => obj.altKey,
-    get_metaKey: (obj) => obj.metaKey,
-    get_modifierAltGraph: (obj) => obj.modifierAltGraph,
-    get_modifierCapsLock: (obj) => obj.modifierCapsLock,
-    get_modifierFn: (obj) => obj.modifierFn,
-    get_modifierFnLock: (obj) => obj.modifierFnLock,
-    get_modifierHyper: (obj) => obj.modifierHyper,
-    get_modifierNumLock: (obj) => obj.modifierNumLock,
-    get_modifierScrollLock: (obj) => obj.modifierScrollLock,
-    get_modifierSuper: (obj) => obj.modifierSuper,
-    get_modifierSymbol: (obj) => obj.modifierSymbol,
-    get_modifierSymbolLock: (obj) => obj.modifierSymbolLock,
-    get_screenX: (obj) => obj.screenX,
-    get_screenY: (obj) => obj.screenY,
-    get_clientX: (obj) => obj.clientX,
-    get_clientY: (obj) => obj.clientY,
-    get_button: (obj) => obj.button,
-    get_buttons: (obj) => obj.buttons,
-    get_relatedTarget: (obj) => obj.relatedTarget,
-    get_deltaX: (obj) => obj.deltaX,
-    get_deltaY: (obj) => obj.deltaY,
-    get_deltaZ: (obj) => obj.deltaZ,
-    get_deltaMode: (obj) => obj.deltaMode
-  },
-
   webapi_InputEventInit: {
     new: (bubbles, cancelable, composed, view, detail, which, data, isComposing, inputType) => {
       const obj = {};
@@ -7678,6 +7501,53 @@ export const wasmImportObject = {
     get_isComposing: (obj) => obj.isComposing,
     get_charCode: (obj) => obj.charCode,
     get_keyCode: (obj) => obj.keyCode
+  },
+
+  webapi_EventModifierInit: {
+    new: (bubbles, cancelable, composed, view, detail, which, ctrlKey, shiftKey, altKey, metaKey, modifierAltGraph, modifierCapsLock, modifierFn, modifierFnLock, modifierHyper, modifierNumLock, modifierScrollLock, modifierSuper, modifierSymbol, modifierSymbolLock) => {
+      const obj = {};
+      if (bubbles !== undefined) obj.bubbles = bubbles;
+      if (cancelable !== undefined) obj.cancelable = cancelable;
+      if (composed !== undefined) obj.composed = composed;
+      if (view !== undefined) obj.view = view;
+      if (detail !== undefined) obj.detail = detail;
+      if (which !== undefined) obj.which = which;
+      if (ctrlKey !== undefined) obj.ctrlKey = ctrlKey;
+      if (shiftKey !== undefined) obj.shiftKey = shiftKey;
+      if (altKey !== undefined) obj.altKey = altKey;
+      if (metaKey !== undefined) obj.metaKey = metaKey;
+      if (modifierAltGraph !== undefined) obj.modifierAltGraph = modifierAltGraph;
+      if (modifierCapsLock !== undefined) obj.modifierCapsLock = modifierCapsLock;
+      if (modifierFn !== undefined) obj.modifierFn = modifierFn;
+      if (modifierFnLock !== undefined) obj.modifierFnLock = modifierFnLock;
+      if (modifierHyper !== undefined) obj.modifierHyper = modifierHyper;
+      if (modifierNumLock !== undefined) obj.modifierNumLock = modifierNumLock;
+      if (modifierScrollLock !== undefined) obj.modifierScrollLock = modifierScrollLock;
+      if (modifierSuper !== undefined) obj.modifierSuper = modifierSuper;
+      if (modifierSymbol !== undefined) obj.modifierSymbol = modifierSymbol;
+      if (modifierSymbolLock !== undefined) obj.modifierSymbolLock = modifierSymbolLock;
+      return obj;
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_view: (obj) => obj.view,
+    get_detail: (obj) => obj.detail,
+    get_which: (obj) => obj.which,
+    get_ctrlKey: (obj) => obj.ctrlKey,
+    get_shiftKey: (obj) => obj.shiftKey,
+    get_altKey: (obj) => obj.altKey,
+    get_metaKey: (obj) => obj.metaKey,
+    get_modifierAltGraph: (obj) => obj.modifierAltGraph,
+    get_modifierCapsLock: (obj) => obj.modifierCapsLock,
+    get_modifierFn: (obj) => obj.modifierFn,
+    get_modifierFnLock: (obj) => obj.modifierFnLock,
+    get_modifierHyper: (obj) => obj.modifierHyper,
+    get_modifierNumLock: (obj) => obj.modifierNumLock,
+    get_modifierScrollLock: (obj) => obj.modifierScrollLock,
+    get_modifierSuper: (obj) => obj.modifierSuper,
+    get_modifierSymbol: (obj) => obj.modifierSymbol,
+    get_modifierSymbolLock: (obj) => obj.modifierSymbolLock
   },
 
   webapi_CompositionEventInit: {
@@ -8161,6 +8031,67 @@ export const wasmImportObject = {
     get_action: (obj) => obj.action
   },
 
+  webapi_MouseEventInit: {
+    new: (bubbles, cancelable, composed, view, detail, which, ctrlKey, shiftKey, altKey, metaKey, modifierAltGraph, modifierCapsLock, modifierFn, modifierFnLock, modifierHyper, modifierNumLock, modifierScrollLock, modifierSuper, modifierSymbol, modifierSymbolLock, screenX, screenY, clientX, clientY, button, buttons, relatedTarget) => {
+      const obj = {};
+      if (bubbles !== undefined) obj.bubbles = bubbles;
+      if (cancelable !== undefined) obj.cancelable = cancelable;
+      if (composed !== undefined) obj.composed = composed;
+      if (view !== undefined) obj.view = view;
+      if (detail !== undefined) obj.detail = detail;
+      if (which !== undefined) obj.which = which;
+      if (ctrlKey !== undefined) obj.ctrlKey = ctrlKey;
+      if (shiftKey !== undefined) obj.shiftKey = shiftKey;
+      if (altKey !== undefined) obj.altKey = altKey;
+      if (metaKey !== undefined) obj.metaKey = metaKey;
+      if (modifierAltGraph !== undefined) obj.modifierAltGraph = modifierAltGraph;
+      if (modifierCapsLock !== undefined) obj.modifierCapsLock = modifierCapsLock;
+      if (modifierFn !== undefined) obj.modifierFn = modifierFn;
+      if (modifierFnLock !== undefined) obj.modifierFnLock = modifierFnLock;
+      if (modifierHyper !== undefined) obj.modifierHyper = modifierHyper;
+      if (modifierNumLock !== undefined) obj.modifierNumLock = modifierNumLock;
+      if (modifierScrollLock !== undefined) obj.modifierScrollLock = modifierScrollLock;
+      if (modifierSuper !== undefined) obj.modifierSuper = modifierSuper;
+      if (modifierSymbol !== undefined) obj.modifierSymbol = modifierSymbol;
+      if (modifierSymbolLock !== undefined) obj.modifierSymbolLock = modifierSymbolLock;
+      if (screenX !== undefined) obj.screenX = screenX;
+      if (screenY !== undefined) obj.screenY = screenY;
+      if (clientX !== undefined) obj.clientX = clientX;
+      if (clientY !== undefined) obj.clientY = clientY;
+      if (button !== undefined) obj.button = button;
+      if (buttons !== undefined) obj.buttons = buttons;
+      if (relatedTarget !== undefined) obj.relatedTarget = relatedTarget;
+      return obj;
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_view: (obj) => obj.view,
+    get_detail: (obj) => obj.detail,
+    get_which: (obj) => obj.which,
+    get_ctrlKey: (obj) => obj.ctrlKey,
+    get_shiftKey: (obj) => obj.shiftKey,
+    get_altKey: (obj) => obj.altKey,
+    get_metaKey: (obj) => obj.metaKey,
+    get_modifierAltGraph: (obj) => obj.modifierAltGraph,
+    get_modifierCapsLock: (obj) => obj.modifierCapsLock,
+    get_modifierFn: (obj) => obj.modifierFn,
+    get_modifierFnLock: (obj) => obj.modifierFnLock,
+    get_modifierHyper: (obj) => obj.modifierHyper,
+    get_modifierNumLock: (obj) => obj.modifierNumLock,
+    get_modifierScrollLock: (obj) => obj.modifierScrollLock,
+    get_modifierSuper: (obj) => obj.modifierSuper,
+    get_modifierSymbol: (obj) => obj.modifierSymbol,
+    get_modifierSymbolLock: (obj) => obj.modifierSymbolLock,
+    get_screenX: (obj) => obj.screenX,
+    get_screenY: (obj) => obj.screenY,
+    get_clientX: (obj) => obj.clientX,
+    get_clientY: (obj) => obj.clientY,
+    get_button: (obj) => obj.button,
+    get_buttons: (obj) => obj.buttons,
+    get_relatedTarget: (obj) => obj.relatedTarget
+  },
+
   webapi_PointerEventInit: {
     new: (bubbles, cancelable, composed, view, detail, which, ctrlKey, shiftKey, altKey, metaKey, modifierAltGraph, modifierCapsLock, modifierFn, modifierFnLock, modifierHyper, modifierNumLock, modifierScrollLock, modifierSuper, modifierSymbol, modifierSymbolLock, screenX, screenY, clientX, clientY, button, buttons, relatedTarget, pointerId, width, height, pressure, tangentialPressure, tiltX, tiltY, twist, altitudeAngle, azimuthAngle, pointerType, isPrimary, persistentDeviceId, coalescedEvents, predictedEvents) => {
       const obj = {};
@@ -8250,6 +8181,75 @@ export const wasmImportObject = {
     get_persistentDeviceId: (obj) => obj.persistentDeviceId,
     get_coalescedEvents: (obj) => obj.coalescedEvents,
     get_predictedEvents: (obj) => obj.predictedEvents
+  },
+
+  webapi_WheelEventInit: {
+    new: (bubbles, cancelable, composed, view, detail, which, ctrlKey, shiftKey, altKey, metaKey, modifierAltGraph, modifierCapsLock, modifierFn, modifierFnLock, modifierHyper, modifierNumLock, modifierScrollLock, modifierSuper, modifierSymbol, modifierSymbolLock, screenX, screenY, clientX, clientY, button, buttons, relatedTarget, deltaX, deltaY, deltaZ, deltaMode) => {
+      const obj = {};
+      if (bubbles !== undefined) obj.bubbles = bubbles;
+      if (cancelable !== undefined) obj.cancelable = cancelable;
+      if (composed !== undefined) obj.composed = composed;
+      if (view !== undefined) obj.view = view;
+      if (detail !== undefined) obj.detail = detail;
+      if (which !== undefined) obj.which = which;
+      if (ctrlKey !== undefined) obj.ctrlKey = ctrlKey;
+      if (shiftKey !== undefined) obj.shiftKey = shiftKey;
+      if (altKey !== undefined) obj.altKey = altKey;
+      if (metaKey !== undefined) obj.metaKey = metaKey;
+      if (modifierAltGraph !== undefined) obj.modifierAltGraph = modifierAltGraph;
+      if (modifierCapsLock !== undefined) obj.modifierCapsLock = modifierCapsLock;
+      if (modifierFn !== undefined) obj.modifierFn = modifierFn;
+      if (modifierFnLock !== undefined) obj.modifierFnLock = modifierFnLock;
+      if (modifierHyper !== undefined) obj.modifierHyper = modifierHyper;
+      if (modifierNumLock !== undefined) obj.modifierNumLock = modifierNumLock;
+      if (modifierScrollLock !== undefined) obj.modifierScrollLock = modifierScrollLock;
+      if (modifierSuper !== undefined) obj.modifierSuper = modifierSuper;
+      if (modifierSymbol !== undefined) obj.modifierSymbol = modifierSymbol;
+      if (modifierSymbolLock !== undefined) obj.modifierSymbolLock = modifierSymbolLock;
+      if (screenX !== undefined) obj.screenX = screenX;
+      if (screenY !== undefined) obj.screenY = screenY;
+      if (clientX !== undefined) obj.clientX = clientX;
+      if (clientY !== undefined) obj.clientY = clientY;
+      if (button !== undefined) obj.button = button;
+      if (buttons !== undefined) obj.buttons = buttons;
+      if (relatedTarget !== undefined) obj.relatedTarget = relatedTarget;
+      if (deltaX !== undefined) obj.deltaX = deltaX;
+      if (deltaY !== undefined) obj.deltaY = deltaY;
+      if (deltaZ !== undefined) obj.deltaZ = deltaZ;
+      if (deltaMode !== undefined) obj.deltaMode = deltaMode;
+      return obj;
+    },
+    get_bubbles: (obj) => obj.bubbles,
+    get_cancelable: (obj) => obj.cancelable,
+    get_composed: (obj) => obj.composed,
+    get_view: (obj) => obj.view,
+    get_detail: (obj) => obj.detail,
+    get_which: (obj) => obj.which,
+    get_ctrlKey: (obj) => obj.ctrlKey,
+    get_shiftKey: (obj) => obj.shiftKey,
+    get_altKey: (obj) => obj.altKey,
+    get_metaKey: (obj) => obj.metaKey,
+    get_modifierAltGraph: (obj) => obj.modifierAltGraph,
+    get_modifierCapsLock: (obj) => obj.modifierCapsLock,
+    get_modifierFn: (obj) => obj.modifierFn,
+    get_modifierFnLock: (obj) => obj.modifierFnLock,
+    get_modifierHyper: (obj) => obj.modifierHyper,
+    get_modifierNumLock: (obj) => obj.modifierNumLock,
+    get_modifierScrollLock: (obj) => obj.modifierScrollLock,
+    get_modifierSuper: (obj) => obj.modifierSuper,
+    get_modifierSymbol: (obj) => obj.modifierSymbol,
+    get_modifierSymbolLock: (obj) => obj.modifierSymbolLock,
+    get_screenX: (obj) => obj.screenX,
+    get_screenY: (obj) => obj.screenY,
+    get_clientX: (obj) => obj.clientX,
+    get_clientY: (obj) => obj.clientY,
+    get_button: (obj) => obj.button,
+    get_buttons: (obj) => obj.buttons,
+    get_relatedTarget: (obj) => obj.relatedTarget,
+    get_deltaX: (obj) => obj.deltaX,
+    get_deltaY: (obj) => obj.deltaY,
+    get_deltaZ: (obj) => obj.deltaZ,
+    get_deltaMode: (obj) => obj.deltaMode
   },
 
   webapi_GetComposedRangesOptions: {

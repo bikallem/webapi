@@ -12041,6 +12041,12 @@ pub trait TMimeTypeArray : TJsValue {
 }
 
 pub trait TMouseEvent : TUIEvent {
+  page_x(Self) -> Double
+  page_y(Self) -> Double
+  x(Self) -> Double
+  y(Self) -> Double
+  offset_x(Self) -> Double
+  offset_y(Self) -> Double
   screen_x(Self) -> Int
   screen_y(Self) -> Int
   client_x(Self) -> Int
@@ -12056,12 +12062,6 @@ pub trait TMouseEvent : TUIEvent {
   related_target(Self) -> EventTarget
   get_modifier_state(Self, String) -> Bool
   init_mouse_event(Self, String, bubbles_arg? : Bool, cancelable_arg? : Bool, view_arg? : &TWindow, detail_arg? : Int, screen_x_arg? : Int, screen_y_arg? : Int, client_x_arg? : Int, client_y_arg? : Int, ctrl_key_arg? : Bool, alt_key_arg? : Bool, shift_key_arg? : Bool, meta_key_arg? : Bool, button_arg? : Int, related_target_arg? : &TEventTarget) -> Unit
-  page_x(Self) -> Double
-  page_y(Self) -> Double
-  x(Self) -> Double
-  y(Self) -> Double
-  offset_x(Self) -> Double
-  offset_y(Self) -> Double
 }
 
 pub trait TMutationObserver : TJsValue {

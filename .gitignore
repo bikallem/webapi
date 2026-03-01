@@ -37,3 +37,4 @@ objects
 refs
 .idea
 .gitmodules
+make-all.log
