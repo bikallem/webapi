@@ -272,7 +272,7 @@ fn main {
     if skipped_logs.length() > 0 {
       let skipped_log_path = "\{output_dir}/skipped.log"
       println("  Writing skipped definitions to \{skipped_log_path}...")
-      let content = skipped_logs.iter().collect().join("\n")
+      let content = skipped_logs.join("\n")
       @fs.write_string_to_file(skipped_log_path, content) catch {
         e => println("Warning: failed to write skipped.log: \{e}")
       }

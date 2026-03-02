@@ -26,6 +26,18 @@ fn is_union_typedef_arg(
 }
 
 ///|
+fn make_self_arg() -> @type_mapping.MethodArg {
+  @type_mapping.MethodArg::{
+    name: "self",
+    original_name: "self",
+    type_: @type_mapping.ArgMbtType::Self,
+    optional: false,
+    variadic: false,
+    default_value: None,
+  }
+}
+
+///|
 /// Wrap an ArgMbtType with a trait reference prefix "&T" for Interface, Union, and Other types.
 fn to_trait_ref(
   mbt_type : @type_mapping.ArgMbtType,
@@ -244,24 +256,6 @@ fn mbt_default_value(
   }
 }
 
-///|
-fn has_hyphen(name : String) -> Bool {
-  for c in name {
-    if c == '-' {
-      return true
-    }
-  }
-  false
-}
-
-///|
-test "has_hyphen identifies names with hyphens correctly" {
-  inspect(has_hyphen("my-method"), content="true")
-  inspect(has_hyphen("myMethod"), content="false")
-  inspect(has_hyphen("method-name-with-hyphens"), content="true")
-  inspect(has_hyphen("method_name_with_underscores"), content="false")
-  inspect(has_hyphen("simplemethod"), content="false")
-}
 
 ///|
 /// Emit a constructor member, returning emits and the new constructor count.
@@ -333,15 +327,7 @@ fn emit_regular_operation(
   let args = if op.static_ {
     args
   } else {
-    let self_arg = @type_mapping.MethodArg::{
-      name: "self",
-      original_name: "self",
-      type_: @type_mapping.ArgMbtType::Self,
-      optional: false,
-      variadic: false,
-      default_value: None,
-    }
-    [self_arg, ..args]
+    [make_self_arg(), ..args]
   }
   emits.push_iter(arg_emits.iter())
   let (return_type, return_emits) = arg_mbt_type(
@@ -397,12 +383,8 @@ fn emit_attribute(
     type_registry,
   )
 
-  // For static attributes, push attr_emits before union handling
-  if attr.static_ {
-    emits.push_iter(attr_emits.iter())
-  }
-  emit_union_return_type(attr_type, emits)
   emits.push_iter(attr_emits.iter())
+  emit_union_return_type(attr_type, emits)
 
   // Getter method (static or regular)
   if attr.static_ {
@@ -449,14 +431,7 @@ fn emit_attribute_setter(
   let is_union_typedef = is_union_typedef_arg(attr.type_, type_registry)
   let attr_type = to_trait_ref(attr_type, is_union_typedef)
   let args = [
-    @type_mapping.MethodArg::{
-      name: "self",
-      original_name: "self",
-      type_: @type_mapping.ArgMbtType::Self,
-      optional: false,
-      variadic: false,
-      default_value: None,
-    },
+    make_self_arg(),
     @type_mapping.MethodArg::{
       name: @type_mapping.safe_identifier(attr.name),
       original_name: attr.name,
@@ -517,15 +492,7 @@ fn emit_special_operation(
     orig_method_name,
     type_registry,
   )
-  let self_arg = @type_mapping.MethodArg::{
-    name: "self",
-    original_name: "self",
-    type_: @type_mapping.ArgMbtType::Self,
-    optional: false,
-    variadic: false,
-    default_value: None,
-  }
-  let args = [self_arg, ..args]
+  let args = [make_self_arg(), ..args]
   emits.push_iter(arg_emits.iter())
   let (return_type, return_emits) = arg_mbt_type(
     op.return_type,
@@ -568,15 +535,7 @@ fn emit_unnamed_special_operation(
     orig_method_name,
     type_registry,
   )
-  let self_arg = @type_mapping.MethodArg::{
-    name: "self",
-    original_name: "self",
-    type_: @type_mapping.ArgMbtType::Self,
-    optional: false,
-    variadic: false,
-    default_value: None,
-  }
-  let args = [self_arg, ..args]
+  let args = [make_self_arg(), ..args]
   emits.push_iter(arg_emits.iter())
   let (return_type, return_emits) = arg_mbt_type(
     op.return_type,
@@ -645,8 +604,8 @@ pub impl Emitter for InterfaceEmitter with emit(
       emits.push_iter(ctor_emits.iter())
       continue rest
     }
-    [RegularOperation(op), .. rest] if has_hyphen(op.name) => continue rest
-    [Attribute(attr), .. rest] if has_hyphen(attr.name) => continue rest
+    [RegularOperation(op), .. rest] if op.name.contains("-") => continue rest
+    [Attribute(attr), .. rest] if attr.name.contains("-") => continue rest
     [RegularOperation(op), .. rest] => {
       let orig_method_name = next_overload_name(
         op.name,

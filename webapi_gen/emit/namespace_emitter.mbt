@@ -25,7 +25,7 @@ pub impl Emitter for NamespaceEmitter with emit(
   for m in ns.members {
     match m.namespace_member {
       Operation(op) => {
-        if has_hyphen(op.name) {
+        if op.name.contains("-") {
           continue
         }
         let orig_method_name = next_overload_name(
@@ -52,7 +52,7 @@ pub impl Emitter for NamespaceEmitter with emit(
         namespace_methods.push(meth)
       }
       Attribute(attr) => {
-        if has_hyphen(attr.name) {
+        if attr.name.contains("-") {
           continue
         }
         // Namespace attributes are always readonly and static

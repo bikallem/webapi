@@ -18,6 +18,29 @@ fn make_ffi_argnames(args : Array[@type_mapping.MethodArg]) -> Array[String] {
 }
 
 ///|
+/// Build FFI argument declarations from argument names (all typed as JsValue).
+fn make_ffi_args(ffi_argnames : Array[String]) -> String {
+  ffi_argnames.map(fn(name) { "\{name}: JsValue" }).join(", ")
+}
+
+///|
+/// Build JS call argument list from method args, handling variadic spread.
+fn make_js_call_args(
+  args : ArrayView[@type_mapping.MethodArg],
+) -> String {
+  args
+  .map(fn(arg) {
+    let name = js_safe(arg.name)
+    if arg.variadic {
+      "...\{name}"
+    } else {
+      name
+    }
+  })
+  .join(", ")
+}
+
+///|
 /// Emit JS FFI declaration with return-type dispatch.
 /// For non-optional, non-void returns: creates a `_js` raw extern + wrapper with unsafe_cast.
 /// For optional returns: returns JsValue for null-checking.
@@ -65,15 +88,12 @@ fn emit_method_body(
   ffi_name : String,
   call_args : String,
   optional_return : Bool,
-  void_return? : Bool = false,
 ) -> Unit {
   if optional_return {
     // Optional: FFI returns JsValue; to_option() checks null and unsafe-casts
     code.write_string("  \{ffi_name}(\{call_args}).to_option()\n")
-  } else if void_return {
-    code.write_string("  \{ffi_name}(\{call_args})\n")
   } else {
-    // Non-optional: FFI wrapper returns the actual type
+    // Non-optional or void: FFI wrapper returns the actual type
     code.write_string("  \{ffi_name}(\{call_args})\n")
   }
   code.write_string("}")

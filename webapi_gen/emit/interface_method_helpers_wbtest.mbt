@@ -200,7 +200,7 @@ test "emit_method_body optional return" {
 test "emit_method_body void return" {
   let code = StringBuilder::new()
   code.write_string("pub fn test() -> Unit {\n")
-  emit_method_body(code, "test_ffi", "obj", false, void_return=true)
+  emit_method_body(code, "test_ffi", "obj", false)
   inspect(
     code.to_string(),
     content=(

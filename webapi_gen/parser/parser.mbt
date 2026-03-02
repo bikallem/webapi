@@ -1460,9 +1460,9 @@ pub fn parse_file(
   }
   let tokens = lex(content[:], file=filepath) catch { e => raise Lex(e) }
   let definitions = definitions(tokens) catch { e => raise Parse(e) }
+  let spec = @path.Path(filepath).basename().to_string()
   for def in definitions {
-    let path = @path.Path(filepath)
-    def.spec = Some(path.basename().to_string())
+    def.spec = Some(spec)
   }
   definitions
 }

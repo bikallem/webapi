@@ -54,7 +54,7 @@ fn is_wasm_valid_stub_type(type_ : @type_mapping.ArgMbtType) -> Bool {
 
 ///|
 fn is_array_return(type_name : String) -> Bool {
-  type_name.has_prefix("Array[") && type_name.has_suffix("]")
+  array_inner_type(type_name) is Some(_)
 }
 
 ///|

@@ -59,17 +59,8 @@ impl InterfaceMethodEmit for RegularMethodEmit with ffi_emit_js(
 ) -> Code {
   let ffi_name = self.ffi_name()
   let ffi_argnames = self.ffi_argnames()
-  let ffi_args = ffi_argnames.map(name => "\{name}: JsValue").join(", ")
-  let ffi_js_call_args = self.args[1:]
-    .map(fn(arg) {
-      let name = js_safe(arg.name)
-      if arg.variadic {
-        "...\{name}"
-      } else {
-        name
-      }
-    })
-    .join(", ")
+  let ffi_args = make_ffi_args(ffi_argnames)
+  let ffi_js_call_args = make_js_call_args(self.args[1:])
   let ret_name = self.return_type.type_.name()
   emit_js_ffi_with_return(
     ffi_name,
@@ -90,7 +81,7 @@ impl InterfaceMethodEmit for RegularMethodEmit with ffi_emit_wasm(
 ) -> Code {
   let ffi_name = self.ffi_name()
   let ffi_argnames = self.ffi_argnames()
-  let ffi_args = ffi_argnames.map(name => "\{name}: JsValue").join(", ")
+  let ffi_args = make_ffi_args(ffi_argnames)
   let ret_name = self.return_type.type_.name()
   emit_wasm_ffi_with_return(
     ffi_name,
@@ -129,14 +120,7 @@ impl InterfaceMethodEmit for RegularMethodEmit with impl_emit(
   code.write_string(
     "impl T\{trait_name} with \{method_name}(\{method_args}) -> \{self.return_type.type_name()} {\n",
   )
-  let ret_name = self.return_type.type_.name()
-  emit_method_body(
-    code,
-    ffi_name,
-    call_args,
-    self.return_type.optional,
-    void_return=ret_name == "Unit",
-  )
+  emit_method_body(code, ffi_name, call_args, self.return_type.optional)
   Code(code.to_string())
 }
 
@@ -191,17 +175,8 @@ impl InterfaceMethodEmit for StaticMethodEmit with ffi_emit_js(
 ) -> Code {
   let ffi_name = self.ffi_name()
   let ffi_argnames = self.args.map(arg => arg.name)
-  let ffi_args = ffi_argnames.map(name => "\{name}: JsValue").join(", ")
-  let ffi_js_args = self.args
-    .map(fn(arg) {
-      let name = js_safe(arg.name)
-      if arg.variadic {
-        "...\{name}"
-      } else {
-        name
-      }
-    })
-    .join(", ")
+  let ffi_args = make_ffi_args(ffi_argnames)
+  let ffi_js_args = make_js_call_args(self.args[:])
   let ret_name = self.return_type.type_.name()
   emit_js_ffi_with_return(
     ffi_name,
@@ -222,7 +197,7 @@ impl InterfaceMethodEmit for StaticMethodEmit with ffi_emit_wasm(
 ) -> Code {
   let ffi_name = self.ffi_name()
   let ffi_argnames = self.args.map(arg => arg.name)
-  let ffi_args = ffi_argnames.map(name => "\{name}: JsValue").join(", ")
+  let ffi_args = make_ffi_args(ffi_argnames)
   let ret_name = self.return_type.type_.name()
   emit_wasm_ffi_with_return(
     ffi_name,
@@ -261,14 +236,7 @@ impl InterfaceMethodEmit for StaticMethodEmit with impl_emit(
   code.write_string(
     "pub fn \{trait_name}::\{method_name}(\{method_args}) -> \{self.return_type.type_name()} {\n",
   )
-  let ret_name = self.return_type.type_.name()
-  emit_method_body(
-    code,
-    ffi_name,
-    call_args,
-    self.return_type.optional,
-    void_return=ret_name == "Unit",
-  )
+  emit_method_body(code, ffi_name, call_args, self.return_type.optional)
   Code(code.to_string())
 }
 
@@ -586,7 +554,7 @@ impl InterfaceMethodEmit for SpecialOperationMethodEmit with ffi_emit_js(
 ) -> Code {
   let ffi_name = self.ffi_name()
   let ffi_argnames = self.ffi_argnames()
-  let ffi_args = ffi_argnames.map(name => "\{name}: JsValue").join(", ")
+  let ffi_args = make_ffi_args(ffi_argnames)
   let ret_name = self.return_type.type_.name()
   // Build bracket-notation JS expression
   let js_expr = match self.special {
@@ -613,7 +581,7 @@ impl InterfaceMethodEmit for SpecialOperationMethodEmit with ffi_emit_wasm(
 ) -> Code {
   let ffi_name = self.ffi_name()
   let ffi_argnames = self.ffi_argnames()
-  let ffi_args = ffi_argnames.map(name => "\{name}: JsValue").join(", ")
+  let ffi_args = make_ffi_args(ffi_argnames)
   let ret_name = self.return_type.type_.name()
   emit_wasm_ffi_with_return(
     ffi_name,
@@ -652,14 +620,7 @@ impl InterfaceMethodEmit for SpecialOperationMethodEmit with impl_emit(
   code.write_string(
     "impl T\{trait_name} with \{method_name}(\{method_args}) -> \{self.return_type.type_name()} {\n",
   )
-  let ret_name = self.return_type.type_.name()
-  emit_method_body(
-    code,
-    ffi_name,
-    call_args,
-    self.return_type.optional,
-    void_return=ret_name == "Unit",
-  )
+  emit_method_body(code, ffi_name, call_args, self.return_type.optional)
   Code(code.to_string())
 }
 
