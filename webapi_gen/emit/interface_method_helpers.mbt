@@ -114,9 +114,27 @@ fn is_convenience_eligible(return_type : @type_mapping.MethodReturn) -> Bool {
 }
 
 ///|
-/// Check if any non-self args are optional without default values.
-fn has_optional_no_default(args : Array[@type_mapping.MethodArg]) -> Bool {
-  args[1:].iter().any(fn(arg) { arg.optional && arg.default_value is None })
+/// Apply _opt suffix to method name if the return type is convenience-eligible.
+fn maybe_opt_name(
+  name : String,
+  return_type : @type_mapping.MethodReturn,
+) -> String {
+  if is_convenience_eligible(return_type) {
+    "\{name}_opt"
+  } else {
+    name
+  }
+}
+
+///|
+/// Format a method arg for forwarding: "name~" for optional, "name" for required.
+fn forward_arg(arg : @type_mapping.MethodArg) -> String {
+  let name = @type_mapping.safe_identifier(arg.name)
+  if arg.optional {
+    "\{name}~"
+  } else {
+    name
+  }
 }
 
 ///|
@@ -124,6 +142,7 @@ fn has_optional_no_default(args : Array[@type_mapping.MethodArg]) -> Bool {
 /// Handles optional-no-default args via match-based forwarding.
 /// `call_prefix` is "self." for instance methods or "ClassName::" for static methods.
 /// `first_arg_index` is 1 for instance methods (skip self), 0 for static methods.
+/// Returns empty string if forwarding cannot be generated.
 fn convenience_call_expr(
   args : Array[@type_mapping.MethodArg],
   call_prefix : String,
@@ -131,67 +150,74 @@ fn convenience_call_expr(
   first_arg_index : Int,
 ) -> String {
   let effective_args = args[first_arg_index:]
-  if !has_optional_no_default(args) {
-    // Simple forwarding: all optional args have defaults, name~ works fine
-    let fwd = effective_args
-      .map(arg => {
-        let name = @type_mapping.safe_identifier(arg.name)
-        if arg.optional {
-          "\{name}~"
-        } else {
-          name
-        }
-      })
-      .join(", ")
-    return "\{call_prefix}\{method_name}_opt(\{fwd}).unwrap()"
-  }
-  // Find the single optional-no-default arg for match-based forwarding
-  let opt_args = effective_args.filter(fn(arg) {
+  let opt_no_default = effective_args.filter(fn(arg) {
     arg.optional && arg.default_value is None
   })
-  guard opt_args.length() == 1 else {
-    // Fallback for multiple optional-no-default args: just use name~ (may not compile)
-    let fwd = effective_args
-      .map(arg => {
-        let name = @type_mapping.safe_identifier(arg.name)
-        if arg.optional {
-          "\{name}~"
-        } else {
-          name
-        }
-      })
-      .join(", ")
+  if opt_no_default.is_empty() {
+    // Simple forwarding: all optional args have defaults
+    let fwd = effective_args.map(forward_arg).join(", ")
     return "\{call_prefix}\{method_name}_opt(\{fwd}).unwrap()"
   }
-  let opt_name = @type_mapping.safe_identifier(opt_args[0].name)
-  // Build forward args for Some branch
-  let some_fwd = effective_args
-    .map(arg => {
-      let name = @type_mapping.safe_identifier(arg.name)
-      if arg.optional {
-        "\{name}~"
-      } else {
-        name
-      }
-    })
-    .join(", ")
-  // Build forward args for None branch (skip the optional-no-default arg)
+  if opt_no_default.length() != 1 {
+    // Cannot generate correct forwarding for multiple optional-no-default args
+    return ""
+  }
+  let opt_name = @type_mapping.safe_identifier(opt_no_default[0].name)
+  let some_fwd = effective_args.map(forward_arg).join(", ")
   let none_fwd = effective_args
     .filter(fn(arg) {
       !(arg.optional &&
       arg.default_value is None &&
       @type_mapping.safe_identifier(arg.name) == opt_name)
     })
-    .map(arg => {
-      let name = @type_mapping.safe_identifier(arg.name)
-      if arg.optional {
-        "\{name}~"
-      } else {
-        name
-      }
-    })
+    .map(forward_arg)
     .join(", ")
   "let result = match \{opt_name} {\n    Some(\{opt_name}) => \{call_prefix}\{method_name}_opt(\{some_fwd})\n    None => \{call_prefix}\{method_name}_opt(\{none_fwd})\n  }\n  result.unwrap()"
+}
+
+///|
+/// Generate convenience trait declaration for methods returning optional interface types.
+fn convenience_decl_code(
+  return_type : @type_mapping.MethodReturn,
+  args : Array[@type_mapping.MethodArg],
+  method_name : String,
+) -> Code {
+  if !is_convenience_eligible(return_type) {
+    return Code("")
+  }
+  let args_str = trait_method_decl_args(args)
+  let name = @type_mapping.safe_identifier(method_name)
+  let ret_type_name = return_type.type_.name()
+  Code("  \{name}(\{args_str}) -> \{ret_type_name} = _")
+}
+
+///|
+/// Generate convenience default trait impl for methods returning optional interface types.
+fn convenience_impl_code(
+  return_type : @type_mapping.MethodReturn,
+  args : Array[@type_mapping.MethodArg],
+  interface_name : String,
+  method_name : String,
+  call_prefix : String,
+  first_arg_index : Int,
+  is_static? : Bool = false,
+) -> Code {
+  if !is_convenience_eligible(return_type) {
+    return Code("")
+  }
+  let name = @type_mapping.safe_identifier(method_name)
+  let ret_type_name = return_type.type_.name()
+  let method_args = trait_method_impl_args(args)
+  let call = convenience_call_expr(args, call_prefix, name, first_arg_index)
+  if call == "" {
+    return Code("")
+  }
+  let decl = if is_static {
+    "pub fn \{interface_name}::\{name}(\{method_args}) -> \{ret_type_name}"
+  } else {
+    "impl T\{interface_name} with \{name}(\{method_args}) -> \{ret_type_name}"
+  }
+  Code("\{decl} {\n  \{call}\n}")
 }
 
 ///|
