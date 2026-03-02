@@ -395,16 +395,9 @@ fn collect_js_operations(
 }
 
 ///|
-/// Emit a complete JS module for an interface
-fn emit_js_interface_module(
-  iface : @flattened_idl.FlattenedInterface,
-) -> String {
+fn wrap_js_module(module_name : String, entries : Array[String]) -> String {
   let buf = StringBuilder::new()
-  buf.write_string("  webapi_\{iface.name}: {\n")
-  let entries : Array[String] = []
-  entries.push_iter(collect_js_constructors(iface).iter())
-  entries.push_iter(collect_js_attributes(iface).iter())
-  entries.push_iter(collect_js_operations(iface).iter())
+  buf.write_string("  webapi_\{module_name}: {\n")
   buf.write_string(entries.join(",\n"))
   if entries.length() > 0 {
     buf.write_string("\n")
@@ -414,12 +407,22 @@ fn emit_js_interface_module(
 }
 
 ///|
+/// Emit a complete JS module for an interface
+fn emit_js_interface_module(
+  iface : @flattened_idl.FlattenedInterface,
+) -> String {
+  let entries : Array[String] = []
+  entries.push_iter(collect_js_constructors(iface).iter())
+  entries.push_iter(collect_js_attributes(iface).iter())
+  entries.push_iter(collect_js_operations(iface).iter())
+  wrap_js_module(iface.name, entries)
+}
+
+///|
 /// Emit a JS module for a dictionary
 fn emit_js_dictionary_module(
   dict : @flattened_idl.MergedDictionaryIR,
 ) -> String {
-  let buf = StringBuilder::new()
-  buf.write_string("  webapi_\{dict.name}: {\n")
   let entries : Array[String] = []
 
   // Dictionary constructor: new(arg1, arg2, ...) => { const obj = {}; if (arg1 !== undefined) obj.field1 = arg1; ... return obj; }
@@ -444,12 +447,7 @@ fn emit_js_dictionary_module(
   for mem in dict.members {
     entries.push(emit_js_getter(mem.name, is_bigint=is_bigint_type(mem.type_)))
   }
-  buf.write_string(entries.join(",\n"))
-  if entries.length() > 0 {
-    buf.write_string("\n")
-  }
-  buf.write_string("  }")
-  buf.to_string()
+  wrap_js_module(dict.name, entries)
 }
 
 ///|
@@ -465,9 +463,7 @@ fn emit_js_callback_module(cb : @parser.CallbackFunctionDefinition) -> String {
 fn emit_js_namespace_module(
   ns : @partial_merged.PartialMergedNamespace,
 ) -> String {
-  let buf = StringBuilder::new()
   let module_name = @type_mapping.pascal_case(ns.name)
-  buf.write_string("  webapi_\{module_name}: {\n")
   let entries : Array[String] = []
   let method_counter : Map[String, Int] = {}
   let used_method_names = @hashset.new()
@@ -503,12 +499,7 @@ fn emit_js_namespace_module(
       Const(_) => continue // Constants don't need JS runtime entries
     }
   }
-  buf.write_string(entries.join(",\n"))
-  if entries.length() > 0 {
-    buf.write_string("\n")
-  }
-  buf.write_string("  }")
-  buf.to_string()
+  wrap_js_module(module_name, entries)
 }
 
 ///|

@@ -26,6 +26,15 @@ fn is_union_typedef_arg(
 }
 
 ///|
+fn unpack_arguments(
+  args : Array[@parser.Argument],
+) -> Array[(String, @parser.Type, Bool, @parser.DefaultValue?, Bool)] {
+  args.map(arg => {
+    (arg.name, arg.type_.type_, arg.optional, arg.default_value, arg.variadic)
+  })
+}
+
+///|
 fn make_self_arg() -> @type_mapping.MethodArg {
   @type_mapping.MethodArg::{
     name: "self",
@@ -265,9 +274,7 @@ fn emit_constructor(
   type_registry : @type_registry.TypeRegistry,
 ) -> Array[Emit] {
   let (args, arg_emits) = method_args(
-    ctor.arguments.map(arg => {
-      (arg.name, arg.type_.type_, arg.optional, arg.default_value, arg.variadic)
-    }),
+    unpack_arguments(ctor.arguments),
     interface_name,
     method_name,
     type_registry,
@@ -316,9 +323,7 @@ fn emit_regular_operation(
 ) -> (Array[Emit], &InterfaceMethodEmit) {
   let emits = []
   let (args, arg_emits) = method_args(
-    op.arguments.map(arg => {
-      (arg.name, arg.type_.type_, arg.optional, arg.default_value, arg.variadic)
-    }),
+    unpack_arguments(op.arguments),
     interface_name,
     orig_method_name,
     type_registry,
@@ -470,49 +475,6 @@ fn emit_const_member(
 }
 
 ///|
-/// Emit a named special operation member (has explicit method name).
-/// Reuses RegularMethodEmit since named special ops are structurally identical to regular methods.
-fn emit_special_operation(
-  op : @parser.SpecialOperationMember,
-  interface_name : String,
-  orig_method_name : String,
-  type_registry : @type_registry.TypeRegistry,
-) -> (Array[Emit], &InterfaceMethodEmit) {
-  let emits = []
-  let (args, arg_emits) = method_args(
-    op.arguments.map(arg => {
-      (arg.name, arg.type_.type_, arg.optional, arg.default_value, arg.variadic)
-    }),
-    interface_name,
-    orig_method_name,
-    type_registry,
-  )
-  let args = [make_self_arg(), ..args]
-  emits.push_iter(arg_emits.iter())
-  let (return_type, return_emits) = arg_mbt_type(
-    op.return_type,
-    interface_name,
-    orig_method_name,
-    "",
-    type_registry,
-  )
-  emit_union_return_type(return_type, emits)
-  emits.push_iter(return_emits.iter())
-  let return_type = @type_mapping.MethodReturn::{
-    type_: return_type,
-    optional: op.return_type is Nullable(_),
-  }
-  let meth : &InterfaceMethodEmit = RegularMethodEmit::{
-    interface_name,
-    method_name: orig_method_name,
-    webidl_name: op.name.unwrap(),
-    return_type,
-    args,
-  }
-  (emits, meth)
-}
-
-///|
 /// Emit an unnamed special operation member (no method name, uses bracket notation).
 /// Creates SpecialOperationMethodEmit for bracket-notation JS.
 fn emit_unnamed_special_operation(
@@ -523,9 +485,7 @@ fn emit_unnamed_special_operation(
 ) -> (Array[Emit], &InterfaceMethodEmit) {
   let emits = []
   let (args, arg_emits) = method_args(
-    op.arguments.map(arg => {
-      (arg.name, arg.type_.type_, arg.optional, arg.default_value, arg.variadic)
-    }),
+    unpack_arguments(op.arguments),
     interface_name,
     orig_method_name,
     type_registry,
@@ -649,8 +609,14 @@ pub impl Emitter for InterfaceEmitter with emit(
         method_counter,
         used_method_names,
       )
-      let (op_emits, meth) = emit_special_operation(
-        op,
+      let regular_op : @parser.RegularOperationMember = {
+        name,
+        return_type: op.return_type,
+        arguments: op.arguments,
+        static_: false,
+      }
+      let (op_emits, meth) = emit_regular_operation(
+        regular_op,
         interface.name,
         orig_method_name,
         self.type_registry,

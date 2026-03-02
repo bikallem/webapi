@@ -54,9 +54,13 @@ fn extract_module_name(line : String) -> String? {
   guard line[0] == ' ' && line[1] == ' ' && line[2] != ' ' else { return None }
   guard line.has_suffix(": {") else { return None }
   // strip "  " prefix and ": {" suffix
-  let name_part = line[2:line.length() - 3].to_string()
+  let name_part = line[2:line.length() - 3].to_string() catch {
+    _ => return None
+  }
   if name_part.has_prefix("\"") && name_part.has_suffix("\"") {
-    let unquoted = name_part[1:name_part.length() - 1].to_string()
+    let unquoted = name_part[1:name_part.length() - 1].to_string() catch {
+      _ => return None
+    }
     Some(unquoted)
   } else {
     Some(name_part)
@@ -79,7 +83,7 @@ fn extract_function_name(line : String) -> String? {
   let mut i = 4
   while i < line.length() {
     if line[i] == ':' && i + 1 < line.length() && line[i + 1] == ' ' {
-      let name = line[4:i].to_string()
+      let name = line[4:i].to_string() catch { _ => return None }
       return Some(name)
     }
     i += 1
@@ -229,7 +233,9 @@ pub fn filter_js_modules(
   }
   let result = out.to_string()
   if result.has_suffix("\n\n") {
-    result[:result.length() - 1].to_string()
+    result[:result.length() - 1].to_string() catch {
+      _ => result
+    }
   } else {
     result
   }

@@ -180,13 +180,11 @@ fn convenience_call_expr(
     // Cannot generate correct forwarding for multiple optional-no-default args
     return ""
   }
-  let opt_name = @type_mapping.safe_identifier(opt_no_default[0].name)
+  let opt_name = opt_no_default[0].name
   let some_fwd = effective_args.map(forward_arg).join(", ")
   let none_fwd = effective_args
     .filter(fn(arg) {
-      !(arg.optional &&
-      arg.default_value is None &&
-      @type_mapping.safe_identifier(arg.name) == opt_name)
+      !(arg.optional && arg.default_value is None && arg.name == opt_name)
     })
     .map(forward_arg)
     .join(", ")
