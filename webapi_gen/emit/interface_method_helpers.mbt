@@ -25,9 +25,7 @@ fn make_ffi_args(ffi_argnames : Array[String]) -> String {
 
 ///|
 /// Build JS call argument list from method args, handling variadic spread.
-fn make_js_call_args(
-  args : ArrayView[@type_mapping.MethodArg],
-) -> String {
+fn make_js_call_args(args : ArrayView[@type_mapping.MethodArg]) -> String {
   args
   .map(fn(arg) {
     let name = js_safe(arg.name)

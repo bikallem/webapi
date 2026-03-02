@@ -256,7 +256,6 @@ fn mbt_default_value(
   }
 }
 
-
 ///|
 /// Emit a constructor member, returning emits and the new constructor count.
 fn emit_constructor(
@@ -324,11 +323,7 @@ fn emit_regular_operation(
     orig_method_name,
     type_registry,
   )
-  let args = if op.static_ {
-    args
-  } else {
-    [make_self_arg(), ..args]
-  }
+  let args = if op.static_ { args } else { [make_self_arg(), ..args] }
   emits.push_iter(arg_emits.iter())
   let (return_type, return_emits) = arg_mbt_type(
     op.return_type,
@@ -666,11 +661,7 @@ pub impl Emitter for InterfaceEmitter with emit(
     }
     // Unnamed special operations → bracket notation with synthetic names
     [SpecialOperation(op), .. rest] => {
-      let base_name = match op.special {
-        Getter => "get"
-        Setter => "set"
-        Deleter => "delete_"
-      }
+      let base_name = op.special.base_name()
       let orig_method_name = next_overload_name(
         base_name,
         op.arguments,

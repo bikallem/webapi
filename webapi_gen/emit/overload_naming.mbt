@@ -152,19 +152,9 @@ fn overload_arg_names(args : Array[@parser.Argument]) -> Array[String] {
 }
 
 ///|
-fn has_name(names : Array[String], target : String) -> Bool {
-  for name in names {
-    if name == target {
-      return true
-    }
-  }
-  false
-}
-
-///|
 fn has_all_names(names : Array[String], required : Array[String]) -> Bool {
   for req in required {
-    if !has_name(names, req) {
+    if !names.contains(req) {
       return false
     }
   }
@@ -187,10 +177,10 @@ fn exact_names(names : Array[String], required : Array[String]) -> Bool {
 ///|
 fn match_condition(names : Array[String], condition : ArgMatch) -> Bool {
   match condition {
-    HasArg(target) => has_name(names, target)
+    HasArg(target) => names.contains(target)
     HasAnyArg(targets) => {
       for t in targets {
-        if has_name(names, t) {
+        if names.contains(t) {
           return true
         }
       }
@@ -219,7 +209,7 @@ fn overload_candidate_name(
 ) -> String {
   let names = overload_arg_names(args)
   for rule in overload_rules {
-    if has_name(rule.base_names, base_name) &&
+    if rule.base_names.contains(base_name) &&
       match_condition(names, rule.condition) {
       return resolve_name(base_name, rule.name)
     }

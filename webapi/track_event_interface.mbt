@@ -31,6 +31,20 @@ pub fn TrackEvent::new(
 }
 
 ///|
+pub(open) trait TTrackEventTrack {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TTrackEventTrack for VideoTrack with to_js(self : VideoTrack) -> JsValue = "%identity"
+
+///|
+pub impl TTrackEventTrack for AudioTrack with to_js(self : AudioTrack) -> JsValue = "%identity"
+
+///|
+pub impl TTrackEventTrack for TextTrack with to_js(self : TextTrack) -> JsValue = "%identity"
+
+///|
 #external
 pub type TrackEventTrack
 
@@ -54,20 +68,6 @@ pub fn[T : TTrackEventTrack] TrackEventTrack::from(
 
 ///|
 pub impl TTrackEventTrack for TrackEventTrack with to_js(self : TrackEventTrack) -> JsValue = "%identity"
-
-///|
-pub(open) trait TTrackEventTrack {
-  to_js(self : Self) -> JsValue
-}
-
-///|
-pub impl TTrackEventTrack for VideoTrack with to_js(self : VideoTrack) -> JsValue = "%identity"
-
-///|
-pub impl TTrackEventTrack for AudioTrack with to_js(self : AudioTrack) -> JsValue = "%identity"
-
-///|
-pub impl TTrackEventTrack for TextTrack with to_js(self : TextTrack) -> JsValue = "%identity"
 
 ///|
 /// [TrackEvent](https://developer.mozilla.org/en-US/docs/Web/API/TrackEvent) interface.

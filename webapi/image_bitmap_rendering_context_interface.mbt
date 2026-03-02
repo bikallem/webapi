@@ -26,6 +26,21 @@ pub fn[T : TImageBitmapRenderingContext] ImageBitmapRenderingContext::into(
 pub impl TImageBitmapRenderingContext for ImageBitmapRenderingContext
 
 ///|
+pub(open) trait TImageBitmapRenderingContextCanvas {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TImageBitmapRenderingContextCanvas for HTMLCanvasElement with to_js(
+  self : HTMLCanvasElement,
+) -> JsValue = "%identity"
+
+///|
+pub impl TImageBitmapRenderingContextCanvas for OffscreenCanvas with to_js(
+  self : OffscreenCanvas,
+) -> JsValue = "%identity"
+
+///|
 #external
 pub type ImageBitmapRenderingContextCanvas
 
@@ -54,21 +69,6 @@ pub fn[T : TImageBitmapRenderingContextCanvas] ImageBitmapRenderingContextCanvas
 ///|
 pub impl TImageBitmapRenderingContextCanvas for ImageBitmapRenderingContextCanvas with to_js(
   self : ImageBitmapRenderingContextCanvas,
-) -> JsValue = "%identity"
-
-///|
-pub(open) trait TImageBitmapRenderingContextCanvas {
-  to_js(self : Self) -> JsValue
-}
-
-///|
-pub impl TImageBitmapRenderingContextCanvas for HTMLCanvasElement with to_js(
-  self : HTMLCanvasElement,
-) -> JsValue = "%identity"
-
-///|
-pub impl TImageBitmapRenderingContextCanvas for OffscreenCanvas with to_js(
-  self : OffscreenCanvas,
 ) -> JsValue = "%identity"
 
 ///|

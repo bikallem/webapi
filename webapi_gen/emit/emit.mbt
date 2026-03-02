@@ -74,7 +74,6 @@ pub(all) struct CallbackArgEmit {
 ///|
 /// Dictionary getter argument emit representation
 pub(all) struct DictionaryGetterArg {
-  dict_name : String
   original_name : String // JS property name, e.g. "done"
   return_type : String // MoonBit return type, e.g. "Bool"
   is_optional : Bool // Whether the return is nullable

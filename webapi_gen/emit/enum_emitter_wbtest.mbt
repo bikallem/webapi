@@ -33,10 +33,9 @@ test "EnumEmitter emits enum with multiple values" {
   let idl =
     #|enum ScrollBehavior { "auto", "instant", "smooth" };
   let definitions = @parser.parse(idl)
-  let registry = @type_registry.TypeRegistry::new(definitions)
   let flattened = @partial_merged.merge_partials(definitions)
     |> @flattened_idl.flatten(ignore)
-  let emitter = EnumEmitter::{ idl: flattened, type_registry: registry }
+  let emitter = EnumEmitter::{ idl: flattened }
   let (Filename(filename), emits) = emitter.emit("ScrollBehavior")
   inspect(filename, content="scroll_behavior_enum.mbt")
   let multi = mbt_code_gen_multi(emits)
@@ -109,10 +108,9 @@ test "EnumEmitter emits enum with empty string value" {
   let idl =
     #|enum SelectionDirection { "forward", "backward", "none", "" };
   let definitions = @parser.parse(idl)
-  let registry = @type_registry.TypeRegistry::new(definitions)
   let flattened = @partial_merged.merge_partials(definitions)
     |> @flattened_idl.flatten(ignore)
-  let emitter = EnumEmitter::{ idl: flattened, type_registry: registry }
+  let emitter = EnumEmitter::{ idl: flattened }
   let (_filename, emits) = emitter.emit("SelectionDirection")
   let multi = mbt_code_gen_multi(emits)
   inspect(
@@ -188,10 +186,9 @@ test "EnumEmitter emits enum with dash-separated values" {
   let idl =
     #|enum ReferrerPolicy { "no-referrer", "no-referrer-when-downgrade", "origin" };
   let definitions = @parser.parse(idl)
-  let registry = @type_registry.TypeRegistry::new(definitions)
   let flattened = @partial_merged.merge_partials(definitions)
     |> @flattened_idl.flatten(ignore)
-  let emitter = EnumEmitter::{ idl: flattened, type_registry: registry }
+  let emitter = EnumEmitter::{ idl: flattened }
   let (_filename, emits) = emitter.emit("ReferrerPolicy")
   let multi = mbt_code_gen_multi(emits)
   inspect(

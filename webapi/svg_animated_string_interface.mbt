@@ -22,6 +22,19 @@ pub fn[T : TSVGAnimatedString] SVGAnimatedString::into(
 pub impl TSVGAnimatedString for SVGAnimatedString
 
 ///|
+pub(open) trait TSVGAnimatedStringBaseVal {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TSVGAnimatedStringBaseVal for String with to_js(self : String) -> JsValue = "%identity"
+
+///|
+pub impl TSVGAnimatedStringBaseVal for TrustedScriptURL with to_js(
+  self : TrustedScriptURL,
+) -> JsValue = "%identity"
+
+///|
 #external
 pub type SVGAnimatedStringBaseVal
 
@@ -48,19 +61,6 @@ pub fn[T : TSVGAnimatedStringBaseVal] SVGAnimatedStringBaseVal::from(
 ///|
 pub impl TSVGAnimatedStringBaseVal for SVGAnimatedStringBaseVal with to_js(
   self : SVGAnimatedStringBaseVal,
-) -> JsValue = "%identity"
-
-///|
-pub(open) trait TSVGAnimatedStringBaseVal {
-  to_js(self : Self) -> JsValue
-}
-
-///|
-pub impl TSVGAnimatedStringBaseVal for String with to_js(self : String) -> JsValue = "%identity"
-
-///|
-pub impl TSVGAnimatedStringBaseVal for TrustedScriptURL with to_js(
-  self : TrustedScriptURL,
 ) -> JsValue = "%identity"
 
 ///|

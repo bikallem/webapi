@@ -26,6 +26,26 @@ pub fn[T : TOffscreenCanvasRenderingContext2D] OffscreenCanvasRenderingContext2D
 pub impl TOffscreenCanvasRenderingContext2D for OffscreenCanvasRenderingContext2D
 
 ///|
+pub(open) trait TOffscreenCanvasRenderingContext2DStrokeStyle {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TOffscreenCanvasRenderingContext2DStrokeStyle for String with to_js(
+  self : String,
+) -> JsValue = "%identity"
+
+///|
+pub impl TOffscreenCanvasRenderingContext2DStrokeStyle for CanvasGradient with to_js(
+  self : CanvasGradient,
+) -> JsValue = "%identity"
+
+///|
+pub impl TOffscreenCanvasRenderingContext2DStrokeStyle for CanvasPattern with to_js(
+  self : CanvasPattern,
+) -> JsValue = "%identity"
+
+///|
 #external
 pub type OffscreenCanvasRenderingContext2DStrokeStyle
 
@@ -57,22 +77,22 @@ pub impl TOffscreenCanvasRenderingContext2DStrokeStyle for OffscreenCanvasRender
 ) -> JsValue = "%identity"
 
 ///|
-pub(open) trait TOffscreenCanvasRenderingContext2DStrokeStyle {
+pub(open) trait TOffscreenCanvasRenderingContext2DFillStyle {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TOffscreenCanvasRenderingContext2DStrokeStyle for String with to_js(
+pub impl TOffscreenCanvasRenderingContext2DFillStyle for String with to_js(
   self : String,
 ) -> JsValue = "%identity"
 
 ///|
-pub impl TOffscreenCanvasRenderingContext2DStrokeStyle for CanvasGradient with to_js(
+pub impl TOffscreenCanvasRenderingContext2DFillStyle for CanvasGradient with to_js(
   self : CanvasGradient,
 ) -> JsValue = "%identity"
 
 ///|
-pub impl TOffscreenCanvasRenderingContext2DStrokeStyle for CanvasPattern with to_js(
+pub impl TOffscreenCanvasRenderingContext2DFillStyle for CanvasPattern with to_js(
   self : CanvasPattern,
 ) -> JsValue = "%identity"
 
@@ -105,26 +125,6 @@ pub fn[T : TOffscreenCanvasRenderingContext2DFillStyle] OffscreenCanvasRendering
 ///|
 pub impl TOffscreenCanvasRenderingContext2DFillStyle for OffscreenCanvasRenderingContext2DFillStyle with to_js(
   self : OffscreenCanvasRenderingContext2DFillStyle,
-) -> JsValue = "%identity"
-
-///|
-pub(open) trait TOffscreenCanvasRenderingContext2DFillStyle {
-  to_js(self : Self) -> JsValue
-}
-
-///|
-pub impl TOffscreenCanvasRenderingContext2DFillStyle for String with to_js(
-  self : String,
-) -> JsValue = "%identity"
-
-///|
-pub impl TOffscreenCanvasRenderingContext2DFillStyle for CanvasGradient with to_js(
-  self : CanvasGradient,
-) -> JsValue = "%identity"
-
-///|
-pub impl TOffscreenCanvasRenderingContext2DFillStyle for CanvasPattern with to_js(
-  self : CanvasPattern,
 ) -> JsValue = "%identity"
 
 ///|

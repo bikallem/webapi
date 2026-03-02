@@ -379,11 +379,7 @@ fn collect_js_operations(
         )
       }
       SpecialOperation(op) => {
-        let base_name = match op.special {
-          Getter => "get"
-          Setter => "set"
-          Deleter => "delete_"
-        }
+        let base_name = op.special.base_name()
         let import_name = next_overload_name(
           base_name,
           op.arguments,

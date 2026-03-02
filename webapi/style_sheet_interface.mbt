@@ -20,6 +20,19 @@ pub fn[T : TStyleSheet] StyleSheet::into(self : StyleSheet) -> T = "%identity"
 pub impl TStyleSheet for StyleSheet
 
 ///|
+pub(open) trait TStyleSheetOwnerNode {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TStyleSheetOwnerNode for Element with to_js(self : Element) -> JsValue = "%identity"
+
+///|
+pub impl TStyleSheetOwnerNode for ProcessingInstruction with to_js(
+  self : ProcessingInstruction,
+) -> JsValue = "%identity"
+
+///|
 #external
 pub type StyleSheetOwnerNode
 
@@ -44,19 +57,6 @@ pub fn[T : TStyleSheetOwnerNode] StyleSheetOwnerNode::from(
 ///|
 pub impl TStyleSheetOwnerNode for StyleSheetOwnerNode with to_js(
   self : StyleSheetOwnerNode,
-) -> JsValue = "%identity"
-
-///|
-pub(open) trait TStyleSheetOwnerNode {
-  to_js(self : Self) -> JsValue
-}
-
-///|
-pub impl TStyleSheetOwnerNode for Element with to_js(self : Element) -> JsValue = "%identity"
-
-///|
-pub impl TStyleSheetOwnerNode for ProcessingInstruction with to_js(
-  self : ProcessingInstruction,
 ) -> JsValue = "%identity"
 
 ///|

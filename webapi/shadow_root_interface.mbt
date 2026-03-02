@@ -42,6 +42,17 @@ pub impl TShadowRootSetHTMLUnsafeHtml for TrustedHTML with to_js(
 pub impl TShadowRootSetHTMLUnsafeHtml for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
+pub(open) trait TShadowRootInnerHTML {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TShadowRootInnerHTML for TrustedHTML with to_js(self : TrustedHTML) -> JsValue = "%identity"
+
+///|
+pub impl TShadowRootInnerHTML for String with to_js(self : String) -> JsValue = "%identity"
+
+///|
 #external
 pub type ShadowRootInnerHTML
 
@@ -67,17 +78,6 @@ pub fn[T : TShadowRootInnerHTML] ShadowRootInnerHTML::from(
 pub impl TShadowRootInnerHTML for ShadowRootInnerHTML with to_js(
   self : ShadowRootInnerHTML,
 ) -> JsValue = "%identity"
-
-///|
-pub(open) trait TShadowRootInnerHTML {
-  to_js(self : Self) -> JsValue
-}
-
-///|
-pub impl TShadowRootInnerHTML for TrustedHTML with to_js(self : TrustedHTML) -> JsValue = "%identity"
-
-///|
-pub impl TShadowRootInnerHTML for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
 /// [ShadowRoot](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot) interface.

@@ -282,7 +282,7 @@ fn main {
     let enum_count = emit_and_write_multi(
       output_dir,
       "Enums",
-      @emit.EnumEmitter::{ idl: flattened, type_registry },
+      @emit.EnumEmitter::{ idl: flattened },
       flattened.enums.keys(),
       js_files,
       wasm_files,

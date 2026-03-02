@@ -215,6 +215,15 @@ pub(all) enum Special {
 } derive(Show, Eq, ToJson, Hash)
 
 ///|
+pub fn Special::base_name(self : Special) -> String {
+  match self {
+    Getter => "get"
+    Setter => "set"
+    Deleter => "delete_"
+  }
+}
+
+///|
 /// Constructor member
 pub(all) struct ConstructorMember {
   arguments : Array[Argument]

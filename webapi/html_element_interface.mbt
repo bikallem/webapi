@@ -34,6 +34,24 @@ pub fn HTMLElement::new() -> HTMLElement {
 }
 
 ///|
+pub(open) trait THTMLElementHidden {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl THTMLElementHidden for Bool with to_js(self : Bool) -> JsValue {
+  TJsValue::to_js(self)
+}
+
+///|
+pub impl THTMLElementHidden for Double with to_js(self : Double) -> JsValue {
+  TJsValue::to_js(self)
+}
+
+///|
+pub impl THTMLElementHidden for String with to_js(self : String) -> JsValue = "%identity"
+
+///|
 #external
 pub type HTMLElementHidden
 
@@ -59,24 +77,6 @@ pub fn[T : THTMLElementHidden] HTMLElementHidden::from(
 pub impl THTMLElementHidden for HTMLElementHidden with to_js(
   self : HTMLElementHidden,
 ) -> JsValue = "%identity"
-
-///|
-pub(open) trait THTMLElementHidden {
-  to_js(self : Self) -> JsValue
-}
-
-///|
-pub impl THTMLElementHidden for Bool with to_js(self : Bool) -> JsValue {
-  TJsValue::to_js(self)
-}
-
-///|
-pub impl THTMLElementHidden for Double with to_js(self : Double) -> JsValue {
-  TJsValue::to_js(self)
-}
-
-///|
-pub impl THTMLElementHidden for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
 pub(open) trait THTMLElementTogglePopoverOptions {

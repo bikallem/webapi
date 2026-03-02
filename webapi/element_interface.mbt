@@ -65,6 +65,17 @@ pub impl TElementSetHTMLUnsafeHtml for TrustedHTML with to_js(
 pub impl TElementSetHTMLUnsafeHtml for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
+pub(open) trait TElementInnerHTML {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TElementInnerHTML for TrustedHTML with to_js(self : TrustedHTML) -> JsValue = "%identity"
+
+///|
+pub impl TElementInnerHTML for String with to_js(self : String) -> JsValue = "%identity"
+
+///|
 #external
 pub type ElementInnerHTML
 
@@ -92,15 +103,15 @@ pub impl TElementInnerHTML for ElementInnerHTML with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-pub(open) trait TElementInnerHTML {
+pub(open) trait TElementOuterHTML {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TElementInnerHTML for TrustedHTML with to_js(self : TrustedHTML) -> JsValue = "%identity"
+pub impl TElementOuterHTML for TrustedHTML with to_js(self : TrustedHTML) -> JsValue = "%identity"
 
 ///|
-pub impl TElementInnerHTML for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TElementOuterHTML for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
 #external
@@ -128,17 +139,6 @@ pub fn[T : TElementOuterHTML] ElementOuterHTML::from(
 pub impl TElementOuterHTML for ElementOuterHTML with to_js(
   self : ElementOuterHTML,
 ) -> JsValue = "%identity"
-
-///|
-pub(open) trait TElementOuterHTML {
-  to_js(self : Self) -> JsValue
-}
-
-///|
-pub impl TElementOuterHTML for TrustedHTML with to_js(self : TrustedHTML) -> JsValue = "%identity"
-
-///|
-pub impl TElementOuterHTML for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
 pub(open) trait TElementInsertAdjacentHTMLString {

@@ -43,7 +43,6 @@ pub impl Emitter for DictionaryEmitter with emit(
     emit_union_return_type(mbt_type, emits)
     let return_type_name = mbt_type.name()
     getter_args.push(DictionaryGetterArg::{
-      dict_name: dict.name,
       original_name: mem.name,
       return_type: return_type_name,
       is_optional: !mem.required,

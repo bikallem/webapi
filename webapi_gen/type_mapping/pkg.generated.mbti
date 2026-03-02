@@ -75,6 +75,7 @@ pub(all) struct MethodReturn {
   type_ : ArgMbtType
   optional : Bool
 }
+pub fn MethodReturn::is_void(Self) -> Bool
 pub fn MethodReturn::type_name(Self) -> String
 pub impl Show for MethodReturn
 pub impl ToJson for MethodReturn

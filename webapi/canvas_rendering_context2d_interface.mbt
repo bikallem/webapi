@@ -24,6 +24,26 @@ pub fn[T : TCanvasRenderingContext2D] CanvasRenderingContext2D::into(
 pub impl TCanvasRenderingContext2D for CanvasRenderingContext2D
 
 ///|
+pub(open) trait TCanvasRenderingContext2DStrokeStyle {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TCanvasRenderingContext2DStrokeStyle for String with to_js(
+  self : String,
+) -> JsValue = "%identity"
+
+///|
+pub impl TCanvasRenderingContext2DStrokeStyle for CanvasGradient with to_js(
+  self : CanvasGradient,
+) -> JsValue = "%identity"
+
+///|
+pub impl TCanvasRenderingContext2DStrokeStyle for CanvasPattern with to_js(
+  self : CanvasPattern,
+) -> JsValue = "%identity"
+
+///|
 #external
 pub type CanvasRenderingContext2DStrokeStyle
 
@@ -55,22 +75,20 @@ pub impl TCanvasRenderingContext2DStrokeStyle for CanvasRenderingContext2DStroke
 ) -> JsValue = "%identity"
 
 ///|
-pub(open) trait TCanvasRenderingContext2DStrokeStyle {
+pub(open) trait TCanvasRenderingContext2DFillStyle {
   to_js(self : Self) -> JsValue
 }
 
 ///|
-pub impl TCanvasRenderingContext2DStrokeStyle for String with to_js(
-  self : String,
-) -> JsValue = "%identity"
+pub impl TCanvasRenderingContext2DFillStyle for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
-pub impl TCanvasRenderingContext2DStrokeStyle for CanvasGradient with to_js(
+pub impl TCanvasRenderingContext2DFillStyle for CanvasGradient with to_js(
   self : CanvasGradient,
 ) -> JsValue = "%identity"
 
 ///|
-pub impl TCanvasRenderingContext2DStrokeStyle for CanvasPattern with to_js(
+pub impl TCanvasRenderingContext2DFillStyle for CanvasPattern with to_js(
   self : CanvasPattern,
 ) -> JsValue = "%identity"
 
@@ -103,24 +121,6 @@ pub fn[T : TCanvasRenderingContext2DFillStyle] CanvasRenderingContext2DFillStyle
 ///|
 pub impl TCanvasRenderingContext2DFillStyle for CanvasRenderingContext2DFillStyle with to_js(
   self : CanvasRenderingContext2DFillStyle,
-) -> JsValue = "%identity"
-
-///|
-pub(open) trait TCanvasRenderingContext2DFillStyle {
-  to_js(self : Self) -> JsValue
-}
-
-///|
-pub impl TCanvasRenderingContext2DFillStyle for String with to_js(self : String) -> JsValue = "%identity"
-
-///|
-pub impl TCanvasRenderingContext2DFillStyle for CanvasGradient with to_js(
-  self : CanvasGradient,
-) -> JsValue = "%identity"
-
-///|
-pub impl TCanvasRenderingContext2DFillStyle for CanvasPattern with to_js(
-  self : CanvasPattern,
 ) -> JsValue = "%identity"
 
 ///|

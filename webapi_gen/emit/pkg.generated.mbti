@@ -63,7 +63,6 @@ pub(all) struct DictionaryEmitter {
 pub impl Emitter for DictionaryEmitter
 
 pub(all) struct DictionaryGetterArg {
-  dict_name : String
   original_name : String
   return_type : String
   is_optional : Bool
@@ -103,7 +102,6 @@ pub impl ToJson for Emit
 
 pub(all) struct EnumEmitter {
   idl : @flattened_idl.FlattenedIdl
-  type_registry : @type_registry.TypeRegistry
 }
 pub impl Emitter for EnumEmitter
 

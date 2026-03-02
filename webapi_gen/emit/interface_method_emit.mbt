@@ -61,14 +61,14 @@ impl InterfaceMethodEmit for RegularMethodEmit with ffi_emit_js(
   let ffi_argnames = self.ffi_argnames()
   let ffi_args = make_ffi_args(ffi_argnames)
   let ffi_js_call_args = make_js_call_args(self.args[1:])
-  let ret_name = self.return_type.type_.name()
+
   emit_js_ffi_with_return(
     ffi_name,
     ffi_args,
     ffi_argnames,
     self.return_type.type_name(),
     is_optional=self.return_type.optional,
-    is_void=ret_name == "Unit",
+    is_void=self.return_type.is_void(),
     is_enum=self.return_type.type_.is_enum(),
     "obj.\{self.webidl_name}(\{ffi_js_call_args})",
   )
@@ -82,14 +82,14 @@ impl InterfaceMethodEmit for RegularMethodEmit with ffi_emit_wasm(
   let ffi_name = self.ffi_name()
   let ffi_argnames = self.ffi_argnames()
   let ffi_args = make_ffi_args(ffi_argnames)
-  let ret_name = self.return_type.type_.name()
+
   emit_wasm_ffi_with_return(
     ffi_name,
     ffi_args,
     ffi_argnames,
     self.return_type.type_name(),
     is_optional=self.return_type.optional,
-    is_void=ret_name == "Unit",
+    is_void=self.return_type.is_void(),
     is_string=self.return_type.type_.is_string(),
     is_enum=self.return_type.type_.is_enum(),
     is_valid_stub=is_wasm_valid_stub_type(self.return_type.type_),
@@ -174,17 +174,17 @@ impl InterfaceMethodEmit for StaticMethodEmit with ffi_emit_js(
   self : StaticMethodEmit,
 ) -> Code {
   let ffi_name = self.ffi_name()
-  let ffi_argnames = self.args.map(arg => arg.name)
+  let ffi_argnames = make_ffi_argnames(self.args)
   let ffi_args = make_ffi_args(ffi_argnames)
   let ffi_js_args = make_js_call_args(self.args[:])
-  let ret_name = self.return_type.type_.name()
+
   emit_js_ffi_with_return(
     ffi_name,
     ffi_args,
     ffi_argnames,
     self.return_type.type_name(),
     is_optional=self.return_type.optional,
-    is_void=ret_name == "Unit",
+    is_void=self.return_type.is_void(),
     is_enum=self.return_type.type_.is_enum(),
     "\{self.js_name}.\{self.webidl_name}(\{ffi_js_args})",
   )
@@ -196,16 +196,16 @@ impl InterfaceMethodEmit for StaticMethodEmit with ffi_emit_wasm(
   module_name : String,
 ) -> Code {
   let ffi_name = self.ffi_name()
-  let ffi_argnames = self.args.map(arg => arg.name)
+  let ffi_argnames = make_ffi_argnames(self.args)
   let ffi_args = make_ffi_args(ffi_argnames)
-  let ret_name = self.return_type.type_.name()
+
   emit_wasm_ffi_with_return(
     ffi_name,
     ffi_args,
     ffi_argnames,
     self.return_type.type_name(),
     is_optional=self.return_type.optional,
-    is_void=ret_name == "Unit",
+    is_void=self.return_type.is_void(),
     is_string=self.return_type.type_.is_string(),
     is_enum=self.return_type.type_.is_enum(),
     is_valid_stub=is_wasm_valid_stub_type(self.return_type.type_),
@@ -555,7 +555,7 @@ impl InterfaceMethodEmit for SpecialOperationMethodEmit with ffi_emit_js(
   let ffi_name = self.ffi_name()
   let ffi_argnames = self.ffi_argnames()
   let ffi_args = make_ffi_args(ffi_argnames)
-  let ret_name = self.return_type.type_.name()
+
   // Build bracket-notation JS expression
   let js_expr = match self.special {
     Getter => "obj[\{ffi_argnames[1]}]"
@@ -568,7 +568,7 @@ impl InterfaceMethodEmit for SpecialOperationMethodEmit with ffi_emit_js(
     ffi_argnames,
     self.return_type.type_name(),
     is_optional=self.return_type.optional,
-    is_void=ret_name == "Unit",
+    is_void=self.return_type.is_void(),
     is_enum=self.return_type.type_.is_enum(),
     js_expr,
   )
@@ -582,14 +582,14 @@ impl InterfaceMethodEmit for SpecialOperationMethodEmit with ffi_emit_wasm(
   let ffi_name = self.ffi_name()
   let ffi_argnames = self.ffi_argnames()
   let ffi_args = make_ffi_args(ffi_argnames)
-  let ret_name = self.return_type.type_.name()
+
   emit_wasm_ffi_with_return(
     ffi_name,
     ffi_args,
     ffi_argnames,
     self.return_type.type_name(),
     is_optional=self.return_type.optional,
-    is_void=ret_name == "Unit",
+    is_void=self.return_type.is_void(),
     is_string=self.return_type.type_.is_string(),
     is_enum=self.return_type.type_.is_enum(),
     is_valid_stub=is_wasm_valid_stub_type(self.return_type.type_),

@@ -39,6 +39,17 @@ pub fn HTMLIFrameElement::new() -> HTMLIFrameElement {
 }
 
 ///|
+pub(open) trait THTMLIFrameElementSrcdoc {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl THTMLIFrameElementSrcdoc for TrustedHTML with to_js(self : TrustedHTML) -> JsValue = "%identity"
+
+///|
+pub impl THTMLIFrameElementSrcdoc for String with to_js(self : String) -> JsValue = "%identity"
+
+///|
 #external
 pub type HTMLIFrameElementSrcdoc
 
@@ -66,17 +77,6 @@ pub fn[T : THTMLIFrameElementSrcdoc] HTMLIFrameElementSrcdoc::from(
 pub impl THTMLIFrameElementSrcdoc for HTMLIFrameElementSrcdoc with to_js(
   self : HTMLIFrameElementSrcdoc,
 ) -> JsValue = "%identity"
-
-///|
-pub(open) trait THTMLIFrameElementSrcdoc {
-  to_js(self : Self) -> JsValue
-}
-
-///|
-pub impl THTMLIFrameElementSrcdoc for TrustedHTML with to_js(self : TrustedHTML) -> JsValue = "%identity"
-
-///|
-pub impl THTMLIFrameElementSrcdoc for String with to_js(self : String) -> JsValue = "%identity"
 
 ///|
 /// [HTMLIFrameElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement) interface.

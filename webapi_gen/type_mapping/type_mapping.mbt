@@ -68,6 +68,11 @@ pub(all) struct MethodReturn {
 } derive(Show, ToJson)
 
 ///|
+pub fn MethodReturn::is_void(self : MethodReturn) -> Bool {
+  self.type_.name() == "Unit"
+}
+
+///|
 pub fn MethodReturn::type_name(self : MethodReturn) -> String {
   if self.optional {
     "\{self.type_.name()}?"

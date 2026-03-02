@@ -1,7 +1,6 @@
 ///|
 pub(all) struct EnumEmitter {
   idl : @flattened_idl.FlattenedIdl
-  type_registry : @type_registry.TypeRegistry
 }
 
 ///|

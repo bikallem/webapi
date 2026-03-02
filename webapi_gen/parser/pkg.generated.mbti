@@ -404,6 +404,7 @@ pub(all) enum Special {
   Setter
   Deleter
 }
+pub fn Special::base_name(Self) -> String
 pub impl Eq for Special
 pub impl Hash for Special
 pub impl Show for Special

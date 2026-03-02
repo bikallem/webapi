@@ -20,6 +20,17 @@ pub fn[T : TIDBCursor] IDBCursor::into(self : IDBCursor) -> T = "%identity"
 pub impl TIDBCursor for IDBCursor
 
 ///|
+pub(open) trait TIDBCursorSource {
+  to_js(self : Self) -> JsValue
+}
+
+///|
+pub impl TIDBCursorSource for IDBObjectStore with to_js(self : IDBObjectStore) -> JsValue = "%identity"
+
+///|
+pub impl TIDBCursorSource for IDBIndex with to_js(self : IDBIndex) -> JsValue = "%identity"
+
+///|
 #external
 pub type IDBCursorSource
 
@@ -43,17 +54,6 @@ pub fn[T : TIDBCursorSource] IDBCursorSource::from(
 
 ///|
 pub impl TIDBCursorSource for IDBCursorSource with to_js(self : IDBCursorSource) -> JsValue = "%identity"
-
-///|
-pub(open) trait TIDBCursorSource {
-  to_js(self : Self) -> JsValue
-}
-
-///|
-pub impl TIDBCursorSource for IDBObjectStore with to_js(self : IDBObjectStore) -> JsValue = "%identity"
-
-///|
-pub impl TIDBCursorSource for IDBIndex with to_js(self : IDBIndex) -> JsValue = "%identity"
 
 ///|
 /// [IDBCursor](https://developer.mozilla.org/en-US/docs/Web/API/IDBCursor) interface.

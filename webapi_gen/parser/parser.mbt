@@ -466,7 +466,7 @@ fn Parser::parse_attribute_body(
   is_inherit : Bool,
 ) -> AttributeMember raise ParseError {
   let type_with_ea = self.parse_type_with_extended_attributes()
-  let name = self.parse_attribute_name()
+  let name = self.parse_argument_name()
   self.skip(TK_SEMICOLON)
   { type_: type_with_ea.type_, name, is_readonly, static_, is_inherit }
 }
@@ -848,18 +848,6 @@ fn Parser::parse_argument_rest(self : Parser) -> Argument raise ParseError {
       variadic,
       default_value: None,
     }
-  }
-}
-
-///|
-fn Parser::parse_attribute_name(self : Parser) -> String raise ParseError {
-  match self.peek_kind() {
-    TK_IDENTIFIER => self.expect_identifier()
-    _ =>
-      match self.try_argument_name_keyword() {
-        Some(name) => name
-        None => self.expect_identifier()
-      }
   }
 }
 
