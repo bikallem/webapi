@@ -435,3 +435,32 @@ test "mbt_code_gen_multi adapts wasm callback Array return with JsArray" {
     ),
   )
 }
+
+///|
+test "extract_trait_ref extracts simple trait ref" {
+  inspect(
+    extract_trait_ref("&TFoo"),
+    content=(
+      #|Some("&TFoo")
+    ),
+  )
+}
+
+///|
+test "extract_trait_ref extracts trait ref from Array" {
+  inspect(
+    extract_trait_ref("Array[&TPath2DRoundRectRadii2]"),
+    content=(
+      #|Some("&TPath2DRoundRectRadii2")
+    ),
+  )
+}
+
+///|
+test "extract_trait_ref returns None for concrete types" {
+  inspect(extract_trait_ref("String"), content="None")
+  inspect(extract_trait_ref("Bool"), content="None")
+  inspect(extract_trait_ref("Double"), content="None")
+  inspect(extract_trait_ref("DOMPointInit"), content="None")
+  inspect(extract_trait_ref("Array[String]"), content="None")
+}
