@@ -15,7 +15,6 @@
     "uievents"
   ],
   "description": "Moonbit browser WebApi - dom, fetch, html, xhr, url, svg, uievents and more",
-  "preferred-target": "js",
   "deps": {
     "moonbitlang/async": "0.16.6"
   }
