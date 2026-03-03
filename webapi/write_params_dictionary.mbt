@@ -14,18 +14,16 @@ pub impl TJsValue for WriteParams with to_js(self : WriteParams) -> JsValue = "%
 pub impl FromJsAny for WriteParams with from_js_any(value : JsAny) -> WriteParams = "%identity"
 
 ///|
-pub(open) trait TWriteParamsNewData {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TWriteParamsNewData: TJsValue {}
 
 ///|
-pub impl TWriteParamsNewData for BufferSource with to_js(self : BufferSource) -> JsValue = "%identity"
+pub impl TWriteParamsNewData for BufferSource
 
 ///|
-pub impl TWriteParamsNewData for Blob with to_js(self : Blob) -> JsValue = "%identity"
+pub impl TWriteParamsNewData for Blob
 
 ///|
-pub impl TWriteParamsNewData for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TWriteParamsNewData for String
 
 ///|
 pub fn WriteParams::new(
@@ -51,18 +49,16 @@ pub fn WriteParams::empty() -> WriteParams {
 }
 
 ///|
-pub(open) trait TWriteParamsGetData {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TWriteParamsGetData: TJsValue {}
 
 ///|
-pub impl TWriteParamsGetData for BufferSource with to_js(self : BufferSource) -> JsValue = "%identity"
+pub impl TWriteParamsGetData for BufferSource
 
 ///|
-pub impl TWriteParamsGetData for Blob with to_js(self : Blob) -> JsValue = "%identity"
+pub impl TWriteParamsGetData for Blob
 
 ///|
-pub impl TWriteParamsGetData for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TWriteParamsGetData for String
 
 ///|
 #external
@@ -87,9 +83,7 @@ pub fn[T : TWriteParamsGetData] WriteParamsGetData::from(
 ) -> WriteParamsGetData = "%identity"
 
 ///|
-pub impl TWriteParamsGetData for WriteParamsGetData with to_js(
-  self : WriteParamsGetData,
-) -> JsValue = "%identity"
+pub impl TWriteParamsGetData for WriteParamsGetData
 
 ///|
 pub fn WriteParams::type_(self : WriteParams) -> WriteCommandType {

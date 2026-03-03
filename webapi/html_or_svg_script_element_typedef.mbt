@@ -16,9 +16,7 @@ pub impl TJsValue for HTMLOrSVGScriptElement with to_js(
 pub impl FromJsAny for HTMLOrSVGScriptElement with from_js_any(value : JsAny) -> HTMLOrSVGScriptElement = "%identity"
 
 ///|
-pub(open) trait THTMLOrSVGScriptElement {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait THTMLOrSVGScriptElement: TJsValue {}
 
 ///|
 pub fn[T : THTMLOrSVGScriptElement + FromJsAny] HTMLOrSVGScriptElement::into(
@@ -33,16 +31,10 @@ pub fn[T : THTMLOrSVGScriptElement] HTMLOrSVGScriptElement::from(
 ) -> HTMLOrSVGScriptElement = "%identity"
 
 ///|
-pub impl THTMLOrSVGScriptElement for HTMLOrSVGScriptElement with to_js(
-  self : HTMLOrSVGScriptElement,
-) -> JsValue = "%identity"
+pub impl THTMLOrSVGScriptElement for HTMLOrSVGScriptElement
 
 ///|
-pub impl THTMLOrSVGScriptElement for HTMLScriptElement with to_js(
-  self : HTMLScriptElement,
-) -> JsValue = "%identity"
+pub impl THTMLOrSVGScriptElement for HTMLScriptElement
 
 ///|
-pub impl THTMLOrSVGScriptElement for SVGScriptElement with to_js(
-  self : SVGScriptElement,
-) -> JsValue = "%identity"
+pub impl THTMLOrSVGScriptElement for SVGScriptElement

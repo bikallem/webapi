@@ -20,15 +20,13 @@ pub fn[T : TCache] Cache::into(self : Cache) -> T = "%identity"
 pub impl TCache for Cache
 
 ///|
-pub(open) trait TCacheMatch {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TCacheMatch: TJsValue {}
 
 ///|
-pub impl TCacheMatch for Response with to_js(self : Response) -> JsValue = "%identity"
+pub impl TCacheMatch for Response
 
 ///|
-pub impl TCacheMatch for JsUndefined with to_js(self : JsUndefined) -> JsValue = "%identity"
+pub impl TCacheMatch for JsUndefined
 
 ///|
 /// [Cache](https://developer.mozilla.org/en-US/docs/Web/API/Cache) interface.

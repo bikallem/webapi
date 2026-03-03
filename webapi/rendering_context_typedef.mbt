@@ -14,9 +14,7 @@ pub impl TJsValue for RenderingContext with to_js(self : RenderingContext) -> Js
 pub impl FromJsAny for RenderingContext with from_js_any(value : JsAny) -> RenderingContext = "%identity"
 
 ///|
-pub(open) trait TRenderingContext {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TRenderingContext: TJsValue {}
 
 ///|
 pub fn[T : TRenderingContext + FromJsAny] RenderingContext::into(
@@ -31,31 +29,19 @@ pub fn[T : TRenderingContext] RenderingContext::from(
 ) -> RenderingContext = "%identity"
 
 ///|
-pub impl TRenderingContext for RenderingContext with to_js(
-  self : RenderingContext,
-) -> JsValue = "%identity"
+pub impl TRenderingContext for RenderingContext
 
 ///|
-pub impl TRenderingContext for CanvasRenderingContext2D with to_js(
-  self : CanvasRenderingContext2D,
-) -> JsValue = "%identity"
+pub impl TRenderingContext for CanvasRenderingContext2D
 
 ///|
-pub impl TRenderingContext for ImageBitmapRenderingContext with to_js(
-  self : ImageBitmapRenderingContext,
-) -> JsValue = "%identity"
+pub impl TRenderingContext for ImageBitmapRenderingContext
 
 ///|
-pub impl TRenderingContext for WebGLRenderingContext with to_js(
-  self : WebGLRenderingContext,
-) -> JsValue = "%identity"
+pub impl TRenderingContext for WebGLRenderingContext
 
 ///|
-pub impl TRenderingContext for WebGL2RenderingContext with to_js(
-  self : WebGL2RenderingContext,
-) -> JsValue = "%identity"
+pub impl TRenderingContext for WebGL2RenderingContext
 
 ///|
-pub impl TRenderingContext for GPUCanvasContext with to_js(
-  self : GPUCanvasContext,
-) -> JsValue = "%identity"
+pub impl TRenderingContext for GPUCanvasContext

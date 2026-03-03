@@ -37,15 +37,13 @@ pub fn HTMLSlotElement::new() -> HTMLSlotElement {
 }
 
 ///|
-pub(open) trait THTMLSlotElementAssignNodes {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait THTMLSlotElementAssignNodes: TJsValue {}
 
 ///|
-pub impl THTMLSlotElementAssignNodes for Element with to_js(self : Element) -> JsValue = "%identity"
+pub impl THTMLSlotElementAssignNodes for Element
 
 ///|
-pub impl THTMLSlotElementAssignNodes for Text with to_js(self : Text) -> JsValue = "%identity"
+pub impl THTMLSlotElementAssignNodes for Text
 
 ///|
 /// [HTMLSlotElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement) interface.

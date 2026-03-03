@@ -280,13 +280,11 @@ test "DictionaryEmitter does not emit duplicate commas for optional union args" 
       #|
       #|pub impl FromJsAny for TestDict with from_js_any(value : JsAny) -> TestDict = "%identity"
       #|
-      #|pub(open) trait TTestDictNewHeaders {
-      #|  to_js(self : Self) -> JsValue
-      #|}
+      #|pub(open) trait TTestDictNewHeaders : TJsValue {}
       #|
-      #|pub impl TTestDictNewHeaders for String with to_js(self : String) -> JsValue = "%identity"
+      #|pub impl TTestDictNewHeaders for String
       #|
-      #|pub impl TTestDictNewHeaders for Int with to_js(self : Int) -> JsValue { TJsValue::to_js(self) }
+      #|pub impl TTestDictNewHeaders for Int
       #|
       #|pub fn TestDict::new(headers? : &TTestDictNewHeaders, 
       #|method_? : String) -> TestDict {
@@ -298,13 +296,11 @@ test "DictionaryEmitter does not emit duplicate commas for optional union args" 
       #|
       #|pub fn TestDict::empty() -> TestDict { test_dict_empty_ffi() }
       #|
-      #|pub(open) trait TTestDictGetHeaders {
-      #|  to_js(self : Self) -> JsValue
-      #|}
+      #|pub(open) trait TTestDictGetHeaders : TJsValue {}
       #|
-      #|pub impl TTestDictGetHeaders for String with to_js(self : String) -> JsValue = "%identity"
+      #|pub impl TTestDictGetHeaders for String
       #|
-      #|pub impl TTestDictGetHeaders for Int with to_js(self : Int) -> JsValue { TJsValue::to_js(self) }
+      #|pub impl TTestDictGetHeaders for Int
       #|
       #|#external
       #|pub type TestDictGetHeaders
@@ -319,7 +315,7 @@ test "DictionaryEmitter does not emit duplicate commas for optional union args" 
       #|
       #|pub fn[T : TTestDictGetHeaders] TestDictGetHeaders::from(value : T) -> TestDictGetHeaders = "%identity"
       #|
-      #|pub impl TTestDictGetHeaders for TestDictGetHeaders with to_js(self : TestDictGetHeaders) -> JsValue = "%identity"
+      #|pub impl TTestDictGetHeaders for TestDictGetHeaders
       #|
       #|pub fn TestDict::headers(self : TestDict) -> TestDictGetHeaders? {
       #|  test_dict_get_headers_ffi(TJsValue::to_js(self)).to_option()

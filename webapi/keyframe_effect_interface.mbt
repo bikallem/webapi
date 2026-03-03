@@ -23,19 +23,13 @@ pub impl TKeyframeEffect for KeyframeEffect
 pub impl TAnimationEffect for KeyframeEffect
 
 ///|
-pub(open) trait TKeyframeEffectNewOptions {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TKeyframeEffectNewOptions: TJsValue {}
 
 ///|
-pub impl TKeyframeEffectNewOptions for Double with to_js(self : Double) -> JsValue {
-  TJsValue::to_js(self)
-}
+pub impl TKeyframeEffectNewOptions for Double
 
 ///|
-pub impl TKeyframeEffectNewOptions for KeyframeEffectOptions with to_js(
-  self : KeyframeEffectOptions,
-) -> JsValue = "%identity"
+pub impl TKeyframeEffectNewOptions for KeyframeEffectOptions
 
 ///|
 pub fn KeyframeEffect::new(

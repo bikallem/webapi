@@ -16,17 +16,13 @@ pub impl TJsValue for OptionalEffectTiming with to_js(
 pub impl FromJsAny for OptionalEffectTiming with from_js_any(value : JsAny) -> OptionalEffectTiming = "%identity"
 
 ///|
-pub(open) trait TOptionalEffectTimingNewDuration {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TOptionalEffectTimingNewDuration: TJsValue {}
 
 ///|
-pub impl TOptionalEffectTimingNewDuration for Double with to_js(self : Double) -> JsValue {
-  TJsValue::to_js(self)
-}
+pub impl TOptionalEffectTimingNewDuration for Double
 
 ///|
-pub impl TOptionalEffectTimingNewDuration for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TOptionalEffectTimingNewDuration for String
 
 ///|
 pub fn OptionalEffectTiming::new(
@@ -60,17 +56,13 @@ pub fn OptionalEffectTiming::empty() -> OptionalEffectTiming {
 }
 
 ///|
-pub(open) trait TOptionalEffectTimingGetDuration {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TOptionalEffectTimingGetDuration: TJsValue {}
 
 ///|
-pub impl TOptionalEffectTimingGetDuration for Double with to_js(self : Double) -> JsValue {
-  TJsValue::to_js(self)
-}
+pub impl TOptionalEffectTimingGetDuration for Double
 
 ///|
-pub impl TOptionalEffectTimingGetDuration for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TOptionalEffectTimingGetDuration for String
 
 ///|
 #external
@@ -99,9 +91,7 @@ pub fn[T : TOptionalEffectTimingGetDuration] OptionalEffectTimingGetDuration::fr
 ) -> OptionalEffectTimingGetDuration = "%identity"
 
 ///|
-pub impl TOptionalEffectTimingGetDuration for OptionalEffectTimingGetDuration with to_js(
-  self : OptionalEffectTimingGetDuration,
-) -> JsValue = "%identity"
+pub impl TOptionalEffectTimingGetDuration for OptionalEffectTimingGetDuration
 
 ///|
 pub fn OptionalEffectTiming::delay(self : OptionalEffectTiming) -> Double? {

@@ -26,37 +26,31 @@ pub impl TNode for CharacterData
 pub impl TEventTarget for CharacterData
 
 ///|
-pub(open) trait TCharacterDataBeforeNodes {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TCharacterDataBeforeNodes: TJsValue {}
 
 ///|
-pub impl TCharacterDataBeforeNodes for Node with to_js(self : Node) -> JsValue = "%identity"
+pub impl TCharacterDataBeforeNodes for Node
 
 ///|
-pub impl TCharacterDataBeforeNodes for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TCharacterDataBeforeNodes for String
 
 ///|
-pub(open) trait TCharacterDataAfterNodes {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TCharacterDataAfterNodes: TJsValue {}
 
 ///|
-pub impl TCharacterDataAfterNodes for Node with to_js(self : Node) -> JsValue = "%identity"
+pub impl TCharacterDataAfterNodes for Node
 
 ///|
-pub impl TCharacterDataAfterNodes for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TCharacterDataAfterNodes for String
 
 ///|
-pub(open) trait TCharacterDataReplaceWithNodes {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TCharacterDataReplaceWithNodes: TJsValue {}
 
 ///|
-pub impl TCharacterDataReplaceWithNodes for Node with to_js(self : Node) -> JsValue = "%identity"
+pub impl TCharacterDataReplaceWithNodes for Node
 
 ///|
-pub impl TCharacterDataReplaceWithNodes for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TCharacterDataReplaceWithNodes for String
 
 ///|
 /// [CharacterData](https://developer.mozilla.org/en-US/docs/Web/API/CharacterData) interface.

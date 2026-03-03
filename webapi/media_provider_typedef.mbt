@@ -14,9 +14,7 @@ pub impl TJsValue for MediaProvider with to_js(self : MediaProvider) -> JsValue 
 pub impl FromJsAny for MediaProvider with from_js_any(value : JsAny) -> MediaProvider = "%identity"
 
 ///|
-pub(open) trait TMediaProvider {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TMediaProvider: TJsValue {}
 
 ///|
 pub fn[T : TMediaProvider + FromJsAny] MediaProvider::into(
@@ -29,13 +27,13 @@ pub fn[T : TMediaProvider + FromJsAny] MediaProvider::into(
 pub fn[T : TMediaProvider] MediaProvider::from(value : T) -> MediaProvider = "%identity"
 
 ///|
-pub impl TMediaProvider for MediaProvider with to_js(self : MediaProvider) -> JsValue = "%identity"
+pub impl TMediaProvider for MediaProvider
 
 ///|
-pub impl TMediaProvider for MediaStream with to_js(self : MediaStream) -> JsValue = "%identity"
+pub impl TMediaProvider for MediaStream
 
 ///|
-pub impl TMediaProvider for MediaSource with to_js(self : MediaSource) -> JsValue = "%identity"
+pub impl TMediaProvider for MediaSource
 
 ///|
-pub impl TMediaProvider for Blob with to_js(self : Blob) -> JsValue = "%identity"
+pub impl TMediaProvider for Blob

@@ -14,9 +14,7 @@ pub impl TJsValue for ImageDataArray with to_js(self : ImageDataArray) -> JsValu
 pub impl FromJsAny for ImageDataArray with from_js_any(value : JsAny) -> ImageDataArray = "%identity"
 
 ///|
-pub(open) trait TImageDataArray {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TImageDataArray: TJsValue {}
 
 ///|
 pub fn[T : TImageDataArray + FromJsAny] ImageDataArray::into(
@@ -29,12 +27,10 @@ pub fn[T : TImageDataArray + FromJsAny] ImageDataArray::into(
 pub fn[T : TImageDataArray] ImageDataArray::from(value : T) -> ImageDataArray = "%identity"
 
 ///|
-pub impl TImageDataArray for ImageDataArray with to_js(self : ImageDataArray) -> JsValue = "%identity"
+pub impl TImageDataArray for ImageDataArray
 
 ///|
-pub impl TImageDataArray for Uint8ClampedArray with to_js(
-  self : Uint8ClampedArray,
-) -> JsValue = "%identity"
+pub impl TImageDataArray for Uint8ClampedArray
 
 ///|
-pub impl TImageDataArray for Float16Array with to_js(self : Float16Array) -> JsValue = "%identity"
+pub impl TImageDataArray for Float16Array

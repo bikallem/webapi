@@ -124,9 +124,7 @@ test "typedef emitter emits union typedef" {
       #|
       #|pub impl FromJsAny for MyUnion with from_js_any(value : JsAny) -> MyUnion = "%identity"
       #|
-      #|pub(open) trait TMyUnion {
-      #|  to_js(self : Self) -> JsValue
-      #|}
+      #|pub(open) trait TMyUnion : TJsValue {}
       #|
       #|pub fn[T : TMyUnion + FromJsAny] MyUnion::into(self : MyUnion) -> T {
       #|  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
@@ -134,13 +132,13 @@ test "typedef emitter emits union typedef" {
       #|
       #|pub fn[T : TMyUnion] MyUnion::from(value : T) -> MyUnion = "%identity"
       #|
-      #|pub impl TMyUnion for MyUnion with to_js(self : MyUnion) -> JsValue = "%identity"
+      #|pub impl TMyUnion for MyUnion
       #|
-      #|pub impl TMyUnion for String with to_js(self : String) -> JsValue = "%identity"
+      #|pub impl TMyUnion for String
       #|
-      #|pub impl TMyUnion for Function with to_js(self : Function) -> JsValue = "%identity"
+      #|pub impl TMyUnion for Function
       #|
-      #|pub impl TMyUnion for Unit with to_js(self : Unit) -> JsValue = "%identity"
+      #|pub impl TMyUnion for Unit
     ),
   )
   inspect(multi.js_ffi)
@@ -175,9 +173,7 @@ test "typedef emitter emit interface types as trait references in union typedef"
       #|
       #|pub impl FromJsAny for MyUnion with from_js_any(value : JsAny) -> MyUnion = "%identity"
       #|
-      #|pub(open) trait TMyUnion {
-      #|  to_js(self : Self) -> JsValue
-      #|}
+      #|pub(open) trait TMyUnion : TJsValue {}
       #|
       #|pub fn[T : TMyUnion + FromJsAny] MyUnion::into(self : MyUnion) -> T {
       #|  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
@@ -185,11 +181,11 @@ test "typedef emitter emit interface types as trait references in union typedef"
       #|
       #|pub fn[T : TMyUnion] MyUnion::from(value : T) -> MyUnion = "%identity"
       #|
-      #|pub impl TMyUnion for MyUnion with to_js(self : MyUnion) -> JsValue = "%identity"
+      #|pub impl TMyUnion for MyUnion
       #|
-      #|pub impl TMyUnion for MyInterface with to_js(self : MyInterface) -> JsValue = "%identity"
+      #|pub impl TMyUnion for MyInterface
       #|
-      #|pub impl TMyUnion for String with to_js(self : String) -> JsValue = "%identity"
+      #|pub impl TMyUnion for String
     ),
   )
   inspect(multi.js_ffi)

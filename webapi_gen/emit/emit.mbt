@@ -591,6 +591,38 @@ fn render_enum(name : String, variants : Array[EnumVariantEmit]) -> String {
 }
 
 ///|
+/// Extract a trait-object reference (&TSomeTrait) from a type string.
+/// Returns the &T reference if found in the type (e.g., "&TFoo" from "&TFoo"
+/// or "Array[&TFoo]"), None otherwise.
+fn extract_trait_ref(type_name : String) -> String? {
+  // Find the position of "&T" in the string
+  let mut start = -1
+  for i = 0; i < type_name.length() - 1; i = i + 1 {
+    if type_name[i] == '&' && type_name[i + 1] == 'T' {
+      start = i
+      break
+    }
+  }
+  if start < 0 {
+    return None
+  }
+  // Find the end of the trait name: alphanumeric characters after "&T"
+  let mut end = start + 2
+  while end < type_name.length() {
+    let c = type_name[end]
+    if (c >= 'A' && c <= 'Z') ||
+      (c >= 'a' && c <= 'z') ||
+      (c >= '0' && c <= '9') ||
+      c == '_' {
+      end = end + 1
+    } else {
+      break
+    }
+  }
+  Some(type_name[start:end].to_string())
+}
+
+///|
 fn render_file_header(
   type_name : String,
   specs : @hashset.HashSet[String],
@@ -682,29 +714,22 @@ pub fn mbt_code_gen_multi(emits : Array[Emit]) -> MultiTargetCode {
         )
       Emit::ImplTrait(TypeName(type_name), TraitName(trait_name)) =>
         append_shared("pub impl \{trait_name} for \{type_name}")
-      Emit::UnionArgTrait(TraitName(trait_name)) => {
-        let b = StringBuilder::new()
-        b
-        ..write_string("pub(open) trait \{trait_name} {\n")
-        ..write_string("  to_js(self : Self) -> JsValue\n")
-        .write_string("}")
-        append_shared(b.to_string())
-      }
-      Emit::UnionArgTraitImpl(TypeName(mbt_type), TraitName(trait_name)) =>
-        if is_wasm_value_type(mbt_type) {
-          // Value types (Bool, Int, Double, etc.) are i32/f64 on wasm-gc, not externref.
-          // %identity cannot convert between value types and externref.
-          // Delegate to TJsValue::to_js which has backend-specific implementations.
-          append_shared(
-            "pub impl \{trait_name} for \{mbt_type} with to_js(self : \{mbt_type}) -> JsValue { TJsValue::to_js(self) }",
-          )
-        } else {
-          // Externref types (#external, String, JsValue, etc.) can use %identity
-          // since they share the same wasm representation on both targets.
-          append_shared(
-            "pub impl \{trait_name} for \{mbt_type} with to_js(self : \{mbt_type}) -> JsValue = \"%identity\"",
-          )
+      Emit::UnionArgTrait(TraitName(trait_name)) =>
+        append_shared("pub(open) trait \{trait_name} : TJsValue {}")
+      Emit::UnionArgTraitImpl(TypeName(mbt_type), TraitName(trait_name)) => {
+        // Trait-object types (&TSomeTrait) don't automatically satisfy TJsValue
+        // even when the trait inherits from TJsValue. Extract the &T reference
+        // and provide an explicit TJsValue impl so compound types like
+        // Array[&TSomeTrait] can satisfy TJsValue via the blanket impl.
+        match extract_trait_ref(mbt_type) {
+          Some(trait_ref) =>
+            append_shared(
+              "pub impl TJsValue for \{trait_ref} with to_js(self : \{trait_ref}) -> JsValue = \"%identity\"",
+            )
+          None => ()
         }
+        append_shared("pub impl \{trait_name} for \{mbt_type}")
+      }
       Emit::Enum(TypeName(name), variants) =>
         append_shared(render_enum(name, variants))
       Emit::TypedefAlias(TypeName(name), target_type) =>

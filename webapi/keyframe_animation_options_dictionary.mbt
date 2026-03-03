@@ -16,21 +16,13 @@ pub impl TJsValue for KeyframeAnimationOptions with to_js(
 pub impl FromJsAny for KeyframeAnimationOptions with from_js_any(value : JsAny) -> KeyframeAnimationOptions = "%identity"
 
 ///|
-pub(open) trait TKeyframeAnimationOptionsNewDuration {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TKeyframeAnimationOptionsNewDuration: TJsValue {}
 
 ///|
-pub impl TKeyframeAnimationOptionsNewDuration for Double with to_js(
-  self : Double,
-) -> JsValue {
-  TJsValue::to_js(self)
-}
+pub impl TKeyframeAnimationOptionsNewDuration for Double
 
 ///|
-pub impl TKeyframeAnimationOptionsNewDuration for String with to_js(
-  self : String,
-) -> JsValue = "%identity"
+pub impl TKeyframeAnimationOptionsNewDuration for String
 
 ///|
 pub fn KeyframeAnimationOptions::new(
@@ -72,21 +64,13 @@ pub fn KeyframeAnimationOptions::empty() -> KeyframeAnimationOptions {
 }
 
 ///|
-pub(open) trait TKeyframeAnimationOptionsGetDuration {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TKeyframeAnimationOptionsGetDuration: TJsValue {}
 
 ///|
-pub impl TKeyframeAnimationOptionsGetDuration for Double with to_js(
-  self : Double,
-) -> JsValue {
-  TJsValue::to_js(self)
-}
+pub impl TKeyframeAnimationOptionsGetDuration for Double
 
 ///|
-pub impl TKeyframeAnimationOptionsGetDuration for String with to_js(
-  self : String,
-) -> JsValue = "%identity"
+pub impl TKeyframeAnimationOptionsGetDuration for String
 
 ///|
 #external
@@ -115,9 +99,7 @@ pub fn[T : TKeyframeAnimationOptionsGetDuration] KeyframeAnimationOptionsGetDura
 ) -> KeyframeAnimationOptionsGetDuration = "%identity"
 
 ///|
-pub impl TKeyframeAnimationOptionsGetDuration for KeyframeAnimationOptionsGetDuration with to_js(
-  self : KeyframeAnimationOptionsGetDuration,
-) -> JsValue = "%identity"
+pub impl TKeyframeAnimationOptionsGetDuration for KeyframeAnimationOptionsGetDuration
 
 ///|
 pub fn KeyframeAnimationOptions::fill(

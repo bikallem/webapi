@@ -33,39 +33,31 @@ pub fn DocumentFragment::new() -> DocumentFragment {
 }
 
 ///|
-pub(open) trait TDocumentFragmentPrependNodes {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TDocumentFragmentPrependNodes: TJsValue {}
 
 ///|
-pub impl TDocumentFragmentPrependNodes for Node with to_js(self : Node) -> JsValue = "%identity"
+pub impl TDocumentFragmentPrependNodes for Node
 
 ///|
-pub impl TDocumentFragmentPrependNodes for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TDocumentFragmentPrependNodes for String
 
 ///|
-pub(open) trait TDocumentFragmentAppendNodes {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TDocumentFragmentAppendNodes: TJsValue {}
 
 ///|
-pub impl TDocumentFragmentAppendNodes for Node with to_js(self : Node) -> JsValue = "%identity"
+pub impl TDocumentFragmentAppendNodes for Node
 
 ///|
-pub impl TDocumentFragmentAppendNodes for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TDocumentFragmentAppendNodes for String
 
 ///|
-pub(open) trait TDocumentFragmentReplaceChildrenNodes {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TDocumentFragmentReplaceChildrenNodes: TJsValue {}
 
 ///|
-pub impl TDocumentFragmentReplaceChildrenNodes for Node with to_js(self : Node) -> JsValue = "%identity"
+pub impl TDocumentFragmentReplaceChildrenNodes for Node
 
 ///|
-pub impl TDocumentFragmentReplaceChildrenNodes for String with to_js(
-  self : String,
-) -> JsValue = "%identity"
+pub impl TDocumentFragmentReplaceChildrenNodes for String
 
 ///|
 /// [DocumentFragment](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) interface.

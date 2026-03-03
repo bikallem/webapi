@@ -20,15 +20,13 @@ pub fn[T : TPath2D] Path2D::into(self : Path2D) -> T = "%identity"
 pub impl TPath2D for Path2D
 
 ///|
-pub(open) trait TPath2DNewPath {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TPath2DNewPath: TJsValue {}
 
 ///|
-pub impl TPath2DNewPath for Path2D with to_js(self : Path2D) -> JsValue = "%identity"
+pub impl TPath2DNewPath for Path2D
 
 ///|
-pub impl TPath2DNewPath for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TPath2DNewPath for String
 
 ///|
 pub fn Path2D::new(path? : &TPath2DNewPath) -> Path2D {
@@ -41,35 +39,30 @@ pub fn Path2D::new(path? : &TPath2DNewPath) -> Path2D {
 }
 
 ///|
-pub(open) trait TPath2DRoundRectRadii {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TPath2DRoundRectRadii: TJsValue {}
 
 ///|
-pub impl TPath2DRoundRectRadii for Double with to_js(self : Double) -> JsValue {
-  TJsValue::to_js(self)
-}
+pub impl TPath2DRoundRectRadii for Double
 
 ///|
-pub impl TPath2DRoundRectRadii for DOMPointInit with to_js(self : DOMPointInit) -> JsValue = "%identity"
+pub impl TPath2DRoundRectRadii for DOMPointInit
 
 ///|
-pub(open) trait TPath2DRoundRectRadii2 {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TPath2DRoundRectRadii2: TJsValue {}
 
 ///|
-pub impl TPath2DRoundRectRadii2 for Double with to_js(self : Double) -> JsValue {
-  TJsValue::to_js(self)
-}
+pub impl TPath2DRoundRectRadii2 for Double
 
 ///|
-pub impl TPath2DRoundRectRadii2 for DOMPointInit with to_js(self : DOMPointInit) -> JsValue = "%identity"
+pub impl TPath2DRoundRectRadii2 for DOMPointInit
 
 ///|
-pub impl TPath2DRoundRectRadii for Array[&TPath2DRoundRectRadii2] with to_js(
-  self : Array[&TPath2DRoundRectRadii2],
+pub impl TJsValue for &TPath2DRoundRectRadii2 with to_js(
+  self : &TPath2DRoundRectRadii2,
 ) -> JsValue = "%identity"
+
+///|
+pub impl TPath2DRoundRectRadii for Array[&TPath2DRoundRectRadii2]
 
 ///|
 /// [Path2D](https://developer.mozilla.org/en-US/docs/Web/API/Path2D) interface.

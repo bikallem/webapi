@@ -14,9 +14,7 @@ pub impl TJsValue for MessageEventSource with to_js(self : MessageEventSource) -
 pub impl FromJsAny for MessageEventSource with from_js_any(value : JsAny) -> MessageEventSource = "%identity"
 
 ///|
-pub(open) trait TMessageEventSource {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TMessageEventSource: TJsValue {}
 
 ///|
 pub fn[T : TMessageEventSource + FromJsAny] MessageEventSource::into(
@@ -31,15 +29,13 @@ pub fn[T : TMessageEventSource] MessageEventSource::from(
 ) -> MessageEventSource = "%identity"
 
 ///|
-pub impl TMessageEventSource for MessageEventSource with to_js(
-  self : MessageEventSource,
-) -> JsValue = "%identity"
+pub impl TMessageEventSource for MessageEventSource
 
 ///|
-pub impl TMessageEventSource for WindowProxy with to_js(self : WindowProxy) -> JsValue = "%identity"
+pub impl TMessageEventSource for WindowProxy
 
 ///|
-pub impl TMessageEventSource for MessagePort with to_js(self : MessagePort) -> JsValue = "%identity"
+pub impl TMessageEventSource for MessagePort
 
 ///|
-pub impl TMessageEventSource for ServiceWorker with to_js(self : ServiceWorker) -> JsValue = "%identity"
+pub impl TMessageEventSource for ServiceWorker

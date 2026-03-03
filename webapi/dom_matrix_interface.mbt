@@ -23,15 +23,13 @@ pub impl TDOMMatrix for DOMMatrix
 pub impl TDOMMatrixReadOnly for DOMMatrix
 
 ///|
-pub(open) trait TDOMMatrixNewInit {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TDOMMatrixNewInit: TJsValue {}
 
 ///|
-pub impl TDOMMatrixNewInit for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TDOMMatrixNewInit for String
 
 ///|
-pub impl TDOMMatrixNewInit for Array[Double] with to_js(self : Array[Double]) -> JsValue = "%identity"
+pub impl TDOMMatrixNewInit for Array[Double]
 
 ///|
 pub fn DOMMatrix::new(init? : &TDOMMatrixNewInit) -> DOMMatrix {

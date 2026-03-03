@@ -14,9 +14,7 @@ pub impl TJsValue for ImageBitmapSource with to_js(self : ImageBitmapSource) -> 
 pub impl FromJsAny for ImageBitmapSource with from_js_any(value : JsAny) -> ImageBitmapSource = "%identity"
 
 ///|
-pub(open) trait TImageBitmapSource {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TImageBitmapSource: TJsValue {}
 
 ///|
 pub fn[T : TImageBitmapSource + FromJsAny] ImageBitmapSource::into(
@@ -31,17 +29,13 @@ pub fn[T : TImageBitmapSource] ImageBitmapSource::from(
 ) -> ImageBitmapSource = "%identity"
 
 ///|
-pub impl TImageBitmapSource for ImageBitmapSource with to_js(
-  self : ImageBitmapSource,
-) -> JsValue = "%identity"
+pub impl TImageBitmapSource for ImageBitmapSource
 
 ///|
-pub impl TImageBitmapSource for CanvasImageSource with to_js(
-  self : CanvasImageSource,
-) -> JsValue = "%identity"
+pub impl TImageBitmapSource for CanvasImageSource
 
 ///|
-pub impl TImageBitmapSource for Blob with to_js(self : Blob) -> JsValue = "%identity"
+pub impl TImageBitmapSource for Blob
 
 ///|
-pub impl TImageBitmapSource for ImageData with to_js(self : ImageData) -> JsValue = "%identity"
+pub impl TImageBitmapSource for ImageData

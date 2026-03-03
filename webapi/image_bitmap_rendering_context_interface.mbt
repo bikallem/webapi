@@ -26,19 +26,13 @@ pub fn[T : TImageBitmapRenderingContext] ImageBitmapRenderingContext::into(
 pub impl TImageBitmapRenderingContext for ImageBitmapRenderingContext
 
 ///|
-pub(open) trait TImageBitmapRenderingContextCanvas {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TImageBitmapRenderingContextCanvas: TJsValue {}
 
 ///|
-pub impl TImageBitmapRenderingContextCanvas for HTMLCanvasElement with to_js(
-  self : HTMLCanvasElement,
-) -> JsValue = "%identity"
+pub impl TImageBitmapRenderingContextCanvas for HTMLCanvasElement
 
 ///|
-pub impl TImageBitmapRenderingContextCanvas for OffscreenCanvas with to_js(
-  self : OffscreenCanvas,
-) -> JsValue = "%identity"
+pub impl TImageBitmapRenderingContextCanvas for OffscreenCanvas
 
 ///|
 #external
@@ -67,9 +61,7 @@ pub fn[T : TImageBitmapRenderingContextCanvas] ImageBitmapRenderingContextCanvas
 ) -> ImageBitmapRenderingContextCanvas = "%identity"
 
 ///|
-pub impl TImageBitmapRenderingContextCanvas for ImageBitmapRenderingContextCanvas with to_js(
-  self : ImageBitmapRenderingContextCanvas,
-) -> JsValue = "%identity"
+pub impl TImageBitmapRenderingContextCanvas for ImageBitmapRenderingContextCanvas
 
 ///|
 /// [ImageBitmapRenderingContext](https://developer.mozilla.org/en-US/docs/Web/API/ImageBitmapRenderingContext) interface.

@@ -23,18 +23,16 @@ pub impl TIDBRequest for IDBRequest
 pub impl TEventTarget for IDBRequest
 
 ///|
-pub(open) trait TIDBRequestSource {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TIDBRequestSource: TJsValue {}
 
 ///|
-pub impl TIDBRequestSource for IDBObjectStore with to_js(self : IDBObjectStore) -> JsValue = "%identity"
+pub impl TIDBRequestSource for IDBObjectStore
 
 ///|
-pub impl TIDBRequestSource for IDBIndex with to_js(self : IDBIndex) -> JsValue = "%identity"
+pub impl TIDBRequestSource for IDBIndex
 
 ///|
-pub impl TIDBRequestSource for IDBCursor with to_js(self : IDBCursor) -> JsValue = "%identity"
+pub impl TIDBRequestSource for IDBCursor
 
 ///|
 #external
@@ -59,9 +57,7 @@ pub fn[T : TIDBRequestSource] IDBRequestSource::from(
 ) -> IDBRequestSource = "%identity"
 
 ///|
-pub impl TIDBRequestSource for IDBRequestSource with to_js(
-  self : IDBRequestSource,
-) -> JsValue = "%identity"
+pub impl TIDBRequestSource for IDBRequestSource
 
 ///|
 /// [IDBRequest](https://developer.mozilla.org/en-US/docs/Web/API/IDBRequest) interface.

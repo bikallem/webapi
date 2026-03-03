@@ -23,30 +23,22 @@ pub impl TSharedWorker for SharedWorker
 pub impl TEventTarget for SharedWorker
 
 ///|
-pub(open) trait TSharedWorkerNewScriptURL {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TSharedWorkerNewScriptURL: TJsValue {}
 
 ///|
-pub impl TSharedWorkerNewScriptURL for TrustedScriptURL with to_js(
-  self : TrustedScriptURL,
-) -> JsValue = "%identity"
+pub impl TSharedWorkerNewScriptURL for TrustedScriptURL
 
 ///|
-pub impl TSharedWorkerNewScriptURL for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TSharedWorkerNewScriptURL for String
 
 ///|
-pub(open) trait TSharedWorkerNewOptions {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TSharedWorkerNewOptions: TJsValue {}
 
 ///|
-pub impl TSharedWorkerNewOptions for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TSharedWorkerNewOptions for String
 
 ///|
-pub impl TSharedWorkerNewOptions for WorkerOptions with to_js(
-  self : WorkerOptions,
-) -> JsValue = "%identity"
+pub impl TSharedWorkerNewOptions for WorkerOptions
 
 ///|
 pub fn SharedWorker::new(

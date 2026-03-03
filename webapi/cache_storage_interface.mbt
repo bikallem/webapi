@@ -20,15 +20,13 @@ pub fn[T : TCacheStorage] CacheStorage::into(self : CacheStorage) -> T = "%ident
 pub impl TCacheStorage for CacheStorage
 
 ///|
-pub(open) trait TCacheStorageMatch {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TCacheStorageMatch: TJsValue {}
 
 ///|
-pub impl TCacheStorageMatch for Response with to_js(self : Response) -> JsValue = "%identity"
+pub impl TCacheStorageMatch for Response
 
 ///|
-pub impl TCacheStorageMatch for JsUndefined with to_js(self : JsUndefined) -> JsValue = "%identity"
+pub impl TCacheStorageMatch for JsUndefined
 
 ///|
 /// [CacheStorage](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage) interface.

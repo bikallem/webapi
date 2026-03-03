@@ -14,15 +14,13 @@ pub impl TJsValue for CSSStyleSheetInit with to_js(self : CSSStyleSheetInit) -> 
 pub impl FromJsAny for CSSStyleSheetInit with from_js_any(value : JsAny) -> CSSStyleSheetInit = "%identity"
 
 ///|
-pub(open) trait TCSSStyleSheetInitNewMedia {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TCSSStyleSheetInitNewMedia: TJsValue {}
 
 ///|
-pub impl TCSSStyleSheetInitNewMedia for MediaList with to_js(self : MediaList) -> JsValue = "%identity"
+pub impl TCSSStyleSheetInitNewMedia for MediaList
 
 ///|
-pub impl TCSSStyleSheetInitNewMedia for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TCSSStyleSheetInitNewMedia for String
 
 ///|
 pub fn CSSStyleSheetInit::new(
@@ -46,15 +44,13 @@ pub fn CSSStyleSheetInit::empty() -> CSSStyleSheetInit {
 }
 
 ///|
-pub(open) trait TCSSStyleSheetInitGetMedia {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TCSSStyleSheetInitGetMedia: TJsValue {}
 
 ///|
-pub impl TCSSStyleSheetInitGetMedia for MediaList with to_js(self : MediaList) -> JsValue = "%identity"
+pub impl TCSSStyleSheetInitGetMedia for MediaList
 
 ///|
-pub impl TCSSStyleSheetInitGetMedia for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TCSSStyleSheetInitGetMedia for String
 
 ///|
 #external
@@ -81,9 +77,7 @@ pub fn[T : TCSSStyleSheetInitGetMedia] CSSStyleSheetInitGetMedia::from(
 ) -> CSSStyleSheetInitGetMedia = "%identity"
 
 ///|
-pub impl TCSSStyleSheetInitGetMedia for CSSStyleSheetInitGetMedia with to_js(
-  self : CSSStyleSheetInitGetMedia,
-) -> JsValue = "%identity"
+pub impl TCSSStyleSheetInitGetMedia for CSSStyleSheetInitGetMedia
 
 ///|
 pub fn CSSStyleSheetInit::base_url(self : CSSStyleSheetInit) -> String? {

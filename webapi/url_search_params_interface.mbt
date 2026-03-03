@@ -20,20 +20,16 @@ pub fn[T : TURLSearchParams] URLSearchParams::into(self : URLSearchParams) -> T 
 pub impl TURLSearchParams for URLSearchParams
 
 ///|
-pub(open) trait TURLSearchParamsNewInit {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TURLSearchParamsNewInit: TJsValue {}
 
 ///|
-pub impl TURLSearchParamsNewInit for Array[Array[String]] with to_js(
-  self : Array[Array[String]],
-) -> JsValue = "%identity"
+pub impl TURLSearchParamsNewInit for Array[Array[String]]
 
 ///|
-pub impl TURLSearchParamsNewInit for JsValue with to_js(self : JsValue) -> JsValue = "%identity"
+pub impl TURLSearchParamsNewInit for JsValue
 
 ///|
-pub impl TURLSearchParamsNewInit for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TURLSearchParamsNewInit for String
 
 ///|
 pub fn URLSearchParams::new(

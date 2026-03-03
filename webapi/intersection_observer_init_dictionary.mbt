@@ -16,34 +16,22 @@ pub impl TJsValue for IntersectionObserverInit with to_js(
 pub impl FromJsAny for IntersectionObserverInit with from_js_any(value : JsAny) -> IntersectionObserverInit = "%identity"
 
 ///|
-pub(open) trait TIntersectionObserverInitNewRoot {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TIntersectionObserverInitNewRoot: TJsValue {}
 
 ///|
-pub impl TIntersectionObserverInitNewRoot for Element with to_js(self : Element) -> JsValue = "%identity"
+pub impl TIntersectionObserverInitNewRoot for Element
 
 ///|
-pub impl TIntersectionObserverInitNewRoot for Document with to_js(
-  self : Document,
-) -> JsValue = "%identity"
+pub impl TIntersectionObserverInitNewRoot for Document
 
 ///|
-pub(open) trait TIntersectionObserverInitNewThreshold {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TIntersectionObserverInitNewThreshold: TJsValue {}
 
 ///|
-pub impl TIntersectionObserverInitNewThreshold for Double with to_js(
-  self : Double,
-) -> JsValue {
-  TJsValue::to_js(self)
-}
+pub impl TIntersectionObserverInitNewThreshold for Double
 
 ///|
-pub impl TIntersectionObserverInitNewThreshold for Array[Double] with to_js(
-  self : Array[Double],
-) -> JsValue = "%identity"
+pub impl TIntersectionObserverInitNewThreshold for Array[Double]
 
 ///|
 pub fn IntersectionObserverInit::new(
@@ -76,17 +64,13 @@ pub fn IntersectionObserverInit::empty() -> IntersectionObserverInit {
 }
 
 ///|
-pub(open) trait TIntersectionObserverInitGetRoot {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TIntersectionObserverInitGetRoot: TJsValue {}
 
 ///|
-pub impl TIntersectionObserverInitGetRoot for Element with to_js(self : Element) -> JsValue = "%identity"
+pub impl TIntersectionObserverInitGetRoot for Element
 
 ///|
-pub impl TIntersectionObserverInitGetRoot for Document with to_js(
-  self : Document,
-) -> JsValue = "%identity"
+pub impl TIntersectionObserverInitGetRoot for Document
 
 ///|
 #external
@@ -115,26 +99,16 @@ pub fn[T : TIntersectionObserverInitGetRoot] IntersectionObserverInitGetRoot::fr
 ) -> IntersectionObserverInitGetRoot = "%identity"
 
 ///|
-pub impl TIntersectionObserverInitGetRoot for IntersectionObserverInitGetRoot with to_js(
-  self : IntersectionObserverInitGetRoot,
-) -> JsValue = "%identity"
+pub impl TIntersectionObserverInitGetRoot for IntersectionObserverInitGetRoot
 
 ///|
-pub(open) trait TIntersectionObserverInitGetThreshold {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TIntersectionObserverInitGetThreshold: TJsValue {}
 
 ///|
-pub impl TIntersectionObserverInitGetThreshold for Double with to_js(
-  self : Double,
-) -> JsValue {
-  TJsValue::to_js(self)
-}
+pub impl TIntersectionObserverInitGetThreshold for Double
 
 ///|
-pub impl TIntersectionObserverInitGetThreshold for Array[Double] with to_js(
-  self : Array[Double],
-) -> JsValue = "%identity"
+pub impl TIntersectionObserverInitGetThreshold for Array[Double]
 
 ///|
 #external
@@ -163,9 +137,7 @@ pub fn[T : TIntersectionObserverInitGetThreshold] IntersectionObserverInitGetThr
 ) -> IntersectionObserverInitGetThreshold = "%identity"
 
 ///|
-pub impl TIntersectionObserverInitGetThreshold for IntersectionObserverInitGetThreshold with to_js(
-  self : IntersectionObserverInitGetThreshold,
-) -> JsValue = "%identity"
+pub impl TIntersectionObserverInitGetThreshold for IntersectionObserverInitGetThreshold
 
 ///|
 pub fn IntersectionObserverInit::root(

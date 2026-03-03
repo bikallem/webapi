@@ -37,15 +37,13 @@ pub const FILE_READER_LOADING : UInt = 1
 pub const FILE_READER_DONE : UInt = 2
 
 ///|
-pub(open) trait TFileReaderResult {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TFileReaderResult: TJsValue {}
 
 ///|
-pub impl TFileReaderResult for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TFileReaderResult for String
 
 ///|
-pub impl TFileReaderResult for ArrayBuffer with to_js(self : ArrayBuffer) -> JsValue = "%identity"
+pub impl TFileReaderResult for ArrayBuffer
 
 ///|
 #external
@@ -70,9 +68,7 @@ pub fn[T : TFileReaderResult] FileReaderResult::from(
 ) -> FileReaderResult = "%identity"
 
 ///|
-pub impl TFileReaderResult for FileReaderResult with to_js(
-  self : FileReaderResult,
-) -> JsValue = "%identity"
+pub impl TFileReaderResult for FileReaderResult
 
 ///|
 /// [FileReader](https://developer.mozilla.org/en-US/docs/Web/API/FileReader) interface.

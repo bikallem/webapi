@@ -16,17 +16,13 @@ pub impl TJsValue for ComputedEffectTiming with to_js(
 pub impl FromJsAny for ComputedEffectTiming with from_js_any(value : JsAny) -> ComputedEffectTiming = "%identity"
 
 ///|
-pub(open) trait TComputedEffectTimingNewDuration {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TComputedEffectTimingNewDuration: TJsValue {}
 
 ///|
-pub impl TComputedEffectTimingNewDuration for Double with to_js(self : Double) -> JsValue {
-  TJsValue::to_js(self)
-}
+pub impl TComputedEffectTimingNewDuration for Double
 
 ///|
-pub impl TComputedEffectTimingNewDuration for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TComputedEffectTimingNewDuration for String
 
 ///|
 pub fn ComputedEffectTiming::new(
@@ -64,17 +60,13 @@ pub fn ComputedEffectTiming::empty() -> ComputedEffectTiming {
 }
 
 ///|
-pub(open) trait TComputedEffectTimingGetDuration {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TComputedEffectTimingGetDuration: TJsValue {}
 
 ///|
-pub impl TComputedEffectTimingGetDuration for Double with to_js(self : Double) -> JsValue {
-  TJsValue::to_js(self)
-}
+pub impl TComputedEffectTimingGetDuration for Double
 
 ///|
-pub impl TComputedEffectTimingGetDuration for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TComputedEffectTimingGetDuration for String
 
 ///|
 #external
@@ -103,9 +95,7 @@ pub fn[T : TComputedEffectTimingGetDuration] ComputedEffectTimingGetDuration::fr
 ) -> ComputedEffectTimingGetDuration = "%identity"
 
 ///|
-pub impl TComputedEffectTimingGetDuration for ComputedEffectTimingGetDuration with to_js(
-  self : ComputedEffectTimingGetDuration,
-) -> JsValue = "%identity"
+pub impl TComputedEffectTimingGetDuration for ComputedEffectTimingGetDuration
 
 ///|
 pub fn ComputedEffectTiming::fill(self : ComputedEffectTiming) -> FillMode? {

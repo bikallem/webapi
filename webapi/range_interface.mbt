@@ -40,19 +40,13 @@ pub const RANGE_END_TO_END : UInt = 2
 pub const RANGE_END_TO_START : UInt = 3
 
 ///|
-pub(open) trait TRangeCreateContextualFragmentString {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TRangeCreateContextualFragmentString: TJsValue {}
 
 ///|
-pub impl TRangeCreateContextualFragmentString for TrustedHTML with to_js(
-  self : TrustedHTML,
-) -> JsValue = "%identity"
+pub impl TRangeCreateContextualFragmentString for TrustedHTML
 
 ///|
-pub impl TRangeCreateContextualFragmentString for String with to_js(
-  self : String,
-) -> JsValue = "%identity"
+pub impl TRangeCreateContextualFragmentString for String
 
 ///|
 /// [Range](https://developer.mozilla.org/en-US/docs/Web/API/Range) interface.

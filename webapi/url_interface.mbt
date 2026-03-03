@@ -25,15 +25,13 @@ pub fn URL::new(url : String, base? : String) -> URL {
 }
 
 ///|
-pub(open) trait TURLCreateObjectURLObj {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TURLCreateObjectURLObj: TJsValue {}
 
 ///|
-pub impl TURLCreateObjectURLObj for Blob with to_js(self : Blob) -> JsValue = "%identity"
+pub impl TURLCreateObjectURLObj for Blob
 
 ///|
-pub impl TURLCreateObjectURLObj for MediaSource with to_js(self : MediaSource) -> JsValue = "%identity"
+pub impl TURLCreateObjectURLObj for MediaSource
 
 ///|
 /// [URL](https://developer.mozilla.org/en-US/docs/Web/API/URL) interface.

@@ -16,9 +16,7 @@ pub impl TJsValue for XMLHttpRequestBodyInit with to_js(
 pub impl FromJsAny for XMLHttpRequestBodyInit with from_js_any(value : JsAny) -> XMLHttpRequestBodyInit = "%identity"
 
 ///|
-pub(open) trait TXMLHttpRequestBodyInit {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TXMLHttpRequestBodyInit: TJsValue {}
 
 ///|
 pub fn[T : TXMLHttpRequestBodyInit + FromJsAny] XMLHttpRequestBodyInit::into(
@@ -33,25 +31,19 @@ pub fn[T : TXMLHttpRequestBodyInit] XMLHttpRequestBodyInit::from(
 ) -> XMLHttpRequestBodyInit = "%identity"
 
 ///|
-pub impl TXMLHttpRequestBodyInit for XMLHttpRequestBodyInit with to_js(
-  self : XMLHttpRequestBodyInit,
-) -> JsValue = "%identity"
+pub impl TXMLHttpRequestBodyInit for XMLHttpRequestBodyInit
 
 ///|
-pub impl TXMLHttpRequestBodyInit for Blob with to_js(self : Blob) -> JsValue = "%identity"
+pub impl TXMLHttpRequestBodyInit for Blob
 
 ///|
-pub impl TXMLHttpRequestBodyInit for BufferSource with to_js(
-  self : BufferSource,
-) -> JsValue = "%identity"
+pub impl TXMLHttpRequestBodyInit for BufferSource
 
 ///|
-pub impl TXMLHttpRequestBodyInit for FormData with to_js(self : FormData) -> JsValue = "%identity"
+pub impl TXMLHttpRequestBodyInit for FormData
 
 ///|
-pub impl TXMLHttpRequestBodyInit for URLSearchParams with to_js(
-  self : URLSearchParams,
-) -> JsValue = "%identity"
+pub impl TXMLHttpRequestBodyInit for URLSearchParams
 
 ///|
-pub impl TXMLHttpRequestBodyInit for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TXMLHttpRequestBodyInit for String

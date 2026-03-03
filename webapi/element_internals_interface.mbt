@@ -22,36 +22,28 @@ pub fn[T : TElementInternals] ElementInternals::into(
 pub impl TElementInternals for ElementInternals
 
 ///|
-pub(open) trait TElementInternalsSetFormValueValue {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TElementInternalsSetFormValueValue: TJsValue {}
 
 ///|
-pub impl TElementInternalsSetFormValueValue for File with to_js(self : File) -> JsValue = "%identity"
+pub impl TElementInternalsSetFormValueValue for File
 
 ///|
-pub impl TElementInternalsSetFormValueValue for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TElementInternalsSetFormValueValue for String
 
 ///|
-pub impl TElementInternalsSetFormValueValue for FormData with to_js(
-  self : FormData,
-) -> JsValue = "%identity"
+pub impl TElementInternalsSetFormValueValue for FormData
 
 ///|
-pub(open) trait TElementInternalsSetFormValueState {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TElementInternalsSetFormValueState: TJsValue {}
 
 ///|
-pub impl TElementInternalsSetFormValueState for File with to_js(self : File) -> JsValue = "%identity"
+pub impl TElementInternalsSetFormValueState for File
 
 ///|
-pub impl TElementInternalsSetFormValueState for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TElementInternalsSetFormValueState for String
 
 ///|
-pub impl TElementInternalsSetFormValueState for FormData with to_js(
-  self : FormData,
-) -> JsValue = "%identity"
+pub impl TElementInternalsSetFormValueState for FormData
 
 ///|
 /// [ElementInternals](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals) interface.

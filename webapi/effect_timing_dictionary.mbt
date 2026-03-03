@@ -14,17 +14,13 @@ pub impl TJsValue for EffectTiming with to_js(self : EffectTiming) -> JsValue = 
 pub impl FromJsAny for EffectTiming with from_js_any(value : JsAny) -> EffectTiming = "%identity"
 
 ///|
-pub(open) trait TEffectTimingNewDuration {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TEffectTimingNewDuration: TJsValue {}
 
 ///|
-pub impl TEffectTimingNewDuration for Double with to_js(self : Double) -> JsValue {
-  TJsValue::to_js(self)
-}
+pub impl TEffectTimingNewDuration for Double
 
 ///|
-pub impl TEffectTimingNewDuration for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TEffectTimingNewDuration for String
 
 ///|
 pub fn EffectTiming::new(
@@ -58,17 +54,13 @@ pub fn EffectTiming::empty() -> EffectTiming {
 }
 
 ///|
-pub(open) trait TEffectTimingGetDuration {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TEffectTimingGetDuration: TJsValue {}
 
 ///|
-pub impl TEffectTimingGetDuration for Double with to_js(self : Double) -> JsValue {
-  TJsValue::to_js(self)
-}
+pub impl TEffectTimingGetDuration for Double
 
 ///|
-pub impl TEffectTimingGetDuration for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TEffectTimingGetDuration for String
 
 ///|
 #external
@@ -95,9 +87,7 @@ pub fn[T : TEffectTimingGetDuration] EffectTimingGetDuration::from(
 ) -> EffectTimingGetDuration = "%identity"
 
 ///|
-pub impl TEffectTimingGetDuration for EffectTimingGetDuration with to_js(
-  self : EffectTimingGetDuration,
-) -> JsValue = "%identity"
+pub impl TEffectTimingGetDuration for EffectTimingGetDuration
 
 ///|
 pub fn EffectTiming::fill(self : EffectTiming) -> FillMode? {

@@ -14,18 +14,16 @@ pub impl TJsValue for TrackEventInit with to_js(self : TrackEventInit) -> JsValu
 pub impl FromJsAny for TrackEventInit with from_js_any(value : JsAny) -> TrackEventInit = "%identity"
 
 ///|
-pub(open) trait TTrackEventInitNewTrack {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TTrackEventInitNewTrack: TJsValue {}
 
 ///|
-pub impl TTrackEventInitNewTrack for VideoTrack with to_js(self : VideoTrack) -> JsValue = "%identity"
+pub impl TTrackEventInitNewTrack for VideoTrack
 
 ///|
-pub impl TTrackEventInitNewTrack for AudioTrack with to_js(self : AudioTrack) -> JsValue = "%identity"
+pub impl TTrackEventInitNewTrack for AudioTrack
 
 ///|
-pub impl TTrackEventInitNewTrack for TextTrack with to_js(self : TextTrack) -> JsValue = "%identity"
+pub impl TTrackEventInitNewTrack for TextTrack
 
 ///|
 pub fn TrackEventInit::new(
@@ -51,18 +49,16 @@ pub fn TrackEventInit::empty() -> TrackEventInit {
 }
 
 ///|
-pub(open) trait TTrackEventInitGetTrack {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TTrackEventInitGetTrack: TJsValue {}
 
 ///|
-pub impl TTrackEventInitGetTrack for VideoTrack with to_js(self : VideoTrack) -> JsValue = "%identity"
+pub impl TTrackEventInitGetTrack for VideoTrack
 
 ///|
-pub impl TTrackEventInitGetTrack for AudioTrack with to_js(self : AudioTrack) -> JsValue = "%identity"
+pub impl TTrackEventInitGetTrack for AudioTrack
 
 ///|
-pub impl TTrackEventInitGetTrack for TextTrack with to_js(self : TextTrack) -> JsValue = "%identity"
+pub impl TTrackEventInitGetTrack for TextTrack
 
 ///|
 #external
@@ -89,9 +85,7 @@ pub fn[T : TTrackEventInitGetTrack] TrackEventInitGetTrack::from(
 ) -> TrackEventInitGetTrack = "%identity"
 
 ///|
-pub impl TTrackEventInitGetTrack for TrackEventInitGetTrack with to_js(
-  self : TrackEventInitGetTrack,
-) -> JsValue = "%identity"
+pub impl TTrackEventInitGetTrack for TrackEventInitGetTrack
 
 ///|
 pub fn TrackEventInit::bubbles(self : TrackEventInit) -> Bool? {

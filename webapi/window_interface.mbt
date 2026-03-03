@@ -23,15 +23,13 @@ pub impl TWindow for Window
 pub impl TEventTarget for Window
 
 ///|
-pub(open) trait TWindowEvent {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TWindowEvent: TJsValue {}
 
 ///|
-pub impl TWindowEvent for Event with to_js(self : Event) -> JsValue = "%identity"
+pub impl TWindowEvent for Event
 
 ///|
-pub impl TWindowEvent for JsUndefined with to_js(self : JsUndefined) -> JsValue = "%identity"
+pub impl TWindowEvent for JsUndefined
 
 ///|
 #external
@@ -57,7 +55,7 @@ pub fn WindowEvent::is_undefined(self : WindowEvent) -> Bool {
 }
 
 ///|
-pub impl TWindowEvent for WindowEvent with to_js(self : WindowEvent) -> JsValue = "%identity"
+pub impl TWindowEvent for WindowEvent
 
 ///|
 /// [Window](https://developer.mozilla.org/en-US/docs/Web/API/Window) interface.

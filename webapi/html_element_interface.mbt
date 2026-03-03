@@ -34,22 +34,16 @@ pub fn HTMLElement::new() -> HTMLElement {
 }
 
 ///|
-pub(open) trait THTMLElementHidden {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait THTMLElementHidden: TJsValue {}
 
 ///|
-pub impl THTMLElementHidden for Bool with to_js(self : Bool) -> JsValue {
-  TJsValue::to_js(self)
-}
+pub impl THTMLElementHidden for Bool
 
 ///|
-pub impl THTMLElementHidden for Double with to_js(self : Double) -> JsValue {
-  TJsValue::to_js(self)
-}
+pub impl THTMLElementHidden for Double
 
 ///|
-pub impl THTMLElementHidden for String with to_js(self : String) -> JsValue = "%identity"
+pub impl THTMLElementHidden for String
 
 ///|
 #external
@@ -74,24 +68,16 @@ pub fn[T : THTMLElementHidden] HTMLElementHidden::from(
 ) -> HTMLElementHidden = "%identity"
 
 ///|
-pub impl THTMLElementHidden for HTMLElementHidden with to_js(
-  self : HTMLElementHidden,
-) -> JsValue = "%identity"
+pub impl THTMLElementHidden for HTMLElementHidden
 
 ///|
-pub(open) trait THTMLElementTogglePopoverOptions {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait THTMLElementTogglePopoverOptions: TJsValue {}
 
 ///|
-pub impl THTMLElementTogglePopoverOptions for TogglePopoverOptions with to_js(
-  self : TogglePopoverOptions,
-) -> JsValue = "%identity"
+pub impl THTMLElementTogglePopoverOptions for TogglePopoverOptions
 
 ///|
-pub impl THTMLElementTogglePopoverOptions for Bool with to_js(self : Bool) -> JsValue {
-  TJsValue::to_js(self)
-}
+pub impl THTMLElementTogglePopoverOptions for Bool
 
 ///|
 /// [HTMLElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement) interface.

@@ -16,9 +16,7 @@ pub impl TJsValue for ReadableStreamReader with to_js(
 pub impl FromJsAny for ReadableStreamReader with from_js_any(value : JsAny) -> ReadableStreamReader = "%identity"
 
 ///|
-pub(open) trait TReadableStreamReader {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TReadableStreamReader: TJsValue {}
 
 ///|
 pub fn[T : TReadableStreamReader + FromJsAny] ReadableStreamReader::into(
@@ -33,16 +31,10 @@ pub fn[T : TReadableStreamReader] ReadableStreamReader::from(
 ) -> ReadableStreamReader = "%identity"
 
 ///|
-pub impl TReadableStreamReader for ReadableStreamReader with to_js(
-  self : ReadableStreamReader,
-) -> JsValue = "%identity"
+pub impl TReadableStreamReader for ReadableStreamReader
 
 ///|
-pub impl TReadableStreamReader for ReadableStreamDefaultReader with to_js(
-  self : ReadableStreamDefaultReader,
-) -> JsValue = "%identity"
+pub impl TReadableStreamReader for ReadableStreamDefaultReader
 
 ///|
-pub impl TReadableStreamReader for ReadableStreamBYOBReader with to_js(
-  self : ReadableStreamBYOBReader,
-) -> JsValue = "%identity"
+pub impl TReadableStreamReader for ReadableStreamBYOBReader

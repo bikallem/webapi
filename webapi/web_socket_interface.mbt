@@ -23,17 +23,13 @@ pub impl TWebSocket for WebSocket
 pub impl TEventTarget for WebSocket
 
 ///|
-pub(open) trait TWebSocketNewProtocols {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TWebSocketNewProtocols: TJsValue {}
 
 ///|
-pub impl TWebSocketNewProtocols for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TWebSocketNewProtocols for String
 
 ///|
-pub impl TWebSocketNewProtocols for Array[String] with to_js(
-  self : Array[String],
-) -> JsValue = "%identity"
+pub impl TWebSocketNewProtocols for Array[String]
 
 ///|
 pub fn WebSocket::new(
@@ -62,18 +58,16 @@ pub const WEB_SOCKET_CLOSING : UInt = 2
 pub const WEB_SOCKET_CLOSED : UInt = 3
 
 ///|
-pub(open) trait TWebSocketSendData {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TWebSocketSendData: TJsValue {}
 
 ///|
-pub impl TWebSocketSendData for BufferSource with to_js(self : BufferSource) -> JsValue = "%identity"
+pub impl TWebSocketSendData for BufferSource
 
 ///|
-pub impl TWebSocketSendData for Blob with to_js(self : Blob) -> JsValue = "%identity"
+pub impl TWebSocketSendData for Blob
 
 ///|
-pub impl TWebSocketSendData for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TWebSocketSendData for String
 
 ///|
 /// [WebSocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket) interface.

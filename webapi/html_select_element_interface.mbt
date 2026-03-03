@@ -39,34 +39,22 @@ pub fn HTMLSelectElement::new() -> HTMLSelectElement {
 }
 
 ///|
-pub(open) trait THTMLSelectElementAddElement {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait THTMLSelectElementAddElement: TJsValue {}
 
 ///|
-pub impl THTMLSelectElementAddElement for HTMLOptionElement with to_js(
-  self : HTMLOptionElement,
-) -> JsValue = "%identity"
+pub impl THTMLSelectElementAddElement for HTMLOptionElement
 
 ///|
-pub impl THTMLSelectElementAddElement for HTMLOptGroupElement with to_js(
-  self : HTMLOptGroupElement,
-) -> JsValue = "%identity"
+pub impl THTMLSelectElementAddElement for HTMLOptGroupElement
 
 ///|
-pub(open) trait THTMLSelectElementAddBefore {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait THTMLSelectElementAddBefore: TJsValue {}
 
 ///|
-pub impl THTMLSelectElementAddBefore for HTMLElement with to_js(
-  self : HTMLElement,
-) -> JsValue = "%identity"
+pub impl THTMLSelectElementAddBefore for HTMLElement
 
 ///|
-pub impl THTMLSelectElementAddBefore for Int with to_js(self : Int) -> JsValue {
-  TJsValue::to_js(self)
-}
+pub impl THTMLSelectElementAddBefore for Int
 
 ///|
 /// [HTMLSelectElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement) interface.

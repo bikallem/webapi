@@ -16,9 +16,7 @@ pub impl TJsValue for AllowSharedBufferSource with to_js(
 pub impl FromJsAny for AllowSharedBufferSource with from_js_any(value : JsAny) -> AllowSharedBufferSource = "%identity"
 
 ///|
-pub(open) trait TAllowSharedBufferSource {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TAllowSharedBufferSource: TJsValue {}
 
 ///|
 pub fn[T : TAllowSharedBufferSource + FromJsAny] AllowSharedBufferSource::into(
@@ -33,19 +31,13 @@ pub fn[T : TAllowSharedBufferSource] AllowSharedBufferSource::from(
 ) -> AllowSharedBufferSource = "%identity"
 
 ///|
-pub impl TAllowSharedBufferSource for AllowSharedBufferSource with to_js(
-  self : AllowSharedBufferSource,
-) -> JsValue = "%identity"
+pub impl TAllowSharedBufferSource for AllowSharedBufferSource
 
 ///|
-pub impl TAllowSharedBufferSource for ArrayBuffer with to_js(self : ArrayBuffer) -> JsValue = "%identity"
+pub impl TAllowSharedBufferSource for ArrayBuffer
 
 ///|
-pub impl TAllowSharedBufferSource for SharedArrayBuffer with to_js(
-  self : SharedArrayBuffer,
-) -> JsValue = "%identity"
+pub impl TAllowSharedBufferSource for SharedArrayBuffer
 
 ///|
-pub impl TAllowSharedBufferSource for ArrayBufferView with to_js(
-  self : ArrayBufferView,
-) -> JsValue = "%identity"
+pub impl TAllowSharedBufferSource for ArrayBufferView

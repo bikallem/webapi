@@ -16,9 +16,7 @@ pub impl TJsValue for ReadableStreamController with to_js(
 pub impl FromJsAny for ReadableStreamController with from_js_any(value : JsAny) -> ReadableStreamController = "%identity"
 
 ///|
-pub(open) trait TReadableStreamController {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TReadableStreamController: TJsValue {}
 
 ///|
 pub fn[T : TReadableStreamController + FromJsAny] ReadableStreamController::into(
@@ -33,16 +31,10 @@ pub fn[T : TReadableStreamController] ReadableStreamController::from(
 ) -> ReadableStreamController = "%identity"
 
 ///|
-pub impl TReadableStreamController for ReadableStreamController with to_js(
-  self : ReadableStreamController,
-) -> JsValue = "%identity"
+pub impl TReadableStreamController for ReadableStreamController
 
 ///|
-pub impl TReadableStreamController for ReadableStreamDefaultController with to_js(
-  self : ReadableStreamDefaultController,
-) -> JsValue = "%identity"
+pub impl TReadableStreamController for ReadableStreamDefaultController
 
 ///|
-pub impl TReadableStreamController for ReadableByteStreamController with to_js(
-  self : ReadableByteStreamController,
-) -> JsValue = "%identity"
+pub impl TReadableStreamController for ReadableByteStreamController

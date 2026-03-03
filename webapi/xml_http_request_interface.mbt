@@ -46,17 +46,13 @@ pub const XML_HTTP_REQUEST_LOADING : UInt = 3
 pub const XML_HTTP_REQUEST_DONE : UInt = 4
 
 ///|
-pub(open) trait TXMLHttpRequestSendBody {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TXMLHttpRequestSendBody: TJsValue {}
 
 ///|
-pub impl TXMLHttpRequestSendBody for Document with to_js(self : Document) -> JsValue = "%identity"
+pub impl TXMLHttpRequestSendBody for Document
 
 ///|
-pub impl TXMLHttpRequestSendBody for XMLHttpRequestBodyInit with to_js(
-  self : XMLHttpRequestBodyInit,
-) -> JsValue = "%identity"
+pub impl TXMLHttpRequestSendBody for XMLHttpRequestBodyInit
 
 ///|
 /// [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) interface.

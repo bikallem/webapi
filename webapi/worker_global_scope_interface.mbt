@@ -25,19 +25,13 @@ pub impl TWorkerGlobalScope for WorkerGlobalScope
 pub impl TEventTarget for WorkerGlobalScope
 
 ///|
-pub(open) trait TWorkerGlobalScopeImportScriptsUrls {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TWorkerGlobalScopeImportScriptsUrls: TJsValue {}
 
 ///|
-pub impl TWorkerGlobalScopeImportScriptsUrls for TrustedScriptURL with to_js(
-  self : TrustedScriptURL,
-) -> JsValue = "%identity"
+pub impl TWorkerGlobalScopeImportScriptsUrls for TrustedScriptURL
 
 ///|
-pub impl TWorkerGlobalScopeImportScriptsUrls for String with to_js(
-  self : String,
-) -> JsValue = "%identity"
+pub impl TWorkerGlobalScopeImportScriptsUrls for String
 
 ///|
 /// [WorkerGlobalScope](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope) interface.

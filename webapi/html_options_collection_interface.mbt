@@ -27,34 +27,22 @@ pub impl THTMLOptionsCollection for HTMLOptionsCollection
 pub impl THTMLCollection for HTMLOptionsCollection
 
 ///|
-pub(open) trait THTMLOptionsCollectionAddElement {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait THTMLOptionsCollectionAddElement: TJsValue {}
 
 ///|
-pub impl THTMLOptionsCollectionAddElement for HTMLOptionElement with to_js(
-  self : HTMLOptionElement,
-) -> JsValue = "%identity"
+pub impl THTMLOptionsCollectionAddElement for HTMLOptionElement
 
 ///|
-pub impl THTMLOptionsCollectionAddElement for HTMLOptGroupElement with to_js(
-  self : HTMLOptGroupElement,
-) -> JsValue = "%identity"
+pub impl THTMLOptionsCollectionAddElement for HTMLOptGroupElement
 
 ///|
-pub(open) trait THTMLOptionsCollectionAddBefore {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait THTMLOptionsCollectionAddBefore: TJsValue {}
 
 ///|
-pub impl THTMLOptionsCollectionAddBefore for HTMLElement with to_js(
-  self : HTMLElement,
-) -> JsValue = "%identity"
+pub impl THTMLOptionsCollectionAddBefore for HTMLElement
 
 ///|
-pub impl THTMLOptionsCollectionAddBefore for Int with to_js(self : Int) -> JsValue {
-  TJsValue::to_js(self)
-}
+pub impl THTMLOptionsCollectionAddBefore for Int
 
 ///|
 /// [HTMLOptionsCollection](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionsCollection) interface.

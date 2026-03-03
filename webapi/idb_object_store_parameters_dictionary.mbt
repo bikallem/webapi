@@ -16,19 +16,13 @@ pub impl TJsValue for IDBObjectStoreParameters with to_js(
 pub impl FromJsAny for IDBObjectStoreParameters with from_js_any(value : JsAny) -> IDBObjectStoreParameters = "%identity"
 
 ///|
-pub(open) trait TIDBObjectStoreParametersNewKeyPath {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TIDBObjectStoreParametersNewKeyPath: TJsValue {}
 
 ///|
-pub impl TIDBObjectStoreParametersNewKeyPath for String with to_js(
-  self : String,
-) -> JsValue = "%identity"
+pub impl TIDBObjectStoreParametersNewKeyPath for String
 
 ///|
-pub impl TIDBObjectStoreParametersNewKeyPath for Array[String] with to_js(
-  self : Array[String],
-) -> JsValue = "%identity"
+pub impl TIDBObjectStoreParametersNewKeyPath for Array[String]
 
 ///|
 pub fn IDBObjectStoreParameters::new(
@@ -50,19 +44,13 @@ pub fn IDBObjectStoreParameters::empty() -> IDBObjectStoreParameters {
 }
 
 ///|
-pub(open) trait TIDBObjectStoreParametersGetKeyPath {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TIDBObjectStoreParametersGetKeyPath: TJsValue {}
 
 ///|
-pub impl TIDBObjectStoreParametersGetKeyPath for String with to_js(
-  self : String,
-) -> JsValue = "%identity"
+pub impl TIDBObjectStoreParametersGetKeyPath for String
 
 ///|
-pub impl TIDBObjectStoreParametersGetKeyPath for Array[String] with to_js(
-  self : Array[String],
-) -> JsValue = "%identity"
+pub impl TIDBObjectStoreParametersGetKeyPath for Array[String]
 
 ///|
 #external
@@ -91,9 +79,7 @@ pub fn[T : TIDBObjectStoreParametersGetKeyPath] IDBObjectStoreParametersGetKeyPa
 ) -> IDBObjectStoreParametersGetKeyPath = "%identity"
 
 ///|
-pub impl TIDBObjectStoreParametersGetKeyPath for IDBObjectStoreParametersGetKeyPath with to_js(
-  self : IDBObjectStoreParametersGetKeyPath,
-) -> JsValue = "%identity"
+pub impl TIDBObjectStoreParametersGetKeyPath for IDBObjectStoreParametersGetKeyPath
 
 ///|
 pub fn IDBObjectStoreParameters::key_path(

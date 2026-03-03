@@ -41,22 +41,16 @@ pub fn ExtendableMessageEvent::new(
 }
 
 ///|
-pub(open) trait TExtendableMessageEventSource {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TExtendableMessageEventSource: TJsValue {}
 
 ///|
-pub impl TExtendableMessageEventSource for Client with to_js(self : Client) -> JsValue = "%identity"
+pub impl TExtendableMessageEventSource for Client
 
 ///|
-pub impl TExtendableMessageEventSource for ServiceWorker with to_js(
-  self : ServiceWorker,
-) -> JsValue = "%identity"
+pub impl TExtendableMessageEventSource for ServiceWorker
 
 ///|
-pub impl TExtendableMessageEventSource for MessagePort with to_js(
-  self : MessagePort,
-) -> JsValue = "%identity"
+pub impl TExtendableMessageEventSource for MessagePort
 
 ///|
 #external
@@ -85,9 +79,7 @@ pub fn[T : TExtendableMessageEventSource] ExtendableMessageEventSource::from(
 ) -> ExtendableMessageEventSource = "%identity"
 
 ///|
-pub impl TExtendableMessageEventSource for ExtendableMessageEventSource with to_js(
-  self : ExtendableMessageEventSource,
-) -> JsValue = "%identity"
+pub impl TExtendableMessageEventSource for ExtendableMessageEventSource
 
 ///|
 /// [ExtendableMessageEvent](https://developer.mozilla.org/en-US/docs/Web/API/ExtendableMessageEvent) interface.

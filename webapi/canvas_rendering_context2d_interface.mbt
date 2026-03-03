@@ -24,24 +24,16 @@ pub fn[T : TCanvasRenderingContext2D] CanvasRenderingContext2D::into(
 pub impl TCanvasRenderingContext2D for CanvasRenderingContext2D
 
 ///|
-pub(open) trait TCanvasRenderingContext2DStrokeStyle {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TCanvasRenderingContext2DStrokeStyle: TJsValue {}
 
 ///|
-pub impl TCanvasRenderingContext2DStrokeStyle for String with to_js(
-  self : String,
-) -> JsValue = "%identity"
+pub impl TCanvasRenderingContext2DStrokeStyle for String
 
 ///|
-pub impl TCanvasRenderingContext2DStrokeStyle for CanvasGradient with to_js(
-  self : CanvasGradient,
-) -> JsValue = "%identity"
+pub impl TCanvasRenderingContext2DStrokeStyle for CanvasGradient
 
 ///|
-pub impl TCanvasRenderingContext2DStrokeStyle for CanvasPattern with to_js(
-  self : CanvasPattern,
-) -> JsValue = "%identity"
+pub impl TCanvasRenderingContext2DStrokeStyle for CanvasPattern
 
 ///|
 #external
@@ -70,27 +62,19 @@ pub fn[T : TCanvasRenderingContext2DStrokeStyle] CanvasRenderingContext2DStrokeS
 ) -> CanvasRenderingContext2DStrokeStyle = "%identity"
 
 ///|
-pub impl TCanvasRenderingContext2DStrokeStyle for CanvasRenderingContext2DStrokeStyle with to_js(
-  self : CanvasRenderingContext2DStrokeStyle,
-) -> JsValue = "%identity"
+pub impl TCanvasRenderingContext2DStrokeStyle for CanvasRenderingContext2DStrokeStyle
 
 ///|
-pub(open) trait TCanvasRenderingContext2DFillStyle {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TCanvasRenderingContext2DFillStyle: TJsValue {}
 
 ///|
-pub impl TCanvasRenderingContext2DFillStyle for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TCanvasRenderingContext2DFillStyle for String
 
 ///|
-pub impl TCanvasRenderingContext2DFillStyle for CanvasGradient with to_js(
-  self : CanvasGradient,
-) -> JsValue = "%identity"
+pub impl TCanvasRenderingContext2DFillStyle for CanvasGradient
 
 ///|
-pub impl TCanvasRenderingContext2DFillStyle for CanvasPattern with to_js(
-  self : CanvasPattern,
-) -> JsValue = "%identity"
+pub impl TCanvasRenderingContext2DFillStyle for CanvasPattern
 
 ///|
 #external
@@ -119,48 +103,35 @@ pub fn[T : TCanvasRenderingContext2DFillStyle] CanvasRenderingContext2DFillStyle
 ) -> CanvasRenderingContext2DFillStyle = "%identity"
 
 ///|
-pub impl TCanvasRenderingContext2DFillStyle for CanvasRenderingContext2DFillStyle with to_js(
-  self : CanvasRenderingContext2DFillStyle,
-) -> JsValue = "%identity"
+pub impl TCanvasRenderingContext2DFillStyle for CanvasRenderingContext2DFillStyle
 
 ///|
-pub(open) trait TCanvasRenderingContext2DRoundRectRadii {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TCanvasRenderingContext2DRoundRectRadii: TJsValue {}
 
 ///|
-pub impl TCanvasRenderingContext2DRoundRectRadii for Double with to_js(
-  self : Double,
-) -> JsValue {
-  TJsValue::to_js(self)
-}
+pub impl TCanvasRenderingContext2DRoundRectRadii for Double
 
 ///|
-pub impl TCanvasRenderingContext2DRoundRectRadii for DOMPointInit with to_js(
-  self : DOMPointInit,
-) -> JsValue = "%identity"
+pub impl TCanvasRenderingContext2DRoundRectRadii for DOMPointInit
 
 ///|
-pub(open) trait TCanvasRenderingContext2DRoundRectRadii2 {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TCanvasRenderingContext2DRoundRectRadii2: TJsValue {}
 
 ///|
-pub impl TCanvasRenderingContext2DRoundRectRadii2 for Double with to_js(
-  self : Double,
-) -> JsValue {
-  TJsValue::to_js(self)
-}
+pub impl TCanvasRenderingContext2DRoundRectRadii2 for Double
 
 ///|
-pub impl TCanvasRenderingContext2DRoundRectRadii2 for DOMPointInit with to_js(
-  self : DOMPointInit,
+pub impl TCanvasRenderingContext2DRoundRectRadii2 for DOMPointInit
+
+///|
+pub impl TJsValue for &TCanvasRenderingContext2DRoundRectRadii2 with to_js(
+  self : &TCanvasRenderingContext2DRoundRectRadii2,
 ) -> JsValue = "%identity"
 
 ///|
 pub impl TCanvasRenderingContext2DRoundRectRadii for Array[
   &TCanvasRenderingContext2DRoundRectRadii2,
-] with to_js(self : Array[&TCanvasRenderingContext2DRoundRectRadii2]) -> JsValue = "%identity"
+]
 
 ///|
 /// [CanvasRenderingContext2D](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D) interface.

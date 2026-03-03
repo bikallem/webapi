@@ -14,9 +14,7 @@ pub impl TJsValue for VibratePattern with to_js(self : VibratePattern) -> JsValu
 pub impl FromJsAny for VibratePattern with from_js_any(value : JsAny) -> VibratePattern = "%identity"
 
 ///|
-pub(open) trait TVibratePattern {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TVibratePattern: TJsValue {}
 
 ///|
 pub fn[T : TVibratePattern + FromJsAny] VibratePattern::into(
@@ -29,12 +27,10 @@ pub fn[T : TVibratePattern + FromJsAny] VibratePattern::into(
 pub fn[T : TVibratePattern] VibratePattern::from(value : T) -> VibratePattern = "%identity"
 
 ///|
-pub impl TVibratePattern for VibratePattern with to_js(self : VibratePattern) -> JsValue = "%identity"
+pub impl TVibratePattern for VibratePattern
 
 ///|
-pub impl TVibratePattern for UInt with to_js(self : UInt) -> JsValue {
-  TJsValue::to_js(self)
-}
+pub impl TVibratePattern for UInt
 
 ///|
-pub impl TVibratePattern for Array[UInt] with to_js(self : Array[UInt]) -> JsValue = "%identity"
+pub impl TVibratePattern for Array[UInt]

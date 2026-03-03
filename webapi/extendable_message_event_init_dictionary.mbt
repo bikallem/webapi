@@ -18,24 +18,16 @@ pub impl FromJsAny for ExtendableMessageEventInit with from_js_any(
 ) -> ExtendableMessageEventInit = "%identity"
 
 ///|
-pub(open) trait TExtendableMessageEventInitNewSource {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TExtendableMessageEventInitNewSource: TJsValue {}
 
 ///|
-pub impl TExtendableMessageEventInitNewSource for Client with to_js(
-  self : Client,
-) -> JsValue = "%identity"
+pub impl TExtendableMessageEventInitNewSource for Client
 
 ///|
-pub impl TExtendableMessageEventInitNewSource for ServiceWorker with to_js(
-  self : ServiceWorker,
-) -> JsValue = "%identity"
+pub impl TExtendableMessageEventInitNewSource for ServiceWorker
 
 ///|
-pub impl TExtendableMessageEventInitNewSource for MessagePort with to_js(
-  self : MessagePort,
-) -> JsValue = "%identity"
+pub impl TExtendableMessageEventInitNewSource for MessagePort
 
 ///|
 pub fn ExtendableMessageEventInit::new(
@@ -69,24 +61,16 @@ pub fn ExtendableMessageEventInit::empty() -> ExtendableMessageEventInit {
 }
 
 ///|
-pub(open) trait TExtendableMessageEventInitGetSource {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TExtendableMessageEventInitGetSource: TJsValue {}
 
 ///|
-pub impl TExtendableMessageEventInitGetSource for Client with to_js(
-  self : Client,
-) -> JsValue = "%identity"
+pub impl TExtendableMessageEventInitGetSource for Client
 
 ///|
-pub impl TExtendableMessageEventInitGetSource for ServiceWorker with to_js(
-  self : ServiceWorker,
-) -> JsValue = "%identity"
+pub impl TExtendableMessageEventInitGetSource for ServiceWorker
 
 ///|
-pub impl TExtendableMessageEventInitGetSource for MessagePort with to_js(
-  self : MessagePort,
-) -> JsValue = "%identity"
+pub impl TExtendableMessageEventInitGetSource for MessagePort
 
 ///|
 #external
@@ -115,9 +99,7 @@ pub fn[T : TExtendableMessageEventInitGetSource] ExtendableMessageEventInitGetSo
 ) -> ExtendableMessageEventInitGetSource = "%identity"
 
 ///|
-pub impl TExtendableMessageEventInitGetSource for ExtendableMessageEventInitGetSource with to_js(
-  self : ExtendableMessageEventInitGetSource,
-) -> JsValue = "%identity"
+pub impl TExtendableMessageEventInitGetSource for ExtendableMessageEventInitGetSource
 
 ///|
 pub fn ExtendableMessageEventInit::bubbles(

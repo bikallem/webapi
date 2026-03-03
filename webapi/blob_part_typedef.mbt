@@ -14,9 +14,7 @@ pub impl TJsValue for BlobPart with to_js(self : BlobPart) -> JsValue = "%identi
 pub impl FromJsAny for BlobPart with from_js_any(value : JsAny) -> BlobPart = "%identity"
 
 ///|
-pub(open) trait TBlobPart {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TBlobPart: TJsValue {}
 
 ///|
 pub fn[T : TBlobPart + FromJsAny] BlobPart::into(self : BlobPart) -> T {
@@ -27,13 +25,13 @@ pub fn[T : TBlobPart + FromJsAny] BlobPart::into(self : BlobPart) -> T {
 pub fn[T : TBlobPart] BlobPart::from(value : T) -> BlobPart = "%identity"
 
 ///|
-pub impl TBlobPart for BlobPart with to_js(self : BlobPart) -> JsValue = "%identity"
+pub impl TBlobPart for BlobPart
 
 ///|
-pub impl TBlobPart for BufferSource with to_js(self : BufferSource) -> JsValue = "%identity"
+pub impl TBlobPart for BufferSource
 
 ///|
-pub impl TBlobPart for Blob with to_js(self : Blob) -> JsValue = "%identity"
+pub impl TBlobPart for Blob
 
 ///|
-pub impl TBlobPart for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TBlobPart for String

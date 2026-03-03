@@ -16,9 +16,7 @@ pub impl TJsValue for FileSystemWriteChunkType with to_js(
 pub impl FromJsAny for FileSystemWriteChunkType with from_js_any(value : JsAny) -> FileSystemWriteChunkType = "%identity"
 
 ///|
-pub(open) trait TFileSystemWriteChunkType {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TFileSystemWriteChunkType: TJsValue {}
 
 ///|
 pub fn[T : TFileSystemWriteChunkType + FromJsAny] FileSystemWriteChunkType::into(
@@ -33,22 +31,16 @@ pub fn[T : TFileSystemWriteChunkType] FileSystemWriteChunkType::from(
 ) -> FileSystemWriteChunkType = "%identity"
 
 ///|
-pub impl TFileSystemWriteChunkType for FileSystemWriteChunkType with to_js(
-  self : FileSystemWriteChunkType,
-) -> JsValue = "%identity"
+pub impl TFileSystemWriteChunkType for FileSystemWriteChunkType
 
 ///|
-pub impl TFileSystemWriteChunkType for BufferSource with to_js(
-  self : BufferSource,
-) -> JsValue = "%identity"
+pub impl TFileSystemWriteChunkType for BufferSource
 
 ///|
-pub impl TFileSystemWriteChunkType for Blob with to_js(self : Blob) -> JsValue = "%identity"
+pub impl TFileSystemWriteChunkType for Blob
 
 ///|
-pub impl TFileSystemWriteChunkType for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TFileSystemWriteChunkType for String
 
 ///|
-pub impl TFileSystemWriteChunkType for WriteParams with to_js(
-  self : WriteParams,
-) -> JsValue = "%identity"
+pub impl TFileSystemWriteChunkType for WriteParams

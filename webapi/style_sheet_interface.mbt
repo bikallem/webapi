@@ -20,17 +20,13 @@ pub fn[T : TStyleSheet] StyleSheet::into(self : StyleSheet) -> T = "%identity"
 pub impl TStyleSheet for StyleSheet
 
 ///|
-pub(open) trait TStyleSheetOwnerNode {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TStyleSheetOwnerNode: TJsValue {}
 
 ///|
-pub impl TStyleSheetOwnerNode for Element with to_js(self : Element) -> JsValue = "%identity"
+pub impl TStyleSheetOwnerNode for Element
 
 ///|
-pub impl TStyleSheetOwnerNode for ProcessingInstruction with to_js(
-  self : ProcessingInstruction,
-) -> JsValue = "%identity"
+pub impl TStyleSheetOwnerNode for ProcessingInstruction
 
 ///|
 #external
@@ -55,9 +51,7 @@ pub fn[T : TStyleSheetOwnerNode] StyleSheetOwnerNode::from(
 ) -> StyleSheetOwnerNode = "%identity"
 
 ///|
-pub impl TStyleSheetOwnerNode for StyleSheetOwnerNode with to_js(
-  self : StyleSheetOwnerNode,
-) -> JsValue = "%identity"
+pub impl TStyleSheetOwnerNode for StyleSheetOwnerNode
 
 ///|
 /// [StyleSheet](https://developer.mozilla.org/en-US/docs/Web/API/StyleSheet) interface.

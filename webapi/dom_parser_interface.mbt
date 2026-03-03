@@ -25,17 +25,13 @@ pub fn DOMParser::new() -> DOMParser {
 }
 
 ///|
-pub(open) trait TDOMParserParseFromStringString {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TDOMParserParseFromStringString: TJsValue {}
 
 ///|
-pub impl TDOMParserParseFromStringString for TrustedHTML with to_js(
-  self : TrustedHTML,
-) -> JsValue = "%identity"
+pub impl TDOMParserParseFromStringString for TrustedHTML
 
 ///|
-pub impl TDOMParserParseFromStringString for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TDOMParserParseFromStringString for String
 
 ///|
 /// [DOMParser](https://developer.mozilla.org/en-US/docs/Web/API/DOMParser) interface.

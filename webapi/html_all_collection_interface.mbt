@@ -48,22 +48,16 @@ pub fn[T : THTMLAllCollectionNamedItem] HTMLAllCollectionNamedItem::from(
 ) -> HTMLAllCollectionNamedItem = "%identity"
 
 ///|
-pub impl THTMLAllCollectionNamedItem for HTMLAllCollectionNamedItem with to_js(
-  self : HTMLAllCollectionNamedItem,
-) -> JsValue = "%identity"
+pub impl THTMLAllCollectionNamedItem for HTMLAllCollectionNamedItem
 
 ///|
-pub(open) trait THTMLAllCollectionNamedItem {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait THTMLAllCollectionNamedItem: TJsValue {}
 
 ///|
-pub impl THTMLAllCollectionNamedItem for HTMLCollection with to_js(
-  self : HTMLCollection,
-) -> JsValue = "%identity"
+pub impl THTMLAllCollectionNamedItem for HTMLCollection
 
 ///|
-pub impl THTMLAllCollectionNamedItem for Element with to_js(self : Element) -> JsValue = "%identity"
+pub impl THTMLAllCollectionNamedItem for Element
 
 ///|
 #external
@@ -90,22 +84,16 @@ pub fn[T : THTMLAllCollectionItem] HTMLAllCollectionItem::from(
 ) -> HTMLAllCollectionItem = "%identity"
 
 ///|
-pub impl THTMLAllCollectionItem for HTMLAllCollectionItem with to_js(
-  self : HTMLAllCollectionItem,
-) -> JsValue = "%identity"
+pub impl THTMLAllCollectionItem for HTMLAllCollectionItem
 
 ///|
-pub(open) trait THTMLAllCollectionItem {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait THTMLAllCollectionItem: TJsValue {}
 
 ///|
-pub impl THTMLAllCollectionItem for HTMLCollection with to_js(
-  self : HTMLCollection,
-) -> JsValue = "%identity"
+pub impl THTMLAllCollectionItem for HTMLCollection
 
 ///|
-pub impl THTMLAllCollectionItem for Element with to_js(self : Element) -> JsValue = "%identity"
+pub impl THTMLAllCollectionItem for Element
 
 ///|
 /// [HTMLAllCollection](https://developer.mozilla.org/en-US/docs/Web/API/HTMLAllCollection) interface.

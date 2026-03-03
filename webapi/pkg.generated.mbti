@@ -8207,8 +8207,7 @@ pub trait TAbstractRange : TJsValue {
   collapsed(Self) -> Bool
 }
 
-pub(open) trait TAllowSharedBufferSource {
-  to_js(Self) -> JsValue
+pub(open) trait TAllowSharedBufferSource : TJsValue {
 }
 
 pub trait TAnimation : TEventTarget {
@@ -8250,8 +8249,7 @@ pub trait TAnimationEffect : TJsValue {
 pub trait TAnimationTimeline : TJsValue {
 }
 
-pub(open) trait TArrayBufferView {
-  to_js(Self) -> JsValue
+pub(open) trait TArrayBufferView : TJsValue {
 }
 
 pub trait TAttr : TNode {
@@ -8292,36 +8290,30 @@ pub trait TBarProp : TJsValue {
   visible(Self) -> Bool
 }
 
-pub(open) trait TBasePropertyIndexedKeyframeGetComposite {
-  to_js(Self) -> JsValue
+pub(open) trait TBasePropertyIndexedKeyframeGetComposite : TJsValue {
 }
 pub impl TBasePropertyIndexedKeyframeGetComposite for Array[CompositeOperationOrAuto]
 
-pub(open) trait TBasePropertyIndexedKeyframeGetEasing {
-  to_js(Self) -> JsValue
+pub(open) trait TBasePropertyIndexedKeyframeGetEasing : TJsValue {
 }
 pub impl TBasePropertyIndexedKeyframeGetEasing for String
 pub impl TBasePropertyIndexedKeyframeGetEasing for Array[String]
 
-pub(open) trait TBasePropertyIndexedKeyframeGetOffset {
-  to_js(Self) -> JsValue
+pub(open) trait TBasePropertyIndexedKeyframeGetOffset : TJsValue {
 }
 pub impl TBasePropertyIndexedKeyframeGetOffset for Double
 pub impl TBasePropertyIndexedKeyframeGetOffset for Array[Double]
 
-pub(open) trait TBasePropertyIndexedKeyframeNewComposite {
-  to_js(Self) -> JsValue
+pub(open) trait TBasePropertyIndexedKeyframeNewComposite : TJsValue {
 }
 pub impl TBasePropertyIndexedKeyframeNewComposite for Array[CompositeOperationOrAuto]
 
-pub(open) trait TBasePropertyIndexedKeyframeNewEasing {
-  to_js(Self) -> JsValue
+pub(open) trait TBasePropertyIndexedKeyframeNewEasing : TJsValue {
 }
 pub impl TBasePropertyIndexedKeyframeNewEasing for String
 pub impl TBasePropertyIndexedKeyframeNewEasing for Array[String]
 
-pub(open) trait TBasePropertyIndexedKeyframeNewOffset {
-  to_js(Self) -> JsValue
+pub(open) trait TBasePropertyIndexedKeyframeNewOffset : TJsValue {
 }
 pub impl TBasePropertyIndexedKeyframeNewOffset for Double
 pub impl TBasePropertyIndexedKeyframeNewOffset for Array[Double]
@@ -8341,13 +8333,11 @@ pub trait TBlob : TJsValue {
   bytes(Self) -> JsPromise[Uint8Array]
 }
 
-pub(open) trait TBlobPart {
-  to_js(Self) -> JsValue
+pub(open) trait TBlobPart : TJsValue {
 }
 pub impl TBlobPart for String
 
-pub(open) trait TBodyInit {
-  to_js(Self) -> JsValue
+pub(open) trait TBodyInit : TJsValue {
 }
 
 pub trait TBroadcastChannel : TEventTarget {
@@ -8360,8 +8350,7 @@ pub trait TBroadcastChannel : TEventTarget {
   set_onmessageerror(Self, (Event) -> JsValue) -> Unit
 }
 
-pub(open) trait TBufferSource {
-  to_js(Self) -> JsValue
+pub(open) trait TBufferSource : TJsValue {
 }
 
 pub trait TByteLengthQueuingStrategy : TJsValue {
@@ -8472,13 +8461,11 @@ pub trait TCSSStyleSheet : TStyleSheet {
   remove_rule(Self, index? : UInt) -> Unit
 }
 
-pub(open) trait TCSSStyleSheetInitGetMedia {
-  to_js(Self) -> JsValue
+pub(open) trait TCSSStyleSheetInitGetMedia : TJsValue {
 }
 pub impl TCSSStyleSheetInitGetMedia for String
 
-pub(open) trait TCSSStyleSheetInitNewMedia {
-  to_js(Self) -> JsValue
+pub(open) trait TCSSStyleSheetInitNewMedia : TJsValue {
 }
 pub impl TCSSStyleSheetInitNewMedia for String
 
@@ -8492,8 +8479,7 @@ pub trait TCache : TJsValue {
   keys(Self, request? : &TRequestInfo, options? : CacheQueryOptions) -> JsPromise[Array[Request]]
 }
 
-pub(open) trait TCacheMatch {
-  to_js(Self) -> JsValue
+pub(open) trait TCacheMatch : TJsValue {
 }
 
 pub trait TCacheStorage : TJsValue {
@@ -8504,16 +8490,14 @@ pub trait TCacheStorage : TJsValue {
   keys(Self) -> JsPromise[Array[String]]
 }
 
-pub(open) trait TCacheStorageMatch {
-  to_js(Self) -> JsValue
+pub(open) trait TCacheStorageMatch : TJsValue {
 }
 
 pub trait TCanvasGradient : TJsValue {
   add_color_stop(Self, Double, String) -> Unit
 }
 
-pub(open) trait TCanvasImageSource {
-  to_js(Self) -> JsValue
+pub(open) trait TCanvasImageSource : TJsValue {
 }
 
 pub trait TCanvasPattern : TJsValue {
@@ -8635,24 +8619,20 @@ pub trait TCanvasRenderingContext2D : TJsValue {
   create_pattern(Self, &TCanvasImageSource, String) -> CanvasPattern
 }
 
-pub(open) trait TCanvasRenderingContext2DFillStyle {
-  to_js(Self) -> JsValue
+pub(open) trait TCanvasRenderingContext2DFillStyle : TJsValue {
 }
 pub impl TCanvasRenderingContext2DFillStyle for String
 
-pub(open) trait TCanvasRenderingContext2DRoundRectRadii {
-  to_js(Self) -> JsValue
+pub(open) trait TCanvasRenderingContext2DRoundRectRadii : TJsValue {
 }
 pub impl TCanvasRenderingContext2DRoundRectRadii for Double
 pub impl TCanvasRenderingContext2DRoundRectRadii for Array[&TCanvasRenderingContext2DRoundRectRadii2]
 
-pub(open) trait TCanvasRenderingContext2DRoundRectRadii2 {
-  to_js(Self) -> JsValue
+pub(open) trait TCanvasRenderingContext2DRoundRectRadii2 : TJsValue {
 }
 pub impl TCanvasRenderingContext2DRoundRectRadii2 for Double
 
-pub(open) trait TCanvasRenderingContext2DStrokeStyle {
-  to_js(Self) -> JsValue
+pub(open) trait TCanvasRenderingContext2DStrokeStyle : TJsValue {
 }
 pub impl TCanvasRenderingContext2DStrokeStyle for String
 
@@ -8680,18 +8660,15 @@ pub trait TCharacterData : TNode {
   remove(Self) -> Unit
 }
 
-pub(open) trait TCharacterDataAfterNodes {
-  to_js(Self) -> JsValue
+pub(open) trait TCharacterDataAfterNodes : TJsValue {
 }
 pub impl TCharacterDataAfterNodes for String
 
-pub(open) trait TCharacterDataBeforeNodes {
-  to_js(Self) -> JsValue
+pub(open) trait TCharacterDataBeforeNodes : TJsValue {
 }
 pub impl TCharacterDataBeforeNodes for String
 
-pub(open) trait TCharacterDataReplaceWithNodes {
-  to_js(Self) -> JsValue
+pub(open) trait TCharacterDataReplaceWithNodes : TJsValue {
 }
 pub impl TCharacterDataReplaceWithNodes for String
 
@@ -8711,8 +8688,7 @@ pub trait TClients : TJsValue {
   claim(Self) -> JsPromise[JsValue]
 }
 
-pub(open) trait TClientsGet {
-  to_js(Self) -> JsValue
+pub(open) trait TClientsGet : TJsValue {
 }
 
 pub trait TClipboard : TEventTarget {
@@ -8737,8 +8713,7 @@ pub trait TClipboardItem : TJsValue {
   get_type(Self, String) -> JsPromise[Blob]
 }
 
-pub(open) trait TClipboardItemData {
-  to_js(Self) -> JsValue
+pub(open) trait TClipboardItemData : TJsValue {
 }
 pub impl TClipboardItemData for String
 
@@ -8771,14 +8746,12 @@ pub trait TCompositionEvent : TUIEvent {
   init_composition_event(Self, String, bubbles_arg? : Bool, cancelable_arg? : Bool, view_arg? : Window, data_arg? : String) -> Unit
 }
 
-pub(open) trait TComputedEffectTimingGetDuration {
-  to_js(Self) -> JsValue
+pub(open) trait TComputedEffectTimingGetDuration : TJsValue {
 }
 pub impl TComputedEffectTimingGetDuration for Double
 pub impl TComputedEffectTimingGetDuration for String
 
-pub(open) trait TComputedEffectTimingNewDuration {
-  to_js(Self) -> JsValue
+pub(open) trait TComputedEffectTimingNewDuration : TJsValue {
 }
 pub impl TComputedEffectTimingNewDuration for Double
 pub impl TComputedEffectTimingNewDuration for String
@@ -8797,8 +8770,7 @@ pub trait TCustomElementRegistry : TJsValue {
   initialize(Self, &TNode) -> Unit
 }
 
-pub(open) trait TCustomElementRegistryGet {
-  to_js(Self) -> JsValue
+pub(open) trait TCustomElementRegistryGet : TJsValue {
 }
 
 pub trait TCustomEvent : TEvent {
@@ -8881,8 +8853,7 @@ pub trait TDOMMatrix : TDOMMatrixReadOnly {
   set_matrix_value(Self, String) -> DOMMatrix
 }
 
-pub(open) trait TDOMMatrixNewInit {
-  to_js(Self) -> JsValue
+pub(open) trait TDOMMatrixNewInit : TJsValue {
 }
 pub impl TDOMMatrixNewInit for String
 pub impl TDOMMatrixNewInit for Array[Double]
@@ -8931,8 +8902,7 @@ pub trait TDOMMatrixReadOnly : TJsValue {
   to_json(Self) -> JsValue
 }
 
-pub(open) trait TDOMMatrixReadOnlyNewInit {
-  to_js(Self) -> JsValue
+pub(open) trait TDOMMatrixReadOnlyNewInit : TJsValue {
 }
 pub impl TDOMMatrixReadOnlyNewInit for String
 pub impl TDOMMatrixReadOnlyNewInit for Array[Double]
@@ -8941,8 +8911,7 @@ pub trait TDOMParser : TJsValue {
   parse_from_string(Self, &TDOMParserParseFromStringString, DOMParserSupportedType) -> Document
 }
 
-pub(open) trait TDOMParserParseFromStringString {
-  to_js(Self) -> JsValue
+pub(open) trait TDOMParserParseFromStringString : TJsValue {
 }
 pub impl TDOMParserParseFromStringString for String
 
@@ -9399,18 +9368,15 @@ pub trait TDocument : TNode {
   query_selector(Self, String) -> Element
 }
 
-pub(open) trait TDocumentAppendNodes {
-  to_js(Self) -> JsValue
+pub(open) trait TDocumentAppendNodes : TJsValue {
 }
 pub impl TDocumentAppendNodes for String
 
-pub(open) trait TDocumentCreateElementNSOptions {
-  to_js(Self) -> JsValue
+pub(open) trait TDocumentCreateElementNSOptions : TJsValue {
 }
 pub impl TDocumentCreateElementNSOptions for String
 
-pub(open) trait TDocumentCreateElementOptions {
-  to_js(Self) -> JsValue
+pub(open) trait TDocumentCreateElementOptions : TJsValue {
 }
 pub impl TDocumentCreateElementOptions for String
 
@@ -9430,38 +9396,31 @@ pub trait TDocumentFragment : TNode {
   query_selector(Self, String) -> Element
 }
 
-pub(open) trait TDocumentFragmentAppendNodes {
-  to_js(Self) -> JsValue
+pub(open) trait TDocumentFragmentAppendNodes : TJsValue {
 }
 pub impl TDocumentFragmentAppendNodes for String
 
-pub(open) trait TDocumentFragmentPrependNodes {
-  to_js(Self) -> JsValue
+pub(open) trait TDocumentFragmentPrependNodes : TJsValue {
 }
 pub impl TDocumentFragmentPrependNodes for String
 
-pub(open) trait TDocumentFragmentReplaceChildrenNodes {
-  to_js(Self) -> JsValue
+pub(open) trait TDocumentFragmentReplaceChildrenNodes : TJsValue {
 }
 pub impl TDocumentFragmentReplaceChildrenNodes for String
 
-pub(open) trait TDocumentImportNodeOptions {
-  to_js(Self) -> JsValue
+pub(open) trait TDocumentImportNodeOptions : TJsValue {
 }
 pub impl TDocumentImportNodeOptions for Bool
 
-pub(open) trait TDocumentParseHTMLUnsafeHtml {
-  to_js(Self) -> JsValue
+pub(open) trait TDocumentParseHTMLUnsafeHtml : TJsValue {
 }
 pub impl TDocumentParseHTMLUnsafeHtml for String
 
-pub(open) trait TDocumentPrependNodes {
-  to_js(Self) -> JsValue
+pub(open) trait TDocumentPrependNodes : TJsValue {
 }
 pub impl TDocumentPrependNodes for String
 
-pub(open) trait TDocumentReplaceChildrenNodes {
-  to_js(Self) -> JsValue
+pub(open) trait TDocumentReplaceChildrenNodes : TJsValue {
 }
 pub impl TDocumentReplaceChildrenNodes for String
 
@@ -9478,28 +9437,23 @@ pub trait TDocumentType : TNode {
   remove(Self) -> Unit
 }
 
-pub(open) trait TDocumentTypeAfterNodes {
-  to_js(Self) -> JsValue
+pub(open) trait TDocumentTypeAfterNodes : TJsValue {
 }
 pub impl TDocumentTypeAfterNodes for String
 
-pub(open) trait TDocumentTypeBeforeNodes {
-  to_js(Self) -> JsValue
+pub(open) trait TDocumentTypeBeforeNodes : TJsValue {
 }
 pub impl TDocumentTypeBeforeNodes for String
 
-pub(open) trait TDocumentTypeReplaceWithNodes {
-  to_js(Self) -> JsValue
+pub(open) trait TDocumentTypeReplaceWithNodes : TJsValue {
 }
 pub impl TDocumentTypeReplaceWithNodes for String
 
-pub(open) trait TDocumentWriteText {
-  to_js(Self) -> JsValue
+pub(open) trait TDocumentWriteText : TJsValue {
 }
 pub impl TDocumentWriteText for String
 
-pub(open) trait TDocumentWritelnText {
-  to_js(Self) -> JsValue
+pub(open) trait TDocumentWritelnText : TJsValue {
 }
 pub impl TDocumentWritelnText for String
 
@@ -9507,14 +9461,12 @@ pub trait TDragEvent : TMouseEvent {
   data_transfer(Self) -> DataTransfer
 }
 
-pub(open) trait TEffectTimingGetDuration {
-  to_js(Self) -> JsValue
+pub(open) trait TEffectTimingGetDuration : TJsValue {
 }
 pub impl TEffectTimingGetDuration for Double
 pub impl TEffectTimingGetDuration for String
 
-pub(open) trait TEffectTimingNewDuration {
-  to_js(Self) -> JsValue
+pub(open) trait TEffectTimingNewDuration : TJsValue {
 }
 pub impl TEffectTimingNewDuration for Double
 pub impl TEffectTimingNewDuration for String
@@ -9627,33 +9579,27 @@ pub trait TElement : TNode {
   query_selector(Self, String) -> Element
 }
 
-pub(open) trait TElementAfterNodes {
-  to_js(Self) -> JsValue
+pub(open) trait TElementAfterNodes : TJsValue {
 }
 pub impl TElementAfterNodes for String
 
-pub(open) trait TElementAnimateOptions {
-  to_js(Self) -> JsValue
+pub(open) trait TElementAnimateOptions : TJsValue {
 }
 pub impl TElementAnimateOptions for Double
 
-pub(open) trait TElementAppendNodes {
-  to_js(Self) -> JsValue
+pub(open) trait TElementAppendNodes : TJsValue {
 }
 pub impl TElementAppendNodes for String
 
-pub(open) trait TElementBeforeNodes {
-  to_js(Self) -> JsValue
+pub(open) trait TElementBeforeNodes : TJsValue {
 }
 pub impl TElementBeforeNodes for String
 
-pub(open) trait TElementInnerHTML {
-  to_js(Self) -> JsValue
+pub(open) trait TElementInnerHTML : TJsValue {
 }
 pub impl TElementInnerHTML for String
 
-pub(open) trait TElementInsertAdjacentHTMLString {
-  to_js(Self) -> JsValue
+pub(open) trait TElementInsertAdjacentHTMLString : TJsValue {
 }
 pub impl TElementInsertAdjacentHTMLString for String
 
@@ -9671,53 +9617,43 @@ pub trait TElementInternals : TJsValue {
   states(Self) -> CustomStateSet
 }
 
-pub(open) trait TElementInternalsSetFormValueState {
-  to_js(Self) -> JsValue
+pub(open) trait TElementInternalsSetFormValueState : TJsValue {
 }
 pub impl TElementInternalsSetFormValueState for String
 
-pub(open) trait TElementInternalsSetFormValueValue {
-  to_js(Self) -> JsValue
+pub(open) trait TElementInternalsSetFormValueValue : TJsValue {
 }
 pub impl TElementInternalsSetFormValueValue for String
 
-pub(open) trait TElementOuterHTML {
-  to_js(Self) -> JsValue
+pub(open) trait TElementOuterHTML : TJsValue {
 }
 pub impl TElementOuterHTML for String
 
-pub(open) trait TElementPrependNodes {
-  to_js(Self) -> JsValue
+pub(open) trait TElementPrependNodes : TJsValue {
 }
 pub impl TElementPrependNodes for String
 
-pub(open) trait TElementReplaceChildrenNodes {
-  to_js(Self) -> JsValue
+pub(open) trait TElementReplaceChildrenNodes : TJsValue {
 }
 pub impl TElementReplaceChildrenNodes for String
 
-pub(open) trait TElementReplaceWithNodes {
-  to_js(Self) -> JsValue
+pub(open) trait TElementReplaceWithNodes : TJsValue {
 }
 pub impl TElementReplaceWithNodes for String
 
-pub(open) trait TElementScrollIntoViewArg {
-  to_js(Self) -> JsValue
+pub(open) trait TElementScrollIntoViewArg : TJsValue {
 }
 pub impl TElementScrollIntoViewArg for Bool
 
-pub(open) trait TElementSetAttributeNSValue {
-  to_js(Self) -> JsValue
+pub(open) trait TElementSetAttributeNSValue : TJsValue {
 }
 pub impl TElementSetAttributeNSValue for String
 
-pub(open) trait TElementSetAttributeValue {
-  to_js(Self) -> JsValue
+pub(open) trait TElementSetAttributeValue : TJsValue {
 }
 pub impl TElementSetAttributeValue for String
 
-pub(open) trait TElementSetHTMLUnsafeHtml {
-  to_js(Self) -> JsValue
+pub(open) trait TElementSetHTMLUnsafeHtml : TJsValue {
 }
 pub impl TElementSetHTMLUnsafeHtml for String
 
@@ -9771,13 +9707,11 @@ pub trait TEventTarget : TJsValue {
   dispatch_event(Self, &TEvent) -> Bool
 }
 
-pub(open) trait TEventTargetAddEventListenerOptions {
-  to_js(Self) -> JsValue
+pub(open) trait TEventTargetAddEventListenerOptions : TJsValue {
 }
 pub impl TEventTargetAddEventListenerOptions for Bool
 
-pub(open) trait TEventTargetRemoveEventListenerOptions {
-  to_js(Self) -> JsValue
+pub(open) trait TEventTargetRemoveEventListenerOptions : TJsValue {
 }
 pub impl TEventTargetRemoveEventListenerOptions for Bool
 
@@ -9793,16 +9727,13 @@ pub trait TExtendableMessageEvent : TExtendableEvent {
   ports(Self) -> Array[MessagePort]
 }
 
-pub(open) trait TExtendableMessageEventInitGetSource {
-  to_js(Self) -> JsValue
+pub(open) trait TExtendableMessageEventInitGetSource : TJsValue {
 }
 
-pub(open) trait TExtendableMessageEventInitNewSource {
-  to_js(Self) -> JsValue
+pub(open) trait TExtendableMessageEventInitNewSource : TJsValue {
 }
 
-pub(open) trait TExtendableMessageEventSource {
-  to_js(Self) -> JsValue
+pub(open) trait TExtendableMessageEventSource : TJsValue {
 }
 
 pub trait TExternal : TJsValue {
@@ -9858,8 +9789,7 @@ pub trait TFileReader : TEventTarget {
   set_onloadend(Self, (Event) -> JsValue) -> Unit
 }
 
-pub(open) trait TFileReaderResult {
-  to_js(Self) -> JsValue
+pub(open) trait TFileReaderResult : TJsValue {
 }
 pub impl TFileReaderResult for String
 
@@ -9906,8 +9836,7 @@ pub trait TFileSystemWritableFileStream : TWritableStream {
   truncate(Self, UInt64) -> JsPromise[JsValue]
 }
 
-pub(open) trait TFileSystemWriteChunkType {
-  to_js(Self) -> JsValue
+pub(open) trait TFileSystemWriteChunkType : TJsValue {
 }
 pub impl TFileSystemWriteChunkType for String
 
@@ -9926,8 +9855,7 @@ pub trait TFormData : TJsValue {
   set_blob(Self, String, &TBlob, filename? : String) -> Unit
 }
 
-pub(open) trait TFormDataEntryValue {
-  to_js(Self) -> JsValue
+pub(open) trait TFormDataEntryValue : TJsValue {
 }
 pub impl TFormDataEntryValue for String
 
@@ -9935,8 +9863,7 @@ pub trait TFormDataEvent : TEvent {
   form_data(Self) -> FormData
 }
 
-pub(open) trait TGeometryNode {
-  to_js(Self) -> JsValue
+pub(open) trait TGeometryNode : TJsValue {
 }
 
 pub trait THTMLAllCollection : TJsValue {
@@ -9947,12 +9874,10 @@ pub trait THTMLAllCollection : TJsValue {
   get(Self, UInt) -> Element
 }
 
-pub(open) trait THTMLAllCollectionItem {
-  to_js(Self) -> JsValue
+pub(open) trait THTMLAllCollectionItem : TJsValue {
 }
 
-pub(open) trait THTMLAllCollectionNamedItem {
-  to_js(Self) -> JsValue
+pub(open) trait THTMLAllCollectionNamedItem : TJsValue {
 }
 
 pub trait THTMLAnchorElement : THTMLElement {
@@ -10467,15 +10392,13 @@ pub trait THTMLElement : TElement {
   style(Self) -> CSSStyleProperties
 }
 
-pub(open) trait THTMLElementHidden {
-  to_js(Self) -> JsValue
+pub(open) trait THTMLElementHidden : TJsValue {
 }
 pub impl THTMLElementHidden for Bool
 pub impl THTMLElementHidden for Double
 pub impl THTMLElementHidden for String
 
-pub(open) trait THTMLElementTogglePopoverOptions {
-  to_js(Self) -> JsValue
+pub(open) trait THTMLElementTogglePopoverOptions : TJsValue {
 }
 pub impl THTMLElementTogglePopoverOptions for Bool
 
@@ -10525,8 +10448,7 @@ pub trait THTMLFormControlsCollection : THTMLCollection {
   named_item(Self, String) -> HTMLFormControlsCollectionNamedItem?
 }
 
-pub(open) trait THTMLFormControlsCollectionNamedItem {
-  to_js(Self) -> JsValue
+pub(open) trait THTMLFormControlsCollectionNamedItem : TJsValue {
 }
 
 pub trait THTMLFormElement : THTMLElement {
@@ -10563,8 +10485,7 @@ pub trait THTMLFormElement : THTMLElement {
   get(Self, UInt) -> Element
 }
 
-pub(open) trait THTMLFormElementGetByName {
-  to_js(Self) -> JsValue
+pub(open) trait THTMLFormElementGetByName : TJsValue {
 }
 
 pub trait THTMLFrameElement : THTMLElement {
@@ -10695,8 +10616,7 @@ pub trait THTMLIFrameElement : THTMLElement {
   get_svg_document(Self) -> Document
 }
 
-pub(open) trait THTMLIFrameElementSrcdoc {
-  to_js(Self) -> JsValue
+pub(open) trait THTMLIFrameElementSrcdoc : TJsValue {
 }
 pub impl THTMLIFrameElementSrcdoc for String
 
@@ -11131,21 +11051,17 @@ pub trait THTMLOptionsCollection : THTMLCollection {
   set_selected_index(Self, Int) -> Unit
 }
 
-pub(open) trait THTMLOptionsCollectionAddBefore {
-  to_js(Self) -> JsValue
+pub(open) trait THTMLOptionsCollectionAddBefore : TJsValue {
 }
 pub impl THTMLOptionsCollectionAddBefore for Int
 
-pub(open) trait THTMLOptionsCollectionAddElement {
-  to_js(Self) -> JsValue
+pub(open) trait THTMLOptionsCollectionAddElement : TJsValue {
 }
 
-pub(open) trait THTMLOrSVGImageElement {
-  to_js(Self) -> JsValue
+pub(open) trait THTMLOrSVGImageElement : TJsValue {
 }
 
-pub(open) trait THTMLOrSVGScriptElement {
-  to_js(Self) -> JsValue
+pub(open) trait THTMLOrSVGScriptElement : TJsValue {
 }
 
 pub trait THTMLOutputElement : THTMLElement {
@@ -11276,13 +11192,11 @@ pub trait THTMLSelectElement : THTMLElement {
   named_item(Self, String) -> HTMLOptionElement
 }
 
-pub(open) trait THTMLSelectElementAddBefore {
-  to_js(Self) -> JsValue
+pub(open) trait THTMLSelectElementAddBefore : TJsValue {
 }
 pub impl THTMLSelectElementAddBefore for Int
 
-pub(open) trait THTMLSelectElementAddElement {
-  to_js(Self) -> JsValue
+pub(open) trait THTMLSelectElementAddElement : TJsValue {
 }
 
 pub trait THTMLSelectedContentElement : THTMLElement {
@@ -11296,8 +11210,7 @@ pub trait THTMLSlotElement : THTMLElement {
   assign(Self, Array[&THTMLSlotElementAssignNodes]) -> Unit
 }
 
-pub(open) trait THTMLSlotElementAssignNodes {
-  to_js(Self) -> JsValue
+pub(open) trait THTMLSlotElementAssignNodes : TJsValue {
 }
 
 pub trait THTMLSourceElement : THTMLElement {
@@ -11580,8 +11493,7 @@ pub trait THeaders : TJsValue {
   set(Self, String, String) -> Unit
 }
 
-pub(open) trait THeadersInit {
-  to_js(Self) -> JsValue
+pub(open) trait THeadersInit : TJsValue {
 }
 pub impl THeadersInit for Array[Array[String]]
 
@@ -11610,8 +11522,7 @@ pub trait TIDBCursor : TJsValue {
   delete(Self) -> IDBRequest
 }
 
-pub(open) trait TIDBCursorSource {
-  to_js(Self) -> JsValue
+pub(open) trait TIDBCursorSource : TJsValue {
 }
 
 pub trait TIDBCursorWithValue : TIDBCursor {
@@ -11636,8 +11547,7 @@ pub trait TIDBDatabase : TEventTarget {
   set_onversionchange(Self, (Event) -> JsValue) -> Unit
 }
 
-pub(open) trait TIDBDatabaseTransactionStoreNames {
-  to_js(Self) -> JsValue
+pub(open) trait TIDBDatabaseTransactionStoreNames : TJsValue {
 }
 pub impl TIDBDatabaseTransactionStoreNames for String
 pub impl TIDBDatabaseTransactionStoreNames for Array[String]
@@ -11698,20 +11608,17 @@ pub trait TIDBObjectStore : TJsValue {
   delete_index(Self, String) -> Unit
 }
 
-pub(open) trait TIDBObjectStoreCreateIndexKeyPath {
-  to_js(Self) -> JsValue
+pub(open) trait TIDBObjectStoreCreateIndexKeyPath : TJsValue {
 }
 pub impl TIDBObjectStoreCreateIndexKeyPath for String
 pub impl TIDBObjectStoreCreateIndexKeyPath for Array[String]
 
-pub(open) trait TIDBObjectStoreParametersGetKeyPath {
-  to_js(Self) -> JsValue
+pub(open) trait TIDBObjectStoreParametersGetKeyPath : TJsValue {
 }
 pub impl TIDBObjectStoreParametersGetKeyPath for String
 pub impl TIDBObjectStoreParametersGetKeyPath for Array[String]
 
-pub(open) trait TIDBObjectStoreParametersNewKeyPath {
-  to_js(Self) -> JsValue
+pub(open) trait TIDBObjectStoreParametersNewKeyPath : TJsValue {
 }
 pub impl TIDBObjectStoreParametersNewKeyPath for String
 pub impl TIDBObjectStoreParametersNewKeyPath for Array[String]
@@ -11741,8 +11648,7 @@ pub trait TIDBRequest : TEventTarget {
   set_onerror(Self, (Event) -> JsValue) -> Unit
 }
 
-pub(open) trait TIDBRequestSource {
-  to_js(Self) -> JsValue
+pub(open) trait TIDBRequestSource : TJsValue {
 }
 
 pub trait TIDBTransaction : TEventTarget {
@@ -11783,12 +11689,10 @@ pub trait TImageBitmapRenderingContext : TJsValue {
   transfer_from_image_bitmap(Self, &TImageBitmap) -> Unit
 }
 
-pub(open) trait TImageBitmapRenderingContextCanvas {
-  to_js(Self) -> JsValue
+pub(open) trait TImageBitmapRenderingContextCanvas : TJsValue {
 }
 
-pub(open) trait TImageBitmapSource {
-  to_js(Self) -> JsValue
+pub(open) trait TImageBitmapSource : TJsValue {
 }
 
 pub trait TImageData : TJsValue {
@@ -11799,8 +11703,7 @@ pub trait TImageData : TJsValue {
   color_space(Self) -> PredefinedColorSpace
 }
 
-pub(open) trait TImageDataArray {
-  to_js(Self) -> JsValue
+pub(open) trait TImageDataArray : TJsValue {
 }
 
 pub trait TInputEvent : TUIEvent {
@@ -11813,8 +11716,7 @@ pub trait TInstallEvent : TExtendableEvent {
   add_routes(Self, &TInstallEventAddRoutesRules) -> JsPromise[JsValue]
 }
 
-pub(open) trait TInstallEventAddRoutesRules {
-  to_js(Self) -> JsValue
+pub(open) trait TInstallEventAddRoutesRules : TJsValue {
 }
 pub impl TInstallEventAddRoutesRules for Array[RouterRule]
 
@@ -11842,28 +11744,23 @@ pub trait TIntersectionObserverEntry : TJsValue {
   target(Self) -> Element
 }
 
-pub(open) trait TIntersectionObserverInitGetRoot {
-  to_js(Self) -> JsValue
+pub(open) trait TIntersectionObserverInitGetRoot : TJsValue {
 }
 
-pub(open) trait TIntersectionObserverInitGetThreshold {
-  to_js(Self) -> JsValue
+pub(open) trait TIntersectionObserverInitGetThreshold : TJsValue {
 }
 pub impl TIntersectionObserverInitGetThreshold for Double
 pub impl TIntersectionObserverInitGetThreshold for Array[Double]
 
-pub(open) trait TIntersectionObserverInitNewRoot {
-  to_js(Self) -> JsValue
+pub(open) trait TIntersectionObserverInitNewRoot : TJsValue {
 }
 
-pub(open) trait TIntersectionObserverInitNewThreshold {
-  to_js(Self) -> JsValue
+pub(open) trait TIntersectionObserverInitNewThreshold : TJsValue {
 }
 pub impl TIntersectionObserverInitNewThreshold for Double
 pub impl TIntersectionObserverInitNewThreshold for Array[Double]
 
-pub(open) trait TIntersectionObserverRoot {
-  to_js(Self) -> JsValue
+pub(open) trait TIntersectionObserverRoot : TJsValue {
 }
 
 pub(open) trait TJsValue {
@@ -11880,6 +11777,9 @@ pub impl TJsValue for UInt64
 pub impl TJsValue for Float
 pub impl TJsValue for Double
 pub impl TJsValue for String
+pub impl TJsValue for &TCanvasRenderingContext2DRoundRectRadii2
+pub impl TJsValue for &TOffscreenCanvasRenderingContext2DRoundRectRadii2
+pub impl TJsValue for &TPath2DRoundRectRadii2
 pub impl[T : TJsValue] TJsValue for Array[T]
 
 pub trait TKeyboardEvent : TUIEvent {
@@ -11898,14 +11798,12 @@ pub trait TKeyboardEvent : TUIEvent {
   key_code(Self) -> UInt
 }
 
-pub(open) trait TKeyframeAnimationOptionsGetDuration {
-  to_js(Self) -> JsValue
+pub(open) trait TKeyframeAnimationOptionsGetDuration : TJsValue {
 }
 pub impl TKeyframeAnimationOptionsGetDuration for Double
 pub impl TKeyframeAnimationOptionsGetDuration for String
 
-pub(open) trait TKeyframeAnimationOptionsNewDuration {
-  to_js(Self) -> JsValue
+pub(open) trait TKeyframeAnimationOptionsNewDuration : TJsValue {
 }
 pub impl TKeyframeAnimationOptionsNewDuration for Double
 pub impl TKeyframeAnimationOptionsNewDuration for String
@@ -11921,19 +11819,16 @@ pub trait TKeyframeEffect : TAnimationEffect {
   set_keyframes(Self, JsValue) -> Unit
 }
 
-pub(open) trait TKeyframeEffectNewOptions {
-  to_js(Self) -> JsValue
+pub(open) trait TKeyframeEffectNewOptions : TJsValue {
 }
 pub impl TKeyframeEffectNewOptions for Double
 
-pub(open) trait TKeyframeEffectOptionsGetDuration {
-  to_js(Self) -> JsValue
+pub(open) trait TKeyframeEffectOptionsGetDuration : TJsValue {
 }
 pub impl TKeyframeEffectOptionsGetDuration for Double
 pub impl TKeyframeEffectOptionsGetDuration for String
 
-pub(open) trait TKeyframeEffectOptionsNewDuration {
-  to_js(Self) -> JsValue
+pub(open) trait TKeyframeEffectOptionsNewDuration : TJsValue {
 }
 pub impl TKeyframeEffectOptionsNewDuration for Double
 pub impl TKeyframeEffectOptionsNewDuration for String
@@ -11976,8 +11871,7 @@ pub trait TMediaList : TJsValue {
   delete_medium(Self, String) -> Unit
 }
 
-pub(open) trait TMediaProvider {
-  to_js(Self) -> JsValue
+pub(open) trait TMediaProvider : TJsValue {
 }
 
 pub trait TMediaQueryList : TEventTarget {
@@ -12008,8 +11902,7 @@ pub trait TMessageEvent : TEvent {
   init_message_event(Self, String, bubbles? : Bool, cancelable? : Bool, data? : JsValue, origin? : String, last_event_id? : String, source? : &TMessageEventSource, ports? : Array[MessagePort]) -> Unit
 }
 
-pub(open) trait TMessageEventSource {
-  to_js(Self) -> JsValue
+pub(open) trait TMessageEventSource : TJsValue {
 }
 
 pub trait TMessagePort : TEventTarget {
@@ -12448,39 +12341,32 @@ pub trait TOffscreenCanvasRenderingContext2D : TJsValue {
   create_pattern(Self, &TCanvasImageSource, String) -> CanvasPattern
 }
 
-pub(open) trait TOffscreenCanvasRenderingContext2DFillStyle {
-  to_js(Self) -> JsValue
+pub(open) trait TOffscreenCanvasRenderingContext2DFillStyle : TJsValue {
 }
 pub impl TOffscreenCanvasRenderingContext2DFillStyle for String
 
-pub(open) trait TOffscreenCanvasRenderingContext2DRoundRectRadii {
-  to_js(Self) -> JsValue
+pub(open) trait TOffscreenCanvasRenderingContext2DRoundRectRadii : TJsValue {
 }
 pub impl TOffscreenCanvasRenderingContext2DRoundRectRadii for Double
 pub impl TOffscreenCanvasRenderingContext2DRoundRectRadii for Array[&TOffscreenCanvasRenderingContext2DRoundRectRadii2]
 
-pub(open) trait TOffscreenCanvasRenderingContext2DRoundRectRadii2 {
-  to_js(Self) -> JsValue
+pub(open) trait TOffscreenCanvasRenderingContext2DRoundRectRadii2 : TJsValue {
 }
 pub impl TOffscreenCanvasRenderingContext2DRoundRectRadii2 for Double
 
-pub(open) trait TOffscreenCanvasRenderingContext2DStrokeStyle {
-  to_js(Self) -> JsValue
+pub(open) trait TOffscreenCanvasRenderingContext2DStrokeStyle : TJsValue {
 }
 pub impl TOffscreenCanvasRenderingContext2DStrokeStyle for String
 
-pub(open) trait TOffscreenRenderingContext {
-  to_js(Self) -> JsValue
+pub(open) trait TOffscreenRenderingContext : TJsValue {
 }
 
-pub(open) trait TOptionalEffectTimingGetDuration {
-  to_js(Self) -> JsValue
+pub(open) trait TOptionalEffectTimingGetDuration : TJsValue {
 }
 pub impl TOptionalEffectTimingGetDuration for Double
 pub impl TOptionalEffectTimingGetDuration for String
 
-pub(open) trait TOptionalEffectTimingNewDuration {
-  to_js(Self) -> JsValue
+pub(open) trait TOptionalEffectTimingNewDuration : TJsValue {
 }
 pub impl TOptionalEffectTimingNewDuration for Double
 pub impl TOptionalEffectTimingNewDuration for String
@@ -12518,19 +12404,16 @@ pub trait TPath2D : TJsValue {
   ellipse(Self, Double, Double, Double, Double, Double, Double, Double, counterclockwise? : Bool) -> Unit
 }
 
-pub(open) trait TPath2DNewPath {
-  to_js(Self) -> JsValue
+pub(open) trait TPath2DNewPath : TJsValue {
 }
 pub impl TPath2DNewPath for String
 
-pub(open) trait TPath2DRoundRectRadii {
-  to_js(Self) -> JsValue
+pub(open) trait TPath2DRoundRectRadii : TJsValue {
 }
 pub impl TPath2DRoundRectRadii for Double
 pub impl TPath2DRoundRectRadii for Array[&TPath2DRoundRectRadii2]
 
-pub(open) trait TPath2DRoundRectRadii2 {
-  to_js(Self) -> JsValue
+pub(open) trait TPath2DRoundRectRadii2 : TJsValue {
 }
 pub impl TPath2DRoundRectRadii2 for Double
 
@@ -12672,8 +12555,7 @@ pub trait TRange : TAbstractRange {
   get_bounding_client_rect(Self) -> DOMRect
 }
 
-pub(open) trait TRangeCreateContextualFragmentString {
-  to_js(Self) -> JsValue
+pub(open) trait TRangeCreateContextualFragmentString : TJsValue {
 }
 pub impl TRangeCreateContextualFragmentString for String
 
@@ -12707,8 +12589,7 @@ pub trait TReadableStreamBYOBRequest : TJsValue {
   respond_with_new_view(Self, &TArrayBufferView) -> Unit
 }
 
-pub(open) trait TReadableStreamController {
-  to_js(Self) -> JsValue
+pub(open) trait TReadableStreamController : TJsValue {
 }
 
 pub trait TReadableStreamDefaultController : TJsValue {
@@ -12725,12 +12606,10 @@ pub trait TReadableStreamDefaultReader : TJsValue {
   cancel(Self, reason? : JsValue) -> JsPromise[JsValue]
 }
 
-pub(open) trait TReadableStreamReader {
-  to_js(Self) -> JsValue
+pub(open) trait TReadableStreamReader : TJsValue {
 }
 
-pub(open) trait TRenderingContext {
-  to_js(Self) -> JsValue
+pub(open) trait TRenderingContext : TJsValue {
 }
 
 pub trait TRequest : TJsValue {
@@ -12761,8 +12640,7 @@ pub trait TRequest : TJsValue {
   text(Self) -> JsPromise[String]
 }
 
-pub(open) trait TRequestInfo {
-  to_js(Self) -> JsValue
+pub(open) trait TRequestInfo : TJsValue {
 }
 pub impl TRequestInfo for String
 
@@ -12804,8 +12682,7 @@ pub trait TResponse : TJsValue {
   text(Self) -> JsPromise[String]
 }
 
-pub(open) trait TRouterSource {
-  to_js(Self) -> JsValue
+pub(open) trait TRouterSource : TJsValue {
 }
 
 pub trait TSVGAElement : TSVGGraphicsElement {
@@ -12917,8 +12794,7 @@ pub trait TSVGAnimatedString : TJsValue {
   anim_val(Self) -> String
 }
 
-pub(open) trait TSVGAnimatedStringBaseVal {
-  to_js(Self) -> JsValue
+pub(open) trait TSVGAnimatedStringBaseVal : TJsValue {
 }
 pub impl TSVGAnimatedStringBaseVal for String
 
@@ -13605,12 +13481,10 @@ pub trait TServiceWorkerContainer : TEventTarget {
   set_onmessageerror(Self, (Event) -> JsValue) -> Unit
 }
 
-pub(open) trait TServiceWorkerContainerGetRegistration {
-  to_js(Self) -> JsValue
+pub(open) trait TServiceWorkerContainerGetRegistration : TJsValue {
 }
 
-pub(open) trait TServiceWorkerContainerRegisterScriptURL {
-  to_js(Self) -> JsValue
+pub(open) trait TServiceWorkerContainerRegisterScriptURL : TJsValue {
 }
 pub impl TServiceWorkerContainerRegisterScriptURL for String
 
@@ -13654,8 +13528,7 @@ pub trait TShadowAnimation : TAnimation {
   source_animation(Self) -> Animation
 }
 
-pub(open) trait TShadowAnimationNewNewTarget {
-  to_js(Self) -> JsValue
+pub(open) trait TShadowAnimationNewNewTarget : TJsValue {
 }
 
 pub trait TShadowRoot : TDocumentFragment {
@@ -13680,13 +13553,11 @@ pub trait TShadowRoot : TDocumentFragment {
   get_animations(Self) -> Array[Animation]
 }
 
-pub(open) trait TShadowRootInnerHTML {
-  to_js(Self) -> JsValue
+pub(open) trait TShadowRootInnerHTML : TJsValue {
 }
 pub impl TShadowRootInnerHTML for String
 
-pub(open) trait TShadowRootSetHTMLUnsafeHtml {
-  to_js(Self) -> JsValue
+pub(open) trait TShadowRootSetHTMLUnsafeHtml : TJsValue {
 }
 pub impl TShadowRootSetHTMLUnsafeHtml for String
 
@@ -13703,18 +13574,15 @@ pub trait TSharedWorkerGlobalScope : TWorkerGlobalScope {
   set_onconnect(Self, (Event) -> JsValue) -> Unit
 }
 
-pub(open) trait TSharedWorkerNewOptions {
-  to_js(Self) -> JsValue
+pub(open) trait TSharedWorkerNewOptions : TJsValue {
 }
 pub impl TSharedWorkerNewOptions for String
 
-pub(open) trait TSharedWorkerNewScriptURL {
-  to_js(Self) -> JsValue
+pub(open) trait TSharedWorkerNewScriptURL : TJsValue {
 }
 pub impl TSharedWorkerNewScriptURL for String
 
-pub(open) trait TStartInDirectory {
-  to_js(Self) -> JsValue
+pub(open) trait TStartInDirectory : TJsValue {
 }
 
 pub trait TStaticRange : TAbstractRange {
@@ -13762,8 +13630,7 @@ pub trait TStyleSheetList : TJsValue {
   item(Self, UInt) -> CSSStyleSheet
 }
 
-pub(open) trait TStyleSheetOwnerNode {
-  to_js(Self) -> JsValue
+pub(open) trait TStyleSheetOwnerNode : TJsValue {
 }
 
 pub trait TSubmitEvent : TEvent {
@@ -13887,8 +13754,7 @@ pub trait TTimeRanges : TJsValue {
   end(Self, UInt) -> Double
 }
 
-pub(open) trait TTimerHandler {
-  to_js(Self) -> JsValue
+pub(open) trait TTimerHandler : TJsValue {
 }
 pub impl TTimerHandler for String
 
@@ -13937,16 +13803,13 @@ pub trait TTrackEvent : TEvent {
   track(Self) -> TrackEventTrack
 }
 
-pub(open) trait TTrackEventInitGetTrack {
-  to_js(Self) -> JsValue
+pub(open) trait TTrackEventInitGetTrack : TJsValue {
 }
 
-pub(open) trait TTrackEventInitNewTrack {
-  to_js(Self) -> JsValue
+pub(open) trait TTrackEventInitNewTrack : TJsValue {
 }
 
-pub(open) trait TTrackEventTrack {
-  to_js(Self) -> JsValue
+pub(open) trait TTrackEventTrack : TJsValue {
 }
 
 pub trait TTransformStream : TJsValue {
@@ -13995,8 +13858,7 @@ pub trait TTrustedScriptURL : TJsValue {
   to_json(Self) -> String
 }
 
-pub(open) trait TTrustedType {
-  to_js(Self) -> JsValue
+pub(open) trait TTrustedType : TJsValue {
 }
 
 pub trait TTrustedTypePolicy : TJsValue {
@@ -14051,8 +13913,7 @@ pub trait TURL : TJsValue {
   to_json(Self) -> String
 }
 
-pub(open) trait TURLCreateObjectURLObj {
-  to_js(Self) -> JsValue
+pub(open) trait TURLCreateObjectURLObj : TJsValue {
 }
 
 pub trait TURLPattern : TJsValue {
@@ -14069,13 +13930,11 @@ pub trait TURLPattern : TJsValue {
   has_reg_exp_groups(Self) -> Bool
 }
 
-pub(open) trait TURLPatternCompatible {
-  to_js(Self) -> JsValue
+pub(open) trait TURLPatternCompatible : TJsValue {
 }
 pub impl TURLPatternCompatible for String
 
-pub(open) trait TURLPatternInput {
-  to_js(Self) -> JsValue
+pub(open) trait TURLPatternInput : TJsValue {
 }
 pub impl TURLPatternInput for String
 
@@ -14090,8 +13949,7 @@ pub trait TURLSearchParams : TJsValue {
   sort(Self) -> Unit
 }
 
-pub(open) trait TURLSearchParamsNewInit {
-  to_js(Self) -> JsValue
+pub(open) trait TURLSearchParamsNewInit : TJsValue {
 }
 pub impl TURLSearchParamsNewInit for String
 pub impl TURLSearchParamsNewInit for Array[Array[String]]
@@ -14115,8 +13973,7 @@ pub trait TValidityState : TJsValue {
   valid(Self) -> Bool
 }
 
-pub(open) trait TVibratePattern {
-  to_js(Self) -> JsValue
+pub(open) trait TVibratePattern : TJsValue {
 }
 pub impl TVibratePattern for UInt
 pub impl TVibratePattern for Array[UInt]
@@ -14188,14 +14045,12 @@ pub trait TWebSocket : TEventTarget {
   send(Self, &TWebSocketSendData) -> Unit
 }
 
-pub(open) trait TWebSocketNewProtocols {
-  to_js(Self) -> JsValue
+pub(open) trait TWebSocketNewProtocols : TJsValue {
 }
 pub impl TWebSocketNewProtocols for String
 pub impl TWebSocketNewProtocols for Array[String]
 
-pub(open) trait TWebSocketSendData {
-  to_js(Self) -> JsValue
+pub(open) trait TWebSocketSendData : TJsValue {
 }
 pub impl TWebSocketSendData for String
 
@@ -14542,8 +14397,7 @@ pub trait TWindowClient : TClient {
   navigate(Self, String) -> JsPromise[WindowClient]
 }
 
-pub(open) trait TWindowEvent {
-  to_js(Self) -> JsValue
+pub(open) trait TWindowEvent : TJsValue {
 }
 
 pub trait TWorker : TEventTarget {
@@ -14596,8 +14450,7 @@ pub trait TWorkerGlobalScope : TEventTarget {
   caches(Self) -> CacheStorage
 }
 
-pub(open) trait TWorkerGlobalScopeImportScriptsUrls {
-  to_js(Self) -> JsValue
+pub(open) trait TWorkerGlobalScopeImportScriptsUrls : TJsValue {
 }
 pub impl TWorkerGlobalScopeImportScriptsUrls for String
 
@@ -14634,8 +14487,7 @@ pub trait TWorkerNavigator : TJsValue {
   storage(Self) -> StorageManager
 }
 
-pub(open) trait TWorkerNewScriptURL {
-  to_js(Self) -> JsValue
+pub(open) trait TWorkerNewScriptURL : TJsValue {
 }
 pub impl TWorkerNewScriptURL for String
 
@@ -14668,13 +14520,11 @@ pub trait TWritableStreamDefaultWriter : TJsValue {
   write(Self, chunk? : JsValue) -> JsPromise[JsValue]
 }
 
-pub(open) trait TWriteParamsGetData {
-  to_js(Self) -> JsValue
+pub(open) trait TWriteParamsGetData : TJsValue {
 }
 pub impl TWriteParamsGetData for String
 
-pub(open) trait TWriteParamsNewData {
-  to_js(Self) -> JsValue
+pub(open) trait TWriteParamsNewData : TJsValue {
 }
 pub impl TWriteParamsNewData for String
 
@@ -14708,8 +14558,7 @@ pub trait TXMLHttpRequest : TXMLHttpRequestEventTarget {
   response_xml(Self) -> Document
 }
 
-pub(open) trait TXMLHttpRequestBodyInit {
-  to_js(Self) -> JsValue
+pub(open) trait TXMLHttpRequestBodyInit : TJsValue {
 }
 pub impl TXMLHttpRequestBodyInit for String
 
@@ -14730,8 +14579,7 @@ pub trait TXMLHttpRequestEventTarget : TEventTarget {
   set_onloadend(Self, (Event) -> JsValue) -> Unit
 }
 
-pub(open) trait TXMLHttpRequestSendBody {
-  to_js(Self) -> JsValue
+pub(open) trait TXMLHttpRequestSendBody : TJsValue {
 }
 
 pub trait TXMLHttpRequestUpload : TXMLHttpRequestEventTarget {

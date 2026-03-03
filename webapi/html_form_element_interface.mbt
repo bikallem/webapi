@@ -61,22 +61,16 @@ pub fn[T : THTMLFormElementGetByName] HTMLFormElementGetByName::from(
 ) -> HTMLFormElementGetByName = "%identity"
 
 ///|
-pub impl THTMLFormElementGetByName for HTMLFormElementGetByName with to_js(
-  self : HTMLFormElementGetByName,
-) -> JsValue = "%identity"
+pub impl THTMLFormElementGetByName for HTMLFormElementGetByName
 
 ///|
-pub(open) trait THTMLFormElementGetByName {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait THTMLFormElementGetByName: TJsValue {}
 
 ///|
-pub impl THTMLFormElementGetByName for RadioNodeList with to_js(
-  self : RadioNodeList,
-) -> JsValue = "%identity"
+pub impl THTMLFormElementGetByName for RadioNodeList
 
 ///|
-pub impl THTMLFormElementGetByName for Element with to_js(self : Element) -> JsValue = "%identity"
+pub impl THTMLFormElementGetByName for Element
 
 ///|
 /// [HTMLFormElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement) interface.

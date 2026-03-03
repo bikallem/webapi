@@ -23,17 +23,13 @@ pub impl TIDBDatabase for IDBDatabase
 pub impl TEventTarget for IDBDatabase
 
 ///|
-pub(open) trait TIDBDatabaseTransactionStoreNames {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TIDBDatabaseTransactionStoreNames: TJsValue {}
 
 ///|
-pub impl TIDBDatabaseTransactionStoreNames for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TIDBDatabaseTransactionStoreNames for String
 
 ///|
-pub impl TIDBDatabaseTransactionStoreNames for Array[String] with to_js(
-  self : Array[String],
-) -> JsValue = "%identity"
+pub impl TIDBDatabaseTransactionStoreNames for Array[String]
 
 ///|
 /// [IDBDatabase](https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase) interface.

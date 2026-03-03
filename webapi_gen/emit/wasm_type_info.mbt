@@ -1,12 +1,4 @@
 ///|
-/// Wasm-gc value types that are NOT externref (i32, f64, etc.).
-/// %identity cannot convert between these and JsValue (externref).
-/// Must use TJsValue::to_js delegation instead.
-let wasm_value_types : Array[String] = [
-  "Bool", "Int", "UInt", "Int64", "UInt64", "Float", "Double",
-]
-
-///|
 /// Other non-primitive types that are valid as wasm-gc import return types.
 /// These are all externref (#external) types or Unit.
 let wasm_valid_stub_other_types : Array[String] = [
@@ -21,11 +13,6 @@ let wasm_valid_stub_other_types : Array[String] = [
   // Valid as wasm import returns because the wasm-gc engine performs JS→wasm numeric conversion.
    "DOMHighResTimeStamp", "EpochTimeStamp",
 ]
-
-///|
-fn is_wasm_value_type(type_name : String) -> Bool {
-  wasm_value_types.contains(type_name)
-}
 
 ///|
 fn is_wasm_valid_stub_other_type(type_name : String) -> Bool {

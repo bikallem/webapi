@@ -14,9 +14,7 @@ pub impl TJsValue for BufferSource with to_js(self : BufferSource) -> JsValue = 
 pub impl FromJsAny for BufferSource with from_js_any(value : JsAny) -> BufferSource = "%identity"
 
 ///|
-pub(open) trait TBufferSource {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TBufferSource: TJsValue {}
 
 ///|
 pub fn[T : TBufferSource + FromJsAny] BufferSource::into(
@@ -29,10 +27,10 @@ pub fn[T : TBufferSource + FromJsAny] BufferSource::into(
 pub fn[T : TBufferSource] BufferSource::from(value : T) -> BufferSource = "%identity"
 
 ///|
-pub impl TBufferSource for BufferSource with to_js(self : BufferSource) -> JsValue = "%identity"
+pub impl TBufferSource for BufferSource
 
 ///|
-pub impl TBufferSource for ArrayBufferView with to_js(self : ArrayBufferView) -> JsValue = "%identity"
+pub impl TBufferSource for ArrayBufferView
 
 ///|
-pub impl TBufferSource for ArrayBuffer with to_js(self : ArrayBuffer) -> JsValue = "%identity"
+pub impl TBufferSource for ArrayBuffer

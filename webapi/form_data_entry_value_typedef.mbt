@@ -14,9 +14,7 @@ pub impl TJsValue for FormDataEntryValue with to_js(self : FormDataEntryValue) -
 pub impl FromJsAny for FormDataEntryValue with from_js_any(value : JsAny) -> FormDataEntryValue = "%identity"
 
 ///|
-pub(open) trait TFormDataEntryValue {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TFormDataEntryValue: TJsValue {}
 
 ///|
 pub fn[T : TFormDataEntryValue + FromJsAny] FormDataEntryValue::into(
@@ -31,12 +29,10 @@ pub fn[T : TFormDataEntryValue] FormDataEntryValue::from(
 ) -> FormDataEntryValue = "%identity"
 
 ///|
-pub impl TFormDataEntryValue for FormDataEntryValue with to_js(
-  self : FormDataEntryValue,
-) -> JsValue = "%identity"
+pub impl TFormDataEntryValue for FormDataEntryValue
 
 ///|
-pub impl TFormDataEntryValue for File with to_js(self : File) -> JsValue = "%identity"
+pub impl TFormDataEntryValue for File
 
 ///|
-pub impl TFormDataEntryValue for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TFormDataEntryValue for String

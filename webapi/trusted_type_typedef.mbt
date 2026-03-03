@@ -14,9 +14,7 @@ pub impl TJsValue for TrustedType with to_js(self : TrustedType) -> JsValue = "%
 pub impl FromJsAny for TrustedType with from_js_any(value : JsAny) -> TrustedType = "%identity"
 
 ///|
-pub(open) trait TTrustedType {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TTrustedType: TJsValue {}
 
 ///|
 pub fn[T : TTrustedType + FromJsAny] TrustedType::into(self : TrustedType) -> T {
@@ -27,13 +25,13 @@ pub fn[T : TTrustedType + FromJsAny] TrustedType::into(self : TrustedType) -> T 
 pub fn[T : TTrustedType] TrustedType::from(value : T) -> TrustedType = "%identity"
 
 ///|
-pub impl TTrustedType for TrustedType with to_js(self : TrustedType) -> JsValue = "%identity"
+pub impl TTrustedType for TrustedType
 
 ///|
-pub impl TTrustedType for TrustedHTML with to_js(self : TrustedHTML) -> JsValue = "%identity"
+pub impl TTrustedType for TrustedHTML
 
 ///|
-pub impl TTrustedType for TrustedScript with to_js(self : TrustedScript) -> JsValue = "%identity"
+pub impl TTrustedType for TrustedScript
 
 ///|
-pub impl TTrustedType for TrustedScriptURL with to_js(self : TrustedScriptURL) -> JsValue = "%identity"
+pub impl TTrustedType for TrustedScriptURL

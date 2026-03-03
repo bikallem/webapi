@@ -37,19 +37,13 @@ pub fn InstallEvent::new(
 }
 
 ///|
-pub(open) trait TInstallEventAddRoutesRules {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TInstallEventAddRoutesRules: TJsValue {}
 
 ///|
-pub impl TInstallEventAddRoutesRules for RouterRule with to_js(
-  self : RouterRule,
-) -> JsValue = "%identity"
+pub impl TInstallEventAddRoutesRules for RouterRule
 
 ///|
-pub impl TInstallEventAddRoutesRules for Array[RouterRule] with to_js(
-  self : Array[RouterRule],
-) -> JsValue = "%identity"
+pub impl TInstallEventAddRoutesRules for Array[RouterRule]
 
 ///|
 /// [InstallEvent](https://developer.mozilla.org/en-US/docs/Web/API/InstallEvent) interface.

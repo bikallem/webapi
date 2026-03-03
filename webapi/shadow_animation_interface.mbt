@@ -26,17 +26,13 @@ pub impl TAnimation for ShadowAnimation
 pub impl TEventTarget for ShadowAnimation
 
 ///|
-pub(open) trait TShadowAnimationNewNewTarget {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TShadowAnimationNewNewTarget: TJsValue {}
 
 ///|
-pub impl TShadowAnimationNewNewTarget for Element with to_js(self : Element) -> JsValue = "%identity"
+pub impl TShadowAnimationNewNewTarget for Element
 
 ///|
-pub impl TShadowAnimationNewNewTarget for CSSPseudoElement with to_js(
-  self : CSSPseudoElement,
-) -> JsValue = "%identity"
+pub impl TShadowAnimationNewNewTarget for CSSPseudoElement
 
 ///|
 pub fn ShadowAnimation::new(

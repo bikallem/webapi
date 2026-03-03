@@ -14,9 +14,7 @@ pub impl TJsValue for URLPatternInput with to_js(self : URLPatternInput) -> JsVa
 pub impl FromJsAny for URLPatternInput with from_js_any(value : JsAny) -> URLPatternInput = "%identity"
 
 ///|
-pub(open) trait TURLPatternInput {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TURLPatternInput: TJsValue {}
 
 ///|
 pub fn[T : TURLPatternInput + FromJsAny] URLPatternInput::into(
@@ -31,10 +29,10 @@ pub fn[T : TURLPatternInput] URLPatternInput::from(
 ) -> URLPatternInput = "%identity"
 
 ///|
-pub impl TURLPatternInput for URLPatternInput with to_js(self : URLPatternInput) -> JsValue = "%identity"
+pub impl TURLPatternInput for URLPatternInput
 
 ///|
-pub impl TURLPatternInput for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TURLPatternInput for String
 
 ///|
-pub impl TURLPatternInput for URLPatternInit with to_js(self : URLPatternInit) -> JsValue = "%identity"
+pub impl TURLPatternInput for URLPatternInit

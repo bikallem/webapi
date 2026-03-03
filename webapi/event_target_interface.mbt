@@ -25,34 +25,22 @@ pub fn EventTarget::new() -> EventTarget {
 }
 
 ///|
-pub(open) trait TEventTargetAddEventListenerOptions {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TEventTargetAddEventListenerOptions: TJsValue {}
 
 ///|
-pub impl TEventTargetAddEventListenerOptions for AddEventListenerOptions with to_js(
-  self : AddEventListenerOptions,
-) -> JsValue = "%identity"
+pub impl TEventTargetAddEventListenerOptions for AddEventListenerOptions
 
 ///|
-pub impl TEventTargetAddEventListenerOptions for Bool with to_js(self : Bool) -> JsValue {
-  TJsValue::to_js(self)
-}
+pub impl TEventTargetAddEventListenerOptions for Bool
 
 ///|
-pub(open) trait TEventTargetRemoveEventListenerOptions {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TEventTargetRemoveEventListenerOptions: TJsValue {}
 
 ///|
-pub impl TEventTargetRemoveEventListenerOptions for EventListenerOptions with to_js(
-  self : EventListenerOptions,
-) -> JsValue = "%identity"
+pub impl TEventTargetRemoveEventListenerOptions for EventListenerOptions
 
 ///|
-pub impl TEventTargetRemoveEventListenerOptions for Bool with to_js(self : Bool) -> JsValue {
-  TJsValue::to_js(self)
-}
+pub impl TEventTargetRemoveEventListenerOptions for Bool
 
 ///|
 /// [EventTarget](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget) interface.

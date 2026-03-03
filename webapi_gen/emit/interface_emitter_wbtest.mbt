@@ -152,21 +152,17 @@ test "InterfaceEmitter generates MoonBit code for interface" {
       #|  event_target_new_ffi()
       #|}
       #|
-      #|pub(open) trait TEventTargetAddEventListenerOptions {
-      #|  to_js(self : Self) -> JsValue
-      #|}
+      #|pub(open) trait TEventTargetAddEventListenerOptions : TJsValue {}
       #|
-      #|pub impl TEventTargetAddEventListenerOptions for AddEventListenerOptions with to_js(self : AddEventListenerOptions) -> JsValue = "%identity"
+      #|pub impl TEventTargetAddEventListenerOptions for AddEventListenerOptions
       #|
-      #|pub impl TEventTargetAddEventListenerOptions for Bool with to_js(self : Bool) -> JsValue { TJsValue::to_js(self) }
+      #|pub impl TEventTargetAddEventListenerOptions for Bool
       #|
-      #|pub(open) trait TEventTargetRemoveEventListenerOptions {
-      #|  to_js(self : Self) -> JsValue
-      #|}
+      #|pub(open) trait TEventTargetRemoveEventListenerOptions : TJsValue {}
       #|
-      #|pub impl TEventTargetRemoveEventListenerOptions for EventListenerOptions with to_js(self : EventListenerOptions) -> JsValue = "%identity"
+      #|pub impl TEventTargetRemoveEventListenerOptions for EventListenerOptions
       #|
-      #|pub impl TEventTargetRemoveEventListenerOptions for Bool with to_js(self : Bool) -> JsValue { TJsValue::to_js(self) }
+      #|pub impl TEventTargetRemoveEventListenerOptions for Bool
       #|
       #|/// [EventTarget](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget) interface.
       #|pub trait TEventTarget: TJsValue {
@@ -263,24 +259,22 @@ test "InterfaceEmitter handles interface with nested union arg types" {
       #|
       #|pub impl TTestInterface for TestInterface
       #|
-      #|pub(open) trait TTestInterfaceTestMethodParam {
-      #|  to_js(self : Self) -> JsValue
-      #|}
+      #|pub(open) trait TTestInterfaceTestMethodParam : TJsValue {}
       #|
-      #|pub impl TTestInterfaceTestMethodParam for String with to_js(self : String) -> JsValue = "%identity"
+      #|pub impl TTestInterfaceTestMethodParam for String
       #|
       #|#external
       #|pub type TestInterfaceTestMethodParam2
       #|
-      #|pub(open) trait TTestInterfaceTestMethodParam2 {
-      #|  to_js(self : Self) -> JsValue
-      #|}
+      #|pub(open) trait TTestInterfaceTestMethodParam2 : TJsValue {}
       #|
-      #|pub impl TTestInterfaceTestMethodParam2 for UInt with to_js(self : UInt) -> JsValue { TJsValue::to_js(self) }
+      #|pub impl TTestInterfaceTestMethodParam2 for UInt
       #|
-      #|pub impl TTestInterfaceTestMethodParam2 for Bool with to_js(self : Bool) -> JsValue { TJsValue::to_js(self) }
+      #|pub impl TTestInterfaceTestMethodParam2 for Bool
       #|
-      #|pub impl TTestInterfaceTestMethodParam for &TTestInterfaceTestMethodParam2 with to_js(self : &TTestInterfaceTestMethodParam2) -> JsValue = "%identity"
+      #|pub impl TJsValue for &TTestInterfaceTestMethodParam2 with to_js(self : &TTestInterfaceTestMethodParam2) -> JsValue = "%identity"
+      #|
+      #|pub impl TTestInterfaceTestMethodParam for &TTestInterfaceTestMethodParam2
       #|
       #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface) interface.
       #|pub trait TTestInterface: TJsValue {
@@ -362,15 +356,13 @@ test "InterfaceEmitter generates MoonBit code for union return type" {
       #|
       #|pub fn[T : TTestInterfaceTestMethod] TestInterfaceTestMethod::from(value : T) -> TestInterfaceTestMethod = "%identity"
       #|
-      #|pub impl TTestInterfaceTestMethod for TestInterfaceTestMethod with to_js(self : TestInterfaceTestMethod) -> JsValue = "%identity"
+      #|pub impl TTestInterfaceTestMethod for TestInterfaceTestMethod
       #|
-      #|pub(open) trait TTestInterfaceTestMethod {
-      #|  to_js(self : Self) -> JsValue
-      #|}
+      #|pub(open) trait TTestInterfaceTestMethod : TJsValue {}
       #|
-      #|pub impl TTestInterfaceTestMethod for String with to_js(self : String) -> JsValue = "%identity"
+      #|pub impl TTestInterfaceTestMethod for String
       #|
-      #|pub impl TTestInterfaceTestMethod for UInt with to_js(self : UInt) -> JsValue { TJsValue::to_js(self) }
+      #|pub impl TTestInterfaceTestMethod for UInt
       #|
       #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface) interface.
       #|pub trait TTestInterface: TJsValue {
@@ -936,7 +928,7 @@ test "mbt_code_gen_multi generates separate shared and FFI files for interface" 
 }
 
 ///|
-test "mbt_code_gen_multi uses TJsValue::to_js for UnionArgTraitImpl" {
+test "mbt_code_gen_multi emits empty UnionArgTraitImpl inheriting TJsValue" {
   let idl =
     #|interface TestInterface {
     #|  void testMethod((DOMString or boolean) param);
@@ -963,13 +955,11 @@ test "mbt_code_gen_multi uses TJsValue::to_js for UnionArgTraitImpl" {
       #|
       #|pub impl TTestInterface for TestInterface
       #|
-      #|pub(open) trait TTestInterfaceTestMethodParam {
-      #|  to_js(self : Self) -> JsValue
-      #|}
+      #|pub(open) trait TTestInterfaceTestMethodParam : TJsValue {}
       #|
-      #|pub impl TTestInterfaceTestMethodParam for String with to_js(self : String) -> JsValue = "%identity"
+      #|pub impl TTestInterfaceTestMethodParam for String
       #|
-      #|pub impl TTestInterfaceTestMethodParam for Bool with to_js(self : Bool) -> JsValue { TJsValue::to_js(self) }
+      #|pub impl TTestInterfaceTestMethodParam for Bool
       #|
       #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface) interface.
       #|pub trait TTestInterface: TJsValue {

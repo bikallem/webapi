@@ -26,37 +26,31 @@ pub impl TNode for DocumentType
 pub impl TEventTarget for DocumentType
 
 ///|
-pub(open) trait TDocumentTypeBeforeNodes {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TDocumentTypeBeforeNodes: TJsValue {}
 
 ///|
-pub impl TDocumentTypeBeforeNodes for Node with to_js(self : Node) -> JsValue = "%identity"
+pub impl TDocumentTypeBeforeNodes for Node
 
 ///|
-pub impl TDocumentTypeBeforeNodes for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TDocumentTypeBeforeNodes for String
 
 ///|
-pub(open) trait TDocumentTypeAfterNodes {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TDocumentTypeAfterNodes: TJsValue {}
 
 ///|
-pub impl TDocumentTypeAfterNodes for Node with to_js(self : Node) -> JsValue = "%identity"
+pub impl TDocumentTypeAfterNodes for Node
 
 ///|
-pub impl TDocumentTypeAfterNodes for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TDocumentTypeAfterNodes for String
 
 ///|
-pub(open) trait TDocumentTypeReplaceWithNodes {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TDocumentTypeReplaceWithNodes: TJsValue {}
 
 ///|
-pub impl TDocumentTypeReplaceWithNodes for Node with to_js(self : Node) -> JsValue = "%identity"
+pub impl TDocumentTypeReplaceWithNodes for Node
 
 ///|
-pub impl TDocumentTypeReplaceWithNodes for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TDocumentTypeReplaceWithNodes for String
 
 ///|
 /// [DocumentType](https://developer.mozilla.org/en-US/docs/Web/API/DocumentType) interface.

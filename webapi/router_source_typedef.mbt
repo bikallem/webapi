@@ -14,9 +14,7 @@ pub impl TJsValue for RouterSource with to_js(self : RouterSource) -> JsValue = 
 pub impl FromJsAny for RouterSource with from_js_any(value : JsAny) -> RouterSource = "%identity"
 
 ///|
-pub(open) trait TRouterSource {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TRouterSource: TJsValue {}
 
 ///|
 pub fn[T : TRouterSource + FromJsAny] RouterSource::into(
@@ -29,10 +27,10 @@ pub fn[T : TRouterSource + FromJsAny] RouterSource::into(
 pub fn[T : TRouterSource] RouterSource::from(value : T) -> RouterSource = "%identity"
 
 ///|
-pub impl TRouterSource for RouterSource with to_js(self : RouterSource) -> JsValue = "%identity"
+pub impl TRouterSource for RouterSource
 
 ///|
-pub impl TRouterSource for RouterSourceDict with to_js(self : RouterSourceDict) -> JsValue = "%identity"
+pub impl TRouterSource for RouterSourceDict
 
 ///|
-pub impl TRouterSource for RouterSourceEnum with to_js(self : RouterSourceEnum) -> JsValue = "%identity"
+pub impl TRouterSource for RouterSourceEnum

@@ -14,9 +14,7 @@ pub impl TJsValue for GeometryNode with to_js(self : GeometryNode) -> JsValue = 
 pub impl FromJsAny for GeometryNode with from_js_any(value : JsAny) -> GeometryNode = "%identity"
 
 ///|
-pub(open) trait TGeometryNode {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TGeometryNode: TJsValue {}
 
 ///|
 pub fn[T : TGeometryNode + FromJsAny] GeometryNode::into(
@@ -29,16 +27,16 @@ pub fn[T : TGeometryNode + FromJsAny] GeometryNode::into(
 pub fn[T : TGeometryNode] GeometryNode::from(value : T) -> GeometryNode = "%identity"
 
 ///|
-pub impl TGeometryNode for GeometryNode with to_js(self : GeometryNode) -> JsValue = "%identity"
+pub impl TGeometryNode for GeometryNode
 
 ///|
-pub impl TGeometryNode for Text with to_js(self : Text) -> JsValue = "%identity"
+pub impl TGeometryNode for Text
 
 ///|
-pub impl TGeometryNode for Element with to_js(self : Element) -> JsValue = "%identity"
+pub impl TGeometryNode for Element
 
 ///|
-pub impl TGeometryNode for CSSPseudoElement with to_js(self : CSSPseudoElement) -> JsValue = "%identity"
+pub impl TGeometryNode for CSSPseudoElement
 
 ///|
-pub impl TGeometryNode for Document with to_js(self : Document) -> JsValue = "%identity"
+pub impl TGeometryNode for Document

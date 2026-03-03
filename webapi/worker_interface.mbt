@@ -23,17 +23,13 @@ pub impl TWorker for Worker
 pub impl TEventTarget for Worker
 
 ///|
-pub(open) trait TWorkerNewScriptURL {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TWorkerNewScriptURL: TJsValue {}
 
 ///|
-pub impl TWorkerNewScriptURL for TrustedScriptURL with to_js(
-  self : TrustedScriptURL,
-) -> JsValue = "%identity"
+pub impl TWorkerNewScriptURL for TrustedScriptURL
 
 ///|
-pub impl TWorkerNewScriptURL for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TWorkerNewScriptURL for String
 
 ///|
 pub fn Worker::new(

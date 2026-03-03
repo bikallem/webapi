@@ -14,9 +14,7 @@ pub impl TJsValue for StartInDirectory with to_js(self : StartInDirectory) -> Js
 pub impl FromJsAny for StartInDirectory with from_js_any(value : JsAny) -> StartInDirectory = "%identity"
 
 ///|
-pub(open) trait TStartInDirectory {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TStartInDirectory: TJsValue {}
 
 ///|
 pub fn[T : TStartInDirectory + FromJsAny] StartInDirectory::into(
@@ -31,16 +29,10 @@ pub fn[T : TStartInDirectory] StartInDirectory::from(
 ) -> StartInDirectory = "%identity"
 
 ///|
-pub impl TStartInDirectory for StartInDirectory with to_js(
-  self : StartInDirectory,
-) -> JsValue = "%identity"
+pub impl TStartInDirectory for StartInDirectory
 
 ///|
-pub impl TStartInDirectory for WellKnownDirectory with to_js(
-  self : WellKnownDirectory,
-) -> JsValue = "%identity"
+pub impl TStartInDirectory for WellKnownDirectory
 
 ///|
-pub impl TStartInDirectory for FileSystemHandle with to_js(
-  self : FileSystemHandle,
-) -> JsValue = "%identity"
+pub impl TStartInDirectory for FileSystemHandle

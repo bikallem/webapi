@@ -20,15 +20,13 @@ pub fn[T : TClients] Clients::into(self : Clients) -> T = "%identity"
 pub impl TClients for Clients
 
 ///|
-pub(open) trait TClientsGet {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TClientsGet: TJsValue {}
 
 ///|
-pub impl TClientsGet for Client with to_js(self : Client) -> JsValue = "%identity"
+pub impl TClientsGet for Client
 
 ///|
-pub impl TClientsGet for JsUndefined with to_js(self : JsUndefined) -> JsValue = "%identity"
+pub impl TClientsGet for JsUndefined
 
 ///|
 /// [Clients](https://developer.mozilla.org/en-US/docs/Web/API/Clients) interface.

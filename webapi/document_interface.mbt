@@ -31,113 +31,85 @@ pub fn Document::new() -> Document {
 }
 
 ///|
-pub(open) trait TDocumentCreateElementOptions {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TDocumentCreateElementOptions: TJsValue {}
 
 ///|
-pub impl TDocumentCreateElementOptions for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TDocumentCreateElementOptions for String
 
 ///|
-pub impl TDocumentCreateElementOptions for ElementCreationOptions with to_js(
-  self : ElementCreationOptions,
-) -> JsValue = "%identity"
+pub impl TDocumentCreateElementOptions for ElementCreationOptions
 
 ///|
-pub(open) trait TDocumentCreateElementNSOptions {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TDocumentCreateElementNSOptions: TJsValue {}
 
 ///|
-pub impl TDocumentCreateElementNSOptions for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TDocumentCreateElementNSOptions for String
 
 ///|
-pub impl TDocumentCreateElementNSOptions for ElementCreationOptions with to_js(
-  self : ElementCreationOptions,
-) -> JsValue = "%identity"
+pub impl TDocumentCreateElementNSOptions for ElementCreationOptions
 
 ///|
-pub(open) trait TDocumentImportNodeOptions {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TDocumentImportNodeOptions: TJsValue {}
 
 ///|
-pub impl TDocumentImportNodeOptions for Bool with to_js(self : Bool) -> JsValue {
-  TJsValue::to_js(self)
-}
+pub impl TDocumentImportNodeOptions for Bool
 
 ///|
-pub impl TDocumentImportNodeOptions for ImportNodeOptions with to_js(
-  self : ImportNodeOptions,
-) -> JsValue = "%identity"
+pub impl TDocumentImportNodeOptions for ImportNodeOptions
 
 ///|
-pub(open) trait TDocumentParseHTMLUnsafeHtml {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TDocumentParseHTMLUnsafeHtml: TJsValue {}
 
 ///|
-pub impl TDocumentParseHTMLUnsafeHtml for TrustedHTML with to_js(
-  self : TrustedHTML,
-) -> JsValue = "%identity"
+pub impl TDocumentParseHTMLUnsafeHtml for TrustedHTML
 
 ///|
-pub impl TDocumentParseHTMLUnsafeHtml for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TDocumentParseHTMLUnsafeHtml for String
 
 ///|
-pub(open) trait TDocumentWriteText {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TDocumentWriteText: TJsValue {}
 
 ///|
-pub impl TDocumentWriteText for TrustedHTML with to_js(self : TrustedHTML) -> JsValue = "%identity"
+pub impl TDocumentWriteText for TrustedHTML
 
 ///|
-pub impl TDocumentWriteText for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TDocumentWriteText for String
 
 ///|
-pub(open) trait TDocumentWritelnText {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TDocumentWritelnText: TJsValue {}
 
 ///|
-pub impl TDocumentWritelnText for TrustedHTML with to_js(self : TrustedHTML) -> JsValue = "%identity"
+pub impl TDocumentWritelnText for TrustedHTML
 
 ///|
-pub impl TDocumentWritelnText for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TDocumentWritelnText for String
 
 ///|
-pub(open) trait TDocumentPrependNodes {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TDocumentPrependNodes: TJsValue {}
 
 ///|
-pub impl TDocumentPrependNodes for Node with to_js(self : Node) -> JsValue = "%identity"
+pub impl TDocumentPrependNodes for Node
 
 ///|
-pub impl TDocumentPrependNodes for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TDocumentPrependNodes for String
 
 ///|
-pub(open) trait TDocumentAppendNodes {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TDocumentAppendNodes: TJsValue {}
 
 ///|
-pub impl TDocumentAppendNodes for Node with to_js(self : Node) -> JsValue = "%identity"
+pub impl TDocumentAppendNodes for Node
 
 ///|
-pub impl TDocumentAppendNodes for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TDocumentAppendNodes for String
 
 ///|
-pub(open) trait TDocumentReplaceChildrenNodes {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TDocumentReplaceChildrenNodes: TJsValue {}
 
 ///|
-pub impl TDocumentReplaceChildrenNodes for Node with to_js(self : Node) -> JsValue = "%identity"
+pub impl TDocumentReplaceChildrenNodes for Node
 
 ///|
-pub impl TDocumentReplaceChildrenNodes for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TDocumentReplaceChildrenNodes for String
 
 ///|
 /// [Document](https://developer.mozilla.org/en-US/docs/Web/API/Document) interface.

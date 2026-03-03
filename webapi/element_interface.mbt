@@ -26,54 +26,40 @@ pub impl TNode for Element
 pub impl TEventTarget for Element
 
 ///|
-pub(open) trait TElementSetAttributeValue {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TElementSetAttributeValue: TJsValue {}
 
 ///|
-pub impl TElementSetAttributeValue for TrustedType with to_js(
-  self : TrustedType,
-) -> JsValue = "%identity"
+pub impl TElementSetAttributeValue for TrustedType
 
 ///|
-pub impl TElementSetAttributeValue for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TElementSetAttributeValue for String
 
 ///|
-pub(open) trait TElementSetAttributeNSValue {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TElementSetAttributeNSValue: TJsValue {}
 
 ///|
-pub impl TElementSetAttributeNSValue for TrustedType with to_js(
-  self : TrustedType,
-) -> JsValue = "%identity"
+pub impl TElementSetAttributeNSValue for TrustedType
 
 ///|
-pub impl TElementSetAttributeNSValue for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TElementSetAttributeNSValue for String
 
 ///|
-pub(open) trait TElementSetHTMLUnsafeHtml {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TElementSetHTMLUnsafeHtml: TJsValue {}
 
 ///|
-pub impl TElementSetHTMLUnsafeHtml for TrustedHTML with to_js(
-  self : TrustedHTML,
-) -> JsValue = "%identity"
+pub impl TElementSetHTMLUnsafeHtml for TrustedHTML
 
 ///|
-pub impl TElementSetHTMLUnsafeHtml for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TElementSetHTMLUnsafeHtml for String
 
 ///|
-pub(open) trait TElementInnerHTML {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TElementInnerHTML: TJsValue {}
 
 ///|
-pub impl TElementInnerHTML for TrustedHTML with to_js(self : TrustedHTML) -> JsValue = "%identity"
+pub impl TElementInnerHTML for TrustedHTML
 
 ///|
-pub impl TElementInnerHTML for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TElementInnerHTML for String
 
 ///|
 #external
@@ -98,20 +84,16 @@ pub fn[T : TElementInnerHTML] ElementInnerHTML::from(
 ) -> ElementInnerHTML = "%identity"
 
 ///|
-pub impl TElementInnerHTML for ElementInnerHTML with to_js(
-  self : ElementInnerHTML,
-) -> JsValue = "%identity"
+pub impl TElementInnerHTML for ElementInnerHTML
 
 ///|
-pub(open) trait TElementOuterHTML {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TElementOuterHTML: TJsValue {}
 
 ///|
-pub impl TElementOuterHTML for TrustedHTML with to_js(self : TrustedHTML) -> JsValue = "%identity"
+pub impl TElementOuterHTML for TrustedHTML
 
 ///|
-pub impl TElementOuterHTML for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TElementOuterHTML for String
 
 ///|
 #external
@@ -136,118 +118,88 @@ pub fn[T : TElementOuterHTML] ElementOuterHTML::from(
 ) -> ElementOuterHTML = "%identity"
 
 ///|
-pub impl TElementOuterHTML for ElementOuterHTML with to_js(
-  self : ElementOuterHTML,
-) -> JsValue = "%identity"
+pub impl TElementOuterHTML for ElementOuterHTML
 
 ///|
-pub(open) trait TElementInsertAdjacentHTMLString {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TElementInsertAdjacentHTMLString: TJsValue {}
 
 ///|
-pub impl TElementInsertAdjacentHTMLString for TrustedHTML with to_js(
-  self : TrustedHTML,
-) -> JsValue = "%identity"
+pub impl TElementInsertAdjacentHTMLString for TrustedHTML
 
 ///|
-pub impl TElementInsertAdjacentHTMLString for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TElementInsertAdjacentHTMLString for String
 
 ///|
-pub(open) trait TElementScrollIntoViewArg {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TElementScrollIntoViewArg: TJsValue {}
 
 ///|
-pub impl TElementScrollIntoViewArg for Bool with to_js(self : Bool) -> JsValue {
-  TJsValue::to_js(self)
-}
+pub impl TElementScrollIntoViewArg for Bool
 
 ///|
-pub impl TElementScrollIntoViewArg for ScrollIntoViewOptions with to_js(
-  self : ScrollIntoViewOptions,
-) -> JsValue = "%identity"
+pub impl TElementScrollIntoViewArg for ScrollIntoViewOptions
 
 ///|
-pub(open) trait TElementPrependNodes {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TElementPrependNodes: TJsValue {}
 
 ///|
-pub impl TElementPrependNodes for Node with to_js(self : Node) -> JsValue = "%identity"
+pub impl TElementPrependNodes for Node
 
 ///|
-pub impl TElementPrependNodes for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TElementPrependNodes for String
 
 ///|
-pub(open) trait TElementAppendNodes {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TElementAppendNodes: TJsValue {}
 
 ///|
-pub impl TElementAppendNodes for Node with to_js(self : Node) -> JsValue = "%identity"
+pub impl TElementAppendNodes for Node
 
 ///|
-pub impl TElementAppendNodes for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TElementAppendNodes for String
 
 ///|
-pub(open) trait TElementReplaceChildrenNodes {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TElementReplaceChildrenNodes: TJsValue {}
 
 ///|
-pub impl TElementReplaceChildrenNodes for Node with to_js(self : Node) -> JsValue = "%identity"
+pub impl TElementReplaceChildrenNodes for Node
 
 ///|
-pub impl TElementReplaceChildrenNodes for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TElementReplaceChildrenNodes for String
 
 ///|
-pub(open) trait TElementBeforeNodes {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TElementBeforeNodes: TJsValue {}
 
 ///|
-pub impl TElementBeforeNodes for Node with to_js(self : Node) -> JsValue = "%identity"
+pub impl TElementBeforeNodes for Node
 
 ///|
-pub impl TElementBeforeNodes for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TElementBeforeNodes for String
 
 ///|
-pub(open) trait TElementAfterNodes {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TElementAfterNodes: TJsValue {}
 
 ///|
-pub impl TElementAfterNodes for Node with to_js(self : Node) -> JsValue = "%identity"
+pub impl TElementAfterNodes for Node
 
 ///|
-pub impl TElementAfterNodes for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TElementAfterNodes for String
 
 ///|
-pub(open) trait TElementReplaceWithNodes {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TElementReplaceWithNodes: TJsValue {}
 
 ///|
-pub impl TElementReplaceWithNodes for Node with to_js(self : Node) -> JsValue = "%identity"
+pub impl TElementReplaceWithNodes for Node
 
 ///|
-pub impl TElementReplaceWithNodes for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TElementReplaceWithNodes for String
 
 ///|
-pub(open) trait TElementAnimateOptions {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TElementAnimateOptions: TJsValue {}
 
 ///|
-pub impl TElementAnimateOptions for Double with to_js(self : Double) -> JsValue {
-  TJsValue::to_js(self)
-}
+pub impl TElementAnimateOptions for Double
 
 ///|
-pub impl TElementAnimateOptions for KeyframeAnimationOptions with to_js(
-  self : KeyframeAnimationOptions,
-) -> JsValue = "%identity"
+pub impl TElementAnimateOptions for KeyframeAnimationOptions
 
 ///|
 /// [Element](https://developer.mozilla.org/en-US/docs/Web/API/Element) interface.

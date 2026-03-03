@@ -20,17 +20,13 @@ pub fn[T : TIDBObjectStore] IDBObjectStore::into(self : IDBObjectStore) -> T = "
 pub impl TIDBObjectStore for IDBObjectStore
 
 ///|
-pub(open) trait TIDBObjectStoreCreateIndexKeyPath {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TIDBObjectStoreCreateIndexKeyPath: TJsValue {}
 
 ///|
-pub impl TIDBObjectStoreCreateIndexKeyPath for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TIDBObjectStoreCreateIndexKeyPath for String
 
 ///|
-pub impl TIDBObjectStoreCreateIndexKeyPath for Array[String] with to_js(
-  self : Array[String],
-) -> JsValue = "%identity"
+pub impl TIDBObjectStoreCreateIndexKeyPath for Array[String]
 
 ///|
 /// [IDBObjectStore](https://developer.mozilla.org/en-US/docs/Web/API/IDBObjectStore) interface.

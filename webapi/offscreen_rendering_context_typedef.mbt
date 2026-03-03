@@ -16,9 +16,7 @@ pub impl TJsValue for OffscreenRenderingContext with to_js(
 pub impl FromJsAny for OffscreenRenderingContext with from_js_any(value : JsAny) -> OffscreenRenderingContext = "%identity"
 
 ///|
-pub(open) trait TOffscreenRenderingContext {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TOffscreenRenderingContext: TJsValue {}
 
 ///|
 pub fn[T : TOffscreenRenderingContext + FromJsAny] OffscreenRenderingContext::into(
@@ -33,31 +31,19 @@ pub fn[T : TOffscreenRenderingContext] OffscreenRenderingContext::from(
 ) -> OffscreenRenderingContext = "%identity"
 
 ///|
-pub impl TOffscreenRenderingContext for OffscreenRenderingContext with to_js(
-  self : OffscreenRenderingContext,
-) -> JsValue = "%identity"
+pub impl TOffscreenRenderingContext for OffscreenRenderingContext
 
 ///|
-pub impl TOffscreenRenderingContext for OffscreenCanvasRenderingContext2D with to_js(
-  self : OffscreenCanvasRenderingContext2D,
-) -> JsValue = "%identity"
+pub impl TOffscreenRenderingContext for OffscreenCanvasRenderingContext2D
 
 ///|
-pub impl TOffscreenRenderingContext for ImageBitmapRenderingContext with to_js(
-  self : ImageBitmapRenderingContext,
-) -> JsValue = "%identity"
+pub impl TOffscreenRenderingContext for ImageBitmapRenderingContext
 
 ///|
-pub impl TOffscreenRenderingContext for WebGLRenderingContext with to_js(
-  self : WebGLRenderingContext,
-) -> JsValue = "%identity"
+pub impl TOffscreenRenderingContext for WebGLRenderingContext
 
 ///|
-pub impl TOffscreenRenderingContext for WebGL2RenderingContext with to_js(
-  self : WebGL2RenderingContext,
-) -> JsValue = "%identity"
+pub impl TOffscreenRenderingContext for WebGL2RenderingContext
 
 ///|
-pub impl TOffscreenRenderingContext for GPUCanvasContext with to_js(
-  self : GPUCanvasContext,
-) -> JsValue = "%identity"
+pub impl TOffscreenRenderingContext for GPUCanvasContext

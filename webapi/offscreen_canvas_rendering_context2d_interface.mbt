@@ -26,24 +26,16 @@ pub fn[T : TOffscreenCanvasRenderingContext2D] OffscreenCanvasRenderingContext2D
 pub impl TOffscreenCanvasRenderingContext2D for OffscreenCanvasRenderingContext2D
 
 ///|
-pub(open) trait TOffscreenCanvasRenderingContext2DStrokeStyle {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TOffscreenCanvasRenderingContext2DStrokeStyle: TJsValue {}
 
 ///|
-pub impl TOffscreenCanvasRenderingContext2DStrokeStyle for String with to_js(
-  self : String,
-) -> JsValue = "%identity"
+pub impl TOffscreenCanvasRenderingContext2DStrokeStyle for String
 
 ///|
-pub impl TOffscreenCanvasRenderingContext2DStrokeStyle for CanvasGradient with to_js(
-  self : CanvasGradient,
-) -> JsValue = "%identity"
+pub impl TOffscreenCanvasRenderingContext2DStrokeStyle for CanvasGradient
 
 ///|
-pub impl TOffscreenCanvasRenderingContext2DStrokeStyle for CanvasPattern with to_js(
-  self : CanvasPattern,
-) -> JsValue = "%identity"
+pub impl TOffscreenCanvasRenderingContext2DStrokeStyle for CanvasPattern
 
 ///|
 #external
@@ -72,29 +64,19 @@ pub fn[T : TOffscreenCanvasRenderingContext2DStrokeStyle] OffscreenCanvasRenderi
 ) -> OffscreenCanvasRenderingContext2DStrokeStyle = "%identity"
 
 ///|
-pub impl TOffscreenCanvasRenderingContext2DStrokeStyle for OffscreenCanvasRenderingContext2DStrokeStyle with to_js(
-  self : OffscreenCanvasRenderingContext2DStrokeStyle,
-) -> JsValue = "%identity"
+pub impl TOffscreenCanvasRenderingContext2DStrokeStyle for OffscreenCanvasRenderingContext2DStrokeStyle
 
 ///|
-pub(open) trait TOffscreenCanvasRenderingContext2DFillStyle {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TOffscreenCanvasRenderingContext2DFillStyle: TJsValue {}
 
 ///|
-pub impl TOffscreenCanvasRenderingContext2DFillStyle for String with to_js(
-  self : String,
-) -> JsValue = "%identity"
+pub impl TOffscreenCanvasRenderingContext2DFillStyle for String
 
 ///|
-pub impl TOffscreenCanvasRenderingContext2DFillStyle for CanvasGradient with to_js(
-  self : CanvasGradient,
-) -> JsValue = "%identity"
+pub impl TOffscreenCanvasRenderingContext2DFillStyle for CanvasGradient
 
 ///|
-pub impl TOffscreenCanvasRenderingContext2DFillStyle for CanvasPattern with to_js(
-  self : CanvasPattern,
-) -> JsValue = "%identity"
+pub impl TOffscreenCanvasRenderingContext2DFillStyle for CanvasPattern
 
 ///|
 #external
@@ -123,48 +105,35 @@ pub fn[T : TOffscreenCanvasRenderingContext2DFillStyle] OffscreenCanvasRendering
 ) -> OffscreenCanvasRenderingContext2DFillStyle = "%identity"
 
 ///|
-pub impl TOffscreenCanvasRenderingContext2DFillStyle for OffscreenCanvasRenderingContext2DFillStyle with to_js(
-  self : OffscreenCanvasRenderingContext2DFillStyle,
-) -> JsValue = "%identity"
+pub impl TOffscreenCanvasRenderingContext2DFillStyle for OffscreenCanvasRenderingContext2DFillStyle
 
 ///|
-pub(open) trait TOffscreenCanvasRenderingContext2DRoundRectRadii {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TOffscreenCanvasRenderingContext2DRoundRectRadii: TJsValue {}
 
 ///|
-pub impl TOffscreenCanvasRenderingContext2DRoundRectRadii for Double with to_js(
-  self : Double,
-) -> JsValue {
-  TJsValue::to_js(self)
-}
+pub impl TOffscreenCanvasRenderingContext2DRoundRectRadii for Double
 
 ///|
-pub impl TOffscreenCanvasRenderingContext2DRoundRectRadii for DOMPointInit with to_js(
-  self : DOMPointInit,
-) -> JsValue = "%identity"
+pub impl TOffscreenCanvasRenderingContext2DRoundRectRadii for DOMPointInit
 
 ///|
-pub(open) trait TOffscreenCanvasRenderingContext2DRoundRectRadii2 {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TOffscreenCanvasRenderingContext2DRoundRectRadii2: TJsValue {}
 
 ///|
-pub impl TOffscreenCanvasRenderingContext2DRoundRectRadii2 for Double with to_js(
-  self : Double,
-) -> JsValue {
-  TJsValue::to_js(self)
-}
+pub impl TOffscreenCanvasRenderingContext2DRoundRectRadii2 for Double
 
 ///|
-pub impl TOffscreenCanvasRenderingContext2DRoundRectRadii2 for DOMPointInit with to_js(
-  self : DOMPointInit,
+pub impl TOffscreenCanvasRenderingContext2DRoundRectRadii2 for DOMPointInit
+
+///|
+pub impl TJsValue for &TOffscreenCanvasRenderingContext2DRoundRectRadii2 with to_js(
+  self : &TOffscreenCanvasRenderingContext2DRoundRectRadii2,
 ) -> JsValue = "%identity"
 
 ///|
 pub impl TOffscreenCanvasRenderingContext2DRoundRectRadii for Array[
   &TOffscreenCanvasRenderingContext2DRoundRectRadii2,
-] with to_js(self : Array[&TOffscreenCanvasRenderingContext2DRoundRectRadii2]) -> JsValue = "%identity"
+]
 
 ///|
 /// [OffscreenCanvasRenderingContext2D](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D) interface.

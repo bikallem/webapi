@@ -16,9 +16,7 @@ pub impl TJsValue for URLPatternCompatible with to_js(
 pub impl FromJsAny for URLPatternCompatible with from_js_any(value : JsAny) -> URLPatternCompatible = "%identity"
 
 ///|
-pub(open) trait TURLPatternCompatible {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TURLPatternCompatible: TJsValue {}
 
 ///|
 pub fn[T : TURLPatternCompatible + FromJsAny] URLPatternCompatible::into(
@@ -33,17 +31,13 @@ pub fn[T : TURLPatternCompatible] URLPatternCompatible::from(
 ) -> URLPatternCompatible = "%identity"
 
 ///|
-pub impl TURLPatternCompatible for URLPatternCompatible with to_js(
-  self : URLPatternCompatible,
-) -> JsValue = "%identity"
+pub impl TURLPatternCompatible for URLPatternCompatible
 
 ///|
-pub impl TURLPatternCompatible for String with to_js(self : String) -> JsValue = "%identity"
+pub impl TURLPatternCompatible for String
 
 ///|
-pub impl TURLPatternCompatible for URLPatternInit with to_js(
-  self : URLPatternInit,
-) -> JsValue = "%identity"
+pub impl TURLPatternCompatible for URLPatternInit
 
 ///|
-pub impl TURLPatternCompatible for URLPattern with to_js(self : URLPattern) -> JsValue = "%identity"
+pub impl TURLPatternCompatible for URLPattern

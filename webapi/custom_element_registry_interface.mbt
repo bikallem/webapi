@@ -60,24 +60,16 @@ pub fn CustomElementRegistryGet::is_undefined(
 }
 
 ///|
-pub impl TCustomElementRegistryGet for CustomElementRegistryGet with to_js(
-  self : CustomElementRegistryGet,
-) -> JsValue = "%identity"
+pub impl TCustomElementRegistryGet for CustomElementRegistryGet
 
 ///|
-pub(open) trait TCustomElementRegistryGet {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TCustomElementRegistryGet: TJsValue {}
 
 ///|
-pub impl TCustomElementRegistryGet for CustomElementConstructor with to_js(
-  self : CustomElementConstructor,
-) -> JsValue = "%identity"
+pub impl TCustomElementRegistryGet for CustomElementConstructor
 
 ///|
-pub impl TCustomElementRegistryGet for JsUndefined with to_js(
-  self : JsUndefined,
-) -> JsValue = "%identity"
+pub impl TCustomElementRegistryGet for JsUndefined
 
 ///|
 /// [CustomElementRegistry](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry) interface.

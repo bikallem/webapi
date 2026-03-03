@@ -55,24 +55,16 @@ pub fn[T : THTMLFormControlsCollectionNamedItem] HTMLFormControlsCollectionNamed
 ) -> HTMLFormControlsCollectionNamedItem = "%identity"
 
 ///|
-pub impl THTMLFormControlsCollectionNamedItem for HTMLFormControlsCollectionNamedItem with to_js(
-  self : HTMLFormControlsCollectionNamedItem,
-) -> JsValue = "%identity"
+pub impl THTMLFormControlsCollectionNamedItem for HTMLFormControlsCollectionNamedItem
 
 ///|
-pub(open) trait THTMLFormControlsCollectionNamedItem {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait THTMLFormControlsCollectionNamedItem: TJsValue {}
 
 ///|
-pub impl THTMLFormControlsCollectionNamedItem for RadioNodeList with to_js(
-  self : RadioNodeList,
-) -> JsValue = "%identity"
+pub impl THTMLFormControlsCollectionNamedItem for RadioNodeList
 
 ///|
-pub impl THTMLFormControlsCollectionNamedItem for Element with to_js(
-  self : Element,
-) -> JsValue = "%identity"
+pub impl THTMLFormControlsCollectionNamedItem for Element
 
 ///|
 /// [HTMLFormControlsCollection](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormControlsCollection) interface.

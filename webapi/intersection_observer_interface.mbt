@@ -35,15 +35,13 @@ pub fn IntersectionObserver::new(
 }
 
 ///|
-pub(open) trait TIntersectionObserverRoot {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TIntersectionObserverRoot: TJsValue {}
 
 ///|
-pub impl TIntersectionObserverRoot for Element with to_js(self : Element) -> JsValue = "%identity"
+pub impl TIntersectionObserverRoot for Element
 
 ///|
-pub impl TIntersectionObserverRoot for Document with to_js(self : Document) -> JsValue = "%identity"
+pub impl TIntersectionObserverRoot for Document
 
 ///|
 #external
@@ -70,9 +68,7 @@ pub fn[T : TIntersectionObserverRoot] IntersectionObserverRoot::from(
 ) -> IntersectionObserverRoot = "%identity"
 
 ///|
-pub impl TIntersectionObserverRoot for IntersectionObserverRoot with to_js(
-  self : IntersectionObserverRoot,
-) -> JsValue = "%identity"
+pub impl TIntersectionObserverRoot for IntersectionObserverRoot
 
 ///|
 /// [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver) interface.

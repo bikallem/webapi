@@ -27,34 +27,22 @@ pub impl TServiceWorkerContainer for ServiceWorkerContainer
 pub impl TEventTarget for ServiceWorkerContainer
 
 ///|
-pub(open) trait TServiceWorkerContainerRegisterScriptURL {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TServiceWorkerContainerRegisterScriptURL: TJsValue {}
 
 ///|
-pub impl TServiceWorkerContainerRegisterScriptURL for TrustedScriptURL with to_js(
-  self : TrustedScriptURL,
-) -> JsValue = "%identity"
+pub impl TServiceWorkerContainerRegisterScriptURL for TrustedScriptURL
 
 ///|
-pub impl TServiceWorkerContainerRegisterScriptURL for String with to_js(
-  self : String,
-) -> JsValue = "%identity"
+pub impl TServiceWorkerContainerRegisterScriptURL for String
 
 ///|
-pub(open) trait TServiceWorkerContainerGetRegistration {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TServiceWorkerContainerGetRegistration: TJsValue {}
 
 ///|
-pub impl TServiceWorkerContainerGetRegistration for ServiceWorkerRegistration with to_js(
-  self : ServiceWorkerRegistration,
-) -> JsValue = "%identity"
+pub impl TServiceWorkerContainerGetRegistration for ServiceWorkerRegistration
 
 ///|
-pub impl TServiceWorkerContainerGetRegistration for JsUndefined with to_js(
-  self : JsUndefined,
-) -> JsValue = "%identity"
+pub impl TServiceWorkerContainerGetRegistration for JsUndefined
 
 ///|
 /// [ServiceWorkerContainer](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerContainer) interface.

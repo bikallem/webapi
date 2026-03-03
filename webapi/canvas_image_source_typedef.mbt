@@ -14,9 +14,7 @@ pub impl TJsValue for CanvasImageSource with to_js(self : CanvasImageSource) -> 
 pub impl FromJsAny for CanvasImageSource with from_js_any(value : JsAny) -> CanvasImageSource = "%identity"
 
 ///|
-pub(open) trait TCanvasImageSource {
-  to_js(self : Self) -> JsValue
-}
+pub(open) trait TCanvasImageSource: TJsValue {}
 
 ///|
 pub fn[T : TCanvasImageSource + FromJsAny] CanvasImageSource::into(
@@ -31,32 +29,22 @@ pub fn[T : TCanvasImageSource] CanvasImageSource::from(
 ) -> CanvasImageSource = "%identity"
 
 ///|
-pub impl TCanvasImageSource for CanvasImageSource with to_js(
-  self : CanvasImageSource,
-) -> JsValue = "%identity"
+pub impl TCanvasImageSource for CanvasImageSource
 
 ///|
-pub impl TCanvasImageSource for HTMLOrSVGImageElement with to_js(
-  self : HTMLOrSVGImageElement,
-) -> JsValue = "%identity"
+pub impl TCanvasImageSource for HTMLOrSVGImageElement
 
 ///|
-pub impl TCanvasImageSource for HTMLVideoElement with to_js(
-  self : HTMLVideoElement,
-) -> JsValue = "%identity"
+pub impl TCanvasImageSource for HTMLVideoElement
 
 ///|
-pub impl TCanvasImageSource for HTMLCanvasElement with to_js(
-  self : HTMLCanvasElement,
-) -> JsValue = "%identity"
+pub impl TCanvasImageSource for HTMLCanvasElement
 
 ///|
-pub impl TCanvasImageSource for ImageBitmap with to_js(self : ImageBitmap) -> JsValue = "%identity"
+pub impl TCanvasImageSource for ImageBitmap
 
 ///|
-pub impl TCanvasImageSource for OffscreenCanvas with to_js(
-  self : OffscreenCanvas,
-) -> JsValue = "%identity"
+pub impl TCanvasImageSource for OffscreenCanvas
 
 ///|
-pub impl TCanvasImageSource for VideoFrame with to_js(self : VideoFrame) -> JsValue = "%identity"
+pub impl TCanvasImageSource for VideoFrame
