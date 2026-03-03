@@ -19,9 +19,9 @@ pub impl FromJsAny for FileSystemGetDirectoryOptions with from_js_any(
 
 ///|
 pub fn FileSystemGetDirectoryOptions::new(
-  create? : Bool = false,
+  create? : Bool,
 ) -> FileSystemGetDirectoryOptions {
-  file_system_get_directory_options_ffi(TJsValue::to_js(create))
+  file_system_get_directory_options_ffi(opt_to_js(create))
 }
 
 ///|

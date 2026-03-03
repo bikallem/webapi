@@ -57,13 +57,9 @@ pub trait TCache: TJsValue {
 impl TCache with match_(
   self : Self,
   request : &TRequestInfo,
-  options? : CacheQueryOptions = CacheQueryOptions::empty(),
+  options? : CacheQueryOptions,
 ) -> JsPromise[&TCacheMatch] {
-  cache_match_ffi(
-    TJsValue::to_js(self),
-    request.to_js(),
-    TJsValue::to_js(options),
-  )
+  cache_match_ffi(TJsValue::to_js(self), request.to_js(), opt_to_js(options))
 }
 
 ///|
@@ -71,7 +67,7 @@ impl TCache with match_(
 impl TCache with match_all(
   self : Self,
   request? : &TRequestInfo,
-  options? : CacheQueryOptions = CacheQueryOptions::empty(),
+  options? : CacheQueryOptions,
 ) -> JsPromise[Array[Response]] {
   cache_match_all_ffi(
     TJsValue::to_js(self),
@@ -79,7 +75,7 @@ impl TCache with match_all(
       Some(v) => v.to_js()
       None => JsValue::undefined()
     },
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 
@@ -116,13 +112,9 @@ impl TCache with put(
 impl TCache with delete(
   self : Self,
   request : &TRequestInfo,
-  options? : CacheQueryOptions = CacheQueryOptions::empty(),
+  options? : CacheQueryOptions,
 ) -> JsPromise[Bool] {
-  cache_delete_ffi(
-    TJsValue::to_js(self),
-    request.to_js(),
-    TJsValue::to_js(options),
-  )
+  cache_delete_ffi(TJsValue::to_js(self), request.to_js(), opt_to_js(options))
 }
 
 ///|
@@ -130,7 +122,7 @@ impl TCache with delete(
 impl TCache with keys(
   self : Self,
   request? : &TRequestInfo,
-  options? : CacheQueryOptions = CacheQueryOptions::empty(),
+  options? : CacheQueryOptions,
 ) -> JsPromise[Array[Request]] {
   cache_keys_ffi(
     TJsValue::to_js(self),
@@ -138,6 +130,6 @@ impl TCache with keys(
       Some(v) => v.to_js()
       None => JsValue::undefined()
     },
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }

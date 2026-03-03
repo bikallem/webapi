@@ -25,12 +25,9 @@ pub impl TEvent for CommandEvent
 ///|
 pub fn CommandEvent::new(
   type_ : String,
-  event_init_dict? : CommandEventInit = CommandEventInit::empty(),
+  event_init_dict? : CommandEventInit,
 ) -> CommandEvent {
-  command_event_new_ffi(
-    TJsValue::to_js(type_),
-    TJsValue::to_js(event_init_dict),
-  )
+  command_event_new_ffi(TJsValue::to_js(type_), opt_to_js(event_init_dict))
 }
 
 ///|

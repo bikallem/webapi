@@ -21,16 +21,16 @@ pub impl TDOMRectReadOnly for DOMRectReadOnly
 
 ///|
 pub fn DOMRectReadOnly::new(
-  x? : Double = (0 : Double),
-  y? : Double = (0 : Double),
-  width? : Double = (0 : Double),
-  height? : Double = (0 : Double),
+  x? : Double,
+  y? : Double,
+  width? : Double,
+  height? : Double,
 ) -> DOMRectReadOnly {
   dom_rect_read_only_new_ffi(
-    TJsValue::to_js(x),
-    TJsValue::to_js(y),
-    TJsValue::to_js(width),
-    TJsValue::to_js(height),
+    opt_to_js(x),
+    opt_to_js(y),
+    opt_to_js(width),
+    opt_to_js(height),
   )
 }
 
@@ -50,10 +50,8 @@ pub trait TDOMRectReadOnly: TJsValue {
 
 ///|
 /// [DOMRectReadOnly.fromRect](https://developer.mozilla.org/en-US/docs/Web/API/DOMRectReadOnly/fromRect)
-pub fn DOMRectReadOnly::from_rect(
-  other? : DOMRectInit = DOMRectInit::empty(),
-) -> DOMRectReadOnly {
-  dom_rect_read_only_from_rect_ffi(TJsValue::to_js(other))
+pub fn DOMRectReadOnly::from_rect(other? : DOMRectInit) -> DOMRectReadOnly {
+  dom_rect_read_only_from_rect_ffi(opt_to_js(other))
 }
 
 ///|

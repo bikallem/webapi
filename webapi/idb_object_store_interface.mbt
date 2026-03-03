@@ -179,11 +179,11 @@ impl TIDBObjectStore with get_all_keys(
 /// [IDBObjectStore.getAllRecords](https://developer.mozilla.org/en-US/docs/Web/API/IDBObjectStore/getAllRecords)
 impl TIDBObjectStore with get_all_records(
   self : Self,
-  options? : IDBGetAllOptions = IDBGetAllOptions::empty(),
+  options? : IDBGetAllOptions,
 ) -> IDBRequest {
   idb_object_store_get_all_records_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 
@@ -198,12 +198,12 @@ impl TIDBObjectStore with count(self : Self, query? : JsValue) -> IDBRequest {
 impl TIDBObjectStore with open_cursor(
   self : Self,
   query? : JsValue,
-  direction? : IDBCursorDirection = IDBCursorDirection::Next,
+  direction? : IDBCursorDirection,
 ) -> IDBRequest {
   idb_object_store_open_cursor_ffi(
     TJsValue::to_js(self),
     opt_to_js(query),
-    TJsValue::to_js(direction),
+    opt_to_js(direction),
   )
 }
 
@@ -212,12 +212,12 @@ impl TIDBObjectStore with open_cursor(
 impl TIDBObjectStore with open_key_cursor(
   self : Self,
   query? : JsValue,
-  direction? : IDBCursorDirection = IDBCursorDirection::Next,
+  direction? : IDBCursorDirection,
 ) -> IDBRequest {
   idb_object_store_open_key_cursor_ffi(
     TJsValue::to_js(self),
     opt_to_js(query),
-    TJsValue::to_js(direction),
+    opt_to_js(direction),
   )
 }
 
@@ -233,13 +233,13 @@ impl TIDBObjectStore with create_index(
   self : Self,
   name : String,
   key_path : &TIDBObjectStoreCreateIndexKeyPath,
-  options? : IDBIndexParameters = IDBIndexParameters::empty(),
+  options? : IDBIndexParameters,
 ) -> IDBIndex {
   idb_object_store_create_index_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(name),
     key_path.to_js(),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 

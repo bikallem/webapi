@@ -20,11 +20,8 @@ pub fn[T : TRequest] Request::into(self : Request) -> T = "%identity"
 pub impl TRequest for Request
 
 ///|
-pub fn Request::new(
-  input : &TRequestInfo,
-  init? : RequestInit = RequestInit::empty(),
-) -> Request {
-  request_new_ffi(input.to_js(), TJsValue::to_js(init))
+pub fn Request::new(input : &TRequestInfo, init? : RequestInit) -> Request {
+  request_new_ffi(input.to_js(), opt_to_js(init))
 }
 
 ///|

@@ -50,17 +50,17 @@ impl TTextEvent with data(self : Self) -> String {
 impl TTextEvent with init_text_event(
   self : Self,
   type_ : String,
-  bubbles? : Bool = false,
-  cancelable? : Bool = false,
+  bubbles? : Bool,
+  cancelable? : Bool,
   view? : &TWindow,
-  data? : String = "undefined",
+  data? : String,
 ) -> Unit {
   text_event_init_text_event_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(type_),
-    TJsValue::to_js(bubbles),
-    TJsValue::to_js(cancelable),
+    opt_to_js(bubbles),
+    opt_to_js(cancelable),
     opt_to_js(view),
-    TJsValue::to_js(data),
+    opt_to_js(data),
   )
 }

@@ -25,12 +25,9 @@ pub impl TEvent for HashChangeEvent
 ///|
 pub fn HashChangeEvent::new(
   type_ : String,
-  event_init_dict? : HashChangeEventInit = HashChangeEventInit::empty(),
+  event_init_dict? : HashChangeEventInit,
 ) -> HashChangeEvent {
-  hash_change_event_new_ffi(
-    TJsValue::to_js(type_),
-    TJsValue::to_js(event_init_dict),
-  )
+  hash_change_event_new_ffi(TJsValue::to_js(type_), opt_to_js(event_init_dict))
 }
 
 ///|

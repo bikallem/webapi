@@ -24,17 +24,12 @@ pub impl TDOMPointReadOnly for DOMPoint
 
 ///|
 pub fn DOMPoint::new(
-  x? : Double = (0 : Double),
-  y? : Double = (0 : Double),
-  z? : Double = (0 : Double),
-  w? : Double = (1 : Double),
+  x? : Double,
+  y? : Double,
+  z? : Double,
+  w? : Double,
 ) -> DOMPoint {
-  dom_point_new_ffi(
-    TJsValue::to_js(x),
-    TJsValue::to_js(y),
-    TJsValue::to_js(z),
-    TJsValue::to_js(w),
-  )
+  dom_point_new_ffi(opt_to_js(x), opt_to_js(y), opt_to_js(z), opt_to_js(w))
 }
 
 ///|
@@ -52,10 +47,8 @@ pub trait TDOMPoint: TDOMPointReadOnly {
 
 ///|
 /// [DOMPoint.fromPoint](https://developer.mozilla.org/en-US/docs/Web/API/DOMPoint/fromPoint)
-pub fn DOMPoint::from_point(
-  other? : DOMPointInit = DOMPointInit::empty(),
-) -> DOMPoint {
-  dom_point_from_point_ffi(TJsValue::to_js(other))
+pub fn DOMPoint::from_point(other? : DOMPointInit) -> DOMPoint {
+  dom_point_from_point_ffi(opt_to_js(other))
 }
 
 ///|

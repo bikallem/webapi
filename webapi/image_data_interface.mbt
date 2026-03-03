@@ -23,12 +23,12 @@ pub impl TImageData for ImageData
 pub fn ImageData::new(
   sw : UInt,
   sh : UInt,
-  settings? : ImageDataSettings = ImageDataSettings::empty(),
+  settings? : ImageDataSettings,
 ) -> ImageData {
   image_data_new_ffi(
     TJsValue::to_js(sw),
     TJsValue::to_js(sh),
-    TJsValue::to_js(settings),
+    opt_to_js(settings),
   )
 }
 
@@ -37,13 +37,13 @@ pub fn ImageData::new_from_array(
   data : &TImageDataArray,
   sw : UInt,
   sh? : UInt,
-  settings? : ImageDataSettings = ImageDataSettings::empty(),
+  settings? : ImageDataSettings,
 ) -> ImageData {
   image_data_new_from_array_ffi(
     data.to_js(),
     TJsValue::to_js(sw),
     opt_to_js(sh),
-    TJsValue::to_js(settings),
+    opt_to_js(settings),
   )
 }
 

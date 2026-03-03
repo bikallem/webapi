@@ -25,9 +25,9 @@ pub impl TEvent for CustomEvent
 ///|
 pub fn CustomEvent::new(
   type_ : String,
-  event_init_dict? : CustomEventInit = CustomEventInit::empty(),
+  event_init_dict? : CustomEventInit,
 ) -> CustomEvent {
-  custom_event_new_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
+  custom_event_new_ffi(TJsValue::to_js(type_), opt_to_js(event_init_dict))
 }
 
 ///|
@@ -54,15 +54,15 @@ impl TCustomEvent with detail(self : Self) -> JsValue {
 impl TCustomEvent with init_custom_event(
   self : Self,
   type_ : String,
-  bubbles? : Bool = false,
-  cancelable? : Bool = false,
+  bubbles? : Bool,
+  cancelable? : Bool,
   detail? : JsValue,
 ) -> Unit {
   custom_event_init_custom_event_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(type_),
-    TJsValue::to_js(bubbles),
-    TJsValue::to_js(cancelable),
+    opt_to_js(bubbles),
+    opt_to_js(cancelable),
     opt_to_js(detail),
   )
 }

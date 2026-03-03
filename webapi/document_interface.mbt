@@ -799,14 +799,17 @@ impl TDocument with create_range(self : Self) -> Range {
 impl TDocument with create_node_iterator(
   self : Self,
   root : &TNode,
-  what_to_show? : UInt = (0xFFFFFFFF : UInt),
-  filter? : (Node) -> UInt = JsValue::null(),
+  what_to_show? : UInt,
+  filter? : (Node) -> UInt,
 ) -> NodeIterator {
   document_create_node_iterator_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(root),
-    TJsValue::to_js(what_to_show),
-    TJsValue::to_js(node_filter_ffi(filter)),
+    opt_to_js(what_to_show),
+    match filter {
+      Some(v) => TJsValue::to_js(node_filter_ffi(v))
+      None => JsValue::undefined()
+    },
   )
 }
 
@@ -815,14 +818,17 @@ impl TDocument with create_node_iterator(
 impl TDocument with create_tree_walker(
   self : Self,
   root : &TNode,
-  what_to_show? : UInt = (0xFFFFFFFF : UInt),
-  filter? : (Node) -> UInt = JsValue::null(),
+  what_to_show? : UInt,
+  filter? : (Node) -> UInt,
 ) -> TreeWalker {
   document_create_tree_walker_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(root),
-    TJsValue::to_js(what_to_show),
-    TJsValue::to_js(node_filter_ffi(filter)),
+    opt_to_js(what_to_show),
+    match filter {
+      Some(v) => TJsValue::to_js(node_filter_ffi(v))
+      None => JsValue::undefined()
+    },
   )
 }
 
@@ -1067,14 +1073,14 @@ impl TDocument with set_design_mode(self : Self, design_mode : String) -> Unit {
 impl TDocument with exec_command(
   self : Self,
   command_id : String,
-  show_ui? : Bool = false,
-  value? : String = "",
+  show_ui? : Bool,
+  value? : String,
 ) -> Bool {
   document_exec_command_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(command_id),
-    TJsValue::to_js(show_ui),
-    TJsValue::to_js(value),
+    opt_to_js(show_ui),
+    opt_to_js(value),
   )
 }
 
@@ -1304,13 +1310,13 @@ impl TDocument with caret_position_from_point_opt(
   self : Self,
   x : Double,
   y : Double,
-  options? : CaretPositionFromPointOptions = CaretPositionFromPointOptions::empty(),
+  options? : CaretPositionFromPointOptions,
 ) -> CaretPosition? {
   document_caret_position_from_point_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(x),
     TJsValue::to_js(y),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   ).to_option()
 }
 
@@ -1533,12 +1539,15 @@ impl TDocument with query_selector_all(self : Self, selectors : String) -> NodeL
 impl TDocument with create_expression(
   self : Self,
   expression : String,
-  resolver? : (String) -> String = JsValue::null(),
+  resolver? : (String) -> String,
 ) -> XPathExpression {
   document_create_expression_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(expression),
-    TJsValue::to_js(x_path_ns_resolver_ffi(resolver)),
+    match resolver {
+      Some(v) => TJsValue::to_js(x_path_ns_resolver_ffi(v))
+      None => JsValue::undefined()
+    },
   )
 }
 
@@ -1557,16 +1566,19 @@ impl TDocument with evaluate(
   self : Self,
   expression : String,
   context_node : &TNode,
-  resolver? : (String) -> String = JsValue::null(),
-  type_? : UInt = (0 : UInt),
+  resolver? : (String) -> String,
+  type_? : UInt,
   result? : &TXPathResult,
 ) -> XPathResult {
   document_evaluate_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(expression),
     TJsValue::to_js(context_node),
-    TJsValue::to_js(x_path_ns_resolver_ffi(resolver)),
-    TJsValue::to_js(type_),
+    match resolver {
+      Some(v) => TJsValue::to_js(x_path_ns_resolver_ffi(v))
+      None => JsValue::undefined()
+    },
+    opt_to_js(type_),
     opt_to_js(result),
   )
 }
@@ -3109,11 +3121,10 @@ impl TDocument with set_onselectionchange(
 
 ///|
 /// [Document.getBoxQuads](https://developer.mozilla.org/en-US/docs/Web/API/Document/getBoxQuads)
-impl TDocument with get_box_quads(
-  self : Self,
-  options? : BoxQuadOptions = BoxQuadOptions::empty(),
-) -> Array[DOMQuad] {
-  document_get_box_quads_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
+impl TDocument with get_box_quads(self : Self, options? : BoxQuadOptions) -> Array[
+  DOMQuad,
+] {
+  document_get_box_quads_ffi(TJsValue::to_js(self), opt_to_js(options))
 }
 
 ///|
@@ -3122,13 +3133,13 @@ impl TDocument with convert_quad_from_node(
   self : Self,
   quad : DOMQuadInit,
   from : &TGeometryNode,
-  options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty(),
+  options? : ConvertCoordinateOptions,
 ) -> DOMQuad {
   document_convert_quad_from_node_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(quad),
     from.to_js(),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 
@@ -3138,13 +3149,13 @@ impl TDocument with convert_rect_from_node(
   self : Self,
   rect : &TDOMRectReadOnly,
   from : &TGeometryNode,
-  options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty(),
+  options? : ConvertCoordinateOptions,
 ) -> DOMQuad {
   document_convert_rect_from_node_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(rect),
     from.to_js(),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 
@@ -3154,13 +3165,13 @@ impl TDocument with convert_point_from_node(
   self : Self,
   point : DOMPointInit,
   from : &TGeometryNode,
-  options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty(),
+  options? : ConvertCoordinateOptions,
 ) -> DOMPoint {
   document_convert_point_from_node_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(point),
     from.to_js(),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 
@@ -3174,9 +3185,13 @@ impl TDocument with caret_position_from_point(
   self : Self,
   x : Double,
   y : Double,
-  options? : CaretPositionFromPointOptions = CaretPositionFromPointOptions::empty(),
+  options? : CaretPositionFromPointOptions,
 ) -> CaretPosition {
-  self.caret_position_from_point_opt(x, y, options~).unwrap()
+  let result = match options {
+    Some(options) => self.caret_position_from_point_opt(x, y, options~)
+    None => self.caret_position_from_point_opt(x, y)
+  }
+  result.unwrap()
 }
 
 ///|

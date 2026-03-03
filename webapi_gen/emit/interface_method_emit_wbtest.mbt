@@ -7,7 +7,6 @@ test "func_call_args emits variadic trait-ref conversion" {
       type_: @type_mapping.ArgMbtType::Other("Array[&TRequestInfo]"),
       optional: false,
       variadic: true,
-      default_value: None,
     },
   ]
   inspect(
@@ -25,7 +24,6 @@ test "func_call_args emits variadic non-trait conversion" {
       type_: @type_mapping.ArgMbtType::Other("Array[String]"),
       optional: false,
       variadic: true,
-      default_value: None,
     },
   ]
   inspect(
@@ -43,7 +41,6 @@ test "func_call_args falls back for malformed variadic type" {
       type_: @type_mapping.ArgMbtType::Primitive("String"),
       optional: false,
       variadic: true,
-      default_value: None,
     },
   ]
   inspect(func_call_args(args), content="TJsValue::to_js(names)")
@@ -58,7 +55,6 @@ test "func_call_args keeps separators stable for optional trait args" {
       type_: @type_mapping.ArgMbtType::Self,
       optional: false,
       variadic: false,
-      default_value: None,
     },
     @type_mapping.MethodArg::{
       name: "input",
@@ -66,7 +62,6 @@ test "func_call_args keeps separators stable for optional trait args" {
       type_: @type_mapping.ArgMbtType::Other("&TRequestInfo"),
       optional: true,
       variadic: false,
-      default_value: None,
     },
     @type_mapping.MethodArg::{
       name: "mode",
@@ -74,7 +69,6 @@ test "func_call_args keeps separators stable for optional trait args" {
       type_: @type_mapping.ArgMbtType::Primitive("String"),
       optional: false,
       variadic: false,
-      default_value: None,
     },
   ]
   let rendered = func_call_args(args)

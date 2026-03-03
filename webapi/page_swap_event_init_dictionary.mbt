@@ -15,16 +15,16 @@ pub impl FromJsAny for PageSwapEventInit with from_js_any(value : JsAny) -> Page
 
 ///|
 pub fn PageSwapEventInit::new(
-  bubbles? : Bool = false,
-  cancelable? : Bool = false,
-  composed? : Bool = false,
+  bubbles? : Bool,
+  cancelable? : Bool,
+  composed? : Bool,
   activation? : &TNavigationActivation,
   view_transition? : ViewTransition,
 ) -> PageSwapEventInit {
   page_swap_event_init_ffi(
-    TJsValue::to_js(bubbles),
-    TJsValue::to_js(cancelable),
-    TJsValue::to_js(composed),
+    opt_to_js(bubbles),
+    opt_to_js(cancelable),
+    opt_to_js(composed),
     opt_to_js(activation),
     opt_to_js(view_transition),
   )

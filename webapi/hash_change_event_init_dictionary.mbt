@@ -15,18 +15,18 @@ pub impl FromJsAny for HashChangeEventInit with from_js_any(value : JsAny) -> Ha
 
 ///|
 pub fn HashChangeEventInit::new(
-  bubbles? : Bool = false,
-  cancelable? : Bool = false,
-  composed? : Bool = false,
-  old_url? : String = "",
-  new_url? : String = "",
+  bubbles? : Bool,
+  cancelable? : Bool,
+  composed? : Bool,
+  old_url? : String,
+  new_url? : String,
 ) -> HashChangeEventInit {
   hash_change_event_init_ffi(
-    TJsValue::to_js(bubbles),
-    TJsValue::to_js(cancelable),
-    TJsValue::to_js(composed),
-    TJsValue::to_js(old_url),
-    TJsValue::to_js(new_url),
+    opt_to_js(bubbles),
+    opt_to_js(cancelable),
+    opt_to_js(composed),
+    opt_to_js(old_url),
+    opt_to_js(new_url),
   )
 }
 

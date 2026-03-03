@@ -576,11 +576,11 @@ impl TOffscreenCanvasRenderingContext2D with set_transform(
 /// [OffscreenCanvasRenderingContext2D.setTransform](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/setTransform)
 impl TOffscreenCanvasRenderingContext2D with set_transform_matrix(
   self : Self,
-  transform? : DOMMatrix2DInit = DOMMatrix2DInit::empty(),
+  transform? : DOMMatrix2DInit,
 ) -> Unit {
   offscreen_canvas_rendering_context2d_set_transform_matrix_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(transform),
+    opt_to_js(transform),
   )
 }
 
@@ -940,11 +940,11 @@ impl TOffscreenCanvasRenderingContext2D with begin_path(self : Self) -> Unit {
 /// [OffscreenCanvasRenderingContext2D.fill](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/fill)
 impl TOffscreenCanvasRenderingContext2D with fill(
   self : Self,
-  fill_rule? : CanvasFillRule = CanvasFillRule::Nonzero,
+  fill_rule? : CanvasFillRule,
 ) -> Unit {
   offscreen_canvas_rendering_context2d_fill_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(fill_rule),
+    opt_to_js(fill_rule),
   )
 }
 
@@ -953,12 +953,12 @@ impl TOffscreenCanvasRenderingContext2D with fill(
 impl TOffscreenCanvasRenderingContext2D with fill_path(
   self : Self,
   path : &TPath2D,
-  fill_rule? : CanvasFillRule = CanvasFillRule::Nonzero,
+  fill_rule? : CanvasFillRule,
 ) -> Unit {
   offscreen_canvas_rendering_context2d_fill_path_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(path),
-    TJsValue::to_js(fill_rule),
+    opt_to_js(fill_rule),
   )
 }
 
@@ -984,11 +984,11 @@ impl TOffscreenCanvasRenderingContext2D with stroke_path(
 /// [OffscreenCanvasRenderingContext2D.clip](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvasRenderingContext2D/clip)
 impl TOffscreenCanvasRenderingContext2D with clip(
   self : Self,
-  fill_rule? : CanvasFillRule = CanvasFillRule::Nonzero,
+  fill_rule? : CanvasFillRule,
 ) -> Unit {
   offscreen_canvas_rendering_context2d_clip_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(fill_rule),
+    opt_to_js(fill_rule),
   )
 }
 
@@ -997,12 +997,12 @@ impl TOffscreenCanvasRenderingContext2D with clip(
 impl TOffscreenCanvasRenderingContext2D with clip_path(
   self : Self,
   path : &TPath2D,
-  fill_rule? : CanvasFillRule = CanvasFillRule::Nonzero,
+  fill_rule? : CanvasFillRule,
 ) -> Unit {
   offscreen_canvas_rendering_context2d_clip_path_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(path),
-    TJsValue::to_js(fill_rule),
+    opt_to_js(fill_rule),
   )
 }
 
@@ -1012,13 +1012,13 @@ impl TOffscreenCanvasRenderingContext2D with is_point_in_path(
   self : Self,
   x : Double,
   y : Double,
-  fill_rule? : CanvasFillRule = CanvasFillRule::Nonzero,
+  fill_rule? : CanvasFillRule,
 ) -> Bool {
   offscreen_canvas_rendering_context2d_is_point_in_path_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(x),
     TJsValue::to_js(y),
-    TJsValue::to_js(fill_rule),
+    opt_to_js(fill_rule),
   )
 }
 
@@ -1029,14 +1029,14 @@ impl TOffscreenCanvasRenderingContext2D with is_point_in_path_with_path(
   path : &TPath2D,
   x : Double,
   y : Double,
-  fill_rule? : CanvasFillRule = CanvasFillRule::Nonzero,
+  fill_rule? : CanvasFillRule,
 ) -> Bool {
   offscreen_canvas_rendering_context2d_is_point_in_path_with_path_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(path),
     TJsValue::to_js(x),
     TJsValue::to_js(y),
-    TJsValue::to_js(fill_rule),
+    opt_to_js(fill_rule),
   )
 }
 
@@ -1188,13 +1188,13 @@ impl TOffscreenCanvasRenderingContext2D with create_image_data(
   self : Self,
   sw : Int,
   sh : Int,
-  settings? : ImageDataSettings = ImageDataSettings::empty(),
+  settings? : ImageDataSettings,
 ) -> ImageData {
   offscreen_canvas_rendering_context2d_create_image_data_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(sw),
     TJsValue::to_js(sh),
-    TJsValue::to_js(settings),
+    opt_to_js(settings),
   )
 }
 
@@ -1218,7 +1218,7 @@ impl TOffscreenCanvasRenderingContext2D with get_image_data(
   sy : Int,
   sw : Int,
   sh : Int,
-  settings? : ImageDataSettings = ImageDataSettings::empty(),
+  settings? : ImageDataSettings,
 ) -> ImageData {
   offscreen_canvas_rendering_context2d_get_image_data_ffi(
     TJsValue::to_js(self),
@@ -1226,7 +1226,7 @@ impl TOffscreenCanvasRenderingContext2D with get_image_data(
     TJsValue::to_js(sy),
     TJsValue::to_js(sw),
     TJsValue::to_js(sh),
-    TJsValue::to_js(settings),
+    opt_to_js(settings),
   )
 }
 
@@ -1726,7 +1726,7 @@ impl TOffscreenCanvasRenderingContext2D with arc(
   radius : Double,
   start_angle : Double,
   end_angle : Double,
-  counterclockwise? : Bool = false,
+  counterclockwise? : Bool,
 ) -> Unit {
   offscreen_canvas_rendering_context2d_arc_ffi(
     TJsValue::to_js(self),
@@ -1735,7 +1735,7 @@ impl TOffscreenCanvasRenderingContext2D with arc(
     TJsValue::to_js(radius),
     TJsValue::to_js(start_angle),
     TJsValue::to_js(end_angle),
-    TJsValue::to_js(counterclockwise),
+    opt_to_js(counterclockwise),
   )
 }
 
@@ -1750,7 +1750,7 @@ impl TOffscreenCanvasRenderingContext2D with ellipse(
   rotation : Double,
   start_angle : Double,
   end_angle : Double,
-  counterclockwise? : Bool = false,
+  counterclockwise? : Bool,
 ) -> Unit {
   offscreen_canvas_rendering_context2d_ellipse_ffi(
     TJsValue::to_js(self),
@@ -1761,7 +1761,7 @@ impl TOffscreenCanvasRenderingContext2D with ellipse(
     TJsValue::to_js(rotation),
     TJsValue::to_js(start_angle),
     TJsValue::to_js(end_angle),
-    TJsValue::to_js(counterclockwise),
+    opt_to_js(counterclockwise),
   )
 }
 

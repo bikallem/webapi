@@ -15,15 +15,11 @@ pub impl FromJsAny for WorkerOptions with from_js_any(value : JsAny) -> WorkerOp
 
 ///|
 pub fn WorkerOptions::new(
-  name? : String = "",
-  type_? : WorkerType = WorkerType::Classic,
-  credentials? : RequestCredentials = RequestCredentials::SameOrigin,
+  name? : String,
+  type_? : WorkerType,
+  credentials? : RequestCredentials,
 ) -> WorkerOptions {
-  worker_options_ffi(
-    TJsValue::to_js(name),
-    TJsValue::to_js(type_),
-    TJsValue::to_js(credentials),
-  )
+  worker_options_ffi(opt_to_js(name), opt_to_js(type_), opt_to_js(credentials))
 }
 
 ///|

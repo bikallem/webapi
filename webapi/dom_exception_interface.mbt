@@ -20,11 +20,8 @@ pub fn[T : TDOMException] DOMException::into(self : DOMException) -> T = "%ident
 pub impl TDOMException for DOMException
 
 ///|
-pub fn DOMException::new(
-  message? : String = "",
-  name? : String = "Error",
-) -> DOMException {
-  dom_exception_new_ffi(TJsValue::to_js(message), TJsValue::to_js(name))
+pub fn DOMException::new(message? : String, name? : String) -> DOMException {
+  dom_exception_new_ffi(opt_to_js(message), opt_to_js(name))
 }
 
 ///|

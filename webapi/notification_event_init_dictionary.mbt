@@ -17,18 +17,18 @@ pub impl FromJsAny for NotificationEventInit with from_js_any(value : JsAny) -> 
 
 ///|
 pub fn NotificationEventInit::new(
-  bubbles? : Bool = false,
-  cancelable? : Bool = false,
-  composed? : Bool = false,
+  bubbles? : Bool,
+  cancelable? : Bool,
+  composed? : Bool,
   notification : &TNotification,
-  action? : String = "",
+  action? : String,
 ) -> NotificationEventInit {
   notification_event_init_ffi(
-    TJsValue::to_js(bubbles),
-    TJsValue::to_js(cancelable),
-    TJsValue::to_js(composed),
+    opt_to_js(bubbles),
+    opt_to_js(cancelable),
+    opt_to_js(composed),
     TJsValue::to_js(notification),
-    TJsValue::to_js(action),
+    opt_to_js(action),
   )
 }
 

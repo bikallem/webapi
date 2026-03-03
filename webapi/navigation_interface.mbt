@@ -106,22 +106,19 @@ impl TNavigation with can_go_forward(self : Self) -> Bool {
 impl TNavigation with navigate(
   self : Self,
   url : String,
-  options? : NavigationNavigateOptions = NavigationNavigateOptions::empty(),
+  options? : NavigationNavigateOptions,
 ) -> NavigationResult {
   navigation_navigate_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(url),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 
 ///|
 /// [Navigation.reload](https://developer.mozilla.org/en-US/docs/Web/API/Navigation/reload)
-impl TNavigation with reload(
-  self : Self,
-  options? : NavigationReloadOptions = NavigationReloadOptions::empty(),
-) -> NavigationResult {
-  navigation_reload_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
+impl TNavigation with reload(self : Self, options? : NavigationReloadOptions) -> NavigationResult {
+  navigation_reload_ffi(TJsValue::to_js(self), opt_to_js(options))
 }
 
 ///|
@@ -129,31 +126,25 @@ impl TNavigation with reload(
 impl TNavigation with traverse_to(
   self : Self,
   key : String,
-  options? : NavigationOptions = NavigationOptions::empty(),
+  options? : NavigationOptions,
 ) -> NavigationResult {
   navigation_traverse_to_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(key),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 
 ///|
 /// [Navigation.back](https://developer.mozilla.org/en-US/docs/Web/API/Navigation/back)
-impl TNavigation with back(
-  self : Self,
-  options? : NavigationOptions = NavigationOptions::empty(),
-) -> NavigationResult {
-  navigation_back_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
+impl TNavigation with back(self : Self, options? : NavigationOptions) -> NavigationResult {
+  navigation_back_ffi(TJsValue::to_js(self), opt_to_js(options))
 }
 
 ///|
 /// [Navigation.forward](https://developer.mozilla.org/en-US/docs/Web/API/Navigation/forward)
-impl TNavigation with forward(
-  self : Self,
-  options? : NavigationOptions = NavigationOptions::empty(),
-) -> NavigationResult {
-  navigation_forward_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
+impl TNavigation with forward(self : Self, options? : NavigationOptions) -> NavigationResult {
+  navigation_forward_ffi(TJsValue::to_js(self), opt_to_js(options))
 }
 
 ///|

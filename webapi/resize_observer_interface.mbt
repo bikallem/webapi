@@ -41,12 +41,12 @@ pub trait TResizeObserver: TJsValue {
 impl TResizeObserver with observe(
   self : Self,
   target : &TElement,
-  options? : ResizeObserverOptions = ResizeObserverOptions::empty(),
+  options? : ResizeObserverOptions,
 ) -> Unit {
   resize_observer_observe_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(target),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 

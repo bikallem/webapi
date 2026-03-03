@@ -48,11 +48,11 @@ impl TFileSystemFileHandle with get_file(self : Self) -> JsPromise[File] {
 /// [FileSystemFileHandle.createWritable](https://developer.mozilla.org/en-US/docs/Web/API/FileSystemFileHandle/createWritable)
 impl TFileSystemFileHandle with create_writable(
   self : Self,
-  options? : FileSystemCreateWritableOptions = FileSystemCreateWritableOptions::empty(),
+  options? : FileSystemCreateWritableOptions,
 ) -> JsPromise[FileSystemWritableFileStream] {
   file_system_file_handle_create_writable_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 

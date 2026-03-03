@@ -38,9 +38,9 @@ pub impl TWorkerNewScriptURL for String with to_js(self : String) -> JsValue = "
 ///|
 pub fn Worker::new(
   script_url : &TWorkerNewScriptURL,
-  options? : WorkerOptions = WorkerOptions::empty(),
+  options? : WorkerOptions,
 ) -> Worker {
-  worker_new_ffi(script_url.to_js(), TJsValue::to_js(options))
+  worker_new_ffi(script_url.to_js(), opt_to_js(options))
 }
 
 ///|
@@ -86,12 +86,12 @@ impl TWorker with post_message(
 impl TWorker with post_message_with_options(
   self : Self,
   message : JsValue,
-  options? : StructuredSerializeOptions = StructuredSerializeOptions::empty(),
+  options? : StructuredSerializeOptions,
 ) -> Unit {
   worker_post_message_with_options_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(message),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 

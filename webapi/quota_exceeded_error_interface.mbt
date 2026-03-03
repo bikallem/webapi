@@ -26,13 +26,10 @@ pub impl TDOMException for QuotaExceededError
 
 ///|
 pub fn QuotaExceededError::new(
-  message? : String = "",
-  options? : QuotaExceededErrorOptions = QuotaExceededErrorOptions::empty(),
+  message? : String,
+  options? : QuotaExceededErrorOptions,
 ) -> QuotaExceededError {
-  quota_exceeded_error_new_ffi(
-    TJsValue::to_js(message),
-    TJsValue::to_js(options),
-  )
+  quota_exceeded_error_new_ffi(opt_to_js(message), opt_to_js(options))
 }
 
 ///|

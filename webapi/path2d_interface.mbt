@@ -138,12 +138,12 @@ pub trait TPath2D: TJsValue {
 impl TPath2D with add_path(
   self : Self,
   path : &TPath2D,
-  transform? : DOMMatrix2DInit = DOMMatrix2DInit::empty(),
+  transform? : DOMMatrix2DInit,
 ) -> Unit {
   path2d_add_path_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(path),
-    TJsValue::to_js(transform),
+    opt_to_js(transform),
   )
 }
 
@@ -283,7 +283,7 @@ impl TPath2D with arc(
   radius : Double,
   start_angle : Double,
   end_angle : Double,
-  counterclockwise? : Bool = false,
+  counterclockwise? : Bool,
 ) -> Unit {
   path2d_arc_ffi(
     TJsValue::to_js(self),
@@ -292,7 +292,7 @@ impl TPath2D with arc(
     TJsValue::to_js(radius),
     TJsValue::to_js(start_angle),
     TJsValue::to_js(end_angle),
-    TJsValue::to_js(counterclockwise),
+    opt_to_js(counterclockwise),
   )
 }
 
@@ -307,7 +307,7 @@ impl TPath2D with ellipse(
   rotation : Double,
   start_angle : Double,
   end_angle : Double,
-  counterclockwise? : Bool = false,
+  counterclockwise? : Bool,
 ) -> Unit {
   path2d_ellipse_ffi(
     TJsValue::to_js(self),
@@ -318,6 +318,6 @@ impl TPath2D with ellipse(
     TJsValue::to_js(rotation),
     TJsValue::to_js(start_angle),
     TJsValue::to_js(end_angle),
-    TJsValue::to_js(counterclockwise),
+    opt_to_js(counterclockwise),
   )
 }

@@ -22,9 +22,9 @@ pub impl TWritableStream for WritableStream
 ///|
 pub fn WritableStream::new(
   underlying_sink? : JsValue,
-  strategy? : QueuingStrategy = QueuingStrategy::empty(),
+  strategy? : QueuingStrategy,
 ) -> WritableStream {
-  writable_stream_new_ffi(opt_to_js(underlying_sink), TJsValue::to_js(strategy))
+  writable_stream_new_ffi(opt_to_js(underlying_sink), opt_to_js(strategy))
 }
 
 ///|

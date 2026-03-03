@@ -35,13 +35,13 @@ pub trait TXPathExpression: TJsValue {
 impl TXPathExpression with evaluate(
   self : Self,
   context_node : &TNode,
-  type_? : UInt = (0 : UInt),
+  type_? : UInt,
   result? : &TXPathResult,
 ) -> XPathResult {
   x_path_expression_evaluate_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(context_node),
-    TJsValue::to_js(type_),
+    opt_to_js(type_),
     opt_to_js(result),
   )
 }

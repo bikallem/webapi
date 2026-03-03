@@ -15,20 +15,20 @@ pub impl FromJsAny for CloseEventInit with from_js_any(value : JsAny) -> CloseEv
 
 ///|
 pub fn CloseEventInit::new(
-  bubbles? : Bool = false,
-  cancelable? : Bool = false,
-  composed? : Bool = false,
-  was_clean? : Bool = false,
-  code? : UInt = (0 : UInt),
-  reason? : String = "",
+  bubbles? : Bool,
+  cancelable? : Bool,
+  composed? : Bool,
+  was_clean? : Bool,
+  code? : UInt,
+  reason? : String,
 ) -> CloseEventInit {
   close_event_init_ffi(
-    TJsValue::to_js(bubbles),
-    TJsValue::to_js(cancelable),
-    TJsValue::to_js(composed),
-    TJsValue::to_js(was_clean),
-    TJsValue::to_js(code),
-    TJsValue::to_js(reason),
+    opt_to_js(bubbles),
+    opt_to_js(cancelable),
+    opt_to_js(composed),
+    opt_to_js(was_clean),
+    opt_to_js(code),
+    opt_to_js(reason),
   )
 }
 

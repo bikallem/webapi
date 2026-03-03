@@ -17,10 +17,10 @@ pub impl FromJsAny for FilePickerAcceptType with from_js_any(value : JsAny) -> F
 
 ///|
 pub fn FilePickerAcceptType::new(
-  description? : String = "",
+  description? : String,
   accept? : JsValue,
 ) -> FilePickerAcceptType {
-  file_picker_accept_type_ffi(TJsValue::to_js(description), opt_to_js(accept))
+  file_picker_accept_type_ffi(opt_to_js(description), opt_to_js(accept))
 }
 
 ///|

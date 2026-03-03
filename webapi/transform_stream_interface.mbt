@@ -22,13 +22,13 @@ pub impl TTransformStream for TransformStream
 ///|
 pub fn TransformStream::new(
   transformer? : JsValue,
-  writable_strategy? : QueuingStrategy = QueuingStrategy::empty(),
-  readable_strategy? : QueuingStrategy = QueuingStrategy::empty(),
+  writable_strategy? : QueuingStrategy,
+  readable_strategy? : QueuingStrategy,
 ) -> TransformStream {
   transform_stream_new_ffi(
     opt_to_js(transformer),
-    TJsValue::to_js(writable_strategy),
-    TJsValue::to_js(readable_strategy),
+    opt_to_js(writable_strategy),
+    opt_to_js(readable_strategy),
   )
 }
 

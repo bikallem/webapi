@@ -66,7 +66,6 @@ pub(all) struct MethodArg {
   type_ : ArgMbtType
   optional : Bool
   variadic : Bool
-  default_value : String?
 }
 pub impl Show for MethodArg
 pub impl ToJson for MethodArg

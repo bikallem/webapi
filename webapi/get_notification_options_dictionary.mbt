@@ -16,10 +16,8 @@ pub impl TJsValue for GetNotificationOptions with to_js(
 pub impl FromJsAny for GetNotificationOptions with from_js_any(value : JsAny) -> GetNotificationOptions = "%identity"
 
 ///|
-pub fn GetNotificationOptions::new(
-  tag? : String = "",
-) -> GetNotificationOptions {
-  get_notification_options_ffi(TJsValue::to_js(tag))
+pub fn GetNotificationOptions::new(tag? : String) -> GetNotificationOptions {
+  get_notification_options_ffi(opt_to_js(tag))
 }
 
 ///|

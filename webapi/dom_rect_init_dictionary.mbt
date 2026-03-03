@@ -15,16 +15,16 @@ pub impl FromJsAny for DOMRectInit with from_js_any(value : JsAny) -> DOMRectIni
 
 ///|
 pub fn DOMRectInit::new(
-  x? : Double = (0 : Double),
-  y? : Double = (0 : Double),
-  width? : Double = (0 : Double),
-  height? : Double = (0 : Double),
+  x? : Double,
+  y? : Double,
+  width? : Double,
+  height? : Double,
 ) -> DOMRectInit {
   dom_rect_init_ffi(
-    TJsValue::to_js(x),
-    TJsValue::to_js(y),
-    TJsValue::to_js(width),
-    TJsValue::to_js(height),
+    opt_to_js(x),
+    opt_to_js(y),
+    opt_to_js(width),
+    opt_to_js(height),
   )
 }
 

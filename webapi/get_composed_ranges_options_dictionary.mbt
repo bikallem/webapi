@@ -17,9 +17,9 @@ pub impl FromJsAny for GetComposedRangesOptions with from_js_any(value : JsAny) 
 
 ///|
 pub fn GetComposedRangesOptions::new(
-  shadow_roots? : Array[ShadowRoot] = [],
+  shadow_roots? : Array[ShadowRoot],
 ) -> GetComposedRangesOptions {
-  get_composed_ranges_options_ffi(TJsValue::to_js(shadow_roots))
+  get_composed_ranges_options_ffi(opt_to_js(shadow_roots))
 }
 
 ///|

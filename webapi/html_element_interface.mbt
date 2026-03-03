@@ -586,11 +586,8 @@ impl THTMLElement with attach_internals(self : Self) -> ElementInternals {
 
 ///|
 /// [HTMLElement.showPopover](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/showPopover)
-impl THTMLElement with show_popover(
-  self : Self,
-  options? : ShowPopoverOptions = ShowPopoverOptions::empty(),
-) -> Unit {
-  html_element_show_popover_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
+impl THTMLElement with show_popover(self : Self, options? : ShowPopoverOptions) -> Unit {
+  html_element_show_popover_ffi(TJsValue::to_js(self), opt_to_js(options))
 }
 
 ///|
@@ -2392,11 +2389,8 @@ impl THTMLElement with set_tab_index(self : Self, tab_index : Int) -> Unit {
 
 ///|
 /// [HTMLElement.focus](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus)
-impl THTMLElement with focus(
-  self : Self,
-  options? : FocusOptions = FocusOptions::empty(),
-) -> Unit {
-  html_element_focus_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
+impl THTMLElement with focus(self : Self, options? : FocusOptions) -> Unit {
+  html_element_focus_ffi(TJsValue::to_js(self), opt_to_js(options))
 }
 
 ///|

@@ -21,12 +21,12 @@ pub impl FromJsAny for FileSystemPermissionDescriptor with from_js_any(
 pub fn FileSystemPermissionDescriptor::new(
   name : String,
   handle : &TFileSystemHandle,
-  mode? : FileSystemPermissionMode = FileSystemPermissionMode::Read,
+  mode? : FileSystemPermissionMode,
 ) -> FileSystemPermissionDescriptor {
   file_system_permission_descriptor_ffi(
     TJsValue::to_js(name),
     TJsValue::to_js(handle),
-    TJsValue::to_js(mode),
+    opt_to_js(mode),
   )
 }
 

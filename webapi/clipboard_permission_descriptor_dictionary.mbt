@@ -20,11 +20,11 @@ pub impl FromJsAny for ClipboardPermissionDescriptor with from_js_any(
 ///|
 pub fn ClipboardPermissionDescriptor::new(
   name : String,
-  allow_without_gesture? : Bool = false,
+  allow_without_gesture? : Bool,
 ) -> ClipboardPermissionDescriptor {
   clipboard_permission_descriptor_ffi(
     TJsValue::to_js(name),
-    TJsValue::to_js(allow_without_gesture),
+    opt_to_js(allow_without_gesture),
   )
 }
 

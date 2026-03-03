@@ -25,12 +25,9 @@ pub impl TEvent for ExtendableEvent
 ///|
 pub fn ExtendableEvent::new(
   type_ : String,
-  event_init_dict? : ExtendableEventInit = ExtendableEventInit::empty(),
+  event_init_dict? : ExtendableEventInit,
 ) -> ExtendableEvent {
-  extendable_event_new_ffi(
-    TJsValue::to_js(type_),
-    TJsValue::to_js(event_init_dict),
-  )
+  extendable_event_new_ffi(TJsValue::to_js(type_), opt_to_js(event_init_dict))
 }
 
 ///|

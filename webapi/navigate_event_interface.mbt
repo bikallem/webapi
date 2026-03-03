@@ -121,9 +121,9 @@ impl TNavigateEvent with source_element(self : Self) -> Element {
 /// [NavigateEvent.intercept](https://developer.mozilla.org/en-US/docs/Web/API/NavigateEvent/intercept)
 impl TNavigateEvent with intercept(
   self : Self,
-  options? : NavigationInterceptOptions = NavigationInterceptOptions::empty(),
+  options? : NavigationInterceptOptions,
 ) -> Unit {
-  navigate_event_intercept_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
+  navigate_event_intercept_ffi(TJsValue::to_js(self), opt_to_js(options))
 }
 
 ///|

@@ -15,10 +15,10 @@ pub impl FromJsAny for TextDecoderOptions with from_js_any(value : JsAny) -> Tex
 
 ///|
 pub fn TextDecoderOptions::new(
-  fatal? : Bool = false,
-  ignore_bom? : Bool = false,
+  fatal? : Bool,
+  ignore_bom? : Bool,
 ) -> TextDecoderOptions {
-  text_decoder_options_ffi(TJsValue::to_js(fatal), TJsValue::to_js(ignore_bom))
+  text_decoder_options_ffi(opt_to_js(fatal), opt_to_js(ignore_bom))
 }
 
 ///|

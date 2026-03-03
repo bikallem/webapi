@@ -56,12 +56,9 @@ impl TSVGGraphicsElement with transform(self : Self) -> SVGAnimatedTransformList
 /// [SVGGraphicsElement.getBBox](https://developer.mozilla.org/en-US/docs/Web/API/SVGGraphicsElement/getBBox)
 impl TSVGGraphicsElement with get_b_box(
   self : Self,
-  options? : SVGBoundingBoxOptions = SVGBoundingBoxOptions::empty(),
+  options? : SVGBoundingBoxOptions,
 ) -> DOMRect {
-  svg_graphics_element_get_b_box_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(options),
-  )
+  svg_graphics_element_get_b_box_ffi(TJsValue::to_js(self), opt_to_js(options))
 }
 
 ///|

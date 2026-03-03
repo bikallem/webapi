@@ -19,7 +19,7 @@ pub impl FromJsAny for DirectoryPickerOptions with from_js_any(value : JsAny) ->
 pub fn DirectoryPickerOptions::new(
   id? : String,
   start_in? : &TStartInDirectory,
-  mode? : FileSystemPermissionMode = FileSystemPermissionMode::Read,
+  mode? : FileSystemPermissionMode,
 ) -> DirectoryPickerOptions {
   directory_picker_options_ffi(
     opt_to_js(id),
@@ -27,7 +27,7 @@ pub fn DirectoryPickerOptions::new(
       Some(v) => v.to_js()
       None => JsValue::undefined()
     },
-    TJsValue::to_js(mode),
+    opt_to_js(mode),
   )
 }
 

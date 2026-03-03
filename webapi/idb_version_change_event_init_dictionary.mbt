@@ -17,17 +17,17 @@ pub impl FromJsAny for IDBVersionChangeEventInit with from_js_any(value : JsAny)
 
 ///|
 pub fn IDBVersionChangeEventInit::new(
-  bubbles? : Bool = false,
-  cancelable? : Bool = false,
-  composed? : Bool = false,
-  old_version? : UInt64 = (0 : UInt64),
+  bubbles? : Bool,
+  cancelable? : Bool,
+  composed? : Bool,
+  old_version? : UInt64,
   new_version? : UInt64,
 ) -> IDBVersionChangeEventInit {
   idb_version_change_event_init_ffi(
-    TJsValue::to_js(bubbles),
-    TJsValue::to_js(cancelable),
-    TJsValue::to_js(composed),
-    TJsValue::to_js(old_version),
+    opt_to_js(bubbles),
+    opt_to_js(cancelable),
+    opt_to_js(composed),
+    opt_to_js(old_version),
     opt_to_js(new_version),
   )
 }

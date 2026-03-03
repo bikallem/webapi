@@ -48,12 +48,15 @@ pub trait TXPathEvaluator: TJsValue {
 impl TXPathEvaluator with create_expression(
   self : Self,
   expression : String,
-  resolver? : (String) -> String = JsValue::null(),
+  resolver? : (String) -> String,
 ) -> XPathExpression {
   x_path_evaluator_create_expression_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(expression),
-    TJsValue::to_js(x_path_ns_resolver_ffi(resolver)),
+    match resolver {
+      Some(v) => TJsValue::to_js(x_path_ns_resolver_ffi(v))
+      None => JsValue::undefined()
+    },
   )
 }
 
@@ -75,16 +78,19 @@ impl TXPathEvaluator with evaluate(
   self : Self,
   expression : String,
   context_node : &TNode,
-  resolver? : (String) -> String = JsValue::null(),
-  type_? : UInt = (0 : UInt),
+  resolver? : (String) -> String,
+  type_? : UInt,
   result? : &TXPathResult,
 ) -> XPathResult {
   x_path_evaluator_evaluate_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(expression),
     TJsValue::to_js(context_node),
-    TJsValue::to_js(x_path_ns_resolver_ffi(resolver)),
-    TJsValue::to_js(type_),
+    match resolver {
+      Some(v) => TJsValue::to_js(x_path_ns_resolver_ffi(v))
+      None => JsValue::undefined()
+    },
+    opt_to_js(type_),
     opt_to_js(result),
   )
 }

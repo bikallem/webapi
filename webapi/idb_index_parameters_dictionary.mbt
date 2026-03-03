@@ -15,13 +15,10 @@ pub impl FromJsAny for IDBIndexParameters with from_js_any(value : JsAny) -> IDB
 
 ///|
 pub fn IDBIndexParameters::new(
-  unique? : Bool = false,
-  multi_entry? : Bool = false,
+  unique? : Bool,
+  multi_entry? : Bool,
 ) -> IDBIndexParameters {
-  idb_index_parameters_ffi(
-    TJsValue::to_js(unique),
-    TJsValue::to_js(multi_entry),
-  )
+  idb_index_parameters_ffi(opt_to_js(unique), opt_to_js(multi_entry))
 }
 
 ///|

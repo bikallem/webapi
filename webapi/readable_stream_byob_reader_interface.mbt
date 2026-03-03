@@ -48,12 +48,12 @@ pub trait TReadableStreamBYOBReader: TJsValue {
 impl TReadableStreamBYOBReader with read(
   self : Self,
   view : &TArrayBufferView,
-  options? : ReadableStreamBYOBReaderReadOptions = ReadableStreamBYOBReaderReadOptions::empty(),
+  options? : ReadableStreamBYOBReaderReadOptions,
 ) -> JsPromise[ReadableStreamReadResult] {
   readable_stream_byob_reader_read_ffi(
     TJsValue::to_js(self),
     view.to_js(),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 

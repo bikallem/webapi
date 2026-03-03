@@ -23,7 +23,6 @@ test "make_ffi_argnames replaces Self with obj" {
       type_: @type_mapping.ArgMbtType::Self,
       optional: false,
       variadic: false,
-      default_value: None,
     },
     @type_mapping.MethodArg::{
       name: "name",
@@ -31,7 +30,6 @@ test "make_ffi_argnames replaces Self with obj" {
       type_: @type_mapping.ArgMbtType::Primitive("String"),
       optional: false,
       variadic: false,
-      default_value: None,
     },
   ]
   inspect(
@@ -51,7 +49,6 @@ test "make_ffi_argnames with no Self args" {
       type_: @type_mapping.ArgMbtType::Primitive("String"),
       optional: false,
       variadic: false,
-      default_value: None,
     },
   ]
   inspect(
@@ -115,7 +112,6 @@ test "trait_method_decl_args formats args for trait declaration" {
       type_: @type_mapping.ArgMbtType::Self,
       optional: false,
       variadic: false,
-      default_value: None,
     },
     @type_mapping.MethodArg::{
       name: "name",
@@ -123,7 +119,6 @@ test "trait_method_decl_args formats args for trait declaration" {
       type_: @type_mapping.ArgMbtType::Primitive("String"),
       optional: false,
       variadic: false,
-      default_value: None,
     },
   ]
   inspect(trait_method_decl_args(args), content="self : Self, name : String")
@@ -138,7 +133,6 @@ test "trait_method_decl_args formats optional args" {
       type_: @type_mapping.ArgMbtType::Self,
       optional: false,
       variadic: false,
-      default_value: None,
     },
     @type_mapping.MethodArg::{
       name: "options",
@@ -146,7 +140,6 @@ test "trait_method_decl_args formats optional args" {
       type_: @type_mapping.ArgMbtType::Dictionary("EventInit"),
       optional: true,
       variadic: false,
-      default_value: None,
     },
   ]
   inspect(
@@ -156,7 +149,7 @@ test "trait_method_decl_args formats optional args" {
 }
 
 ///|
-test "trait_method_impl_args formats args with default values" {
+test "trait_method_impl_args formats optional args" {
   let args = [
     @type_mapping.MethodArg::{
       name: "self",
@@ -164,7 +157,6 @@ test "trait_method_impl_args formats args with default values" {
       type_: @type_mapping.ArgMbtType::Self,
       optional: false,
       variadic: false,
-      default_value: None,
     },
     @type_mapping.MethodArg::{
       name: "deep",
@@ -172,13 +164,9 @@ test "trait_method_impl_args formats args with default values" {
       type_: @type_mapping.ArgMbtType::Primitive("Bool"),
       optional: true,
       variadic: false,
-      default_value: Some("false"),
     },
   ]
-  inspect(
-    trait_method_impl_args(args),
-    content="self : Self, \ndeep? : Bool = false",
-  )
+  inspect(trait_method_impl_args(args), content="self : Self, \ndeep? : Bool")
 }
 
 ///|

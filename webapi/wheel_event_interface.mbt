@@ -31,9 +31,9 @@ pub impl TEvent for WheelEvent
 ///|
 pub fn WheelEvent::new(
   type_ : String,
-  event_init_dict? : WheelEventInit = WheelEventInit::empty(),
+  event_init_dict? : WheelEventInit,
 ) -> WheelEvent {
-  wheel_event_new_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
+  wheel_event_new_ffi(TJsValue::to_js(type_), opt_to_js(event_init_dict))
 }
 
 ///|

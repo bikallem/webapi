@@ -23,16 +23,16 @@ pub impl TDOMPointReadOnly for DOMPointReadOnly
 
 ///|
 pub fn DOMPointReadOnly::new(
-  x? : Double = (0 : Double),
-  y? : Double = (0 : Double),
-  z? : Double = (0 : Double),
-  w? : Double = (1 : Double),
+  x? : Double,
+  y? : Double,
+  z? : Double,
+  w? : Double,
 ) -> DOMPointReadOnly {
   dom_point_read_only_new_ffi(
-    TJsValue::to_js(x),
-    TJsValue::to_js(y),
-    TJsValue::to_js(z),
-    TJsValue::to_js(w),
+    opt_to_js(x),
+    opt_to_js(y),
+    opt_to_js(z),
+    opt_to_js(w),
   )
 }
 
@@ -49,10 +49,8 @@ pub trait TDOMPointReadOnly: TJsValue {
 
 ///|
 /// [DOMPointReadOnly.fromPoint](https://developer.mozilla.org/en-US/docs/Web/API/DOMPointReadOnly/fromPoint)
-pub fn DOMPointReadOnly::from_point(
-  other? : DOMPointInit = DOMPointInit::empty(),
-) -> DOMPointReadOnly {
-  dom_point_read_only_from_point_ffi(TJsValue::to_js(other))
+pub fn DOMPointReadOnly::from_point(other? : DOMPointInit) -> DOMPointReadOnly {
+  dom_point_read_only_from_point_ffi(opt_to_js(other))
 }
 
 ///|
@@ -83,11 +81,11 @@ impl TDOMPointReadOnly with w(self : Self) -> Double {
 /// [DOMPointReadOnly.matrixTransform](https://developer.mozilla.org/en-US/docs/Web/API/DOMPointReadOnly/matrixTransform)
 impl TDOMPointReadOnly with matrix_transform(
   self : Self,
-  matrix? : DOMMatrixInit = DOMMatrixInit::empty(),
+  matrix? : DOMMatrixInit,
 ) -> DOMPoint {
   dom_point_read_only_matrix_transform_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(matrix),
+    opt_to_js(matrix),
   )
 }
 

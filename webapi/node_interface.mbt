@@ -144,11 +144,8 @@ impl TNode with owner_document(self : Self) -> Document {
 
 ///|
 /// [Node.getRootNode](https://developer.mozilla.org/en-US/docs/Web/API/Node/getRootNode)
-impl TNode with get_root_node(
-  self : Self,
-  options? : GetRootNodeOptions = GetRootNodeOptions::empty(),
-) -> Node {
-  node_get_root_node_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
+impl TNode with get_root_node(self : Self, options? : GetRootNodeOptions) -> Node {
+  node_get_root_node_ffi(TJsValue::to_js(self), opt_to_js(options))
 }
 
 ///|
@@ -234,8 +231,8 @@ impl TNode with normalize(self : Self) -> Unit {
 
 ///|
 /// [Node.cloneNode](https://developer.mozilla.org/en-US/docs/Web/API/Node/cloneNode)
-impl TNode with clone_node(self : Self, subtree? : Bool = false) -> Node {
-  node_clone_node_ffi(TJsValue::to_js(self), TJsValue::to_js(subtree))
+impl TNode with clone_node(self : Self, subtree? : Bool) -> Node {
+  node_clone_node_ffi(TJsValue::to_js(self), opt_to_js(subtree))
 }
 
 ///|

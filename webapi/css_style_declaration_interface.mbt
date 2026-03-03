@@ -97,13 +97,13 @@ impl TCSSStyleDeclaration with set_property(
   self : Self,
   property : CSSOMString,
   value : CSSOMString,
-  priority? : CSSOMString = "",
+  priority? : CSSOMString,
 ) -> Unit {
   css_style_declaration_set_property_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(property),
     TJsValue::to_js(value),
-    TJsValue::to_js(priority),
+    opt_to_js(priority),
   )
 }
 

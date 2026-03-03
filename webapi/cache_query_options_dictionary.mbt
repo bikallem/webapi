@@ -15,14 +15,14 @@ pub impl FromJsAny for CacheQueryOptions with from_js_any(value : JsAny) -> Cach
 
 ///|
 pub fn CacheQueryOptions::new(
-  ignore_search? : Bool = false,
-  ignore_method? : Bool = false,
-  ignore_vary? : Bool = false,
+  ignore_search? : Bool,
+  ignore_method? : Bool,
+  ignore_vary? : Bool,
 ) -> CacheQueryOptions {
   cache_query_options_ffi(
-    TJsValue::to_js(ignore_search),
-    TJsValue::to_js(ignore_method),
-    TJsValue::to_js(ignore_vary),
+    opt_to_js(ignore_search),
+    opt_to_js(ignore_method),
+    opt_to_js(ignore_vary),
   )
 }
 

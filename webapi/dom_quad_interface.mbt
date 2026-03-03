@@ -21,17 +21,12 @@ pub impl TDOMQuad for DOMQuad
 
 ///|
 pub fn DOMQuad::new(
-  p1? : DOMPointInit = DOMPointInit::empty(),
-  p2? : DOMPointInit = DOMPointInit::empty(),
-  p3? : DOMPointInit = DOMPointInit::empty(),
-  p4? : DOMPointInit = DOMPointInit::empty(),
+  p1? : DOMPointInit,
+  p2? : DOMPointInit,
+  p3? : DOMPointInit,
+  p4? : DOMPointInit,
 ) -> DOMQuad {
-  dom_quad_new_ffi(
-    TJsValue::to_js(p1),
-    TJsValue::to_js(p2),
-    TJsValue::to_js(p3),
-    TJsValue::to_js(p4),
-  )
+  dom_quad_new_ffi(opt_to_js(p1), opt_to_js(p2), opt_to_js(p3), opt_to_js(p4))
 }
 
 ///|
@@ -47,18 +42,14 @@ pub trait TDOMQuad: TJsValue {
 
 ///|
 /// [DOMQuad.fromRect](https://developer.mozilla.org/en-US/docs/Web/API/DOMQuad/fromRect)
-pub fn DOMQuad::from_rect(
-  other? : DOMRectInit = DOMRectInit::empty(),
-) -> DOMQuad {
-  dom_quad_from_rect_ffi(TJsValue::to_js(other))
+pub fn DOMQuad::from_rect(other? : DOMRectInit) -> DOMQuad {
+  dom_quad_from_rect_ffi(opt_to_js(other))
 }
 
 ///|
 /// [DOMQuad.fromQuad](https://developer.mozilla.org/en-US/docs/Web/API/DOMQuad/fromQuad)
-pub fn DOMQuad::from_quad(
-  other? : DOMQuadInit = DOMQuadInit::empty(),
-) -> DOMQuad {
-  dom_quad_from_quad_ffi(TJsValue::to_js(other))
+pub fn DOMQuad::from_quad(other? : DOMQuadInit) -> DOMQuad {
+  dom_quad_from_quad_ffi(opt_to_js(other))
 }
 
 ///|

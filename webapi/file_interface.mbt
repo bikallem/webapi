@@ -26,12 +26,12 @@ pub impl TBlob for File
 pub fn File::new(
   file_bits : Array[BlobPart],
   file_name : String,
-  options? : FilePropertyBag = FilePropertyBag::empty(),
+  options? : FilePropertyBag,
 ) -> File {
   file_new_ffi(
     TJsValue::to_js(file_bits),
     TJsValue::to_js(file_name),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 

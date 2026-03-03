@@ -16,10 +16,8 @@ pub impl TJsValue for EventListenerOptions with to_js(
 pub impl FromJsAny for EventListenerOptions with from_js_any(value : JsAny) -> EventListenerOptions = "%identity"
 
 ///|
-pub fn EventListenerOptions::new(
-  capture? : Bool = false,
-) -> EventListenerOptions {
-  event_listener_options_ffi(TJsValue::to_js(capture))
+pub fn EventListenerOptions::new(capture? : Bool) -> EventListenerOptions {
+  event_listener_options_ffi(opt_to_js(capture))
 }
 
 ///|

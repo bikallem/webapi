@@ -70,12 +70,12 @@ impl TServiceWorker with post_message(
 impl TServiceWorker with post_message_with_options(
   self : Self,
   message : JsValue,
-  options? : StructuredSerializeOptions = StructuredSerializeOptions::empty(),
+  options? : StructuredSerializeOptions,
 ) -> Unit {
   service_worker_post_message_with_options_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(message),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 

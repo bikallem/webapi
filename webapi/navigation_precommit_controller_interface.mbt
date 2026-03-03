@@ -37,12 +37,12 @@ pub trait TNavigationPrecommitController: TJsValue {
 impl TNavigationPrecommitController with redirect(
   self : Self,
   url : String,
-  options? : NavigationNavigateOptions = NavigationNavigateOptions::empty(),
+  options? : NavigationNavigateOptions,
 ) -> Unit {
   navigation_precommit_controller_redirect_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(url),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 

@@ -23,26 +23,26 @@ pub impl TURLPattern for URLPattern
 pub fn URLPattern::new(
   input : &TURLPatternInput,
   base_url : String,
-  options? : URLPatternOptions = URLPatternOptions::empty(),
+  options? : URLPatternOptions,
 ) -> URLPattern {
   url_pattern_new_ffi(
     input.to_js(),
     TJsValue::to_js(base_url),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 
 ///|
 pub fn URLPattern::new_2(
   input? : &TURLPatternInput,
-  options? : URLPatternOptions = URLPatternOptions::empty(),
+  options? : URLPatternOptions,
 ) -> URLPattern {
   url_pattern_new_2_ffi(
     match input {
       Some(v) => v.to_js()
       None => JsValue::undefined()
     },
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 

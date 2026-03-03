@@ -52,12 +52,12 @@ pub trait TFileSystemDirectoryHandle: TFileSystemHandle {
 impl TFileSystemDirectoryHandle with get_file_handle(
   self : Self,
   name : String,
-  options? : FileSystemGetFileOptions = FileSystemGetFileOptions::empty(),
+  options? : FileSystemGetFileOptions,
 ) -> JsPromise[FileSystemFileHandle] {
   file_system_directory_handle_get_file_handle_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(name),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 
@@ -66,12 +66,12 @@ impl TFileSystemDirectoryHandle with get_file_handle(
 impl TFileSystemDirectoryHandle with get_directory_handle(
   self : Self,
   name : String,
-  options? : FileSystemGetDirectoryOptions = FileSystemGetDirectoryOptions::empty(),
+  options? : FileSystemGetDirectoryOptions,
 ) -> JsPromise[FileSystemDirectoryHandle] {
   file_system_directory_handle_get_directory_handle_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(name),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 
@@ -80,12 +80,12 @@ impl TFileSystemDirectoryHandle with get_directory_handle(
 impl TFileSystemDirectoryHandle with remove_entry(
   self : Self,
   name : String,
-  options? : FileSystemRemoveOptions = FileSystemRemoveOptions::empty(),
+  options? : FileSystemRemoveOptions,
 ) -> JsPromise[JsValue] {
   file_system_directory_handle_remove_entry_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(name),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 

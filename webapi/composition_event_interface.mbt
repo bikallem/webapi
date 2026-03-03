@@ -30,12 +30,9 @@ pub impl TEvent for CompositionEvent
 ///|
 pub fn CompositionEvent::new(
   type_ : String,
-  event_init_dict? : CompositionEventInit = CompositionEventInit::empty(),
+  event_init_dict? : CompositionEventInit,
 ) -> CompositionEvent {
-  composition_event_new_ffi(
-    TJsValue::to_js(type_),
-    TJsValue::to_js(event_init_dict),
-  )
+  composition_event_new_ffi(TJsValue::to_js(type_), opt_to_js(event_init_dict))
 }
 
 ///|
@@ -63,17 +60,17 @@ impl TCompositionEvent with data(self : Self) -> String {
 impl TCompositionEvent with init_composition_event(
   self : Self,
   type_arg : String,
-  bubbles_arg? : Bool = false,
-  cancelable_arg? : Bool = false,
+  bubbles_arg? : Bool,
+  cancelable_arg? : Bool,
   view_arg? : WindowProxy,
-  data_arg? : String = "",
+  data_arg? : String,
 ) -> Unit {
   composition_event_init_composition_event_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(type_arg),
-    TJsValue::to_js(bubbles_arg),
-    TJsValue::to_js(cancelable_arg),
+    opt_to_js(bubbles_arg),
+    opt_to_js(cancelable_arg),
     opt_to_js(view_arg),
-    TJsValue::to_js(data_arg),
+    opt_to_js(data_arg),
   )
 }

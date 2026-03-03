@@ -29,11 +29,11 @@ pub impl TEvent for ClipboardChangeEvent
 ///|
 pub fn ClipboardChangeEvent::new(
   type_ : String,
-  event_init_dict? : ClipboardChangeEventInit = ClipboardChangeEventInit::empty(),
+  event_init_dict? : ClipboardChangeEventInit,
 ) -> ClipboardChangeEvent {
   clipboard_change_event_new_ffi(
     TJsValue::to_js(type_),
-    TJsValue::to_js(event_init_dict),
+    opt_to_js(event_init_dict),
   )
 }
 

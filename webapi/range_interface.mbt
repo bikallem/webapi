@@ -138,8 +138,8 @@ impl TRange with set_end_after(self : Self, node : &TNode) -> Unit {
 
 ///|
 /// [Range.collapse](https://developer.mozilla.org/en-US/docs/Web/API/Range/collapse)
-impl TRange with collapse(self : Self, to_start? : Bool = false) -> Unit {
-  range_collapse_ffi(TJsValue::to_js(self), TJsValue::to_js(to_start))
+impl TRange with collapse(self : Self, to_start? : Bool) -> Unit {
+  range_collapse_ffi(TJsValue::to_js(self), opt_to_js(to_start))
 }
 
 ///|
