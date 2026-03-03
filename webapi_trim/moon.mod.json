@@ -12,5 +12,6 @@
     "wasm",
     "trim"
   ],
-  "description": "Trim webapi.mjs to only the modules imported by a wasm binary."
+  "description": "Trim webapi.mjs to only the modules imported by a wasm binary.",
+  "warn-list": "@27"
 }

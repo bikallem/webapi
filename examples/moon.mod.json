@@ -12,5 +12,6 @@
         },
         "moonbitlang/async": "0.16.6"
     },
-    "preferred-target": "js"
+    "preferred-target": "js",
+    "warn-list": "@27"
 }

@@ -17,5 +17,6 @@
   "description": "Moonbit browser WebApi - dom, fetch, html, xhr, url, svg, uievents and more",
   "deps": {
     "moonbitlang/async": "0.16.6"
-  }
+  },
+  "warn-list": "@27"
 }
