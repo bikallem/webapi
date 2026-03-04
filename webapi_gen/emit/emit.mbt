@@ -596,9 +596,10 @@ fn render_enum(name : String, variants : Array[EnumVariantEmit]) -> String {
 /// or "Array[&TFoo]"), None otherwise.
 fn extract_trait_ref(type_name : String) -> String? {
   // Find the position of "&T" in the string
+  let chars = type_name.to_array()
   let mut start = -1
-  for i = 0; i < type_name.length() - 1; i = i + 1 {
-    if type_name[i] == '&' && type_name[i + 1] == 'T' {
+  for i = 0; i < chars.length() - 1; i = i + 1 {
+    if chars[i] == '&' && chars[i + 1] == 'T' {
       start = i
       break
     }
@@ -608,8 +609,8 @@ fn extract_trait_ref(type_name : String) -> String? {
   }
   // Find the end of the trait name: alphanumeric characters after "&T"
   let mut end = start + 2
-  while end < type_name.length() {
-    let c = type_name[end]
+  while end < chars.length() {
+    let c = chars[end]
     if (c >= 'A' && c <= 'Z') ||
       (c >= 'a' && c <= 'z') ||
       (c >= '0' && c <= '9') ||
@@ -619,7 +620,11 @@ fn extract_trait_ref(type_name : String) -> String? {
       break
     }
   }
-  Some(type_name.substring(start~, end~))
+  let buf = StringBuilder::new()
+  for i = start; i < end; i = i + 1 {
+    buf.write_char(chars[i])
+  }
+  Some(buf.to_string())
 }
 
 ///|
