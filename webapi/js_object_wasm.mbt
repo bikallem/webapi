@@ -20,3 +20,11 @@ pub fn JsObject::set(
 ) -> JsObject {
   js_object_set_ffi(TJsValue::to_js(self), key, value).unsafe_cast()
 }
+
+///|
+fn js_object_get_ffi(obj : JsValue, key : String) -> JsValue = "webapi_JsObject" "get"
+
+///|
+pub fn JsObject::get(self : JsObject, key : String) -> JsValue {
+  js_object_get_ffi(TJsValue::to_js(self), key)
+}

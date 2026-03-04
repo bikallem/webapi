@@ -4186,6 +4186,7 @@ pub impl TJsValue for JsArray
 
 #external
 pub type JsObject
+pub fn JsObject::get(Self, String) -> JsValue
 pub fn JsObject::new() -> Self
 pub fn JsObject::set(Self, String, JsValue) -> Self
 pub impl FromJsAny for JsObject

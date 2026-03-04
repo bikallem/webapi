@@ -10,3 +10,6 @@ pub extern "js" fn JsObject::set(
   key : String,
   value : JsValue,
 ) -> JsObject = "(obj, key, value) => { obj[key] = value; return obj; }"
+
+///|
+pub extern "js" fn JsObject::get(self : JsObject, key : String) -> JsValue = "(obj, key) => obj[key]"

@@ -97,7 +97,8 @@ fn emit_js_preamble() -> String {
     #|
     #|  webapi_JsObject: {
     #|    create: () => ({}),
-    #|    set: (obj, key, value) => { obj[key] = value; return obj; }
+    #|    set: (obj, key, value) => { obj[key] = value; return obj; },
+    #|    get: (obj, key) => obj[key]
     #|  },
     #|
     #|  webapi_WebComponent: {

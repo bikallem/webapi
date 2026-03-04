@@ -109,7 +109,7 @@ pub fn lex(
     remain = xs
   }
 
-  for ;; {
+  for {
     lexmatch remain with longest {
       ("-?([1-9][0-9]*|0[Xx][0-9A-Fa-f]+|0[0-7]*)" as s, xs) =>
         push(INTEGER(s.to_string()), s, xs)

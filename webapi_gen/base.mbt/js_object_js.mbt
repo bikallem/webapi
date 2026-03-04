@@ -7,3 +7,7 @@ pub extern "js" fn JsObject::new() -> JsObject = "() => ({})"
 ///|
 pub extern "js" fn JsObject::set(self : JsObject, key : String, value : JsValue) -> JsObject =
   "(obj, key, value) => { obj[key] = value; return obj; }"
+
+///|
+pub extern "js" fn JsObject::get(self : JsObject, key : String) -> JsValue =
+  "(obj, key) => obj[key]"

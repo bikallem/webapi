@@ -619,7 +619,7 @@ fn extract_trait_ref(type_name : String) -> String? {
       break
     }
   }
-  Some(type_name[start:end].to_string())
+  Some(type_name.substring(start~, end~))
 }
 
 ///|
