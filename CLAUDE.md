@@ -272,16 +272,8 @@ All examples compile for both js and wasm-gc targets except `fetch-async` (requi
 
 **`unsigned long long` (UInt64) properties on wasm-gc (resolved)**: The JS runtime code generator now wraps return values of `LongLong`, `UnsignedLongLong`, and `Bigint` types with `BigInt()` in generated getters and methods (e.g., `get_version: (obj) => BigInt(obj.version)`). The `is_bigint_type` helper in `emit_js_runtime.mbt` detects these types and the `is_bigint` parameter on `emit_js_getter`/`emit_js_method` controls wrapping. Namespace methods/getters reuse these same functions with `is_static=true`.
 
-## Pending: remove default_value from code generation (branch `remove-default-value`)
-
-The branch `remove-default-value` removes redundant MoonBit-side default values from optional parameters (e.g., `deep? : Bool = false` becomes `deep? : Bool`). JavaScript already applies its own defaults when it receives `undefined`, making these MoonBit defaults unnecessary. The change removes ~80 lines of `mbt_default_value` conversion logic and simplifies `func_call_args`/`trait_method_impl_args`.
-
-**Blocked by moonc ICE** ([#1133](https://github.com/moonbitlang/moonbit-docs/issues/1133)): Removing `= []` from optional `Array[T]` parameters (e.g., `actions? : Array[NotificationAction] = []` to `actions? : Array[NotificationAction]`) triggers `Moonc.Basic_hashf.Make(Key).Key_not_found(_)` during `link-core` on the JS target. wasm-gc is unaffected. Type-checking passes — only the linker crashes.
-
-**Action**: Once the moonc bug is fixed, merge `remove-default-value` back into main and verify with `make clean all`.
-
 ## Pending: rework file-api JS helpers (blocked by moonc ICE #1133)
 
-The file-api example uses target-specific helpers (`helpers_js.mbt` / `helpers_wasm.mbt`) because `Union::from()` (e.g., `BlobPart::from(text)`) triggers the same `Moonc.Basic_hashf.Make(Key).Key_not_found(_)` ICE on the JS target. The wasm-gc helper already uses `BlobPart::from()` directly, but the JS helper falls back to `extern "js"` for blob/file construction.
+The file-api example uses target-specific helpers (`helpers_js.mbt` / `helpers_wasm.mbt`) because `Union::from()` (e.g., `BlobPart::from(text)`) triggers the `Moonc.Basic_hashf.Make(Key).Key_not_found(_)` ICE ([#1133](https://github.com/moonbitlang/moonbit-docs/issues/1133)) on the JS target. The wasm-gc helper already uses `BlobPart::from()` directly, but the JS helper falls back to `extern "js"` for blob/file construction.
 
 **Action**: Once the moonc bug is fixed, replace `helpers_js.mbt` with a shared `main.mbt` that uses `BlobPart::from()` on both targets, delete the target-specific helpers, and remove the `targets` config from `moon.pkg`.
