@@ -22,9 +22,9 @@ pub impl TBlob for Blob
 ///|
 pub fn Blob::new(
   blob_parts? : Array[BlobPart],
-  options? : BlobPropertyBag = BlobPropertyBag::empty(),
+  options? : BlobPropertyBag,
 ) -> Blob {
-  blob_new_ffi(opt_to_js(blob_parts), TJsValue::to_js(options))
+  blob_new_ffi(opt_to_js(blob_parts), opt_to_js(options))
 }
 
 ///|

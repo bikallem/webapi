@@ -115,11 +115,7 @@ fn trait_method_impl_args(args : Array[@type_mapping.MethodArg]) -> String {
   .map(arg => {
     let arg_name = @type_mapping.safe_identifier(arg.name)
     let arg_name = if arg.optional { "\{arg_name}?" } else { arg_name }
-    let arg_decl = "\{arg_name} : \{arg.type_.name()}"
-    match arg.default_value {
-      Some(dv) => "\{arg_decl} = \{dv}"
-      None => arg_decl
-    }
+    "\{arg_name} : \{arg.type_.name()}"
   })
   .join(", \n")
 }
@@ -168,24 +164,20 @@ fn convenience_call_expr(
   first_arg_index : Int,
 ) -> String {
   let effective_args = args[first_arg_index:]
-  let opt_no_default = effective_args.filter(fn(arg) {
-    arg.optional && arg.default_value is None
-  })
-  if opt_no_default.is_empty() {
-    // Simple forwarding: all optional args have defaults
+  let opt_args = effective_args.filter(fn(arg) { arg.optional })
+  if opt_args.is_empty() {
+    // Simple forwarding: no optional args
     let fwd = effective_args.map(forward_arg).join(", ")
     return "\{call_prefix}\{method_name}_opt(\{fwd}).unwrap()"
   }
-  if opt_no_default.length() != 1 {
-    // Cannot generate correct forwarding for multiple optional-no-default args
+  if opt_args.length() != 1 {
+    // Cannot generate correct forwarding for multiple optional args
     return ""
   }
-  let opt_name = opt_no_default[0].name
+  let opt_name = opt_args[0].name
   let some_fwd = effective_args.map(forward_arg).join(", ")
   let none_fwd = effective_args
-    .filter(fn(arg) {
-      !(arg.optional && arg.default_value is None && arg.name == opt_name)
-    })
+    .filter(fn(arg) { !(arg.optional && arg.name == opt_name) })
     .map(forward_arg)
     .join(", ")
   "let result = match \{opt_name} {\n    Some(\{opt_name}) => \{call_prefix}\{method_name}_opt(\{some_fwd})\n    None => \{call_prefix}\{method_name}_opt(\{none_fwd})\n  }\n  result.unwrap()"
@@ -277,18 +269,18 @@ fn func_call_args(args : Array[@type_mapping.MethodArg]) -> String {
     if arg.variadic {
       variadic_call_arg(arg_name, arg.type_)
     } else if arg.type_ is @type_mapping.Callback(info) {
-      if arg.optional && arg.default_value is None {
+      if arg.optional {
         "match \{arg_name} {\nSome(v) => TJsValue::to_js(\{info.ffi_name}(v))\nNone => JsValue::undefined()\n}"
       } else {
         "TJsValue::to_js(\{info.ffi_name}(\{arg_name}))"
       }
     } else if is_union_or_trait {
-      if arg.optional && arg.default_value is None {
+      if arg.optional {
         "match \{arg_name} {\nSome(v) => v.to_js()\nNone => JsValue::undefined()\n}"
       } else {
         "\{arg_name}.to_js()"
       }
-    } else if arg.optional && arg.default_value is None {
+    } else if arg.optional {
       "opt_to_js(\{arg_name})"
     } else {
       "TJsValue::to_js(\{arg_name})"

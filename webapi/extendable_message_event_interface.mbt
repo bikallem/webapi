@@ -32,11 +32,11 @@ pub impl TEvent for ExtendableMessageEvent
 ///|
 pub fn ExtendableMessageEvent::new(
   type_ : String,
-  event_init_dict? : ExtendableMessageEventInit = ExtendableMessageEventInit::empty(),
+  event_init_dict? : ExtendableMessageEventInit,
 ) -> ExtendableMessageEvent {
   extendable_message_event_new_ffi(
     TJsValue::to_js(type_),
-    TJsValue::to_js(event_init_dict),
+    opt_to_js(event_init_dict),
   )
 }
 

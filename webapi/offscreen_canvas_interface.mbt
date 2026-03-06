@@ -98,11 +98,11 @@ impl TOffscreenCanvas with transfer_to_image_bitmap(self : Self) -> ImageBitmap 
 /// [OffscreenCanvas.convertToBlob](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas/convertToBlob)
 impl TOffscreenCanvas with convert_to_blob(
   self : Self,
-  options? : ImageEncodeOptions = ImageEncodeOptions::empty(),
+  options? : ImageEncodeOptions,
 ) -> JsPromise[Blob] {
   offscreen_canvas_convert_to_blob_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 

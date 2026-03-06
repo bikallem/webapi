@@ -15,7 +15,6 @@ test "InterfaceEmitter generates to_js() call for Union arg types" {
         op.arguments[0].name,
         op.arguments[0].type_.type_,
         op.arguments[0].optional,
-        op.arguments[0].default_value,
         op.arguments[0].variadic,
       ),
     ],
@@ -761,8 +760,8 @@ test "InterfaceEmitter emits static methods" {
       #|
       #|/// [TestInterface.redirect](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface/redirect)
       #|pub fn TestInterface::redirect(url : String, 
-      #|status? : UInt = (302: UInt)) -> Response {
-      #|  test_interface_redirect_ffi(TJsValue::to_js(url), TJsValue::to_js(status))
+      #|status? : UInt) -> Response {
+      #|  test_interface_redirect_ffi(TJsValue::to_js(url), opt_to_js(status))
       #|}
     ),
   )

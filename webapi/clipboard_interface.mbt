@@ -35,11 +35,10 @@ pub trait TClipboard: TEventTarget {
 
 ///|
 /// [Clipboard.read](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard/read)
-impl TClipboard with read(
-  self : Self,
-  formats? : ClipboardUnsanitizedFormats = ClipboardUnsanitizedFormats::empty(),
-) -> JsPromise[ClipboardItems] {
-  clipboard_read_ffi(TJsValue::to_js(self), TJsValue::to_js(formats))
+impl TClipboard with read(self : Self, formats? : ClipboardUnsanitizedFormats) -> JsPromise[
+  ClipboardItems,
+] {
+  clipboard_read_ffi(TJsValue::to_js(self), opt_to_js(formats))
 }
 
 ///|

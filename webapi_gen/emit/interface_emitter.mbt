@@ -28,10 +28,8 @@ fn is_union_typedef_arg(
 ///|
 fn unpack_arguments(
   args : Array[@parser.Argument],
-) -> Array[(String, @parser.Type, Bool, @parser.DefaultValue?, Bool)] {
-  args.map(arg => {
-    (arg.name, arg.type_.type_, arg.optional, arg.default_value, arg.variadic)
-  })
+) -> Array[(String, @parser.Type, Bool, Bool)] {
+  args.map(arg => (arg.name, arg.type_.type_, arg.optional, arg.variadic))
 }
 
 ///|
@@ -42,7 +40,6 @@ fn make_self_arg() -> @type_mapping.MethodArg {
     type_: @type_mapping.ArgMbtType::Self,
     optional: false,
     variadic: false,
-    default_value: None,
   }
 }
 
@@ -103,7 +100,7 @@ fn try_resolve_callback(
 /// Convert method arguments from IDL to MBT types, collecting any additional emits needed
 /// for complex types (e.g., union arg traits).
 fn method_args(
-  args : Array[(String, @parser.Type, Bool, @parser.DefaultValue?, Bool)],
+  args : Array[(String, @parser.Type, Bool, Bool)],
   interface_name : String,
   method_name : String,
   type_registry : @type_registry.TypeRegistry,
@@ -111,7 +108,7 @@ fn method_args(
   let emits = []
   let mbt_args = []
   for arg in args {
-    let (arg_name, type_, optional, default_value, variadic) = arg
+    let (arg_name, type_, optional, variadic) = arg
     let (mbt_type, arg_emits) = arg_mbt_type(
       type_, interface_name, method_name, arg_name, type_registry,
     )
@@ -123,25 +120,7 @@ fn method_args(
         try_resolve_callback(name, type_registry).unwrap_or(mbt_type)
       _ => mbt_type
     }
-    let default_value = default_value.map(dv => mbt_default_value(dv, mbt_type))
-    // On wasm-gc, JsValue::null() returns externref (nullable) which is
-    // incompatible with non-nullable (ref extern) types like String, type
-    // aliases (CSSOMString), primitives (Bool=i32, Double=f64), and enums
-    // (i32). Strip the default so the field becomes a plain optional;
-    // opt_to_js sends undefined when absent.
     let union_typedef_arg = is_union_typedef_arg(type_, type_registry)
-    let default_value = match (default_value, mbt_type) {
-      (Some("JsValue::null()"), Primitive(_) | Enum(_) | Other(_)) => None
-      // On wasm-gc, trait-typed params (Union and Interface) compile to GC struct
-      // closures. Any default creates a thunk returning Option[GCStruct], but the
-      // compiler uses JsNull::null() (externref) for None, which is incompatible
-      // with GC struct types. Strip all defaults and use Option + match instead.
-      // Union typedefs (e.g. URLPatternInput) appear as Other(_) but are also
-      // trait-typed, so strip their defaults too.
-      (Some(_), Union(_) | Interface(_)) => None
-      (Some(_), _) if union_typedef_arg => None
-      _ => default_value
-    }
     let mbt_type = to_trait_ref(mbt_type, union_typedef_arg)
     let mbt_type = if variadic {
       let inner = if mbt_type.name() == "JsValue" {
@@ -159,110 +138,9 @@ fn method_args(
       type_: mbt_type,
       optional,
       variadic,
-      default_value,
     })
   }
   (mbt_args, emits)
-}
-
-///|
-fn find_union_option(
-  arg_type : @type_mapping.ArgMbtType,
-  pred : (@type_mapping.ArgMbtType) -> Bool,
-) -> @type_mapping.ArgMbtType? {
-  match arg_type {
-    Union({ options, .. }) => options.iter().find_first(pred)
-    _ => None
-  }
-}
-
-///|
-fn is_int_type(t : @type_mapping.ArgMbtType) -> Bool {
-  match t {
-    Primitive("Int")
-    | Primitive("Int64")
-    | Primitive("UInt")
-    | Primitive("UInt64") => true
-    _ => false
-  }
-}
-
-///|
-fn is_double_type(t : @type_mapping.ArgMbtType) -> Bool {
-  t is Primitive("Double")
-}
-
-///|
-fn is_float_type(t : @type_mapping.ArgMbtType) -> Bool {
-  t is Primitive("Float")
-}
-
-///|
-fn is_float_or_double_type(t : @type_mapping.ArgMbtType) -> Bool {
-  match t {
-    Primitive("Float") | Primitive("Double") => true
-    _ => false
-  }
-}
-
-///|
-fn mbt_default_value(
-  default_value : @parser.DefaultValue,
-  arg_type : @type_mapping.ArgMbtType,
-) -> String {
-  match default_value {
-    String(s) =>
-      if arg_type is Enum(name) {
-        // For enum types, convert string to enum variant
-        let enum_variant = enum_variant(s)
-        "\{name}::\{enum_variant}"
-      } else {
-        "\"\{s}\""
-      }
-    ConstValue(Boolean(b)) => b
-    ConstValue(Integer(i)) =>
-      if find_union_option(arg_type, is_int_type) is Some(t) {
-        "(\{i}: \{t.name()})"
-      } else if find_union_option(arg_type, is_double_type) is Some(_) {
-        "(\{i} : Double)"
-      } else if find_union_option(arg_type, is_float_type) is Some(_) {
-        "(\{i} : Float)"
-      } else if arg_type is Union(_) {
-        i
-      } else {
-        "(\{i}: \{arg_type.name()})"
-      }
-    ConstValue(Float(_) as f) => {
-      let f = @type_mapping.const_value(f)
-      if find_union_option(arg_type, is_float_or_double_type) is Some(t) {
-        "(\{f}: \{t.name()})"
-      } else if arg_type is Union(_) {
-        abort("No suitable float type in union for default value \{f}")
-      } else {
-        "(\{f}: \{arg_type.name()})"
-      }
-    }
-    Null => "JsValue::null()"
-    EmptyObject =>
-      if find_union_option(arg_type, @type_mapping.ArgMbtType::is_dictionary)
-        is Some(t) {
-        "\{t.name()}::empty()"
-      } else if arg_type is Union(_) {
-        abort(
-          "No suitable interface type in union for default value EmptyObject",
-        )
-      } else {
-        "\{arg_type.name()}::empty()"
-      }
-    EmptySequence =>
-      if find_union_option(arg_type, fn(t) { t.name().has_prefix("Array[") })
-        is Some(t) {
-        "([] : \{t.name()})"
-      } else {
-        "[]"
-      }
-    Undefined => "JsUndefined::undefined()"
-  }
 }
 
 ///|
@@ -438,7 +316,6 @@ fn emit_attribute_setter(
       type_: attr_type,
       optional: false,
       variadic: false,
-      default_value: None,
     },
   ]
   AttributeSetMethodEmit::{ interface_name, original_name: attr.name, args }

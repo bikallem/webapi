@@ -15,15 +15,15 @@ pub impl FromJsAny for PageRevealEventInit with from_js_any(value : JsAny) -> Pa
 
 ///|
 pub fn PageRevealEventInit::new(
-  bubbles? : Bool = false,
-  cancelable? : Bool = false,
-  composed? : Bool = false,
+  bubbles? : Bool,
+  cancelable? : Bool,
+  composed? : Bool,
   view_transition? : ViewTransition,
 ) -> PageRevealEventInit {
   page_reveal_event_init_ffi(
-    TJsValue::to_js(bubbles),
-    TJsValue::to_js(cancelable),
-    TJsValue::to_js(composed),
+    opt_to_js(bubbles),
+    opt_to_js(cancelable),
+    opt_to_js(composed),
     opt_to_js(view_transition),
   )
 }

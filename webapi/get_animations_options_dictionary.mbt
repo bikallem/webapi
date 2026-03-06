@@ -17,13 +17,10 @@ pub impl FromJsAny for GetAnimationsOptions with from_js_any(value : JsAny) -> G
 
 ///|
 pub fn GetAnimationsOptions::new(
-  subtree? : Bool = false,
+  subtree? : Bool,
   pseudo_element? : CSSOMString,
 ) -> GetAnimationsOptions {
-  get_animations_options_ffi(
-    TJsValue::to_js(subtree),
-    opt_to_js(pseudo_element),
-  )
+  get_animations_options_ffi(opt_to_js(subtree), opt_to_js(pseudo_element))
 }
 
 ///|

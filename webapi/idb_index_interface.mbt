@@ -120,11 +120,8 @@ impl TIDBIndex with get_all_keys(
 
 ///|
 /// [IDBIndex.getAllRecords](https://developer.mozilla.org/en-US/docs/Web/API/IDBIndex/getAllRecords)
-impl TIDBIndex with get_all_records(
-  self : Self,
-  options? : IDBGetAllOptions = IDBGetAllOptions::empty(),
-) -> IDBRequest {
-  idb_index_get_all_records_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
+impl TIDBIndex with get_all_records(self : Self, options? : IDBGetAllOptions) -> IDBRequest {
+  idb_index_get_all_records_ffi(TJsValue::to_js(self), opt_to_js(options))
 }
 
 ///|
@@ -138,12 +135,12 @@ impl TIDBIndex with count(self : Self, query? : JsValue) -> IDBRequest {
 impl TIDBIndex with open_cursor(
   self : Self,
   query? : JsValue,
-  direction? : IDBCursorDirection = IDBCursorDirection::Next,
+  direction? : IDBCursorDirection,
 ) -> IDBRequest {
   idb_index_open_cursor_ffi(
     TJsValue::to_js(self),
     opt_to_js(query),
-    TJsValue::to_js(direction),
+    opt_to_js(direction),
   )
 }
 
@@ -152,11 +149,11 @@ impl TIDBIndex with open_cursor(
 impl TIDBIndex with open_key_cursor(
   self : Self,
   query? : JsValue,
-  direction? : IDBCursorDirection = IDBCursorDirection::Next,
+  direction? : IDBCursorDirection,
 ) -> IDBRequest {
   idb_index_open_key_cursor_ffi(
     TJsValue::to_js(self),
     opt_to_js(query),
-    TJsValue::to_js(direction),
+    opt_to_js(direction),
   )
 }

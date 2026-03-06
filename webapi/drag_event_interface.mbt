@@ -31,9 +31,9 @@ pub impl TEvent for DragEvent
 ///|
 pub fn DragEvent::new(
   type_ : String,
-  event_init_dict? : DragEventInit = DragEventInit::empty(),
+  event_init_dict? : DragEventInit,
 ) -> DragEvent {
-  drag_event_new_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
+  drag_event_new_ffi(TJsValue::to_js(type_), opt_to_js(event_init_dict))
 }
 
 ///|

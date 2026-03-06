@@ -15,15 +15,11 @@ pub impl FromJsAny for ScrollToOptions with from_js_any(value : JsAny) -> Scroll
 
 ///|
 pub fn ScrollToOptions::new(
-  behavior? : ScrollBehavior = ScrollBehavior::Auto,
+  behavior? : ScrollBehavior,
   left? : Double,
   top? : Double,
 ) -> ScrollToOptions {
-  scroll_to_options_ffi(
-    TJsValue::to_js(behavior),
-    opt_to_js(left),
-    opt_to_js(top),
-  )
+  scroll_to_options_ffi(opt_to_js(behavior), opt_to_js(left), opt_to_js(top))
 }
 
 ///|

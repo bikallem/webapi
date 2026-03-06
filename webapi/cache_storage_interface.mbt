@@ -47,12 +47,12 @@ pub trait TCacheStorage: TJsValue {
 impl TCacheStorage with match_(
   self : Self,
   request : &TRequestInfo,
-  options? : MultiCacheQueryOptions = MultiCacheQueryOptions::empty(),
+  options? : MultiCacheQueryOptions,
 ) -> JsPromise[&TCacheStorageMatch] {
   cache_storage_match_ffi(
     TJsValue::to_js(self),
     request.to_js(),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 

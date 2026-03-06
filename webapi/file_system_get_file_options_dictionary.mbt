@@ -17,9 +17,9 @@ pub impl FromJsAny for FileSystemGetFileOptions with from_js_any(value : JsAny) 
 
 ///|
 pub fn FileSystemGetFileOptions::new(
-  create? : Bool = false,
+  create? : Bool,
 ) -> FileSystemGetFileOptions {
-  file_system_get_file_options_ffi(TJsValue::to_js(create))
+  file_system_get_file_options_ffi(opt_to_js(create))
 }
 
 ///|

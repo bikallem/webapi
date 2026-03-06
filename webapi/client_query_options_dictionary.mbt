@@ -15,13 +15,10 @@ pub impl FromJsAny for ClientQueryOptions with from_js_any(value : JsAny) -> Cli
 
 ///|
 pub fn ClientQueryOptions::new(
-  include_uncontrolled? : Bool = false,
-  type_? : ClientType = ClientType::Window,
+  include_uncontrolled? : Bool,
+  type_? : ClientType,
 ) -> ClientQueryOptions {
-  client_query_options_ffi(
-    TJsValue::to_js(include_uncontrolled),
-    TJsValue::to_js(type_),
-  )
+  client_query_options_ffi(opt_to_js(include_uncontrolled), opt_to_js(type_))
 }
 
 ///|

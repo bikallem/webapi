@@ -21,10 +21,10 @@ pub impl TTextDecoder for TextDecoder
 
 ///|
 pub fn TextDecoder::new(
-  label? : String = "utf-8",
-  options? : TextDecoderOptions = TextDecoderOptions::empty(),
+  label? : String,
+  options? : TextDecoderOptions,
 ) -> TextDecoder {
-  text_decoder_new_ffi(TJsValue::to_js(label), TJsValue::to_js(options))
+  text_decoder_new_ffi(opt_to_js(label), opt_to_js(options))
 }
 
 ///|
@@ -45,7 +45,7 @@ pub trait TTextDecoder: TJsValue {
 impl TTextDecoder with decode(
   self : Self,
   input? : &TAllowSharedBufferSource,
-  options? : TextDecodeOptions = TextDecodeOptions::empty(),
+  options? : TextDecodeOptions,
 ) -> String {
   text_decoder_decode_ffi(
     TJsValue::to_js(self),
@@ -53,7 +53,7 @@ impl TTextDecoder with decode(
       Some(v) => v.to_js()
       None => JsValue::undefined()
     },
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 

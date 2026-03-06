@@ -17,9 +17,9 @@ pub impl FromJsAny for FileSystemRemoveOptions with from_js_any(value : JsAny) -
 
 ///|
 pub fn FileSystemRemoveOptions::new(
-  recursive? : Bool = false,
+  recursive? : Bool,
 ) -> FileSystemRemoveOptions {
-  file_system_remove_options_ffi(TJsValue::to_js(recursive))
+  file_system_remove_options_ffi(opt_to_js(recursive))
 }
 
 ///|

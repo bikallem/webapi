@@ -73,11 +73,11 @@ impl THTMLSlotElement with set_name(self : Self, name : String) -> Unit {
 /// [HTMLSlotElement.assignedNodes](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/assignedNodes)
 impl THTMLSlotElement with assigned_nodes(
   self : Self,
-  options? : AssignedNodesOptions = AssignedNodesOptions::empty(),
+  options? : AssignedNodesOptions,
 ) -> Array[Node] {
   html_slot_element_assigned_nodes_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 
@@ -85,11 +85,11 @@ impl THTMLSlotElement with assigned_nodes(
 /// [HTMLSlotElement.assignedElements](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/assignedElements)
 impl THTMLSlotElement with assigned_elements(
   self : Self,
-  options? : AssignedNodesOptions = AssignedNodesOptions::empty(),
+  options? : AssignedNodesOptions,
 ) -> Array[Element] {
   html_slot_element_assigned_elements_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 

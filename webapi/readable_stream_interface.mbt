@@ -22,12 +22,9 @@ pub impl TReadableStream for ReadableStream
 ///|
 pub fn ReadableStream::new(
   underlying_source? : JsValue,
-  strategy? : QueuingStrategy = QueuingStrategy::empty(),
+  strategy? : QueuingStrategy,
 ) -> ReadableStream {
-  readable_stream_new_ffi(
-    opt_to_js(underlying_source),
-    TJsValue::to_js(strategy),
-  )
+  readable_stream_new_ffi(opt_to_js(underlying_source), opt_to_js(strategy))
 }
 
 ///|
@@ -73,12 +70,9 @@ impl TReadableStream with cancel(self : Self, reason? : JsValue) -> JsPromise[
 /// [ReadableStream.getReader](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream/getReader)
 impl TReadableStream with get_reader(
   self : Self,
-  options? : ReadableStreamGetReaderOptions = ReadableStreamGetReaderOptions::empty(),
+  options? : ReadableStreamGetReaderOptions,
 ) -> ReadableStreamReader {
-  readable_stream_get_reader_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(options),
-  )
+  readable_stream_get_reader_ffi(TJsValue::to_js(self), opt_to_js(options))
 }
 
 ///|
@@ -86,12 +80,12 @@ impl TReadableStream with get_reader(
 impl TReadableStream with pipe_through(
   self : Self,
   transform : ReadableWritablePair,
-  options? : StreamPipeOptions = StreamPipeOptions::empty(),
+  options? : StreamPipeOptions,
 ) -> ReadableStream {
   readable_stream_pipe_through_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(transform),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 
@@ -100,12 +94,12 @@ impl TReadableStream with pipe_through(
 impl TReadableStream with pipe_to(
   self : Self,
   destination : &TWritableStream,
-  options? : StreamPipeOptions = StreamPipeOptions::empty(),
+  options? : StreamPipeOptions,
 ) -> JsPromise[JsValue] {
   readable_stream_pipe_to_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(destination),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 

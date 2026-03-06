@@ -78,13 +78,10 @@ impl THTMLTableRowElement with cells(self : Self) -> HTMLCollection {
 
 ///|
 /// [HTMLTableRowElement.insertCell](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableRowElement/insertCell)
-impl THTMLTableRowElement with insert_cell(
-  self : Self,
-  index? : Int = (-1 : Int),
-) -> HTMLTableCellElement {
+impl THTMLTableRowElement with insert_cell(self : Self, index? : Int) -> HTMLTableCellElement {
   html_table_row_element_insert_cell_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(index),
+    opt_to_js(index),
   )
 }
 

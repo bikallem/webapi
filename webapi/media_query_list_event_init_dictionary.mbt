@@ -17,18 +17,18 @@ pub impl FromJsAny for MediaQueryListEventInit with from_js_any(value : JsAny) -
 
 ///|
 pub fn MediaQueryListEventInit::new(
-  bubbles? : Bool = false,
-  cancelable? : Bool = false,
-  composed? : Bool = false,
-  media? : CSSOMString = "",
-  matches? : Bool = false,
+  bubbles? : Bool,
+  cancelable? : Bool,
+  composed? : Bool,
+  media? : CSSOMString,
+  matches? : Bool,
 ) -> MediaQueryListEventInit {
   media_query_list_event_init_ffi(
-    TJsValue::to_js(bubbles),
-    TJsValue::to_js(cancelable),
-    TJsValue::to_js(composed),
-    TJsValue::to_js(media),
-    TJsValue::to_js(matches),
+    opt_to_js(bubbles),
+    opt_to_js(cancelable),
+    opt_to_js(composed),
+    opt_to_js(media),
+    opt_to_js(matches),
   )
 }
 

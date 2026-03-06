@@ -15,12 +15,12 @@ pub impl FromJsAny for GetHTMLOptions with from_js_any(value : JsAny) -> GetHTML
 
 ///|
 pub fn GetHTMLOptions::new(
-  serializable_shadow_roots? : Bool = false,
-  shadow_roots? : Array[ShadowRoot] = [],
+  serializable_shadow_roots? : Bool,
+  shadow_roots? : Array[ShadowRoot],
 ) -> GetHTMLOptions {
   get_html_options_ffi(
-    TJsValue::to_js(serializable_shadow_roots),
-    TJsValue::to_js(shadow_roots),
+    opt_to_js(serializable_shadow_roots),
+    opt_to_js(shadow_roots),
   )
 }
 

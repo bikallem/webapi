@@ -15,27 +15,27 @@ pub impl FromJsAny for MessageEventInit with from_js_any(value : JsAny) -> Messa
 
 ///|
 pub fn MessageEventInit::new(
-  bubbles? : Bool = false,
-  cancelable? : Bool = false,
-  composed? : Bool = false,
+  bubbles? : Bool,
+  cancelable? : Bool,
+  composed? : Bool,
   data? : JsValue,
-  origin? : String = "",
-  last_event_id? : String = "",
+  origin? : String,
+  last_event_id? : String,
   source? : &TMessageEventSource,
-  ports? : Array[MessagePort] = [],
+  ports? : Array[MessagePort],
 ) -> MessageEventInit {
   message_event_init_ffi(
-    TJsValue::to_js(bubbles),
-    TJsValue::to_js(cancelable),
-    TJsValue::to_js(composed),
+    opt_to_js(bubbles),
+    opt_to_js(cancelable),
+    opt_to_js(composed),
     opt_to_js(data),
-    TJsValue::to_js(origin),
-    TJsValue::to_js(last_event_id),
+    opt_to_js(origin),
+    opt_to_js(last_event_id),
     match source {
       Some(v) => v.to_js()
       None => JsValue::undefined()
     },
-    TJsValue::to_js(ports),
+    opt_to_js(ports),
   )
 }
 

@@ -20,16 +20,13 @@ pub fn[T : TResponse] Response::into(self : Response) -> T = "%identity"
 pub impl TResponse for Response
 
 ///|
-pub fn Response::new(
-  body? : &TBodyInit,
-  init? : ResponseInit = ResponseInit::empty(),
-) -> Response {
+pub fn Response::new(body? : &TBodyInit, init? : ResponseInit) -> Response {
   response_new_ffi(
     match body {
       Some(v) => v.to_js()
       None => JsValue::undefined()
     },
-    TJsValue::to_js(init),
+    opt_to_js(init),
   )
 }
 
@@ -62,20 +59,14 @@ pub fn Response::error() -> Response {
 
 ///|
 /// [Response.redirect](https://developer.mozilla.org/en-US/docs/Web/API/Response/redirect)
-pub fn Response::redirect(
-  url : String,
-  status? : UInt = (302 : UInt),
-) -> Response {
-  response_redirect_ffi(TJsValue::to_js(url), TJsValue::to_js(status))
+pub fn Response::redirect(url : String, status? : UInt) -> Response {
+  response_redirect_ffi(TJsValue::to_js(url), opt_to_js(status))
 }
 
 ///|
 /// [Response.json](https://developer.mozilla.org/en-US/docs/Web/API/Response/json)
-pub fn Response::json(
-  data : JsValue,
-  init? : ResponseInit = ResponseInit::empty(),
-) -> Response {
-  response_json_ffi(TJsValue::to_js(data), TJsValue::to_js(init))
+pub fn Response::json(data : JsValue, init? : ResponseInit) -> Response {
+  response_json_ffi(TJsValue::to_js(data), opt_to_js(init))
 }
 
 ///|

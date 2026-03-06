@@ -61,20 +61,14 @@ pub fn IDBKeyRange::only(value : JsValue) -> IDBKeyRange {
 
 ///|
 /// [IDBKeyRange.lowerBound](https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange/lowerBound)
-pub fn IDBKeyRange::lower_bound(
-  lower : JsValue,
-  open? : Bool = false,
-) -> IDBKeyRange {
-  idb_key_range_lower_bound_ffi(TJsValue::to_js(lower), TJsValue::to_js(open))
+pub fn IDBKeyRange::lower_bound(lower : JsValue, open? : Bool) -> IDBKeyRange {
+  idb_key_range_lower_bound_ffi(TJsValue::to_js(lower), opt_to_js(open))
 }
 
 ///|
 /// [IDBKeyRange.upperBound](https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange/upperBound)
-pub fn IDBKeyRange::upper_bound(
-  upper : JsValue,
-  open? : Bool = false,
-) -> IDBKeyRange {
-  idb_key_range_upper_bound_ffi(TJsValue::to_js(upper), TJsValue::to_js(open))
+pub fn IDBKeyRange::upper_bound(upper : JsValue, open? : Bool) -> IDBKeyRange {
+  idb_key_range_upper_bound_ffi(TJsValue::to_js(upper), opt_to_js(open))
 }
 
 ///|
@@ -82,14 +76,14 @@ pub fn IDBKeyRange::upper_bound(
 pub fn IDBKeyRange::bound(
   lower : JsValue,
   upper : JsValue,
-  lower_open? : Bool = false,
-  upper_open? : Bool = false,
+  lower_open? : Bool,
+  upper_open? : Bool,
 ) -> IDBKeyRange {
   idb_key_range_bound_ffi(
     TJsValue::to_js(lower),
     TJsValue::to_js(upper),
-    TJsValue::to_js(lower_open),
-    TJsValue::to_js(upper_open),
+    opt_to_js(lower_open),
+    opt_to_js(upper_open),
   )
 }
 

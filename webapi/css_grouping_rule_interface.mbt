@@ -41,12 +41,12 @@ impl TCSSGroupingRule with css_rules(self : Self) -> CSSRuleList {
 impl TCSSGroupingRule with insert_rule(
   self : Self,
   rule : CSSOMString,
-  index? : UInt = (0 : UInt),
+  index? : UInt,
 ) -> UInt {
   css_grouping_rule_insert_rule_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(rule),
-    TJsValue::to_js(index),
+    opt_to_js(index),
   )
 }
 

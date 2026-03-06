@@ -150,11 +150,11 @@ impl TSVGTextContentElement with get_rotation_of_char(
 /// [SVGTextContentElement.getCharNumAtPosition](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextContentElement/getCharNumAtPosition)
 impl TSVGTextContentElement with get_char_num_at_position(
   self : Self,
-  point? : DOMPointInit = DOMPointInit::empty(),
+  point? : DOMPointInit,
 ) -> Int {
   svg_text_content_element_get_char_num_at_position_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(point),
+    opt_to_js(point),
   )
 }
 

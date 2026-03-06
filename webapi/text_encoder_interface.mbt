@@ -34,8 +34,8 @@ pub trait TTextEncoder: TJsValue {
 
 ///|
 /// [TextEncoder.encode](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoder/encode)
-impl TTextEncoder with encode(self : Self, input? : String = "") -> Uint8Array {
-  text_encoder_encode_ffi(TJsValue::to_js(self), TJsValue::to_js(input))
+impl TTextEncoder with encode(self : Self, input? : String) -> Uint8Array {
+  text_encoder_encode_ffi(TJsValue::to_js(self), opt_to_js(input))
 }
 
 ///|

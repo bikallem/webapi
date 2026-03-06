@@ -163,11 +163,8 @@ impl TShadowRoot with set_html_unsafe(
 
 ///|
 /// [ShadowRoot.getHTML](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/getHTML)
-impl TShadowRoot with get_html(
-  self : Self,
-  options? : GetHTMLOptions = GetHTMLOptions::empty(),
-) -> String {
-  shadow_root_get_html_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
+impl TShadowRoot with get_html(self : Self, options? : GetHTMLOptions) -> String {
+  shadow_root_get_html_ffi(TJsValue::to_js(self), opt_to_js(options))
 }
 
 ///|

@@ -52,12 +52,12 @@ pub trait TServiceWorkerRegistration: TEventTarget {
 impl TServiceWorkerRegistration with show_notification(
   self : Self,
   title : String,
-  options? : NotificationOptions = NotificationOptions::empty(),
+  options? : NotificationOptions,
 ) -> JsPromise[JsValue] {
   service_worker_registration_show_notification_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(title),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 
@@ -65,11 +65,11 @@ impl TServiceWorkerRegistration with show_notification(
 /// [ServiceWorkerRegistration.getNotifications](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/getNotifications)
 impl TServiceWorkerRegistration with get_notifications(
   self : Self,
-  filter? : GetNotificationOptions = GetNotificationOptions::empty(),
+  filter? : GetNotificationOptions,
 ) -> JsPromise[Array[Notification]] {
   service_worker_registration_get_notifications_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(filter),
+    opt_to_js(filter),
   )
 }
 

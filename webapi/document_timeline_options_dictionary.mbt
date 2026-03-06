@@ -17,9 +17,9 @@ pub impl FromJsAny for DocumentTimelineOptions with from_js_any(value : JsAny) -
 
 ///|
 pub fn DocumentTimelineOptions::new(
-  origin_time? : DOMHighResTimeStamp = (0 : DOMHighResTimeStamp),
+  origin_time? : DOMHighResTimeStamp,
 ) -> DocumentTimelineOptions {
-  document_timeline_options_ffi(TJsValue::to_js(origin_time))
+  document_timeline_options_ffi(opt_to_js(origin_time))
 }
 
 ///|

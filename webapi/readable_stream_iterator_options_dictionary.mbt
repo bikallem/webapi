@@ -19,9 +19,9 @@ pub impl FromJsAny for ReadableStreamIteratorOptions with from_js_any(
 
 ///|
 pub fn ReadableStreamIteratorOptions::new(
-  prevent_cancel? : Bool = false,
+  prevent_cancel? : Bool,
 ) -> ReadableStreamIteratorOptions {
-  readable_stream_iterator_options_ffi(TJsValue::to_js(prevent_cancel))
+  readable_stream_iterator_options_ffi(opt_to_js(prevent_cancel))
 }
 
 ///|

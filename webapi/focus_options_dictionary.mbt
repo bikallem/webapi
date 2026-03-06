@@ -15,10 +15,10 @@ pub impl FromJsAny for FocusOptions with from_js_any(value : JsAny) -> FocusOpti
 
 ///|
 pub fn FocusOptions::new(
-  prevent_scroll? : Bool = false,
+  prevent_scroll? : Bool,
   focus_visible? : Bool,
 ) -> FocusOptions {
-  focus_options_ffi(TJsValue::to_js(prevent_scroll), opt_to_js(focus_visible))
+  focus_options_ffi(opt_to_js(prevent_scroll), opt_to_js(focus_visible))
 }
 
 ///|

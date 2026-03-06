@@ -701,14 +701,14 @@ impl THTMLInputElement with set_width(self : Self, width : UInt) -> Unit {
 
 ///|
 /// [HTMLInputElement.stepUp](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/stepUp)
-impl THTMLInputElement with step_up(self : Self, n? : Int = (1 : Int)) -> Unit {
-  html_input_element_step_up_ffi(TJsValue::to_js(self), TJsValue::to_js(n))
+impl THTMLInputElement with step_up(self : Self, n? : Int) -> Unit {
+  html_input_element_step_up_ffi(TJsValue::to_js(self), opt_to_js(n))
 }
 
 ///|
 /// [HTMLInputElement.stepDown](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/stepDown)
-impl THTMLInputElement with step_down(self : Self, n? : Int = (1 : Int)) -> Unit {
-  html_input_element_step_down_ffi(TJsValue::to_js(self), TJsValue::to_js(n))
+impl THTMLInputElement with step_down(self : Self, n? : Int) -> Unit {
+  html_input_element_step_down_ffi(TJsValue::to_js(self), opt_to_js(n))
 }
 
 ///|
@@ -829,14 +829,14 @@ impl THTMLInputElement with set_range_text_in_range(
   replacement : String,
   start : UInt,
   end : UInt,
-  selection_mode? : SelectionMode = SelectionMode::Preserve,
+  selection_mode? : SelectionMode,
 ) -> Unit {
   html_input_element_set_range_text_in_range_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(replacement),
     TJsValue::to_js(start),
     TJsValue::to_js(end),
-    TJsValue::to_js(selection_mode),
+    opt_to_js(selection_mode),
   )
 }
 

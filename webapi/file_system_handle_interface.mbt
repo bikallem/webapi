@@ -65,11 +65,11 @@ impl TFileSystemHandle with is_same_entry(
 /// [FileSystemHandle.queryPermission](https://developer.mozilla.org/en-US/docs/Web/API/FileSystemHandle/queryPermission)
 impl TFileSystemHandle with query_permission(
   self : Self,
-  descriptor? : FileSystemHandlePermissionDescriptor = FileSystemHandlePermissionDescriptor::empty(),
+  descriptor? : FileSystemHandlePermissionDescriptor,
 ) -> JsPromise[PermissionState] {
   file_system_handle_query_permission_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(descriptor),
+    opt_to_js(descriptor),
   )
 }
 
@@ -77,10 +77,10 @@ impl TFileSystemHandle with query_permission(
 /// [FileSystemHandle.requestPermission](https://developer.mozilla.org/en-US/docs/Web/API/FileSystemHandle/requestPermission)
 impl TFileSystemHandle with request_permission(
   self : Self,
-  descriptor? : FileSystemHandlePermissionDescriptor = FileSystemHandlePermissionDescriptor::empty(),
+  descriptor? : FileSystemHandlePermissionDescriptor,
 ) -> JsPromise[PermissionState] {
   file_system_handle_request_permission_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(descriptor),
+    opt_to_js(descriptor),
   )
 }

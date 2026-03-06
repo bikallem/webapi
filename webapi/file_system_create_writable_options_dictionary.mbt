@@ -19,9 +19,9 @@ pub impl FromJsAny for FileSystemCreateWritableOptions with from_js_any(
 
 ///|
 pub fn FileSystemCreateWritableOptions::new(
-  keep_existing_data? : Bool = false,
+  keep_existing_data? : Bool,
 ) -> FileSystemCreateWritableOptions {
-  file_system_create_writable_options_ffi(TJsValue::to_js(keep_existing_data))
+  file_system_create_writable_options_ffi(opt_to_js(keep_existing_data))
 }
 
 ///|

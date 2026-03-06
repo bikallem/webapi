@@ -27,11 +27,11 @@ pub impl TEvent for PageTransitionEvent
 ///|
 pub fn PageTransitionEvent::new(
   type_ : String,
-  event_init_dict? : PageTransitionEventInit = PageTransitionEventInit::empty(),
+  event_init_dict? : PageTransitionEventInit,
 ) -> PageTransitionEvent {
   page_transition_event_new_ffi(
     TJsValue::to_js(type_),
-    TJsValue::to_js(event_init_dict),
+    opt_to_js(event_init_dict),
   )
 }
 

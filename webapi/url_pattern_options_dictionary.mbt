@@ -14,8 +14,8 @@ pub impl TJsValue for URLPatternOptions with to_js(self : URLPatternOptions) -> 
 pub impl FromJsAny for URLPatternOptions with from_js_any(value : JsAny) -> URLPatternOptions = "%identity"
 
 ///|
-pub fn URLPatternOptions::new(ignore_case? : Bool = false) -> URLPatternOptions {
-  url_pattern_options_ffi(TJsValue::to_js(ignore_case))
+pub fn URLPatternOptions::new(ignore_case? : Bool) -> URLPatternOptions {
+  url_pattern_options_ffi(opt_to_js(ignore_case))
 }
 
 ///|

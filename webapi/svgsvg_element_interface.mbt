@@ -271,11 +271,11 @@ impl TSVGSVGElement with create_svg_transform(self : Self) -> SVGTransform {
 /// [SVGSVGElement.createSVGTransformFromMatrix](https://developer.mozilla.org/en-US/docs/Web/API/SVGSVGElement/createSVGTransformFromMatrix)
 impl TSVGSVGElement with create_svg_transform_from_matrix(
   self : Self,
-  matrix? : DOMMatrix2DInit = DOMMatrix2DInit::empty(),
+  matrix? : DOMMatrix2DInit,
 ) -> SVGTransform {
   svgsvg_element_create_svg_transform_from_matrix_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(matrix),
+    opt_to_js(matrix),
   )
 }
 

@@ -26,30 +26,30 @@ pub impl TKeyframeEffectOptionsNewDuration for String
 
 ///|
 pub fn KeyframeEffectOptions::new(
-  fill? : FillMode = FillMode::Auto,
-  iteration_start? : Double = (0.0 : Double),
-  iterations? : Double = (1.0 : Double),
-  direction? : PlaybackDirection = PlaybackDirection::Normal,
-  easing? : String = "linear",
+  fill? : FillMode,
+  iteration_start? : Double,
+  iterations? : Double,
+  direction? : PlaybackDirection,
+  easing? : String,
   delay? : Double,
   end_delay? : Double,
   duration? : &TKeyframeEffectOptionsNewDuration,
-  composite? : CompositeOperation = CompositeOperation::Replace,
+  composite? : CompositeOperation,
   pseudo_element? : CSSOMString,
 ) -> KeyframeEffectOptions {
   keyframe_effect_options_ffi(
-    TJsValue::to_js(fill),
-    TJsValue::to_js(iteration_start),
-    TJsValue::to_js(iterations),
-    TJsValue::to_js(direction),
-    TJsValue::to_js(easing),
+    opt_to_js(fill),
+    opt_to_js(iteration_start),
+    opt_to_js(iterations),
+    opt_to_js(direction),
+    opt_to_js(easing),
     opt_to_js(delay),
     opt_to_js(end_delay),
     match duration {
       Some(v) => v.to_js()
       None => JsValue::undefined()
     },
-    TJsValue::to_js(composite),
+    opt_to_js(composite),
     opt_to_js(pseudo_element),
   )
 }

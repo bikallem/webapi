@@ -17,13 +17,10 @@ pub impl FromJsAny for NavigationPreloadState with from_js_any(value : JsAny) ->
 
 ///|
 pub fn NavigationPreloadState::new(
-  enabled? : Bool = false,
+  enabled? : Bool,
   header_value? : String,
 ) -> NavigationPreloadState {
-  navigation_preload_state_ffi(
-    TJsValue::to_js(enabled),
-    opt_to_js(header_value),
-  )
+  navigation_preload_state_ffi(opt_to_js(enabled), opt_to_js(header_value))
 }
 
 ///|

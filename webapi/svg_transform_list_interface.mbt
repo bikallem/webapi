@@ -136,11 +136,11 @@ impl TSVGTransformList with set(
 /// [SVGTransformList.createSVGTransformFromMatrix](https://developer.mozilla.org/en-US/docs/Web/API/SVGTransformList/createSVGTransformFromMatrix)
 impl TSVGTransformList with create_svg_transform_from_matrix(
   self : Self,
-  matrix? : DOMMatrix2DInit = DOMMatrix2DInit::empty(),
+  matrix? : DOMMatrix2DInit,
 ) -> SVGTransform {
   svg_transform_list_create_svg_transform_from_matrix_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(matrix),
+    opt_to_js(matrix),
   )
 }
 

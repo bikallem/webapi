@@ -17,16 +17,16 @@ pub impl FromJsAny for ScrollIntoViewOptions with from_js_any(value : JsAny) -> 
 
 ///|
 pub fn ScrollIntoViewOptions::new(
-  behavior? : ScrollBehavior = ScrollBehavior::Auto,
-  block? : ScrollLogicalPosition = ScrollLogicalPosition::Start,
-  inline? : ScrollLogicalPosition = ScrollLogicalPosition::Nearest,
-  container? : ScrollIntoViewContainer = ScrollIntoViewContainer::All,
+  behavior? : ScrollBehavior,
+  block? : ScrollLogicalPosition,
+  inline? : ScrollLogicalPosition,
+  container? : ScrollIntoViewContainer,
 ) -> ScrollIntoViewOptions {
   scroll_into_view_options_ffi(
-    TJsValue::to_js(behavior),
-    TJsValue::to_js(block),
-    TJsValue::to_js(inline),
-    TJsValue::to_js(container),
+    opt_to_js(behavior),
+    opt_to_js(block),
+    opt_to_js(inline),
+    opt_to_js(container),
   )
 }
 

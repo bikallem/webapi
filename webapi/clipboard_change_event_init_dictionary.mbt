@@ -17,18 +17,18 @@ pub impl FromJsAny for ClipboardChangeEventInit with from_js_any(value : JsAny) 
 
 ///|
 pub fn ClipboardChangeEventInit::new(
-  bubbles? : Bool = false,
-  cancelable? : Bool = false,
-  composed? : Bool = false,
-  types? : Array[String] = [],
-  change_id? : Int64 = (0 : Int64),
+  bubbles? : Bool,
+  cancelable? : Bool,
+  composed? : Bool,
+  types? : Array[String],
+  change_id? : Int64,
 ) -> ClipboardChangeEventInit {
   clipboard_change_event_init_ffi(
-    TJsValue::to_js(bubbles),
-    TJsValue::to_js(cancelable),
-    TJsValue::to_js(composed),
-    TJsValue::to_js(types),
-    TJsValue::to_js(change_id),
+    opt_to_js(bubbles),
+    opt_to_js(cancelable),
+    opt_to_js(composed),
+    opt_to_js(types),
+    opt_to_js(change_id),
   )
 }
 

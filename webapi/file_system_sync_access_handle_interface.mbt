@@ -49,12 +49,12 @@ pub trait TFileSystemSyncAccessHandle: TJsValue {
 impl TFileSystemSyncAccessHandle with read(
   self : Self,
   buffer : &TAllowSharedBufferSource,
-  options? : FileSystemReadWriteOptions = FileSystemReadWriteOptions::empty(),
+  options? : FileSystemReadWriteOptions,
 ) -> UInt64 {
   file_system_sync_access_handle_read_ffi(
     TJsValue::to_js(self),
     buffer.to_js(),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 
@@ -63,12 +63,12 @@ impl TFileSystemSyncAccessHandle with read(
 impl TFileSystemSyncAccessHandle with write(
   self : Self,
   buffer : &TAllowSharedBufferSource,
-  options? : FileSystemReadWriteOptions = FileSystemReadWriteOptions::empty(),
+  options? : FileSystemReadWriteOptions,
 ) -> UInt64 {
   file_system_sync_access_handle_write_ffi(
     TJsValue::to_js(self),
     buffer.to_js(),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 

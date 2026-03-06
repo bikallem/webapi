@@ -23,10 +23,10 @@ pub impl TTextDecoderStream for TextDecoderStream
 
 ///|
 pub fn TextDecoderStream::new(
-  label? : String = "utf-8",
-  options? : TextDecoderOptions = TextDecoderOptions::empty(),
+  label? : String,
+  options? : TextDecoderOptions,
 ) -> TextDecoderStream {
-  text_decoder_stream_new_ffi(TJsValue::to_js(label), TJsValue::to_js(options))
+  text_decoder_stream_new_ffi(opt_to_js(label), opt_to_js(options))
 }
 
 ///|

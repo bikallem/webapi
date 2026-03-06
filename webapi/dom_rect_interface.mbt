@@ -24,16 +24,16 @@ pub impl TDOMRectReadOnly for DOMRect
 
 ///|
 pub fn DOMRect::new(
-  x? : Double = (0 : Double),
-  y? : Double = (0 : Double),
-  width? : Double = (0 : Double),
-  height? : Double = (0 : Double),
+  x? : Double,
+  y? : Double,
+  width? : Double,
+  height? : Double,
 ) -> DOMRect {
   dom_rect_new_ffi(
-    TJsValue::to_js(x),
-    TJsValue::to_js(y),
-    TJsValue::to_js(width),
-    TJsValue::to_js(height),
+    opt_to_js(x),
+    opt_to_js(y),
+    opt_to_js(width),
+    opt_to_js(height),
   )
 }
 
@@ -52,10 +52,8 @@ pub trait TDOMRect: TDOMRectReadOnly {
 
 ///|
 /// [DOMRect.fromRect](https://developer.mozilla.org/en-US/docs/Web/API/DOMRect/fromRect)
-pub fn DOMRect::from_rect(
-  other? : DOMRectInit = DOMRectInit::empty(),
-) -> DOMRect {
-  dom_rect_from_rect_ffi(TJsValue::to_js(other))
+pub fn DOMRect::from_rect(other? : DOMRectInit) -> DOMRect {
+  dom_rect_from_rect_ffi(opt_to_js(other))
 }
 
 ///|

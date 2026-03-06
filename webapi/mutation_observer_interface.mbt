@@ -41,12 +41,12 @@ pub trait TMutationObserver: TJsValue {
 impl TMutationObserver with observe(
   self : Self,
   target : &TNode,
-  options? : MutationObserverInit = MutationObserverInit::empty(),
+  options? : MutationObserverInit,
 ) -> Unit {
   mutation_observer_observe_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(target),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 

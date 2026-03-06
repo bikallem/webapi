@@ -17,13 +17,10 @@ pub impl FromJsAny for WindowPostMessageOptions with from_js_any(value : JsAny) 
 
 ///|
 pub fn WindowPostMessageOptions::new(
-  transfer? : Array[JsValue] = [],
-  target_origin? : String = "/",
+  transfer? : Array[JsValue],
+  target_origin? : String,
 ) -> WindowPostMessageOptions {
-  window_post_message_options_ffi(
-    TJsValue::to_js(transfer),
-    TJsValue::to_js(target_origin),
-  )
+  window_post_message_options_ffi(opt_to_js(transfer), opt_to_js(target_origin))
 }
 
 ///|

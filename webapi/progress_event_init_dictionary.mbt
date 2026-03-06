@@ -15,20 +15,20 @@ pub impl FromJsAny for ProgressEventInit with from_js_any(value : JsAny) -> Prog
 
 ///|
 pub fn ProgressEventInit::new(
-  bubbles? : Bool = false,
-  cancelable? : Bool = false,
-  composed? : Bool = false,
-  length_computable? : Bool = false,
-  loaded? : Double = (0 : Double),
-  total? : Double = (0 : Double),
+  bubbles? : Bool,
+  cancelable? : Bool,
+  composed? : Bool,
+  length_computable? : Bool,
+  loaded? : Double,
+  total? : Double,
 ) -> ProgressEventInit {
   progress_event_init_ffi(
-    TJsValue::to_js(bubbles),
-    TJsValue::to_js(cancelable),
-    TJsValue::to_js(composed),
-    TJsValue::to_js(length_computable),
-    TJsValue::to_js(loaded),
-    TJsValue::to_js(total),
+    opt_to_js(bubbles),
+    opt_to_js(cancelable),
+    opt_to_js(composed),
+    opt_to_js(length_computable),
+    opt_to_js(loaded),
+    opt_to_js(total),
   )
 }
 

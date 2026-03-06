@@ -64,13 +64,10 @@ impl THTMLTableSectionElement with rows(self : Self) -> HTMLCollection {
 
 ///|
 /// [HTMLTableSectionElement.insertRow](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableSectionElement/insertRow)
-impl THTMLTableSectionElement with insert_row(
-  self : Self,
-  index? : Int = (-1 : Int),
-) -> HTMLTableRowElement {
+impl THTMLTableSectionElement with insert_row(self : Self, index? : Int) -> HTMLTableRowElement {
   html_table_section_element_insert_row_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(index),
+    opt_to_js(index),
   )
 }
 

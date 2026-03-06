@@ -18,14 +18,14 @@ pub impl FromJsAny for SaveFilePickerOptions with from_js_any(value : JsAny) -> 
 ///|
 pub fn SaveFilePickerOptions::new(
   types? : Array[FilePickerAcceptType],
-  exclude_accept_all_option? : Bool = false,
+  exclude_accept_all_option? : Bool,
   id? : String,
   start_in? : &TStartInDirectory,
   suggested_name? : String,
 ) -> SaveFilePickerOptions {
   save_file_picker_options_ffi(
     opt_to_js(types),
-    TJsValue::to_js(exclude_accept_all_option),
+    opt_to_js(exclude_accept_all_option),
     opt_to_js(id),
     match start_in {
       Some(v) => v.to_js()

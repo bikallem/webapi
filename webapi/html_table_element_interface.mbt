@@ -188,11 +188,8 @@ impl THTMLTableElement with rows(self : Self) -> HTMLCollection {
 
 ///|
 /// [HTMLTableElement.insertRow](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/insertRow)
-impl THTMLTableElement with insert_row(self : Self, index? : Int = (-1 : Int)) -> HTMLTableRowElement {
-  html_table_element_insert_row_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(index),
-  )
+impl THTMLTableElement with insert_row(self : Self, index? : Int) -> HTMLTableRowElement {
+  html_table_element_insert_row_ffi(TJsValue::to_js(self), opt_to_js(index))
 }
 
 ///|

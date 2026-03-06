@@ -57,12 +57,12 @@ pub trait TTrustedTypePolicyFactory: TJsValue {
 impl TTrustedTypePolicyFactory with create_policy(
   self : Self,
   policy_name : String,
-  policy_options? : TrustedTypePolicyOptions = TrustedTypePolicyOptions::empty(),
+  policy_options? : TrustedTypePolicyOptions,
 ) -> TrustedTypePolicy {
   trusted_type_policy_factory_create_policy_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(policy_name),
-    TJsValue::to_js(policy_options),
+    opt_to_js(policy_options),
   )
 }
 
@@ -111,15 +111,15 @@ impl TTrustedTypePolicyFactory with get_attribute_type(
   self : Self,
   tag_name : String,
   attribute : String,
-  element_ns? : String = "",
-  attr_ns? : String = "",
+  element_ns? : String,
+  attr_ns? : String,
 ) -> String? {
   trusted_type_policy_factory_get_attribute_type_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(tag_name),
     TJsValue::to_js(attribute),
-    TJsValue::to_js(element_ns),
-    TJsValue::to_js(attr_ns),
+    opt_to_js(element_ns),
+    opt_to_js(attr_ns),
   ).to_option()
 }
 
@@ -129,13 +129,13 @@ impl TTrustedTypePolicyFactory with get_property_type(
   self : Self,
   tag_name : String,
   property : String,
-  element_ns? : String = "",
+  element_ns? : String,
 ) -> String? {
   trusted_type_policy_factory_get_property_type_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(tag_name),
     TJsValue::to_js(property),
-    TJsValue::to_js(element_ns),
+    opt_to_js(element_ns),
   ).to_option()
 }
 

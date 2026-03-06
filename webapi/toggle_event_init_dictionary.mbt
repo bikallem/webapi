@@ -15,19 +15,19 @@ pub impl FromJsAny for ToggleEventInit with from_js_any(value : JsAny) -> Toggle
 
 ///|
 pub fn ToggleEventInit::new(
-  bubbles? : Bool = false,
-  cancelable? : Bool = false,
-  composed? : Bool = false,
-  old_state? : String = "",
-  new_state? : String = "",
+  bubbles? : Bool,
+  cancelable? : Bool,
+  composed? : Bool,
+  old_state? : String,
+  new_state? : String,
   source? : &TElement,
 ) -> ToggleEventInit {
   toggle_event_init_ffi(
-    TJsValue::to_js(bubbles),
-    TJsValue::to_js(cancelable),
-    TJsValue::to_js(composed),
-    TJsValue::to_js(old_state),
-    TJsValue::to_js(new_state),
+    opt_to_js(bubbles),
+    opt_to_js(cancelable),
+    opt_to_js(composed),
+    opt_to_js(old_state),
+    opt_to_js(new_state),
     opt_to_js(source),
   )
 }

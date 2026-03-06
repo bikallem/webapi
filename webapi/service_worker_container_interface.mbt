@@ -86,12 +86,12 @@ impl TServiceWorkerContainer with ready(self : Self) -> JsPromise[
 impl TServiceWorkerContainer with register(
   self : Self,
   script_url : &TServiceWorkerContainerRegisterScriptURL,
-  options? : RegistrationOptions = RegistrationOptions::empty(),
+  options? : RegistrationOptions,
 ) -> JsPromise[ServiceWorkerRegistration] {
   service_worker_container_register_ffi(
     TJsValue::to_js(self),
     script_url.to_js(),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 
@@ -99,11 +99,11 @@ impl TServiceWorkerContainer with register(
 /// [ServiceWorkerContainer.getRegistration](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerContainer/getRegistration)
 impl TServiceWorkerContainer with get_registration(
   self : Self,
-  client_url? : String = "",
+  client_url? : String,
 ) -> JsPromise[&TServiceWorkerContainerGetRegistration] {
   service_worker_container_get_registration_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(client_url),
+    opt_to_js(client_url),
   )
 }
 

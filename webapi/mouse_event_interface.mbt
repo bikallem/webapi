@@ -28,9 +28,9 @@ pub impl TEvent for MouseEvent
 ///|
 pub fn MouseEvent::new(
   type_ : String,
-  event_init_dict? : MouseEventInit = MouseEventInit::empty(),
+  event_init_dict? : MouseEventInit,
 ) -> MouseEvent {
-  mouse_event_new_ffi(TJsValue::to_js(type_), TJsValue::to_js(event_init_dict))
+  mouse_event_new_ffi(TJsValue::to_js(type_), opt_to_js(event_init_dict))
 }
 
 ///|
@@ -204,37 +204,37 @@ impl TMouseEvent with get_modifier_state(self : Self, key_arg : String) -> Bool 
 impl TMouseEvent with init_mouse_event(
   self : Self,
   type_arg : String,
-  bubbles_arg? : Bool = false,
-  cancelable_arg? : Bool = false,
+  bubbles_arg? : Bool,
+  cancelable_arg? : Bool,
   view_arg? : &TWindow,
-  detail_arg? : Int = (0 : Int),
-  screen_x_arg? : Int = (0 : Int),
-  screen_y_arg? : Int = (0 : Int),
-  client_x_arg? : Int = (0 : Int),
-  client_y_arg? : Int = (0 : Int),
-  ctrl_key_arg? : Bool = false,
-  alt_key_arg? : Bool = false,
-  shift_key_arg? : Bool = false,
-  meta_key_arg? : Bool = false,
-  button_arg? : Int = (0 : Int),
+  detail_arg? : Int,
+  screen_x_arg? : Int,
+  screen_y_arg? : Int,
+  client_x_arg? : Int,
+  client_y_arg? : Int,
+  ctrl_key_arg? : Bool,
+  alt_key_arg? : Bool,
+  shift_key_arg? : Bool,
+  meta_key_arg? : Bool,
+  button_arg? : Int,
   related_target_arg? : &TEventTarget,
 ) -> Unit {
   mouse_event_init_mouse_event_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(type_arg),
-    TJsValue::to_js(bubbles_arg),
-    TJsValue::to_js(cancelable_arg),
+    opt_to_js(bubbles_arg),
+    opt_to_js(cancelable_arg),
     opt_to_js(view_arg),
-    TJsValue::to_js(detail_arg),
-    TJsValue::to_js(screen_x_arg),
-    TJsValue::to_js(screen_y_arg),
-    TJsValue::to_js(client_x_arg),
-    TJsValue::to_js(client_y_arg),
-    TJsValue::to_js(ctrl_key_arg),
-    TJsValue::to_js(alt_key_arg),
-    TJsValue::to_js(shift_key_arg),
-    TJsValue::to_js(meta_key_arg),
-    TJsValue::to_js(button_arg),
+    opt_to_js(detail_arg),
+    opt_to_js(screen_x_arg),
+    opt_to_js(screen_y_arg),
+    opt_to_js(client_x_arg),
+    opt_to_js(client_y_arg),
+    opt_to_js(ctrl_key_arg),
+    opt_to_js(alt_key_arg),
+    opt_to_js(shift_key_arg),
+    opt_to_js(meta_key_arg),
+    opt_to_js(button_arg),
     opt_to_js(related_target_arg),
   )
 }

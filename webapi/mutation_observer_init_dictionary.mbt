@@ -17,19 +17,19 @@ pub impl FromJsAny for MutationObserverInit with from_js_any(value : JsAny) -> M
 
 ///|
 pub fn MutationObserverInit::new(
-  child_list? : Bool = false,
+  child_list? : Bool,
   attributes? : Bool,
   character_data? : Bool,
-  subtree? : Bool = false,
+  subtree? : Bool,
   attribute_old_value? : Bool,
   character_data_old_value? : Bool,
   attribute_filter? : Array[String],
 ) -> MutationObserverInit {
   mutation_observer_init_ffi(
-    TJsValue::to_js(child_list),
+    opt_to_js(child_list),
     opt_to_js(attributes),
     opt_to_js(character_data),
-    TJsValue::to_js(subtree),
+    opt_to_js(subtree),
     opt_to_js(attribute_old_value),
     opt_to_js(character_data_old_value),
     opt_to_js(attribute_filter),

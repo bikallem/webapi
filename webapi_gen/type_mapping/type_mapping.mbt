@@ -58,7 +58,6 @@ pub(all) struct MethodArg {
   type_ : ArgMbtType
   optional : Bool
   variadic : Bool
-  default_value : String?
 } derive(Show, ToJson)
 
 ///|

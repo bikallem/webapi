@@ -31,12 +31,9 @@ pub impl TEvent for PointerEvent
 ///|
 pub fn PointerEvent::new(
   type_ : String,
-  event_init_dict? : PointerEventInit = PointerEventInit::empty(),
+  event_init_dict? : PointerEventInit,
 ) -> PointerEvent {
-  pointer_event_new_ffi(
-    TJsValue::to_js(type_),
-    TJsValue::to_js(event_init_dict),
-  )
+  pointer_event_new_ffi(TJsValue::to_js(type_), opt_to_js(event_init_dict))
 }
 
 ///|

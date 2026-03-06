@@ -47,11 +47,10 @@ impl TClients with get(self : Self, id : String) -> JsPromise[&TClientsGet] {
 
 ///|
 /// [Clients.matchAll](https://developer.mozilla.org/en-US/docs/Web/API/Clients/matchAll)
-impl TClients with match_all(
-  self : Self,
-  options? : ClientQueryOptions = ClientQueryOptions::empty(),
-) -> JsPromise[Array[Client]] {
-  clients_match_all_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
+impl TClients with match_all(self : Self, options? : ClientQueryOptions) -> JsPromise[
+  Array[Client],
+] {
+  clients_match_all_ffi(TJsValue::to_js(self), opt_to_js(options))
 }
 
 ///|

@@ -23,10 +23,8 @@ pub impl TCSSStyleSheet for CSSStyleSheet
 pub impl TStyleSheet for CSSStyleSheet
 
 ///|
-pub fn CSSStyleSheet::new(
-  options? : CSSStyleSheetInit = CSSStyleSheetInit::empty(),
-) -> CSSStyleSheet {
-  css_style_sheet_new_ffi(TJsValue::to_js(options))
+pub fn CSSStyleSheet::new(options? : CSSStyleSheetInit) -> CSSStyleSheet {
+  css_style_sheet_new_ffi(opt_to_js(options))
 }
 
 ///|
@@ -60,12 +58,12 @@ impl TCSSStyleSheet with css_rules(self : Self) -> CSSRuleList {
 impl TCSSStyleSheet with insert_rule(
   self : Self,
   rule : CSSOMString,
-  index? : UInt = (0 : UInt),
+  index? : UInt,
 ) -> UInt {
   css_style_sheet_insert_rule_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(rule),
-    TJsValue::to_js(index),
+    opt_to_js(index),
   )
 }
 
@@ -99,20 +97,20 @@ impl TCSSStyleSheet with rules(self : Self) -> CSSRuleList {
 /// [CSSStyleSheet.addRule](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet/addRule)
 impl TCSSStyleSheet with add_rule(
   self : Self,
-  selector? : String = "undefined",
-  style? : String = "undefined",
+  selector? : String,
+  style? : String,
   index? : UInt,
 ) -> Int {
   css_style_sheet_add_rule_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(selector),
-    TJsValue::to_js(style),
+    opt_to_js(selector),
+    opt_to_js(style),
     opt_to_js(index),
   )
 }
 
 ///|
 /// [CSSStyleSheet.removeRule](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet/removeRule)
-impl TCSSStyleSheet with remove_rule(self : Self, index? : UInt = (0 : UInt)) -> Unit {
-  css_style_sheet_remove_rule_ffi(TJsValue::to_js(self), TJsValue::to_js(index))
+impl TCSSStyleSheet with remove_rule(self : Self, index? : UInt) -> Unit {
+  css_style_sheet_remove_rule_ffi(TJsValue::to_js(self), opt_to_js(index))
 }

@@ -25,9 +25,9 @@ pub impl TEventTarget for Notification
 ///|
 pub fn Notification::new(
   title : String,
-  options? : NotificationOptions = NotificationOptions::empty(),
+  options? : NotificationOptions,
 ) -> Notification {
-  notification_new_ffi(TJsValue::to_js(title), TJsValue::to_js(options))
+  notification_new_ffi(TJsValue::to_js(title), opt_to_js(options))
 }
 
 ///|

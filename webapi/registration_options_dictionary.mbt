@@ -16,13 +16,13 @@ pub impl FromJsAny for RegistrationOptions with from_js_any(value : JsAny) -> Re
 ///|
 pub fn RegistrationOptions::new(
   scope? : String,
-  type_? : WorkerType = WorkerType::Classic,
-  update_via_cache? : ServiceWorkerUpdateViaCache = ServiceWorkerUpdateViaCache::Imports,
+  type_? : WorkerType,
+  update_via_cache? : ServiceWorkerUpdateViaCache,
 ) -> RegistrationOptions {
   registration_options_ffi(
     opt_to_js(scope),
-    TJsValue::to_js(type_),
-    TJsValue::to_js(update_via_cache),
+    opt_to_js(type_),
+    opt_to_js(update_via_cache),
   )
 }
 

@@ -65,8 +65,8 @@ impl THistory with state(self : Self) -> JsValue {
 
 ///|
 /// [History.go](https://developer.mozilla.org/en-US/docs/Web/API/History/go)
-impl THistory with go(self : Self, delta? : Int = (0 : Int)) -> Unit {
-  history_go_ffi(TJsValue::to_js(self), TJsValue::to_js(delta))
+impl THistory with go(self : Self, delta? : Int) -> Unit {
+  history_go_ffi(TJsValue::to_js(self), opt_to_js(delta))
 }
 
 ///|

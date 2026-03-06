@@ -14,8 +14,8 @@ pub impl TJsValue for GetRootNodeOptions with to_js(self : GetRootNodeOptions) -
 pub impl FromJsAny for GetRootNodeOptions with from_js_any(value : JsAny) -> GetRootNodeOptions = "%identity"
 
 ///|
-pub fn GetRootNodeOptions::new(composed? : Bool = false) -> GetRootNodeOptions {
-  get_root_node_options_ffi(TJsValue::to_js(composed))
+pub fn GetRootNodeOptions::new(composed? : Bool) -> GetRootNodeOptions {
+  get_root_node_options_ffi(opt_to_js(composed))
 }
 
 ///|

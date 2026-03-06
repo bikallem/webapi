@@ -17,9 +17,9 @@ pub impl FromJsAny for ClipboardItemOptions with from_js_any(value : JsAny) -> C
 
 ///|
 pub fn ClipboardItemOptions::new(
-  presentation_style? : PresentationStyle = PresentationStyle::Unspecified,
+  presentation_style? : PresentationStyle,
 ) -> ClipboardItemOptions {
-  clipboard_item_options_ffi(TJsValue::to_js(presentation_style))
+  clipboard_item_options_ffi(opt_to_js(presentation_style))
 }
 
 ///|

@@ -16,11 +16,11 @@ pub impl FromJsAny for ImportNodeOptions with from_js_any(value : JsAny) -> Impo
 ///|
 pub fn ImportNodeOptions::new(
   custom_element_registry? : &TCustomElementRegistry,
-  self_only? : Bool = false,
+  self_only? : Bool,
 ) -> ImportNodeOptions {
   import_node_options_ffi(
     opt_to_js(custom_element_registry),
-    TJsValue::to_js(self_only),
+    opt_to_js(self_only),
   )
 }
 

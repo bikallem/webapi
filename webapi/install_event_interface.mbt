@@ -28,12 +28,9 @@ pub impl TEvent for InstallEvent
 ///|
 pub fn InstallEvent::new(
   type_ : String,
-  event_init_dict? : ExtendableEventInit = ExtendableEventInit::empty(),
+  event_init_dict? : ExtendableEventInit,
 ) -> InstallEvent {
-  install_event_new_ffi(
-    TJsValue::to_js(type_),
-    TJsValue::to_js(event_init_dict),
-  )
+  install_event_new_ffi(TJsValue::to_js(type_), opt_to_js(event_init_dict))
 }
 
 ///|

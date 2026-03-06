@@ -124,10 +124,8 @@ pub trait TDOMMatrix: TDOMMatrixReadOnly {
 
 ///|
 /// [DOMMatrix.fromMatrix](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrix/fromMatrix)
-pub fn DOMMatrix::from_matrix(
-  other? : DOMMatrixInit = DOMMatrixInit::empty(),
-) -> DOMMatrix {
-  dom_matrix_from_matrix_ffi(TJsValue::to_js(other))
+pub fn DOMMatrix::from_matrix(other? : DOMMatrixInit) -> DOMMatrix {
+  dom_matrix_from_matrix_ffi(opt_to_js(other))
 }
 
 ///|
@@ -408,38 +406,29 @@ impl TDOMMatrix with set_m44(self : Self, m44 : Double) -> Unit {
 
 ///|
 /// [DOMMatrix.multiplySelf](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrix/multiplySelf)
-impl TDOMMatrix with multiply_self(
-  self : Self,
-  other? : DOMMatrixInit = DOMMatrixInit::empty(),
-) -> DOMMatrix {
-  dom_matrix_multiply_self_ffi(TJsValue::to_js(self), TJsValue::to_js(other))
+impl TDOMMatrix with multiply_self(self : Self, other? : DOMMatrixInit) -> DOMMatrix {
+  dom_matrix_multiply_self_ffi(TJsValue::to_js(self), opt_to_js(other))
 }
 
 ///|
 /// [DOMMatrix.preMultiplySelf](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrix/preMultiplySelf)
-impl TDOMMatrix with pre_multiply_self(
-  self : Self,
-  other? : DOMMatrixInit = DOMMatrixInit::empty(),
-) -> DOMMatrix {
-  dom_matrix_pre_multiply_self_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(other),
-  )
+impl TDOMMatrix with pre_multiply_self(self : Self, other? : DOMMatrixInit) -> DOMMatrix {
+  dom_matrix_pre_multiply_self_ffi(TJsValue::to_js(self), opt_to_js(other))
 }
 
 ///|
 /// [DOMMatrix.translateSelf](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrix/translateSelf)
 impl TDOMMatrix with translate_self(
   self : Self,
-  tx? : Double = (0 : Double),
-  ty? : Double = (0 : Double),
-  tz? : Double = (0 : Double),
+  tx? : Double,
+  ty? : Double,
+  tz? : Double,
 ) -> DOMMatrix {
   dom_matrix_translate_self_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(tx),
-    TJsValue::to_js(ty),
-    TJsValue::to_js(tz),
+    opt_to_js(tx),
+    opt_to_js(ty),
+    opt_to_js(tz),
   )
 }
 
@@ -447,21 +436,21 @@ impl TDOMMatrix with translate_self(
 /// [DOMMatrix.scaleSelf](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrix/scaleSelf)
 impl TDOMMatrix with scale_self(
   self : Self,
-  scale_x? : Double = (1 : Double),
+  scale_x? : Double,
   scale_y? : Double,
-  scale_z? : Double = (1 : Double),
-  origin_x? : Double = (0 : Double),
-  origin_y? : Double = (0 : Double),
-  origin_z? : Double = (0 : Double),
+  scale_z? : Double,
+  origin_x? : Double,
+  origin_y? : Double,
+  origin_z? : Double,
 ) -> DOMMatrix {
   dom_matrix_scale_self_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(scale_x),
+    opt_to_js(scale_x),
     opt_to_js(scale_y),
-    TJsValue::to_js(scale_z),
-    TJsValue::to_js(origin_x),
-    TJsValue::to_js(origin_y),
-    TJsValue::to_js(origin_z),
+    opt_to_js(scale_z),
+    opt_to_js(origin_x),
+    opt_to_js(origin_y),
+    opt_to_js(origin_z),
   )
 }
 
@@ -469,17 +458,17 @@ impl TDOMMatrix with scale_self(
 /// [DOMMatrix.scale3dSelf](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrix/scale3dSelf)
 impl TDOMMatrix with scale3d_self(
   self : Self,
-  scale? : Double = (1 : Double),
-  origin_x? : Double = (0 : Double),
-  origin_y? : Double = (0 : Double),
-  origin_z? : Double = (0 : Double),
+  scale? : Double,
+  origin_x? : Double,
+  origin_y? : Double,
+  origin_z? : Double,
 ) -> DOMMatrix {
   dom_matrix_scale3d_self_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(scale),
-    TJsValue::to_js(origin_x),
-    TJsValue::to_js(origin_y),
-    TJsValue::to_js(origin_z),
+    opt_to_js(scale),
+    opt_to_js(origin_x),
+    opt_to_js(origin_y),
+    opt_to_js(origin_z),
   )
 }
 
@@ -487,13 +476,13 @@ impl TDOMMatrix with scale3d_self(
 /// [DOMMatrix.rotateSelf](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrix/rotateSelf)
 impl TDOMMatrix with rotate_self(
   self : Self,
-  rot_x? : Double = (0 : Double),
+  rot_x? : Double,
   rot_y? : Double,
   rot_z? : Double,
 ) -> DOMMatrix {
   dom_matrix_rotate_self_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(rot_x),
+    opt_to_js(rot_x),
     opt_to_js(rot_y),
     opt_to_js(rot_z),
   )
@@ -503,13 +492,13 @@ impl TDOMMatrix with rotate_self(
 /// [DOMMatrix.rotateFromVectorSelf](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrix/rotateFromVectorSelf)
 impl TDOMMatrix with rotate_from_vector_self(
   self : Self,
-  x? : Double = (0 : Double),
-  y? : Double = (0 : Double),
+  x? : Double,
+  y? : Double,
 ) -> DOMMatrix {
   dom_matrix_rotate_from_vector_self_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(x),
-    TJsValue::to_js(y),
+    opt_to_js(x),
+    opt_to_js(y),
   )
 }
 
@@ -517,30 +506,30 @@ impl TDOMMatrix with rotate_from_vector_self(
 /// [DOMMatrix.rotateAxisAngleSelf](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrix/rotateAxisAngleSelf)
 impl TDOMMatrix with rotate_axis_angle_self(
   self : Self,
-  x? : Double = (0 : Double),
-  y? : Double = (0 : Double),
-  z? : Double = (0 : Double),
-  angle? : Double = (0 : Double),
+  x? : Double,
+  y? : Double,
+  z? : Double,
+  angle? : Double,
 ) -> DOMMatrix {
   dom_matrix_rotate_axis_angle_self_ffi(
     TJsValue::to_js(self),
-    TJsValue::to_js(x),
-    TJsValue::to_js(y),
-    TJsValue::to_js(z),
-    TJsValue::to_js(angle),
+    opt_to_js(x),
+    opt_to_js(y),
+    opt_to_js(z),
+    opt_to_js(angle),
   )
 }
 
 ///|
 /// [DOMMatrix.skewXSelf](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrix/skewXSelf)
-impl TDOMMatrix with skew_x_self(self : Self, sx? : Double = (0 : Double)) -> DOMMatrix {
-  dom_matrix_skew_x_self_ffi(TJsValue::to_js(self), TJsValue::to_js(sx))
+impl TDOMMatrix with skew_x_self(self : Self, sx? : Double) -> DOMMatrix {
+  dom_matrix_skew_x_self_ffi(TJsValue::to_js(self), opt_to_js(sx))
 }
 
 ///|
 /// [DOMMatrix.skewYSelf](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrix/skewYSelf)
-impl TDOMMatrix with skew_y_self(self : Self, sy? : Double = (0 : Double)) -> DOMMatrix {
-  dom_matrix_skew_y_self_ffi(TJsValue::to_js(self), TJsValue::to_js(sy))
+impl TDOMMatrix with skew_y_self(self : Self, sy? : Double) -> DOMMatrix {
+  dom_matrix_skew_y_self_ffi(TJsValue::to_js(self), opt_to_js(sy))
 }
 
 ///|

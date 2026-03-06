@@ -29,11 +29,11 @@ pub impl TEvent for IDBVersionChangeEvent
 ///|
 pub fn IDBVersionChangeEvent::new(
   type_ : String,
-  event_init_dict? : IDBVersionChangeEventInit = IDBVersionChangeEventInit::empty(),
+  event_init_dict? : IDBVersionChangeEventInit,
 ) -> IDBVersionChangeEvent {
   idb_version_change_event_new_ffi(
     TJsValue::to_js(type_),
-    TJsValue::to_js(event_init_dict),
+    opt_to_js(event_init_dict),
   )
 }
 

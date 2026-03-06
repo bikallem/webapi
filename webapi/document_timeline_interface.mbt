@@ -26,9 +26,9 @@ pub impl TAnimationTimeline for DocumentTimeline
 
 ///|
 pub fn DocumentTimeline::new(
-  options? : DocumentTimelineOptions = DocumentTimelineOptions::empty(),
+  options? : DocumentTimelineOptions,
 ) -> DocumentTimeline {
-  document_timeline_new_ffi(TJsValue::to_js(options))
+  document_timeline_new_ffi(opt_to_js(options))
 }
 
 ///|

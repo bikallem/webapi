@@ -15,10 +15,10 @@ pub impl FromJsAny for ImageEncodeOptions with from_js_any(value : JsAny) -> Ima
 
 ///|
 pub fn ImageEncodeOptions::new(
-  type_? : String = "image/png",
+  type_? : String,
   quality? : Double,
 ) -> ImageEncodeOptions {
-  image_encode_options_ffi(TJsValue::to_js(type_), opt_to_js(quality))
+  image_encode_options_ffi(opt_to_js(type_), opt_to_js(quality))
 }
 
 ///|

@@ -19,9 +19,9 @@ pub impl FromJsAny for StructuredSerializeOptions with from_js_any(
 
 ///|
 pub fn StructuredSerializeOptions::new(
-  transfer? : Array[JsValue] = [],
+  transfer? : Array[JsValue],
 ) -> StructuredSerializeOptions {
-  structured_serialize_options_ffi(TJsValue::to_js(transfer))
+  structured_serialize_options_ffi(opt_to_js(transfer))
 }
 
 ///|

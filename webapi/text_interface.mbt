@@ -29,8 +29,8 @@ pub impl TNode for Text
 pub impl TEventTarget for Text
 
 ///|
-pub fn Text::new(data? : String = "") -> Text {
-  text_new_ffi(TJsValue::to_js(data))
+pub fn Text::new(data? : String) -> Text {
+  text_new_ffi(opt_to_js(data))
 }
 
 ///|
@@ -80,11 +80,10 @@ impl TText with assigned_slot(self : Self) -> HTMLSlotElement {
 
 ///|
 /// [Text.getBoxQuads](https://developer.mozilla.org/en-US/docs/Web/API/Text/getBoxQuads)
-impl TText with get_box_quads(
-  self : Self,
-  options? : BoxQuadOptions = BoxQuadOptions::empty(),
-) -> Array[DOMQuad] {
-  text_get_box_quads_ffi(TJsValue::to_js(self), TJsValue::to_js(options))
+impl TText with get_box_quads(self : Self, options? : BoxQuadOptions) -> Array[
+  DOMQuad,
+] {
+  text_get_box_quads_ffi(TJsValue::to_js(self), opt_to_js(options))
 }
 
 ///|
@@ -93,13 +92,13 @@ impl TText with convert_quad_from_node(
   self : Self,
   quad : DOMQuadInit,
   from : &TGeometryNode,
-  options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty(),
+  options? : ConvertCoordinateOptions,
 ) -> DOMQuad {
   text_convert_quad_from_node_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(quad),
     from.to_js(),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 
@@ -109,13 +108,13 @@ impl TText with convert_rect_from_node(
   self : Self,
   rect : &TDOMRectReadOnly,
   from : &TGeometryNode,
-  options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty(),
+  options? : ConvertCoordinateOptions,
 ) -> DOMQuad {
   text_convert_rect_from_node_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(rect),
     from.to_js(),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }
 
@@ -125,12 +124,12 @@ impl TText with convert_point_from_node(
   self : Self,
   point : DOMPointInit,
   from : &TGeometryNode,
-  options? : ConvertCoordinateOptions = ConvertCoordinateOptions::empty(),
+  options? : ConvertCoordinateOptions,
 ) -> DOMPoint {
   text_convert_point_from_node_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(point),
     from.to_js(),
-    TJsValue::to_js(options),
+    opt_to_js(options),
   )
 }

@@ -460,14 +460,14 @@ impl THTMLTextAreaElement with set_range_text_in_range(
   replacement : String,
   start : UInt,
   end : UInt,
-  selection_mode? : SelectionMode = SelectionMode::Preserve,
+  selection_mode? : SelectionMode,
 ) -> Unit {
   html_text_area_element_set_range_text_in_range_ffi(
     TJsValue::to_js(self),
     TJsValue::to_js(replacement),
     TJsValue::to_js(start),
     TJsValue::to_js(end),
-    TJsValue::to_js(selection_mode),
+    opt_to_js(selection_mode),
   )
 }
 

@@ -17,16 +17,16 @@ pub impl FromJsAny for PageTransitionEventInit with from_js_any(value : JsAny) -
 
 ///|
 pub fn PageTransitionEventInit::new(
-  bubbles? : Bool = false,
-  cancelable? : Bool = false,
-  composed? : Bool = false,
-  persisted? : Bool = false,
+  bubbles? : Bool,
+  cancelable? : Bool,
+  composed? : Bool,
+  persisted? : Bool,
 ) -> PageTransitionEventInit {
   page_transition_event_init_ffi(
-    TJsValue::to_js(bubbles),
-    TJsValue::to_js(cancelable),
-    TJsValue::to_js(composed),
-    TJsValue::to_js(persisted),
+    opt_to_js(bubbles),
+    opt_to_js(cancelable),
+    opt_to_js(composed),
+    opt_to_js(persisted),
   )
 }
 

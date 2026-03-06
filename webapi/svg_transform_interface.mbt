@@ -74,11 +74,8 @@ impl TSVGTransform with angle(self : Self) -> Float {
 
 ///|
 /// [SVGTransform.setMatrix](https://developer.mozilla.org/en-US/docs/Web/API/SVGTransform/setMatrix)
-impl TSVGTransform with set_matrix(
-  self : Self,
-  matrix? : DOMMatrix2DInit = DOMMatrix2DInit::empty(),
-) -> Unit {
-  svg_transform_set_matrix_ffi(TJsValue::to_js(self), TJsValue::to_js(matrix))
+impl TSVGTransform with set_matrix(self : Self, matrix? : DOMMatrix2DInit) -> Unit {
+  svg_transform_set_matrix_ffi(TJsValue::to_js(self), opt_to_js(matrix))
 }
 
 ///|

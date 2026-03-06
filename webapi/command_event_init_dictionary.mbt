@@ -15,18 +15,18 @@ pub impl FromJsAny for CommandEventInit with from_js_any(value : JsAny) -> Comma
 
 ///|
 pub fn CommandEventInit::new(
-  bubbles? : Bool = false,
-  cancelable? : Bool = false,
-  composed? : Bool = false,
+  bubbles? : Bool,
+  cancelable? : Bool,
+  composed? : Bool,
   source? : &TElement,
-  command? : String = "",
+  command? : String,
 ) -> CommandEventInit {
   command_event_init_ffi(
-    TJsValue::to_js(bubbles),
-    TJsValue::to_js(cancelable),
-    TJsValue::to_js(composed),
+    opt_to_js(bubbles),
+    opt_to_js(cancelable),
+    opt_to_js(composed),
     opt_to_js(source),
-    TJsValue::to_js(command),
+    opt_to_js(command),
   )
 }
 

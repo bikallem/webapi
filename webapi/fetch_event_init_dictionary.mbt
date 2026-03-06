@@ -15,25 +15,25 @@ pub impl FromJsAny for FetchEventInit with from_js_any(value : JsAny) -> FetchEv
 
 ///|
 pub fn FetchEventInit::new(
-  bubbles? : Bool = false,
-  cancelable? : Bool = false,
-  composed? : Bool = false,
+  bubbles? : Bool,
+  cancelable? : Bool,
+  composed? : Bool,
   request : &TRequest,
   preload_response? : JsPromise[JsValue],
-  client_id? : String = "",
-  resulting_client_id? : String = "",
-  replaces_client_id? : String = "",
+  client_id? : String,
+  resulting_client_id? : String,
+  replaces_client_id? : String,
   handled? : JsPromise[JsValue],
 ) -> FetchEventInit {
   fetch_event_init_ffi(
-    TJsValue::to_js(bubbles),
-    TJsValue::to_js(cancelable),
-    TJsValue::to_js(composed),
+    opt_to_js(bubbles),
+    opt_to_js(cancelable),
+    opt_to_js(composed),
     TJsValue::to_js(request),
     opt_to_js(preload_response),
-    TJsValue::to_js(client_id),
-    TJsValue::to_js(resulting_client_id),
-    TJsValue::to_js(replaces_client_id),
+    opt_to_js(client_id),
+    opt_to_js(resulting_client_id),
+    opt_to_js(replaces_client_id),
     opt_to_js(handled),
   )
 }
