@@ -552,36 +552,18 @@ fn render_enum(name : String, variants : Array[EnumVariantEmit]) -> String {
 /// Returns the &T reference if found in the type (e.g., "&TFoo" from "&TFoo"
 /// or "Array[&TFoo]"), None otherwise.
 fn extract_trait_ref(type_name : String) -> String? {
-  // Find the position of "&T" in the string
+  // Find "&T" in the string (e.g., "&TFoo" or "Array[&TFoo]")
   let chars = type_name.to_array()
-  let mut start = -1
-  for i = 0; i < chars.length() - 1; i = i + 1 {
-    if chars[i] == '&' && chars[i + 1] == 'T' {
-      start = i
-      break
-    }
+  let start = chars.iter2().find_first(fn(i, _) {
+    i + 1 < chars.length() && chars[i] == '&' && chars[i + 1] == 'T'
+  })
+  guard start is Some((start_idx, _)) else { return None }
+  // Scan alphanumeric/underscore chars after "&T"
+  let mut end = start_idx + 2
+  while end < chars.length() && (chars[end].is_ascii_alphabetic() || chars[end].is_ascii_digit() || chars[end] == '_') {
+    end += 1
   }
-  if start < 0 {
-    return None
-  }
-  // Find the end of the trait name: alphanumeric characters after "&T"
-  let mut end = start + 2
-  while end < chars.length() {
-    let c = chars[end]
-    if (c >= 'A' && c <= 'Z') ||
-      (c >= 'a' && c <= 'z') ||
-      (c >= '0' && c <= '9') ||
-      c == '_' {
-      end = end + 1
-    } else {
-      break
-    }
-  }
-  let buf = StringBuilder::new()
-  for i = start; i < end; i = i + 1 {
-    buf.write_char(chars[i])
-  }
-  Some(buf.to_string())
+  Some(type_name[start_idx:end].to_string())
 }
 
 ///|
