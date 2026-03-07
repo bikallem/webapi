@@ -71,7 +71,7 @@ fn[E : @emit.Emitter] emit_and_write_multi(
 
   fn write_files(
     files : Map[@emit.Filename, @emit.Code],
-    track~ : Array[String]? = None,
+    track : Array[String]?,
   ) -> Unit raise {
     let filenames = files.keys().map(fn(f) { let @emit.Filename(n) = f; n }).collect()
     filenames.sort()
@@ -91,9 +91,9 @@ fn[E : @emit.Emitter] emit_and_write_multi(
   println("=== Generating \{type_name} ===")
   let multi = @emit.emit_all_multi(emitter, sorted_keys(keys).iter())
   let count = multi.shared.length()
-  write_files!(multi.shared)
-  write_files!(multi.js_ffi, track=Some(js_files))
-  write_files!(multi.wasm_ffi, track=Some(wasm_files))
+  write_files(multi.shared, None)
+  write_files(multi.js_ffi, Some(js_files))
+  write_files(multi.wasm_ffi, Some(wasm_files))
   count
 }
 
