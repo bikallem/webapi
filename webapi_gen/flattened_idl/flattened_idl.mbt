@@ -76,21 +76,15 @@ fn flatten_dictionary_members(
 }
 
 ///|
-/// Flattens the IDL by merging dictionary inheritance hierarchy, flattening mixins into interfaces
-/// and converting callback interfaces to callback functions.
-pub fn flatten(
-  partial_merged : @partial_merged.PartialMerged,
+/// Inject members from source dictionaries into target dictionaries.
+/// Members already present in the target are skipped.
+fn inject_dictionary_members(
+  dictionaries : Map[String, @partial_merged.PartialMergedDictionary],
+  injection : Map[String, String],
   logger : (String) -> Unit,
-  dictionary_member_injection? : Map[String, String] = {},
-) -> FlattenedIdl {
-  // Inject members from source dictionaries into target dictionaries before flattening,
-  // so that inheritance naturally propagates the injected members to children.
-  for target_name, source_name in dictionary_member_injection {
-    match
-      (
-        partial_merged.dictionaries.get(target_name),
-        partial_merged.dictionaries.get(source_name),
-      ) {
+) -> Unit {
+  for target_name, source_name in injection {
+    match (dictionaries.get(target_name), dictionaries.get(source_name)) {
       (Some(target_dict), Some(source_dict)) => {
         let existing : @hashset.HashSet[String] = @hashset.from_iter(
           target_dict.members.iter().map(fn(m) { m.name }),
@@ -107,21 +101,29 @@ pub fn flatten(
         )
     }
   }
-  // Merge dictionaries by combining members from parent dictionaries
-  let dictionaries = partial_merged.dictionaries
+}
+
+///|
+/// Flatten all dictionaries by resolving inheritance chains.
+fn flatten_dictionaries(
+  dictionaries : Map[String, @partial_merged.PartialMergedDictionary],
+) -> Map[String, MergedDictionaryIR] {
+  dictionaries
     .iter()
     .map(fn(it) {
       let (dict_name, dict) = it
-      let (members, specs) = flatten_dictionary_members(
-        partial_merged.dictionaries,
-        dict_name,
-      )
+      let (members, specs) = flatten_dictionary_members(dictionaries, dict_name)
       (dict_name, MergedDictionaryIR::new(dict.name, members, specs))
     })
     |> Map::from_iter
+}
 
-  // flatten mixins into interfaces
-  // Skip include statements where interface or mixin is missing (may have been filtered out)
+///|
+/// Merge mixin members into their target interfaces via includes statements.
+fn merge_mixins_into_interfaces(
+  partial_merged : @partial_merged.PartialMerged,
+  logger : (String) -> Unit,
+) -> Unit {
   for include_stmt in partial_merged.include_statements {
     match partial_merged.mixins.get(include_stmt.mixin_name) {
       Some(mxn) =>
@@ -143,28 +145,16 @@ pub fn flatten(
         )
     }
   }
-  // Build FlattenedInterface map, breaking the alias to partial_merged.interfaces
-  let interfaces : Map[String, FlattenedInterface] = Map::new()
-  for name, iface in partial_merged.interfaces {
-    interfaces[name] = FlattenedInterface::{
-      name: iface.name,
-      members: iface.members,
-      inheritance: iface.inheritance,
-      specs: iface.specs,
-    }
-  }
-  let merged_idl = FlattenedIdl::{
-    interfaces,
-    dictionaries,
-    namespaces: partial_merged.namespaces,
-    enums: partial_merged.enums,
-    typedefs: partial_merged.typedefs,
-    callbacks: partial_merged.callback_functions,
-  }
+}
 
-  // Transform CallbackInterfaceDefinitions to CallbackFunctionDefinitions
-  for name, cbi in partial_merged.callback_interfaces {
-    // CallbackInterface::members only holds one operation member
+///|
+/// Convert callback interface definitions to callback function definitions.
+fn convert_callback_interfaces(
+  callback_interfaces : Map[String, @parser.CallbackInterfaceDefinition],
+  callbacks : Map[String, @parser.CallbackFunctionDefinition],
+  logger : (String) -> Unit,
+) -> Unit {
+  for name, cbi in callback_interfaces {
     let op = loop cbi.members.map(m => m.callback_interface_member)[:] {
       [] => {
         logger(
@@ -176,15 +166,53 @@ pub fn flatten(
       [_, .. rest] => continue rest
     }
     guard op is Some(op) else { continue }
-    let cbf : @parser.CallbackFunctionDefinition = {
+    callbacks[name] = @parser.CallbackFunctionDefinition::{
       name: cbi.name,
       return_type: op.return_type,
       arguments: op.arguments,
       spec: cbi.spec,
     }
-    merged_idl.callbacks[name] = cbf
   }
-  merged_idl
+}
+
+///|
+/// Flattens the IDL by merging dictionary inheritance hierarchy, flattening mixins into interfaces
+/// and converting callback interfaces to callback functions.
+pub fn flatten(
+  partial_merged : @partial_merged.PartialMerged,
+  logger : (String) -> Unit,
+  dictionary_member_injection? : Map[String, String] = {},
+) -> FlattenedIdl {
+  inject_dictionary_members(
+    partial_merged.dictionaries,
+    dictionary_member_injection,
+    logger,
+  )
+  let dictionaries = flatten_dictionaries(partial_merged.dictionaries)
+  merge_mixins_into_interfaces(partial_merged, logger)
+  let interfaces : Map[String, FlattenedInterface] = Map::new()
+  for name, iface in partial_merged.interfaces {
+    interfaces[name] = FlattenedInterface::{
+      name: iface.name,
+      members: iface.members,
+      inheritance: iface.inheritance,
+      specs: iface.specs,
+    }
+  }
+  let idl = FlattenedIdl::{
+    interfaces,
+    dictionaries,
+    namespaces: partial_merged.namespaces,
+    enums: partial_merged.enums,
+    typedefs: partial_merged.typedefs,
+    callbacks: partial_merged.callback_functions,
+  }
+  convert_callback_interfaces(
+    partial_merged.callback_interfaces,
+    idl.callbacks,
+    logger,
+  )
+  idl
 }
 
 ///|
