@@ -109,13 +109,13 @@ fn flatten_dictionaries(
   dictionaries : Map[String, @partial_merged.PartialMergedDictionary],
 ) -> Map[String, MergedDictionaryIR] {
   dictionaries
-    .iter()
-    .map(fn(it) {
-      let (dict_name, dict) = it
-      let (members, specs) = flatten_dictionary_members(dictionaries, dict_name)
-      (dict_name, MergedDictionaryIR::new(dict.name, members, specs))
-    })
-    |> Map::from_iter
+  .iter()
+  .map(fn(it) {
+    let (dict_name, dict) = it
+    let (members, specs) = flatten_dictionary_members(dictionaries, dict_name)
+    (dict_name, MergedDictionaryIR::new(dict.name, members, specs))
+  })
+  |> Map::from_iter
 }
 
 ///|

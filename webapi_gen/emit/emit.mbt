@@ -21,10 +21,12 @@ struct Specs(@hashset.HashSet[String]) derive(Show, ToJson)
 
 ///|
 fn specs_from_optional(spec : String?) -> Specs {
-  Specs(match spec {
-    Some(s) => @hashset.HashSet::from_array([s])
-    None => @hashset.HashSet::new()
-  })
+  Specs(
+    match spec {
+      Some(s) => @hashset.HashSet::from_array([s])
+      None => @hashset.HashSet::new()
+    },
+  )
 }
 
 ///|
@@ -385,15 +387,13 @@ fn render_namespace_definition(ns_def : NamespaceDef) -> MultiTargetCode {
     shared: ns_def.methods.map(meth => meth.impl_emit().0).join("\n\n"),
     js_ffi: ns_def.methods.map(meth => meth.ffi_emit_js().0).join("\n\n"),
     wasm_ffi: ns_def.methods
-      .map(meth => meth.ffi_emit_wasm(module_name).0)
-      .join("\n\n"),
+    .map(meth => meth.ffi_emit_wasm(module_name).0)
+    .join("\n\n"),
   }
 }
 
 ///|
-fn render_interface_definition(
-  interface_def : InterfaceDef,
-) -> MultiTargetCode {
+fn render_interface_definition(interface_def : InterfaceDef) -> MultiTargetCode {
   // Shared: trait definition + default impls
   let buf = StringBuilder::new()
   let mdn_url = mdn_interface_url(interface_def.trait_name)
@@ -442,12 +442,10 @@ fn render_interface_definition(
   let module_name = "webapi_\{interface_def.trait_name}"
   {
     shared,
-    js_ffi: interface_def.methods
-      .map(meth => meth.ffi_emit_js().0)
-      .join("\n\n"),
+    js_ffi: interface_def.methods.map(meth => meth.ffi_emit_js().0).join("\n\n"),
     wasm_ffi: interface_def.methods
-      .map(meth => meth.ffi_emit_wasm(module_name).0)
-      .join("\n\n"),
+    .map(meth => meth.ffi_emit_wasm(module_name).0)
+    .join("\n\n"),
   }
 }
 
@@ -458,7 +456,7 @@ fn enum_match_block(
   variants : Array[EnumVariantEmit],
   subject : String,
   arm_fn : (String, EnumVariantEmit) -> String,
-  fallback~ : String = "",
+  fallback? : String = "",
 ) -> String {
   let buf = StringBuilder::new()
   buf.write_string("  match \{subject} {\n")
@@ -481,7 +479,7 @@ fn render_enum_method(
   signature : String,
   subject : String,
   arm_fn : (String, EnumVariantEmit) -> String,
-  fallback~ : String = "",
+  fallback? : String = "",
 ) -> Unit {
   buf.write_string(signature)
   buf.write_string(enum_match_block(name, variants, subject, arm_fn, fallback~))
@@ -497,21 +495,34 @@ fn render_enum(name : String, variants : Array[EnumVariantEmit]) -> String {
   }
   buf.write_string("} derive(Eq)\n\n")
   // Show
-  render_enum_method(buf, name, variants,
+  render_enum_method(
+    buf,
+    name,
+    variants,
     "pub impl Show for \{name} with output(self : \{name}, logger : &Logger) -> Unit {\n",
     "self",
-    fn(n, v) { "\{n}::\{v.variant_name} => logger.write_string(\"\{v.variant_name}\")" },
+    fn(n, v) {
+      "\{n}::\{v.variant_name} => logger.write_string(\"\{v.variant_name}\")"
+    },
   )
   buf.write_string("\n\n")
   // TJsValue
-  render_enum_method(buf, name, variants,
+  render_enum_method(
+    buf,
+    name,
+    variants,
     "pub impl TJsValue for \{name} with to_js(self: \{name}) -> JsValue {\n",
     "self",
-    fn(n, v) { "\{n}::\{v.variant_name} => TJsValue::to_js(\"\{v.original_value}\")" },
+    fn(n, v) {
+      "\{n}::\{v.variant_name} => TJsValue::to_js(\"\{v.original_value}\")"
+    },
   )
   buf.write_string("\n\n")
   // from (safe)
-  render_enum_method(buf, name, variants,
+  render_enum_method(
+    buf,
+    name,
+    variants,
     "pub fn \{name}::from(value: String) -> \{name}? {\n",
     "value",
     fn(n, v) { "\"\{v.original_value}\" => Some(\{n}::\{v.variant_name})" },
@@ -519,7 +530,10 @@ fn render_enum(name : String, variants : Array[EnumVariantEmit]) -> String {
   )
   buf.write_string("\n\n")
   // from_unchecked (wasm-gc)
-  render_enum_method(buf, name, variants,
+  render_enum_method(
+    buf,
+    name,
+    variants,
     "fn \{name}::from_unchecked(value: String) -> \{name} {\n",
     "value",
     fn(n, v) { "\"\{v.original_value}\" => \{n}::\{v.variant_name}" },
@@ -527,7 +541,10 @@ fn render_enum(name : String, variants : Array[EnumVariantEmit]) -> String {
   )
   buf.write_string("\n\n")
   // value
-  render_enum_method(buf, name, variants,
+  render_enum_method(
+    buf,
+    name,
+    variants,
     "pub fn \{name}::value(self: \{name}) -> String {\n",
     "self",
     fn(n, v) { "\{n}::\{v.variant_name} => \"\{v.original_value}\"" },
@@ -557,7 +574,12 @@ fn extract_trait_ref(type_name : String) -> String? {
   guard start_idx >= 0 else { return None }
   // Scan alphanumeric/underscore chars after "&T"
   let mut end = start_idx + 2
-  while end < chars.length() && (chars[end].is_ascii_alphabetic() || chars[end].is_ascii_digit() || chars[end] == '_') {
+  while end < chars.length() &&
+        (
+          chars[end].is_ascii_alphabetic() ||
+          chars[end].is_ascii_digit() ||
+          chars[end] == '_'
+        ) {
     end += 1
   }
   Some(type_name[start_idx:end].to_string())
@@ -693,8 +715,7 @@ pub fn mbt_code_gen_multi(emits : Array[Emit]) -> MultiTargetCode {
         ConstructorName(constructor_name),
         TypeName(type_name),
         args
-      ) =>
-        append_multi(render_constructor(constructor_name, type_name, args))
+      ) => append_multi(render_constructor(constructor_name, type_name, args))
       Emit::Callback(TypeName(name), args, TypeName(return_type)) =>
         append_multi(render_callback(name, args, return_type))
     }

@@ -73,7 +73,13 @@ fn[E : @emit.Emitter] emit_and_write_multi(
     files : Map[@emit.Filename, @emit.Code],
     track : Array[String]?,
   ) -> Unit raise {
-    let filenames = files.keys().map(fn(f) { let @emit.Filename(n) = f; n }).collect()
+    let filenames = files
+      .keys()
+      .map(fn(f) {
+        let @emit.Filename(n) = f
+        n
+      })
+      .collect()
     filenames.sort()
     for filename in filenames {
       let filepath = "\{output_dir}/\{filename}"
