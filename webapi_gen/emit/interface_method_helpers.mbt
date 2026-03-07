@@ -77,6 +77,33 @@ fn emit_js_ffi_with_return(
 }
 
 ///|
+/// Emit a default trait method implementation with MDN doc comment.
+/// Shared by RegularMethodEmit and SpecialOperationMethodEmit.
+fn emit_trait_method_impl(
+  interface_name : String,
+  display_name : String,
+  method_name : String,
+  args : Array[@type_mapping.MethodArg],
+  return_type : @type_mapping.MethodReturn,
+  ffi_name : String,
+) -> Code {
+  let code = StringBuilder::new()
+  let mdn_url = mdn_member_url(interface_name, display_name)
+  code.write_string("/// [\{interface_name}.\{display_name}](\{mdn_url})\n")
+  let method_args = trait_method_impl_args(args)
+  let safe_name = maybe_opt_name(
+    @type_mapping.safe_identifier(method_name),
+    return_type,
+  )
+  let call_args = func_call_args(args)
+  code.write_string(
+    "impl T\{interface_name} with \{safe_name}(\{method_args}) -> \{return_type.type_name()} {\n",
+  )
+  emit_method_body(code, ffi_name, call_args, return_type.optional)
+  Code(code.to_string())
+}
+
+///|
 /// Emits the method body: either a direct FFI call or a null-checking wrapper.
 /// The FFI function is responsible for returning the correct type.
 /// For optional returns, FFI returns JsValue for null checking.

@@ -102,26 +102,14 @@ impl InterfaceMethodEmit for RegularMethodEmit with ffi_emit_wasm(
 impl InterfaceMethodEmit for RegularMethodEmit with impl_emit(
   self : RegularMethodEmit,
 ) -> Code {
-  let trait_name = self.interface_name
-  let ffi_name = self.ffi_name()
-  let code = StringBuilder::new()
-
-  // Emit MDN documentation comment
-  let mdn_url = mdn_member_url(trait_name, self.webidl_name)
-  code.write_string("/// [\{trait_name}.\{self.webidl_name}](\{mdn_url})\n")
-
-  // Emit default trait method implementation
-  let method_args = trait_method_impl_args(self.args)
-  let method_name = maybe_opt_name(
-    @type_mapping.safe_identifier(self.method_name),
+  emit_trait_method_impl(
+    self.interface_name,
+    self.webidl_name,
+    self.method_name,
+    self.args,
     self.return_type,
+    self.ffi_name(),
   )
-  let call_args = func_call_args(self.args)
-  code.write_string(
-    "impl T\{trait_name} with \{method_name}(\{method_args}) -> \{self.return_type.type_name()} {\n",
-  )
-  emit_method_body(code, ffi_name, call_args, self.return_type.optional)
-  Code(code.to_string())
 }
 
 ///|
@@ -602,26 +590,14 @@ impl InterfaceMethodEmit for SpecialOperationMethodEmit with ffi_emit_wasm(
 impl InterfaceMethodEmit for SpecialOperationMethodEmit with impl_emit(
   self : SpecialOperationMethodEmit,
 ) -> Code {
-  let trait_name = self.interface_name
-  let ffi_name = self.ffi_name()
-  let code = StringBuilder::new()
-
-  // Emit MDN documentation comment
-  let mdn_url = mdn_member_url(trait_name, self.original_name)
-  code.write_string("/// [\{trait_name}.\{self.original_name}](\{mdn_url})\n")
-
-  // Emit default trait method implementation
-  let method_args = trait_method_impl_args(self.args)
-  let method_name = maybe_opt_name(
-    @type_mapping.safe_identifier(self.original_name),
+  emit_trait_method_impl(
+    self.interface_name,
+    self.original_name,
+    self.original_name,
+    self.args,
     self.return_type,
+    self.ffi_name(),
   )
-  let call_args = func_call_args(self.args)
-  code.write_string(
-    "impl T\{trait_name} with \{method_name}(\{method_args}) -> \{self.return_type.type_name()} {\n",
-  )
-  emit_method_body(code, ffi_name, call_args, self.return_type.optional)
-  Code(code.to_string())
 }
 
 ///|
