@@ -10,6 +10,6 @@ options(
       "use-js-builtin-string": true,
     },
   },
-  "supported-targets": [ "js", "wasm-gc" ],
+  "supported-targets": "js+wasm-gc",
   targets: { "helpers_js.mbt": [ "js" ], "helpers_wasm.mbt": [ "wasm-gc" ] },
 )

@@ -186,7 +186,7 @@ fn generate_moon_pkg(
   }
   buf.write_string(entries.join(","))
   buf.write_string(" },\n")
-  buf.write_string("  \"supported-targets\": [ \"js\", \"wasm-gc\" ],\n")
+  buf.write_string("  \"supported-targets\": \"js+wasm-gc\",\n")
   buf.write_string(")\n")
   buf.to_string()
 }

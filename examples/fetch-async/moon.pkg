@@ -8,5 +8,5 @@ warnings = "-unused_package"
 
 options(
   "is-main": true,
-  targets: { "main.mbt": [ "js" ], "main_wasm.mbt": [ "wasm-gc" ] },
+  "supported-targets": "js",
 )
