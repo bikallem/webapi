@@ -129,39 +129,26 @@ fn filter_idl(
   let excluded_interfaces = config.excluded_interfaces
   let excluded_callbacks = config.excluded_callbacks
   let excluded_typedefs = config.excluded_typedefs
-  let filtered_defns = []
   fn is_dictionary_prefix_excluded(name : String) -> Bool {
     config.excluded_dictionary_prefixes
     .iter()
     .any(prefix => name.has_prefix(prefix))
   }
 
-  for def in defns {
+  defns.filter(fn(def) {
     match def.definition {
-      Interface(iface) if !excluded_interfaces.contains(iface.name) =>
-        filtered_defns.push(def)
-      PartialInterface(piface) if !excluded_interfaces.contains(piface.name) =>
-        filtered_defns.push(def)
-      Mixin(mxn) if !excluded_interfaces.contains(mxn.name) =>
-        filtered_defns.push(def)
-      PartialMixin(pmxn) if !excluded_interfaces.contains(pmxn.name) =>
-        filtered_defns.push(def)
-      Namespace(_) | PartialNamespace(_) => filtered_defns.push(def)
-      Dictionary(dict) if !is_dictionary_prefix_excluded(dict.name) =>
-        filtered_defns.push(def)
-      PartialDictionary(pdict) if !is_dictionary_prefix_excluded(pdict.name) =>
-        filtered_defns.push(def)
-      Typedef(td) if !excluded_typedefs.contains(td.name) =>
-        filtered_defns.push(def)
-      CallbackFunction(cbf) if !excluded_callbacks.contains(cbf.name) =>
-        filtered_defns.push(def)
-      CallbackInterface(cbi) if !excluded_callbacks.contains(cbi.name) =>
-        filtered_defns.push(def)
-      Enum(_) | Includes(_) => filtered_defns.push(def)
-      _ => ()
+      Interface(iface) => !excluded_interfaces.contains(iface.name)
+      PartialInterface(piface) => !excluded_interfaces.contains(piface.name)
+      Mixin(mxn) => !excluded_interfaces.contains(mxn.name)
+      PartialMixin(pmxn) => !excluded_interfaces.contains(pmxn.name)
+      Dictionary(dict) => !is_dictionary_prefix_excluded(dict.name)
+      PartialDictionary(pdict) => !is_dictionary_prefix_excluded(pdict.name)
+      Typedef(td) => !excluded_typedefs.contains(td.name)
+      CallbackFunction(cbf) => !excluded_callbacks.contains(cbf.name)
+      CallbackInterface(cbi) => !excluded_callbacks.contains(cbi.name)
+      Namespace(_) | PartialNamespace(_) | Enum(_) | Includes(_) => true
     }
-  }
-  filtered_defns
+  })
 }
 
 ///|
