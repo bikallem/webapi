@@ -459,123 +459,40 @@ fn render_interface_definition(
 }
 
 ///|
-/// Generate a match-self block over enum variants.
-fn enum_match_self(
-  buf : StringBuilder,
+/// Generate a match block with arms over enum variants, optionally with a fallback.
+fn enum_match_block(
   name : String,
   variants : Array[EnumVariantEmit],
+  subject : String,
   arm_fn : (String, EnumVariantEmit) -> String,
-) -> Unit {
-  buf.write_string("  match self {\n")
+  fallback~ : String = "",
+) -> String {
+  let buf = StringBuilder::new()
+  buf.write_string("  match \{subject} {\n")
   for variant in variants {
     buf.write_string("    \{arm_fn(name, variant)}\n")
+  }
+  if fallback.length() > 0 {
+    buf.write_string("    \{fallback}\n")
   }
   buf.write_string("  }\n")
+  buf.to_string()
 }
 
 ///|
-/// Generate a match-value block over enum variants with a fallback arm.
-fn enum_match_value(
+/// Generate a complete enum method: signature + match block + closing brace.
+fn render_enum_method(
   buf : StringBuilder,
   name : String,
   variants : Array[EnumVariantEmit],
+  signature : String,
+  subject : String,
   arm_fn : (String, EnumVariantEmit) -> String,
-  fallback : String,
+  fallback~ : String = "",
 ) -> Unit {
-  buf.write_string("  match value {\n")
-  for variant in variants {
-    buf.write_string("    \{arm_fn(name, variant)}\n")
-  }
-  buf.write_string("    \{fallback}\n  }\n")
-}
-
-///|
-fn render_enum_show(
-  buf : StringBuilder,
-  name : String,
-  variants : Array[EnumVariantEmit],
-) -> Unit {
-  // Manual Show implementation: avoids derive(Show) which generates a to_string()
-  // that triggers a wasm-gc compiler bug (externref vs (ref extern) in match returns).
-  buf.write_string(
-    "pub impl Show for \{name} with output(self : \{name}, logger : &Logger) -> Unit {\n",
-  )
-  enum_match_self(buf, name, variants, fn(n, v) {
-    "\{n}::\{v.variant_name} => logger.write_string(\"\{v.variant_name}\")"
-  })
+  buf.write_string(signature)
+  buf.write_string(enum_match_block(name, variants, subject, arm_fn, fallback~))
   buf.write_string("}")
-}
-
-///|
-fn render_enum_to_js(
-  buf : StringBuilder,
-  name : String,
-  variants : Array[EnumVariantEmit],
-) -> Unit {
-  buf.write_string(
-    "pub impl TJsValue for \{name} with to_js(self: \{name}) -> JsValue {\n",
-  )
-  enum_match_self(buf, name, variants, fn(n, v) {
-    "\{n}::\{v.variant_name} => TJsValue::to_js(\"\{v.original_value}\")"
-  })
-  buf.write_string("}")
-}
-
-///|
-fn render_enum_from(
-  buf : StringBuilder,
-  name : String,
-  variants : Array[EnumVariantEmit],
-) -> Unit {
-  buf.write_string("pub fn \{name}::from(value: String) -> \{name}? {\n")
-  enum_match_value(
-    buf,
-    name,
-    variants,
-    fn(n, v) { "\"\{v.original_value}\" => Some(\{n}::\{v.variant_name})" },
-    "_ => None",
-  )
-  buf.write_string("}")
-}
-
-///|
-fn render_enum_from_unchecked(
-  buf : StringBuilder,
-  name : String,
-  variants : Array[EnumVariantEmit],
-) -> Unit {
-  // from_unchecked() converts a string to the enum, aborting on unknown values.
-  // Used by wasm-gc FFI to avoid Option[Enum] which triggers a compiler bug
-  // (None uses externref null but Option[Enum] expects i32 representation).
-  buf.write_string("fn \{name}::from_unchecked(value: String) -> \{name} {\n")
-  enum_match_value(
-    buf,
-    name,
-    variants,
-    fn(n, v) { "\"\{v.original_value}\" => \{n}::\{v.variant_name}" },
-    "_ => abort(\"unknown \{name} enum value\")",
-  )
-  buf.write_string("}")
-}
-
-///|
-fn render_enum_value(
-  buf : StringBuilder,
-  name : String,
-  variants : Array[EnumVariantEmit],
-) -> Unit {
-  buf.write_string("pub fn \{name}::value(self: \{name}) -> String {\n")
-  enum_match_self(buf, name, variants, fn(n, v) {
-    "\{n}::\{v.variant_name} => \"\{v.original_value}\""
-  })
-  buf.write_string("}")
-}
-
-///|
-fn render_enum_from_js_any(buf : StringBuilder, name : String) -> Unit {
-  buf.write_string(
-    "pub impl FromJsAny for \{name} with from_js_any(value : JsAny) -> \{name} {\n  \{name}::from_unchecked(value)\n}",
-  )
 }
 
 ///|
@@ -586,17 +503,47 @@ fn render_enum(name : String, variants : Array[EnumVariantEmit]) -> String {
     buf.write_string("  \{variant.variant_name}\n")
   }
   buf.write_string("} derive(Eq)\n\n")
-  render_enum_show(buf, name, variants)
+  // Show
+  render_enum_method(buf, name, variants,
+    "pub impl Show for \{name} with output(self : \{name}, logger : &Logger) -> Unit {\n",
+    "self",
+    fn(n, v) { "\{n}::\{v.variant_name} => logger.write_string(\"\{v.variant_name}\")" },
+  )
   buf.write_string("\n\n")
-  render_enum_to_js(buf, name, variants)
+  // TJsValue
+  render_enum_method(buf, name, variants,
+    "pub impl TJsValue for \{name} with to_js(self: \{name}) -> JsValue {\n",
+    "self",
+    fn(n, v) { "\{n}::\{v.variant_name} => TJsValue::to_js(\"\{v.original_value}\")" },
+  )
   buf.write_string("\n\n")
-  render_enum_from(buf, name, variants)
+  // from (safe)
+  render_enum_method(buf, name, variants,
+    "pub fn \{name}::from(value: String) -> \{name}? {\n",
+    "value",
+    fn(n, v) { "\"\{v.original_value}\" => Some(\{n}::\{v.variant_name})" },
+    fallback="_ => None",
+  )
   buf.write_string("\n\n")
-  render_enum_from_unchecked(buf, name, variants)
+  // from_unchecked (wasm-gc)
+  render_enum_method(buf, name, variants,
+    "fn \{name}::from_unchecked(value: String) -> \{name} {\n",
+    "value",
+    fn(n, v) { "\"\{v.original_value}\" => \{n}::\{v.variant_name}" },
+    fallback="_ => abort(\"unknown \{name} enum value\")",
+  )
   buf.write_string("\n\n")
-  render_enum_value(buf, name, variants)
+  // value
+  render_enum_method(buf, name, variants,
+    "pub fn \{name}::value(self: \{name}) -> String {\n",
+    "self",
+    fn(n, v) { "\{n}::\{v.variant_name} => \"\{v.original_value}\"" },
+  )
   buf.write_string("\n\n")
-  render_enum_from_js_any(buf, name)
+  // FromJsAny
+  buf.write_string(
+    "pub impl FromJsAny for \{name} with from_js_any(value : JsAny) -> \{name} {\n  \{name}::from_unchecked(value)\n}",
+  )
   buf.to_string()
 }
 
