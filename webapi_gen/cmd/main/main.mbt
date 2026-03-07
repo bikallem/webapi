@@ -126,7 +126,7 @@ fn filter_idl(
   config : @config.Config,
   defns : Array[@parser.DefinitionExtendedAttributes],
 ) -> Array[@parser.DefinitionExtendedAttributes] {
-  let core_interfaces = config.excluded_interfaces
+  let excluded_interfaces = config.excluded_interfaces
   let excluded_callbacks = config.excluded_callbacks
   let excluded_typedefs = config.excluded_typedefs
   let filtered_defns = []
@@ -138,13 +138,13 @@ fn filter_idl(
 
   for def in defns {
     match def.definition {
-      Interface(iface) if !core_interfaces.contains(iface.name) =>
+      Interface(iface) if !excluded_interfaces.contains(iface.name) =>
         filtered_defns.push(def)
-      PartialInterface(piface) if !core_interfaces.contains(piface.name) =>
+      PartialInterface(piface) if !excluded_interfaces.contains(piface.name) =>
         filtered_defns.push(def)
-      Mixin(mxn) if !core_interfaces.contains(mxn.name) =>
+      Mixin(mxn) if !excluded_interfaces.contains(mxn.name) =>
         filtered_defns.push(def)
-      PartialMixin(pmxn) if !core_interfaces.contains(pmxn.name) =>
+      PartialMixin(pmxn) if !excluded_interfaces.contains(pmxn.name) =>
         filtered_defns.push(def)
       Namespace(_) | PartialNamespace(_) => filtered_defns.push(def)
       Dictionary(dict) if !is_dictionary_prefix_excluded(dict.name) =>
