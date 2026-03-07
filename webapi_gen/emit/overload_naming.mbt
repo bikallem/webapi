@@ -1,4 +1,16 @@
 ///|
+/// Tracks method name deduplication for overloaded methods.
+struct OverloadNamer {
+  counter : Map[String, Int]
+  used_names : @hashset.HashSet[String]
+}
+
+///|
+fn OverloadNamer::new() -> OverloadNamer {
+  { counter: {}, used_names: @hashset.new() }
+}
+
+///|
 priv enum ArgMatch {
   HasArg(String)
   HasAnyArg(Array[String])
@@ -218,35 +230,34 @@ fn overload_candidate_name(
 }
 
 ///|
-fn next_overload_name(
+fn OverloadNamer::next(
+  self : OverloadNamer,
   base_name : String,
   args : Array[@parser.Argument],
-  method_counter : Map[String, Int],
-  used_names : @hashset.HashSet[String],
 ) -> String {
   let base_key = @type_mapping.safe_identifier(base_name)
-  let overload_index = match method_counter.get(base_key) {
+  let overload_index = match self.counter.get(base_key) {
     None => {
-      method_counter[base_key] = 1
+      self.counter[base_key] = 1
       1
     }
     Some(count) => {
       let next = count + 1
-      method_counter[base_key] = next
+      self.counter[base_key] = next
       next
     }
   }
   if overload_index == 1 {
-    used_names.add(base_name)
+    self.used_names.add(base_name)
     base_name
   } else {
     let candidate = overload_candidate_name(base_key, args, overload_index)
-    if candidate == base_name || used_names.contains(candidate) {
+    if candidate == base_name || self.used_names.contains(candidate) {
       let fallback = "\{base_name}_\{overload_index}"
-      used_names.add(fallback)
+      self.used_names.add(fallback)
       fallback
     } else {
-      used_names.add(candidate)
+      self.used_names.add(candidate)
       candidate
     }
   }

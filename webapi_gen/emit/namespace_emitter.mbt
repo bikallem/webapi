@@ -20,20 +20,14 @@ pub impl Emitter for NamespaceEmitter with emit(
   ..push(Emit::ImplTJsValue(mbt_name))
   .push(Emit::ImplFromJsAny(mbt_name))
   let namespace_methods : Array[&InterfaceMethodEmit] = []
-  let method_counter : Map[String, Int] = {}
-  let used_method_names = @hashset.new()
+  let method_namer = OverloadNamer::new()
   for m in ns.members {
     match m.namespace_member {
       Operation(op) => {
         if op.name.contains("-") {
           continue
         }
-        let orig_method_name = next_overload_name(
-          op.name,
-          op.arguments,
-          method_counter,
-          used_method_names,
-        )
+        let orig_method_name = method_namer.next(op.name, op.arguments)
         // All namespace operations are implicitly static
         let static_op : @parser.RegularOperationMember = {
           name: op.name,

@@ -16,14 +16,11 @@ fn mk_arg(
 
 ///|
 test "next_overload_name uses semantic name for fill path overload" {
-  let counter : Map[String, Int] = {}
-  let used = @hashset.new()
-  let name1 = next_overload_name("fill", [mk_arg("fillRule")], counter, used)
-  let name2 = next_overload_name(
+  let namer = OverloadNamer::new()
+  let name1 = namer.next("fill", [mk_arg("fillRule")])
+  let name2 = namer.next(
     "fill",
     [mk_arg("path"), mk_arg("fillRule", optional=true)],
-    counter,
-    used,
   )
   inspect(name1, content="fill")
   inspect(name2, content="fill_path")
@@ -31,34 +28,20 @@ test "next_overload_name uses semantic name for fill path overload" {
 
 ///|
 test "next_overload_name uses semantic name for coordinate overloads" {
-  let counter : Map[String, Int] = {}
-  let used = @hashset.new()
-  let _ = next_overload_name(
-    "scroll",
-    [mk_arg("options", optional=true)],
-    counter,
-    used,
-  )
-  let name2 = next_overload_name(
+  let namer = OverloadNamer::new()
+  let _ = namer.next("scroll", [mk_arg("options", optional=true)])
+  let name2 = namer.next(
     "scroll",
     [mk_arg("x", type_=@parser.Double), mk_arg("y", type_=@parser.Double)],
-    counter,
-    used,
   )
   inspect(name2, content="scroll_xy")
 }
 
 ///|
 test "next_overload_name distinguishes open overloads" {
-  let counter : Map[String, Int] = {}
-  let used = @hashset.new()
-  let _ = next_overload_name(
-    "open",
-    [mk_arg("method"), mk_arg("url")],
-    counter,
-    used,
-  )
-  let xhr_name = next_overload_name(
+  let namer = OverloadNamer::new()
+  let _ = namer.next("open", [mk_arg("method"), mk_arg("url")])
+  let xhr_name = namer.next(
     "open",
     [
       mk_arg("method_"),
@@ -67,41 +50,31 @@ test "next_overload_name distinguishes open overloads" {
       mk_arg("username", optional=true),
       mk_arg("password", optional=true),
     ],
-    counter,
-    used,
   )
   inspect(xhr_name, content="open_with_credentials")
 }
 
 ///|
 test "next_overload_name distinguishes alert overloads" {
-  let counter : Map[String, Int] = {}
-  let used = @hashset.new()
-  let _ = next_overload_name("alert", [], counter, used)
-  let alert_with_message = next_overload_name(
-    "alert",
-    [mk_arg("message")],
-    counter,
-    used,
-  )
+  let namer = OverloadNamer::new()
+  let _ = namer.next("alert", [])
+  let alert_with_message = namer.next("alert", [mk_arg("message")])
   inspect(alert_with_message, content="alert_with_message")
 }
 
 ///|
 test "next_overload_name falls back when semantic candidate collides" {
-  let counter : Map[String, Int] = {}
-  let used = @hashset.from_array(["post_message_with_options"])
-  let _ = next_overload_name(
+  let namer : OverloadNamer = {
+    counter: {},
+    used_names: @hashset.from_array(["post_message_with_options"]),
+  }
+  let _ = namer.next(
     "post_message",
     [mk_arg("message"), mk_arg("transfer", type_=@parser.Sequence(@parser.Any))],
-    counter,
-    used,
   )
-  let name2 = next_overload_name(
+  let name2 = namer.next(
     "post_message",
     [mk_arg("message"), mk_arg("options", optional=true)],
-    counter,
-    used,
   )
   inspect(name2, content="post_message_2")
 }

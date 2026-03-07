@@ -279,17 +279,11 @@ fn collect_js_constructors(
   iface : @flattened_idl.FlattenedInterface,
 ) -> Array[String] {
   let entries : Array[String] = []
-  let counter : Map[String, Int] = {}
-  let used_names = @hashset.new()
+  let namer = OverloadNamer::new()
   for m in iface.members {
     match m.interface_member {
       Constructor(ctor) => {
-        let import_name = next_overload_name(
-          "new",
-          ctor.arguments,
-          counter,
-          used_names,
-        )
+        let import_name = namer.next("new", ctor.arguments)
         entries.push(
           emit_js_constructor(import_name, iface.name, ctor.arguments),
         )
@@ -339,17 +333,11 @@ fn collect_js_operations(
   iface : @flattened_idl.FlattenedInterface,
 ) -> Array[String] {
   let entries : Array[String] = []
-  let counter : Map[String, Int] = {}
-  let used_names = @hashset.new()
+  let namer = OverloadNamer::new()
   for m in iface.members {
     match m.interface_member {
       RegularOperation(op) => {
-        let import_name = next_overload_name(
-          op.name,
-          op.arguments,
-          counter,
-          used_names,
-        )
+        let import_name = namer.next(op.name, op.arguments)
         entries.push(
           emit_js_method(
             import_name,
@@ -363,12 +351,7 @@ fn collect_js_operations(
       }
       SpecialOperation(op) if op.name is Some(_) => {
         let name = op.name.unwrap()
-        let import_name = next_overload_name(
-          name,
-          op.arguments,
-          counter,
-          used_names,
-        )
+        let import_name = namer.next(name, op.arguments)
         entries.push(
           emit_js_method(
             import_name,
@@ -381,12 +364,7 @@ fn collect_js_operations(
       }
       SpecialOperation(op) => {
         let base_name = op.special.base_name()
-        let import_name = next_overload_name(
-          base_name,
-          op.arguments,
-          counter,
-          used_names,
-        )
+        let import_name = namer.next(base_name, op.arguments)
         entries.push(emit_js_special_operation(import_name, op))
       }
       _ => continue
@@ -466,17 +444,11 @@ fn emit_js_namespace_module(
 ) -> String {
   let module_name = @type_mapping.pascal_case(ns.name)
   let entries : Array[String] = []
-  let method_counter : Map[String, Int] = {}
-  let used_method_names = @hashset.new()
+  let namer = OverloadNamer::new()
   for m in ns.members {
     match m.namespace_member {
       Operation(op) => {
-        let import_name = next_overload_name(
-          op.name,
-          op.arguments,
-          method_counter,
-          used_method_names,
-        )
+        let import_name = namer.next(op.name, op.arguments)
         entries.push(
           emit_js_method(
             import_name,

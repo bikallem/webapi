@@ -414,19 +414,12 @@ pub impl Emitter for InterfaceEmitter with emit(
     emits.push(Emit::ImplTrait(interface.name, TraitName("T" + ancestor)))
   }
   let interface_methods : Array[&InterfaceMethodEmit] = []
-  let constructor_counter : Map[String, Int] = {}
-  let used_constructor_names = @hashset.new()
-  let method_counter : Map[String, Int] = {}
-  let used_method_names = @hashset.new()
+  let constructor_namer = OverloadNamer::new()
+  let method_namer = OverloadNamer::new()
   loop interface.members.map(mem => mem.interface_member)[:] {
     [] => break
     [Constructor(ctor), .. rest] => {
-      let method_name = next_overload_name(
-        "new",
-        ctor.arguments,
-        constructor_counter,
-        used_constructor_names,
-      )
+      let method_name = constructor_namer.next("new", ctor.arguments)
       let ctor_emits = emit_constructor(
         ctor,
         interface.name,
@@ -439,12 +432,7 @@ pub impl Emitter for InterfaceEmitter with emit(
     [RegularOperation(op), .. rest] if op.name.contains("-") => continue rest
     [Attribute(attr), .. rest] if attr.name.contains("-") => continue rest
     [RegularOperation(op), .. rest] => {
-      let orig_method_name = next_overload_name(
-        op.name,
-        op.arguments,
-        method_counter,
-        used_method_names,
-      )
+      let orig_method_name = method_namer.next(op.name, op.arguments)
       let (op_emits, meth) = emit_regular_operation(
         op,
         interface.name,
@@ -480,12 +468,7 @@ pub impl Emitter for InterfaceEmitter with emit(
     // Named special operations → treat as regular methods
     [SpecialOperation(op), .. rest] if op.name is Some(_) => {
       let name = op.name.unwrap()
-      let orig_method_name = next_overload_name(
-        name,
-        op.arguments,
-        method_counter,
-        used_method_names,
-      )
+      let orig_method_name = method_namer.next(name, op.arguments)
       let regular_op : @parser.RegularOperationMember = {
         name,
         return_type: op.return_type,
@@ -505,12 +488,7 @@ pub impl Emitter for InterfaceEmitter with emit(
     // Unnamed special operations → bracket notation with synthetic names
     [SpecialOperation(op), .. rest] => {
       let base_name = op.special.base_name()
-      let orig_method_name = next_overload_name(
-        base_name,
-        op.arguments,
-        method_counter,
-        used_method_names,
-      )
+      let orig_method_name = method_namer.next(base_name, op.arguments)
       let (op_emits, meth) = emit_unnamed_special_operation(
         op,
         interface.name,
