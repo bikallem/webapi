@@ -136,28 +136,30 @@ fn arg_mbt_type(
 //============================ Shared render helpers ===========================
 
 ///|
-fn render_is_undefined(type_name : String) -> (String, String, String) {
+fn render_is_undefined(type_name : String) -> MultiTargetCode {
   let ffi_name = "\{@type_mapping.snake_case(type_name)}_is_undefined_ffi"
-  let shared = "pub fn \{type_name}::is_undefined(self : \{type_name}) -> Bool { \{ffi_name}(self) }"
-  let js = "extern \"js\" fn \{ffi_name}(obj : \{type_name}) -> Bool = \"(obj) => obj === undefined\""
-  let wasm = "fn \{ffi_name}(obj : \{type_name}) -> Bool = \"JsValue\" \"isUndefined\""
-  (shared, js, wasm)
+  {
+    shared: "pub fn \{type_name}::is_undefined(self : \{type_name}) -> Bool { \{ffi_name}(self) }",
+    js_ffi: "extern \"js\" fn \{ffi_name}(obj : \{type_name}) -> Bool = \"(obj) => obj === undefined\"",
+    wasm_ffi: "fn \{ffi_name}(obj : \{type_name}) -> Bool = \"JsValue\" \"isUndefined\"",
+  }
 }
 
 ///|
-fn render_empty(type_name : String) -> (String, String, String) {
+fn render_empty(type_name : String) -> MultiTargetCode {
   let ffi_name = "\{@type_mapping.snake_case(type_name)}_empty_ffi"
-  let shared = "pub fn \{type_name}::empty() -> \{type_name} { \{ffi_name}() }"
-  let js = "extern \"js\" fn \{ffi_name}() -> \{type_name} = \"() => {}\""
-  let wasm = "fn \{ffi_name}() -> \{type_name} = \"webapi_Dictionary\" \"empty\""
-  (shared, js, wasm)
+  {
+    shared: "pub fn \{type_name}::empty() -> \{type_name} { \{ffi_name}() }",
+    js_ffi: "extern \"js\" fn \{ffi_name}() -> \{type_name} = \"() => {}\"",
+    wasm_ffi: "fn \{ffi_name}() -> \{type_name} = \"webapi_Dictionary\" \"empty\"",
+  }
 }
 
 ///|
 fn render_dictionary_create(
   type_name : String,
   args : Array[@type_mapping.MethodArg],
-) -> (String, String, String) {
+) -> MultiTargetCode {
   let ffi_name = "\{@type_mapping.snake_case(type_name)}_ffi"
   let ffi_args = args
     .map(arg => "\{@type_mapping.safe_identifier(arg.name)}: JsValue")
@@ -181,17 +183,19 @@ fn render_dictionary_create(
     )
   }
   js_buf..write_string("#|  return obj;\n").write_string("#|}")
-  let js = js_buf.to_string()
   // Wasm FFI
-  let wasm = "fn \{ffi_name}(\{ffi_args}) -> \{type_name} = \"webapi_\{type_name}\" \"new\""
-  (shared, js, wasm)
+  {
+    shared,
+    js_ffi: js_buf.to_string(),
+    wasm_ffi: "fn \{ffi_name}(\{ffi_args}) -> \{type_name} = \"webapi_\{type_name}\" \"new\"",
+  }
 }
 
 ///|
 fn render_dictionary_getter(
   type_name : String,
   args : Array[DictionaryGetterArg],
-) -> (String, String, String) {
+) -> MultiTargetCode {
   let shared_buf = StringBuilder::new()
   let js_buf = StringBuilder::new()
   let wasm_buf = StringBuilder::new()
@@ -251,7 +255,11 @@ fn render_dictionary_getter(
     )
     wasm_buf.write_string(wasm_code.0)
   }
-  (shared_buf.to_string(), js_buf.to_string(), wasm_buf.to_string())
+  {
+    shared: shared_buf.to_string(),
+    js_ffi: js_buf.to_string(),
+    wasm_ffi: wasm_buf.to_string(),
+  }
 }
 
 ///|
@@ -259,22 +267,20 @@ fn render_constructor(
   constructor_name : String,
   type_name : String,
   args : Array[@type_mapping.MethodArg],
-) -> (String, String, String) {
+) -> MultiTargetCode {
   let ffi_name = "\{@type_mapping.snake_case(type_name)}_\{@type_mapping.snake_case(constructor_name)}_ffi"
   let ffi_args = args
     .map(arg => "\{@type_mapping.safe_identifier(arg.name)}: JsValue")
     .join(", ")
-  // Shared wrapper
   let method_args = trait_method_impl_args(args)
   let call_args = func_call_args(args)
-  let shared = "pub fn \{type_name}::\{constructor_name}(\{method_args}) -> \{type_name} {\n  \{ffi_name}(\{call_args})\n}"
-  // JS FFI
   let ffi_js_args = args.map(arg => arg.name).join(", ")
-  let js = "extern \"js\" fn \{ffi_name}(\{ffi_args}) -> \{type_name} = \"(\{ffi_js_args}) => new \{type_name}(\{ffi_js_args})\""
-  // Wasm FFI
   let module_name = "webapi_\{type_name}"
-  let wasm = "fn \{ffi_name}(\{ffi_args}) -> \{type_name} = \"\{module_name}\" \"\{constructor_name}\""
-  (shared, js, wasm)
+  {
+    shared: "pub fn \{type_name}::\{constructor_name}(\{method_args}) -> \{type_name} {\n  \{ffi_name}(\{call_args})\n}",
+    js_ffi: "extern \"js\" fn \{ffi_name}(\{ffi_args}) -> \{type_name} = \"(\{ffi_js_args}) => new \{type_name}(\{ffi_js_args})\"",
+    wasm_ffi: "fn \{ffi_name}(\{ffi_args}) -> \{type_name} = \"\{module_name}\" \"\{constructor_name}\"",
+  }
 }
 
 ///|
@@ -283,17 +289,15 @@ fn render_callback(
   name : String,
   args : Array[CallbackArgEmit],
   return_type : String,
-) -> (String, String, String) {
+) -> MultiTargetCode {
   let arg_types = args.map(fn(a) { a.mbt_type }).join(", ")
   let closure_type = "(\{arg_types}) -> \{return_type}"
   let ffi_name = "\{@type_mapping.snake_case(name)}_ffi"
-  // Shared wrapper
-  let shared = "pub fn \{name}::new(callback : \{closure_type}) -> \{name} { \{ffi_name}(callback) }"
-  // JS FFI
-  let js = "extern \"js\" fn \{ffi_name}(callback : \{closure_type}) -> \{name} = \"(callback) => callback\""
-  // Wasm FFI
-  let wasm = render_callback_wasm_ffi(name, args, return_type)
-  (shared, js, wasm)
+  {
+    shared: "pub fn \{name}::new(callback : \{closure_type}) -> \{name} { \{ffi_name}(callback) }",
+    js_ffi: "extern \"js\" fn \{ffi_name}(callback : \{closure_type}) -> \{name} = \"(callback) => callback\"",
+    wasm_ffi: render_callback_wasm_ffi(name, args, return_type),
+  }
 }
 
 ///|
@@ -375,22 +379,21 @@ fn render_callback_wasm_ffi(
 }
 
 ///|
-fn render_namespace_definition(
-  ns_def : NamespaceDef,
-) -> (String, String, String) {
-  let shared = ns_def.methods.map(meth => meth.impl_emit().0).join("\n\n")
-  let js = ns_def.methods.map(meth => meth.ffi_emit_js().0).join("\n\n")
+fn render_namespace_definition(ns_def : NamespaceDef) -> MultiTargetCode {
   let module_name = "webapi_\{ns_def.name}"
-  let wasm = ns_def.methods
-    .map(meth => meth.ffi_emit_wasm(module_name).0)
-    .join("\n\n")
-  (shared, js, wasm)
+  {
+    shared: ns_def.methods.map(meth => meth.impl_emit().0).join("\n\n"),
+    js_ffi: ns_def.methods.map(meth => meth.ffi_emit_js().0).join("\n\n"),
+    wasm_ffi: ns_def.methods
+      .map(meth => meth.ffi_emit_wasm(module_name).0)
+      .join("\n\n"),
+  }
 }
 
 ///|
 fn render_interface_definition(
   interface_def : InterfaceDef,
-) -> (String, String, String) {
+) -> MultiTargetCode {
   // Shared: trait definition + default impls
   let buf = StringBuilder::new()
   let mdn_url = mdn_interface_url(interface_def.trait_name)
@@ -443,7 +446,16 @@ fn render_interface_definition(
   let wasm = interface_def.methods
     .map(meth => meth.ffi_emit_wasm(module_name).0)
     .join("\n\n")
-  (shared, js, wasm)
+  let module_name = "webapi_\{interface_def.trait_name}"
+  {
+    shared,
+    js_ffi: interface_def.methods
+      .map(meth => meth.ffi_emit_js().0)
+      .join("\n\n"),
+    wasm_ffi: interface_def.methods
+      .map(meth => meth.ffi_emit_wasm(module_name).0)
+      .join("\n\n"),
+  }
 }
 
 ///|
@@ -669,20 +681,22 @@ pub fn mbt_code_gen_multi(emits : Array[Emit]) -> MultiTargetCode {
     shared_first = false
   }
 
-  fn append_js(s : String) {
-    if !js_first {
-      js_buf.write_string("\n\n")
+  fn append_multi(code : MultiTargetCode) {
+    append_shared(code.shared)
+    if code.js_ffi.length() > 0 {
+      if !js_first {
+        js_buf.write_string("\n\n")
+      }
+      js_buf.write_string(code.js_ffi)
+      js_first = false
     }
-    js_buf.write_string(s)
-    js_first = false
-  }
-
-  fn append_wasm(s : String) {
-    if !wasm_first {
-      wasm_buf.write_string("\n\n")
+    if code.wasm_ffi.length() > 0 {
+      if !wasm_first {
+        wasm_buf.write_string("\n\n")
+      }
+      wasm_buf.write_string(code.wasm_ffi)
+      wasm_first = false
     }
-    wasm_buf.write_string(s)
-    wasm_first = false
   }
 
   for emit in emits {
@@ -720,10 +734,6 @@ pub fn mbt_code_gen_multi(emits : Array[Emit]) -> MultiTargetCode {
       Emit::UnionArgTrait(TraitName(trait_name)) =>
         append_shared("pub(open) trait \{trait_name} : TJsValue {}")
       Emit::UnionArgTraitImpl(TypeName(mbt_type), TraitName(trait_name)) => {
-        // Trait-object types (&TSomeTrait) don't automatically satisfy TJsValue
-        // even when the trait inherits from TJsValue. Extract the &T reference
-        // and provide an explicit TJsValue impl so compound types like
-        // Array[&TSomeTrait] can satisfy TJsValue via the blanket impl.
         match extract_trait_ref(mbt_type) {
           Some(trait_ref) =>
             append_shared(
@@ -741,60 +751,26 @@ pub fn mbt_code_gen_multi(emits : Array[Emit]) -> MultiTargetCode {
         append_shared("pub const \{const_name}: \{type_name} = \{value}")
       Emit::FileHeader(TypeName(type_name), Specs(specs)) =>
         append_shared(render_file_header(type_name, specs))
-      Emit::IsUndefinedMethod(TypeName(type_name)) => {
-        let (shared, js, wasm) = render_is_undefined(type_name)
-        append_shared(shared)
-        append_js(js)
-        append_wasm(wasm)
-      }
-      Emit::EmptyMethod(TypeName(type_name)) => {
-        let (shared, js, wasm) = render_empty(type_name)
-        append_shared(shared)
-        append_js(js)
-        append_wasm(wasm)
-      }
-      Emit::InterfaceDefinition(interface_def) => {
-        let (shared, js, wasm) = render_interface_definition(interface_def)
-        append_shared(shared)
-        append_js(js)
-        append_wasm(wasm)
-      }
-      Emit::NamespaceDefinition(ns_def) => {
-        let (shared, js, wasm) = render_namespace_definition(ns_def)
-        append_shared(shared)
-        append_js(js)
-        append_wasm(wasm)
-      }
-      Emit::DictionaryCreate(TypeName(type_name), args) => {
-        let (shared, js, wasm) = render_dictionary_create(type_name, args)
-        append_shared(shared)
-        append_js(js)
-        append_wasm(wasm)
-      }
-      Emit::DictionaryGetter(TypeName(type_name), args) => {
-        let (shared, js, wasm) = render_dictionary_getter(type_name, args)
-        append_shared(shared)
-        append_js(js)
-        append_wasm(wasm)
-      }
+      Emit::IsUndefinedMethod(TypeName(type_name)) =>
+        append_multi(render_is_undefined(type_name))
+      Emit::EmptyMethod(TypeName(type_name)) =>
+        append_multi(render_empty(type_name))
+      Emit::InterfaceDefinition(interface_def) =>
+        append_multi(render_interface_definition(interface_def))
+      Emit::NamespaceDefinition(ns_def) =>
+        append_multi(render_namespace_definition(ns_def))
+      Emit::DictionaryCreate(TypeName(type_name), args) =>
+        append_multi(render_dictionary_create(type_name, args))
+      Emit::DictionaryGetter(TypeName(type_name), args) =>
+        append_multi(render_dictionary_getter(type_name, args))
       Emit::ConstructorMethod(
         ConstructorName(constructor_name),
         TypeName(type_name),
         args
-      ) => {
-        let (shared, js, wasm) = render_constructor(
-          constructor_name, type_name, args,
-        )
-        append_shared(shared)
-        append_js(js)
-        append_wasm(wasm)
-      }
-      Emit::Callback(TypeName(name), args, TypeName(return_type)) => {
-        let (shared, js, wasm) = render_callback(name, args, return_type)
-        append_shared(shared)
-        append_js(js)
-        append_wasm(wasm)
-      }
+      ) =>
+        append_multi(render_constructor(constructor_name, type_name, args))
+      Emit::Callback(TypeName(name), args, TypeName(return_type)) =>
+        append_multi(render_callback(name, args, return_type))
     }
   }
   MultiTargetCode::{
