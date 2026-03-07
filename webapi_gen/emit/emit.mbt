@@ -21,12 +21,10 @@ struct Specs(@hashset.HashSet[String]) derive(Show, ToJson)
 
 ///|
 fn specs_from_optional(spec : String?) -> Specs {
-  let specs = @hashset.HashSet::new()
-  match spec {
-    Some(s) => specs.add(s)
-    None => ()
-  }
-  Specs(specs)
+  Specs(match spec {
+    Some(s) => @hashset.HashSet::from_array([s])
+    None => @hashset.HashSet::new()
+  })
 }
 
 ///|

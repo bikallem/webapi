@@ -1,11 +1,9 @@
 ///|
 fn hashset_from_optional(spec : String?) -> @hashset.HashSet[String] {
-  let specs = @hashset.HashSet::new()
   match spec {
-    Some(s) => specs.add(s)
-    None => ()
+    Some(s) => @hashset.HashSet::from_array([s])
+    None => @hashset.HashSet::new()
   }
-  specs
 }
 
 ///|
