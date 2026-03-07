@@ -90,12 +90,12 @@ fn PartialMerged::merge_namespace(
   specs : @hashset.HashSet[String],
 ) -> Unit {
   match self.namespaces.get(name) {
-    Some(current) => {
-      current.members.push_iter(members.iter())
-      for s in specs {
-        current.specs.add(s)
+    Some(current) =>
+      self.namespaces[name] = PartialMergedNamespace::{
+        name,
+        members: current.members + members,
+        specs: current.specs.union(specs),
       }
-    }
     None =>
       self.namespaces[name] = PartialMergedNamespace::{ name, members, specs }
   }

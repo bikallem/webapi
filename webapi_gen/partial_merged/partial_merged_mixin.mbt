@@ -21,9 +21,9 @@ fn PartialMergedMixin::merge(
   members : Array[@parser.InterfaceMemberExtendedAttributes],
   spec : String?,
 ) -> PartialMergedMixin {
-  match spec {
-    Some(s) => self.specs.add(s)
-    None => ()
+  let specs = match spec {
+    Some(s) => self.specs.union(@hashset.HashSet::from_array([s]))
+    None => self.specs
   }
-  { ..self, members: self.members + members }
+  { ..self, members: self.members + members, specs }
 }

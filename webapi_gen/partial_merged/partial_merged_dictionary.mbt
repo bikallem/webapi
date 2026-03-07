@@ -28,11 +28,11 @@ fn PartialMergedDictionary::merge(
     None => self.inheritance
     Some(_) => inheritance
   }
-  match spec {
-    Some(s) => self.specs.add(s)
-    None => ()
+  let specs = match spec {
+    Some(s) => self.specs.union(@hashset.HashSet::from_array([s]))
+    None => self.specs
   }
-  { ..self, members: self.members + members, inheritance }
+  { ..self, members: self.members + members, inheritance, specs }
 }
 
 ///|
