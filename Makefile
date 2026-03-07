@@ -31,6 +31,10 @@ fmt:
 	moon -C webapi_trim fmt
 	moon -C examples fmt
 
+test:
+	cd webapi_gen && moon test
+	cd webapi_trim && moon test	
+
 # Update .mbti interface files
 info:
 	moon -C webapi info --target js
