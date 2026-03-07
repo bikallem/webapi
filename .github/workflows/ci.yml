@@ -22,6 +22,7 @@ jobs:
           rm -rf "$HOME/.moon"
           curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
           echo "$HOME/.moon/bin" >> $GITHUB_PATH
+          moon version --all
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
