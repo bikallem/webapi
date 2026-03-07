@@ -10,15 +10,14 @@ pub impl Emitter for EnumEmitter with emit(self : EnumEmitter, name : String) ->
 ) {
   let filename = Filename("\{@type_mapping.snake_case(name)}_enum.mbt")
   let enum_ = self.idl.enums[name]
-  let variants = []
-  for original_value in enum_.values {
+  let variants = enum_.values.map(fn(original_value) {
     let variant_name = if original_value.is_empty() {
       "Empty"
     } else {
       enum_variant(original_value)
     }
-    variants.push(EnumVariantEmit::{ variant_name, original_value })
-  }
+    EnumVariantEmit::{ variant_name, original_value }
+  })
   (
     filename,
     [
