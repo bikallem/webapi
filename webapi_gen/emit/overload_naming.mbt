@@ -1,6 +1,6 @@
 ///|
 /// Tracks method name deduplication for overloaded methods.
-struct OverloadNamer {
+priv struct OverloadNamer {
   counter : Map[String, Int]
   used_names : @hashset.HashSet[String]
 }

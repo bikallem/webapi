@@ -439,13 +439,6 @@ fn render_interface_definition(
     buf.write_string(convenience_impls)
   }
   let shared = buf.to_string()
-  // JS FFI
-  let js = interface_def.methods.map(meth => meth.ffi_emit_js().0).join("\n\n")
-  // Wasm FFI
-  let module_name = "webapi_\{interface_def.trait_name}"
-  let wasm = interface_def.methods
-    .map(meth => meth.ffi_emit_wasm(module_name).0)
-    .join("\n\n")
   let module_name = "webapi_\{interface_def.trait_name}"
   {
     shared,
@@ -554,10 +547,14 @@ fn render_enum(name : String, variants : Array[EnumVariantEmit]) -> String {
 fn extract_trait_ref(type_name : String) -> String? {
   // Find "&T" in the string (e.g., "&TFoo" or "Array[&TFoo]")
   let chars = type_name.to_array()
-  let start = chars.iter2().find_first(fn(i, _) {
-    i + 1 < chars.length() && chars[i] == '&' && chars[i + 1] == 'T'
-  })
-  guard start is Some((start_idx, _)) else { return None }
+  let mut start_idx = -1
+  for i, c in chars {
+    if c == '&' && i + 1 < chars.length() && chars[i + 1] == 'T' {
+      start_idx = i
+      break
+    }
+  }
+  guard start_idx >= 0 else { return None }
   // Scan alphanumeric/underscore chars after "&T"
   let mut end = start_idx + 2
   while end < chars.length() && (chars[end].is_ascii_alphabetic() || chars[end].is_ascii_digit() || chars[end] == '_') {
