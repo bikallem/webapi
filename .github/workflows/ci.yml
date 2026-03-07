@@ -19,6 +19,7 @@ jobs:
 
       - name: Set up MoonBit
         run: |
+          rm -rf "$HOME/.moon"
           curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
           echo "$HOME/.moon/bin" >> $GITHUB_PATH
 
@@ -35,6 +36,10 @@ jobs:
         working-directory: webapi_gen
         run: npm ci
 
+      - name: Get MoonBit version
+        id: moonbit-version
+        run: echo "version=$(moon version | head -1)" >> "$GITHUB_OUTPUT"
+
       - name: Cache MoonBit packages
         uses: actions/cache@v4
         with:
@@ -43,7 +48,7 @@ jobs:
             webapi_gen/.mooncakes
             webapi_trim/.mooncakes
             examples/.mooncakes
-          key: mooncakes-${{ runner.os }}-${{ hashFiles('webapi/moon.mod.json', 'webapi_gen/moon.mod.json', 'webapi_trim/moon.mod.json', 'examples/moon.mod.json') }}
+          key: mooncakes-${{ runner.os }}-${{ steps.moonbit-version.outputs.version }}-${{ hashFiles('webapi/moon.mod.json', 'webapi_gen/moon.mod.json', 'webapi_trim/moon.mod.json', 'examples/moon.mod.json') }}
 
       - name: Install MoonBit dependencies
         run: |
