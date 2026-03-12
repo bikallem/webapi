@@ -3,6 +3,45 @@
 let default_config_file : String = "config.toml"
 
 ///|
+#cfg(any(target="native", target="llvm"))
+extern "c" fn runtime_native_exit(code : Int) = "exit"
+
+///|
+#cfg(any(target="native", target="llvm"))
+fn exit_failure() -> Unit {
+  runtime_native_exit(1)
+}
+
+///|
+#cfg(target="js")
+extern "js" fn runtime_js_try_exit(code : Int) -> Bool =
+  #| function(code) {
+  #|   if (typeof process !== "undefined" && typeof process.exit === "function") {
+  #|     process.exit(code);
+  #|     return true;
+  #|   }
+  #|   return false;
+  #| }
+
+///|
+#cfg(target="js")
+fn exit_failure() -> Unit {
+  if !runtime_js_try_exit(1) {
+    panic()
+  }
+}
+
+///|
+#cfg(any(target="wasm", target="wasm-gc"))
+fn runtime_wasm_exit(code : Int) -> Unit = "__moonbit_sys_unstable" "exit"
+
+///|
+#cfg(any(target="wasm", target="wasm-gc"))
+fn exit_failure() -> Unit {
+  runtime_wasm_exit(1)
+}
+
+///|
 /// Check if a filename matches one of the core specs
 fn is_core_spec(
   filename : String,
@@ -329,6 +368,9 @@ fn main {
     )
     println("Output directory: \{output_dir}")
   } catch {
-    e => println("Error: \{e}")
+    e => {
+      println("Error: \{e}")
+      exit_failure()
+    }
   }
 }
