@@ -162,3 +162,85 @@ test "emit_wasm_ffi_with_return uses string array bridge for Array[String]" {
     ),
   )
 }
+
+///|
+test "AttributeGetMethodEmit uses to_option_prim for optional string returns" {
+  let Code(rendered) = AttributeGetMethodEmit::{
+    interface_name: "Storage",
+    original_name: "key",
+    return_type: "String?",
+    is_enum_type: false,
+    is_valid_wasm_stub: false,
+  }.impl_emit()
+  inspect(
+    rendered,
+    content=(
+      #|/// [Storage.key](https://developer.mozilla.org/en-US/docs/Web/API/Storage/key)
+      #|impl TStorage with key(self : Self) -> String? {
+      #|  storage_key_ffi(TJsValue::to_js(self)).to_option_prim()
+      #|}
+    ),
+  )
+}
+
+///|
+test "AttributeGetMethodEmit keeps optional interface returns on to_option" {
+  let Code(rendered) = AttributeGetMethodEmit::{
+    interface_name: "Window",
+    original_name: "opener",
+    return_type: "Window?",
+    is_enum_type: false,
+    is_valid_wasm_stub: false,
+  }.impl_emit()
+  inspect(
+    rendered,
+    content=(
+      #|/// [Window.opener](https://developer.mozilla.org/en-US/docs/Web/API/Window/opener)
+      #|impl TWindow with opener(self : Self) -> Window? {
+      #|  window_opener_ffi(TJsValue::to_js(self)).to_option()
+      #|}
+    ),
+  )
+}
+
+///|
+test "StaticAttributeGetMethodEmit uses to_option_prim for optional string returns" {
+  let Code(rendered) = StaticAttributeGetMethodEmit::{
+    interface_name: "Navigator",
+    js_name: "navigator",
+    original_name: "vendor",
+    return_type: "String?",
+    is_enum_type: false,
+    is_valid_wasm_stub: false,
+  }.impl_emit()
+  inspect(
+    rendered,
+    content=(
+      #|/// [Navigator.vendor](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/vendor)
+      #|pub fn Navigator::vendor() -> String? {
+      #|  navigator_vendor_ffi().to_option_prim()
+      #|}
+    ),
+  )
+}
+
+///|
+test "StaticAttributeGetMethodEmit keeps optional interface returns on to_option" {
+  let Code(rendered) = StaticAttributeGetMethodEmit::{
+    interface_name: "NavigationCurrentEntryChangeEvent",
+    js_name: "navigationCurrentEntryChangeEvent",
+    original_name: "navigationType",
+    return_type: "NavigationDestination?",
+    is_enum_type: false,
+    is_valid_wasm_stub: false,
+  }.impl_emit()
+  inspect(
+    rendered,
+    content=(
+      #|/// [NavigationCurrentEntryChangeEvent.navigationType](https://developer.mozilla.org/en-US/docs/Web/API/NavigationCurrentEntryChangeEvent/navigationType)
+      #|pub fn NavigationCurrentEntryChangeEvent::navigation_type() -> NavigationDestination? {
+      #|  navigation_current_entry_change_event_navigation_type_ffi().to_option()
+      #|}
+    ),
+  )
+}

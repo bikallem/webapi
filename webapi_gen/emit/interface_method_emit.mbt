@@ -324,8 +324,8 @@ impl InterfaceMethodEmit for AttributeGetMethodEmit with impl_emit(
     "impl T\{trait_name} with \{method_name}(self : Self) -> \{ret_type_str} {\n",
   )
   if ret_type_str.has_suffix("?") {
-    // Optional: FFI returns JsValue, use unsafe_cast to convert to Option type
-    code.write_string("  \{ffi_name}(TJsValue::to_js(self)).unsafe_cast()\n")
+    let helper = optional_return_helper(ret_type_str)
+    code.write_string("  \{ffi_name}(TJsValue::to_js(self)).\{helper}()\n")
   } else {
     // Non-optional: FFI wrapper returns the correct type directly
     code.write_string("  \{ffi_name}(TJsValue::to_js(self))\n")
@@ -489,7 +489,8 @@ impl InterfaceMethodEmit for StaticAttributeGetMethodEmit with impl_emit(
     "pub fn \{trait_name}::\{method_name}() -> \{ret_type_str} {\n",
   )
   if ret_type_str.has_suffix("?") {
-    code.write_string("  \{ffi_name}().unsafe_cast()\n")
+    let helper = optional_return_helper(ret_type_str)
+    code.write_string("  \{ffi_name}().\{helper}()\n")
   } else {
     code.write_string("  \{ffi_name}()\n")
   }
