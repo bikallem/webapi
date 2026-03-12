@@ -3,6 +3,74 @@
 let default_config_file : String = "config.toml"
 
 ///|
+priv struct GenerationSummary {
+  config_file : String
+  idl_dir : String
+  templates_dir : String
+  output_dir : String
+  idl_file_count : Int
+  definition_count : Int
+  template_file_count : Int
+  enum_count : Int
+  typedef_count : Int
+  dictionary_count : Int
+  interface_count : Int
+  callback_count : Int
+  namespace_count : Int
+  runtime_file_count : Int
+  metadata_file_count : Int
+  skipped_count : Int
+  skipped_log_written : Bool
+  stale_file_count : Int
+  warnings : Array[String]
+}
+
+///|
+fn format_generation_summary(summary : GenerationSummary) -> String {
+  let generated_file_count = summary.enum_count +
+    summary.typedef_count +
+    summary.dictionary_count +
+    summary.interface_count +
+    summary.callback_count +
+    summary.namespace_count
+  let support_file_count = summary.runtime_file_count +
+    summary.metadata_file_count +
+    (if summary.skipped_log_written { 1 } else { 0 })
+  let total_file_count = summary.template_file_count +
+    generated_file_count +
+    support_file_count
+  let lines : Array[String] = [
+    "=== MoonBit WebAPI Bindings Generator Summary ===",
+    "Config: \{summary.config_file}",
+    "Inputs: \{summary.idl_file_count} IDL files from \{summary.idl_dir}",
+    "Filtered definitions: \{summary.definition_count}",
+    "Templates: \{summary.template_file_count} files from \{summary.templates_dir}",
+    "Generated types: \{summary.enum_count} enums, \{summary.typedef_count} typedefs, \{summary.dictionary_count} dictionaries, \{summary.interface_count} interfaces, \{summary.callback_count} callbacks, \{summary.namespace_count} namespaces",
+    "Output: \{total_file_count} files written to \{summary.output_dir} (\{generated_file_count} generated, \{summary.template_file_count} templates, \{support_file_count} support)",
+  ]
+  if summary.stale_file_count > 0 {
+    lines.push(
+      "Cleanup: removed \{summary.stale_file_count} stale generated files",
+    )
+  }
+  if summary.skipped_count > 0 {
+    let skipped_detail = if summary.skipped_log_written {
+      "details written to \{summary.output_dir}/skipped.log"
+    } else {
+      "details retained in memory only"
+    }
+    lines.push("Skipped items: \{summary.skipped_count} (\{skipped_detail})")
+  }
+  if summary.warnings.length() > 0 {
+    lines.push("Warnings:")
+    for warning in summary.warnings {
+      lines.push("  - \{warning}")
+    }
+  }
+  lines.join("\n")
+}
+
+///|
 #cfg(any(target="native", target="llvm"))
 extern "c" fn runtime_native_exit(code : Int) = "exit"
 
@@ -70,7 +138,6 @@ fn write_output_file(
   expected_files : @hashset.HashSet[String],
 ) -> Unit raise {
   let filepath = "\{output_dir}/\{filename}"
-  println("  Writing \{filepath}...")
   @fs.write_string_to_file(filepath, content) catch {
     e => fail("failed to write \{filepath}: \{e}")
   }
@@ -93,8 +160,7 @@ fn is_generated_output_file(filename : String) -> Bool {
 fn reconcile_output_dir(
   output_dir : String,
   expected_files : @hashset.HashSet[String],
-) -> Unit raise {
-  println("=== Reconciling Output Directory ===")
+) -> Int raise {
   let output_files = @fs.read_dir(output_dir) catch {
     e => fail("failed to read output directory \{output_dir}: \{e}")
   }
@@ -102,18 +168,20 @@ fn reconcile_output_dir(
     is_generated_output_file(filename) && !expected_files.contains(filename)
   })
   stale_files.sort()
+  let mut removed_count = 0
   for filename in stale_files {
     let filepath = "\{output_dir}/\{filename}"
     let is_file = @fs.is_file(filepath) catch {
       e => fail("failed to stat \{filepath}: \{e}")
     }
     if is_file {
-      println("  Removing stale \{filepath}...")
       @fs.remove_file(filepath) catch {
         e => fail("failed to remove stale output file \{filepath}: \{e}")
       }
+      removed_count = removed_count + 1
     }
   }
+  removed_count
 }
 
 ///|
@@ -137,8 +205,7 @@ fn copy_templates(
   templates_dir : String,
   output_dir : String,
   expected_files : @hashset.HashSet[String],
-) -> Unit raise {
-  println("=== Copying Template Files ===")
+) -> Int raise {
   let template_files = @fs.read_dir(templates_dir) catch {
     e => fail("failed to read templates directory \{templates_dir}: \{e}")
   }
@@ -148,7 +215,6 @@ fn copy_templates(
       continue
     }
     let src_path = "\{templates_dir}/\{filename}"
-    println("  Copying \{filename}...")
     let content = @fs.read_file_to_string(src_path) catch {
       e => fail("failed to read template \{src_path}: \{e}")
     }
@@ -171,6 +237,7 @@ fn copy_templates(
     let merged = @emit.merge_multi_target_code(merged_templates[filename])
     write_output_file(output_dir, filename, merged, expected_files)
   }
+  output_filenames.length()
 }
 
 ///|
@@ -178,7 +245,6 @@ fn copy_templates(
 /// Returns the count of types processed.
 fn[E : @emit.Emitter] emit_and_write_multi(
   output_dir : String,
-  type_name : String,
   emitter : E,
   keys : Iter[String],
   expected_files : @hashset.HashSet[String],
@@ -189,7 +255,6 @@ fn[E : @emit.Emitter] emit_and_write_multi(
     names
   }
 
-  println("=== Generating \{type_name} ===")
   let files = @emit.emit_all_multi(emitter, sorted_keys(keys).iter())
   let count = files.length()
   let filenames = files
@@ -263,8 +328,6 @@ fn main {
   } else {
     default_config_file
   }
-  println("=== MoonBit WebAPI Bindings Generator ===\n")
-  println("Config file: \{config_file}")
   try {
     // Read config
     let content = @fs.read_file_to_string(config_file) catch {
@@ -274,12 +337,10 @@ fn main {
     let idl_dir = config.idl_dir
     let output_dir = config.output_dir
     let templates_dir = config.templates_dir
-    println("IDL directory: \{idl_dir}")
-    println("Output directory: \{output_dir}")
-    println("Templates directory: \{templates_dir}\n")
 
     // Initialize logger
     let skipped_logs : Array[String] = []
+    let warnings : Array[String] = []
     fn log_skipped(msg : String) {
       skipped_logs.push(msg)
     }
@@ -296,21 +357,15 @@ fn main {
     }
     // Sort paths for deterministic order
     idl_paths.sort()
-    println("Found \{idl_paths.length()} core spec IDL files\n")
 
     // Parse all IDL files and merge definitions
     let all_definitions : Array[@parser.DefinitionExtendedAttributes] = []
     for idl_path in idl_paths {
-      println("  Parsing \{idl_path}...")
       let definitions = @parser.parse_file(idl_path)
       let definitions = filter_idl(config, definitions)
-      println("    Parsed \{definitions.length()} definitions")
       all_definitions.append(definitions)
     }
-    println("Total definitions: \{all_definitions.length()}")
-    println("Creating type registry...")
     let type_registry = @type_registry.TypeRegistry::new(all_definitions)
-    println("Merging partials...")
     let partials_merged = @partial_merged.merge_partials(all_definitions)
     let flattened = @flattened_idl.flatten(
       partials_merged,
@@ -319,7 +374,6 @@ fn main {
     )
     type_registry.set_callback_defs(flattened.callbacks)
     type_registry.set_typedef_defs(flattened.typedefs)
-    println("Flattened \{flattened.interfaces.length()} interfaces")
 
     // Create output directory if it doesn't exist
     if not(@fs.path_exists(output_dir)) {
@@ -330,75 +384,97 @@ fn main {
 
     // Copy base template files
     let expected_files : @hashset.HashSet[String] = @hashset.new()
-    copy_templates(templates_dir, output_dir, expected_files)
+    let template_count = copy_templates(
+      templates_dir, output_dir, expected_files,
+    )
 
     // Write skipped log
-    if skipped_logs.length() > 0 {
-      let content = skipped_logs.join("\n")
-      write_output_file(output_dir, "skipped.log", content, expected_files) catch {
-        e => println("Warning: failed to write skipped.log: \{e}")
+    let skipped_log_written = if skipped_logs.length() > 0 {
+      try {
+        let content = skipped_logs.join("\n")
+        write_output_file(output_dir, "skipped.log", content, expected_files)
+        true
+      } catch {
+        e => {
+          warnings.push("failed to write skipped.log: \{e}")
+          false
+        }
       }
+    } else {
+      false
     }
 
     // Generate and write generated code files (multi-target)
     let enum_count = emit_and_write_multi(
       output_dir,
-      "Enums",
       @emit.EnumEmitter::{ idl: flattened },
       flattened.enums.keys(),
       expected_files,
     )
     let typedef_count = emit_and_write_multi(
       output_dir,
-      "Typedefs",
       @emit.TypedefEmitter::{ idl: flattened, type_registry },
       flattened.typedefs.keys(),
       expected_files,
     )
     let dict_count = emit_and_write_multi(
       output_dir,
-      "Dictionaries",
       @emit.DictionaryEmitter::{ idl: flattened, type_registry },
       flattened.dictionaries.keys(),
       expected_files,
     )
     let iface_count = emit_and_write_multi(
       output_dir,
-      "Interfaces",
       @emit.InterfaceEmitter::{ idl: flattened, type_registry, log_skipped },
       flattened.interfaces.keys(),
       expected_files,
     )
     let callback_count = emit_and_write_multi(
       output_dir,
-      "Callbacks",
       @emit.CallbackEmitter::{ idl: flattened, type_registry },
       flattened.callbacks.keys(),
       expected_files,
     )
     let namespace_count = emit_and_write_multi(
       output_dir,
-      "Namespaces",
       @emit.NamespaceEmitter::{ idl: flattened, type_registry },
       flattened.namespaces.keys(),
       expected_files,
     )
 
     // Generate and write JS runtime for wasm-gc
-    println("=== Generating JS Runtime ===")
     let js_runtime = @emit.emit_js_runtime(flattened)
     write_output_file(output_dir, "webapi.mjs", js_runtime, expected_files)
+    let runtime_file_count = 1
 
     // Generate moon.pkg with conditional compilation targets
-    println("=== Generating moon.pkg ===")
     let moon_pkg_content = generate_moon_pkg()
     write_output_file(output_dir, "moon.pkg", moon_pkg_content, expected_files)
-    reconcile_output_dir(output_dir, expected_files)
-    println("\n=== Generation complete! ===")
+    let metadata_file_count = 1
+    let stale_file_count = reconcile_output_dir(output_dir, expected_files)
     println(
-      "Generated \{enum_count} enums, \{typedef_count} typedefs, \{dict_count} dictionaries, \{iface_count} interfaces, \{callback_count} callbacks, \{namespace_count} namespaces",
+      format_generation_summary(GenerationSummary::{
+        config_file,
+        idl_dir,
+        templates_dir,
+        output_dir,
+        idl_file_count: idl_paths.length(),
+        definition_count: all_definitions.length(),
+        template_file_count: template_count,
+        enum_count,
+        typedef_count,
+        dictionary_count: dict_count,
+        interface_count: iface_count,
+        callback_count,
+        namespace_count,
+        runtime_file_count,
+        metadata_file_count,
+        skipped_count: skipped_logs.length(),
+        skipped_log_written,
+        stale_file_count,
+        warnings,
+      }),
     )
-    println("Output directory: \{output_dir}")
   } catch {
     e => {
       println("Error: \{e}")

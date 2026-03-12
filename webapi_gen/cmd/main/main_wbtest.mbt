@@ -227,6 +227,46 @@ test "filter_idl plus flatten skips dictionaries whose filtered parent is missin
 }
 
 ///|
+test "format_generation_summary renders compact end-of-run report" {
+  inspect(
+    format_generation_summary(GenerationSummary::{
+      config_file: "config.toml",
+      idl_dir: "./idl",
+      templates_dir: "./base.mbt",
+      output_dir: "./webapi",
+      idl_file_count: 3,
+      definition_count: 42,
+      template_file_count: 5,
+      enum_count: 2,
+      typedef_count: 1,
+      dictionary_count: 4,
+      interface_count: 6,
+      callback_count: 1,
+      namespace_count: 2,
+      runtime_file_count: 1,
+      metadata_file_count: 1,
+      skipped_count: 2,
+      skipped_log_written: true,
+      stale_file_count: 3,
+      warnings: ["failed to write optional note"],
+    }),
+    content=(
+      #|=== MoonBit WebAPI Bindings Generator Summary ===
+      #|Config: config.toml
+      #|Inputs: 3 IDL files from ./idl
+      #|Filtered definitions: 42
+      #|Templates: 5 files from ./base.mbt
+      #|Generated types: 2 enums, 1 typedefs, 4 dictionaries, 6 interfaces, 1 callbacks, 2 namespaces
+      #|Output: 24 files written to ./webapi (16 generated, 5 templates, 3 support)
+      #|Cleanup: removed 3 stale generated files
+      #|Skipped items: 2 (details written to ./webapi/skipped.log)
+      #|Warnings:
+      #|  - failed to write optional note
+    ),
+  )
+}
+
+///|
 test "reconcile_output_dir removes stale generated files and keeps unrelated files" {
   let output_dir = "./cmd/main/.wbtest_reconcile_output_dir"
   try clear_test_dir(output_dir) catch {
@@ -253,7 +293,7 @@ test "reconcile_output_dir removes stale generated files and keeps unrelated fil
   ])
 
   try {
-    reconcile_output_dir(output_dir, expected_files)
+    inspect(reconcile_output_dir(output_dir, expected_files), content="3")
     inspect(@fs.path_exists("\{output_dir}/keep_template.mbt"), content="true")
     inspect(@fs.path_exists("\{output_dir}/keep_unified.mbt"), content="true")
     inspect(@fs.path_exists("\{output_dir}/webapi.mjs"), content="true")
