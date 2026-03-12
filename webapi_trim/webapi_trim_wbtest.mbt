@@ -65,14 +65,14 @@ fn make_imports(
 
 ///|
 test "read_leb128: single byte" {
-  let (value, offset) = read_leb128(bytes_of([42]), 0)
+  let (value, offset) = try! read_leb128(bytes_of([42]), 0)
   assert_eq(value, 42)
   assert_eq(offset, 1)
 }
 
 ///|
 test "read_leb128: zero" {
-  let (value, offset) = read_leb128(bytes_of([0]), 0)
+  let (value, offset) = try! read_leb128(bytes_of([0]), 0)
   assert_eq(value, 0)
   assert_eq(offset, 1)
 }
@@ -80,27 +80,27 @@ test "read_leb128: zero" {
 ///|
 test "read_leb128: multi-byte 300" {
   // 300 = 0b100101100 → LEB128: 0xAC 0x02
-  let (value, offset) = read_leb128(bytes_of([0xAC, 0x02]), 0)
+  let (value, offset) = try! read_leb128(bytes_of([0xAC, 0x02]), 0)
   assert_eq(value, 300)
   assert_eq(offset, 2)
 }
 
 ///|
 test "read_leb128: 127 (max single byte)" {
-  let (value, _) = read_leb128(bytes_of([0x7F]), 0)
+  let (value, _) = try! read_leb128(bytes_of([0x7F]), 0)
   assert_eq(value, 127)
 }
 
 ///|
 test "read_leb128: 128 (min two bytes)" {
-  let (value, offset) = read_leb128(bytes_of([0x80, 0x01]), 0)
+  let (value, offset) = try! read_leb128(bytes_of([0x80, 0x01]), 0)
   assert_eq(value, 128)
   assert_eq(offset, 2)
 }
 
 ///|
 test "read_leb128: at nonzero offset" {
-  let (value, offset) = read_leb128(bytes_of([0xFF, 0xFF, 5]), 2)
+  let (value, offset) = try! read_leb128(bytes_of([0xFF, 0xFF, 5]), 2)
   assert_eq(value, 5)
   assert_eq(offset, 3)
 }
@@ -109,21 +109,21 @@ test "read_leb128: at nonzero offset" {
 
 ///|
 test "read_utf8_string: simple" {
-  let (s, offset) = read_utf8_string(bytes_of([3, 0x61, 0x62, 0x63]), 0)
+  let (s, offset) = try! read_utf8_string(bytes_of([3, 0x61, 0x62, 0x63]), 0)
   assert_eq(s, "abc")
   assert_eq(offset, 4)
 }
 
 ///|
 test "read_utf8_string: empty" {
-  let (s, offset) = read_utf8_string(bytes_of([0]), 0)
+  let (s, offset) = try! read_utf8_string(bytes_of([0]), 0)
   assert_eq(s, "")
   assert_eq(offset, 1)
 }
 
 ///|
 test "read_utf8_string: at offset" {
-  let (s, offset) = read_utf8_string(bytes_of([0xFF, 0xFF, 2, 0x68, 0x69]), 2)
+  let (s, offset) = try! read_utf8_string(bytes_of([0xFF, 0xFF, 2, 0x68, 0x69]), 2)
   assert_eq(s, "hi")
   assert_eq(offset, 5)
 }
@@ -132,40 +132,40 @@ test "read_utf8_string: at offset" {
 
 ///|
 test "skip_valtype: simple i32" {
-  assert_eq(skip_valtype(bytes_of([0x7F]), 0), 1)
+  assert_eq(try! skip_valtype(bytes_of([0x7F]), 0), 1)
 }
 
 ///|
 test "skip_valtype: externref" {
-  assert_eq(skip_valtype(bytes_of([0x6F]), 0), 1)
+  assert_eq(try! skip_valtype(bytes_of([0x6F]), 0), 1)
 }
 
 ///|
 test "skip_valtype: ref extern (0x64 + heaptype)" {
-  assert_eq(skip_valtype(bytes_of([0x64, 0x6F]), 0), 2)
+  assert_eq(try! skip_valtype(bytes_of([0x64, 0x6F]), 0), 2)
 }
 
 ///|
 test "skip_valtype: ref null extern (0x63 + heaptype)" {
-  assert_eq(skip_valtype(bytes_of([0x63, 0x6F]), 0), 2)
+  assert_eq(try! skip_valtype(bytes_of([0x63, 0x6F]), 0), 2)
 }
 
 ///|
 test "skip_valtype: ref with multi-byte type index" {
   // 0x64 followed by type index 200 (LEB128: 0xC8 0x01)
-  assert_eq(skip_valtype(bytes_of([0x64, 0xC8, 0x01]), 0), 3)
+  assert_eq(try! skip_valtype(bytes_of([0x64, 0xC8, 0x01]), 0), 3)
 }
 
 // ===== skip_limits =====
 
 ///|
 test "skip_limits: without max" {
-  assert_eq(skip_limits(bytes_of([0x00, 10]), 0), 2)
+  assert_eq(try! skip_limits(bytes_of([0x00, 10]), 0), 2)
 }
 
 ///|
 test "skip_limits: with max" {
-  assert_eq(skip_limits(bytes_of([0x01, 10, 100]), 0), 3)
+  assert_eq(try! skip_limits(bytes_of([0x01, 10, 100]), 0), 3)
 }
 
 // ===== parse_wasm_imports =====
@@ -174,7 +174,7 @@ test "skip_limits: with max" {
 test "parse_wasm_imports: two func imports" {
   let wasm = make_wasm_with_func_imports([("env", "foo"), ("env", "bar")])
   inspect(
-    parse_wasm_imports(wasm),
+    try! parse_wasm_imports(wasm),
     content=(
       #|[("env", "foo"), ("env", "bar")]
     ),
@@ -189,7 +189,7 @@ test "parse_wasm_imports: no import section" {
      0x00, 0x02, 0x00, 0x00, // custom section id=0, size=2, 2 bytes payload
   ])
   inspect(
-    parse_wasm_imports(wasm),
+    try! parse_wasm_imports(wasm),
     content=(
       #|[]
     ),
@@ -204,7 +204,7 @@ test "parse_wasm_imports: different modules" {
     ("JsValue", "null"),
   ])
   inspect(
-    parse_wasm_imports(wasm),
+    try! parse_wasm_imports(wasm),
     content=(
       #|[("webapi_Node", "get"), ("webapi_Element", "set"), ("JsValue", "null")]
     ),
@@ -230,7 +230,7 @@ test "parse_wasm_imports: global import with ref extern" {
     buf.push(v)
   }
   inspect(
-    parse_wasm_imports(bytes_of(buf)),
+    try! parse_wasm_imports(bytes_of(buf)),
     content=(
       #|[("_", "x")]
     ),
@@ -255,7 +255,7 @@ test "parse_wasm_imports: skips section before imports" {
     buf.push(v)
   }
   inspect(
-    parse_wasm_imports(bytes_of(buf)),
+    try! parse_wasm_imports(bytes_of(buf)),
     content=(
       #|[("m", "f")]
     ),
@@ -281,11 +281,44 @@ test "parse_wasm_imports: mixed func and global imports" {
     buf.push(v)
   }
   inspect(
-    parse_wasm_imports(bytes_of(buf)),
+    try! parse_wasm_imports(bytes_of(buf)),
     content=(
       #|[("env", "foo"), ("_", "hello")]
     ),
   )
+}
+
+///|
+test "parse_wasm_imports: bad magic raises InvalidMagic" {
+  try {
+    parse_wasm_imports(bytes_of([0x01, 0x02, 0x03, 0x04, 0, 0, 0, 0]))
+  } catch {
+    InvalidMagic => ()
+    _ => fail("expected InvalidMagic")
+  } noraise {
+    _ => fail("expected InvalidMagic")
+  }
+}
+
+///|
+test "parse_wasm_imports: truncated import payload raises UnexpectedEnd" {
+  let wasm = bytes_of([
+    0x00, 0x61, 0x73, 0x6d,
+    0x01, 0x00, 0x00, 0x00,
+    0x02, 0x04,
+    0x01, 0x01, 0x65, 0x01,
+  ])
+  try {
+    parse_wasm_imports(wasm)
+  } catch {
+    UnexpectedEnd(context, offset) => {
+      assert_eq(context, "UTF-8 string")
+      assert_eq(offset, 14)
+    }
+    _ => fail("expected UnexpectedEnd")
+  } noraise {
+    _ => fail("expected parse failure")
+  }
 }
 
 // ===== count_braces =====

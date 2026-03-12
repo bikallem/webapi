@@ -6,7 +6,13 @@ fn usage() -> Unit {
 }
 
 ///|
-fn main {
+suberror TrimCliError {
+  UsageError(String)
+  FatalError(String)
+} derive(Show)
+
+///|
+fn run() -> Unit raise {
   let args = @sys.get_cli_args()
   let mut wasm_path = ""
   let mut output_path = ""
@@ -16,18 +22,14 @@ fn main {
     match args[i] {
       "-o" => {
         guard i + 1 < args.length() else {
-          println("error: -o requires an argument")
-          usage()
-          return
+          raise UsageError("-o requires an argument")
         }
         i += 1
         output_path = args[i]
       }
       "--source" => {
         guard i + 1 < args.length() else {
-          println("error: --source requires an argument")
-          usage()
-          return
+          raise UsageError("--source requires an argument")
         }
         i += 1
         source_path = args[i]
@@ -38,34 +40,27 @@ fn main {
       }
       arg => {
         if arg.has_prefix("-") {
-          println("error: unknown option: " + arg)
-          usage()
-          return
+          raise UsageError("unknown option: " + arg)
         }
         if wasm_path.is_empty() {
           wasm_path = arg
         } else {
-          println("error: unexpected argument: " + arg)
-          usage()
-          return
+          raise UsageError("unexpected argument: " + arg)
         }
       }
     }
     i += 1
   }
   if wasm_path.is_empty() {
-    println("error: no input wasm file specified")
-    usage()
-    return
+    raise UsageError("no input wasm file specified")
   }
   // Read wasm binary
   let wasm_bytes = @fs.read_file_to_bytes(wasm_path) catch {
-    err => {
-      println("error: cannot read \{wasm_path}: \{err}")
-      return
-    }
+    err => raise FatalError("cannot read \{wasm_path}: \{err}")
   }
-  let imports = parse_wasm_imports(wasm_bytes)
+  let imports = parse_wasm_imports(wasm_bytes) catch {
+    err => raise FatalError(err.message())
+  }
   // Build map of module name → required field names
   let required_imports : Map[String, @hashset.HashSet[String]] = {}
   for pair in imports {
@@ -86,10 +81,7 @@ fn main {
   )
   // Read and filter webapi.mjs
   let source = @fs.read_file_to_string(source_path) catch {
-    err => {
-      println("error: cannot read \{source_path}: \{err}")
-      return
-    }
+    err => raise FatalError("cannot read \{source_path}: \{err}")
   }
   let trimmed = filter_js_modules(source, required_imports)
   // Default output: webapi.mjs next to the input wasm file
@@ -99,12 +91,27 @@ fn main {
     output_path
   }
   @fs.write_string_to_file(out, trimmed) catch {
-    err => {
-      println("error: cannot write \{out}: \{err}")
-      return
-    }
+    err => raise FatalError("cannot write \{out}: \{err}")
   }
   let src_lines = source.split("\n").fold(init=0, fn(acc, _) { acc + 1 })
   let out_lines = trimmed.split("\n").fold(init=0, fn(acc, _) { acc + 1 })
   println("Wrote \{out}: \{out_lines} lines (from \{src_lines})")
+}
+
+///|
+fn main {
+  try {
+    run()
+  } catch {
+    UsageError(message) => {
+      println("error: " + message)
+      usage()
+    }
+    FatalError(message) => {
+      println("error: " + message)
+    }
+    err => {
+      println("error: \{err}")
+    }
+  }
 }
