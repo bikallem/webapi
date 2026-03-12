@@ -56,32 +56,44 @@ let examples : Array[(String, String, Bool)] = [
 let github_base : String = "https://github.com/bikallem/webapi/tree/main/examples/"
 
 ///|
-fn parse_hash(hash : String) -> (String, String) {
-  let h = if hash.length() > 0 && hash[0] == '#' {
+fn strip_hash_prefix(hash : String) -> String {
+  if hash.length() > 0 && hash[0] == '#' {
     hash.view(start_offset=1).to_string()
   } else {
     hash
   }
+}
+
+///|
+fn find_last_dot(value : String) -> Int? {
+  if value.is_empty() {
+    return None
+  }
+  for i = value.length() - 1; i >= 0; i = i - 1 {
+    if value[i] == '.' {
+      return Some(i)
+    }
+  }
+  None
+}
+
+///|
+fn parse_hash(hash : String) -> (String, String) {
+  let h = strip_hash_prefix(hash)
   if h.is_empty() {
     return ("canvas", "js")
   }
-  // Split on last '.'
-  let mut last_dot = -1
-  for i = h.length() - 1; i >= 0; i = i - 1 {
-    if h[i] == '.' {
-      last_dot = i
-      break
+  match find_last_dot(h) {
+    Some(last_dot) if last_dot > 0 && last_dot < h.length() - 1 => {
+      let name = h.view(end_offset=last_dot).to_string()
+      let target = h.view(start_offset=last_dot + 1).to_string()
+      if target == "js" || target == "wasm" {
+        (name, target)
+      } else {
+        (h, "js")
+      }
     }
-  }
-  if last_dot <= 0 || last_dot >= h.length() - 1 {
-    return (h, "js")
-  }
-  let name = h.view(end_offset=last_dot).to_string()
-  let target = h.view(start_offset=last_dot + 1).to_string()
-  if target == "js" || target == "wasm" {
-    (name, target)
-  } else {
-    (h, "js")
+    _ => (h, "js")
   }
 }
 
@@ -114,8 +126,8 @@ fn main {
 
   let ul = document.create_element("ul")
 
-  for i = 0; i < examples.length(); i = i + 1 {
-    let (display_name, dir, has_wasm) = examples[i]
+  for example in examples {
+    let (display_name, dir, has_wasm) = example
     let li = document.create_element("li")
 
     let name_span = document.create_element("span")
@@ -170,7 +182,7 @@ fn main {
   app.append_child(main) |> ignore
 
   // Track previously active link for class removal
-  let prev_active : Array[Element?] = [None]
+  let prev_active : Ref[Element?] = { val: None }
 
   // Navigate based on current hash
   let navigate = fn() {
@@ -179,7 +191,7 @@ fn main {
     iframe.set_src(name + "/" + name + "." + target + ".html")
 
     // Remove active class from previous link
-    if prev_active[0] is Some(el) {
+    if prev_active.val is Some(el) {
       el.class_list().remove(["active"])
     }
 
@@ -187,9 +199,9 @@ fn main {
     match document.get_element_by_id_opt(link_id(name, target)) {
       Some(el) => {
         el.class_list().add(["active"])
-        prev_active[0] = Some(el)
+        prev_active.val = Some(el)
       }
-      None => prev_active[0] = None
+      None => prev_active.val = None
     }
   }
 

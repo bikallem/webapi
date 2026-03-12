@@ -60,8 +60,8 @@ fn main {
     ),
     ("UnsafeUrl", @webapi.ReferrerPolicy::UnsafeUrl),
   ]
-  for i = 0; i < policies.length(); i = i + 1 {
-    let (name, policy) = policies[i]
+  for entry in policies {
+    let (name, policy) = entry
     let row : @webapi.HTMLTableRowElement = doc.create_element("tr").into()
     let td1 : @webapi.HTMLTableCellElement = doc.create_element("td").into()
     td1
