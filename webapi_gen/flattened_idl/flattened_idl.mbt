@@ -41,8 +41,9 @@ fn MergedDictionaryIR::new(
 /// from most-distant ancestor to self. Uses a visited set for cycle detection.
 fn flatten_dictionary_members(
   dictionaries : Map[String, @partial_merged.PartialMergedDictionary],
+  logger : (String) -> Unit,
   name : String,
-) -> (Array[@parser.DictionaryMember], @hashset.HashSet[String]) {
+) -> (Array[@parser.DictionaryMember], @hashset.HashSet[String])? {
   let visited : @hashset.HashSet[String] = @hashset.new()
   // Collect the chain from self to root
   let chain : Array[String] = []
@@ -59,7 +60,12 @@ fn flatten_dictionary_members(
           Some(parent) => current = parent
           None => break
         }
-      None => abort("Dictionary '\{current}' not found in chain from '\{name}'")
+      None => {
+        logger(
+          "Skipped dictionary '\{name}': inherited dictionary '\{current}' not found in chain from '\{name}'",
+        )
+        return None
+      }
     }
   }
   // Reverse to get root-first order, then collect members and specs
@@ -72,7 +78,7 @@ fn flatten_dictionary_members(
       specs.add(s)
     }
   }
-  (members, specs)
+  Some((members, specs))
 }
 
 ///|
@@ -107,15 +113,21 @@ fn inject_dictionary_members(
 /// Flatten all dictionaries by resolving inheritance chains.
 fn flatten_dictionaries(
   dictionaries : Map[String, @partial_merged.PartialMergedDictionary],
+  logger : (String) -> Unit,
 ) -> Map[String, MergedDictionaryIR] {
-  dictionaries
-  .iter()
-  .map(fn(it) {
-    let (dict_name, dict) = it
-    let (members, specs) = flatten_dictionary_members(dictionaries, dict_name)
-    (dict_name, MergedDictionaryIR::new(dict.name, members, specs))
-  })
-  |> Map::from_iter
+  let flattened : Map[String, MergedDictionaryIR] = Map::new()
+  for dict_name, dict in dictionaries {
+    match flatten_dictionary_members(dictionaries, logger, dict_name) {
+      Some((members, specs)) =>
+        flattened[dict_name] = MergedDictionaryIR::new(
+          dict.name,
+          members,
+          specs,
+        )
+      None => ()
+    }
+  }
+  flattened
 }
 
 ///|
@@ -188,7 +200,7 @@ pub fn flatten(
     dictionary_member_injection,
     logger,
   )
-  let dictionaries = flatten_dictionaries(partial_merged.dictionaries)
+  let dictionaries = flatten_dictionaries(partial_merged.dictionaries, logger)
   merge_mixins_into_interfaces(partial_merged, logger)
   let interfaces : Map[String, FlattenedInterface] = Map::new()
   for name, iface in partial_merged.interfaces {

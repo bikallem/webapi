@@ -173,3 +173,40 @@ test "filter_idl excludes dictionaries by prefix" {
     },
   ])
 }
+
+///|
+test "filter_idl plus flatten skips dictionaries whose filtered parent is missing" {
+  let widl : String =
+    #|dictionary ElementBase {};
+    #|dictionary ChildDict : ElementBase {
+    #|  DOMString childProp;
+    #|};
+    #|dictionary EventInit {};
+  let defs = @parser.parse(widl)
+  let config : @config.Config = @config.load_config_from_string(
+    (
+      #|idl_dir = ""
+      #|output_dir = ""
+      #|templates_dir = ""
+      #|core_specs = []
+      #|excluded_interfaces = []
+      #|excluded_callbacks = []
+      #|excluded_typedefs = []
+      #|excluded_dictionary_prefixes = ["Element"]
+      #|
+    ),
+  )
+  let filtered = filter_idl(config, defs)
+  let partial_merged = @partial_merged.merge_partials(filtered)
+  let logs : Array[String] = []
+  let flattened = @flattened_idl.flatten(partial_merged, fn(msg) {
+    logs.push(msg)
+  })
+  inspect(flattened.dictionaries.contains("ChildDict"), content="false")
+  inspect(flattened.dictionaries.contains("EventInit"), content="true")
+  inspect(
+    logs.join("\n").contains("Skipped dictionary 'ChildDict'"),
+    content="true",
+  )
+  inspect(logs.join("\n").contains("ElementBase"), content="true")
+}

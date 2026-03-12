@@ -72,14 +72,21 @@ test "flatten handles dictionary without inheritance" {
 }
 
 ///|
-test "panic: flatten aborts when parent dictionary is missing" {
+test "flatten skips dictionary when parent dictionary is missing" {
   let widl : String =
     #|dictionary ChildDict : MissingParentDict {
     #|  DOMString childProp;
     #|};
   let defs = @parser.parse(widl)
   let partial_merged = @partial_merged.merge_partials(defs)
-  flatten(partial_merged, ignore) |> ignore
+  let logs : Array[String] = []
+  let flattened_idl = flatten(partial_merged, fn(msg) { logs.push(msg) })
+  inspect(flattened_idl.dictionaries.contains("ChildDict"), content="false")
+  inspect(
+    logs.join("\n").contains("Skipped dictionary 'ChildDict'"),
+    content="true",
+  )
+  inspect(logs.join("\n").contains("MissingParentDict"), content="true")
 }
 
 ///|
