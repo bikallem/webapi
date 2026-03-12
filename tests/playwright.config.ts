@@ -2,7 +2,12 @@ import { defineConfig } from '@playwright/test';
 
 export default defineConfig({
   testDir: '.',
-  timeout: 3_000,
+  // Some example pages allow up to 10s for wasm startup before assertions run,
+  // so each test needs enough headroom for navigation plus async expectations.
+  timeout: 20_000,
+  expect: {
+    timeout: 5_000,
+  },
   use: {
     baseURL: 'http://localhost:3000/examples/',
   },
