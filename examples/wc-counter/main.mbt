@@ -17,33 +17,33 @@ fn my_counter(host : @webapi.HTMLElement) -> Unit {
   let inc_btn = shadow.query_selector("[data-ref=inc]")
   let reset_btn = shadow.query_selector("[data-ref=reset]")
 
-  // Counter state (mutable array cell)
-  let state : Array[Int] = [0]
+  // Counter state
+  let state : Ref[Int] = { val: 0 }
 
   // Update display and dispatch custom event
   fn update() {
-    display.set_text_content(state[0].to_string())
+    display.set_text_content(state.val.to_string())
     let event = @webapi.CustomEvent::new(
       "count-changed",
       event_init_dict=@webapi.CustomEventInit::new(
         bubbles=true,
         composed=true,
-        detail=@webapi.TJsValue::to_js(state[0]),
+        detail=@webapi.TJsValue::to_js(state.val),
       ),
     )
     host.dispatch_event(event) |> ignore
   }
 
   dec_btn.add_event_listener("click", fn(_e) {
-    state[0] = state[0] - 1
+    state.val = state.val - 1
     update()
   })
   inc_btn.add_event_listener("click", fn(_e) {
-    state[0] = state[0] + 1
+    state.val = state.val + 1
     update()
   })
   reset_btn.add_event_listener("click", fn(_e) {
-    state[0] = 0
+    state.val = 0
     update()
   })
 }
