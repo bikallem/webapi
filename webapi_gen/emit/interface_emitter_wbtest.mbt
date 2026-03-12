@@ -1040,14 +1040,12 @@ test "mbt_code_gen_multi generates wasm FFI for constructor" {
     multi.js_ffi,
     content=(
       #|extern "js" fn test_interface_new_ffi(name: JsValue) -> TestInterface = "(name) => new TestInterface(name)"
-
     ),
   )
   inspect(
     multi.wasm_ffi,
     content=(
       #|fn test_interface_new_ffi(name: JsValue) -> TestInterface = "webapi_TestInterface" "new"
-
     ),
   )
 }
@@ -1095,7 +1093,6 @@ test "mbt_code_gen_multi wasm FFI snapshot for constructor" {
     multi.wasm_ffi,
     content=(
       #|fn test_interface_new_ffi(name: JsValue) -> TestInterface = "webapi_TestInterface" "new"
-
     ),
   )
 }
@@ -1116,7 +1113,6 @@ test "mbt_code_gen_multi wasm FFI snapshot for overloaded constructors" {
       #|fn test_interface_new_ffi(input: JsValue, base_url: JsValue, options: JsValue) -> TestInterface = "webapi_TestInterface" "new"
       #|
       #|fn test_interface_new_2_ffi(input: JsValue) -> TestInterface = "webapi_TestInterface" "new_2"
-
     ),
   )
 }

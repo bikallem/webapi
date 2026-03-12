@@ -16,15 +16,7 @@ let wasm_valid_stub_other_types : Array[String] = [
 
 ///|
 let wasm_jsany_value_types : Array[String] = [
-  "String",
-  "Bool",
-  "Int",
-  "UInt",
-  "Int64",
-  "UInt64",
-  "Float",
-  "Double",
-  "DOMHighResTimeStamp",
+  "String", "Bool", "Int", "UInt", "Int64", "UInt64", "Float", "Double", "DOMHighResTimeStamp",
   "EpochTimeStamp",
 ]
 

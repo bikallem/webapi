@@ -173,15 +173,10 @@ test "trait_method_impl_args formats optional args" {
 test "emit_method_body optional return" {
   let code = StringBuilder::new()
   code.write_string("pub fn test() -> Element? {\n")
-  emit_method_body(
-    code,
-    "test_ffi",
-    "obj",
-    @type_mapping.MethodReturn::{
-      type_: @type_mapping.ArgMbtType::Interface("Element"),
-      optional: true,
-    },
-  )
+  emit_method_body(code, "test_ffi", "obj", @type_mapping.MethodReturn::{
+    type_: @type_mapping.ArgMbtType::Interface("Element"),
+    optional: true,
+  })
   inspect(
     code.to_string(),
     content=(
@@ -196,15 +191,10 @@ test "emit_method_body optional return" {
 test "emit_method_body void return" {
   let code = StringBuilder::new()
   code.write_string("pub fn test() -> Unit {\n")
-  emit_method_body(
-    code,
-    "test_ffi",
-    "obj",
-    @type_mapping.MethodReturn::{
-      type_: @type_mapping.ArgMbtType::Other("Unit"),
-      optional: false,
-    },
-  )
+  emit_method_body(code, "test_ffi", "obj", @type_mapping.MethodReturn::{
+    type_: @type_mapping.ArgMbtType::Other("Unit"),
+    optional: false,
+  })
   inspect(
     code.to_string(),
     content=(
@@ -219,15 +209,10 @@ test "emit_method_body void return" {
 test "emit_method_body direct return" {
   let code = StringBuilder::new()
   code.write_string("pub fn test() -> Element {\n")
-  emit_method_body(
-    code,
-    "test_ffi",
-    "obj",
-    @type_mapping.MethodReturn::{
-      type_: @type_mapping.ArgMbtType::Interface("Element"),
-      optional: false,
-    },
-  )
+  emit_method_body(code, "test_ffi", "obj", @type_mapping.MethodReturn::{
+    type_: @type_mapping.ArgMbtType::Interface("Element"),
+    optional: false,
+  })
   inspect(
     code.to_string(),
     content=(
@@ -242,15 +227,10 @@ test "emit_method_body direct return" {
 test "emit_method_body optional string return uses to_option_prim" {
   let code = StringBuilder::new()
   code.write_string("pub fn test() -> String? {\n")
-  emit_method_body(
-    code,
-    "test_ffi",
-    "obj",
-    @type_mapping.MethodReturn::{
-      type_: @type_mapping.ArgMbtType::Primitive("String"),
-      optional: true,
-    },
-  )
+  emit_method_body(code, "test_ffi", "obj", @type_mapping.MethodReturn::{
+    type_: @type_mapping.ArgMbtType::Primitive("String"),
+    optional: true,
+  })
   inspect(
     code.to_string(),
     content=(

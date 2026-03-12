@@ -73,7 +73,7 @@ fn read_utf8_string(
   offset : Int,
   limit? : Int = bytes.length(),
 ) -> (String, Int) raise WasmParseError {
-  let (len, pos) = read_leb128(bytes, offset, limit=limit)
+  let (len, pos) = read_leb128(bytes, offset, limit~)
   require_bytes(limit, pos, len, "UTF-8 string")
   let buf = StringBuilder::new()
   for i in 0..<len {
@@ -94,7 +94,7 @@ fn skip_valtype(
   match b {
     0x63 | 0x64 => {
       // (ref null ht) or (ref ht): skip the heaptype (LEB128)
-      let (_, next_pos) = read_leb128(bytes, pos, limit=limit)
+      let (_, next_pos) = read_leb128(bytes, pos, limit~)
       next_pos
     }
     _ => pos
@@ -108,7 +108,7 @@ fn skip_reftype(
   offset : Int,
   limit? : Int = bytes.length(),
 ) -> Int raise WasmParseError {
-  skip_valtype(bytes, offset, limit=limit)
+  skip_valtype(bytes, offset, limit~)
 }
 
 ///|
@@ -119,9 +119,9 @@ fn skip_limits(
   limit? : Int = bytes.length(),
 ) -> Int raise WasmParseError {
   let (flags, pos0) = read_byte(bytes, offset, limit, "limits flags")
-  let (_, pos) = read_leb128(bytes, pos0, limit=limit) // min
+  let (_, pos) = read_leb128(bytes, pos0, limit~) // min
   if (flags & 0x01) != 0 {
-    let (_, pos2) = read_leb128(bytes, pos, limit=limit) // max
+    let (_, pos2) = read_leb128(bytes, pos, limit~) // max
     pos2
   } else {
     pos
@@ -174,19 +174,22 @@ pub fn parse_wasm_imports(
           }
           1 =>
             // table: skip reftype + limits
-            p = skip_limits(bytes, skip_reftype(bytes, p, limit=section_end), limit=section_end)
+            p = skip_limits(
+              bytes,
+              skip_reftype(bytes, p, limit=section_end),
+              limit=section_end,
+            )
           2 =>
             // memory: skip limits
             p = skip_limits(bytes, p, limit=section_end)
           3 =>
             // global: skip valtype + mutability (1 byte)
             p = read_byte(
-              bytes,
-              skip_valtype(bytes, p, limit=section_end),
-              section_end,
-              "global mutability",
-            )
-            .1
+                bytes,
+                skip_valtype(bytes, p, limit=section_end),
+                section_end,
+                "global mutability",
+              ).1
           4 => {
             // tag: skip tag kind + type index
             let (_, tag_pos) = read_byte(bytes, p, section_end, "tag kind")

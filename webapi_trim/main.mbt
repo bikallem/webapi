@@ -139,9 +139,7 @@ fn run() -> Unit raise {
 
 ///|
 fn main {
-  try {
-    run()
-  } catch {
+  run() catch {
     UsageError(message) => {
       println("error: " + message)
       usage()

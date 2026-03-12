@@ -123,7 +123,10 @@ test "read_utf8_string: empty" {
 
 ///|
 test "read_utf8_string: at offset" {
-  let (s, offset) = try! read_utf8_string(bytes_of([0xFF, 0xFF, 2, 0x68, 0x69]), 2)
+  let (s, offset) = try! read_utf8_string(
+    bytes_of([0xFF, 0xFF, 2, 0x68, 0x69]),
+    2,
+  )
   assert_eq(s, "hi")
   assert_eq(offset, 5)
 }
@@ -290,9 +293,7 @@ test "parse_wasm_imports: mixed func and global imports" {
 
 ///|
 test "parse_wasm_imports: bad magic raises InvalidMagic" {
-  try {
-    parse_wasm_imports(bytes_of([0x01, 0x02, 0x03, 0x04, 0, 0, 0, 0]))
-  } catch {
+  try parse_wasm_imports(bytes_of([0x01, 0x02, 0x03, 0x04, 0, 0, 0, 0])) catch {
     InvalidMagic => ()
     _ => fail("expected InvalidMagic")
   } noraise {
@@ -303,14 +304,10 @@ test "parse_wasm_imports: bad magic raises InvalidMagic" {
 ///|
 test "parse_wasm_imports: truncated import payload raises UnexpectedEnd" {
   let wasm = bytes_of([
-    0x00, 0x61, 0x73, 0x6d,
-    0x01, 0x00, 0x00, 0x00,
-    0x02, 0x04,
-    0x01, 0x01, 0x65, 0x01,
+    0x00, 0x61, 0x73, 0x6d, 0x01, 0x00, 0x00, 0x00, 0x02, 0x04, 0x01, 0x01, 0x65,
+    0x01,
   ])
-  try {
-    parse_wasm_imports(wasm)
-  } catch {
+  try parse_wasm_imports(wasm) catch {
     UnexpectedEnd(context, offset) => {
       assert_eq(context, "UTF-8 string")
       assert_eq(offset, 14)

@@ -120,7 +120,10 @@ test "is_string_array_return detects Array[String]" {
 ///|
 test "uses_from_jsany_value_conversion identifies wasm value conversions" {
   inspect(uses_from_jsany_value_conversion("Double"), content="true")
-  inspect(uses_from_jsany_value_conversion("DOMHighResTimeStamp"), content="true")
+  inspect(
+    uses_from_jsany_value_conversion("DOMHighResTimeStamp"),
+    content="true",
+  )
   inspect(uses_from_jsany_value_conversion("DOMQuad"), content="false")
 }
 
