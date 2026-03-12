@@ -487,7 +487,18 @@ fn render_enum_method(
 }
 
 ///|
+fn enum_fallback_variant(variants : Array[EnumVariantEmit]) -> EnumVariantEmit {
+  for variant in variants {
+    if variant.original_value == "" {
+      return variant
+    }
+  }
+  variants[0]
+}
+
+///|
 fn render_enum(name : String, variants : Array[EnumVariantEmit]) -> String {
+  let fallback_variant = enum_fallback_variant(variants)
   let buf = StringBuilder::new()
   buf.write_string("pub(all) enum \{name} {\n")
   for variant in variants {
@@ -537,7 +548,7 @@ fn render_enum(name : String, variants : Array[EnumVariantEmit]) -> String {
     "fn \{name}::from_unchecked(value: String) -> \{name} {\n",
     "value",
     fn(n, v) { "\"\{v.original_value}\" => \{n}::\{v.variant_name}" },
-    fallback="_ => abort(\"unknown \{name} enum value\")",
+    fallback="_ => \{name}::\{fallback_variant.variant_name}",
   )
   buf.write_string("\n\n")
   // value

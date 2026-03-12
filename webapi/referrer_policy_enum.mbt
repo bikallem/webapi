@@ -85,7 +85,7 @@ fn ReferrerPolicy::from_unchecked(value : String) -> ReferrerPolicy {
     "strict-origin-when-cross-origin" =>
       ReferrerPolicy::StrictOriginWhenCrossOrigin
     "unsafe-url" => ReferrerPolicy::UnsafeUrl
-    _ => abort("unknown ReferrerPolicy enum value")
+    _ => ReferrerPolicy::Empty
   }
 }
 

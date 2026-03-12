@@ -46,7 +46,7 @@ fn PresentationStyle::from_unchecked(value : String) -> PresentationStyle {
     "unspecified" => PresentationStyle::Unspecified
     "inline" => PresentationStyle::Inline
     "attachment" => PresentationStyle::Attachment
-    _ => abort("unknown PresentationStyle enum value")
+    _ => PresentationStyle::Unspecified
   }
 }
 

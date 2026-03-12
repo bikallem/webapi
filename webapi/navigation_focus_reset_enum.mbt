@@ -44,7 +44,7 @@ fn NavigationFocusReset::from_unchecked(value : String) -> NavigationFocusReset 
   match value {
     "after-transition" => NavigationFocusReset::AfterTransition
     "manual" => NavigationFocusReset::Manual
-    _ => abort("unknown NavigationFocusReset enum value")
+    _ => NavigationFocusReset::AfterTransition
   }
 }
 

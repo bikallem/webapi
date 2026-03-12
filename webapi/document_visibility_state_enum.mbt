@@ -47,7 +47,7 @@ fn DocumentVisibilityState::from_unchecked(
   match value {
     "visible" => DocumentVisibilityState::Visible
     "hidden" => DocumentVisibilityState::Hidden
-    _ => abort("unknown DocumentVisibilityState enum value")
+    _ => DocumentVisibilityState::Visible
   }
 }
 

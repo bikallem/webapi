@@ -78,7 +78,7 @@ fn OrientationLockType::from_unchecked(value : String) -> OrientationLockType {
     "portrait-secondary" => OrientationLockType::PortraitSecondary
     "landscape-primary" => OrientationLockType::LandscapePrimary
     "landscape-secondary" => OrientationLockType::LandscapeSecondary
-    _ => abort("unknown OrientationLockType enum value")
+    _ => OrientationLockType::Any
   }
 }
 

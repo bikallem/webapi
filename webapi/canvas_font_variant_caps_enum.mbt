@@ -70,7 +70,7 @@ fn CanvasFontVariantCaps::from_unchecked(
     "all-petite-caps" => CanvasFontVariantCaps::AllPetiteCaps
     "unicase" => CanvasFontVariantCaps::Unicase
     "titling-caps" => CanvasFontVariantCaps::TitlingCaps
-    _ => abort("unknown CanvasFontVariantCaps enum value")
+    _ => CanvasFontVariantCaps::Normal
   }
 }
 

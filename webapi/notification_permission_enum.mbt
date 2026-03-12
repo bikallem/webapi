@@ -50,7 +50,7 @@ fn NotificationPermission::from_unchecked(
     "default" => NotificationPermission::Default
     "denied" => NotificationPermission::Denied
     "granted" => NotificationPermission::Granted
-    _ => abort("unknown NotificationPermission enum value")
+    _ => NotificationPermission::Default
   }
 }
 

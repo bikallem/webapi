@@ -55,7 +55,7 @@ fn RouterSourceEnum::from_unchecked(value : String) -> RouterSourceEnum {
     "network" => RouterSourceEnum::Network
     "race-network-and-fetch-handler" =>
       RouterSourceEnum::RaceNetworkAndFetchHandler
-    _ => abort("unknown RouterSourceEnum enum value")
+    _ => RouterSourceEnum::Cache
   }
 }
 

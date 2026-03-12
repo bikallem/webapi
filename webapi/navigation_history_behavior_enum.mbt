@@ -52,7 +52,7 @@ fn NavigationHistoryBehavior::from_unchecked(
     "auto" => NavigationHistoryBehavior::Auto
     "push" => NavigationHistoryBehavior::Push
     "replace" => NavigationHistoryBehavior::Replace
-    _ => abort("unknown NavigationHistoryBehavior enum value")
+    _ => NavigationHistoryBehavior::Auto
   }
 }
 

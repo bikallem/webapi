@@ -61,7 +61,7 @@ fn RequestCache::from_unchecked(value : String) -> RequestCache {
     "no-cache" => RequestCache::NoCache
     "force-cache" => RequestCache::ForceCache
     "only-if-cached" => RequestCache::OnlyIfCached
-    _ => abort("unknown RequestCache enum value")
+    _ => RequestCache::Default
   }
 }
 

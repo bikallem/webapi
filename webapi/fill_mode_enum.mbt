@@ -53,7 +53,7 @@ fn FillMode::from_unchecked(value : String) -> FillMode {
     "backwards" => FillMode::Backwards
     "both" => FillMode::Both
     "auto" => FillMode::Auto
-    _ => abort("unknown FillMode enum value")
+    _ => FillMode::None
   }
 }
 

@@ -38,7 +38,7 @@ fn WorkerType::from_unchecked(value : String) -> WorkerType {
   match value {
     "classic" => WorkerType::Classic
     "module" => WorkerType::Module
-    _ => abort("unknown WorkerType enum value")
+    _ => WorkerType::Classic
   }
 }
 

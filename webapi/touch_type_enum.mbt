@@ -38,7 +38,7 @@ fn TouchType::from_unchecked(value : String) -> TouchType {
   match value {
     "direct" => TouchType::Direct
     "stylus" => TouchType::Stylus
-    _ => abort("unknown TouchType enum value")
+    _ => TouchType::Direct
   }
 }
 

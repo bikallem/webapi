@@ -46,7 +46,7 @@ fn PermissionState::from_unchecked(value : String) -> PermissionState {
     "granted" => PermissionState::Granted
     "denied" => PermissionState::Denied
     "prompt" => PermissionState::Prompt
-    _ => abort("unknown PermissionState enum value")
+    _ => PermissionState::Granted
   }
 }
 

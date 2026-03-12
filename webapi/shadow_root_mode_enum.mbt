@@ -41,7 +41,7 @@ fn ShadowRootMode::from_unchecked(value : String) -> ShadowRootMode {
   match value {
     "open" => ShadowRootMode::Open
     "closed" => ShadowRootMode::Closed
-    _ => abort("unknown ShadowRootMode enum value")
+    _ => ShadowRootMode::Open
   }
 }
 

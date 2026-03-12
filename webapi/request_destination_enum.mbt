@@ -136,7 +136,7 @@ fn RequestDestination::from_unchecked(value : String) -> RequestDestination {
     "video" => RequestDestination::Video
     "worker" => RequestDestination::Worker
     "xslt" => RequestDestination::Xslt
-    _ => abort("unknown RequestDestination enum value")
+    _ => RequestDestination::Empty
   }
 }
 

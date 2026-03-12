@@ -61,7 +61,7 @@ fn WellKnownDirectory::from_unchecked(value : String) -> WellKnownDirectory {
     "music" => WellKnownDirectory::Music
     "pictures" => WellKnownDirectory::Pictures
     "videos" => WellKnownDirectory::Videos
-    _ => abort("unknown WellKnownDirectory enum value")
+    _ => WellKnownDirectory::Desktop
   }
 }
 

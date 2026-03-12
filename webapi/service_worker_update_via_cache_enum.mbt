@@ -52,7 +52,7 @@ fn ServiceWorkerUpdateViaCache::from_unchecked(
     "imports" => ServiceWorkerUpdateViaCache::Imports
     "all" => ServiceWorkerUpdateViaCache::All
     "none" => ServiceWorkerUpdateViaCache::None
-    _ => abort("unknown ServiceWorkerUpdateViaCache enum value")
+    _ => ServiceWorkerUpdateViaCache::Imports
   }
 }
 

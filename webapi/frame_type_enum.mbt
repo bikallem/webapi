@@ -48,7 +48,7 @@ fn FrameType::from_unchecked(value : String) -> FrameType {
     "top-level" => FrameType::TopLevel
     "nested" => FrameType::Nested
     "none" => FrameType::None
-    _ => abort("unknown FrameType enum value")
+    _ => FrameType::Auxiliary
   }
 }
 

@@ -48,7 +48,7 @@ fn CSSBoxType::from_unchecked(value : String) -> CSSBoxType {
     "border" => CSSBoxType::Border
     "padding" => CSSBoxType::Padding
     "content" => CSSBoxType::Content
-    _ => abort("unknown CSSBoxType enum value")
+    _ => CSSBoxType::Margin
   }
 }
 

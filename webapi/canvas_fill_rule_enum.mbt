@@ -41,7 +41,7 @@ fn CanvasFillRule::from_unchecked(value : String) -> CanvasFillRule {
   match value {
     "nonzero" => CanvasFillRule::Nonzero
     "evenodd" => CanvasFillRule::Evenodd
-    _ => abort("unknown CanvasFillRule enum value")
+    _ => CanvasFillRule::Nonzero
   }
 }
 

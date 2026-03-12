@@ -51,7 +51,7 @@ fn AnimationPlayState::from_unchecked(value : String) -> AnimationPlayState {
     "running" => AnimationPlayState::Running
     "paused" => AnimationPlayState::Paused
     "finished" => AnimationPlayState::Finished
-    _ => abort("unknown AnimationPlayState enum value")
+    _ => AnimationPlayState::Idle
   }
 }
 

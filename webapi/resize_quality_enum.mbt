@@ -51,7 +51,7 @@ fn ResizeQuality::from_unchecked(value : String) -> ResizeQuality {
     "low" => ResizeQuality::Low
     "medium" => ResizeQuality::Medium
     "high" => ResizeQuality::High
-    _ => abort("unknown ResizeQuality enum value")
+    _ => ResizeQuality::Pixelated
   }
 }
 

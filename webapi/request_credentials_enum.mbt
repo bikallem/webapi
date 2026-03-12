@@ -46,7 +46,7 @@ fn RequestCredentials::from_unchecked(value : String) -> RequestCredentials {
     "omit" => RequestCredentials::Omit
     "same-origin" => RequestCredentials::SameOrigin
     "include" => RequestCredentials::Include
-    _ => abort("unknown RequestCredentials enum value")
+    _ => RequestCredentials::Omit
   }
 }
 

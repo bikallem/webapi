@@ -46,7 +46,7 @@ fn CanvasFontKerning::from_unchecked(value : String) -> CanvasFontKerning {
     "auto" => CanvasFontKerning::Auto
     "normal" => CanvasFontKerning::Normal
     "none" => CanvasFontKerning::None
-    _ => abort("unknown CanvasFontKerning enum value")
+    _ => CanvasFontKerning::Auto
   }
 }
 

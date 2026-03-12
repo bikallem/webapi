@@ -41,7 +41,7 @@ fn SlotAssignmentMode::from_unchecked(value : String) -> SlotAssignmentMode {
   match value {
     "manual" => SlotAssignmentMode::Manual
     "named" => SlotAssignmentMode::Named
-    _ => abort("unknown SlotAssignmentMode enum value")
+    _ => SlotAssignmentMode::Manual
   }
 }
 

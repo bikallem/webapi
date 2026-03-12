@@ -46,7 +46,7 @@ fn RequestPriority::from_unchecked(value : String) -> RequestPriority {
     "high" => RequestPriority::High
     "low" => RequestPriority::Low
     "auto" => RequestPriority::Auto
-    _ => abort("unknown RequestPriority enum value")
+    _ => RequestPriority::High
   }
 }
 

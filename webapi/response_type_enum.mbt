@@ -61,7 +61,7 @@ fn ResponseType::from_unchecked(value : String) -> ResponseType {
     "error" => ResponseType::Error
     "opaque" => ResponseType::Opaque
     "opaqueredirect" => ResponseType::Opaqueredirect
-    _ => abort("unknown ResponseType enum value")
+    _ => ResponseType::Basic
   }
 }
 

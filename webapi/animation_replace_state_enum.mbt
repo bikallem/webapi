@@ -50,7 +50,7 @@ fn AnimationReplaceState::from_unchecked(
     "active" => AnimationReplaceState::Active
     "removed" => AnimationReplaceState::Removed
     "persisted" => AnimationReplaceState::Persisted
-    _ => abort("unknown AnimationReplaceState enum value")
+    _ => AnimationReplaceState::Active
   }
 }
 

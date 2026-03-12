@@ -46,7 +46,7 @@ fn WriteCommandType::from_unchecked(value : String) -> WriteCommandType {
     "write" => WriteCommandType::Write
     "seek" => WriteCommandType::Seek
     "truncate" => WriteCommandType::Truncate
-    _ => abort("unknown WriteCommandType enum value")
+    _ => WriteCommandType::Write
   }
 }
 

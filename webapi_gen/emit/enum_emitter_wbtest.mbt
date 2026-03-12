@@ -82,7 +82,7 @@ test "EnumEmitter emits enum with multiple values" {
       #|    "auto" => ScrollBehavior::Auto
       #|    "instant" => ScrollBehavior::Instant
       #|    "smooth" => ScrollBehavior::Smooth
-      #|    _ => abort("unknown ScrollBehavior enum value")
+      #|    _ => ScrollBehavior::Auto
       #|  }
       #|}
       #|
@@ -161,7 +161,7 @@ test "EnumEmitter emits enum with empty string value" {
       #|    "backward" => SelectionDirection::Backward
       #|    "none" => SelectionDirection::None
       #|    "" => SelectionDirection::Empty
-      #|    _ => abort("unknown SelectionDirection enum value")
+      #|    _ => SelectionDirection::Empty
       #|  }
       #|}
       #|
@@ -234,7 +234,7 @@ test "EnumEmitter emits enum with dash-separated values" {
       #|    "no-referrer" => ReferrerPolicy::NoReferrer
       #|    "no-referrer-when-downgrade" => ReferrerPolicy::NoReferrerWhenDowngrade
       #|    "origin" => ReferrerPolicy::Origin
-      #|    _ => abort("unknown ReferrerPolicy enum value")
+      #|    _ => ReferrerPolicy::NoReferrer
       #|  }
       #|}
       #|
@@ -251,4 +251,33 @@ test "EnumEmitter emits enum with dash-separated values" {
       #|}
     ),
   )
+}
+
+///|
+test "EnumEmitter falls back to empty variant for unknown values when available" {
+  let idl =
+    #|enum SelectionDirection { "forward", "backward", "none", "" };
+  let definitions = @parser.parse(idl)
+  let flattened = @partial_merged.merge_partials(definitions)
+    |> @flattened_idl.flatten(ignore)
+  let emitter = EnumEmitter::{ idl: flattened }
+  let (_filename, emits) = emitter.emit("SelectionDirection")
+  let multi = mbt_code_gen_multi(emits)
+  inspect(
+    multi.shared.contains("_ => SelectionDirection::Empty"),
+    content="true",
+  )
+}
+
+///|
+test "EnumEmitter falls back to first variant for unknown values without empty case" {
+  let idl =
+    #|enum ScrollBehavior { "auto", "instant", "smooth" };
+  let definitions = @parser.parse(idl)
+  let flattened = @partial_merged.merge_partials(definitions)
+    |> @flattened_idl.flatten(ignore)
+  let emitter = EnumEmitter::{ idl: flattened }
+  let (_filename, emits) = emitter.emit("ScrollBehavior")
+  let multi = mbt_code_gen_multi(emits)
+  inspect(multi.shared.contains("_ => ScrollBehavior::Auto"), content="true")
 }

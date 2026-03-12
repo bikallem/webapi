@@ -61,7 +61,7 @@ fn ServiceWorkerState::from_unchecked(value : String) -> ServiceWorkerState {
     "activating" => ServiceWorkerState::Activating
     "activated" => ServiceWorkerState::Activated
     "redundant" => ServiceWorkerState::Redundant
-    _ => abort("unknown ServiceWorkerState enum value")
+    _ => ServiceWorkerState::Parsed
   }
 }
 

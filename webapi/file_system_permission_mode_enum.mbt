@@ -47,7 +47,7 @@ fn FileSystemPermissionMode::from_unchecked(
   match value {
     "read" => FileSystemPermissionMode::Read
     "readwrite" => FileSystemPermissionMode::Readwrite
-    _ => abort("unknown FileSystemPermissionMode enum value")
+    _ => FileSystemPermissionMode::Read
   }
 }
 

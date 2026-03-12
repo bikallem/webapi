@@ -47,7 +47,7 @@ fn ScrollIntoViewContainer::from_unchecked(
   match value {
     "all" => ScrollIntoViewContainer::All
     "nearest" => ScrollIntoViewContainer::Nearest
-    _ => abort("unknown ScrollIntoViewContainer enum value")
+    _ => ScrollIntoViewContainer::All
   }
 }
 

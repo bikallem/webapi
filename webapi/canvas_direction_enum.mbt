@@ -46,7 +46,7 @@ fn CanvasDirection::from_unchecked(value : String) -> CanvasDirection {
     "ltr" => CanvasDirection::Ltr
     "rtl" => CanvasDirection::Rtl
     "inherit" => CanvasDirection::Inherit
-    _ => abort("unknown CanvasDirection enum value")
+    _ => CanvasDirection::Ltr
   }
 }
 

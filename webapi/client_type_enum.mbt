@@ -48,7 +48,7 @@ fn ClientType::from_unchecked(value : String) -> ClientType {
     "worker" => ClientType::Worker
     "sharedworker" => ClientType::Sharedworker
     "all" => ClientType::All
-    _ => abort("unknown ClientType enum value")
+    _ => ClientType::Window
   }
 }
 

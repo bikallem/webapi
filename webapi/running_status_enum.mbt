@@ -41,7 +41,7 @@ fn RunningStatus::from_unchecked(value : String) -> RunningStatus {
   match value {
     "running" => RunningStatus::Running
     "not-running" => RunningStatus::NotRunning
-    _ => abort("unknown RunningStatus enum value")
+    _ => RunningStatus::Running
   }
 }
 

@@ -56,7 +56,7 @@ fn TextTrackKind::from_unchecked(value : String) -> TextTrackKind {
     "descriptions" => TextTrackKind::Descriptions
     "chapters" => TextTrackKind::Chapters
     "metadata" => TextTrackKind::Metadata
-    _ => abort("unknown TextTrackKind enum value")
+    _ => TextTrackKind::Subtitles
   }
 }
 

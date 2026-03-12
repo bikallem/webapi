@@ -52,7 +52,7 @@ fn IDBTransactionDurability::from_unchecked(
     "default" => IDBTransactionDurability::Default
     "strict" => IDBTransactionDurability::Strict
     "relaxed" => IDBTransactionDurability::Relaxed
-    _ => abort("unknown IDBTransactionDurability enum value")
+    _ => IDBTransactionDurability::Default
   }
 }
 

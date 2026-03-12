@@ -43,7 +43,7 @@ fn FileSystemHandleKind::from_unchecked(value : String) -> FileSystemHandleKind 
   match value {
     "file" => FileSystemHandleKind::File
     "directory" => FileSystemHandleKind::Directory
-    _ => abort("unknown FileSystemHandleKind enum value")
+    _ => FileSystemHandleKind::File
   }
 }
 

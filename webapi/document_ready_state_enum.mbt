@@ -46,7 +46,7 @@ fn DocumentReadyState::from_unchecked(value : String) -> DocumentReadyState {
     "loading" => DocumentReadyState::Loading
     "interactive" => DocumentReadyState::Interactive
     "complete" => DocumentReadyState::Complete
-    _ => abort("unknown DocumentReadyState enum value")
+    _ => DocumentReadyState::Loading
   }
 }
 

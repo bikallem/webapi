@@ -56,7 +56,7 @@ fn CanvasTextAlign::from_unchecked(value : String) -> CanvasTextAlign {
     "left" => CanvasTextAlign::Left
     "right" => CanvasTextAlign::Right
     "center" => CanvasTextAlign::Center
-    _ => abort("unknown CanvasTextAlign enum value")
+    _ => CanvasTextAlign::Start
   }
 }
 

@@ -46,7 +46,7 @@ fn CanvasLineJoin::from_unchecked(value : String) -> CanvasLineJoin {
     "round" => CanvasLineJoin::Round
     "bevel" => CanvasLineJoin::Bevel
     "miter" => CanvasLineJoin::Miter
-    _ => abort("unknown CanvasLineJoin enum value")
+    _ => CanvasLineJoin::Round
   }
 }
 

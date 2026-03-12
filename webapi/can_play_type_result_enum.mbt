@@ -46,7 +46,7 @@ fn CanPlayTypeResult::from_unchecked(value : String) -> CanPlayTypeResult {
     "" => CanPlayTypeResult::Empty
     "maybe" => CanPlayTypeResult::Maybe
     "probably" => CanPlayTypeResult::Probably
-    _ => abort("unknown CanPlayTypeResult enum value")
+    _ => CanPlayTypeResult::Empty
   }
 }
 

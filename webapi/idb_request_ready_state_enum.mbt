@@ -43,7 +43,7 @@ fn IDBRequestReadyState::from_unchecked(value : String) -> IDBRequestReadyState 
   match value {
     "pending" => IDBRequestReadyState::Pending
     "done" => IDBRequestReadyState::Done
-    _ => abort("unknown IDBRequestReadyState enum value")
+    _ => IDBRequestReadyState::Pending
   }
 }
 

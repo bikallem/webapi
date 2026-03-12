@@ -46,7 +46,7 @@ fn TextTrackMode::from_unchecked(value : String) -> TextTrackMode {
     "disabled" => TextTrackMode::Disabled
     "hidden" => TextTrackMode::Hidden
     "showing" => TextTrackMode::Showing
-    _ => abort("unknown TextTrackMode enum value")
+    _ => TextTrackMode::Disabled
   }
 }
 

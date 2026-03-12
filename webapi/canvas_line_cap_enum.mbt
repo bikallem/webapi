@@ -46,7 +46,7 @@ fn CanvasLineCap::from_unchecked(value : String) -> CanvasLineCap {
     "butt" => CanvasLineCap::Butt
     "round" => CanvasLineCap::Round
     "square" => CanvasLineCap::Square
-    _ => abort("unknown CanvasLineCap enum value")
+    _ => CanvasLineCap::Butt
   }
 }
 

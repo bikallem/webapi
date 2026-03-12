@@ -36,7 +36,7 @@ pub fn RequestDuplex::from(value : String) -> RequestDuplex? {
 fn RequestDuplex::from_unchecked(value : String) -> RequestDuplex {
   match value {
     "half" => RequestDuplex::Half
-    _ => abort("unknown RequestDuplex enum value")
+    _ => RequestDuplex::Half
   }
 }
 
