@@ -55,11 +55,74 @@ fn is_core_spec(
 }
 
 ///|
+fn track_output_file(
+  expected_files : @hashset.HashSet[String],
+  filename : String,
+) -> Unit {
+  expected_files.add(filename)
+}
+
+///|
+fn write_output_file(
+  output_dir : String,
+  filename : String,
+  content : String,
+  expected_files : @hashset.HashSet[String],
+) -> Unit raise {
+  let filepath = "\{output_dir}/\{filename}"
+  println("  Writing \{filepath}...")
+  @fs.write_string_to_file(filepath, content) catch {
+    e => fail("failed to write \{filepath}: \{e}")
+  }
+  track_output_file(expected_files, filename)
+}
+
+///|
+fn is_generated_output_file(filename : String) -> Bool {
+  if filename.has_suffix(".mbt") {
+    true
+  } else {
+    match filename {
+      "moon.pkg" | "moon.pkg.json" | "skipped.log" | "webapi.mjs" => true
+      _ => false
+    }
+  }
+}
+
+///|
+fn reconcile_output_dir(
+  output_dir : String,
+  expected_files : @hashset.HashSet[String],
+) -> Unit raise {
+  println("=== Reconciling Output Directory ===")
+  let output_files = @fs.read_dir(output_dir) catch {
+    e => fail("failed to read output directory \{output_dir}: \{e}")
+  }
+  let stale_files = output_files.filter(fn(filename) {
+    is_generated_output_file(filename) && !expected_files.contains(filename)
+  })
+  stale_files.sort()
+  for filename in stale_files {
+    let filepath = "\{output_dir}/\{filename}"
+    let is_file = @fs.is_file(filepath) catch {
+      e => fail("failed to stat \{filepath}: \{e}")
+    }
+    if is_file {
+      println("  Removing stale \{filepath}...")
+      @fs.remove_file(filepath) catch {
+        e => fail("failed to remove stale output file \{filepath}: \{e}")
+      }
+    }
+  }
+}
+
+///|
 /// Copy all .mbt template files from templates_dir to output_dir.
 /// Returns arrays of JS-only and wasm-only filenames for conditional compilation.
 fn copy_templates(
   templates_dir : String,
   output_dir : String,
+  expected_files : @hashset.HashSet[String],
 ) -> (Array[String], Array[String]) raise {
   println("=== Copying Template Files ===")
   let template_files = @fs.read_dir(templates_dir) catch {
@@ -71,14 +134,11 @@ fn copy_templates(
     // Only copy .mbt files (skip non-.mbt files like README.md)
     if filename.has_suffix(".mbt") {
       let src_path = "\{templates_dir}/\{filename}"
-      let dst_path = "\{output_dir}/\{filename}"
       println("  Copying \{filename}...")
       let content = @fs.read_file_to_string(src_path) catch {
         e => fail("failed to read template \{src_path}: \{e}")
       }
-      @fs.write_string_to_file(dst_path, content) catch {
-        e => fail("failed to write template \{dst_path}: \{e}")
-      }
+      write_output_file(output_dir, filename, content, expected_files)
       // Track target-specific files
       if filename.has_suffix("_js.mbt") {
         js_files.push(filename)
@@ -101,6 +161,7 @@ fn[E : @emit.Emitter] emit_and_write_multi(
   keys : Iter[String],
   js_files : Array[String],
   wasm_files : Array[String],
+  expected_files : @hashset.HashSet[String],
 ) -> Int raise {
   fn sorted_keys(keys : Iter[String]) -> Array[String] {
     let names = keys.collect()
@@ -121,11 +182,12 @@ fn[E : @emit.Emitter] emit_and_write_multi(
       .collect()
     filenames.sort()
     for filename in filenames {
-      let filepath = "\{output_dir}/\{filename}"
-      println("  Writing \{filepath}...")
-      @fs.write_string_to_file(filepath, files[@emit.Filename(filename)].0) catch {
-        e => fail("failed to write file: \{e}")
-      }
+      write_output_file(
+        output_dir,
+        filename,
+        files[@emit.Filename(filename)].0,
+        expected_files,
+      )
       match track {
         Some(arr) => arr.push(filename)
         None => ()
@@ -275,14 +337,17 @@ fn main {
     }
 
     // Copy base template files (returns target-specific filenames)
-    let (js_files, wasm_files) = copy_templates(templates_dir, output_dir)
+    let expected_files : @hashset.HashSet[String] = @hashset.new()
+    let (js_files, wasm_files) = copy_templates(
+      templates_dir,
+      output_dir,
+      expected_files,
+    )
 
     // Write skipped log
     if skipped_logs.length() > 0 {
-      let skipped_log_path = "\{output_dir}/skipped.log"
-      println("  Writing skipped definitions to \{skipped_log_path}...")
       let content = skipped_logs.join("\n")
-      @fs.write_string_to_file(skipped_log_path, content) catch {
+      try write_output_file(output_dir, "skipped.log", content, expected_files) catch {
         e => println("Warning: failed to write skipped.log: \{e}")
       }
     }
@@ -295,6 +360,7 @@ fn main {
       flattened.enums.keys(),
       js_files,
       wasm_files,
+      expected_files,
     )
     let typedef_count = emit_and_write_multi(
       output_dir,
@@ -303,6 +369,7 @@ fn main {
       flattened.typedefs.keys(),
       js_files,
       wasm_files,
+      expected_files,
     )
     let dict_count = emit_and_write_multi(
       output_dir,
@@ -311,6 +378,7 @@ fn main {
       flattened.dictionaries.keys(),
       js_files,
       wasm_files,
+      expected_files,
     )
     let iface_count = emit_and_write_multi(
       output_dir,
@@ -319,6 +387,7 @@ fn main {
       flattened.interfaces.keys(),
       js_files,
       wasm_files,
+      expected_files,
     )
     let callback_count = emit_and_write_multi(
       output_dir,
@@ -327,6 +396,7 @@ fn main {
       flattened.callbacks.keys(),
       js_files,
       wasm_files,
+      expected_files,
     )
     let namespace_count = emit_and_write_multi(
       output_dir,
@@ -335,33 +405,19 @@ fn main {
       flattened.namespaces.keys(),
       js_files,
       wasm_files,
+      expected_files,
     )
 
     // Generate and write JS runtime for wasm-gc
     println("=== Generating JS Runtime ===")
     let js_runtime = @emit.emit_js_runtime(flattened)
-    let js_runtime_path = "\{output_dir}/webapi.mjs"
-    println("  Writing \{js_runtime_path}...")
-    @fs.write_string_to_file(js_runtime_path, js_runtime) catch {
-      e => fail("failed to write JS runtime: \{e}")
-    }
+    write_output_file(output_dir, "webapi.mjs", js_runtime, expected_files)
 
     // Generate moon.pkg with conditional compilation targets
-    // Remove old moon.pkg.json if it exists (moon.pkg takes precedence)
-    let old_moon_pkg_json = "\{output_dir}/moon.pkg.json"
-    if @fs.path_exists(old_moon_pkg_json) {
-      println("  Removing old \{old_moon_pkg_json}...")
-      @fs.remove_file(old_moon_pkg_json) catch {
-        e => println("Warning: failed to remove old moon.pkg.json: \{e}")
-      }
-    }
     println("=== Generating moon.pkg ===")
     let moon_pkg_content = generate_moon_pkg(js_files, wasm_files)
-    let moon_pkg_path = "\{output_dir}/moon.pkg"
-    println("  Writing \{moon_pkg_path}...")
-    @fs.write_string_to_file(moon_pkg_path, moon_pkg_content) catch {
-      e => fail("failed to write moon.pkg: \{e}")
-    }
+    write_output_file(output_dir, "moon.pkg", moon_pkg_content, expected_files)
+    reconcile_output_dir(output_dir, expected_files)
     println("\n=== Generation complete! ===")
     println(
       "Generated \{enum_count} enums, \{typedef_count} typedefs, \{dict_count} dictionaries, \{iface_count} interfaces, \{callback_count} callbacks, \{namespace_count} namespaces",
