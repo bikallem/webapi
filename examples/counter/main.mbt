@@ -6,7 +6,7 @@ fn main {
   let mut count = 0
 
   // Create heading
-  let heading : @webapi.HTMLHeadElement = @webapi.document
+  let heading : @webapi.HTMLHeadingElement = @webapi.document
     .create_element("h1")
     .into()
   heading.set_text_content("Counter")
