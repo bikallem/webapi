@@ -14,13 +14,15 @@ fn make_wasm_with_func_imports(imports : Array[(String, String)]) -> Bytes {
   for pair in imports {
     let mod_name = pair.0
     let field = pair.1
-    payload.push(mod_name.length())
-    for c in mod_name {
-      payload.push(c.to_int())
+    let mod_name_utf8 = @utf8.encode(mod_name)
+    payload.push(mod_name_utf8.length())
+    for b in mod_name_utf8 {
+      payload.push(b.to_int())
     }
-    payload.push(field.length())
-    for c in field {
-      payload.push(c.to_int())
+    let field_utf8 = @utf8.encode(field)
+    payload.push(field_utf8.length())
+    for b in field_utf8 {
+      payload.push(b.to_int())
     }
     payload.push(0) // kind = func
     payload.push(0) // type index = 0
@@ -131,6 +133,26 @@ test "read_utf8_string: at offset" {
   assert_eq(offset, 5)
 }
 
+///|
+test "read_utf8_string: decodes non-ascii UTF-8" {
+  let (s, offset) = try! read_utf8_string(
+    bytes_of([6, 0xE4, 0xBD, 0xA0, 0xE5, 0xA5, 0xBD]),
+    0,
+  )
+  assert_eq(s, "你好")
+  assert_eq(offset, 7)
+}
+
+///|
+test "read_utf8_string: invalid UTF-8 raises InvalidUtf8" {
+  try read_utf8_string(bytes_of([2, 0xC3, 0x28]), 0) catch {
+    InvalidUtf8(offset) => assert_eq(offset, 1)
+    _ => fail("expected InvalidUtf8")
+  } noraise {
+    _ => fail("expected InvalidUtf8")
+  }
+}
+
 // ===== skip_valtype =====
 
 ///|
@@ -210,6 +232,17 @@ test "parse_wasm_imports: different modules" {
     try! parse_wasm_imports(wasm),
     content=(
       #|[("webapi_Node", "get"), ("webapi_Element", "set"), ("JsValue", "null")]
+    ),
+  )
+}
+
+///|
+test "parse_wasm_imports: decodes UTF-8 module and field names" {
+  let wasm = make_wasm_with_func_imports([("模块", "函數")])
+  inspect(
+    try! parse_wasm_imports(wasm),
+    content=(
+      #|[("模块", "函數")]
     ),
   )
 }
@@ -313,6 +346,20 @@ test "parse_wasm_imports: truncated import payload raises UnexpectedEnd" {
       assert_eq(offset, 14)
     }
     _ => fail("expected UnexpectedEnd")
+  } noraise {
+    _ => fail("expected parse failure")
+  }
+}
+
+///|
+test "parse_wasm_imports: invalid UTF-8 raises InvalidUtf8" {
+  let wasm = bytes_of([
+    0x00, 0x61, 0x73, 0x6d, 0x01, 0x00, 0x00, 0x00, 0x02, 0x08, 0x01, 0x02, 0xC3,
+    0x28, 0x01, 0x66, 0x00, 0x00,
+  ])
+  try parse_wasm_imports(wasm) catch {
+    InvalidUtf8(offset) => assert_eq(offset, 12)
+    _ => fail("expected InvalidUtf8")
   } noraise {
     _ => fail("expected parse failure")
   }

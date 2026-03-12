@@ -2,6 +2,7 @@
 pub suberror WasmParseError {
   UnexpectedEnd(String, Int)
   InvalidMagic
+  InvalidUtf8(Int)
   SectionPastEnd(Int, Int, Int)
   InvalidImportKind(Int, Int)
 } derive(Show)
@@ -12,6 +13,7 @@ pub fn WasmParseError::message(self : WasmParseError) -> String {
     UnexpectedEnd(context, offset) =>
       "unexpected end of wasm while reading \{context} at byte \{offset}"
     InvalidMagic => "not a wasm binary (bad magic)"
+    InvalidUtf8(offset) => "invalid UTF-8 string at byte \{offset}"
     SectionPastEnd(section_id, section_end, length) =>
       "section \{section_id} ends at byte \{section_end}, past file length \{length}"
     InvalidImportKind(kind, offset) =>
@@ -75,11 +77,14 @@ fn read_utf8_string(
 ) -> (String, Int) raise WasmParseError {
   let (len, pos) = read_leb128(bytes, offset, limit~)
   require_bytes(limit, pos, len, "UTF-8 string")
-  let buf = StringBuilder::new()
-  for i in 0..<len {
-    buf.write_char(bytes[pos + i].to_int().unsafe_to_char())
+  let raw = bytes.view(start=pos, end=pos + len)
+  let decoded = @utf8.decode(raw) catch {
+    @utf8.Malformed(remaining) => {
+      let consumed = raw.length() - remaining.length()
+      raise InvalidUtf8(pos + consumed)
+    }
   }
-  (buf.to_string(), pos + len)
+  (decoded, pos + len)
 }
 
 ///|
