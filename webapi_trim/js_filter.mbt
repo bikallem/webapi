@@ -1,152 +1,476 @@
 ///|
-/// Count net brace changes in a line, ignoring braces inside string literals.
-fn count_braces(line : String) -> Int {
-  let mut depth = 0
-  let mut in_single = false
-  let mut in_double = false
-  let mut in_template = false
-  let mut escaped = false
-  for c in line {
-    if escaped {
-      escaped = false
-      continue
-    }
-    if c == '\\' {
-      escaped = true
-      continue
-    }
-    if in_single {
-      if c == '\'' {
-        in_single = false
-      }
-      continue
-    }
-    if in_double {
-      if c == '"' {
-        in_double = false
-      }
-      continue
-    }
-    if in_template {
-      if c == '`' {
-        in_template = false
-      }
-      continue
-    }
-    match c {
-      '\'' => in_single = true
-      '"' => in_double = true
-      '`' => in_template = true
-      '{' => depth += 1
-      '}' => depth -= 1
-      _ => ()
-    }
-  }
-  depth
+struct ObjectEntry {
+  key : String
+  start : Int
+  value_start : Int
+  value_end : Int
+  end : Int
 }
 
 ///|
-/// Extract a module name from a line like `  moduleName: {` or `  "module:name": {`.
-/// Returns the name (without quotes) if the line starts a module block at brace depth 1.
-fn extract_module_name(line : String) -> String? {
-  // Must start with exactly 2 spaces
-  guard line.length() >= 5 else { return None }
-  guard line[0] == ' ' && line[1] == ' ' && line[2] != ' ' else { return None }
-  guard line.has_suffix(": {") else { return None }
-  // strip "  " prefix and ": {" suffix
-  let name_part = line[2:line.length() - 3].to_string()
-  if name_part.has_prefix("\"") && name_part.has_suffix("\"") {
-    let unquoted = name_part[1:name_part.length() - 1].to_string()
-    Some(unquoted)
-  } else {
-    Some(name_part)
+fn code_unit_at(source : String, pos : Int) -> UInt16 {
+  source.code_unit_at(pos)
+}
+
+///|
+fn slice(source : String, start : Int, end_ : Int) -> String {
+  source[start:end_].to_string()
+}
+
+///|
+fn is_js_space(ch : UInt16) -> Bool {
+  match ch {
+    ' ' | '\n' | '\r' | '\t' => true
+    _ => false
   }
 }
 
 ///|
-/// Extract a function name from a line like `    funcName: (args) => ...`.
-/// Returns the name if the line starts with exactly 4 spaces followed by a name and `: `.
-fn extract_function_name(line : String) -> String? {
-  guard line.length() >= 7 else { return None }
-  guard line[0] == ' ' &&
-    line[1] == ' ' &&
-    line[2] == ' ' &&
-    line[3] == ' ' &&
-    line[4] != ' ' else {
-    return None
+fn skip_line_comment(
+  source : String,
+  pos : Int,
+  limit? : Int = source.length(),
+) -> Int {
+  let mut i = pos + 2
+  while i < limit && code_unit_at(source, i) != '\n' {
+    i += 1
   }
-  // Find ": " after the name
-  let mut i = 4
-  while i < line.length() {
-    if line[i] == ':' && i + 1 < line.length() && line[i + 1] == ' ' {
-      let name = line[4:i].to_string()
-      return Some(name)
+  i
+}
+
+///|
+fn skip_block_comment(
+  source : String,
+  pos : Int,
+  limit? : Int = source.length(),
+) -> Int {
+  let mut i = pos + 2
+  while i + 1 < limit {
+    if code_unit_at(source, i) == '*' && code_unit_at(source, i + 1) == '/' {
+      return i + 2
     }
     i += 1
+  }
+  limit
+}
+
+///|
+fn skip_js_string(
+  source : String,
+  pos : Int,
+  quote : UInt16,
+  limit? : Int = source.length(),
+) -> Int {
+  let mut i = pos + 1
+  let mut escaped = false
+  while i < limit {
+    let ch = code_unit_at(source, i)
+    if escaped {
+      escaped = false
+      i += 1
+    } else if ch == '\\' {
+      escaped = true
+      i += 1
+    } else if ch == quote {
+      return i + 1
+    } else {
+      i += 1
+    }
+  }
+  limit
+}
+
+///|
+fn skip_template_expression(
+  source : String,
+  pos : Int,
+  limit? : Int = source.length(),
+) -> Int {
+  let mut i = pos
+  let mut paren_depth = 0
+  let mut bracket_depth = 0
+  let mut brace_depth = 1
+  while i < limit && brace_depth > 0 {
+    let ch = code_unit_at(source, i)
+    if ch == '"' {
+      i = skip_js_string(source, i, '"', limit~)
+    } else if ch == '\'' {
+      i = skip_js_string(source, i, '\'', limit~)
+    } else if ch == '`' {
+      i = skip_template_literal(source, i, limit~)
+    } else if ch == '/' && i + 1 < limit && code_unit_at(source, i + 1) == '/' {
+      i = skip_line_comment(source, i, limit~)
+    } else if ch == '/' && i + 1 < limit && code_unit_at(source, i + 1) == '*' {
+      i = skip_block_comment(source, i, limit~)
+    } else {
+      match ch {
+        '(' => paren_depth += 1
+        ')' if paren_depth > 0 => paren_depth -= 1
+        '[' => bracket_depth += 1
+        ']' if bracket_depth > 0 => bracket_depth -= 1
+        '{' => brace_depth += 1
+        '}' => brace_depth -= 1
+        _ => ()
+      }
+      i += 1
+    }
+  }
+  i
+}
+
+///|
+fn skip_template_literal(
+  source : String,
+  pos : Int,
+  limit? : Int = source.length(),
+) -> Int {
+  let mut i = pos + 1
+  let mut escaped = false
+  while i < limit {
+    let ch = code_unit_at(source, i)
+    if escaped {
+      escaped = false
+      i += 1
+    } else if ch == '\\' {
+      escaped = true
+      i += 1
+    } else if ch == '`' {
+      return i + 1
+    } else if ch == '$' && i + 1 < limit && code_unit_at(source, i + 1) == '{' {
+      i = skip_template_expression(source, i + 2, limit~)
+    } else {
+      i += 1
+    }
+  }
+  limit
+}
+
+///|
+fn skip_js_whitespace_and_comments(
+  source : String,
+  pos : Int,
+  limit? : Int = source.length(),
+) -> Int {
+  let mut i = pos
+  while i < limit {
+    let ch = code_unit_at(source, i)
+    if is_js_space(ch) {
+      i += 1
+    } else if ch == '/' && i + 1 < limit && code_unit_at(source, i + 1) == '/' {
+      i = skip_line_comment(source, i, limit~)
+    } else if ch == '/' && i + 1 < limit && code_unit_at(source, i + 1) == '*' {
+      i = skip_block_comment(source, i, limit~)
+    } else {
+      break
+    }
+  }
+  i
+}
+
+///|
+fn scan_expression_end(
+  source : String,
+  pos : Int,
+  limit? : Int = source.length(),
+) -> Int {
+  let mut i = pos
+  let mut paren_depth = 0
+  let mut bracket_depth = 0
+  let mut brace_depth = 0
+  let mut last_end = pos
+  while i < limit {
+    let ch = code_unit_at(source, i)
+    let top_level = paren_depth == 0 && bracket_depth == 0 && brace_depth == 0
+    if top_level && is_js_space(ch) {
+      i += 1
+    } else if ch == '"' {
+      i = skip_js_string(source, i, '"', limit~)
+      last_end = i
+    } else if ch == '\'' {
+      i = skip_js_string(source, i, '\'', limit~)
+      last_end = i
+    } else if ch == '`' {
+      i = skip_template_literal(source, i, limit~)
+      last_end = i
+    } else if ch == '/' && i + 1 < limit && code_unit_at(source, i + 1) == '/' {
+      i = skip_line_comment(source, i, limit~)
+      if !top_level {
+        last_end = i
+      }
+    } else if ch == '/' && i + 1 < limit && code_unit_at(source, i + 1) == '*' {
+      i = skip_block_comment(source, i, limit~)
+      if !top_level {
+        last_end = i
+      }
+    } else if ch == ',' && top_level {
+      return last_end
+    } else if ch == '}' && top_level {
+      return last_end
+    } else {
+      match ch {
+        '(' => paren_depth += 1
+        ')' if paren_depth > 0 => paren_depth -= 1
+        '[' => bracket_depth += 1
+        ']' if bracket_depth > 0 => bracket_depth -= 1
+        '{' => brace_depth += 1
+        '}' if brace_depth > 0 => brace_depth -= 1
+        _ => ()
+      }
+      i += 1
+      last_end = i
+    }
+  }
+  last_end
+}
+
+///|
+fn find_next_open_brace(
+  source : String,
+  pos : Int,
+  limit? : Int = source.length(),
+) -> Int? {
+  let mut i = pos
+  while i < limit {
+    let ch = code_unit_at(source, i)
+    if ch == '{' {
+      return Some(i)
+    }
+    if ch == '"' {
+      i = skip_js_string(source, i, '"', limit~)
+    } else if ch == '\'' {
+      i = skip_js_string(source, i, '\'', limit~)
+    } else if ch == '`' {
+      i = skip_template_literal(source, i, limit~)
+    } else if ch == '/' && i + 1 < limit && code_unit_at(source, i + 1) == '/' {
+      i = skip_line_comment(source, i, limit~)
+    } else if ch == '/' && i + 1 < limit && code_unit_at(source, i + 1) == '*' {
+      i = skip_block_comment(source, i, limit~)
+    } else {
+      i += 1
+    }
   }
   None
 }
 
 ///|
-/// Filter the function lines within a module block, keeping only functions
-/// whose names are in the required set. Returns the filtered lines including
-/// the module header and closing brace.
-fn filter_module_functions(
-  block_lines : Array[String],
-  required_fields : @hashset.HashSet[String],
-) -> Array[String] {
-  // block_lines[0] is the module header (e.g., "  ModName: {")
-  // block_lines[last] is the closing brace (e.g., "  },")
-  guard block_lines.length() >= 2 else { return block_lines }
-  let header = block_lines[0]
-  let closer = block_lines[block_lines.length() - 1]
-  // Extract inner lines (between header and closer)
-  let inner : Array[String] = []
-  for i in 1..<(block_lines.length() - 1) {
-    inner.push(block_lines[i])
+fn find_matching_brace(
+  source : String,
+  open_brace : Int,
+  limit? : Int = source.length(),
+) -> Int? {
+  guard open_brace < limit && code_unit_at(source, open_brace) == '{' else {
+    return None
   }
-  // Parse functions from inner lines
-  let kept : Array[Array[String]] = []
-  let mut func_buf : Array[String] = []
-  let mut func_name : String? = None
-  let mut func_depth = 0
-  for line in inner {
-    match extract_function_name(line) {
-      Some(name) if func_name is None => {
-        // Start of a new function
-        func_name = Some(name)
-        func_buf = [line]
-        func_depth = count_braces(line)
-      }
-      _ =>
-        if func_name is None {
-          // Blank line or non-function line outside a function — skip
-          continue
-        } else {
-          func_buf.push(line)
-          func_depth += count_braces(line)
+  let mut i = open_brace + 1
+  let mut depth = 1
+  while i < limit {
+    let ch = code_unit_at(source, i)
+    if ch == '"' {
+      i = skip_js_string(source, i, '"', limit~)
+    } else if ch == '\'' {
+      i = skip_js_string(source, i, '\'', limit~)
+    } else if ch == '`' {
+      i = skip_template_literal(source, i, limit~)
+    } else if ch == '/' && i + 1 < limit && code_unit_at(source, i + 1) == '/' {
+      i = skip_line_comment(source, i, limit~)
+    } else if ch == '/' && i + 1 < limit && code_unit_at(source, i + 1) == '*' {
+      i = skip_block_comment(source, i, limit~)
+    } else {
+      match ch {
+        '{' => depth += 1
+        '}' => {
+          depth -= 1
+          if depth == 0 {
+            return Some(i)
+          }
         }
-    }
-    // Check if the current function is complete
-    if func_name is Some(_) && func_depth <= 0 {
-      guard func_name is Some(name) else { continue }
-      if required_fields.contains(name) {
-        kept.push(func_buf)
+        _ => ()
       }
-      func_name = None
-      func_buf = []
-      func_depth = 0
+      i += 1
     }
   }
-  // Reconstruct block — keep original lines as-is (trailing commas are valid JS)
-  let result : Array[String] = [header]
-  for func_lines in kept {
-    for fline in func_lines {
-      result.push(fline)
+  None
+}
+
+///|
+fn parse_property_key(
+  source : String,
+  pos : Int,
+  limit : Int,
+) -> (String, Int)? {
+  guard pos < limit else { return None }
+  let ch = code_unit_at(source, pos)
+  if ch == '"' || ch == '\'' {
+    let end_ = skip_js_string(source, pos, ch, limit~)
+    guard end_ > pos + 1 else { return None }
+    Some((slice(source, pos + 1, end_ - 1), end_))
+  } else {
+    let mut end_ = pos
+    while end_ < limit {
+      let next = code_unit_at(source, end_)
+      if is_js_space(next) || next == ':' {
+        break
+      }
+      end_ += 1
+    }
+    guard end_ > pos else { return None }
+    Some((slice(source, pos, end_), end_))
+  }
+}
+
+///|
+fn parse_object_entries(
+  source : String,
+  obj_start : Int,
+  obj_end : Int,
+) -> Array[ObjectEntry]? {
+  let entries : Array[ObjectEntry] = []
+  let mut pos = obj_start + 1
+  while true {
+    pos = skip_js_whitespace_and_comments(source, pos, limit=obj_end)
+    if pos >= obj_end {
+      break
+    }
+    let start = pos
+    let (key, after_key) = match parse_property_key(source, pos, obj_end) {
+      Some(parsed) => parsed
+      None => return None
+    }
+    let colon_pos = skip_js_whitespace_and_comments(
+      source,
+      after_key,
+      limit=obj_end,
+    )
+    guard colon_pos < obj_end && code_unit_at(source, colon_pos) == ':' else {
+      return None
+    }
+    let value_start = skip_js_whitespace_and_comments(
+      source,
+      colon_pos + 1,
+      limit=obj_end,
+    )
+    let value_end = scan_expression_end(source, value_start, limit=obj_end)
+    let delimiter_pos = skip_js_whitespace_and_comments(
+      source,
+      value_end,
+      limit=obj_end,
+    )
+    let end_ = if delimiter_pos < obj_end &&
+      code_unit_at(source, delimiter_pos) == ',' {
+      delimiter_pos + 1
+    } else {
+      value_end
+    }
+    entries.push({ key, start, value_start, value_end, end: end_ })
+    pos = end_
+  }
+  Some(entries)
+}
+
+///|
+fn collapse_leading_blank_lines(prefix : String) -> String {
+  let mut i = 0
+  let mut last_newline = -1
+  while i < prefix.length() {
+    match code_unit_at(prefix, i) {
+      ' ' | '\t' | '\r' => i += 1
+      '\n' => {
+        last_newline = i
+        i += 1
+      }
+      _ => break
     }
   }
-  result.push(closer)
-  result
+  if last_newline > 0 {
+    slice(prefix, last_newline, prefix.length())
+  } else {
+    prefix
+  }
+}
+
+///|
+fn rewrite_object_entries(
+  source : String,
+  obj_start : Int,
+  obj_end : Int,
+  entries : Array[ObjectEntry],
+  render_entry : (ObjectEntry) -> String?,
+) -> String {
+  let multiline = slice(source, obj_start, obj_end + 1).contains("\n")
+  let rendered : Array[String?] = []
+  let mut last_kept = -1
+  for i in 0..<entries.length() {
+    let content = render_entry(entries[i])
+    if content is Some(_) {
+      last_kept = i
+    }
+    rendered.push(content)
+  }
+  let out = StringBuilder::new()
+  out.write_string(slice(source, obj_start, obj_start + 1))
+  let mut prev_end = obj_start + 1
+  let mut wrote_any = false
+  for i in 0..<entries.length() {
+    let entry = entries[i]
+    match rendered[i] {
+      Some(content) => {
+        let prefix = slice(source, prev_end, entry.start)
+        if multiline && !wrote_any {
+          out.write_string(collapse_leading_blank_lines(prefix))
+        } else {
+          out.write_string(prefix)
+        }
+        if !multiline && i == last_kept && content.has_suffix(",") {
+          out.write_string(slice(content, 0, content.length() - 1))
+        } else {
+          out.write_string(content)
+        }
+        wrote_any = true
+      }
+      None => ()
+    }
+    prev_end = entry.end
+  }
+  out.write_string(slice(source, prev_end, obj_end + 1))
+  out.to_string()
+}
+
+///|
+fn filter_module_entry(
+  source : String,
+  entry : ObjectEntry,
+  required_fields : @hashset.HashSet[String],
+) -> String {
+  guard entry.value_start < entry.value_end &&
+    code_unit_at(source, entry.value_start) == '{' else {
+    return slice(source, entry.start, entry.end)
+  }
+  let inner_end = match
+    find_matching_brace(source, entry.value_start, limit=entry.value_end) {
+    Some(end_) => end_
+    None => return slice(source, entry.start, entry.end)
+  }
+  let inner_entries = match
+    parse_object_entries(source, entry.value_start, inner_end) {
+    Some(entries) => entries
+    None => return slice(source, entry.start, entry.end)
+  }
+  let filtered_value = rewrite_object_entries(
+    source,
+    entry.value_start,
+    inner_end,
+    inner_entries,
+    fn(inner_entry) {
+      if required_fields.is_empty() || required_fields.contains(inner_entry.key) {
+        Some(slice(source, inner_entry.start, inner_entry.end))
+      } else {
+        None
+      }
+    },
+  )
+  slice(source, entry.start, entry.value_start) +
+  filtered_value +
+  slice(source, inner_end + 1, entry.end)
 }
 
 ///|
@@ -156,80 +480,41 @@ pub fn filter_js_modules(
   source : String,
   required_imports : Map[String, @hashset.HashSet[String]],
 ) -> String {
-  let lines : Array[String] = source
-    .split("\n")
-    .map(fn(sv) { sv.to_string() })
-    .collect()
-  let out = StringBuilder::new()
-  let mut in_object = false // inside wasmImportObject
-  let mut depth = 0 // brace depth relative to wasmImportObject
-  let mut in_block = false // inside a module block
-  let mut block_buf : Array[String] = []
-  let mut block_depth = 0
-  let mut keep_block = false
-  let mut block_fields : @hashset.HashSet[String]? = None
-  let mut first_kept = true
-  for line in lines {
-    if not(in_object) {
-      out.write_string(line)
-      out.write_char('\n')
-      if line.contains("wasmImportObject") && line.contains("{") {
-        in_object = true
-        depth = 1
-      }
-      continue
-    }
-    // Inside wasmImportObject
-    let brace_delta = count_braces(line)
-    if in_block {
-      block_buf.push(line)
-      block_depth += brace_delta
-      if block_depth == 0 {
-        // Block ended, back to depth 1
-        in_block = false
-        if keep_block {
-          let filtered = match block_fields {
-            Some(fields) => filter_module_functions(block_buf, fields)
-            None => block_buf
-          }
-          if not(first_kept) {
-            out.write_char('\n')
-          }
-          first_kept = false
-          for bline in filtered {
-            out.write_string(bline)
-            out.write_char('\n')
-          }
-        }
-        block_buf = []
-        block_fields = None
-      }
-      continue
-    }
-    // Check for module block start before updating depth, since the block
-    // tracks its own depth internally and we don't want to double-count.
-    match extract_module_name(line) {
-      Some(name) => {
-        in_block = true
-        block_buf = [line]
-        block_depth = brace_delta
-        keep_block = required_imports.contains(name)
-        block_fields = required_imports.get(name)
-        continue
-      }
-      None => ()
-    }
-    depth += brace_delta
-    if depth <= 0 {
-      // Closing of wasmImportObject
-      out.write_string(line)
-      out.write_char('\n')
-      in_object = false
-    }
+  let name_pos = match source.find("wasmImportObject") {
+    Some(pos) => pos
+    None => return source
   }
-  let result = out.to_string()
-  if result.has_suffix("\n\n") {
-    result[:result.length() - 1].to_string()
+  let obj_start = match
+    find_next_open_brace(source, name_pos + "wasmImportObject".length()) {
+    Some(pos) => pos
+    None => return source
+  }
+  let obj_end = match find_matching_brace(source, obj_start) {
+    Some(pos) => pos
+    None => return source
+  }
+  let entries = match parse_object_entries(source, obj_start, obj_end) {
+    Some(entries) => entries
+    None => return source
+  }
+  let filtered_object = rewrite_object_entries(
+    source,
+    obj_start,
+    obj_end,
+    entries,
+    fn(entry) {
+      match required_imports.get(entry.key) {
+        Some(required_fields) =>
+          Some(filter_module_entry(source, entry, required_fields))
+        None => None
+      }
+    },
+  )
+  let result = slice(source, 0, obj_start) +
+    filtered_object +
+    slice(source, obj_end + 1, source.length())
+  if !result.has_suffix("\n") {
+    result + "\n"
   } else {
     result
   }

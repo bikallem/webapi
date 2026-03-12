@@ -365,146 +365,6 @@ test "parse_wasm_imports: invalid UTF-8 raises InvalidUtf8" {
   }
 }
 
-// ===== count_braces =====
-
-///|
-test "count_braces: open brace" {
-  assert_eq(count_braces("  foo: {"), 1)
-}
-
-///|
-test "count_braces: close brace" {
-  assert_eq(count_braces("  },"), -1)
-}
-
-///|
-test "count_braces: balanced" {
-  assert_eq(count_braces("  x: (a) => { return a; },"), 0)
-}
-
-///|
-test "count_braces: no braces" {
-  assert_eq(count_braces("    hello: () => 42"), 0)
-}
-
-///|
-test "count_braces: braces in double-quoted string" {
-  let line = "    x: () => \"}{}{}\""
-  assert_eq(count_braces(line), 0)
-}
-
-///|
-test "count_braces: braces in single-quoted string" {
-  assert_eq(count_braces("    x: () => '}{}'"), 0)
-}
-
-///|
-test "count_braces: braces in template literal" {
-  assert_eq(count_braces("    x: () => `}{}`"), 0)
-}
-
-///|
-test "count_braces: escaped quote inside string" {
-  let line = "    x: \"a\\\"}\""
-  assert_eq(count_braces(line), 0)
-}
-
-// ===== extract_module_name =====
-
-///|
-test "extract_module_name: unquoted" {
-  inspect(
-    extract_module_name("  webapi_Node: {"),
-    content="Some(\"webapi_Node\")",
-  )
-}
-
-///|
-test "extract_module_name: quoted" {
-  inspect(
-    extract_module_name("  \"moonbit:ffi\": {"),
-    content="Some(\"moonbit:ffi\")",
-  )
-}
-
-///|
-test "extract_module_name: wrong indent (3 spaces)" {
-  inspect(extract_module_name("   foo: {"), content="None")
-}
-
-///|
-test "extract_module_name: no trailing brace" {
-  inspect(extract_module_name("  foo: bar"), content="None")
-}
-
-///|
-test "extract_module_name: too short" {
-  inspect(extract_module_name("  a"), content="None")
-}
-
-///|
-test "extract_module_name: no indent" {
-  inspect(extract_module_name("foo: {"), content="None")
-}
-
-///|
-test "extract_module_name: single space indent" {
-  inspect(extract_module_name(" foo: {"), content="None")
-}
-
-// ===== extract_function_name =====
-
-///|
-test "extract_function_name: simple" {
-  inspect(extract_function_name("    foo: () => 1"), content="Some(\"foo\")")
-}
-
-///|
-test "extract_function_name: with arrow function body" {
-  inspect(
-    extract_function_name(
-      "    setAttribute: (obj, name, value) => obj.setAttribute(name, value),",
-    ),
-    content="Some(\"setAttribute\")",
-  )
-}
-
-///|
-test "extract_function_name: multi-line start" {
-  inspect(
-    extract_function_name("    define: (tag, ctor) => {"),
-    content="Some(\"define\")",
-  )
-}
-
-///|
-test "extract_function_name: underscore prefix" {
-  inspect(
-    extract_function_name("    get_textContent: (obj) => obj.textContent"),
-    content="Some(\"get_textContent\")",
-  )
-}
-
-///|
-test "extract_function_name: wrong indent (2 spaces)" {
-  inspect(extract_function_name("  foo: () => 1"), content="None")
-}
-
-///|
-test "extract_function_name: wrong indent (6 spaces)" {
-  inspect(extract_function_name("      foo: () => 1"), content="None")
-}
-
-///|
-test "extract_function_name: no colon-space" {
-  inspect(extract_function_name("    foo = 1"), content="None")
-}
-
-///|
-test "extract_function_name: too short" {
-  inspect(extract_function_name("    a"), content="None")
-}
-
 // ===== filter_js_modules =====
 
 ///|
@@ -595,7 +455,7 @@ test "filter_js_modules: no matching modules" {
 }
 
 ///|
-test "filter_js_modules: nested braces in method body" {
+test "filter_js_modules: keeps multi-line function body" {
   let source =
     #|export const wasmImportObject = {
     #|  Mod: {
@@ -688,8 +548,6 @@ test "filter_js_modules: all modules kept" {
     ),
   )
 }
-
-// ===== function-level filtering =====
 
 ///|
 test "filter_js_modules: keeps only required functions" {
@@ -833,6 +691,105 @@ test "filter_js_modules: function-level with multiple modules" {
       #|  ModB: {
       #|    b2: () => 20
       #|  }
+      #|};
+      #|
+    ),
+  )
+}
+
+///|
+test "filter_js_modules: handles compact formatting without indentation" {
+  let source =
+    #|const keep = true;
+    #|export const wasmImportObject={ModA:{foo:()=>1,bar:()=>2},ModB:{baz:()=>3}};
+  let result = filter_js_modules(source, make_imports([("ModB", ["baz"])]))
+  inspect(
+    result,
+    content=(
+      #|const keep = true;
+      #|export const wasmImportObject={ModB:{baz:()=>3}};
+      #|
+    ),
+  )
+}
+
+///|
+test "filter_js_modules: handles comments and split property syntax" {
+  let source =
+    #|export const wasmImportObject = {
+    #|  /* keep */
+    #|  ModA
+    #|  /* colon */
+    #|  : {
+    #|    foo
+    #|    : (obj) => ({
+    #|      text: `value:${obj}`
+    #|    }),
+    #|    bar: () => 2
+    #|  },
+    #|  // drop
+    #|  ModB: {
+    #|    baz: () => 3
+    #|  }
+    #|};
+  let result = filter_js_modules(source, make_imports([("ModA", ["foo"])]))
+  inspect(
+    result,
+    content=(
+      #|export const wasmImportObject = {
+      #|  /* keep */
+      #|  ModA
+      #|  /* colon */
+      #|  : {
+      #|    foo
+      #|    : (obj) => ({
+      #|      text: `value:${obj}`
+      #|    }),
+      #|  },
+      #|};
+      #|
+    ),
+  )
+}
+
+///|
+test "filter_js_modules: filters compact module functions with quoted names" {
+  let source =
+    #|export const wasmImportObject={"moonbit:ffi":{"make_closure":(f,c)=>f.bind(null,c),"drop_closure":(f)=>f()},JsValue:{null:()=>null,undefined:()=>undefined}};
+  let result = filter_js_modules(
+    source,
+    make_imports([("moonbit:ffi", ["make_closure"]), ("JsValue", ["null"])]),
+  )
+  inspect(
+    result,
+    content=(
+      #|export const wasmImportObject={"moonbit:ffi":{"make_closure":(f,c)=>f.bind(null,c)},JsValue:{null:()=>null}};
+      #|
+    ),
+  )
+}
+
+///|
+test "filter_js_modules: keeps module when required field set is empty" {
+  let source =
+    #|export const wasmImportObject = {
+    #|  ModA: {
+    #|    foo: () => 1,
+    #|    bar: () => 2
+    #|  },
+    #|  ModB: {
+    #|    baz: () => 3
+    #|  }
+    #|};
+  let result = filter_js_modules(source, make_imports([("ModA", [])]))
+  inspect(
+    result,
+    content=(
+      #|export const wasmImportObject = {
+      #|  ModA: {
+      #|    foo: () => 1,
+      #|    bar: () => 2
+      #|  },
       #|};
       #|
     ),
