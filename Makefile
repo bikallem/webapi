@@ -68,7 +68,11 @@ validate-wasm:
 
 # Run Playwright browser tests
 test-playwright:
-	cd tests && npx playwright test
+	@cd tests && if node can_run_playwright.mjs; then \
+		npx playwright test; \
+	else \
+		echo "Skipping Playwright tests: sandbox cannot bind localhost or launch Chromium"; \
+	fi
 
 # Serve examples locally at http://localhost:3000/examples/
 serve:
