@@ -2,77 +2,58 @@
 
 ## [Unreleased]
 
-- **Replace `@js_async.Promise[T]` with `JsPromise[T]`** - Promise-returning WebAPI methods now return `JsPromise[T]` with `then()`/`catch_()`/`finally_()` methods that work on both JS and wasm-gc targets. Users wanting async/await can use the `bikallem/webapi/js_promise` bridge package to convert to `@js_async.Promise[T]` (JS target only).
+## [v0.4.0] - 2026-03-12
 
-## unreleased
+### Highlights
 
-### New Features
+- Added first-class `wasm-gc` support alongside the existing JS target.
+- Expanded the live demo gallery to 45 examples covering DOM, Fetch, Canvas, Streams, IndexedDB, Web Animations, WebSocket, URLPattern, File System Access, custom elements, and more.
+- Broadened generated API coverage with variadic arguments, namespaces, special operations, more specs, richer dictionary support, and improved callback ergonomics.
+- Added `webapi_trim`, a CLI/tooling path for trimming `webapi.mjs` to only the modules required by a compiled wasm binary.
 
-- **Support variadic arguments** - WebIDL variadic parameters (e.g., `any... data`, `DOMString... tokens`) are now emitted as `Array[T]` positional parameters with `...` spread in both JS FFI expressions and the wasm JS runtime. `any...` maps to `Array[&TJsValue]` so callers can pass heterogeneous values directly. This affects ~17 methods across DOM, HTML, and other specs (`Element::append`, `DOMTokenList::add`, `Window::set_timeout`, `Document::write`, etc.).
-- **Support WebIDL namespaces** - Namespace definitions (e.g., `namespace CSS { ... }`) now flow through the full pipeline (parser → partial_merged → flattened_idl → emitter → JS runtime) instead of being skipped. Namespace members (operations, readonly attributes, constants) are emitted as static methods (`pub fn CSS::escape(...)`). The generated JS runtime includes corresponding namespace modules (`webapi_CSS: { escape: (ident) => CSS.escape(ident) }`).
-- **Generate special operations (getter/setter/deleter)** - WebIDL special operations are now emitted instead of being skipped. Named operations (e.g. `Storage.getItem`, `NodeList.item`, `HTMLCollection.namedItem`) emit as regular method calls. Unnamed operations (e.g. `DOMStringMap` bracket access) emit using bracket notation (`obj[key]`, `obj[key] = value`, `delete obj[key]`) with synthetic method names (`get`, `set`, `delete_`). Unnamed getters always return `Option` to handle undefined. This adds ~31 new methods across Storage, NodeList, HTMLCollection, DOMStringMap, DOMTokenList, and many other interfaces.
-- **Replace `JsPromise[T]` with `@js_async.Promise[T]`** - Promise-returning WebAPI methods (like `fetch`, `response.text()`, `blob.arrayBuffer()`) now return `@js_async.Promise[T]` from the `moonbitlang/async` package instead of the custom `JsPromise[T]` type. This lets users directly `await` promises using MoonBit's async syntax (`promise.wait()`), with full coroutine-based scheduling and cancellation support via `AbortController`.
-- **Add wasm-gc target support** - The library now compiles for both `--target js` and `--target wasm-gc`. Each generated interface produces three files: shared code, JS FFI (`_js.mbt`), and wasm-gc FFI (`_wasm.mbt`), wired together via MoonBit conditional compilation (`targets` in `moon.pkg`).
-- **Generate `webapi.mjs` JS runtime** - A JavaScript module is generated that provides the wasm import object for all interfaces, dictionaries, callbacks, primitives, and globals. Used to instantiate the wasm module at runtime.
-- **Add wasm-gc canvas example** - A working example (`examples/counter/counter.wasm.html`) demonstrating wasm-gc compilation with the generated bindings.
+### Breaking Changes
 
-### Bug Fixes
+- Promise-returning APIs now use `JsPromise[T]` instead of `@js_async.Promise[T]`.
+- For JS-only async/await integration, use the `bikallem/webapi/js_promise` bridge package to convert `JsPromise[T]` values.
 
-- **Fix closure wrapping for wasm-gc callbacks** - MoonBit closures are `funcref` on wasm-gc, not `externref`. Callback constructors now wrap user closures in `JsValue`-only parameter closures so `make_closure` can convert them to callable JS functions.
-- **Fix String return type on wasm-gc** - String is `(ref extern)` (non-nullable) on wasm-gc but imports return `externref` (nullable). String-returning methods now go through `String?` + `.unwrap()` to emit `ref.as_non_null`.
-- **Fix primitive `%identity` on wasm-gc** - `Bool`, `Int`, `Double` etc. are value types (`i32`/`f64`) on wasm-gc, not `externref`. Union arg trait impls for primitives now delegate to `TJsValue::to_js` instead of using `%identity`.
-- **Escape JS reserved words in generated runtime** - Parameter names like `default`, `class`, `arguments`, `eval` are now prefixed with underscore in `webapi.mjs`.
-- **Escape JS reserved words in `extern "js"` FFI declarations** - The same reserved word escaping (`arguments` → `_arguments`) is now also applied to JS parameter names in generated `extern "js"` FFI functions. Previously, `arguments` in strict mode (ES modules) caused runtime errors.
-- **Quote hyphenated CSS property names** - CSS properties like `background-color` are now bracket-accessed (`obj["background-color"]`) instead of dot-accessed in the JS runtime.
-- **Disambiguate overloaded methods in JS runtime** - Overloaded WebIDL methods (e.g., `fill` with different arities) now use suffixed import names (`fill`, `fill_2`) to avoid silent JS object key collisions.
-- **Fix `is_undefined` using correct JS check** - Uses `value === undefined` instead of the null check.
+### Added
 
-### Examples & Testing
+- Added `JsPromise[T]` support for both JS and `wasm-gc`, including `then()`, `catch_()`, and `finally_()` helpers plus the `webapi/js_promise` bridge package.
+- Added `webapi_trim` for producing minimal `webapi.mjs` bundles from wasm imports, including function-level trimming and test coverage.
+- Added new bindings and examples across a wide range of APIs, including Console, timers, storage, clipboard, notifications, WebSocket, fullscreen, screen orientation, requestIdleCallback, pointer/touch/selection/resize/intersection observers, streams, IndexedDB, Web Animations, permissions, service workers, URLPattern, File System Access, Trusted Types, and more.
+- Added custom element helpers and examples such as `wc-counter`, `wc-edit-word`, and the larger `wc-todo` / `wc-calculator` examples.
+- Added generator support for WebIDL namespaces, variadic arguments, special operations (getter/setter/deleter), dictionary getters, dynamic `JsObject` helpers, and additional overload handling.
 
-- **Add fetch example** - JS-only async/await demo using `@js_async.Promise::wait()` to fetch from user-entered URLs, with status, headers, and body display.
-- **Add timers example** - Dual-target (JS + wasm-gc) demo of `setInterval`, `clearInterval`, and `setTimeout` using `Function::new` callbacks and `TimerHandler`.
-- **Add storage example** - Dual-target (JS + wasm-gc) demo of `localStorage` with `setItem`, `getItem`, `removeItem`, and `clear` using generated bindings.
-- **Add 6 new examples** - dom, events, url, classlist, element-ops, and forms examples, each with both JS and wasm-gc HTML entry points.
-- **Add 13 new API examples** - websockets, encoding, requestidlecallback, fullscreen, screen-orientation, resize-observer, selection-api, intersection-observer, pointerevents, touch-events, clipboard-apis, notifications, and storage-manager. All rewritten to use generated bindings instead of `extern "js"` FFI.
-- **Add wasm-gc support for 5 examples** - encoding, fullscreen, pointerevents, selection-api, and touch-events now have wasm-gc HTML entry points and tests. The remaining 6 (websockets, notifications, requestidlecallback, resize-observer, screen-orientation, intersection-observer) are JS-only due to a MoonBit compiler bug with externref trait objects ([moonbitlang/moonbit-docs#1123](https://github.com/moonbitlang/moonbit-docs/issues/1123)).
-- **Add WebSocket echo server for testing** - Local echo server (`tests/ws-echo-server.mjs`) replaces the defunct `echo.websocket.org`. The websockets demo now has a URL input field. `make serve` starts both the echo server and static file server.
-- **Add Playwright integration tests** - 130 tests covering all examples across JS and wasm-gc targets, including WebSocket connect/disconnect/reconnect tests.
-- **Add CI workflow** - GitHub Actions workflow with type checking (js + wasm-gc), unit tests, example builds, and Playwright tests.
-- **Update GitHub Pages deployment** - Deploy all 11 examples instead of just canvas and counter.
+### Changed
 
-### Known Issues
+- The generated bindings now target both backends throughout the pipeline, and backend-specific FFI is emitted through unified source files guarded with `#cfg(...)`.
+- The project layout was consolidated around the `webapi/` module, with package metadata, examples, and tests updated to match.
+- The examples gallery, GitHub Pages deployment, and local development flow were expanded to support both JS and `wasm-gc` demos.
+- Generated runtime and emitters were refactored substantially to reduce duplication, improve determinism, and make backend behavior easier to reason about.
 
-- **`dispatch_event` with trait objects on wasm-gc** - Passing an `#external` type as a trait object (`&TEvent`) produces invalid wasm-gc code (`type error in fallthru[0] (expected (ref N), got externref)`). This is a MoonBit compiler bug ([moonbitlang/moonbit-docs#1123](https://github.com/moonbitlang/moonbit-docs/issues/1123)). Workaround: avoid `dispatch_event` on wasm-gc target.
+### Fixed
 
-### Code Generator Improvements
+- Fixed multiple `wasm-gc` conversion issues, including callback wrapping, nullable returns, string handling, enum conversion, primitive array decoding, and `UInt64`/`Int64` BigInt bridging.
+- Fixed generated JS runtime issues around reserved words, hyphenated CSS property names, overloaded method name collisions, and namespace module key casing.
+- Fixed bugs in example behavior and encapsulation, including per-instance component state and broader JS/wasm parity across demos.
+- Fixed `webapi_trim` robustness issues, including UTF-8 import decoding, structured parse failures, resilient filtering, and proper non-zero CLI exits on fatal errors.
+- Fixed several generator correctness issues around dictionary inheritance gaps, stale output reconciliation, lexer position tracking, and nullable method/attribute conversion.
 
-- **Add `SpecialOperationMethodEmit`** - New emit struct for unnamed special operations that generates bracket-notation JS (`obj[key]`, `obj[key] = value`, `delete obj[key]`). Named special operations reuse `RegularMethodEmit`.
-- **Three-file split architecture** - `InterfaceMethodEmit` trait gains `ffi_emit_js()` and `ffi_emit_wasm()` methods. `mbt_code_gen_multi()` routes emit variants to shared/JS/wasm buffers.
-- **Split base template files** - `js_value.mbt`, `primitives.mbt`, and `global.mbt` are each split into shared + JS + wasm-gc variants.
-- **Extract `emit_wasm_ffi_with_return()` helper** - Centralizes the four-way wasm return-type dispatch (void/optional, String, valid stub, JsValue wrapper).
-- **Extract `emit_js_ffi_with_return()` helper** - Centralizes the JS FFI return-type dispatch, eliminating duplication across 4 method emit types.
-- **Render functions return String directly** - All render helpers changed from `fn(buf: StringBuilder) -> Unit` to `fn() -> String`, eliminating intermediate StringBuilder boilerplate.
-- **Extract `variant_filename()` helper** - Safer FFI filename derivation replacing fragile `strip_suffix().unwrap_or("")` pattern.
-- **Explicit typed array allowlist** - Replaced fragile `has_suffix("Array")` heuristic with an explicit list of valid wasm-gc stub return types.
-- **Add multi-target render tests** - Tests for `is_undefined`, `empty`, `dictionary`, `callback`, `constructor`, `String` return, and overloaded method emit variants.
+### Quality and Tooling
 
-## v0.3.0
+- Grew end-to-end browser coverage to 339 Playwright tests across the example gallery.
+- Added broader CI coverage for JS and `wasm-gc` checks, example builds, Pages deployment, and `webapi_trim`.
+- Reworked large parts of the generator and parser internals to use smaller helpers, more deterministic output, and more MoonBit-idiomatic patterns.
 
-### Bug Fixes
+## [v0.3.0] - 2026-02-08
 
-- **Fix multi-level dictionary inheritance** - Dictionary types that inherit through multiple levels now correctly include all ancestor members. Previously, only the immediate parent's members were merged. This affects the UIEvents/DOM event init dictionary chain:
-  - `EventModifierInit` now includes `EventInit` fields (`bubbles`, `cancelable`, `composed`) and `UIEventInit` fields (`view`, `detail`, `which`)
-  - `MouseEventInit` now includes `EventInit`, `UIEventInit`, and `EventModifierInit` fields
-  - `WheelEventInit`, `DragEventInit`, `KeyboardEventInit`, `FocusEventInit`, `InputEventInit`, `CompositionEventInit` similarly gain their full ancestor fields
+### Fixed
 
-### Code Generator Improvements
+- Fixed multi-level dictionary inheritance so derived dictionary types correctly include all ancestor members.
 
-- **Replace yacc-generated parser with hand-written recursive descent** - The WebIDL parser no longer depends on `moonbitlang/yacc`. The new parser is faster and easier to maintain.
-- **Extract `type_mapping` package** - Type resolution logic (WebIDL-to-MoonBit type mapping) is now in its own `type_mapping/` package, separated from code rendering in `emit/`.
-- **Introduce `FlattenedInterface` type** - Decouples the flattened IDL representation from the partial-merged intermediate form, preventing unintended mutation of pipeline inputs.
-- **Extract render helpers from `mbt_code_gen`** - The monolithic 200-line code generator match is now a 40-line dispatcher calling focused render functions.
-- **Split `InterfaceEmitter.emit` into helpers** - The 270-line method is now composed of `emit_constructor`, `emit_regular_operation`, `emit_attribute`, `emit_const_member`, and `emit_union_return_type`.
-- **Replace `println`/`panic` with logger callbacks** - Pipeline stages use injected logger functions instead of direct I/O, improving testability.
-- **Convert file-based snapshot tests to inline assertions** - Tests use `inspect()` and `@json.inspect()` instead of external snapshot files.
-- **Convert `moon.pkg.json` to `moon.pkg` DSL format** - Package configs use the newer MoonBit package DSL.
-- **Address all build warnings** in `webapi_gen`.
+### Improved
+
+- Replaced the yacc-generated WebIDL parser with a hand-written recursive descent parser.
+- Extracted `type_mapping` and flattened-IDL stages into clearer pipeline components.
+- Split large emitter code paths into smaller helpers and moved tests to inline assertions.
+- Switched package configuration to `moon.pkg` and cleaned up generator warnings.
