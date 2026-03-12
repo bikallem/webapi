@@ -38,3 +38,7 @@ refs
 .idea
 .gitmodules
 make-all.log
+
+# Dolt database files (added by bd init)
+.dolt/
+*.db
