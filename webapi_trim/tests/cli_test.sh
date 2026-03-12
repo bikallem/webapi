@@ -67,8 +67,8 @@ code=$?
 set -e
 assert_exit_code "--help exits 0" 0 "$code"
 assert_stdout_contains "--help shows usage" "Usage: webapi_trim" "$TMPDIR_TEST/help.out"
-assert_stdout_contains "--help shows -o option" "-o <path>" "$TMPDIR_TEST/help.out"
-assert_stdout_contains "--help shows --source option" "--source <path>" "$TMPDIR_TEST/help.out"
+assert_stdout_contains "--help shows -o option" "-o <output>" "$TMPDIR_TEST/help.out"
+assert_stdout_contains "--help shows --source option" "--source <source>" "$TMPDIR_TEST/help.out"
 
 # --- Test: no arguments ---
 echo "# no arguments"
@@ -76,7 +76,8 @@ set +e
 (cd "$PROJECT_ROOT" && moon -C webapi_trim run . --) > "$TMPDIR_TEST/noargs.out" 2>/dev/null
 code=$?
 set -e
-assert_stdout_contains "no args prints error" "no input wasm file" "$TMPDIR_TEST/noargs.out"
+assert_exit_code "no args exits 2" 2 "$code"
+assert_stdout_contains "no args prints required input error" "requires at least 1 values" "$TMPDIR_TEST/noargs.out"
 
 # --- Test: missing wasm file ---
 echo "# missing wasm file"
@@ -84,6 +85,7 @@ set +e
 (cd "$PROJECT_ROOT" && moon -C webapi_trim run . -- /nonexistent/file.wasm --source "$FIXTURES/sample.mjs") > "$TMPDIR_TEST/missing.out" 2>/dev/null
 code=$?
 set -e
+assert_exit_code "missing file exits 1" 1 "$code"
 assert_stdout_contains "missing file prints error" "cannot read" "$TMPDIR_TEST/missing.out"
 
 # --- Test: unknown option ---
@@ -92,7 +94,8 @@ set +e
 (cd "$PROJECT_ROOT" && moon -C webapi_trim run . -- --bogus) > "$TMPDIR_TEST/unknown.out" 2>/dev/null
 code=$?
 set -e
-assert_stdout_contains "unknown option prints error" "unknown option" "$TMPDIR_TEST/unknown.out"
+assert_exit_code "unknown option exits 2" 2 "$code"
+assert_stdout_contains "unknown option prints argparse error" "unexpected argument '--bogus' found" "$TMPDIR_TEST/unknown.out"
 
 # --- Test: -o writes to specified path ---
 echo "# -o flag"

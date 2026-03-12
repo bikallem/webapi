@@ -4,6 +4,7 @@ import {
   "moonbitlang/x/fs",
   "moonbitlang/x/path",
   "moonbitlang/core/hashset",
+  "moonbitlang/core/argparse",
 }
 
 options(
