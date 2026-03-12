@@ -80,6 +80,44 @@ for (const target of TARGETS) {
       await page.locator(wc).locator('[data-ref=clear]').click();
     });
 
+    test('keeps multiple component instances isolated', async ({ page }) => {
+      await page.evaluate(() => {
+        const second = document.createElement('wc-todo');
+        second.id = 'secondary';
+        document.body.appendChild(second);
+      });
+      await expect(page.locator(wc)).toHaveCount(2);
+
+      const first = page.locator(wc).nth(0);
+      const second = page.locator(wc).nth(1);
+
+      await expect(first.locator('[data-ref=status]')).toContainText('Total: 0');
+      await expect(second.locator('[data-ref=status]')).toContainText('Total: 0');
+
+      await first.locator('[data-ref=input]').fill('First task');
+      await first.locator('[data-ref=add]').click();
+      await expect(first.locator('li')).toHaveCount(1);
+      await expect(first.locator('[data-ref=status]')).toContainText('Total: 1');
+      await expect(second.locator('li')).toHaveCount(0);
+      await expect(second.locator('[data-ref=status]')).toContainText('Total: 0');
+
+      await second.locator('[data-ref=input]').fill('Second task');
+      await second.locator('[data-ref=add]').click();
+      await expect(first.locator('li')).toHaveCount(1);
+      await expect(first.locator('li')).toContainText('First task');
+      await expect(first.locator('[data-ref=status]')).toContainText('Total: 1');
+      await expect(second.locator('li')).toHaveCount(1);
+      await expect(second.locator('li')).toContainText('Second task');
+      await expect(second.locator('[data-ref=status]')).toContainText('Total: 1');
+
+      await first.locator('[data-ref=clear]').click();
+      await expect(first.locator('li')).toHaveCount(0);
+      await expect(first.locator('[data-ref=status]')).toContainText('Total: 0');
+      await expect(second.locator('li')).toHaveCount(1);
+      await expect(second.locator('li')).toContainText('Second task');
+      await expect(second.locator('[data-ref=status]')).toContainText('Total: 1');
+    });
+
     test('updates status with multiple items', async ({ page }) => {
       await page.locator(wc).locator('[data-ref=input]').fill('Task A');
       await page.locator(wc).locator('[data-ref=add]').click();
