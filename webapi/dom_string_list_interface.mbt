@@ -2,18 +2,24 @@
 // MoonBit type: DOMStringList
 // Specifications: html.idl
 
+///|
 /// [DOMStringList](https://developer.mozilla.org/en-US/docs/Web/API/DOMStringList)
 #external
 pub type DOMStringList
 
-pub impl TJsValue for DOMStringList with to_js(self: DOMStringList) -> JsValue = "%identity"
+///|
+pub impl TJsValue for DOMStringList with to_js(self : DOMStringList) -> JsValue = "%identity"
 
+///|
 pub impl FromJsAny for DOMStringList with from_js_any(value : JsAny) -> DOMStringList = "%identity"
 
-pub fn[T: TDOMStringList] DOMStringList::into(self : DOMStringList) -> T = "%identity"
+///|
+pub fn[T : TDOMStringList] DOMStringList::into(self : DOMStringList) -> T = "%identity"
 
+///|
 pub impl TDOMStringList for DOMStringList
 
+///|
 /// [DOMStringList](https://developer.mozilla.org/en-US/docs/Web/API/DOMStringList) interface.
 pub trait TDOMStringList: TJsValue {
   length(self : Self) -> UInt = _
@@ -21,19 +27,20 @@ pub trait TDOMStringList: TJsValue {
   contains(self : Self, string : String) -> Bool = _
 }
 
+///|
 /// [DOMStringList.length](https://developer.mozilla.org/en-US/docs/Web/API/DOMStringList/length)
 impl TDOMStringList with length(self : Self) -> UInt {
   dom_string_list_length_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [DOMStringList.item](https://developer.mozilla.org/en-US/docs/Web/API/DOMStringList/item)
-impl TDOMStringList with item(self : Self, 
-index : UInt) -> String? {
-  dom_string_list_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
+impl TDOMStringList with item(self : Self, index : UInt) -> String? {
+  dom_string_list_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option_prim()
 }
 
+///|
 /// [DOMStringList.contains](https://developer.mozilla.org/en-US/docs/Web/API/DOMStringList/contains)
-impl TDOMStringList with contains(self : Self, 
-string : String) -> Bool {
+impl TDOMStringList with contains(self : Self, string : String) -> Bool {
   dom_string_list_contains_ffi(TJsValue::to_js(self), TJsValue::to_js(string))
 }

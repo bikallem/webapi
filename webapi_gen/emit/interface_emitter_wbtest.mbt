@@ -1369,7 +1369,7 @@ test "no convenience method for non-interface optional return" {
       #|
       #|/// [TestInterface.getName](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface/getName)
       #|impl TTestInterface with get_name(self : Self) -> String? {
-      #|  test_interface_get_name_ffi(TJsValue::to_js(self)).to_option()
+      #|  test_interface_get_name_ffi(TJsValue::to_js(self)).to_option_prim()
       #|}
     ),
   )

@@ -77,6 +77,19 @@ fn emit_js_ffi_with_return(
 }
 
 ///|
+fn optional_return_helper(return_type_name : String) -> String {
+  let base_type = match return_type_name.strip_suffix("?") {
+    Some(name) => name.to_string()
+    None => return_type_name
+  }
+  if uses_from_jsany_value_conversion(base_type) {
+    "to_option_prim"
+  } else {
+    "to_option"
+  }
+}
+
+///|
 /// Emit a default trait method implementation with MDN doc comment.
 /// Shared by RegularMethodEmit and SpecialOperationMethodEmit.
 fn emit_trait_method_impl(
@@ -99,7 +112,7 @@ fn emit_trait_method_impl(
   code.write_string(
     "impl T\{interface_name} with \{safe_name}(\{method_args}) -> \{return_type.type_name()} {\n",
   )
-  emit_method_body(code, ffi_name, call_args, return_type.optional)
+  emit_method_body(code, ffi_name, call_args, return_type)
   Code(code.to_string())
 }
 
@@ -112,11 +125,11 @@ fn emit_method_body(
   code : StringBuilder,
   ffi_name : String,
   call_args : String,
-  optional_return : Bool,
+  return_type : @type_mapping.MethodReturn,
 ) -> Unit {
-  if optional_return {
-    // Optional: FFI returns JsValue; to_option() checks null and unsafe-casts
-    code.write_string("  \{ffi_name}(\{call_args}).to_option()\n")
+  if return_type.optional {
+    let helper = optional_return_helper(return_type.type_name())
+    code.write_string("  \{ffi_name}(\{call_args}).\{helper}()\n")
   } else {
     // Non-optional or void: FFI wrapper returns the actual type
     code.write_string("  \{ffi_name}(\{call_args})\n")

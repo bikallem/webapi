@@ -224,7 +224,7 @@ impl InterfaceMethodEmit for StaticMethodEmit with impl_emit(
   code.write_string(
     "pub fn \{trait_name}::\{method_name}(\{method_args}) -> \{self.return_type.type_name()} {\n",
   )
-  emit_method_body(code, ffi_name, call_args, self.return_type.optional)
+  emit_method_body(code, ffi_name, call_args, self.return_type)
   Code(code.to_string())
 }
 
