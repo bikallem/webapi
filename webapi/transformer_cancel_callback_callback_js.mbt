@@ -1,4 +1,1 @@
-///|
-extern "js" fn transformer_cancel_callback_ffi(
-  callback : (JsValue) -> JsPromise[JsValue],
-) -> TransformerCancelCallback = "(callback) => callback"
+extern "js" fn transformer_cancel_callback_ffi(callback : (JsValue) -> JsPromise[JsValue]) -> TransformerCancelCallback = "(callback) => callback"

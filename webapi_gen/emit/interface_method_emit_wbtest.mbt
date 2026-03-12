@@ -108,6 +108,34 @@ test "emit_wasm_ffi_with_return bridges Array return through JsArray" {
 }
 
 ///|
+test "emit_wasm_ffi_with_return uses value array bridge for Array[Double]" {
+  let Code(rendered) = emit_wasm_ffi_with_return(
+    "canvas_rendering_context2d_get_line_dash_ffi",
+    "obj : JsValue",
+    ["obj"],
+    "Array[Double]",
+    is_optional=false,
+    is_void=false,
+    is_string=false,
+    is_enum=false,
+    is_valid_stub=false,
+    "webapi_CanvasRenderingContext2D",
+    "getLineDash",
+  )
+  inspect(
+    rendered,
+    content=(
+      #|fn canvas_rendering_context2d_get_line_dash_ffi_wasm(obj : JsValue) -> JsArray = "webapi_CanvasRenderingContext2D" "getLineDash"
+      #|
+      #|///|
+      #|fn canvas_rendering_context2d_get_line_dash_ffi(obj : JsValue) -> Array[Double] {
+      #|  canvas_rendering_context2d_get_line_dash_ffi_wasm(obj).to_value_array()
+      #|}
+    ),
+  )
+}
+
+///|
 test "emit_wasm_ffi_with_return uses string array bridge for Array[String]" {
   let Code(rendered) = emit_wasm_ffi_with_return(
     "element_get_attribute_names_ffi",

@@ -2,18 +2,13 @@
 // MoonBit type: CanvasDirection
 // Specifications: html.idl
 
-///|
 pub(all) enum CanvasDirection {
   Ltr
   Rtl
   Inherit
 } derive(Eq)
 
-///|
-pub impl Show for CanvasDirection with output(
-  self : CanvasDirection,
-  logger : &Logger,
-) -> Unit {
+pub impl Show for CanvasDirection with output(self : CanvasDirection, logger : &Logger) -> Unit {
   match self {
     CanvasDirection::Ltr => logger.write_string("Ltr")
     CanvasDirection::Rtl => logger.write_string("Rtl")
@@ -21,8 +16,7 @@ pub impl Show for CanvasDirection with output(
   }
 }
 
-///|
-pub impl TJsValue for CanvasDirection with to_js(self : CanvasDirection) -> JsValue {
+pub impl TJsValue for CanvasDirection with to_js(self: CanvasDirection) -> JsValue {
   match self {
     CanvasDirection::Ltr => TJsValue::to_js("ltr")
     CanvasDirection::Rtl => TJsValue::to_js("rtl")
@@ -30,8 +24,7 @@ pub impl TJsValue for CanvasDirection with to_js(self : CanvasDirection) -> JsVa
   }
 }
 
-///|
-pub fn CanvasDirection::from(value : String) -> CanvasDirection? {
+pub fn CanvasDirection::from(value: String) -> CanvasDirection? {
   match value {
     "ltr" => Some(CanvasDirection::Ltr)
     "rtl" => Some(CanvasDirection::Rtl)
@@ -40,8 +33,7 @@ pub fn CanvasDirection::from(value : String) -> CanvasDirection? {
   }
 }
 
-///|
-fn CanvasDirection::from_unchecked(value : String) -> CanvasDirection {
+fn CanvasDirection::from_unchecked(value: String) -> CanvasDirection {
   match value {
     "ltr" => CanvasDirection::Ltr
     "rtl" => CanvasDirection::Rtl
@@ -50,8 +42,7 @@ fn CanvasDirection::from_unchecked(value : String) -> CanvasDirection {
   }
 }
 
-///|
-pub fn CanvasDirection::value(self : CanvasDirection) -> String {
+pub fn CanvasDirection::value(self: CanvasDirection) -> String {
   match self {
     CanvasDirection::Ltr => "ltr"
     CanvasDirection::Rtl => "rtl"
@@ -59,7 +50,6 @@ pub fn CanvasDirection::value(self : CanvasDirection) -> String {
   }
 }
 
-///|
 pub impl FromJsAny for CanvasDirection with from_js_any(value : JsAny) -> CanvasDirection {
   CanvasDirection::from_unchecked(value)
 }

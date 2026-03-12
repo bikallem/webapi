@@ -2,33 +2,24 @@
 // MoonBit type: SVGElement
 // Specifications: SVG.idl
 
-///|
 /// [SVGElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement)
 #external
 pub type SVGElement
 
-///|
-pub impl TJsValue for SVGElement with to_js(self : SVGElement) -> JsValue = "%identity"
+pub impl TJsValue for SVGElement with to_js(self: SVGElement) -> JsValue = "%identity"
 
-///|
 pub impl FromJsAny for SVGElement with from_js_any(value : JsAny) -> SVGElement = "%identity"
 
-///|
-pub fn[T : TSVGElement] SVGElement::into(self : SVGElement) -> T = "%identity"
+pub fn[T: TSVGElement] SVGElement::into(self : SVGElement) -> T = "%identity"
 
-///|
 pub impl TSVGElement for SVGElement
 
-///|
 pub impl TElement for SVGElement
 
-///|
 pub impl TNode for SVGElement
 
-///|
 pub impl TEventTarget for SVGElement
 
-///|
 /// [SVGElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement) interface.
 pub trait TSVGElement: TElement {
   class_name(self : Self) -> SVGAnimatedString = _
@@ -95,10 +86,7 @@ pub trait TSVGElement: TElement {
   onended(self : Self) -> EventHandler = _
   set_onended(self : Self, onended : (Event) -> JsValue) -> Unit = _
   onerror(self : Self) -> OnErrorEventHandler = _
-  set_onerror(
-    self : Self,
-    onerror : (OnErrorEventHandlerNonNullEvent, String, UInt, UInt, JsValue) -> JsValue,
-  ) -> Unit = _
+  set_onerror(self : Self, onerror : (OnErrorEventHandlerNonNullEvent, String, UInt, UInt, JsValue) -> JsValue) -> Unit = _
   onfocus(self : Self) -> EventHandler = _
   set_onfocus(self : Self, onfocus : (Event) -> JsValue) -> Unit = _
   onformdata(self : Self) -> EventHandler = _
@@ -156,10 +144,7 @@ pub trait TSVGElement: TElement {
   onscrollend(self : Self) -> EventHandler = _
   set_onscrollend(self : Self, onscrollend : (Event) -> JsValue) -> Unit = _
   onsecuritypolicyviolation(self : Self) -> EventHandler = _
-  set_onsecuritypolicyviolation(
-    self : Self,
-    onsecuritypolicyviolation : (Event) -> JsValue,
-  ) -> Unit = _
+  set_onsecuritypolicyviolation(self : Self, onsecuritypolicyviolation : (Event) -> JsValue) -> Unit = _
   onseeked(self : Self) -> EventHandler = _
   set_onseeked(self : Self, onseeked : (Event) -> JsValue) -> Unit = _
   onseeking(self : Self) -> EventHandler = _
@@ -183,25 +168,13 @@ pub trait TSVGElement: TElement {
   onwaiting(self : Self) -> EventHandler = _
   set_onwaiting(self : Self, onwaiting : (Event) -> JsValue) -> Unit = _
   onwebkitanimationend(self : Self) -> EventHandler = _
-  set_onwebkitanimationend(
-    self : Self,
-    onwebkitanimationend : (Event) -> JsValue,
-  ) -> Unit = _
+  set_onwebkitanimationend(self : Self, onwebkitanimationend : (Event) -> JsValue) -> Unit = _
   onwebkitanimationiteration(self : Self) -> EventHandler = _
-  set_onwebkitanimationiteration(
-    self : Self,
-    onwebkitanimationiteration : (Event) -> JsValue,
-  ) -> Unit = _
+  set_onwebkitanimationiteration(self : Self, onwebkitanimationiteration : (Event) -> JsValue) -> Unit = _
   onwebkitanimationstart(self : Self) -> EventHandler = _
-  set_onwebkitanimationstart(
-    self : Self,
-    onwebkitanimationstart : (Event) -> JsValue,
-  ) -> Unit = _
+  set_onwebkitanimationstart(self : Self, onwebkitanimationstart : (Event) -> JsValue) -> Unit = _
   onwebkittransitionend(self : Self) -> EventHandler = _
-  set_onwebkittransitionend(
-    self : Self,
-    onwebkittransitionend : (Event) -> JsValue,
-  ) -> Unit = _
+  set_onwebkittransitionend(self : Self, onwebkittransitionend : (Event) -> JsValue) -> Unit = _
   onwheel(self : Self) -> EventHandler = _
   set_onwheel(self : Self, onwheel : (Event) -> JsValue) -> Unit = _
   ontouchstart(self : Self) -> EventHandler = _
@@ -233,10 +206,7 @@ pub trait TSVGElement: TElement {
   ongotpointercapture(self : Self) -> EventHandler = _
   set_ongotpointercapture(self : Self, ongotpointercapture : (Event) -> JsValue) -> Unit = _
   onlostpointercapture(self : Self) -> EventHandler = _
-  set_onlostpointercapture(
-    self : Self,
-    onlostpointercapture : (Event) -> JsValue,
-  ) -> Unit = _
+  set_onlostpointercapture(self : Self, onlostpointercapture : (Event) -> JsValue) -> Unit = _
   onselectstart(self : Self) -> EventHandler = _
   set_onselectstart(self : Self, onselectstart : (Event) -> JsValue) -> Unit = _
   onselectionchange(self : Self) -> EventHandler = _
@@ -255,1657 +225,1103 @@ pub trait TSVGElement: TElement {
   style(self : Self) -> CSSStyleProperties = _
 }
 
-///|
 /// [SVGElement.className](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/className)
 impl TSVGElement with class_name(self : Self) -> SVGAnimatedString {
   svg_element_class_name_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.ownerSVGElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ownerSVGElement)
 impl TSVGElement with owner_svg_element(self : Self) -> SVGSVGElement {
   svg_element_owner_svg_element_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.viewportElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/viewportElement)
 impl TSVGElement with viewport_element(self : Self) -> SVGElement {
   svg_element_viewport_element_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onabort](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onabort)
 impl TSVGElement with onabort(self : Self) -> EventHandler {
   svg_element_onabort_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onabort](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onabort)
-impl TSVGElement with set_onabort(self : Self, onabort : (Event) -> JsValue) -> Unit {
-  svg_element_set_onabort_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onabort)),
-  )
+impl TSVGElement with set_onabort(self : Self, 
+onabort : (Event) -> JsValue) -> Unit {
+  svg_element_set_onabort_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onabort)))
 }
 
-///|
 /// [SVGElement.onauxclick](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onauxclick)
 impl TSVGElement with onauxclick(self : Self) -> EventHandler {
   svg_element_onauxclick_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onauxclick](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onauxclick)
-impl TSVGElement with set_onauxclick(
-  self : Self,
-  onauxclick : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_onauxclick_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onauxclick)),
-  )
+impl TSVGElement with set_onauxclick(self : Self, 
+onauxclick : (Event) -> JsValue) -> Unit {
+  svg_element_set_onauxclick_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onauxclick)))
 }
 
-///|
 /// [SVGElement.onbeforeinput](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onbeforeinput)
 impl TSVGElement with onbeforeinput(self : Self) -> EventHandler {
   svg_element_onbeforeinput_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onbeforeinput](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onbeforeinput)
-impl TSVGElement with set_onbeforeinput(
-  self : Self,
-  onbeforeinput : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_onbeforeinput_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onbeforeinput)),
-  )
+impl TSVGElement with set_onbeforeinput(self : Self, 
+onbeforeinput : (Event) -> JsValue) -> Unit {
+  svg_element_set_onbeforeinput_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onbeforeinput)))
 }
 
-///|
 /// [SVGElement.onbeforematch](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onbeforematch)
 impl TSVGElement with onbeforematch(self : Self) -> EventHandler {
   svg_element_onbeforematch_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onbeforematch](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onbeforematch)
-impl TSVGElement with set_onbeforematch(
-  self : Self,
-  onbeforematch : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_onbeforematch_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onbeforematch)),
-  )
+impl TSVGElement with set_onbeforematch(self : Self, 
+onbeforematch : (Event) -> JsValue) -> Unit {
+  svg_element_set_onbeforematch_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onbeforematch)))
 }
 
-///|
 /// [SVGElement.onbeforetoggle](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onbeforetoggle)
 impl TSVGElement with onbeforetoggle(self : Self) -> EventHandler {
   svg_element_onbeforetoggle_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onbeforetoggle](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onbeforetoggle)
-impl TSVGElement with set_onbeforetoggle(
-  self : Self,
-  onbeforetoggle : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_onbeforetoggle_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onbeforetoggle)),
-  )
+impl TSVGElement with set_onbeforetoggle(self : Self, 
+onbeforetoggle : (Event) -> JsValue) -> Unit {
+  svg_element_set_onbeforetoggle_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onbeforetoggle)))
 }
 
-///|
 /// [SVGElement.onblur](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onblur)
 impl TSVGElement with onblur(self : Self) -> EventHandler {
   svg_element_onblur_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onblur](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onblur)
-impl TSVGElement with set_onblur(self : Self, onblur : (Event) -> JsValue) -> Unit {
-  svg_element_set_onblur_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onblur)),
-  )
+impl TSVGElement with set_onblur(self : Self, 
+onblur : (Event) -> JsValue) -> Unit {
+  svg_element_set_onblur_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onblur)))
 }
 
-///|
 /// [SVGElement.oncancel](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/oncancel)
 impl TSVGElement with oncancel(self : Self) -> EventHandler {
   svg_element_oncancel_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.oncancel](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/oncancel)
-impl TSVGElement with set_oncancel(self : Self, oncancel : (Event) -> JsValue) -> Unit {
-  svg_element_set_oncancel_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(oncancel)),
-  )
+impl TSVGElement with set_oncancel(self : Self, 
+oncancel : (Event) -> JsValue) -> Unit {
+  svg_element_set_oncancel_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(oncancel)))
 }
 
-///|
 /// [SVGElement.oncanplay](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/oncanplay)
 impl TSVGElement with oncanplay(self : Self) -> EventHandler {
   svg_element_oncanplay_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.oncanplay](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/oncanplay)
-impl TSVGElement with set_oncanplay(self : Self, oncanplay : (Event) -> JsValue) -> Unit {
-  svg_element_set_oncanplay_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(oncanplay)),
-  )
+impl TSVGElement with set_oncanplay(self : Self, 
+oncanplay : (Event) -> JsValue) -> Unit {
+  svg_element_set_oncanplay_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(oncanplay)))
 }
 
-///|
 /// [SVGElement.oncanplaythrough](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/oncanplaythrough)
 impl TSVGElement with oncanplaythrough(self : Self) -> EventHandler {
   svg_element_oncanplaythrough_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.oncanplaythrough](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/oncanplaythrough)
-impl TSVGElement with set_oncanplaythrough(
-  self : Self,
-  oncanplaythrough : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_oncanplaythrough_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(oncanplaythrough)),
-  )
+impl TSVGElement with set_oncanplaythrough(self : Self, 
+oncanplaythrough : (Event) -> JsValue) -> Unit {
+  svg_element_set_oncanplaythrough_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(oncanplaythrough)))
 }
 
-///|
 /// [SVGElement.onchange](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onchange)
 impl TSVGElement with onchange(self : Self) -> EventHandler {
   svg_element_onchange_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onchange](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onchange)
-impl TSVGElement with set_onchange(self : Self, onchange : (Event) -> JsValue) -> Unit {
-  svg_element_set_onchange_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onchange)),
-  )
+impl TSVGElement with set_onchange(self : Self, 
+onchange : (Event) -> JsValue) -> Unit {
+  svg_element_set_onchange_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onchange)))
 }
 
-///|
 /// [SVGElement.onclick](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onclick)
 impl TSVGElement with onclick(self : Self) -> EventHandler {
   svg_element_onclick_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onclick](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onclick)
-impl TSVGElement with set_onclick(self : Self, onclick : (Event) -> JsValue) -> Unit {
-  svg_element_set_onclick_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onclick)),
-  )
+impl TSVGElement with set_onclick(self : Self, 
+onclick : (Event) -> JsValue) -> Unit {
+  svg_element_set_onclick_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onclick)))
 }
 
-///|
 /// [SVGElement.onclose](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onclose)
 impl TSVGElement with onclose(self : Self) -> EventHandler {
   svg_element_onclose_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onclose](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onclose)
-impl TSVGElement with set_onclose(self : Self, onclose : (Event) -> JsValue) -> Unit {
-  svg_element_set_onclose_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onclose)),
-  )
+impl TSVGElement with set_onclose(self : Self, 
+onclose : (Event) -> JsValue) -> Unit {
+  svg_element_set_onclose_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onclose)))
 }
 
-///|
 /// [SVGElement.oncommand](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/oncommand)
 impl TSVGElement with oncommand(self : Self) -> EventHandler {
   svg_element_oncommand_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.oncommand](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/oncommand)
-impl TSVGElement with set_oncommand(self : Self, oncommand : (Event) -> JsValue) -> Unit {
-  svg_element_set_oncommand_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(oncommand)),
-  )
+impl TSVGElement with set_oncommand(self : Self, 
+oncommand : (Event) -> JsValue) -> Unit {
+  svg_element_set_oncommand_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(oncommand)))
 }
 
-///|
 /// [SVGElement.oncontextlost](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/oncontextlost)
 impl TSVGElement with oncontextlost(self : Self) -> EventHandler {
   svg_element_oncontextlost_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.oncontextlost](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/oncontextlost)
-impl TSVGElement with set_oncontextlost(
-  self : Self,
-  oncontextlost : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_oncontextlost_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(oncontextlost)),
-  )
+impl TSVGElement with set_oncontextlost(self : Self, 
+oncontextlost : (Event) -> JsValue) -> Unit {
+  svg_element_set_oncontextlost_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(oncontextlost)))
 }
 
-///|
 /// [SVGElement.oncontextmenu](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/oncontextmenu)
 impl TSVGElement with oncontextmenu(self : Self) -> EventHandler {
   svg_element_oncontextmenu_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.oncontextmenu](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/oncontextmenu)
-impl TSVGElement with set_oncontextmenu(
-  self : Self,
-  oncontextmenu : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_oncontextmenu_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(oncontextmenu)),
-  )
+impl TSVGElement with set_oncontextmenu(self : Self, 
+oncontextmenu : (Event) -> JsValue) -> Unit {
+  svg_element_set_oncontextmenu_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(oncontextmenu)))
 }
 
-///|
 /// [SVGElement.oncontextrestored](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/oncontextrestored)
 impl TSVGElement with oncontextrestored(self : Self) -> EventHandler {
   svg_element_oncontextrestored_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.oncontextrestored](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/oncontextrestored)
-impl TSVGElement with set_oncontextrestored(
-  self : Self,
-  oncontextrestored : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_oncontextrestored_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(oncontextrestored)),
-  )
+impl TSVGElement with set_oncontextrestored(self : Self, 
+oncontextrestored : (Event) -> JsValue) -> Unit {
+  svg_element_set_oncontextrestored_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(oncontextrestored)))
 }
 
-///|
 /// [SVGElement.oncopy](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/oncopy)
 impl TSVGElement with oncopy(self : Self) -> EventHandler {
   svg_element_oncopy_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.oncopy](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/oncopy)
-impl TSVGElement with set_oncopy(self : Self, oncopy : (Event) -> JsValue) -> Unit {
-  svg_element_set_oncopy_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(oncopy)),
-  )
+impl TSVGElement with set_oncopy(self : Self, 
+oncopy : (Event) -> JsValue) -> Unit {
+  svg_element_set_oncopy_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(oncopy)))
 }
 
-///|
 /// [SVGElement.oncuechange](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/oncuechange)
 impl TSVGElement with oncuechange(self : Self) -> EventHandler {
   svg_element_oncuechange_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.oncuechange](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/oncuechange)
-impl TSVGElement with set_oncuechange(
-  self : Self,
-  oncuechange : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_oncuechange_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(oncuechange)),
-  )
+impl TSVGElement with set_oncuechange(self : Self, 
+oncuechange : (Event) -> JsValue) -> Unit {
+  svg_element_set_oncuechange_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(oncuechange)))
 }
 
-///|
 /// [SVGElement.oncut](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/oncut)
 impl TSVGElement with oncut(self : Self) -> EventHandler {
   svg_element_oncut_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.oncut](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/oncut)
-impl TSVGElement with set_oncut(self : Self, oncut : (Event) -> JsValue) -> Unit {
-  svg_element_set_oncut_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(oncut)),
-  )
+impl TSVGElement with set_oncut(self : Self, 
+oncut : (Event) -> JsValue) -> Unit {
+  svg_element_set_oncut_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(oncut)))
 }
 
-///|
 /// [SVGElement.ondblclick](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ondblclick)
 impl TSVGElement with ondblclick(self : Self) -> EventHandler {
   svg_element_ondblclick_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.ondblclick](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ondblclick)
-impl TSVGElement with set_ondblclick(
-  self : Self,
-  ondblclick : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_ondblclick_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(ondblclick)),
-  )
+impl TSVGElement with set_ondblclick(self : Self, 
+ondblclick : (Event) -> JsValue) -> Unit {
+  svg_element_set_ondblclick_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(ondblclick)))
 }
 
-///|
 /// [SVGElement.ondrag](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ondrag)
 impl TSVGElement with ondrag(self : Self) -> EventHandler {
   svg_element_ondrag_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.ondrag](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ondrag)
-impl TSVGElement with set_ondrag(self : Self, ondrag : (Event) -> JsValue) -> Unit {
-  svg_element_set_ondrag_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(ondrag)),
-  )
+impl TSVGElement with set_ondrag(self : Self, 
+ondrag : (Event) -> JsValue) -> Unit {
+  svg_element_set_ondrag_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(ondrag)))
 }
 
-///|
 /// [SVGElement.ondragend](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ondragend)
 impl TSVGElement with ondragend(self : Self) -> EventHandler {
   svg_element_ondragend_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.ondragend](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ondragend)
-impl TSVGElement with set_ondragend(self : Self, ondragend : (Event) -> JsValue) -> Unit {
-  svg_element_set_ondragend_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(ondragend)),
-  )
+impl TSVGElement with set_ondragend(self : Self, 
+ondragend : (Event) -> JsValue) -> Unit {
+  svg_element_set_ondragend_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(ondragend)))
 }
 
-///|
 /// [SVGElement.ondragenter](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ondragenter)
 impl TSVGElement with ondragenter(self : Self) -> EventHandler {
   svg_element_ondragenter_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.ondragenter](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ondragenter)
-impl TSVGElement with set_ondragenter(
-  self : Self,
-  ondragenter : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_ondragenter_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(ondragenter)),
-  )
+impl TSVGElement with set_ondragenter(self : Self, 
+ondragenter : (Event) -> JsValue) -> Unit {
+  svg_element_set_ondragenter_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(ondragenter)))
 }
 
-///|
 /// [SVGElement.ondragleave](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ondragleave)
 impl TSVGElement with ondragleave(self : Self) -> EventHandler {
   svg_element_ondragleave_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.ondragleave](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ondragleave)
-impl TSVGElement with set_ondragleave(
-  self : Self,
-  ondragleave : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_ondragleave_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(ondragleave)),
-  )
+impl TSVGElement with set_ondragleave(self : Self, 
+ondragleave : (Event) -> JsValue) -> Unit {
+  svg_element_set_ondragleave_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(ondragleave)))
 }
 
-///|
 /// [SVGElement.ondragover](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ondragover)
 impl TSVGElement with ondragover(self : Self) -> EventHandler {
   svg_element_ondragover_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.ondragover](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ondragover)
-impl TSVGElement with set_ondragover(
-  self : Self,
-  ondragover : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_ondragover_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(ondragover)),
-  )
+impl TSVGElement with set_ondragover(self : Self, 
+ondragover : (Event) -> JsValue) -> Unit {
+  svg_element_set_ondragover_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(ondragover)))
 }
 
-///|
 /// [SVGElement.ondragstart](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ondragstart)
 impl TSVGElement with ondragstart(self : Self) -> EventHandler {
   svg_element_ondragstart_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.ondragstart](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ondragstart)
-impl TSVGElement with set_ondragstart(
-  self : Self,
-  ondragstart : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_ondragstart_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(ondragstart)),
-  )
+impl TSVGElement with set_ondragstart(self : Self, 
+ondragstart : (Event) -> JsValue) -> Unit {
+  svg_element_set_ondragstart_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(ondragstart)))
 }
 
-///|
 /// [SVGElement.ondrop](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ondrop)
 impl TSVGElement with ondrop(self : Self) -> EventHandler {
   svg_element_ondrop_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.ondrop](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ondrop)
-impl TSVGElement with set_ondrop(self : Self, ondrop : (Event) -> JsValue) -> Unit {
-  svg_element_set_ondrop_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(ondrop)),
-  )
+impl TSVGElement with set_ondrop(self : Self, 
+ondrop : (Event) -> JsValue) -> Unit {
+  svg_element_set_ondrop_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(ondrop)))
 }
 
-///|
 /// [SVGElement.ondurationchange](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ondurationchange)
 impl TSVGElement with ondurationchange(self : Self) -> EventHandler {
   svg_element_ondurationchange_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.ondurationchange](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ondurationchange)
-impl TSVGElement with set_ondurationchange(
-  self : Self,
-  ondurationchange : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_ondurationchange_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(ondurationchange)),
-  )
+impl TSVGElement with set_ondurationchange(self : Self, 
+ondurationchange : (Event) -> JsValue) -> Unit {
+  svg_element_set_ondurationchange_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(ondurationchange)))
 }
 
-///|
 /// [SVGElement.onemptied](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onemptied)
 impl TSVGElement with onemptied(self : Self) -> EventHandler {
   svg_element_onemptied_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onemptied](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onemptied)
-impl TSVGElement with set_onemptied(self : Self, onemptied : (Event) -> JsValue) -> Unit {
-  svg_element_set_onemptied_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onemptied)),
-  )
+impl TSVGElement with set_onemptied(self : Self, 
+onemptied : (Event) -> JsValue) -> Unit {
+  svg_element_set_onemptied_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onemptied)))
 }
 
-///|
 /// [SVGElement.onended](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onended)
 impl TSVGElement with onended(self : Self) -> EventHandler {
   svg_element_onended_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onended](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onended)
-impl TSVGElement with set_onended(self : Self, onended : (Event) -> JsValue) -> Unit {
-  svg_element_set_onended_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onended)),
-  )
+impl TSVGElement with set_onended(self : Self, 
+onended : (Event) -> JsValue) -> Unit {
+  svg_element_set_onended_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onended)))
 }
 
-///|
 /// [SVGElement.onerror](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onerror)
 impl TSVGElement with onerror(self : Self) -> OnErrorEventHandler {
   svg_element_onerror_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onerror](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onerror)
-impl TSVGElement with set_onerror(
-  self : Self,
-  onerror : (OnErrorEventHandlerNonNullEvent, String, UInt, UInt, JsValue) -> JsValue,
-) -> Unit {
-  svg_element_set_onerror_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(on_error_event_handler_non_null_ffi(onerror)),
-  )
+impl TSVGElement with set_onerror(self : Self, 
+onerror : (OnErrorEventHandlerNonNullEvent, String, UInt, UInt, JsValue) -> JsValue) -> Unit {
+  svg_element_set_onerror_ffi(TJsValue::to_js(self), TJsValue::to_js(on_error_event_handler_non_null_ffi(onerror)))
 }
 
-///|
 /// [SVGElement.onfocus](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onfocus)
 impl TSVGElement with onfocus(self : Self) -> EventHandler {
   svg_element_onfocus_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onfocus](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onfocus)
-impl TSVGElement with set_onfocus(self : Self, onfocus : (Event) -> JsValue) -> Unit {
-  svg_element_set_onfocus_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onfocus)),
-  )
+impl TSVGElement with set_onfocus(self : Self, 
+onfocus : (Event) -> JsValue) -> Unit {
+  svg_element_set_onfocus_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onfocus)))
 }
 
-///|
 /// [SVGElement.onformdata](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onformdata)
 impl TSVGElement with onformdata(self : Self) -> EventHandler {
   svg_element_onformdata_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onformdata](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onformdata)
-impl TSVGElement with set_onformdata(
-  self : Self,
-  onformdata : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_onformdata_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onformdata)),
-  )
+impl TSVGElement with set_onformdata(self : Self, 
+onformdata : (Event) -> JsValue) -> Unit {
+  svg_element_set_onformdata_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onformdata)))
 }
 
-///|
 /// [SVGElement.oninput](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/oninput)
 impl TSVGElement with oninput(self : Self) -> EventHandler {
   svg_element_oninput_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.oninput](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/oninput)
-impl TSVGElement with set_oninput(self : Self, oninput : (Event) -> JsValue) -> Unit {
-  svg_element_set_oninput_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(oninput)),
-  )
+impl TSVGElement with set_oninput(self : Self, 
+oninput : (Event) -> JsValue) -> Unit {
+  svg_element_set_oninput_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(oninput)))
 }
 
-///|
 /// [SVGElement.oninvalid](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/oninvalid)
 impl TSVGElement with oninvalid(self : Self) -> EventHandler {
   svg_element_oninvalid_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.oninvalid](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/oninvalid)
-impl TSVGElement with set_oninvalid(self : Self, oninvalid : (Event) -> JsValue) -> Unit {
-  svg_element_set_oninvalid_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(oninvalid)),
-  )
+impl TSVGElement with set_oninvalid(self : Self, 
+oninvalid : (Event) -> JsValue) -> Unit {
+  svg_element_set_oninvalid_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(oninvalid)))
 }
 
-///|
 /// [SVGElement.onkeydown](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onkeydown)
 impl TSVGElement with onkeydown(self : Self) -> EventHandler {
   svg_element_onkeydown_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onkeydown](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onkeydown)
-impl TSVGElement with set_onkeydown(self : Self, onkeydown : (Event) -> JsValue) -> Unit {
-  svg_element_set_onkeydown_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onkeydown)),
-  )
+impl TSVGElement with set_onkeydown(self : Self, 
+onkeydown : (Event) -> JsValue) -> Unit {
+  svg_element_set_onkeydown_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onkeydown)))
 }
 
-///|
 /// [SVGElement.onkeypress](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onkeypress)
 impl TSVGElement with onkeypress(self : Self) -> EventHandler {
   svg_element_onkeypress_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onkeypress](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onkeypress)
-impl TSVGElement with set_onkeypress(
-  self : Self,
-  onkeypress : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_onkeypress_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onkeypress)),
-  )
+impl TSVGElement with set_onkeypress(self : Self, 
+onkeypress : (Event) -> JsValue) -> Unit {
+  svg_element_set_onkeypress_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onkeypress)))
 }
 
-///|
 /// [SVGElement.onkeyup](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onkeyup)
 impl TSVGElement with onkeyup(self : Self) -> EventHandler {
   svg_element_onkeyup_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onkeyup](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onkeyup)
-impl TSVGElement with set_onkeyup(self : Self, onkeyup : (Event) -> JsValue) -> Unit {
-  svg_element_set_onkeyup_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onkeyup)),
-  )
+impl TSVGElement with set_onkeyup(self : Self, 
+onkeyup : (Event) -> JsValue) -> Unit {
+  svg_element_set_onkeyup_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onkeyup)))
 }
 
-///|
 /// [SVGElement.onload](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onload)
 impl TSVGElement with onload(self : Self) -> EventHandler {
   svg_element_onload_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onload](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onload)
-impl TSVGElement with set_onload(self : Self, onload : (Event) -> JsValue) -> Unit {
-  svg_element_set_onload_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onload)),
-  )
+impl TSVGElement with set_onload(self : Self, 
+onload : (Event) -> JsValue) -> Unit {
+  svg_element_set_onload_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onload)))
 }
 
-///|
 /// [SVGElement.onloadeddata](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onloadeddata)
 impl TSVGElement with onloadeddata(self : Self) -> EventHandler {
   svg_element_onloadeddata_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onloadeddata](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onloadeddata)
-impl TSVGElement with set_onloadeddata(
-  self : Self,
-  onloadeddata : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_onloadeddata_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onloadeddata)),
-  )
+impl TSVGElement with set_onloadeddata(self : Self, 
+onloadeddata : (Event) -> JsValue) -> Unit {
+  svg_element_set_onloadeddata_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onloadeddata)))
 }
 
-///|
 /// [SVGElement.onloadedmetadata](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onloadedmetadata)
 impl TSVGElement with onloadedmetadata(self : Self) -> EventHandler {
   svg_element_onloadedmetadata_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onloadedmetadata](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onloadedmetadata)
-impl TSVGElement with set_onloadedmetadata(
-  self : Self,
-  onloadedmetadata : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_onloadedmetadata_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onloadedmetadata)),
-  )
+impl TSVGElement with set_onloadedmetadata(self : Self, 
+onloadedmetadata : (Event) -> JsValue) -> Unit {
+  svg_element_set_onloadedmetadata_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onloadedmetadata)))
 }
 
-///|
 /// [SVGElement.onloadstart](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onloadstart)
 impl TSVGElement with onloadstart(self : Self) -> EventHandler {
   svg_element_onloadstart_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onloadstart](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onloadstart)
-impl TSVGElement with set_onloadstart(
-  self : Self,
-  onloadstart : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_onloadstart_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onloadstart)),
-  )
+impl TSVGElement with set_onloadstart(self : Self, 
+onloadstart : (Event) -> JsValue) -> Unit {
+  svg_element_set_onloadstart_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onloadstart)))
 }
 
-///|
 /// [SVGElement.onmousedown](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onmousedown)
 impl TSVGElement with onmousedown(self : Self) -> EventHandler {
   svg_element_onmousedown_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onmousedown](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onmousedown)
-impl TSVGElement with set_onmousedown(
-  self : Self,
-  onmousedown : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_onmousedown_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onmousedown)),
-  )
+impl TSVGElement with set_onmousedown(self : Self, 
+onmousedown : (Event) -> JsValue) -> Unit {
+  svg_element_set_onmousedown_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onmousedown)))
 }
 
-///|
 /// [SVGElement.onmouseenter](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onmouseenter)
 impl TSVGElement with onmouseenter(self : Self) -> EventHandler {
   svg_element_onmouseenter_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onmouseenter](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onmouseenter)
-impl TSVGElement with set_onmouseenter(
-  self : Self,
-  onmouseenter : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_onmouseenter_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onmouseenter)),
-  )
+impl TSVGElement with set_onmouseenter(self : Self, 
+onmouseenter : (Event) -> JsValue) -> Unit {
+  svg_element_set_onmouseenter_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onmouseenter)))
 }
 
-///|
 /// [SVGElement.onmouseleave](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onmouseleave)
 impl TSVGElement with onmouseleave(self : Self) -> EventHandler {
   svg_element_onmouseleave_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onmouseleave](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onmouseleave)
-impl TSVGElement with set_onmouseleave(
-  self : Self,
-  onmouseleave : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_onmouseleave_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onmouseleave)),
-  )
+impl TSVGElement with set_onmouseleave(self : Self, 
+onmouseleave : (Event) -> JsValue) -> Unit {
+  svg_element_set_onmouseleave_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onmouseleave)))
 }
 
-///|
 /// [SVGElement.onmousemove](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onmousemove)
 impl TSVGElement with onmousemove(self : Self) -> EventHandler {
   svg_element_onmousemove_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onmousemove](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onmousemove)
-impl TSVGElement with set_onmousemove(
-  self : Self,
-  onmousemove : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_onmousemove_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onmousemove)),
-  )
+impl TSVGElement with set_onmousemove(self : Self, 
+onmousemove : (Event) -> JsValue) -> Unit {
+  svg_element_set_onmousemove_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onmousemove)))
 }
 
-///|
 /// [SVGElement.onmouseout](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onmouseout)
 impl TSVGElement with onmouseout(self : Self) -> EventHandler {
   svg_element_onmouseout_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onmouseout](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onmouseout)
-impl TSVGElement with set_onmouseout(
-  self : Self,
-  onmouseout : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_onmouseout_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onmouseout)),
-  )
+impl TSVGElement with set_onmouseout(self : Self, 
+onmouseout : (Event) -> JsValue) -> Unit {
+  svg_element_set_onmouseout_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onmouseout)))
 }
 
-///|
 /// [SVGElement.onmouseover](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onmouseover)
 impl TSVGElement with onmouseover(self : Self) -> EventHandler {
   svg_element_onmouseover_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onmouseover](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onmouseover)
-impl TSVGElement with set_onmouseover(
-  self : Self,
-  onmouseover : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_onmouseover_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onmouseover)),
-  )
+impl TSVGElement with set_onmouseover(self : Self, 
+onmouseover : (Event) -> JsValue) -> Unit {
+  svg_element_set_onmouseover_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onmouseover)))
 }
 
-///|
 /// [SVGElement.onmouseup](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onmouseup)
 impl TSVGElement with onmouseup(self : Self) -> EventHandler {
   svg_element_onmouseup_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onmouseup](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onmouseup)
-impl TSVGElement with set_onmouseup(self : Self, onmouseup : (Event) -> JsValue) -> Unit {
-  svg_element_set_onmouseup_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onmouseup)),
-  )
+impl TSVGElement with set_onmouseup(self : Self, 
+onmouseup : (Event) -> JsValue) -> Unit {
+  svg_element_set_onmouseup_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onmouseup)))
 }
 
-///|
 /// [SVGElement.onpaste](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onpaste)
 impl TSVGElement with onpaste(self : Self) -> EventHandler {
   svg_element_onpaste_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onpaste](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onpaste)
-impl TSVGElement with set_onpaste(self : Self, onpaste : (Event) -> JsValue) -> Unit {
-  svg_element_set_onpaste_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onpaste)),
-  )
+impl TSVGElement with set_onpaste(self : Self, 
+onpaste : (Event) -> JsValue) -> Unit {
+  svg_element_set_onpaste_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onpaste)))
 }
 
-///|
 /// [SVGElement.onpause](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onpause)
 impl TSVGElement with onpause(self : Self) -> EventHandler {
   svg_element_onpause_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onpause](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onpause)
-impl TSVGElement with set_onpause(self : Self, onpause : (Event) -> JsValue) -> Unit {
-  svg_element_set_onpause_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onpause)),
-  )
+impl TSVGElement with set_onpause(self : Self, 
+onpause : (Event) -> JsValue) -> Unit {
+  svg_element_set_onpause_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onpause)))
 }
 
-///|
 /// [SVGElement.onplay](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onplay)
 impl TSVGElement with onplay(self : Self) -> EventHandler {
   svg_element_onplay_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onplay](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onplay)
-impl TSVGElement with set_onplay(self : Self, onplay : (Event) -> JsValue) -> Unit {
-  svg_element_set_onplay_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onplay)),
-  )
+impl TSVGElement with set_onplay(self : Self, 
+onplay : (Event) -> JsValue) -> Unit {
+  svg_element_set_onplay_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onplay)))
 }
 
-///|
 /// [SVGElement.onplaying](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onplaying)
 impl TSVGElement with onplaying(self : Self) -> EventHandler {
   svg_element_onplaying_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onplaying](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onplaying)
-impl TSVGElement with set_onplaying(self : Self, onplaying : (Event) -> JsValue) -> Unit {
-  svg_element_set_onplaying_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onplaying)),
-  )
+impl TSVGElement with set_onplaying(self : Self, 
+onplaying : (Event) -> JsValue) -> Unit {
+  svg_element_set_onplaying_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onplaying)))
 }
 
-///|
 /// [SVGElement.onprogress](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onprogress)
 impl TSVGElement with onprogress(self : Self) -> EventHandler {
   svg_element_onprogress_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onprogress](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onprogress)
-impl TSVGElement with set_onprogress(
-  self : Self,
-  onprogress : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_onprogress_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onprogress)),
-  )
+impl TSVGElement with set_onprogress(self : Self, 
+onprogress : (Event) -> JsValue) -> Unit {
+  svg_element_set_onprogress_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onprogress)))
 }
 
-///|
 /// [SVGElement.onratechange](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onratechange)
 impl TSVGElement with onratechange(self : Self) -> EventHandler {
   svg_element_onratechange_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onratechange](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onratechange)
-impl TSVGElement with set_onratechange(
-  self : Self,
-  onratechange : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_onratechange_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onratechange)),
-  )
+impl TSVGElement with set_onratechange(self : Self, 
+onratechange : (Event) -> JsValue) -> Unit {
+  svg_element_set_onratechange_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onratechange)))
 }
 
-///|
 /// [SVGElement.onreset](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onreset)
 impl TSVGElement with onreset(self : Self) -> EventHandler {
   svg_element_onreset_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onreset](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onreset)
-impl TSVGElement with set_onreset(self : Self, onreset : (Event) -> JsValue) -> Unit {
-  svg_element_set_onreset_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onreset)),
-  )
+impl TSVGElement with set_onreset(self : Self, 
+onreset : (Event) -> JsValue) -> Unit {
+  svg_element_set_onreset_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onreset)))
 }
 
-///|
 /// [SVGElement.onresize](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onresize)
 impl TSVGElement with onresize(self : Self) -> EventHandler {
   svg_element_onresize_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onresize](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onresize)
-impl TSVGElement with set_onresize(self : Self, onresize : (Event) -> JsValue) -> Unit {
-  svg_element_set_onresize_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onresize)),
-  )
+impl TSVGElement with set_onresize(self : Self, 
+onresize : (Event) -> JsValue) -> Unit {
+  svg_element_set_onresize_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onresize)))
 }
 
-///|
 /// [SVGElement.onscroll](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onscroll)
 impl TSVGElement with onscroll(self : Self) -> EventHandler {
   svg_element_onscroll_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onscroll](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onscroll)
-impl TSVGElement with set_onscroll(self : Self, onscroll : (Event) -> JsValue) -> Unit {
-  svg_element_set_onscroll_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onscroll)),
-  )
+impl TSVGElement with set_onscroll(self : Self, 
+onscroll : (Event) -> JsValue) -> Unit {
+  svg_element_set_onscroll_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onscroll)))
 }
 
-///|
 /// [SVGElement.onscrollend](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onscrollend)
 impl TSVGElement with onscrollend(self : Self) -> EventHandler {
   svg_element_onscrollend_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onscrollend](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onscrollend)
-impl TSVGElement with set_onscrollend(
-  self : Self,
-  onscrollend : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_onscrollend_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onscrollend)),
-  )
+impl TSVGElement with set_onscrollend(self : Self, 
+onscrollend : (Event) -> JsValue) -> Unit {
+  svg_element_set_onscrollend_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onscrollend)))
 }
 
-///|
 /// [SVGElement.onsecuritypolicyviolation](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onsecuritypolicyviolation)
 impl TSVGElement with onsecuritypolicyviolation(self : Self) -> EventHandler {
   svg_element_onsecuritypolicyviolation_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onsecuritypolicyviolation](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onsecuritypolicyviolation)
-impl TSVGElement with set_onsecuritypolicyviolation(
-  self : Self,
-  onsecuritypolicyviolation : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_onsecuritypolicyviolation_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onsecuritypolicyviolation)),
-  )
+impl TSVGElement with set_onsecuritypolicyviolation(self : Self, 
+onsecuritypolicyviolation : (Event) -> JsValue) -> Unit {
+  svg_element_set_onsecuritypolicyviolation_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onsecuritypolicyviolation)))
 }
 
-///|
 /// [SVGElement.onseeked](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onseeked)
 impl TSVGElement with onseeked(self : Self) -> EventHandler {
   svg_element_onseeked_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onseeked](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onseeked)
-impl TSVGElement with set_onseeked(self : Self, onseeked : (Event) -> JsValue) -> Unit {
-  svg_element_set_onseeked_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onseeked)),
-  )
+impl TSVGElement with set_onseeked(self : Self, 
+onseeked : (Event) -> JsValue) -> Unit {
+  svg_element_set_onseeked_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onseeked)))
 }
 
-///|
 /// [SVGElement.onseeking](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onseeking)
 impl TSVGElement with onseeking(self : Self) -> EventHandler {
   svg_element_onseeking_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onseeking](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onseeking)
-impl TSVGElement with set_onseeking(self : Self, onseeking : (Event) -> JsValue) -> Unit {
-  svg_element_set_onseeking_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onseeking)),
-  )
+impl TSVGElement with set_onseeking(self : Self, 
+onseeking : (Event) -> JsValue) -> Unit {
+  svg_element_set_onseeking_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onseeking)))
 }
 
-///|
 /// [SVGElement.onselect](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onselect)
 impl TSVGElement with onselect(self : Self) -> EventHandler {
   svg_element_onselect_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onselect](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onselect)
-impl TSVGElement with set_onselect(self : Self, onselect : (Event) -> JsValue) -> Unit {
-  svg_element_set_onselect_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onselect)),
-  )
+impl TSVGElement with set_onselect(self : Self, 
+onselect : (Event) -> JsValue) -> Unit {
+  svg_element_set_onselect_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onselect)))
 }
 
-///|
 /// [SVGElement.onslotchange](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onslotchange)
 impl TSVGElement with onslotchange(self : Self) -> EventHandler {
   svg_element_onslotchange_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onslotchange](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onslotchange)
-impl TSVGElement with set_onslotchange(
-  self : Self,
-  onslotchange : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_onslotchange_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onslotchange)),
-  )
+impl TSVGElement with set_onslotchange(self : Self, 
+onslotchange : (Event) -> JsValue) -> Unit {
+  svg_element_set_onslotchange_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onslotchange)))
 }
 
-///|
 /// [SVGElement.onstalled](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onstalled)
 impl TSVGElement with onstalled(self : Self) -> EventHandler {
   svg_element_onstalled_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onstalled](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onstalled)
-impl TSVGElement with set_onstalled(self : Self, onstalled : (Event) -> JsValue) -> Unit {
-  svg_element_set_onstalled_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onstalled)),
-  )
+impl TSVGElement with set_onstalled(self : Self, 
+onstalled : (Event) -> JsValue) -> Unit {
+  svg_element_set_onstalled_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onstalled)))
 }
 
-///|
 /// [SVGElement.onsubmit](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onsubmit)
 impl TSVGElement with onsubmit(self : Self) -> EventHandler {
   svg_element_onsubmit_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onsubmit](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onsubmit)
-impl TSVGElement with set_onsubmit(self : Self, onsubmit : (Event) -> JsValue) -> Unit {
-  svg_element_set_onsubmit_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onsubmit)),
-  )
+impl TSVGElement with set_onsubmit(self : Self, 
+onsubmit : (Event) -> JsValue) -> Unit {
+  svg_element_set_onsubmit_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onsubmit)))
 }
 
-///|
 /// [SVGElement.onsuspend](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onsuspend)
 impl TSVGElement with onsuspend(self : Self) -> EventHandler {
   svg_element_onsuspend_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onsuspend](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onsuspend)
-impl TSVGElement with set_onsuspend(self : Self, onsuspend : (Event) -> JsValue) -> Unit {
-  svg_element_set_onsuspend_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onsuspend)),
-  )
+impl TSVGElement with set_onsuspend(self : Self, 
+onsuspend : (Event) -> JsValue) -> Unit {
+  svg_element_set_onsuspend_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onsuspend)))
 }
 
-///|
 /// [SVGElement.ontimeupdate](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ontimeupdate)
 impl TSVGElement with ontimeupdate(self : Self) -> EventHandler {
   svg_element_ontimeupdate_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.ontimeupdate](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ontimeupdate)
-impl TSVGElement with set_ontimeupdate(
-  self : Self,
-  ontimeupdate : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_ontimeupdate_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(ontimeupdate)),
-  )
+impl TSVGElement with set_ontimeupdate(self : Self, 
+ontimeupdate : (Event) -> JsValue) -> Unit {
+  svg_element_set_ontimeupdate_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(ontimeupdate)))
 }
 
-///|
 /// [SVGElement.ontoggle](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ontoggle)
 impl TSVGElement with ontoggle(self : Self) -> EventHandler {
   svg_element_ontoggle_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.ontoggle](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ontoggle)
-impl TSVGElement with set_ontoggle(self : Self, ontoggle : (Event) -> JsValue) -> Unit {
-  svg_element_set_ontoggle_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(ontoggle)),
-  )
+impl TSVGElement with set_ontoggle(self : Self, 
+ontoggle : (Event) -> JsValue) -> Unit {
+  svg_element_set_ontoggle_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(ontoggle)))
 }
 
-///|
 /// [SVGElement.onvolumechange](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onvolumechange)
 impl TSVGElement with onvolumechange(self : Self) -> EventHandler {
   svg_element_onvolumechange_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onvolumechange](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onvolumechange)
-impl TSVGElement with set_onvolumechange(
-  self : Self,
-  onvolumechange : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_onvolumechange_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onvolumechange)),
-  )
+impl TSVGElement with set_onvolumechange(self : Self, 
+onvolumechange : (Event) -> JsValue) -> Unit {
+  svg_element_set_onvolumechange_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onvolumechange)))
 }
 
-///|
 /// [SVGElement.onwaiting](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onwaiting)
 impl TSVGElement with onwaiting(self : Self) -> EventHandler {
   svg_element_onwaiting_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onwaiting](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onwaiting)
-impl TSVGElement with set_onwaiting(self : Self, onwaiting : (Event) -> JsValue) -> Unit {
-  svg_element_set_onwaiting_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onwaiting)),
-  )
+impl TSVGElement with set_onwaiting(self : Self, 
+onwaiting : (Event) -> JsValue) -> Unit {
+  svg_element_set_onwaiting_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onwaiting)))
 }
 
-///|
 /// [SVGElement.onwebkitanimationend](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onwebkitanimationend)
 impl TSVGElement with onwebkitanimationend(self : Self) -> EventHandler {
   svg_element_onwebkitanimationend_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onwebkitanimationend](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onwebkitanimationend)
-impl TSVGElement with set_onwebkitanimationend(
-  self : Self,
-  onwebkitanimationend : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_onwebkitanimationend_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onwebkitanimationend)),
-  )
+impl TSVGElement with set_onwebkitanimationend(self : Self, 
+onwebkitanimationend : (Event) -> JsValue) -> Unit {
+  svg_element_set_onwebkitanimationend_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onwebkitanimationend)))
 }
 
-///|
 /// [SVGElement.onwebkitanimationiteration](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onwebkitanimationiteration)
 impl TSVGElement with onwebkitanimationiteration(self : Self) -> EventHandler {
   svg_element_onwebkitanimationiteration_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onwebkitanimationiteration](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onwebkitanimationiteration)
-impl TSVGElement with set_onwebkitanimationiteration(
-  self : Self,
-  onwebkitanimationiteration : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_onwebkitanimationiteration_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onwebkitanimationiteration)),
-  )
+impl TSVGElement with set_onwebkitanimationiteration(self : Self, 
+onwebkitanimationiteration : (Event) -> JsValue) -> Unit {
+  svg_element_set_onwebkitanimationiteration_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onwebkitanimationiteration)))
 }
 
-///|
 /// [SVGElement.onwebkitanimationstart](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onwebkitanimationstart)
 impl TSVGElement with onwebkitanimationstart(self : Self) -> EventHandler {
   svg_element_onwebkitanimationstart_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onwebkitanimationstart](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onwebkitanimationstart)
-impl TSVGElement with set_onwebkitanimationstart(
-  self : Self,
-  onwebkitanimationstart : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_onwebkitanimationstart_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onwebkitanimationstart)),
-  )
+impl TSVGElement with set_onwebkitanimationstart(self : Self, 
+onwebkitanimationstart : (Event) -> JsValue) -> Unit {
+  svg_element_set_onwebkitanimationstart_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onwebkitanimationstart)))
 }
 
-///|
 /// [SVGElement.onwebkittransitionend](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onwebkittransitionend)
 impl TSVGElement with onwebkittransitionend(self : Self) -> EventHandler {
   svg_element_onwebkittransitionend_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onwebkittransitionend](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onwebkittransitionend)
-impl TSVGElement with set_onwebkittransitionend(
-  self : Self,
-  onwebkittransitionend : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_onwebkittransitionend_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onwebkittransitionend)),
-  )
+impl TSVGElement with set_onwebkittransitionend(self : Self, 
+onwebkittransitionend : (Event) -> JsValue) -> Unit {
+  svg_element_set_onwebkittransitionend_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onwebkittransitionend)))
 }
 
-///|
 /// [SVGElement.onwheel](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onwheel)
 impl TSVGElement with onwheel(self : Self) -> EventHandler {
   svg_element_onwheel_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onwheel](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onwheel)
-impl TSVGElement with set_onwheel(self : Self, onwheel : (Event) -> JsValue) -> Unit {
-  svg_element_set_onwheel_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onwheel)),
-  )
+impl TSVGElement with set_onwheel(self : Self, 
+onwheel : (Event) -> JsValue) -> Unit {
+  svg_element_set_onwheel_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onwheel)))
 }
 
-///|
 /// [SVGElement.ontouchstart](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ontouchstart)
 impl TSVGElement with ontouchstart(self : Self) -> EventHandler {
   svg_element_ontouchstart_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.ontouchstart](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ontouchstart)
-impl TSVGElement with set_ontouchstart(
-  self : Self,
-  ontouchstart : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_ontouchstart_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(ontouchstart)),
-  )
+impl TSVGElement with set_ontouchstart(self : Self, 
+ontouchstart : (Event) -> JsValue) -> Unit {
+  svg_element_set_ontouchstart_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(ontouchstart)))
 }
 
-///|
 /// [SVGElement.ontouchend](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ontouchend)
 impl TSVGElement with ontouchend(self : Self) -> EventHandler {
   svg_element_ontouchend_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.ontouchend](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ontouchend)
-impl TSVGElement with set_ontouchend(
-  self : Self,
-  ontouchend : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_ontouchend_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(ontouchend)),
-  )
+impl TSVGElement with set_ontouchend(self : Self, 
+ontouchend : (Event) -> JsValue) -> Unit {
+  svg_element_set_ontouchend_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(ontouchend)))
 }
 
-///|
 /// [SVGElement.ontouchmove](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ontouchmove)
 impl TSVGElement with ontouchmove(self : Self) -> EventHandler {
   svg_element_ontouchmove_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.ontouchmove](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ontouchmove)
-impl TSVGElement with set_ontouchmove(
-  self : Self,
-  ontouchmove : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_ontouchmove_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(ontouchmove)),
-  )
+impl TSVGElement with set_ontouchmove(self : Self, 
+ontouchmove : (Event) -> JsValue) -> Unit {
+  svg_element_set_ontouchmove_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(ontouchmove)))
 }
 
-///|
 /// [SVGElement.ontouchcancel](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ontouchcancel)
 impl TSVGElement with ontouchcancel(self : Self) -> EventHandler {
   svg_element_ontouchcancel_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.ontouchcancel](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ontouchcancel)
-impl TSVGElement with set_ontouchcancel(
-  self : Self,
-  ontouchcancel : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_ontouchcancel_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(ontouchcancel)),
-  )
+impl TSVGElement with set_ontouchcancel(self : Self, 
+ontouchcancel : (Event) -> JsValue) -> Unit {
+  svg_element_set_ontouchcancel_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(ontouchcancel)))
 }
 
-///|
 /// [SVGElement.onpointerover](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onpointerover)
 impl TSVGElement with onpointerover(self : Self) -> EventHandler {
   svg_element_onpointerover_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onpointerover](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onpointerover)
-impl TSVGElement with set_onpointerover(
-  self : Self,
-  onpointerover : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_onpointerover_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onpointerover)),
-  )
+impl TSVGElement with set_onpointerover(self : Self, 
+onpointerover : (Event) -> JsValue) -> Unit {
+  svg_element_set_onpointerover_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onpointerover)))
 }
 
-///|
 /// [SVGElement.onpointerenter](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onpointerenter)
 impl TSVGElement with onpointerenter(self : Self) -> EventHandler {
   svg_element_onpointerenter_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onpointerenter](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onpointerenter)
-impl TSVGElement with set_onpointerenter(
-  self : Self,
-  onpointerenter : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_onpointerenter_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onpointerenter)),
-  )
+impl TSVGElement with set_onpointerenter(self : Self, 
+onpointerenter : (Event) -> JsValue) -> Unit {
+  svg_element_set_onpointerenter_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onpointerenter)))
 }
 
-///|
 /// [SVGElement.onpointerdown](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onpointerdown)
 impl TSVGElement with onpointerdown(self : Self) -> EventHandler {
   svg_element_onpointerdown_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onpointerdown](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onpointerdown)
-impl TSVGElement with set_onpointerdown(
-  self : Self,
-  onpointerdown : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_onpointerdown_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onpointerdown)),
-  )
+impl TSVGElement with set_onpointerdown(self : Self, 
+onpointerdown : (Event) -> JsValue) -> Unit {
+  svg_element_set_onpointerdown_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onpointerdown)))
 }
 
-///|
 /// [SVGElement.onpointermove](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onpointermove)
 impl TSVGElement with onpointermove(self : Self) -> EventHandler {
   svg_element_onpointermove_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onpointermove](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onpointermove)
-impl TSVGElement with set_onpointermove(
-  self : Self,
-  onpointermove : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_onpointermove_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onpointermove)),
-  )
+impl TSVGElement with set_onpointermove(self : Self, 
+onpointermove : (Event) -> JsValue) -> Unit {
+  svg_element_set_onpointermove_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onpointermove)))
 }
 
-///|
 /// [SVGElement.onpointerrawupdate](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onpointerrawupdate)
 impl TSVGElement with onpointerrawupdate(self : Self) -> EventHandler {
   svg_element_onpointerrawupdate_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onpointerrawupdate](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onpointerrawupdate)
-impl TSVGElement with set_onpointerrawupdate(
-  self : Self,
-  onpointerrawupdate : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_onpointerrawupdate_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onpointerrawupdate)),
-  )
+impl TSVGElement with set_onpointerrawupdate(self : Self, 
+onpointerrawupdate : (Event) -> JsValue) -> Unit {
+  svg_element_set_onpointerrawupdate_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onpointerrawupdate)))
 }
 
-///|
 /// [SVGElement.onpointerup](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onpointerup)
 impl TSVGElement with onpointerup(self : Self) -> EventHandler {
   svg_element_onpointerup_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onpointerup](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onpointerup)
-impl TSVGElement with set_onpointerup(
-  self : Self,
-  onpointerup : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_onpointerup_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onpointerup)),
-  )
+impl TSVGElement with set_onpointerup(self : Self, 
+onpointerup : (Event) -> JsValue) -> Unit {
+  svg_element_set_onpointerup_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onpointerup)))
 }
 
-///|
 /// [SVGElement.onpointercancel](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onpointercancel)
 impl TSVGElement with onpointercancel(self : Self) -> EventHandler {
   svg_element_onpointercancel_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onpointercancel](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onpointercancel)
-impl TSVGElement with set_onpointercancel(
-  self : Self,
-  onpointercancel : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_onpointercancel_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onpointercancel)),
-  )
+impl TSVGElement with set_onpointercancel(self : Self, 
+onpointercancel : (Event) -> JsValue) -> Unit {
+  svg_element_set_onpointercancel_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onpointercancel)))
 }
 
-///|
 /// [SVGElement.onpointerout](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onpointerout)
 impl TSVGElement with onpointerout(self : Self) -> EventHandler {
   svg_element_onpointerout_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onpointerout](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onpointerout)
-impl TSVGElement with set_onpointerout(
-  self : Self,
-  onpointerout : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_onpointerout_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onpointerout)),
-  )
+impl TSVGElement with set_onpointerout(self : Self, 
+onpointerout : (Event) -> JsValue) -> Unit {
+  svg_element_set_onpointerout_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onpointerout)))
 }
 
-///|
 /// [SVGElement.onpointerleave](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onpointerleave)
 impl TSVGElement with onpointerleave(self : Self) -> EventHandler {
   svg_element_onpointerleave_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onpointerleave](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onpointerleave)
-impl TSVGElement with set_onpointerleave(
-  self : Self,
-  onpointerleave : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_onpointerleave_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onpointerleave)),
-  )
+impl TSVGElement with set_onpointerleave(self : Self, 
+onpointerleave : (Event) -> JsValue) -> Unit {
+  svg_element_set_onpointerleave_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onpointerleave)))
 }
 
-///|
 /// [SVGElement.ongotpointercapture](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ongotpointercapture)
 impl TSVGElement with ongotpointercapture(self : Self) -> EventHandler {
   svg_element_ongotpointercapture_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.ongotpointercapture](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/ongotpointercapture)
-impl TSVGElement with set_ongotpointercapture(
-  self : Self,
-  ongotpointercapture : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_ongotpointercapture_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(ongotpointercapture)),
-  )
+impl TSVGElement with set_ongotpointercapture(self : Self, 
+ongotpointercapture : (Event) -> JsValue) -> Unit {
+  svg_element_set_ongotpointercapture_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(ongotpointercapture)))
 }
 
-///|
 /// [SVGElement.onlostpointercapture](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onlostpointercapture)
 impl TSVGElement with onlostpointercapture(self : Self) -> EventHandler {
   svg_element_onlostpointercapture_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onlostpointercapture](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onlostpointercapture)
-impl TSVGElement with set_onlostpointercapture(
-  self : Self,
-  onlostpointercapture : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_onlostpointercapture_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onlostpointercapture)),
-  )
+impl TSVGElement with set_onlostpointercapture(self : Self, 
+onlostpointercapture : (Event) -> JsValue) -> Unit {
+  svg_element_set_onlostpointercapture_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onlostpointercapture)))
 }
 
-///|
 /// [SVGElement.onselectstart](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onselectstart)
 impl TSVGElement with onselectstart(self : Self) -> EventHandler {
   svg_element_onselectstart_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onselectstart](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onselectstart)
-impl TSVGElement with set_onselectstart(
-  self : Self,
-  onselectstart : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_onselectstart_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onselectstart)),
-  )
+impl TSVGElement with set_onselectstart(self : Self, 
+onselectstart : (Event) -> JsValue) -> Unit {
+  svg_element_set_onselectstart_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onselectstart)))
 }
 
-///|
 /// [SVGElement.onselectionchange](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onselectionchange)
 impl TSVGElement with onselectionchange(self : Self) -> EventHandler {
   svg_element_onselectionchange_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.onselectionchange](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/onselectionchange)
-impl TSVGElement with set_onselectionchange(
-  self : Self,
-  onselectionchange : (Event) -> JsValue,
-) -> Unit {
-  svg_element_set_onselectionchange_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(event_handler_non_null_ffi(onselectionchange)),
-  )
+impl TSVGElement with set_onselectionchange(self : Self, 
+onselectionchange : (Event) -> JsValue) -> Unit {
+  svg_element_set_onselectionchange_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onselectionchange)))
 }
 
-///|
 /// [SVGElement.correspondingElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/correspondingElement)
 impl TSVGElement with corresponding_element(self : Self) -> SVGElement {
   svg_element_corresponding_element_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.correspondingUseElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/correspondingUseElement)
 impl TSVGElement with corresponding_use_element(self : Self) -> SVGUseElement {
   svg_element_corresponding_use_element_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.dataset](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/dataset)
 impl TSVGElement with dataset(self : Self) -> DOMStringMap {
   svg_element_dataset_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.nonce](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/nonce)
 impl TSVGElement with nonce(self : Self) -> String {
   svg_element_nonce_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.nonce](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/nonce)
-impl TSVGElement with set_nonce(self : Self, nonce : String) -> Unit {
+impl TSVGElement with set_nonce(self : Self, 
+nonce : String) -> Unit {
   svg_element_set_nonce_ffi(TJsValue::to_js(self), TJsValue::to_js(nonce))
 }
 
-///|
 /// [SVGElement.autofocus](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/autofocus)
 impl TSVGElement with autofocus(self : Self) -> Bool {
   svg_element_autofocus_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.autofocus](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/autofocus)
-impl TSVGElement with set_autofocus(self : Self, autofocus : Bool) -> Unit {
-  svg_element_set_autofocus_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(autofocus),
-  )
+impl TSVGElement with set_autofocus(self : Self, 
+autofocus : Bool) -> Unit {
+  svg_element_set_autofocus_ffi(TJsValue::to_js(self), TJsValue::to_js(autofocus))
 }
 
-///|
 /// [SVGElement.tabIndex](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/tabIndex)
 impl TSVGElement with tab_index(self : Self) -> Int {
   svg_element_tab_index_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.tabIndex](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/tabIndex)
-impl TSVGElement with set_tab_index(self : Self, tab_index : Int) -> Unit {
-  svg_element_set_tab_index_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(tab_index),
-  )
+impl TSVGElement with set_tab_index(self : Self, 
+tab_index : Int) -> Unit {
+  svg_element_set_tab_index_ffi(TJsValue::to_js(self), TJsValue::to_js(tab_index))
 }
 
-///|
 /// [SVGElement.focus](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/focus)
-impl TSVGElement with focus(self : Self, options? : FocusOptions) -> Unit {
+impl TSVGElement with focus(self : Self, 
+options? : FocusOptions) -> Unit {
   svg_element_focus_ffi(TJsValue::to_js(self), opt_to_js(options))
 }
 
-///|
 /// [SVGElement.blur](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/blur)
 impl TSVGElement with blur(self : Self) -> Unit {
   svg_element_blur_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGElement.style](https://developer.mozilla.org/en-US/docs/Web/API/SVGElement/style)
 impl TSVGElement with style(self : Self) -> CSSStyleProperties {
   svg_element_style_ffi(TJsValue::to_js(self))

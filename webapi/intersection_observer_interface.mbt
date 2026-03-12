@@ -2,75 +2,44 @@
 // MoonBit type: IntersectionObserver
 // Specifications: intersection-observer.idl
 
-///|
 /// [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver)
 #external
 pub type IntersectionObserver
 
-///|
-pub impl TJsValue for IntersectionObserver with to_js(
-  self : IntersectionObserver,
-) -> JsValue = "%identity"
+pub impl TJsValue for IntersectionObserver with to_js(self: IntersectionObserver) -> JsValue = "%identity"
 
-///|
 pub impl FromJsAny for IntersectionObserver with from_js_any(value : JsAny) -> IntersectionObserver = "%identity"
 
-///|
-pub fn[T : TIntersectionObserver] IntersectionObserver::into(
-  self : IntersectionObserver,
-) -> T = "%identity"
+pub fn[T: TIntersectionObserver] IntersectionObserver::into(self : IntersectionObserver) -> T = "%identity"
 
-///|
 pub impl TIntersectionObserver for IntersectionObserver
 
-///|
-pub fn IntersectionObserver::new(
-  callback : (Array[IntersectionObserverEntry], IntersectionObserver) -> Unit,
-  options? : IntersectionObserverInit,
-) -> IntersectionObserver {
-  intersection_observer_new_ffi(
-    TJsValue::to_js(intersection_observer_callback_ffi(callback)),
-    opt_to_js(options),
-  )
+pub fn IntersectionObserver::new(callback : (Array[IntersectionObserverEntry], IntersectionObserver) -> Unit, 
+options? : IntersectionObserverInit) -> IntersectionObserver {
+  intersection_observer_new_ffi(TJsValue::to_js(intersection_observer_callback_ffi(callback)), opt_to_js(options))
 }
 
-///|
-pub(open) trait TIntersectionObserverRoot: TJsValue {}
+pub(open) trait TIntersectionObserverRoot : TJsValue {}
 
-///|
 pub impl TIntersectionObserverRoot for Element
 
-///|
 pub impl TIntersectionObserverRoot for Document
 
-///|
 #external
 pub type IntersectionObserverRoot
 
-///|
-pub impl TJsValue for IntersectionObserverRoot with to_js(
-  self : IntersectionObserverRoot,
-) -> JsValue = "%identity"
+pub impl TJsValue for IntersectionObserverRoot with to_js(self: IntersectionObserverRoot) -> JsValue = "%identity"
 
-///|
 pub impl FromJsAny for IntersectionObserverRoot with from_js_any(value : JsAny) -> IntersectionObserverRoot = "%identity"
 
-///|
-pub fn[T : TIntersectionObserverRoot + FromJsAny] IntersectionObserverRoot::into(
-  self : IntersectionObserverRoot,
-) -> T {
+pub fn[T : TIntersectionObserverRoot + FromJsAny] IntersectionObserverRoot::into(self : IntersectionObserverRoot) -> T {
   FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
 }
 
-///|
-pub fn[T : TIntersectionObserverRoot] IntersectionObserverRoot::from(
-  value : T,
-) -> IntersectionObserverRoot = "%identity"
+pub fn[T : TIntersectionObserverRoot] IntersectionObserverRoot::from(value : T) -> IntersectionObserverRoot = "%identity"
 
-///|
 pub impl TIntersectionObserverRoot for IntersectionObserverRoot
 
-///|
 /// [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver) interface.
 pub trait TIntersectionObserver: TJsValue {
   root(self : Self) -> IntersectionObserverRoot = _
@@ -85,70 +54,54 @@ pub trait TIntersectionObserver: TJsValue {
   take_records(self : Self) -> Array[IntersectionObserverEntry] = _
 }
 
-///|
 /// [IntersectionObserver.root](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/root)
 impl TIntersectionObserver with root(self : Self) -> IntersectionObserverRoot {
   intersection_observer_root_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [IntersectionObserver.rootMargin](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/rootMargin)
 impl TIntersectionObserver with root_margin(self : Self) -> String {
   intersection_observer_root_margin_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [IntersectionObserver.scrollMargin](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/scrollMargin)
 impl TIntersectionObserver with scroll_margin(self : Self) -> String {
   intersection_observer_scroll_margin_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [IntersectionObserver.thresholds](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/thresholds)
 impl TIntersectionObserver with thresholds(self : Self) -> Array[Double] {
   intersection_observer_thresholds_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [IntersectionObserver.delay](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/delay)
 impl TIntersectionObserver with delay(self : Self) -> Int {
   intersection_observer_delay_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [IntersectionObserver.trackVisibility](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/trackVisibility)
 impl TIntersectionObserver with track_visibility(self : Self) -> Bool {
   intersection_observer_track_visibility_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [IntersectionObserver.observe](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/observe)
-impl TIntersectionObserver with observe(self : Self, target : &TElement) -> Unit {
-  intersection_observer_observe_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(target),
-  )
+impl TIntersectionObserver with observe(self : Self, 
+target : &TElement) -> Unit {
+  intersection_observer_observe_ffi(TJsValue::to_js(self), TJsValue::to_js(target))
 }
 
-///|
 /// [IntersectionObserver.unobserve](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/unobserve)
-impl TIntersectionObserver with unobserve(self : Self, target : &TElement) -> Unit {
-  intersection_observer_unobserve_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(target),
-  )
+impl TIntersectionObserver with unobserve(self : Self, 
+target : &TElement) -> Unit {
+  intersection_observer_unobserve_ffi(TJsValue::to_js(self), TJsValue::to_js(target))
 }
 
-///|
 /// [IntersectionObserver.disconnect](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/disconnect)
 impl TIntersectionObserver with disconnect(self : Self) -> Unit {
   intersection_observer_disconnect_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [IntersectionObserver.takeRecords](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/takeRecords)
-impl TIntersectionObserver with take_records(self : Self) -> Array[
-  IntersectionObserverEntry,
-] {
+impl TIntersectionObserver with take_records(self : Self) -> Array[IntersectionObserverEntry] {
   intersection_observer_take_records_ffi(TJsValue::to_js(self))
 }

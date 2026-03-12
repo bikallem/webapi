@@ -2,37 +2,26 @@
 // MoonBit type: ScrollIntoViewContainer
 // Specifications: cssom-view.idl
 
-///|
 pub(all) enum ScrollIntoViewContainer {
   All
   Nearest
 } derive(Eq)
 
-///|
-pub impl Show for ScrollIntoViewContainer with output(
-  self : ScrollIntoViewContainer,
-  logger : &Logger,
-) -> Unit {
+pub impl Show for ScrollIntoViewContainer with output(self : ScrollIntoViewContainer, logger : &Logger) -> Unit {
   match self {
     ScrollIntoViewContainer::All => logger.write_string("All")
     ScrollIntoViewContainer::Nearest => logger.write_string("Nearest")
   }
 }
 
-///|
-pub impl TJsValue for ScrollIntoViewContainer with to_js(
-  self : ScrollIntoViewContainer,
-) -> JsValue {
+pub impl TJsValue for ScrollIntoViewContainer with to_js(self: ScrollIntoViewContainer) -> JsValue {
   match self {
     ScrollIntoViewContainer::All => TJsValue::to_js("all")
     ScrollIntoViewContainer::Nearest => TJsValue::to_js("nearest")
   }
 }
 
-///|
-pub fn ScrollIntoViewContainer::from(
-  value : String,
-) -> ScrollIntoViewContainer? {
+pub fn ScrollIntoViewContainer::from(value: String) -> ScrollIntoViewContainer? {
   match value {
     "all" => Some(ScrollIntoViewContainer::All)
     "nearest" => Some(ScrollIntoViewContainer::Nearest)
@@ -40,10 +29,7 @@ pub fn ScrollIntoViewContainer::from(
   }
 }
 
-///|
-fn ScrollIntoViewContainer::from_unchecked(
-  value : String,
-) -> ScrollIntoViewContainer {
+fn ScrollIntoViewContainer::from_unchecked(value: String) -> ScrollIntoViewContainer {
   match value {
     "all" => ScrollIntoViewContainer::All
     "nearest" => ScrollIntoViewContainer::Nearest
@@ -51,15 +37,13 @@ fn ScrollIntoViewContainer::from_unchecked(
   }
 }
 
-///|
-pub fn ScrollIntoViewContainer::value(self : ScrollIntoViewContainer) -> String {
+pub fn ScrollIntoViewContainer::value(self: ScrollIntoViewContainer) -> String {
   match self {
     ScrollIntoViewContainer::All => "all"
     ScrollIntoViewContainer::Nearest => "nearest"
   }
 }
 
-///|
 pub impl FromJsAny for ScrollIntoViewContainer with from_js_any(value : JsAny) -> ScrollIntoViewContainer {
   ScrollIntoViewContainer::from_unchecked(value)
 }

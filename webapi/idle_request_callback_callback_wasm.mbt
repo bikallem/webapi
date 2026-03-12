@@ -1,4 +1,1 @@
-///|
-fn idle_request_callback_ffi(
-  callback : (IdleDeadline) -> Unit,
-) -> IdleRequestCallback = "webapi_IdleRequestCallback" "new"
+fn idle_request_callback_ffi(callback : (IdleDeadline) -> Unit) -> IdleRequestCallback = "webapi_IdleRequestCallback" "new"

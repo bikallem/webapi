@@ -1,4 +1,1 @@
-///|
-extern "js" fn underlying_sink_write_callback_ffi(
-  callback : (JsValue, WritableStreamDefaultController) -> JsPromise[JsValue],
-) -> UnderlyingSinkWriteCallback = "(callback) => callback"
+extern "js" fn underlying_sink_write_callback_ffi(callback : (JsValue, WritableStreamDefaultController) -> JsPromise[JsValue]) -> UnderlyingSinkWriteCallback = "(callback) => callback"

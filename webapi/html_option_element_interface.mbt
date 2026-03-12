@@ -2,43 +2,30 @@
 // MoonBit type: HTMLOptionElement
 // Specifications: html.idl
 
-///|
 /// [HTMLOptionElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement)
 #external
 pub type HTMLOptionElement
 
-///|
-pub impl TJsValue for HTMLOptionElement with to_js(self : HTMLOptionElement) -> JsValue = "%identity"
+pub impl TJsValue for HTMLOptionElement with to_js(self: HTMLOptionElement) -> JsValue = "%identity"
 
-///|
 pub impl FromJsAny for HTMLOptionElement with from_js_any(value : JsAny) -> HTMLOptionElement = "%identity"
 
-///|
-pub fn[T : THTMLOptionElement] HTMLOptionElement::into(
-  self : HTMLOptionElement,
-) -> T = "%identity"
+pub fn[T: THTMLOptionElement] HTMLOptionElement::into(self : HTMLOptionElement) -> T = "%identity"
 
-///|
 pub impl THTMLOptionElement for HTMLOptionElement
 
-///|
 pub impl THTMLElement for HTMLOptionElement
 
-///|
 pub impl TElement for HTMLOptionElement
 
-///|
 pub impl TNode for HTMLOptionElement
 
-///|
 pub impl TEventTarget for HTMLOptionElement
 
-///|
 pub fn HTMLOptionElement::new() -> HTMLOptionElement {
   html_option_element_new_ffi()
 }
 
-///|
 /// [HTMLOptionElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement) interface.
 pub trait THTMLOptionElement: THTMLElement {
   disabled(self : Self) -> Bool = _
@@ -57,103 +44,77 @@ pub trait THTMLOptionElement: THTMLElement {
   index(self : Self) -> Int = _
 }
 
-///|
 /// [HTMLOptionElement.disabled](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement/disabled)
 impl THTMLOptionElement with disabled(self : Self) -> Bool {
   html_option_element_disabled_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [HTMLOptionElement.disabled](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement/disabled)
-impl THTMLOptionElement with set_disabled(self : Self, disabled : Bool) -> Unit {
-  html_option_element_set_disabled_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(disabled),
-  )
+impl THTMLOptionElement with set_disabled(self : Self, 
+disabled : Bool) -> Unit {
+  html_option_element_set_disabled_ffi(TJsValue::to_js(self), TJsValue::to_js(disabled))
 }
 
-///|
 /// [HTMLOptionElement.form](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement/form)
 impl THTMLOptionElement with form(self : Self) -> HTMLFormElement {
   html_option_element_form_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [HTMLOptionElement.label](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement/label)
 impl THTMLOptionElement with label(self : Self) -> String {
   html_option_element_label_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [HTMLOptionElement.label](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement/label)
-impl THTMLOptionElement with set_label(self : Self, label : String) -> Unit {
-  html_option_element_set_label_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(label),
-  )
+impl THTMLOptionElement with set_label(self : Self, 
+label : String) -> Unit {
+  html_option_element_set_label_ffi(TJsValue::to_js(self), TJsValue::to_js(label))
 }
 
-///|
 /// [HTMLOptionElement.defaultSelected](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement/defaultSelected)
 impl THTMLOptionElement with default_selected(self : Self) -> Bool {
   html_option_element_default_selected_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [HTMLOptionElement.defaultSelected](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement/defaultSelected)
-impl THTMLOptionElement with set_default_selected(
-  self : Self,
-  default_selected : Bool,
-) -> Unit {
-  html_option_element_set_default_selected_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(default_selected),
-  )
+impl THTMLOptionElement with set_default_selected(self : Self, 
+default_selected : Bool) -> Unit {
+  html_option_element_set_default_selected_ffi(TJsValue::to_js(self), TJsValue::to_js(default_selected))
 }
 
-///|
 /// [HTMLOptionElement.selected](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement/selected)
 impl THTMLOptionElement with selected(self : Self) -> Bool {
   html_option_element_selected_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [HTMLOptionElement.selected](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement/selected)
-impl THTMLOptionElement with set_selected(self : Self, selected : Bool) -> Unit {
-  html_option_element_set_selected_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(selected),
-  )
+impl THTMLOptionElement with set_selected(self : Self, 
+selected : Bool) -> Unit {
+  html_option_element_set_selected_ffi(TJsValue::to_js(self), TJsValue::to_js(selected))
 }
 
-///|
 /// [HTMLOptionElement.value](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement/value)
 impl THTMLOptionElement with value(self : Self) -> String {
   html_option_element_value_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [HTMLOptionElement.value](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement/value)
-impl THTMLOptionElement with set_value(self : Self, value : String) -> Unit {
-  html_option_element_set_value_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(value),
-  )
+impl THTMLOptionElement with set_value(self : Self, 
+value : String) -> Unit {
+  html_option_element_set_value_ffi(TJsValue::to_js(self), TJsValue::to_js(value))
 }
 
-///|
 /// [HTMLOptionElement.text](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement/text)
 impl THTMLOptionElement with text(self : Self) -> String {
   html_option_element_text_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [HTMLOptionElement.text](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement/text)
-impl THTMLOptionElement with set_text(self : Self, text : String) -> Unit {
+impl THTMLOptionElement with set_text(self : Self, 
+text : String) -> Unit {
   html_option_element_set_text_ffi(TJsValue::to_js(self), TJsValue::to_js(text))
 }
 
-///|
 /// [HTMLOptionElement.index](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement/index)
 impl THTMLOptionElement with index(self : Self) -> Int {
   html_option_element_index_ffi(TJsValue::to_js(self))

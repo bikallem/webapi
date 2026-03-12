@@ -2,7 +2,6 @@
 // MoonBit type: CanvasFontStretch
 // Specifications: html.idl
 
-///|
 pub(all) enum CanvasFontStretch {
   UltraCondensed
   ExtraCondensed
@@ -15,11 +14,7 @@ pub(all) enum CanvasFontStretch {
   UltraExpanded
 } derive(Eq)
 
-///|
-pub impl Show for CanvasFontStretch with output(
-  self : CanvasFontStretch,
-  logger : &Logger,
-) -> Unit {
+pub impl Show for CanvasFontStretch with output(self : CanvasFontStretch, logger : &Logger) -> Unit {
   match self {
     CanvasFontStretch::UltraCondensed => logger.write_string("UltraCondensed")
     CanvasFontStretch::ExtraCondensed => logger.write_string("ExtraCondensed")
@@ -33,8 +28,7 @@ pub impl Show for CanvasFontStretch with output(
   }
 }
 
-///|
-pub impl TJsValue for CanvasFontStretch with to_js(self : CanvasFontStretch) -> JsValue {
+pub impl TJsValue for CanvasFontStretch with to_js(self: CanvasFontStretch) -> JsValue {
   match self {
     CanvasFontStretch::UltraCondensed => TJsValue::to_js("ultra-condensed")
     CanvasFontStretch::ExtraCondensed => TJsValue::to_js("extra-condensed")
@@ -48,8 +42,7 @@ pub impl TJsValue for CanvasFontStretch with to_js(self : CanvasFontStretch) -> 
   }
 }
 
-///|
-pub fn CanvasFontStretch::from(value : String) -> CanvasFontStretch? {
+pub fn CanvasFontStretch::from(value: String) -> CanvasFontStretch? {
   match value {
     "ultra-condensed" => Some(CanvasFontStretch::UltraCondensed)
     "extra-condensed" => Some(CanvasFontStretch::ExtraCondensed)
@@ -64,8 +57,7 @@ pub fn CanvasFontStretch::from(value : String) -> CanvasFontStretch? {
   }
 }
 
-///|
-fn CanvasFontStretch::from_unchecked(value : String) -> CanvasFontStretch {
+fn CanvasFontStretch::from_unchecked(value: String) -> CanvasFontStretch {
   match value {
     "ultra-condensed" => CanvasFontStretch::UltraCondensed
     "extra-condensed" => CanvasFontStretch::ExtraCondensed
@@ -80,8 +72,7 @@ fn CanvasFontStretch::from_unchecked(value : String) -> CanvasFontStretch {
   }
 }
 
-///|
-pub fn CanvasFontStretch::value(self : CanvasFontStretch) -> String {
+pub fn CanvasFontStretch::value(self: CanvasFontStretch) -> String {
   match self {
     CanvasFontStretch::UltraCondensed => "ultra-condensed"
     CanvasFontStretch::ExtraCondensed => "extra-condensed"
@@ -95,7 +86,6 @@ pub fn CanvasFontStretch::value(self : CanvasFontStretch) -> String {
   }
 }
 
-///|
 pub impl FromJsAny for CanvasFontStretch with from_js_any(value : JsAny) -> CanvasFontStretch {
   CanvasFontStretch::from_unchecked(value)
 }

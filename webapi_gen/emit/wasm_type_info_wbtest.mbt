@@ -116,3 +116,18 @@ test "is_string_array_return detects Array[String]" {
   inspect(is_string_array_return("Array[String]"), content="true")
   inspect(is_string_array_return("Array[Int]"), content="false")
 }
+
+///|
+test "uses_from_jsany_value_conversion identifies wasm value conversions" {
+  inspect(uses_from_jsany_value_conversion("Double"), content="true")
+  inspect(uses_from_jsany_value_conversion("DOMHighResTimeStamp"), content="true")
+  inspect(uses_from_jsany_value_conversion("DOMQuad"), content="false")
+}
+
+///|
+test "is_value_array_return detects value-backed Array[T]" {
+  inspect(is_value_array_return("Array[Double]"), content="true")
+  inspect(is_value_array_return("Array[DOMHighResTimeStamp]"), content="true")
+  inspect(is_value_array_return("Array[String]"), content="false")
+  inspect(is_value_array_return("Array[DOMQuad]"), content="false")
+}

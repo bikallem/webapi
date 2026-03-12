@@ -2,7 +2,6 @@
 // MoonBit type: CanvasTextAlign
 // Specifications: html.idl
 
-///|
 pub(all) enum CanvasTextAlign {
   Start
   End
@@ -11,11 +10,7 @@ pub(all) enum CanvasTextAlign {
   Center
 } derive(Eq)
 
-///|
-pub impl Show for CanvasTextAlign with output(
-  self : CanvasTextAlign,
-  logger : &Logger,
-) -> Unit {
+pub impl Show for CanvasTextAlign with output(self : CanvasTextAlign, logger : &Logger) -> Unit {
   match self {
     CanvasTextAlign::Start => logger.write_string("Start")
     CanvasTextAlign::End => logger.write_string("End")
@@ -25,8 +20,7 @@ pub impl Show for CanvasTextAlign with output(
   }
 }
 
-///|
-pub impl TJsValue for CanvasTextAlign with to_js(self : CanvasTextAlign) -> JsValue {
+pub impl TJsValue for CanvasTextAlign with to_js(self: CanvasTextAlign) -> JsValue {
   match self {
     CanvasTextAlign::Start => TJsValue::to_js("start")
     CanvasTextAlign::End => TJsValue::to_js("end")
@@ -36,8 +30,7 @@ pub impl TJsValue for CanvasTextAlign with to_js(self : CanvasTextAlign) -> JsVa
   }
 }
 
-///|
-pub fn CanvasTextAlign::from(value : String) -> CanvasTextAlign? {
+pub fn CanvasTextAlign::from(value: String) -> CanvasTextAlign? {
   match value {
     "start" => Some(CanvasTextAlign::Start)
     "end" => Some(CanvasTextAlign::End)
@@ -48,8 +41,7 @@ pub fn CanvasTextAlign::from(value : String) -> CanvasTextAlign? {
   }
 }
 
-///|
-fn CanvasTextAlign::from_unchecked(value : String) -> CanvasTextAlign {
+fn CanvasTextAlign::from_unchecked(value: String) -> CanvasTextAlign {
   match value {
     "start" => CanvasTextAlign::Start
     "end" => CanvasTextAlign::End
@@ -60,8 +52,7 @@ fn CanvasTextAlign::from_unchecked(value : String) -> CanvasTextAlign {
   }
 }
 
-///|
-pub fn CanvasTextAlign::value(self : CanvasTextAlign) -> String {
+pub fn CanvasTextAlign::value(self: CanvasTextAlign) -> String {
   match self {
     CanvasTextAlign::Start => "start"
     CanvasTextAlign::End => "end"
@@ -71,7 +62,6 @@ pub fn CanvasTextAlign::value(self : CanvasTextAlign) -> String {
   }
 }
 
-///|
 pub impl FromJsAny for CanvasTextAlign with from_js_any(value : JsAny) -> CanvasTextAlign {
   CanvasTextAlign::from_unchecked(value)
 }

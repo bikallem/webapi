@@ -2,57 +2,39 @@
 // MoonBit type: KeyframeEffect
 // Specifications: web-animations.idl
 
-///|
 /// [KeyframeEffect](https://developer.mozilla.org/en-US/docs/Web/API/KeyframeEffect)
 #external
 pub type KeyframeEffect
 
-///|
-pub impl TJsValue for KeyframeEffect with to_js(self : KeyframeEffect) -> JsValue = "%identity"
+pub impl TJsValue for KeyframeEffect with to_js(self: KeyframeEffect) -> JsValue = "%identity"
 
-///|
 pub impl FromJsAny for KeyframeEffect with from_js_any(value : JsAny) -> KeyframeEffect = "%identity"
 
-///|
-pub fn[T : TKeyframeEffect] KeyframeEffect::into(self : KeyframeEffect) -> T = "%identity"
+pub fn[T: TKeyframeEffect] KeyframeEffect::into(self : KeyframeEffect) -> T = "%identity"
 
-///|
 pub impl TKeyframeEffect for KeyframeEffect
 
-///|
 pub impl TAnimationEffect for KeyframeEffect
 
-///|
-pub(open) trait TKeyframeEffectNewOptions: TJsValue {}
+pub(open) trait TKeyframeEffectNewOptions : TJsValue {}
 
-///|
 pub impl TKeyframeEffectNewOptions for Double
 
-///|
 pub impl TKeyframeEffectNewOptions for KeyframeEffectOptions
 
-///|
-pub fn KeyframeEffect::new(
-  target : &TElement,
-  keyframes : JsValue,
-  options? : &TKeyframeEffectNewOptions,
-) -> KeyframeEffect {
-  keyframe_effect_new_ffi(
-    TJsValue::to_js(target),
-    TJsValue::to_js(keyframes),
-    match options {
-      Some(v) => v.to_js()
-      None => JsValue::undefined()
-    },
-  )
+pub fn KeyframeEffect::new(target : &TElement, 
+keyframes : JsValue, 
+options? : &TKeyframeEffectNewOptions) -> KeyframeEffect {
+  keyframe_effect_new_ffi(TJsValue::to_js(target), TJsValue::to_js(keyframes), match options {
+Some(v) => v.to_js()
+None => JsValue::undefined()
+})
 }
 
-///|
 pub fn KeyframeEffect::new_2(source : &TKeyframeEffect) -> KeyframeEffect {
   keyframe_effect_new_2_ffi(TJsValue::to_js(source))
 }
 
-///|
 /// [KeyframeEffect](https://developer.mozilla.org/en-US/docs/Web/API/KeyframeEffect) interface.
 pub trait TKeyframeEffect: TAnimationEffect {
   target(self : Self) -> Element = _
@@ -65,65 +47,46 @@ pub trait TKeyframeEffect: TAnimationEffect {
   set_keyframes(self : Self, keyframes : JsValue) -> Unit = _
 }
 
-///|
 /// [KeyframeEffect.target](https://developer.mozilla.org/en-US/docs/Web/API/KeyframeEffect/target)
 impl TKeyframeEffect with target(self : Self) -> Element {
   keyframe_effect_target_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [KeyframeEffect.target](https://developer.mozilla.org/en-US/docs/Web/API/KeyframeEffect/target)
-impl TKeyframeEffect with set_target(self : Self, target : &TElement) -> Unit {
+impl TKeyframeEffect with set_target(self : Self, 
+target : &TElement) -> Unit {
   keyframe_effect_set_target_ffi(TJsValue::to_js(self), TJsValue::to_js(target))
 }
 
-///|
 /// [KeyframeEffect.pseudoElement](https://developer.mozilla.org/en-US/docs/Web/API/KeyframeEffect/pseudoElement)
 impl TKeyframeEffect with pseudo_element(self : Self) -> CSSOMString {
   keyframe_effect_pseudo_element_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [KeyframeEffect.pseudoElement](https://developer.mozilla.org/en-US/docs/Web/API/KeyframeEffect/pseudoElement)
-impl TKeyframeEffect with set_pseudo_element(
-  self : Self,
-  pseudo_element : CSSOMString,
-) -> Unit {
-  keyframe_effect_set_pseudo_element_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(pseudo_element),
-  )
+impl TKeyframeEffect with set_pseudo_element(self : Self, 
+pseudo_element : CSSOMString) -> Unit {
+  keyframe_effect_set_pseudo_element_ffi(TJsValue::to_js(self), TJsValue::to_js(pseudo_element))
 }
 
-///|
 /// [KeyframeEffect.composite](https://developer.mozilla.org/en-US/docs/Web/API/KeyframeEffect/composite)
 impl TKeyframeEffect with composite(self : Self) -> CompositeOperation {
   keyframe_effect_composite_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [KeyframeEffect.composite](https://developer.mozilla.org/en-US/docs/Web/API/KeyframeEffect/composite)
-impl TKeyframeEffect with set_composite(
-  self : Self,
-  composite : CompositeOperation,
-) -> Unit {
-  keyframe_effect_set_composite_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(composite),
-  )
+impl TKeyframeEffect with set_composite(self : Self, 
+composite : CompositeOperation) -> Unit {
+  keyframe_effect_set_composite_ffi(TJsValue::to_js(self), TJsValue::to_js(composite))
 }
 
-///|
 /// [KeyframeEffect.getKeyframes](https://developer.mozilla.org/en-US/docs/Web/API/KeyframeEffect/getKeyframes)
 impl TKeyframeEffect with get_keyframes(self : Self) -> Array[JsValue] {
   keyframe_effect_get_keyframes_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [KeyframeEffect.setKeyframes](https://developer.mozilla.org/en-US/docs/Web/API/KeyframeEffect/setKeyframes)
-impl TKeyframeEffect with set_keyframes(self : Self, keyframes : JsValue) -> Unit {
-  keyframe_effect_set_keyframes_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(keyframes),
-  )
+impl TKeyframeEffect with set_keyframes(self : Self, 
+keyframes : JsValue) -> Unit {
+  keyframe_effect_set_keyframes_ffi(TJsValue::to_js(self), TJsValue::to_js(keyframes))
 }

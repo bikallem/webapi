@@ -2,24 +2,12 @@
 // MoonBit type: UnderlyingSourceCancelCallback
 // Specifications: streams.idl
 
-///|
 /// [UnderlyingSourceCancelCallback](https://developer.mozilla.org/en-US/docs/Web/API/UnderlyingSourceCancelCallback)
 #external
 pub type UnderlyingSourceCancelCallback
 
-///|
-pub impl TJsValue for UnderlyingSourceCancelCallback with to_js(
-  self : UnderlyingSourceCancelCallback,
-) -> JsValue = "%identity"
+pub impl TJsValue for UnderlyingSourceCancelCallback with to_js(self: UnderlyingSourceCancelCallback) -> JsValue = "%identity"
 
-///|
-pub impl FromJsAny for UnderlyingSourceCancelCallback with from_js_any(
-  value : JsAny,
-) -> UnderlyingSourceCancelCallback = "%identity"
+pub impl FromJsAny for UnderlyingSourceCancelCallback with from_js_any(value : JsAny) -> UnderlyingSourceCancelCallback = "%identity"
 
-///|
-pub fn UnderlyingSourceCancelCallback::new(
-  callback : (JsValue) -> JsPromise[JsValue],
-) -> UnderlyingSourceCancelCallback {
-  underlying_source_cancel_callback_ffi(callback)
-}
+pub fn UnderlyingSourceCancelCallback::new(callback : (JsValue) -> JsPromise[JsValue]) -> UnderlyingSourceCancelCallback { underlying_source_cancel_callback_ffi(callback) }

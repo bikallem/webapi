@@ -2,22 +2,12 @@
 // MoonBit type: CreateScriptCallback
 // Specifications: trusted-types.idl
 
-///|
 /// [CreateScriptCallback](https://developer.mozilla.org/en-US/docs/Web/API/CreateScriptCallback)
 #external
 pub type CreateScriptCallback
 
-///|
-pub impl TJsValue for CreateScriptCallback with to_js(
-  self : CreateScriptCallback,
-) -> JsValue = "%identity"
+pub impl TJsValue for CreateScriptCallback with to_js(self: CreateScriptCallback) -> JsValue = "%identity"
 
-///|
 pub impl FromJsAny for CreateScriptCallback with from_js_any(value : JsAny) -> CreateScriptCallback = "%identity"
 
-///|
-pub fn CreateScriptCallback::new(
-  callback : (String, JsValue) -> String,
-) -> CreateScriptCallback {
-  create_script_callback_ffi(callback)
-}
+pub fn CreateScriptCallback::new(callback : (String, JsValue) -> String) -> CreateScriptCallback { create_script_callback_ffi(callback) }

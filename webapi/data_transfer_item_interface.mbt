@@ -2,26 +2,18 @@
 // MoonBit type: DataTransferItem
 // Specifications: file-system-access.idl, html.idl
 
-///|
 /// [DataTransferItem](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem)
 #external
 pub type DataTransferItem
 
-///|
-pub impl TJsValue for DataTransferItem with to_js(self : DataTransferItem) -> JsValue = "%identity"
+pub impl TJsValue for DataTransferItem with to_js(self: DataTransferItem) -> JsValue = "%identity"
 
-///|
 pub impl FromJsAny for DataTransferItem with from_js_any(value : JsAny) -> DataTransferItem = "%identity"
 
-///|
-pub fn[T : TDataTransferItem] DataTransferItem::into(
-  self : DataTransferItem,
-) -> T = "%identity"
+pub fn[T: TDataTransferItem] DataTransferItem::into(self : DataTransferItem) -> T = "%identity"
 
-///|
 pub impl TDataTransferItem for DataTransferItem
 
-///|
 /// [DataTransferItem](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem) interface.
 pub trait TDataTransferItem: TJsValue {
   kind(self : Self) -> String = _
@@ -32,45 +24,32 @@ pub trait TDataTransferItem: TJsValue {
   get_as_file(self : Self) -> File = _
 }
 
-///|
 /// [DataTransferItem.kind](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem/kind)
 impl TDataTransferItem with kind(self : Self) -> String {
   data_transfer_item_kind_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [DataTransferItem.type](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem/type)
 impl TDataTransferItem with type_(self : Self) -> String {
   data_transfer_item_type_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [DataTransferItem.getAsString](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem/getAsString)
-impl TDataTransferItem with get_as_string(
-  self : Self,
-  _callback : (String) -> Unit,
-) -> Unit {
-  data_transfer_item_get_as_string_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(function_string_callback_ffi(_callback)),
-  )
+impl TDataTransferItem with get_as_string(self : Self, 
+_callback : (String) -> Unit) -> Unit {
+  data_transfer_item_get_as_string_ffi(TJsValue::to_js(self), TJsValue::to_js(function_string_callback_ffi(_callback)))
 }
 
-///|
 /// [DataTransferItem.getAsFile](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem/getAsFile)
 impl TDataTransferItem with get_as_file_opt(self : Self) -> File? {
   data_transfer_item_get_as_file_ffi(TJsValue::to_js(self)).to_option()
 }
 
-///|
 /// [DataTransferItem.getAsFileSystemHandle](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem/getAsFileSystemHandle)
-impl TDataTransferItem with get_as_file_system_handle(self : Self) -> JsPromise[
-  FileSystemHandle,
-] {
+impl TDataTransferItem with get_as_file_system_handle(self : Self) -> JsPromise[FileSystemHandle] {
   data_transfer_item_get_as_file_system_handle_ffi(TJsValue::to_js(self))
 }
 
-///|
 impl TDataTransferItem with get_as_file(self : Self) -> File {
   self.get_as_file_opt().unwrap()
 }

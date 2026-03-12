@@ -1,8 +1,1 @@
-///|
-fn performance_observer_callback_ffi(
-  callback : (
-    PerformanceObserverEntryList,
-    PerformanceObserver,
-    PerformanceObserverCallbackOptions,
-  ) -> Unit,
-) -> PerformanceObserverCallback = "webapi_PerformanceObserverCallback" "new"
+fn performance_observer_callback_ffi(callback : (PerformanceObserverEntryList, PerformanceObserver, PerformanceObserverCallbackOptions) -> Unit) -> PerformanceObserverCallback = "webapi_PerformanceObserverCallback" "new"

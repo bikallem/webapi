@@ -2,7 +2,6 @@
 // MoonBit type: CanvasTextBaseline
 // Specifications: html.idl
 
-///|
 pub(all) enum CanvasTextBaseline {
   Top
   Hanging
@@ -12,11 +11,7 @@ pub(all) enum CanvasTextBaseline {
   Bottom
 } derive(Eq)
 
-///|
-pub impl Show for CanvasTextBaseline with output(
-  self : CanvasTextBaseline,
-  logger : &Logger,
-) -> Unit {
+pub impl Show for CanvasTextBaseline with output(self : CanvasTextBaseline, logger : &Logger) -> Unit {
   match self {
     CanvasTextBaseline::Top => logger.write_string("Top")
     CanvasTextBaseline::Hanging => logger.write_string("Hanging")
@@ -27,8 +22,7 @@ pub impl Show for CanvasTextBaseline with output(
   }
 }
 
-///|
-pub impl TJsValue for CanvasTextBaseline with to_js(self : CanvasTextBaseline) -> JsValue {
+pub impl TJsValue for CanvasTextBaseline with to_js(self: CanvasTextBaseline) -> JsValue {
   match self {
     CanvasTextBaseline::Top => TJsValue::to_js("top")
     CanvasTextBaseline::Hanging => TJsValue::to_js("hanging")
@@ -39,8 +33,7 @@ pub impl TJsValue for CanvasTextBaseline with to_js(self : CanvasTextBaseline) -
   }
 }
 
-///|
-pub fn CanvasTextBaseline::from(value : String) -> CanvasTextBaseline? {
+pub fn CanvasTextBaseline::from(value: String) -> CanvasTextBaseline? {
   match value {
     "top" => Some(CanvasTextBaseline::Top)
     "hanging" => Some(CanvasTextBaseline::Hanging)
@@ -52,8 +45,7 @@ pub fn CanvasTextBaseline::from(value : String) -> CanvasTextBaseline? {
   }
 }
 
-///|
-fn CanvasTextBaseline::from_unchecked(value : String) -> CanvasTextBaseline {
+fn CanvasTextBaseline::from_unchecked(value: String) -> CanvasTextBaseline {
   match value {
     "top" => CanvasTextBaseline::Top
     "hanging" => CanvasTextBaseline::Hanging
@@ -65,8 +57,7 @@ fn CanvasTextBaseline::from_unchecked(value : String) -> CanvasTextBaseline {
   }
 }
 
-///|
-pub fn CanvasTextBaseline::value(self : CanvasTextBaseline) -> String {
+pub fn CanvasTextBaseline::value(self: CanvasTextBaseline) -> String {
   match self {
     CanvasTextBaseline::Top => "top"
     CanvasTextBaseline::Hanging => "hanging"
@@ -77,7 +68,6 @@ pub fn CanvasTextBaseline::value(self : CanvasTextBaseline) -> String {
   }
 }
 
-///|
 pub impl FromJsAny for CanvasTextBaseline with from_js_any(value : JsAny) -> CanvasTextBaseline {
   CanvasTextBaseline::from_unchecked(value)
 }

@@ -2,7 +2,6 @@
 // MoonBit type: CanvasTextRendering
 // Specifications: html.idl
 
-///|
 pub(all) enum CanvasTextRendering {
   Auto
   OptimizeSpeed
@@ -10,35 +9,25 @@ pub(all) enum CanvasTextRendering {
   GeometricPrecision
 } derive(Eq)
 
-///|
-pub impl Show for CanvasTextRendering with output(
-  self : CanvasTextRendering,
-  logger : &Logger,
-) -> Unit {
+pub impl Show for CanvasTextRendering with output(self : CanvasTextRendering, logger : &Logger) -> Unit {
   match self {
     CanvasTextRendering::Auto => logger.write_string("Auto")
     CanvasTextRendering::OptimizeSpeed => logger.write_string("OptimizeSpeed")
-    CanvasTextRendering::OptimizeLegibility =>
-      logger.write_string("OptimizeLegibility")
-    CanvasTextRendering::GeometricPrecision =>
-      logger.write_string("GeometricPrecision")
+    CanvasTextRendering::OptimizeLegibility => logger.write_string("OptimizeLegibility")
+    CanvasTextRendering::GeometricPrecision => logger.write_string("GeometricPrecision")
   }
 }
 
-///|
-pub impl TJsValue for CanvasTextRendering with to_js(self : CanvasTextRendering) -> JsValue {
+pub impl TJsValue for CanvasTextRendering with to_js(self: CanvasTextRendering) -> JsValue {
   match self {
     CanvasTextRendering::Auto => TJsValue::to_js("auto")
     CanvasTextRendering::OptimizeSpeed => TJsValue::to_js("optimizeSpeed")
-    CanvasTextRendering::OptimizeLegibility =>
-      TJsValue::to_js("optimizeLegibility")
-    CanvasTextRendering::GeometricPrecision =>
-      TJsValue::to_js("geometricPrecision")
+    CanvasTextRendering::OptimizeLegibility => TJsValue::to_js("optimizeLegibility")
+    CanvasTextRendering::GeometricPrecision => TJsValue::to_js("geometricPrecision")
   }
 }
 
-///|
-pub fn CanvasTextRendering::from(value : String) -> CanvasTextRendering? {
+pub fn CanvasTextRendering::from(value: String) -> CanvasTextRendering? {
   match value {
     "auto" => Some(CanvasTextRendering::Auto)
     "optimizeSpeed" => Some(CanvasTextRendering::OptimizeSpeed)
@@ -48,8 +37,7 @@ pub fn CanvasTextRendering::from(value : String) -> CanvasTextRendering? {
   }
 }
 
-///|
-fn CanvasTextRendering::from_unchecked(value : String) -> CanvasTextRendering {
+fn CanvasTextRendering::from_unchecked(value: String) -> CanvasTextRendering {
   match value {
     "auto" => CanvasTextRendering::Auto
     "optimizeSpeed" => CanvasTextRendering::OptimizeSpeed
@@ -59,8 +47,7 @@ fn CanvasTextRendering::from_unchecked(value : String) -> CanvasTextRendering {
   }
 }
 
-///|
-pub fn CanvasTextRendering::value(self : CanvasTextRendering) -> String {
+pub fn CanvasTextRendering::value(self: CanvasTextRendering) -> String {
   match self {
     CanvasTextRendering::Auto => "auto"
     CanvasTextRendering::OptimizeSpeed => "optimizeSpeed"
@@ -69,7 +56,6 @@ pub fn CanvasTextRendering::value(self : CanvasTextRendering) -> String {
   }
 }
 
-///|
 pub impl FromJsAny for CanvasTextRendering with from_js_any(value : JsAny) -> CanvasTextRendering {
   CanvasTextRendering::from_unchecked(value)
 }

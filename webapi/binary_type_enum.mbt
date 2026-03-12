@@ -2,13 +2,11 @@
 // MoonBit type: BinaryType
 // Specifications: websockets.idl
 
-///|
 pub(all) enum BinaryType {
   Blob
   Arraybuffer
 } derive(Eq)
 
-///|
 pub impl Show for BinaryType with output(self : BinaryType, logger : &Logger) -> Unit {
   match self {
     BinaryType::Blob => logger.write_string("Blob")
@@ -16,16 +14,14 @@ pub impl Show for BinaryType with output(self : BinaryType, logger : &Logger) ->
   }
 }
 
-///|
-pub impl TJsValue for BinaryType with to_js(self : BinaryType) -> JsValue {
+pub impl TJsValue for BinaryType with to_js(self: BinaryType) -> JsValue {
   match self {
     BinaryType::Blob => TJsValue::to_js("blob")
     BinaryType::Arraybuffer => TJsValue::to_js("arraybuffer")
   }
 }
 
-///|
-pub fn BinaryType::from(value : String) -> BinaryType? {
+pub fn BinaryType::from(value: String) -> BinaryType? {
   match value {
     "blob" => Some(BinaryType::Blob)
     "arraybuffer" => Some(BinaryType::Arraybuffer)
@@ -33,8 +29,7 @@ pub fn BinaryType::from(value : String) -> BinaryType? {
   }
 }
 
-///|
-fn BinaryType::from_unchecked(value : String) -> BinaryType {
+fn BinaryType::from_unchecked(value: String) -> BinaryType {
   match value {
     "blob" => BinaryType::Blob
     "arraybuffer" => BinaryType::Arraybuffer
@@ -42,15 +37,13 @@ fn BinaryType::from_unchecked(value : String) -> BinaryType {
   }
 }
 
-///|
-pub fn BinaryType::value(self : BinaryType) -> String {
+pub fn BinaryType::value(self: BinaryType) -> String {
   match self {
     BinaryType::Blob => "blob"
     BinaryType::Arraybuffer => "arraybuffer"
   }
 }
 
-///|
 pub impl FromJsAny for BinaryType with from_js_any(value : JsAny) -> BinaryType {
   BinaryType::from_unchecked(value)
 }

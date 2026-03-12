@@ -2,107 +2,70 @@
 // MoonBit type: HTMLSlotElement
 // Specifications: html.idl
 
-///|
 /// [HTMLSlotElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement)
 #external
 pub type HTMLSlotElement
 
-///|
-pub impl TJsValue for HTMLSlotElement with to_js(self : HTMLSlotElement) -> JsValue = "%identity"
+pub impl TJsValue for HTMLSlotElement with to_js(self: HTMLSlotElement) -> JsValue = "%identity"
 
-///|
 pub impl FromJsAny for HTMLSlotElement with from_js_any(value : JsAny) -> HTMLSlotElement = "%identity"
 
-///|
-pub fn[T : THTMLSlotElement] HTMLSlotElement::into(self : HTMLSlotElement) -> T = "%identity"
+pub fn[T: THTMLSlotElement] HTMLSlotElement::into(self : HTMLSlotElement) -> T = "%identity"
 
-///|
 pub impl THTMLSlotElement for HTMLSlotElement
 
-///|
 pub impl THTMLElement for HTMLSlotElement
 
-///|
 pub impl TElement for HTMLSlotElement
 
-///|
 pub impl TNode for HTMLSlotElement
 
-///|
 pub impl TEventTarget for HTMLSlotElement
 
-///|
 pub fn HTMLSlotElement::new() -> HTMLSlotElement {
   html_slot_element_new_ffi()
 }
 
-///|
-pub(open) trait THTMLSlotElementAssignNodes: TJsValue {}
+pub(open) trait THTMLSlotElementAssignNodes : TJsValue {}
 
-///|
 pub impl THTMLSlotElementAssignNodes for Element
 
-///|
 pub impl THTMLSlotElementAssignNodes for Text
 
-///|
 /// [HTMLSlotElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement) interface.
 pub trait THTMLSlotElement: THTMLElement {
   name(self : Self) -> String = _
   set_name(self : Self, name : String) -> Unit = _
   assigned_nodes(self : Self, options? : AssignedNodesOptions) -> Array[Node] = _
-  assigned_elements(self : Self, options? : AssignedNodesOptions) -> Array[
-    Element,
-  ] = _
+  assigned_elements(self : Self, options? : AssignedNodesOptions) -> Array[Element] = _
   assign(self : Self, nodes : Array[&THTMLSlotElementAssignNodes]) -> Unit = _
 }
 
-///|
 /// [HTMLSlotElement.name](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/name)
 impl THTMLSlotElement with name(self : Self) -> String {
   html_slot_element_name_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [HTMLSlotElement.name](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/name)
-impl THTMLSlotElement with set_name(self : Self, name : String) -> Unit {
+impl THTMLSlotElement with set_name(self : Self, 
+name : String) -> Unit {
   html_slot_element_set_name_ffi(TJsValue::to_js(self), TJsValue::to_js(name))
 }
 
-///|
 /// [HTMLSlotElement.assignedNodes](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/assignedNodes)
-impl THTMLSlotElement with assigned_nodes(
-  self : Self,
-  options? : AssignedNodesOptions,
-) -> Array[Node] {
-  html_slot_element_assigned_nodes_ffi(
-    TJsValue::to_js(self),
-    opt_to_js(options),
-  )
+impl THTMLSlotElement with assigned_nodes(self : Self, 
+options? : AssignedNodesOptions) -> Array[Node] {
+  html_slot_element_assigned_nodes_ffi(TJsValue::to_js(self), opt_to_js(options))
 }
 
-///|
 /// [HTMLSlotElement.assignedElements](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/assignedElements)
-impl THTMLSlotElement with assigned_elements(
-  self : Self,
-  options? : AssignedNodesOptions,
-) -> Array[Element] {
-  html_slot_element_assigned_elements_ffi(
-    TJsValue::to_js(self),
-    opt_to_js(options),
-  )
+impl THTMLSlotElement with assigned_elements(self : Self, 
+options? : AssignedNodesOptions) -> Array[Element] {
+  html_slot_element_assigned_elements_ffi(TJsValue::to_js(self), opt_to_js(options))
 }
 
-///|
 /// [HTMLSlotElement.assign](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/assign)
-impl THTMLSlotElement with assign(
-  self : Self,
-  nodes : Array[&THTMLSlotElementAssignNodes],
-) -> Unit {
-  html_slot_element_assign_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(
-      nodes.map(fn(v : &THTMLSlotElementAssignNodes) -> JsValue { v.to_js() }),
-    ),
-  )
+impl THTMLSlotElement with assign(self : Self, 
+nodes : Array[&THTMLSlotElementAssignNodes]) -> Unit {
+  html_slot_element_assign_ffi(TJsValue::to_js(self), TJsValue::to_js(nodes.map(fn(v : &THTMLSlotElementAssignNodes) -> JsValue { v.to_js() })))
 }

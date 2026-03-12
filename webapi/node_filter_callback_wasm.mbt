@@ -1,2 +1,1 @@
-///|
 fn node_filter_ffi(callback : (Node) -> UInt) -> NodeFilter = "webapi_NodeFilter" "new"

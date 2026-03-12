@@ -2,5 +2,4 @@
 // MoonBit type: OnErrorEventHandler
 // Specifications: html.idl
 
-///|
 pub type OnErrorEventHandler = OnErrorEventHandlerNonNull

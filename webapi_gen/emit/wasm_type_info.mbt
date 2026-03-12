@@ -15,6 +15,25 @@ let wasm_valid_stub_other_types : Array[String] = [
 ]
 
 ///|
+let wasm_jsany_value_types : Array[String] = [
+  "String",
+  "Bool",
+  "Int",
+  "UInt",
+  "Int64",
+  "UInt64",
+  "Float",
+  "Double",
+  "DOMHighResTimeStamp",
+  "EpochTimeStamp",
+]
+
+///|
+fn uses_from_jsany_value_conversion(type_name : String) -> Bool {
+  wasm_jsany_value_types.contains(type_name)
+}
+
+///|
 fn is_wasm_valid_stub_other_type(type_name : String) -> Bool {
   wasm_valid_stub_other_types.contains(type_name)
 }
@@ -47,6 +66,14 @@ fn is_array_return(type_name : String) -> Bool {
 ///|
 fn is_string_array_return(type_name : String) -> Bool {
   type_name == "Array[String]"
+}
+
+///|
+fn is_value_array_return(type_name : String) -> Bool {
+  match array_inner_type(type_name) {
+    Some(inner) => inner != "String" && uses_from_jsany_value_conversion(inner)
+    None => false
+  }
 }
 
 ///|
@@ -96,6 +123,8 @@ fn emit_wasm_ffi_with_return(
     let call_fwd = ffi_argnames.join(", ")
     let array_convert = if is_string_array_return(return_type_name) {
       "to_string_array"
+    } else if is_value_array_return(return_type_name) {
+      "to_value_array"
     } else {
       "to_array"
     }

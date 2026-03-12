@@ -2,59 +2,35 @@
 // MoonBit type: BaseComputedKeyframe
 // Specifications: web-animations.idl
 
-///|
 /// [BaseComputedKeyframe](https://developer.mozilla.org/en-US/docs/Web/API/BaseComputedKeyframe)
 #external
 pub type BaseComputedKeyframe
 
-///|
-pub impl TJsValue for BaseComputedKeyframe with to_js(
-  self : BaseComputedKeyframe,
-) -> JsValue = "%identity"
+pub impl TJsValue for BaseComputedKeyframe with to_js(self: BaseComputedKeyframe) -> JsValue = "%identity"
 
-///|
 pub impl FromJsAny for BaseComputedKeyframe with from_js_any(value : JsAny) -> BaseComputedKeyframe = "%identity"
 
-///|
-pub fn BaseComputedKeyframe::new(
-  offset? : Double,
-  computed_offset? : Double,
-  easing? : String,
-  composite? : CompositeOperationOrAuto,
-) -> BaseComputedKeyframe {
-  base_computed_keyframe_ffi(
-    opt_to_js(offset),
-    opt_to_js(computed_offset),
-    opt_to_js(easing),
-    opt_to_js(composite),
-  )
+pub fn BaseComputedKeyframe::new(offset? : Double, 
+computed_offset? : Double, 
+easing? : String, 
+composite? : CompositeOperationOrAuto) -> BaseComputedKeyframe {
+  base_computed_keyframe_ffi(opt_to_js(offset), opt_to_js(computed_offset), opt_to_js(easing), opt_to_js(composite))
 }
 
-///|
-pub fn BaseComputedKeyframe::empty() -> BaseComputedKeyframe {
-  base_computed_keyframe_empty_ffi()
-}
+pub fn BaseComputedKeyframe::empty() -> BaseComputedKeyframe { base_computed_keyframe_empty_ffi() }
 
-///|
 pub fn BaseComputedKeyframe::offset(self : BaseComputedKeyframe) -> Double? {
   base_computed_keyframe_get_offset_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
-///|
-pub fn BaseComputedKeyframe::computed_offset(
-  self : BaseComputedKeyframe,
-) -> Double? {
+pub fn BaseComputedKeyframe::computed_offset(self : BaseComputedKeyframe) -> Double? {
   base_computed_keyframe_get_computed_offset_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
-///|
 pub fn BaseComputedKeyframe::easing(self : BaseComputedKeyframe) -> String? {
   base_computed_keyframe_get_easing_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
-///|
-pub fn BaseComputedKeyframe::composite(
-  self : BaseComputedKeyframe,
-) -> CompositeOperationOrAuto? {
+pub fn BaseComputedKeyframe::composite(self : BaseComputedKeyframe) -> CompositeOperationOrAuto? {
   base_computed_keyframe_get_composite_ffi(TJsValue::to_js(self)).to_option()
 }

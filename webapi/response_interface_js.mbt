@@ -1,7 +1,5 @@
-///|
-extern "js" fn response_new_ffi(body : JsValue, init : JsValue) -> Response = "(body, init) => new Response(body, init)"
+extern "js" fn response_new_ffi(body: JsValue, init: JsValue) -> Response = "(body, init) => new Response(body, init)"
 
-///|
 extern "js" fn response_error_ffi_js() -> JsValue = "() => Response.error()"
 
 ///|
@@ -9,149 +7,128 @@ fn response_error_ffi() -> Response {
   response_error_ffi_js().unsafe_cast()
 }
 
-///|
-extern "js" fn response_redirect_ffi_js(
-  url : JsValue,
-  status : JsValue,
-) -> JsValue = "(url, status) => Response.redirect(url, status)"
+extern "js" fn response_redirect_ffi_js(url: JsValue, status: JsValue) -> JsValue = "(url, status) => Response.redirect(url, status)"
 
 ///|
-fn response_redirect_ffi(url : JsValue, status : JsValue) -> Response {
+fn response_redirect_ffi(url: JsValue, status: JsValue) -> Response {
   response_redirect_ffi_js(url, status).unsafe_cast()
 }
 
-///|
-extern "js" fn response_json_ffi_js(data : JsValue, init : JsValue) -> JsValue = "(data, init) => Response.json(data, init)"
+extern "js" fn response_json_ffi_js(data: JsValue, init: JsValue) -> JsValue = "(data, init) => Response.json(data, init)"
 
 ///|
-fn response_json_ffi(data : JsValue, init : JsValue) -> Response {
+fn response_json_ffi(data: JsValue, init: JsValue) -> Response {
   response_json_ffi_js(data, init).unsafe_cast()
 }
 
-///|
-extern "js" fn response_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.type"
+extern "js" fn response_type_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.type"
 
 ///|
-fn response_type_ffi(obj : JsValue) -> ResponseType {
+fn response_type_ffi(obj: JsValue) -> ResponseType {
   ResponseType::from_unchecked(response_type_ffi_js(obj).unsafe_cast())
 }
 
-///|
-extern "js" fn response_url_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.url"
+extern "js" fn response_url_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.url"
 
 ///|
-fn response_url_ffi(obj : JsValue) -> String {
+fn response_url_ffi(obj: JsValue) -> String {
   response_url_ffi_js(obj).unsafe_cast()
 }
 
-///|
-extern "js" fn response_redirected_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.redirected"
+extern "js" fn response_redirected_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.redirected"
 
 ///|
-fn response_redirected_ffi(obj : JsValue) -> Bool {
+fn response_redirected_ffi(obj: JsValue) -> Bool {
   response_redirected_ffi_js(obj).unsafe_cast()
 }
 
-///|
-extern "js" fn response_status_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.status"
+extern "js" fn response_status_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.status"
 
 ///|
-fn response_status_ffi(obj : JsValue) -> UInt {
+fn response_status_ffi(obj: JsValue) -> UInt {
   response_status_ffi_js(obj).unsafe_cast()
 }
 
-///|
-extern "js" fn response_ok_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ok"
+extern "js" fn response_ok_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.ok"
 
 ///|
-fn response_ok_ffi(obj : JsValue) -> Bool {
+fn response_ok_ffi(obj: JsValue) -> Bool {
   response_ok_ffi_js(obj).unsafe_cast()
 }
 
-///|
-extern "js" fn response_status_text_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.statusText"
+extern "js" fn response_status_text_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.statusText"
 
 ///|
-fn response_status_text_ffi(obj : JsValue) -> String {
+fn response_status_text_ffi(obj: JsValue) -> String {
   response_status_text_ffi_js(obj).unsafe_cast()
 }
 
-///|
-extern "js" fn response_headers_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.headers"
+extern "js" fn response_headers_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.headers"
 
 ///|
-fn response_headers_ffi(obj : JsValue) -> Headers {
+fn response_headers_ffi(obj: JsValue) -> Headers {
   response_headers_ffi_js(obj).unsafe_cast()
 }
 
-///|
-extern "js" fn response_clone_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.clone()"
+extern "js" fn response_clone_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.clone()"
 
 ///|
-fn response_clone_ffi(obj : JsValue) -> Response {
+fn response_clone_ffi(obj: JsValue) -> Response {
   response_clone_ffi_js(obj).unsafe_cast()
 }
 
-///|
-extern "js" fn response_body_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.body"
+extern "js" fn response_body_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.body"
 
 ///|
-fn response_body_ffi(obj : JsValue) -> ReadableStream {
+fn response_body_ffi(obj: JsValue) -> ReadableStream {
   response_body_ffi_js(obj).unsafe_cast()
 }
 
-///|
-extern "js" fn response_body_used_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.bodyUsed"
+extern "js" fn response_body_used_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.bodyUsed"
 
 ///|
-fn response_body_used_ffi(obj : JsValue) -> Bool {
+fn response_body_used_ffi(obj: JsValue) -> Bool {
   response_body_used_ffi_js(obj).unsafe_cast()
 }
 
-///|
-extern "js" fn response_array_buffer_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.arrayBuffer()"
+extern "js" fn response_array_buffer_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.arrayBuffer()"
 
 ///|
-fn response_array_buffer_ffi(obj : JsValue) -> JsPromise[ArrayBuffer] {
+fn response_array_buffer_ffi(obj: JsValue) -> JsPromise[ArrayBuffer] {
   response_array_buffer_ffi_js(obj).unsafe_cast()
 }
 
-///|
-extern "js" fn response_blob_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.blob()"
+extern "js" fn response_blob_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.blob()"
 
 ///|
-fn response_blob_ffi(obj : JsValue) -> JsPromise[Blob] {
+fn response_blob_ffi(obj: JsValue) -> JsPromise[Blob] {
   response_blob_ffi_js(obj).unsafe_cast()
 }
 
-///|
-extern "js" fn response_bytes_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.bytes()"
+extern "js" fn response_bytes_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.bytes()"
 
 ///|
-fn response_bytes_ffi(obj : JsValue) -> JsPromise[Uint8Array] {
+fn response_bytes_ffi(obj: JsValue) -> JsPromise[Uint8Array] {
   response_bytes_ffi_js(obj).unsafe_cast()
 }
 
-///|
-extern "js" fn response_form_data_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.formData()"
+extern "js" fn response_form_data_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.formData()"
 
 ///|
-fn response_form_data_ffi(obj : JsValue) -> JsPromise[FormData] {
+fn response_form_data_ffi(obj: JsValue) -> JsPromise[FormData] {
   response_form_data_ffi_js(obj).unsafe_cast()
 }
 
-///|
-extern "js" fn response_json_body_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.json()"
+extern "js" fn response_json_body_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.json()"
 
 ///|
-fn response_json_body_ffi(obj : JsValue) -> JsPromise[JsValue] {
+fn response_json_body_ffi(obj: JsValue) -> JsPromise[JsValue] {
   response_json_body_ffi_js(obj).unsafe_cast()
 }
 
-///|
-extern "js" fn response_text_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.text()"
+extern "js" fn response_text_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.text()"
 
 ///|
-fn response_text_ffi(obj : JsValue) -> JsPromise[String] {
+fn response_text_ffi(obj: JsValue) -> JsPromise[String] {
   response_text_ffi_js(obj).unsafe_cast()
 }

@@ -1,8 +1,5 @@
-///|
 fn abort_controller_new_ffi() -> AbortController = "webapi_AbortController" "new"
 
-///|
-fn abort_controller_signal_ffi(obj : JsValue) -> AbortSignal = "webapi_AbortController" "get_signal"
+fn abort_controller_signal_ffi(obj: JsValue) -> AbortSignal = "webapi_AbortController" "get_signal"
 
-///|
-fn abort_controller_abort_ffi(obj : JsValue, reason : JsValue) -> Unit = "webapi_AbortController" "abort"
+fn abort_controller_abort_ffi(obj: JsValue, reason: JsValue) -> Unit = "webapi_AbortController" "abort"

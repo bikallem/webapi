@@ -2,20 +2,12 @@
 // MoonBit type: QueuingStrategySize
 // Specifications: streams.idl
 
-///|
 /// [QueuingStrategySize](https://developer.mozilla.org/en-US/docs/Web/API/QueuingStrategySize)
 #external
 pub type QueuingStrategySize
 
-///|
-pub impl TJsValue for QueuingStrategySize with to_js(self : QueuingStrategySize) -> JsValue = "%identity"
+pub impl TJsValue for QueuingStrategySize with to_js(self: QueuingStrategySize) -> JsValue = "%identity"
 
-///|
 pub impl FromJsAny for QueuingStrategySize with from_js_any(value : JsAny) -> QueuingStrategySize = "%identity"
 
-///|
-pub fn QueuingStrategySize::new(
-  callback : (JsValue) -> Double,
-) -> QueuingStrategySize {
-  queuing_strategy_size_ffi(callback)
-}
+pub fn QueuingStrategySize::new(callback : (JsValue) -> Double) -> QueuingStrategySize { queuing_strategy_size_ffi(callback) }

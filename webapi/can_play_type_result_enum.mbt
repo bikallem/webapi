@@ -2,18 +2,13 @@
 // MoonBit type: CanPlayTypeResult
 // Specifications: html.idl
 
-///|
 pub(all) enum CanPlayTypeResult {
   Empty
   Maybe
   Probably
 } derive(Eq)
 
-///|
-pub impl Show for CanPlayTypeResult with output(
-  self : CanPlayTypeResult,
-  logger : &Logger,
-) -> Unit {
+pub impl Show for CanPlayTypeResult with output(self : CanPlayTypeResult, logger : &Logger) -> Unit {
   match self {
     CanPlayTypeResult::Empty => logger.write_string("Empty")
     CanPlayTypeResult::Maybe => logger.write_string("Maybe")
@@ -21,8 +16,7 @@ pub impl Show for CanPlayTypeResult with output(
   }
 }
 
-///|
-pub impl TJsValue for CanPlayTypeResult with to_js(self : CanPlayTypeResult) -> JsValue {
+pub impl TJsValue for CanPlayTypeResult with to_js(self: CanPlayTypeResult) -> JsValue {
   match self {
     CanPlayTypeResult::Empty => TJsValue::to_js("")
     CanPlayTypeResult::Maybe => TJsValue::to_js("maybe")
@@ -30,8 +24,7 @@ pub impl TJsValue for CanPlayTypeResult with to_js(self : CanPlayTypeResult) -> 
   }
 }
 
-///|
-pub fn CanPlayTypeResult::from(value : String) -> CanPlayTypeResult? {
+pub fn CanPlayTypeResult::from(value: String) -> CanPlayTypeResult? {
   match value {
     "" => Some(CanPlayTypeResult::Empty)
     "maybe" => Some(CanPlayTypeResult::Maybe)
@@ -40,8 +33,7 @@ pub fn CanPlayTypeResult::from(value : String) -> CanPlayTypeResult? {
   }
 }
 
-///|
-fn CanPlayTypeResult::from_unchecked(value : String) -> CanPlayTypeResult {
+fn CanPlayTypeResult::from_unchecked(value: String) -> CanPlayTypeResult {
   match value {
     "" => CanPlayTypeResult::Empty
     "maybe" => CanPlayTypeResult::Maybe
@@ -50,8 +42,7 @@ fn CanPlayTypeResult::from_unchecked(value : String) -> CanPlayTypeResult {
   }
 }
 
-///|
-pub fn CanPlayTypeResult::value(self : CanPlayTypeResult) -> String {
+pub fn CanPlayTypeResult::value(self: CanPlayTypeResult) -> String {
   match self {
     CanPlayTypeResult::Empty => ""
     CanPlayTypeResult::Maybe => "maybe"
@@ -59,7 +50,6 @@ pub fn CanPlayTypeResult::value(self : CanPlayTypeResult) -> String {
   }
 }
 
-///|
 pub impl FromJsAny for CanPlayTypeResult with from_js_any(value : JsAny) -> CanPlayTypeResult {
   CanPlayTypeResult::from_unchecked(value)
 }

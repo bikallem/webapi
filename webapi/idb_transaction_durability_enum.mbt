@@ -2,18 +2,13 @@
 // MoonBit type: IDBTransactionDurability
 // Specifications: IndexedDB.idl
 
-///|
 pub(all) enum IDBTransactionDurability {
   Default
   Strict
   Relaxed
 } derive(Eq)
 
-///|
-pub impl Show for IDBTransactionDurability with output(
-  self : IDBTransactionDurability,
-  logger : &Logger,
-) -> Unit {
+pub impl Show for IDBTransactionDurability with output(self : IDBTransactionDurability, logger : &Logger) -> Unit {
   match self {
     IDBTransactionDurability::Default => logger.write_string("Default")
     IDBTransactionDurability::Strict => logger.write_string("Strict")
@@ -21,10 +16,7 @@ pub impl Show for IDBTransactionDurability with output(
   }
 }
 
-///|
-pub impl TJsValue for IDBTransactionDurability with to_js(
-  self : IDBTransactionDurability,
-) -> JsValue {
+pub impl TJsValue for IDBTransactionDurability with to_js(self: IDBTransactionDurability) -> JsValue {
   match self {
     IDBTransactionDurability::Default => TJsValue::to_js("default")
     IDBTransactionDurability::Strict => TJsValue::to_js("strict")
@@ -32,10 +24,7 @@ pub impl TJsValue for IDBTransactionDurability with to_js(
   }
 }
 
-///|
-pub fn IDBTransactionDurability::from(
-  value : String,
-) -> IDBTransactionDurability? {
+pub fn IDBTransactionDurability::from(value: String) -> IDBTransactionDurability? {
   match value {
     "default" => Some(IDBTransactionDurability::Default)
     "strict" => Some(IDBTransactionDurability::Strict)
@@ -44,10 +33,7 @@ pub fn IDBTransactionDurability::from(
   }
 }
 
-///|
-fn IDBTransactionDurability::from_unchecked(
-  value : String,
-) -> IDBTransactionDurability {
+fn IDBTransactionDurability::from_unchecked(value: String) -> IDBTransactionDurability {
   match value {
     "default" => IDBTransactionDurability::Default
     "strict" => IDBTransactionDurability::Strict
@@ -56,10 +42,7 @@ fn IDBTransactionDurability::from_unchecked(
   }
 }
 
-///|
-pub fn IDBTransactionDurability::value(
-  self : IDBTransactionDurability,
-) -> String {
+pub fn IDBTransactionDurability::value(self: IDBTransactionDurability) -> String {
   match self {
     IDBTransactionDurability::Default => "default"
     IDBTransactionDurability::Strict => "strict"
@@ -67,7 +50,6 @@ pub fn IDBTransactionDurability::value(
   }
 }
 
-///|
 pub impl FromJsAny for IDBTransactionDurability with from_js_any(value : JsAny) -> IDBTransactionDurability {
   IDBTransactionDurability::from_unchecked(value)
 }

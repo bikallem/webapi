@@ -1,4 +1,1 @@
-///|
-extern "js" fn queuing_strategy_size_ffi(
-  callback : (JsValue) -> Double,
-) -> QueuingStrategySize = "(callback) => callback"
+extern "js" fn queuing_strategy_size_ffi(callback : (JsValue) -> Double) -> QueuingStrategySize = "(callback) => callback"
