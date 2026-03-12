@@ -55,3 +55,45 @@ impl TPromiseRejectionEvent with promise(self : Self) -> JsValue {
 impl TPromiseRejectionEvent with reason(self : Self) -> JsValue {
   promise_rejection_event_reason_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn promise_rejection_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> PromiseRejectionEvent = "(type_, event_init_dict) => new PromiseRejectionEvent(type_, event_init_dict)"
+
+///|
+#cfg(target="js")
+extern "js" fn promise_rejection_event_promise_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.promise"
+
+///|
+#cfg(target="js")
+fn promise_rejection_event_promise_ffi(obj : JsValue) -> JsValue {
+  promise_rejection_event_promise_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn promise_rejection_event_reason_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.reason"
+
+///|
+#cfg(target="js")
+fn promise_rejection_event_reason_ffi(obj : JsValue) -> JsValue {
+  promise_rejection_event_reason_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn promise_rejection_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> PromiseRejectionEvent = "webapi_PromiseRejectionEvent" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn promise_rejection_event_promise_ffi(obj : JsValue) -> JsValue = "webapi_PromiseRejectionEvent" "get_promise"
+
+///|
+#cfg(target="wasm-gc")
+fn promise_rejection_event_reason_ffi(obj : JsValue) -> JsValue = "webapi_PromiseRejectionEvent" "get_reason"

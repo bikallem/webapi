@@ -89,3 +89,136 @@ pub fn FetchEventInit::replaces_client_id(self : FetchEventInit) -> String? {
 pub fn FetchEventInit::handled(self : FetchEventInit) -> JsPromise[JsValue]? {
   fetch_event_init_get_handled_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn fetch_event_init_ffi(
+  bubbles : JsValue,
+  cancelable : JsValue,
+  composed : JsValue,
+  request : JsValue,
+  preload_response : JsValue,
+  client_id : JsValue,
+  resulting_client_id : JsValue,
+  replaces_client_id : JsValue,
+  handled : JsValue,
+) -> FetchEventInit =
+  #|(bubbles, cancelable, composed, request, preloadResponse, clientId, resultingClientId, replacesClientId, handled) => {
+  #|  const obj = {};
+  #|  if (bubbles !== undefined) obj.bubbles = bubbles;
+  #|  if (cancelable !== undefined) obj.cancelable = cancelable;
+  #|  if (composed !== undefined) obj.composed = composed;
+  #|  if (request !== undefined) obj.request = request;
+  #|  if (preloadResponse !== undefined) obj.preloadResponse = preloadResponse;
+  #|  if (clientId !== undefined) obj.clientId = clientId;
+  #|  if (resultingClientId !== undefined) obj.resultingClientId = resultingClientId;
+  #|  if (replacesClientId !== undefined) obj.replacesClientId = replacesClientId;
+  #|  if (handled !== undefined) obj.handled = handled;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn fetch_event_init_empty_ffi() -> FetchEventInit = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn fetch_event_init_get_bubbles_ffi(obj : JsValue) -> JsValue = "(obj) => obj.bubbles"
+
+///|
+#cfg(target="js")
+extern "js" fn fetch_event_init_get_cancelable_ffi(obj : JsValue) -> JsValue = "(obj) => obj.cancelable"
+
+///|
+#cfg(target="js")
+extern "js" fn fetch_event_init_get_composed_ffi(obj : JsValue) -> JsValue = "(obj) => obj.composed"
+
+///|
+#cfg(target="js")
+extern "js" fn fetch_event_init_get_request_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.request"
+
+///|
+#cfg(target="js")
+fn fetch_event_init_get_request_ffi(obj : JsValue) -> Request {
+  fetch_event_init_get_request_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn fetch_event_init_get_preload_response_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.preloadResponse"
+
+///|
+#cfg(target="js")
+extern "js" fn fetch_event_init_get_client_id_ffi(obj : JsValue) -> JsValue = "(obj) => obj.clientId"
+
+///|
+#cfg(target="js")
+extern "js" fn fetch_event_init_get_resulting_client_id_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.resultingClientId"
+
+///|
+#cfg(target="js")
+extern "js" fn fetch_event_init_get_replaces_client_id_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.replacesClientId"
+
+///|
+#cfg(target="js")
+extern "js" fn fetch_event_init_get_handled_ffi(obj : JsValue) -> JsValue = "(obj) => obj.handled"
+
+///|
+#cfg(target="wasm-gc")
+fn fetch_event_init_ffi(
+  bubbles : JsValue,
+  cancelable : JsValue,
+  composed : JsValue,
+  request : JsValue,
+  preload_response : JsValue,
+  client_id : JsValue,
+  resulting_client_id : JsValue,
+  replaces_client_id : JsValue,
+  handled : JsValue,
+) -> FetchEventInit = "webapi_FetchEventInit" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn fetch_event_init_empty_ffi() -> FetchEventInit = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn fetch_event_init_get_bubbles_ffi(obj : JsValue) -> JsValue = "webapi_FetchEventInit" "get_bubbles"
+
+///|
+#cfg(target="wasm-gc")
+fn fetch_event_init_get_cancelable_ffi(obj : JsValue) -> JsValue = "webapi_FetchEventInit" "get_cancelable"
+
+///|
+#cfg(target="wasm-gc")
+fn fetch_event_init_get_composed_ffi(obj : JsValue) -> JsValue = "webapi_FetchEventInit" "get_composed"
+
+///|
+#cfg(target="wasm-gc")
+fn fetch_event_init_get_request_ffi(obj : JsValue) -> Request = "webapi_FetchEventInit" "get_request"
+
+///|
+#cfg(target="wasm-gc")
+fn fetch_event_init_get_preload_response_ffi(obj : JsValue) -> JsValue = "webapi_FetchEventInit" "get_preloadResponse"
+
+///|
+#cfg(target="wasm-gc")
+fn fetch_event_init_get_client_id_ffi(obj : JsValue) -> JsValue = "webapi_FetchEventInit" "get_clientId"
+
+///|
+#cfg(target="wasm-gc")
+fn fetch_event_init_get_resulting_client_id_ffi(obj : JsValue) -> JsValue = "webapi_FetchEventInit" "get_resultingClientId"
+
+///|
+#cfg(target="wasm-gc")
+fn fetch_event_init_get_replaces_client_id_ffi(obj : JsValue) -> JsValue = "webapi_FetchEventInit" "get_replacesClientId"
+
+///|
+#cfg(target="wasm-gc")
+fn fetch_event_init_get_handled_ffi(obj : JsValue) -> JsValue = "webapi_FetchEventInit" "get_handled"

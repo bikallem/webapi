@@ -65,3 +65,108 @@ impl TAudioTrack with enabled(self : Self) -> Bool {
 impl TAudioTrack with set_enabled(self : Self, enabled : Bool) -> Unit {
   audio_track_set_enabled_ffi(TJsValue::to_js(self), TJsValue::to_js(enabled))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn audio_track_id_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.id"
+
+///|
+#cfg(target="js")
+fn audio_track_id_ffi(obj : JsValue) -> String {
+  audio_track_id_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn audio_track_kind_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.kind"
+
+///|
+#cfg(target="js")
+fn audio_track_kind_ffi(obj : JsValue) -> String {
+  audio_track_kind_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn audio_track_label_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.label"
+
+///|
+#cfg(target="js")
+fn audio_track_label_ffi(obj : JsValue) -> String {
+  audio_track_label_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn audio_track_language_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.language"
+
+///|
+#cfg(target="js")
+fn audio_track_language_ffi(obj : JsValue) -> String {
+  audio_track_language_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn audio_track_enabled_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.enabled"
+
+///|
+#cfg(target="js")
+fn audio_track_enabled_ffi(obj : JsValue) -> Bool {
+  audio_track_enabled_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn audio_track_set_enabled_ffi(
+  obj : JsValue,
+  enabled : JsValue,
+) -> Unit = "(obj, enabled) => { obj.enabled = enabled; }"
+
+///|
+#cfg(target="wasm-gc")
+fn audio_track_id_ffi_wasm(obj : JsValue) -> JsValue = "webapi_AudioTrack" "get_id"
+
+///|
+#cfg(target="wasm-gc")
+fn audio_track_id_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(audio_track_id_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn audio_track_kind_ffi_wasm(obj : JsValue) -> JsValue = "webapi_AudioTrack" "get_kind"
+
+///|
+#cfg(target="wasm-gc")
+fn audio_track_kind_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(audio_track_kind_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn audio_track_label_ffi_wasm(obj : JsValue) -> JsValue = "webapi_AudioTrack" "get_label"
+
+///|
+#cfg(target="wasm-gc")
+fn audio_track_label_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(audio_track_label_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn audio_track_language_ffi_wasm(obj : JsValue) -> JsValue = "webapi_AudioTrack" "get_language"
+
+///|
+#cfg(target="wasm-gc")
+fn audio_track_language_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(audio_track_language_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn audio_track_enabled_ffi(obj : JsValue) -> Bool = "webapi_AudioTrack" "get_enabled"
+
+///|
+#cfg(target="wasm-gc")
+fn audio_track_set_enabled_ffi(obj : JsValue, enabled : JsValue) -> Unit = "webapi_AudioTrack" "set_enabled"

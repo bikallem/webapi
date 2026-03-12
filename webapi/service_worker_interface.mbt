@@ -111,3 +111,144 @@ impl TServiceWorker with set_onerror(self : Self, onerror : (Event) -> JsValue) 
     TJsValue::to_js(event_handler_non_null_ffi(onerror)),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn service_worker_script_url_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.scriptURL"
+
+///|
+#cfg(target="js")
+fn service_worker_script_url_ffi(obj : JsValue) -> String {
+  service_worker_script_url_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn service_worker_state_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.state"
+
+///|
+#cfg(target="js")
+fn service_worker_state_ffi(obj : JsValue) -> ServiceWorkerState {
+  ServiceWorkerState::from_unchecked(
+    service_worker_state_ffi_js(obj).unsafe_cast(),
+  )
+}
+
+///|
+#cfg(target="js")
+extern "js" fn service_worker_post_message_ffi(
+  obj : JsValue,
+  message : JsValue,
+  transfer : JsValue,
+) -> Unit = "(obj, message, transfer) => obj.postMessage(message, transfer)"
+
+///|
+#cfg(target="js")
+extern "js" fn service_worker_post_message_with_options_ffi(
+  obj : JsValue,
+  message : JsValue,
+  options : JsValue,
+) -> Unit = "(obj, message, options) => obj.postMessage(message, options)"
+
+///|
+#cfg(target="js")
+extern "js" fn service_worker_onstatechange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onstatechange"
+
+///|
+#cfg(target="js")
+fn service_worker_onstatechange_ffi(obj : JsValue) -> EventHandler {
+  service_worker_onstatechange_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn service_worker_set_onstatechange_ffi(
+  obj : JsValue,
+  onstatechange : JsValue,
+) -> Unit = "(obj, onstatechange) => { obj.onstatechange = onstatechange; }"
+
+///|
+#cfg(target="js")
+extern "js" fn service_worker_onerror_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onerror"
+
+///|
+#cfg(target="js")
+fn service_worker_onerror_ffi(obj : JsValue) -> EventHandler {
+  service_worker_onerror_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn service_worker_set_onerror_ffi(
+  obj : JsValue,
+  onerror : JsValue,
+) -> Unit = "(obj, onerror) => { obj.onerror = onerror; }"
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_script_url_ffi_wasm(obj : JsValue) -> JsValue = "webapi_ServiceWorker" "get_scriptURL"
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_script_url_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(service_worker_script_url_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_state_ffi_wasm(obj : JsValue) -> JsValue = "webapi_ServiceWorker" "get_state"
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_state_ffi(obj : JsValue) -> ServiceWorkerState {
+  ServiceWorkerState::from_unchecked(
+    jsvalue_to_string(service_worker_state_ffi_wasm(obj)),
+  )
+}
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_post_message_ffi(
+  obj : JsValue,
+  message : JsValue,
+  transfer : JsValue,
+) -> Unit = "webapi_ServiceWorker" "postMessage"
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_post_message_with_options_ffi(
+  obj : JsValue,
+  message : JsValue,
+  options : JsValue,
+) -> Unit = "webapi_ServiceWorker" "post_message_with_options"
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_onstatechange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_ServiceWorker" "get_onstatechange"
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_onstatechange_ffi(obj : JsValue) -> EventHandler {
+  service_worker_onstatechange_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_set_onstatechange_ffi(
+  obj : JsValue,
+  onstatechange : JsValue,
+) -> Unit = "webapi_ServiceWorker" "set_onstatechange"
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_onerror_ffi_wasm(obj : JsValue) -> JsValue = "webapi_ServiceWorker" "get_onerror"
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_onerror_ffi(obj : JsValue) -> EventHandler {
+  service_worker_onerror_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_set_onerror_ffi(obj : JsValue, onerror : JsValue) -> Unit = "webapi_ServiceWorker" "set_onerror"

@@ -43,3 +43,25 @@ impl TFileList with length(self : Self) -> UInt {
 impl TFileList with item(self : Self, index : UInt) -> File {
   self.item_opt(index).unwrap()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn file_list_item_ffi(obj : JsValue, index : JsValue) -> JsValue = "(obj, index) => obj.item(index)"
+
+///|
+#cfg(target="js")
+extern "js" fn file_list_length_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.length"
+
+///|
+#cfg(target="js")
+fn file_list_length_ffi(obj : JsValue) -> UInt {
+  file_list_length_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn file_list_item_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_FileList" "item"
+
+///|
+#cfg(target="wasm-gc")
+fn file_list_length_ffi(obj : JsValue) -> UInt = "webapi_FileList" "get_length"

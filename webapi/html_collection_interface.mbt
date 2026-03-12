@@ -56,3 +56,39 @@ impl THTMLCollection with item(self : Self, index : UInt) -> Element {
 impl THTMLCollection with named_item(self : Self, name : String) -> Element {
   self.named_item_opt(name).unwrap()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_collection_length_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.length"
+
+///|
+#cfg(target="js")
+fn html_collection_length_ffi(obj : JsValue) -> UInt {
+  html_collection_length_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_collection_item_ffi(
+  obj : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, index) => obj.item(index)"
+
+///|
+#cfg(target="js")
+extern "js" fn html_collection_named_item_ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> JsValue = "(obj, name) => obj.namedItem(name)"
+
+///|
+#cfg(target="wasm-gc")
+fn html_collection_length_ffi(obj : JsValue) -> UInt = "webapi_HTMLCollection" "get_length"
+
+///|
+#cfg(target="wasm-gc")
+fn html_collection_item_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_HTMLCollection" "item"
+
+///|
+#cfg(target="wasm-gc")
+fn html_collection_named_item_ffi(obj : JsValue, name : JsValue) -> JsValue = "webapi_HTMLCollection" "namedItem"

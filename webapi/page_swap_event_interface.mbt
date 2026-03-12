@@ -48,3 +48,51 @@ impl TPageSwapEvent with activation(self : Self) -> NavigationActivation {
 impl TPageSwapEvent with view_transition(self : Self) -> ViewTransition {
   page_swap_event_view_transition_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn page_swap_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> PageSwapEvent = "(type_, event_init_dict) => new PageSwapEvent(type_, event_init_dict)"
+
+///|
+#cfg(target="js")
+extern "js" fn page_swap_event_activation_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.activation"
+
+///|
+#cfg(target="js")
+fn page_swap_event_activation_ffi(obj : JsValue) -> NavigationActivation {
+  page_swap_event_activation_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn page_swap_event_view_transition_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.viewTransition"
+
+///|
+#cfg(target="js")
+fn page_swap_event_view_transition_ffi(obj : JsValue) -> ViewTransition {
+  page_swap_event_view_transition_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn page_swap_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> PageSwapEvent = "webapi_PageSwapEvent" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn page_swap_event_activation_ffi(obj : JsValue) -> NavigationActivation = "webapi_PageSwapEvent" "get_activation"
+
+///|
+#cfg(target="wasm-gc")
+fn page_swap_event_view_transition_ffi_wasm(obj : JsValue) -> JsValue = "webapi_PageSwapEvent" "get_viewTransition"
+
+///|
+#cfg(target="wasm-gc")
+fn page_swap_event_view_transition_ffi(obj : JsValue) -> ViewTransition {
+  page_swap_event_view_transition_ffi_wasm(obj).unsafe_cast()
+}

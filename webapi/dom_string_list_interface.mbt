@@ -44,3 +44,45 @@ impl TDOMStringList with item(self : Self, index : UInt) -> String? {
 impl TDOMStringList with contains(self : Self, string : String) -> Bool {
   dom_string_list_contains_ffi(TJsValue::to_js(self), TJsValue::to_js(string))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn dom_string_list_length_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.length"
+
+///|
+#cfg(target="js")
+fn dom_string_list_length_ffi(obj : JsValue) -> UInt {
+  dom_string_list_length_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_string_list_item_ffi(
+  obj : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, index) => obj.item(index)"
+
+///|
+#cfg(target="js")
+extern "js" fn dom_string_list_contains_ffi_js(
+  obj : JsValue,
+  string : JsValue,
+) -> JsValue = "(obj, string) => obj.contains(string)"
+
+///|
+#cfg(target="js")
+fn dom_string_list_contains_ffi(obj : JsValue, string : JsValue) -> Bool {
+  dom_string_list_contains_ffi_js(obj, string).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn dom_string_list_length_ffi(obj : JsValue) -> UInt = "webapi_DOMStringList" "get_length"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_string_list_item_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_DOMStringList" "item"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_string_list_contains_ffi(obj : JsValue, string : JsValue) -> Bool = "webapi_DOMStringList" "contains"

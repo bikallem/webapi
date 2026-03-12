@@ -166,3 +166,269 @@ impl THTMLOutputElement with set_custom_validity(self : Self, error : String) ->
 impl THTMLOutputElement with labels(self : Self) -> NodeList {
   html_output_element_labels_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_output_element_new_ffi() -> HTMLOutputElement = "() => new HTMLOutputElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_output_element_html_for_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.htmlFor"
+
+///|
+#cfg(target="js")
+fn html_output_element_html_for_ffi(obj : JsValue) -> DOMTokenList {
+  html_output_element_html_for_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_output_element_form_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.form"
+
+///|
+#cfg(target="js")
+fn html_output_element_form_ffi(obj : JsValue) -> HTMLFormElement {
+  html_output_element_form_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_output_element_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.name"
+
+///|
+#cfg(target="js")
+fn html_output_element_name_ffi(obj : JsValue) -> String {
+  html_output_element_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_output_element_set_name_ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> Unit = "(obj, name) => { obj.name = name; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_output_element_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.type"
+
+///|
+#cfg(target="js")
+fn html_output_element_type_ffi(obj : JsValue) -> String {
+  html_output_element_type_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_output_element_default_value_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.defaultValue"
+
+///|
+#cfg(target="js")
+fn html_output_element_default_value_ffi(obj : JsValue) -> String {
+  html_output_element_default_value_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_output_element_set_default_value_ffi(
+  obj : JsValue,
+  default_value : JsValue,
+) -> Unit = "(obj, defaultValue) => { obj.defaultValue = defaultValue; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_output_element_value_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.value"
+
+///|
+#cfg(target="js")
+fn html_output_element_value_ffi(obj : JsValue) -> String {
+  html_output_element_value_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_output_element_set_value_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "(obj, value) => { obj.value = value; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_output_element_will_validate_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.willValidate"
+
+///|
+#cfg(target="js")
+fn html_output_element_will_validate_ffi(obj : JsValue) -> Bool {
+  html_output_element_will_validate_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_output_element_validity_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.validity"
+
+///|
+#cfg(target="js")
+fn html_output_element_validity_ffi(obj : JsValue) -> ValidityState {
+  html_output_element_validity_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_output_element_validation_message_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.validationMessage"
+
+///|
+#cfg(target="js")
+fn html_output_element_validation_message_ffi(obj : JsValue) -> String {
+  html_output_element_validation_message_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_output_element_check_validity_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.checkValidity()"
+
+///|
+#cfg(target="js")
+fn html_output_element_check_validity_ffi(obj : JsValue) -> Bool {
+  html_output_element_check_validity_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_output_element_report_validity_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.reportValidity()"
+
+///|
+#cfg(target="js")
+fn html_output_element_report_validity_ffi(obj : JsValue) -> Bool {
+  html_output_element_report_validity_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_output_element_set_custom_validity_ffi(
+  obj : JsValue,
+  error : JsValue,
+) -> Unit = "(obj, error) => obj.setCustomValidity(error)"
+
+///|
+#cfg(target="js")
+extern "js" fn html_output_element_labels_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.labels"
+
+///|
+#cfg(target="js")
+fn html_output_element_labels_ffi(obj : JsValue) -> NodeList {
+  html_output_element_labels_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_output_element_new_ffi() -> HTMLOutputElement = "webapi_HTMLOutputElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_output_element_html_for_ffi(obj : JsValue) -> DOMTokenList = "webapi_HTMLOutputElement" "get_htmlFor"
+
+///|
+#cfg(target="wasm-gc")
+fn html_output_element_form_ffi(obj : JsValue) -> HTMLFormElement = "webapi_HTMLOutputElement" "get_form"
+
+///|
+#cfg(target="wasm-gc")
+fn html_output_element_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLOutputElement" "get_name"
+
+///|
+#cfg(target="wasm-gc")
+fn html_output_element_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_output_element_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_output_element_set_name_ffi(obj : JsValue, name : JsValue) -> Unit = "webapi_HTMLOutputElement" "set_name"
+
+///|
+#cfg(target="wasm-gc")
+fn html_output_element_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLOutputElement" "get_type"
+
+///|
+#cfg(target="wasm-gc")
+fn html_output_element_type_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_output_element_type_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_output_element_default_value_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLOutputElement" "get_defaultValue"
+
+///|
+#cfg(target="wasm-gc")
+fn html_output_element_default_value_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_output_element_default_value_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_output_element_set_default_value_ffi(
+  obj : JsValue,
+  default_value : JsValue,
+) -> Unit = "webapi_HTMLOutputElement" "set_defaultValue"
+
+///|
+#cfg(target="wasm-gc")
+fn html_output_element_value_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLOutputElement" "get_value"
+
+///|
+#cfg(target="wasm-gc")
+fn html_output_element_value_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_output_element_value_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_output_element_set_value_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLOutputElement" "set_value"
+
+///|
+#cfg(target="wasm-gc")
+fn html_output_element_will_validate_ffi(obj : JsValue) -> Bool = "webapi_HTMLOutputElement" "get_willValidate"
+
+///|
+#cfg(target="wasm-gc")
+fn html_output_element_validity_ffi(obj : JsValue) -> ValidityState = "webapi_HTMLOutputElement" "get_validity"
+
+///|
+#cfg(target="wasm-gc")
+fn html_output_element_validation_message_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLOutputElement" "get_validationMessage"
+
+///|
+#cfg(target="wasm-gc")
+fn html_output_element_validation_message_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_output_element_validation_message_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_output_element_check_validity_ffi(obj : JsValue) -> Bool = "webapi_HTMLOutputElement" "checkValidity"
+
+///|
+#cfg(target="wasm-gc")
+fn html_output_element_report_validity_ffi(obj : JsValue) -> Bool = "webapi_HTMLOutputElement" "reportValidity"
+
+///|
+#cfg(target="wasm-gc")
+fn html_output_element_set_custom_validity_ffi(
+  obj : JsValue,
+  error : JsValue,
+) -> Unit = "webapi_HTMLOutputElement" "setCustomValidity"
+
+///|
+#cfg(target="wasm-gc")
+fn html_output_element_labels_ffi(obj : JsValue) -> NodeList = "webapi_HTMLOutputElement" "get_labels"

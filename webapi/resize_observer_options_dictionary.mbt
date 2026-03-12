@@ -33,3 +33,34 @@ pub fn ResizeObserverOptions::box(
 ) -> ResizeObserverBoxOptions? {
   resize_observer_options_get_box_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn resize_observer_options_ffi(
+  box : JsValue,
+) -> ResizeObserverOptions =
+  #|(box) => {
+  #|  const obj = {};
+  #|  if (box !== undefined) obj.box = box;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn resize_observer_options_empty_ffi() -> ResizeObserverOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn resize_observer_options_get_box_ffi(obj : JsValue) -> JsValue = "(obj) => obj.box"
+
+///|
+#cfg(target="wasm-gc")
+fn resize_observer_options_ffi(box : JsValue) -> ResizeObserverOptions = "webapi_ResizeObserverOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn resize_observer_options_empty_ffi() -> ResizeObserverOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn resize_observer_options_get_box_ffi(obj : JsValue) -> JsValue = "webapi_ResizeObserverOptions" "get_box"

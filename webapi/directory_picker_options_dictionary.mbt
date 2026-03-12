@@ -54,3 +54,60 @@ pub fn DirectoryPickerOptions::mode(
 ) -> FileSystemPermissionMode? {
   directory_picker_options_get_mode_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn directory_picker_options_ffi(
+  id : JsValue,
+  start_in : JsValue,
+  mode : JsValue,
+) -> DirectoryPickerOptions =
+  #|(id, startIn, mode) => {
+  #|  const obj = {};
+  #|  if (id !== undefined) obj.id = id;
+  #|  if (startIn !== undefined) obj.startIn = startIn;
+  #|  if (mode !== undefined) obj.mode = mode;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn directory_picker_options_empty_ffi() -> DirectoryPickerOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn directory_picker_options_get_id_ffi(obj : JsValue) -> JsValue = "(obj) => obj.id"
+
+///|
+#cfg(target="js")
+extern "js" fn directory_picker_options_get_start_in_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.startIn"
+
+///|
+#cfg(target="js")
+extern "js" fn directory_picker_options_get_mode_ffi(obj : JsValue) -> JsValue = "(obj) => obj.mode"
+
+///|
+#cfg(target="wasm-gc")
+fn directory_picker_options_ffi(
+  id : JsValue,
+  start_in : JsValue,
+  mode : JsValue,
+) -> DirectoryPickerOptions = "webapi_DirectoryPickerOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn directory_picker_options_empty_ffi() -> DirectoryPickerOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn directory_picker_options_get_id_ffi(obj : JsValue) -> JsValue = "webapi_DirectoryPickerOptions" "get_id"
+
+///|
+#cfg(target="wasm-gc")
+fn directory_picker_options_get_start_in_ffi(obj : JsValue) -> JsValue = "webapi_DirectoryPickerOptions" "get_startIn"
+
+///|
+#cfg(target="wasm-gc")
+fn directory_picker_options_get_mode_ffi(obj : JsValue) -> JsValue = "webapi_DirectoryPickerOptions" "get_mode"

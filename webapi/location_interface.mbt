@@ -170,3 +170,294 @@ impl TLocation with reload(self : Self) -> Unit {
 impl TLocation with ancestor_origins(self : Self) -> DOMStringList {
   location_ancestor_origins_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn location_href_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.href"
+
+///|
+#cfg(target="js")
+fn location_href_ffi(obj : JsValue) -> String {
+  location_href_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn location_set_href_ffi(obj : JsValue, href : JsValue) -> Unit = "(obj, href) => { obj.href = href; }"
+
+///|
+#cfg(target="js")
+extern "js" fn location_origin_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.origin"
+
+///|
+#cfg(target="js")
+fn location_origin_ffi(obj : JsValue) -> String {
+  location_origin_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn location_protocol_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.protocol"
+
+///|
+#cfg(target="js")
+fn location_protocol_ffi(obj : JsValue) -> String {
+  location_protocol_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn location_set_protocol_ffi(
+  obj : JsValue,
+  protocol : JsValue,
+) -> Unit = "(obj, protocol) => { obj.protocol = protocol; }"
+
+///|
+#cfg(target="js")
+extern "js" fn location_host_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.host"
+
+///|
+#cfg(target="js")
+fn location_host_ffi(obj : JsValue) -> String {
+  location_host_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn location_set_host_ffi(obj : JsValue, host : JsValue) -> Unit = "(obj, host) => { obj.host = host; }"
+
+///|
+#cfg(target="js")
+extern "js" fn location_hostname_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.hostname"
+
+///|
+#cfg(target="js")
+fn location_hostname_ffi(obj : JsValue) -> String {
+  location_hostname_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn location_set_hostname_ffi(
+  obj : JsValue,
+  hostname : JsValue,
+) -> Unit = "(obj, hostname) => { obj.hostname = hostname; }"
+
+///|
+#cfg(target="js")
+extern "js" fn location_port_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.port"
+
+///|
+#cfg(target="js")
+fn location_port_ffi(obj : JsValue) -> String {
+  location_port_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn location_set_port_ffi(obj : JsValue, port : JsValue) -> Unit = "(obj, port) => { obj.port = port; }"
+
+///|
+#cfg(target="js")
+extern "js" fn location_pathname_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.pathname"
+
+///|
+#cfg(target="js")
+fn location_pathname_ffi(obj : JsValue) -> String {
+  location_pathname_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn location_set_pathname_ffi(
+  obj : JsValue,
+  pathname : JsValue,
+) -> Unit = "(obj, pathname) => { obj.pathname = pathname; }"
+
+///|
+#cfg(target="js")
+extern "js" fn location_search_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.search"
+
+///|
+#cfg(target="js")
+fn location_search_ffi(obj : JsValue) -> String {
+  location_search_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn location_set_search_ffi(obj : JsValue, search : JsValue) -> Unit = "(obj, search) => { obj.search = search; }"
+
+///|
+#cfg(target="js")
+extern "js" fn location_hash_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.hash"
+
+///|
+#cfg(target="js")
+fn location_hash_ffi(obj : JsValue) -> String {
+  location_hash_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn location_set_hash_ffi(obj : JsValue, hash : JsValue) -> Unit = "(obj, hash) => { obj.hash = hash; }"
+
+///|
+#cfg(target="js")
+extern "js" fn location_assign_ffi(obj : JsValue, url : JsValue) -> Unit = "(obj, url) => obj.assign(url)"
+
+///|
+#cfg(target="js")
+extern "js" fn location_replace_ffi(obj : JsValue, url : JsValue) -> Unit = "(obj, url) => obj.replace(url)"
+
+///|
+#cfg(target="js")
+extern "js" fn location_reload_ffi(obj : JsValue) -> Unit = "(obj) => obj.reload()"
+
+///|
+#cfg(target="js")
+extern "js" fn location_ancestor_origins_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ancestorOrigins"
+
+///|
+#cfg(target="js")
+fn location_ancestor_origins_ffi(obj : JsValue) -> DOMStringList {
+  location_ancestor_origins_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn location_href_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Location" "get_href"
+
+///|
+#cfg(target="wasm-gc")
+fn location_href_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(location_href_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn location_set_href_ffi(obj : JsValue, href : JsValue) -> Unit = "webapi_Location" "set_href"
+
+///|
+#cfg(target="wasm-gc")
+fn location_origin_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Location" "get_origin"
+
+///|
+#cfg(target="wasm-gc")
+fn location_origin_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(location_origin_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn location_protocol_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Location" "get_protocol"
+
+///|
+#cfg(target="wasm-gc")
+fn location_protocol_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(location_protocol_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn location_set_protocol_ffi(obj : JsValue, protocol : JsValue) -> Unit = "webapi_Location" "set_protocol"
+
+///|
+#cfg(target="wasm-gc")
+fn location_host_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Location" "get_host"
+
+///|
+#cfg(target="wasm-gc")
+fn location_host_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(location_host_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn location_set_host_ffi(obj : JsValue, host : JsValue) -> Unit = "webapi_Location" "set_host"
+
+///|
+#cfg(target="wasm-gc")
+fn location_hostname_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Location" "get_hostname"
+
+///|
+#cfg(target="wasm-gc")
+fn location_hostname_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(location_hostname_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn location_set_hostname_ffi(obj : JsValue, hostname : JsValue) -> Unit = "webapi_Location" "set_hostname"
+
+///|
+#cfg(target="wasm-gc")
+fn location_port_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Location" "get_port"
+
+///|
+#cfg(target="wasm-gc")
+fn location_port_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(location_port_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn location_set_port_ffi(obj : JsValue, port : JsValue) -> Unit = "webapi_Location" "set_port"
+
+///|
+#cfg(target="wasm-gc")
+fn location_pathname_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Location" "get_pathname"
+
+///|
+#cfg(target="wasm-gc")
+fn location_pathname_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(location_pathname_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn location_set_pathname_ffi(obj : JsValue, pathname : JsValue) -> Unit = "webapi_Location" "set_pathname"
+
+///|
+#cfg(target="wasm-gc")
+fn location_search_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Location" "get_search"
+
+///|
+#cfg(target="wasm-gc")
+fn location_search_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(location_search_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn location_set_search_ffi(obj : JsValue, search : JsValue) -> Unit = "webapi_Location" "set_search"
+
+///|
+#cfg(target="wasm-gc")
+fn location_hash_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Location" "get_hash"
+
+///|
+#cfg(target="wasm-gc")
+fn location_hash_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(location_hash_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn location_set_hash_ffi(obj : JsValue, hash : JsValue) -> Unit = "webapi_Location" "set_hash"
+
+///|
+#cfg(target="wasm-gc")
+fn location_assign_ffi(obj : JsValue, url : JsValue) -> Unit = "webapi_Location" "assign"
+
+///|
+#cfg(target="wasm-gc")
+fn location_replace_ffi(obj : JsValue, url : JsValue) -> Unit = "webapi_Location" "replace"
+
+///|
+#cfg(target="wasm-gc")
+fn location_reload_ffi(obj : JsValue) -> Unit = "webapi_Location" "reload"
+
+///|
+#cfg(target="wasm-gc")
+fn location_ancestor_origins_ffi(obj : JsValue) -> DOMStringList = "webapi_Location" "get_ancestorOrigins"

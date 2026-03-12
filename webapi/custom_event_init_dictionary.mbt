@@ -52,3 +52,69 @@ pub fn CustomEventInit::composed(self : CustomEventInit) -> Bool? {
 pub fn CustomEventInit::detail(self : CustomEventInit) -> JsValue? {
   custom_event_init_get_detail_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn custom_event_init_ffi(
+  bubbles : JsValue,
+  cancelable : JsValue,
+  composed : JsValue,
+  detail : JsValue,
+) -> CustomEventInit =
+  #|(bubbles, cancelable, composed, detail) => {
+  #|  const obj = {};
+  #|  if (bubbles !== undefined) obj.bubbles = bubbles;
+  #|  if (cancelable !== undefined) obj.cancelable = cancelable;
+  #|  if (composed !== undefined) obj.composed = composed;
+  #|  if (detail !== undefined) obj.detail = detail;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn custom_event_init_empty_ffi() -> CustomEventInit = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn custom_event_init_get_bubbles_ffi(obj : JsValue) -> JsValue = "(obj) => obj.bubbles"
+
+///|
+#cfg(target="js")
+extern "js" fn custom_event_init_get_cancelable_ffi(obj : JsValue) -> JsValue = "(obj) => obj.cancelable"
+
+///|
+#cfg(target="js")
+extern "js" fn custom_event_init_get_composed_ffi(obj : JsValue) -> JsValue = "(obj) => obj.composed"
+
+///|
+#cfg(target="js")
+extern "js" fn custom_event_init_get_detail_ffi(obj : JsValue) -> JsValue = "(obj) => obj.detail"
+
+///|
+#cfg(target="wasm-gc")
+fn custom_event_init_ffi(
+  bubbles : JsValue,
+  cancelable : JsValue,
+  composed : JsValue,
+  detail : JsValue,
+) -> CustomEventInit = "webapi_CustomEventInit" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn custom_event_init_empty_ffi() -> CustomEventInit = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn custom_event_init_get_bubbles_ffi(obj : JsValue) -> JsValue = "webapi_CustomEventInit" "get_bubbles"
+
+///|
+#cfg(target="wasm-gc")
+fn custom_event_init_get_cancelable_ffi(obj : JsValue) -> JsValue = "webapi_CustomEventInit" "get_cancelable"
+
+///|
+#cfg(target="wasm-gc")
+fn custom_event_init_get_composed_ffi(obj : JsValue) -> JsValue = "webapi_CustomEventInit" "get_composed"
+
+///|
+#cfg(target="wasm-gc")
+fn custom_event_init_get_detail_ffi(obj : JsValue) -> JsValue = "webapi_CustomEventInit" "get_detail"

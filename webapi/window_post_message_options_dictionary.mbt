@@ -41,3 +41,51 @@ pub fn WindowPostMessageOptions::target_origin(
 ) -> String? {
   window_post_message_options_get_target_origin_ffi(TJsValue::to_js(self)).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn window_post_message_options_ffi(
+  transfer : JsValue,
+  target_origin : JsValue,
+) -> WindowPostMessageOptions =
+  #|(transfer, targetOrigin) => {
+  #|  const obj = {};
+  #|  if (transfer !== undefined) obj.transfer = transfer;
+  #|  if (targetOrigin !== undefined) obj.targetOrigin = targetOrigin;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn window_post_message_options_empty_ffi() -> WindowPostMessageOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn window_post_message_options_get_transfer_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.transfer"
+
+///|
+#cfg(target="js")
+extern "js" fn window_post_message_options_get_target_origin_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.targetOrigin"
+
+///|
+#cfg(target="wasm-gc")
+fn window_post_message_options_ffi(
+  transfer : JsValue,
+  target_origin : JsValue,
+) -> WindowPostMessageOptions = "webapi_WindowPostMessageOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn window_post_message_options_empty_ffi() -> WindowPostMessageOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn window_post_message_options_get_transfer_ffi(obj : JsValue) -> JsValue = "webapi_WindowPostMessageOptions" "get_transfer"
+
+///|
+#cfg(target="wasm-gc")
+fn window_post_message_options_get_target_origin_ffi(obj : JsValue) -> JsValue = "webapi_WindowPostMessageOptions" "get_targetOrigin"

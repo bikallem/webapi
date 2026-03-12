@@ -196,3 +196,286 @@ impl TEvent with init_event(
     opt_to_js(cancelable),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> Event = "(type_, event_init_dict) => new Event(type_, event_init_dict)"
+
+///|
+#cfg(target="js")
+extern "js" fn event_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.type"
+
+///|
+#cfg(target="js")
+fn event_type_ffi(obj : JsValue) -> String {
+  event_type_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn event_target_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.target"
+
+///|
+#cfg(target="js")
+fn event_target_ffi(obj : JsValue) -> EventTarget {
+  event_target_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn event_src_element_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.srcElement"
+
+///|
+#cfg(target="js")
+fn event_src_element_ffi(obj : JsValue) -> EventTarget {
+  event_src_element_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn event_current_target_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.currentTarget"
+
+///|
+#cfg(target="js")
+fn event_current_target_ffi(obj : JsValue) -> EventTarget {
+  event_current_target_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn event_composed_path_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.composedPath()"
+
+///|
+#cfg(target="js")
+fn event_composed_path_ffi(obj : JsValue) -> Array[EventTarget] {
+  event_composed_path_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn event_event_phase_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.eventPhase"
+
+///|
+#cfg(target="js")
+fn event_event_phase_ffi(obj : JsValue) -> UInt {
+  event_event_phase_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn event_stop_propagation_ffi(obj : JsValue) -> Unit = "(obj) => obj.stopPropagation()"
+
+///|
+#cfg(target="js")
+extern "js" fn event_cancel_bubble_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.cancelBubble"
+
+///|
+#cfg(target="js")
+fn event_cancel_bubble_ffi(obj : JsValue) -> Bool {
+  event_cancel_bubble_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn event_set_cancel_bubble_ffi(
+  obj : JsValue,
+  cancel_bubble : JsValue,
+) -> Unit = "(obj, cancelBubble) => { obj.cancelBubble = cancelBubble; }"
+
+///|
+#cfg(target="js")
+extern "js" fn event_stop_immediate_propagation_ffi(obj : JsValue) -> Unit = "(obj) => obj.stopImmediatePropagation()"
+
+///|
+#cfg(target="js")
+extern "js" fn event_bubbles_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.bubbles"
+
+///|
+#cfg(target="js")
+fn event_bubbles_ffi(obj : JsValue) -> Bool {
+  event_bubbles_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn event_cancelable_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.cancelable"
+
+///|
+#cfg(target="js")
+fn event_cancelable_ffi(obj : JsValue) -> Bool {
+  event_cancelable_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn event_return_value_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.returnValue"
+
+///|
+#cfg(target="js")
+fn event_return_value_ffi(obj : JsValue) -> Bool {
+  event_return_value_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn event_set_return_value_ffi(
+  obj : JsValue,
+  return_value : JsValue,
+) -> Unit = "(obj, returnValue) => { obj.returnValue = returnValue; }"
+
+///|
+#cfg(target="js")
+extern "js" fn event_prevent_default_ffi(obj : JsValue) -> Unit = "(obj) => obj.preventDefault()"
+
+///|
+#cfg(target="js")
+extern "js" fn event_default_prevented_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.defaultPrevented"
+
+///|
+#cfg(target="js")
+fn event_default_prevented_ffi(obj : JsValue) -> Bool {
+  event_default_prevented_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn event_composed_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.composed"
+
+///|
+#cfg(target="js")
+fn event_composed_ffi(obj : JsValue) -> Bool {
+  event_composed_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn event_is_trusted_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.isTrusted"
+
+///|
+#cfg(target="js")
+fn event_is_trusted_ffi(obj : JsValue) -> Bool {
+  event_is_trusted_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn event_time_stamp_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.timeStamp"
+
+///|
+#cfg(target="js")
+fn event_time_stamp_ffi(obj : JsValue) -> DOMHighResTimeStamp {
+  event_time_stamp_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn event_init_event_ffi(
+  obj : JsValue,
+  type_ : JsValue,
+  bubbles : JsValue,
+  cancelable : JsValue,
+) -> Unit = "(obj, type_, bubbles, cancelable) => obj.initEvent(type_, bubbles, cancelable)"
+
+///|
+#cfg(target="wasm-gc")
+fn event_new_ffi(type_ : JsValue, event_init_dict : JsValue) -> Event = "webapi_Event" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn event_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Event" "get_type"
+
+///|
+#cfg(target="wasm-gc")
+fn event_type_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(event_type_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn event_target_ffi(obj : JsValue) -> EventTarget = "webapi_Event" "get_target"
+
+///|
+#cfg(target="wasm-gc")
+fn event_src_element_ffi(obj : JsValue) -> EventTarget = "webapi_Event" "get_srcElement"
+
+///|
+#cfg(target="wasm-gc")
+fn event_current_target_ffi(obj : JsValue) -> EventTarget = "webapi_Event" "get_currentTarget"
+
+///|
+#cfg(target="wasm-gc")
+fn event_composed_path_ffi_wasm(obj : JsValue) -> JsArray = "webapi_Event" "composedPath"
+
+///|
+#cfg(target="wasm-gc")
+fn event_composed_path_ffi(obj : JsValue) -> Array[EventTarget] {
+  event_composed_path_ffi_wasm(obj).to_array()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn event_event_phase_ffi(obj : JsValue) -> UInt = "webapi_Event" "get_eventPhase"
+
+///|
+#cfg(target="wasm-gc")
+fn event_stop_propagation_ffi(obj : JsValue) -> Unit = "webapi_Event" "stopPropagation"
+
+///|
+#cfg(target="wasm-gc")
+fn event_cancel_bubble_ffi(obj : JsValue) -> Bool = "webapi_Event" "get_cancelBubble"
+
+///|
+#cfg(target="wasm-gc")
+fn event_set_cancel_bubble_ffi(obj : JsValue, cancel_bubble : JsValue) -> Unit = "webapi_Event" "set_cancelBubble"
+
+///|
+#cfg(target="wasm-gc")
+fn event_stop_immediate_propagation_ffi(obj : JsValue) -> Unit = "webapi_Event" "stopImmediatePropagation"
+
+///|
+#cfg(target="wasm-gc")
+fn event_bubbles_ffi(obj : JsValue) -> Bool = "webapi_Event" "get_bubbles"
+
+///|
+#cfg(target="wasm-gc")
+fn event_cancelable_ffi(obj : JsValue) -> Bool = "webapi_Event" "get_cancelable"
+
+///|
+#cfg(target="wasm-gc")
+fn event_return_value_ffi(obj : JsValue) -> Bool = "webapi_Event" "get_returnValue"
+
+///|
+#cfg(target="wasm-gc")
+fn event_set_return_value_ffi(obj : JsValue, return_value : JsValue) -> Unit = "webapi_Event" "set_returnValue"
+
+///|
+#cfg(target="wasm-gc")
+fn event_prevent_default_ffi(obj : JsValue) -> Unit = "webapi_Event" "preventDefault"
+
+///|
+#cfg(target="wasm-gc")
+fn event_default_prevented_ffi(obj : JsValue) -> Bool = "webapi_Event" "get_defaultPrevented"
+
+///|
+#cfg(target="wasm-gc")
+fn event_composed_ffi(obj : JsValue) -> Bool = "webapi_Event" "get_composed"
+
+///|
+#cfg(target="wasm-gc")
+fn event_is_trusted_ffi(obj : JsValue) -> Bool = "webapi_Event" "get_isTrusted"
+
+///|
+#cfg(target="wasm-gc")
+fn event_time_stamp_ffi(obj : JsValue) -> DOMHighResTimeStamp = "webapi_Event" "get_timeStamp"
+
+///|
+#cfg(target="wasm-gc")
+fn event_init_event_ffi(
+  obj : JsValue,
+  type_ : JsValue,
+  bubbles : JsValue,
+  cancelable : JsValue,
+) -> Unit = "webapi_Event" "initEvent"

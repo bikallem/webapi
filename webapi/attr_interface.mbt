@@ -85,3 +85,139 @@ impl TAttr with owner_element(self : Self) -> Element {
 impl TAttr with specified(self : Self) -> Bool {
   attr_specified_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn attr_namespace_uri_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.namespaceURI"
+
+///|
+#cfg(target="js")
+fn attr_namespace_uri_ffi(obj : JsValue) -> String {
+  attr_namespace_uri_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn attr_prefix_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.prefix"
+
+///|
+#cfg(target="js")
+fn attr_prefix_ffi(obj : JsValue) -> String {
+  attr_prefix_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn attr_local_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.localName"
+
+///|
+#cfg(target="js")
+fn attr_local_name_ffi(obj : JsValue) -> String {
+  attr_local_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn attr_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.name"
+
+///|
+#cfg(target="js")
+fn attr_name_ffi(obj : JsValue) -> String {
+  attr_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn attr_value_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.value"
+
+///|
+#cfg(target="js")
+fn attr_value_ffi(obj : JsValue) -> String {
+  attr_value_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn attr_set_value_ffi(obj : JsValue, value : JsValue) -> Unit = "(obj, value) => { obj.value = value; }"
+
+///|
+#cfg(target="js")
+extern "js" fn attr_owner_element_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ownerElement"
+
+///|
+#cfg(target="js")
+fn attr_owner_element_ffi(obj : JsValue) -> Element {
+  attr_owner_element_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn attr_specified_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.specified"
+
+///|
+#cfg(target="js")
+fn attr_specified_ffi(obj : JsValue) -> Bool {
+  attr_specified_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn attr_namespace_uri_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Attr" "get_namespaceURI"
+
+///|
+#cfg(target="wasm-gc")
+fn attr_namespace_uri_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(attr_namespace_uri_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn attr_prefix_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Attr" "get_prefix"
+
+///|
+#cfg(target="wasm-gc")
+fn attr_prefix_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(attr_prefix_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn attr_local_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Attr" "get_localName"
+
+///|
+#cfg(target="wasm-gc")
+fn attr_local_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(attr_local_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn attr_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Attr" "get_name"
+
+///|
+#cfg(target="wasm-gc")
+fn attr_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(attr_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn attr_value_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Attr" "get_value"
+
+///|
+#cfg(target="wasm-gc")
+fn attr_value_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(attr_value_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn attr_set_value_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_Attr" "set_value"
+
+///|
+#cfg(target="wasm-gc")
+fn attr_owner_element_ffi(obj : JsValue) -> Element = "webapi_Attr" "get_ownerElement"
+
+///|
+#cfg(target="wasm-gc")
+fn attr_specified_ffi(obj : JsValue) -> Bool = "webapi_Attr" "get_specified"

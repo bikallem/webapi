@@ -76,3 +76,145 @@ impl TNotRestoredReasons with children(self : Self) -> Array[NotRestoredReasons]
 impl TNotRestoredReasons with to_json(self : Self) -> JsValue {
   not_restored_reasons_to_json_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn not_restored_reasons_src_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.src"
+
+///|
+#cfg(target="js")
+fn not_restored_reasons_src_ffi(obj : JsValue) -> String {
+  not_restored_reasons_src_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn not_restored_reasons_id_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.id"
+
+///|
+#cfg(target="js")
+fn not_restored_reasons_id_ffi(obj : JsValue) -> String {
+  not_restored_reasons_id_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn not_restored_reasons_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.name"
+
+///|
+#cfg(target="js")
+fn not_restored_reasons_name_ffi(obj : JsValue) -> String {
+  not_restored_reasons_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn not_restored_reasons_url_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.url"
+
+///|
+#cfg(target="js")
+fn not_restored_reasons_url_ffi(obj : JsValue) -> String {
+  not_restored_reasons_url_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn not_restored_reasons_reasons_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.reasons"
+
+///|
+#cfg(target="js")
+fn not_restored_reasons_reasons_ffi(
+  obj : JsValue,
+) -> Array[NotRestoredReasonDetails] {
+  not_restored_reasons_reasons_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn not_restored_reasons_children_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.children"
+
+///|
+#cfg(target="js")
+fn not_restored_reasons_children_ffi(
+  obj : JsValue,
+) -> Array[NotRestoredReasons] {
+  not_restored_reasons_children_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn not_restored_reasons_to_json_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.toJSON()"
+
+///|
+#cfg(target="js")
+fn not_restored_reasons_to_json_ffi(obj : JsValue) -> JsValue {
+  not_restored_reasons_to_json_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn not_restored_reasons_src_ffi_wasm(obj : JsValue) -> JsValue = "webapi_NotRestoredReasons" "get_src"
+
+///|
+#cfg(target="wasm-gc")
+fn not_restored_reasons_src_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(not_restored_reasons_src_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn not_restored_reasons_id_ffi_wasm(obj : JsValue) -> JsValue = "webapi_NotRestoredReasons" "get_id"
+
+///|
+#cfg(target="wasm-gc")
+fn not_restored_reasons_id_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(not_restored_reasons_id_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn not_restored_reasons_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_NotRestoredReasons" "get_name"
+
+///|
+#cfg(target="wasm-gc")
+fn not_restored_reasons_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(not_restored_reasons_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn not_restored_reasons_url_ffi_wasm(obj : JsValue) -> JsValue = "webapi_NotRestoredReasons" "get_url"
+
+///|
+#cfg(target="wasm-gc")
+fn not_restored_reasons_url_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(not_restored_reasons_url_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn not_restored_reasons_reasons_ffi_wasm(obj : JsValue) -> JsArray = "webapi_NotRestoredReasons" "get_reasons"
+
+///|
+#cfg(target="wasm-gc")
+fn not_restored_reasons_reasons_ffi(
+  obj : JsValue,
+) -> Array[NotRestoredReasonDetails] {
+  not_restored_reasons_reasons_ffi_wasm(obj).to_array()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn not_restored_reasons_children_ffi_wasm(obj : JsValue) -> JsArray = "webapi_NotRestoredReasons" "get_children"
+
+///|
+#cfg(target="wasm-gc")
+fn not_restored_reasons_children_ffi(
+  obj : JsValue,
+) -> Array[NotRestoredReasons] {
+  not_restored_reasons_children_ffi_wasm(obj).to_array()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn not_restored_reasons_to_json_ffi(obj : JsValue) -> JsValue = "webapi_NotRestoredReasons" "toJSON"

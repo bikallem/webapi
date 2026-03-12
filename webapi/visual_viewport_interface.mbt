@@ -135,3 +135,197 @@ impl TVisualViewport with set_onscrollend(
     TJsValue::to_js(event_handler_non_null_ffi(onscrollend)),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn visual_viewport_offset_left_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.offsetLeft"
+
+///|
+#cfg(target="js")
+fn visual_viewport_offset_left_ffi(obj : JsValue) -> Double {
+  visual_viewport_offset_left_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn visual_viewport_offset_top_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.offsetTop"
+
+///|
+#cfg(target="js")
+fn visual_viewport_offset_top_ffi(obj : JsValue) -> Double {
+  visual_viewport_offset_top_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn visual_viewport_page_left_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.pageLeft"
+
+///|
+#cfg(target="js")
+fn visual_viewport_page_left_ffi(obj : JsValue) -> Double {
+  visual_viewport_page_left_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn visual_viewport_page_top_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.pageTop"
+
+///|
+#cfg(target="js")
+fn visual_viewport_page_top_ffi(obj : JsValue) -> Double {
+  visual_viewport_page_top_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn visual_viewport_width_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.width"
+
+///|
+#cfg(target="js")
+fn visual_viewport_width_ffi(obj : JsValue) -> Double {
+  visual_viewport_width_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn visual_viewport_height_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.height"
+
+///|
+#cfg(target="js")
+fn visual_viewport_height_ffi(obj : JsValue) -> Double {
+  visual_viewport_height_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn visual_viewport_scale_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.scale"
+
+///|
+#cfg(target="js")
+fn visual_viewport_scale_ffi(obj : JsValue) -> Double {
+  visual_viewport_scale_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn visual_viewport_onresize_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onresize"
+
+///|
+#cfg(target="js")
+fn visual_viewport_onresize_ffi(obj : JsValue) -> EventHandler {
+  visual_viewport_onresize_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn visual_viewport_set_onresize_ffi(
+  obj : JsValue,
+  onresize : JsValue,
+) -> Unit = "(obj, onresize) => { obj.onresize = onresize; }"
+
+///|
+#cfg(target="js")
+extern "js" fn visual_viewport_onscroll_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onscroll"
+
+///|
+#cfg(target="js")
+fn visual_viewport_onscroll_ffi(obj : JsValue) -> EventHandler {
+  visual_viewport_onscroll_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn visual_viewport_set_onscroll_ffi(
+  obj : JsValue,
+  onscroll : JsValue,
+) -> Unit = "(obj, onscroll) => { obj.onscroll = onscroll; }"
+
+///|
+#cfg(target="js")
+extern "js" fn visual_viewport_onscrollend_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onscrollend"
+
+///|
+#cfg(target="js")
+fn visual_viewport_onscrollend_ffi(obj : JsValue) -> EventHandler {
+  visual_viewport_onscrollend_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn visual_viewport_set_onscrollend_ffi(
+  obj : JsValue,
+  onscrollend : JsValue,
+) -> Unit = "(obj, onscrollend) => { obj.onscrollend = onscrollend; }"
+
+///|
+#cfg(target="wasm-gc")
+fn visual_viewport_offset_left_ffi(obj : JsValue) -> Double = "webapi_VisualViewport" "get_offsetLeft"
+
+///|
+#cfg(target="wasm-gc")
+fn visual_viewport_offset_top_ffi(obj : JsValue) -> Double = "webapi_VisualViewport" "get_offsetTop"
+
+///|
+#cfg(target="wasm-gc")
+fn visual_viewport_page_left_ffi(obj : JsValue) -> Double = "webapi_VisualViewport" "get_pageLeft"
+
+///|
+#cfg(target="wasm-gc")
+fn visual_viewport_page_top_ffi(obj : JsValue) -> Double = "webapi_VisualViewport" "get_pageTop"
+
+///|
+#cfg(target="wasm-gc")
+fn visual_viewport_width_ffi(obj : JsValue) -> Double = "webapi_VisualViewport" "get_width"
+
+///|
+#cfg(target="wasm-gc")
+fn visual_viewport_height_ffi(obj : JsValue) -> Double = "webapi_VisualViewport" "get_height"
+
+///|
+#cfg(target="wasm-gc")
+fn visual_viewport_scale_ffi(obj : JsValue) -> Double = "webapi_VisualViewport" "get_scale"
+
+///|
+#cfg(target="wasm-gc")
+fn visual_viewport_onresize_ffi_wasm(obj : JsValue) -> JsValue = "webapi_VisualViewport" "get_onresize"
+
+///|
+#cfg(target="wasm-gc")
+fn visual_viewport_onresize_ffi(obj : JsValue) -> EventHandler {
+  visual_viewport_onresize_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn visual_viewport_set_onresize_ffi(obj : JsValue, onresize : JsValue) -> Unit = "webapi_VisualViewport" "set_onresize"
+
+///|
+#cfg(target="wasm-gc")
+fn visual_viewport_onscroll_ffi_wasm(obj : JsValue) -> JsValue = "webapi_VisualViewport" "get_onscroll"
+
+///|
+#cfg(target="wasm-gc")
+fn visual_viewport_onscroll_ffi(obj : JsValue) -> EventHandler {
+  visual_viewport_onscroll_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn visual_viewport_set_onscroll_ffi(obj : JsValue, onscroll : JsValue) -> Unit = "webapi_VisualViewport" "set_onscroll"
+
+///|
+#cfg(target="wasm-gc")
+fn visual_viewport_onscrollend_ffi_wasm(obj : JsValue) -> JsValue = "webapi_VisualViewport" "get_onscrollend"
+
+///|
+#cfg(target="wasm-gc")
+fn visual_viewport_onscrollend_ffi(obj : JsValue) -> EventHandler {
+  visual_viewport_onscrollend_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn visual_viewport_set_onscrollend_ffi(
+  obj : JsValue,
+  onscrollend : JsValue,
+) -> Unit = "webapi_VisualViewport" "set_onscrollend"

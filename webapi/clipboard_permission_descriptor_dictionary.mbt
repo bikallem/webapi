@@ -48,3 +48,65 @@ pub fn ClipboardPermissionDescriptor::allow_without_gesture(
     TJsValue::to_js(self),
   ).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn clipboard_permission_descriptor_ffi(
+  name : JsValue,
+  allow_without_gesture : JsValue,
+) -> ClipboardPermissionDescriptor =
+  #|(name, allowWithoutGesture) => {
+  #|  const obj = {};
+  #|  if (name !== undefined) obj.name = name;
+  #|  if (allowWithoutGesture !== undefined) obj.allowWithoutGesture = allowWithoutGesture;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn clipboard_permission_descriptor_empty_ffi() -> ClipboardPermissionDescriptor = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn clipboard_permission_descriptor_get_name_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.name"
+
+///|
+#cfg(target="js")
+fn clipboard_permission_descriptor_get_name_ffi(obj : JsValue) -> String {
+  clipboard_permission_descriptor_get_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn clipboard_permission_descriptor_get_allow_without_gesture_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.allowWithoutGesture"
+
+///|
+#cfg(target="wasm-gc")
+fn clipboard_permission_descriptor_ffi(
+  name : JsValue,
+  allow_without_gesture : JsValue,
+) -> ClipboardPermissionDescriptor = "webapi_ClipboardPermissionDescriptor" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn clipboard_permission_descriptor_empty_ffi() -> ClipboardPermissionDescriptor = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn clipboard_permission_descriptor_get_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_ClipboardPermissionDescriptor" "get_name"
+
+///|
+#cfg(target="wasm-gc")
+fn clipboard_permission_descriptor_get_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(clipboard_permission_descriptor_get_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn clipboard_permission_descriptor_get_allow_without_gesture_ffi(
+  obj : JsValue,
+) -> JsValue = "webapi_ClipboardPermissionDescriptor" "get_allowWithoutGesture"

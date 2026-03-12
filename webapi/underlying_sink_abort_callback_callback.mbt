@@ -23,3 +23,15 @@ pub fn UnderlyingSinkAbortCallback::new(
 ) -> UnderlyingSinkAbortCallback {
   underlying_sink_abort_callback_ffi(callback)
 }
+
+///|
+#cfg(target="js")
+extern "js" fn underlying_sink_abort_callback_ffi(
+  callback : (JsValue) -> JsPromise[JsValue],
+) -> UnderlyingSinkAbortCallback = "(callback) => callback"
+
+///|
+#cfg(target="wasm-gc")
+fn underlying_sink_abort_callback_ffi(
+  callback : (JsValue) -> JsPromise[JsValue],
+) -> UnderlyingSinkAbortCallback = "webapi_UnderlyingSinkAbortCallback" "new"

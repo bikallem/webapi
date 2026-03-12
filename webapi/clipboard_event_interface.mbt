@@ -41,3 +41,31 @@ pub trait TClipboardEvent: TEvent {
 impl TClipboardEvent with clipboard_data(self : Self) -> DataTransfer {
   clipboard_event_clipboard_data_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn clipboard_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> ClipboardEvent = "(type_, event_init_dict) => new ClipboardEvent(type_, event_init_dict)"
+
+///|
+#cfg(target="js")
+extern "js" fn clipboard_event_clipboard_data_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.clipboardData"
+
+///|
+#cfg(target="js")
+fn clipboard_event_clipboard_data_ffi(obj : JsValue) -> DataTransfer {
+  clipboard_event_clipboard_data_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn clipboard_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> ClipboardEvent = "webapi_ClipboardEvent" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn clipboard_event_clipboard_data_ffi(obj : JsValue) -> DataTransfer = "webapi_ClipboardEvent" "get_clipboardData"

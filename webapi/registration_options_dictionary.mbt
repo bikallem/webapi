@@ -47,3 +47,60 @@ pub fn RegistrationOptions::update_via_cache(
 ) -> ServiceWorkerUpdateViaCache? {
   registration_options_get_update_via_cache_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn registration_options_ffi(
+  scope : JsValue,
+  type_ : JsValue,
+  update_via_cache : JsValue,
+) -> RegistrationOptions =
+  #|(scope, type, updateViaCache) => {
+  #|  const obj = {};
+  #|  if (scope !== undefined) obj.scope = scope;
+  #|  if (type !== undefined) obj.type = type;
+  #|  if (updateViaCache !== undefined) obj.updateViaCache = updateViaCache;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn registration_options_empty_ffi() -> RegistrationOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn registration_options_get_scope_ffi(obj : JsValue) -> JsValue = "(obj) => obj.scope"
+
+///|
+#cfg(target="js")
+extern "js" fn registration_options_get_type_ffi(obj : JsValue) -> JsValue = "(obj) => obj.type"
+
+///|
+#cfg(target="js")
+extern "js" fn registration_options_get_update_via_cache_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.updateViaCache"
+
+///|
+#cfg(target="wasm-gc")
+fn registration_options_ffi(
+  scope : JsValue,
+  type_ : JsValue,
+  update_via_cache : JsValue,
+) -> RegistrationOptions = "webapi_RegistrationOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn registration_options_empty_ffi() -> RegistrationOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn registration_options_get_scope_ffi(obj : JsValue) -> JsValue = "webapi_RegistrationOptions" "get_scope"
+
+///|
+#cfg(target="wasm-gc")
+fn registration_options_get_type_ffi(obj : JsValue) -> JsValue = "webapi_RegistrationOptions" "get_type"
+
+///|
+#cfg(target="wasm-gc")
+fn registration_options_get_update_via_cache_ffi(obj : JsValue) -> JsValue = "webapi_RegistrationOptions" "get_updateViaCache"

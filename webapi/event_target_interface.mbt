@@ -103,3 +103,64 @@ impl TEventTarget with remove_event_listener(
 impl TEventTarget with dispatch_event(self : Self, event : &TEvent) -> Bool {
   event_target_dispatch_event_ffi(TJsValue::to_js(self), TJsValue::to_js(event))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn event_target_new_ffi() -> EventTarget = "() => new EventTarget()"
+
+///|
+#cfg(target="js")
+extern "js" fn event_target_add_event_listener_ffi(
+  obj : JsValue,
+  type_ : JsValue,
+  callback : JsValue,
+  options : JsValue,
+) -> Unit = "(obj, type_, callback, options) => obj.addEventListener(type_, callback, options)"
+
+///|
+#cfg(target="js")
+extern "js" fn event_target_remove_event_listener_ffi(
+  obj : JsValue,
+  type_ : JsValue,
+  callback : JsValue,
+  options : JsValue,
+) -> Unit = "(obj, type_, callback, options) => obj.removeEventListener(type_, callback, options)"
+
+///|
+#cfg(target="js")
+extern "js" fn event_target_dispatch_event_ffi_js(
+  obj : JsValue,
+  event : JsValue,
+) -> JsValue = "(obj, event) => obj.dispatchEvent(event)"
+
+///|
+#cfg(target="js")
+fn event_target_dispatch_event_ffi(obj : JsValue, event : JsValue) -> Bool {
+  event_target_dispatch_event_ffi_js(obj, event).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn event_target_new_ffi() -> EventTarget = "webapi_EventTarget" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn event_target_add_event_listener_ffi(
+  obj : JsValue,
+  type_ : JsValue,
+  callback : JsValue,
+  options : JsValue,
+) -> Unit = "webapi_EventTarget" "addEventListener"
+
+///|
+#cfg(target="wasm-gc")
+fn event_target_remove_event_listener_ffi(
+  obj : JsValue,
+  type_ : JsValue,
+  callback : JsValue,
+  options : JsValue,
+) -> Unit = "webapi_EventTarget" "removeEventListener"
+
+///|
+#cfg(target="wasm-gc")
+fn event_target_dispatch_event_ffi(obj : JsValue, event : JsValue) -> Bool = "webapi_EventTarget" "dispatchEvent"

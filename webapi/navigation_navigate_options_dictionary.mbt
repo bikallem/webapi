@@ -53,3 +53,64 @@ pub fn NavigationNavigateOptions::history(
 ) -> NavigationHistoryBehavior? {
   navigation_navigate_options_get_history_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_navigate_options_ffi(
+  info : JsValue,
+  state : JsValue,
+  history : JsValue,
+) -> NavigationNavigateOptions =
+  #|(info, state, history) => {
+  #|  const obj = {};
+  #|  if (info !== undefined) obj.info = info;
+  #|  if (state !== undefined) obj.state = state;
+  #|  if (history !== undefined) obj.history = history;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_navigate_options_empty_ffi() -> NavigationNavigateOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_navigate_options_get_info_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.info"
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_navigate_options_get_state_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.state"
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_navigate_options_get_history_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.history"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_navigate_options_ffi(
+  info : JsValue,
+  state : JsValue,
+  history : JsValue,
+) -> NavigationNavigateOptions = "webapi_NavigationNavigateOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_navigate_options_empty_ffi() -> NavigationNavigateOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_navigate_options_get_info_ffi(obj : JsValue) -> JsValue = "webapi_NavigationNavigateOptions" "get_info"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_navigate_options_get_state_ffi(obj : JsValue) -> JsValue = "webapi_NavigationNavigateOptions" "get_state"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_navigate_options_get_history_ffi(obj : JsValue) -> JsValue = "webapi_NavigationNavigateOptions" "get_history"

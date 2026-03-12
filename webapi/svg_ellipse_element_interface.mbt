@@ -71,3 +71,59 @@ impl TSVGEllipseElement with rx(self : Self) -> SVGAnimatedLength {
 impl TSVGEllipseElement with ry(self : Self) -> SVGAnimatedLength {
   svg_ellipse_element_ry_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn svg_ellipse_element_cx_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.cx"
+
+///|
+#cfg(target="js")
+fn svg_ellipse_element_cx_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_ellipse_element_cx_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_ellipse_element_cy_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.cy"
+
+///|
+#cfg(target="js")
+fn svg_ellipse_element_cy_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_ellipse_element_cy_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_ellipse_element_rx_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.rx"
+
+///|
+#cfg(target="js")
+fn svg_ellipse_element_rx_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_ellipse_element_rx_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_ellipse_element_ry_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ry"
+
+///|
+#cfg(target="js")
+fn svg_ellipse_element_ry_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_ellipse_element_ry_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svg_ellipse_element_cx_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGEllipseElement" "get_cx"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_ellipse_element_cy_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGEllipseElement" "get_cy"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_ellipse_element_rx_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGEllipseElement" "get_rx"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_ellipse_element_ry_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGEllipseElement" "get_ry"

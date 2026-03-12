@@ -62,3 +62,81 @@ impl TPermissionStatus with set_onchange(
     TJsValue::to_js(event_handler_non_null_ffi(onchange)),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn permission_status_state_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.state"
+
+///|
+#cfg(target="js")
+fn permission_status_state_ffi(obj : JsValue) -> PermissionState {
+  PermissionState::from_unchecked(
+    permission_status_state_ffi_js(obj).unsafe_cast(),
+  )
+}
+
+///|
+#cfg(target="js")
+extern "js" fn permission_status_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.name"
+
+///|
+#cfg(target="js")
+fn permission_status_name_ffi(obj : JsValue) -> String {
+  permission_status_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn permission_status_onchange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onchange"
+
+///|
+#cfg(target="js")
+fn permission_status_onchange_ffi(obj : JsValue) -> EventHandler {
+  permission_status_onchange_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn permission_status_set_onchange_ffi(
+  obj : JsValue,
+  onchange : JsValue,
+) -> Unit = "(obj, onchange) => { obj.onchange = onchange; }"
+
+///|
+#cfg(target="wasm-gc")
+fn permission_status_state_ffi_wasm(obj : JsValue) -> JsValue = "webapi_PermissionStatus" "get_state"
+
+///|
+#cfg(target="wasm-gc")
+fn permission_status_state_ffi(obj : JsValue) -> PermissionState {
+  PermissionState::from_unchecked(
+    jsvalue_to_string(permission_status_state_ffi_wasm(obj)),
+  )
+}
+
+///|
+#cfg(target="wasm-gc")
+fn permission_status_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_PermissionStatus" "get_name"
+
+///|
+#cfg(target="wasm-gc")
+fn permission_status_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(permission_status_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn permission_status_onchange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_PermissionStatus" "get_onchange"
+
+///|
+#cfg(target="wasm-gc")
+fn permission_status_onchange_ffi(obj : JsValue) -> EventHandler {
+  permission_status_onchange_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn permission_status_set_onchange_ffi(
+  obj : JsValue,
+  onchange : JsValue,
+) -> Unit = "webapi_PermissionStatus" "set_onchange"

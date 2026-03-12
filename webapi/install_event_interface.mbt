@@ -58,3 +58,46 @@ impl TInstallEvent with add_routes(
 ) -> JsPromise[JsValue] {
   install_event_add_routes_ffi(TJsValue::to_js(self), rules.to_js())
 }
+
+///|
+#cfg(target="js")
+extern "js" fn install_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> InstallEvent = "(type_, event_init_dict) => new InstallEvent(type_, event_init_dict)"
+
+///|
+#cfg(target="js")
+extern "js" fn install_event_add_routes_ffi_js(
+  obj : JsValue,
+  rules : JsValue,
+) -> JsValue = "(obj, rules) => obj.addRoutes(rules)"
+
+///|
+#cfg(target="js")
+fn install_event_add_routes_ffi(
+  obj : JsValue,
+  rules : JsValue,
+) -> JsPromise[JsValue] {
+  install_event_add_routes_ffi_js(obj, rules).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn install_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> InstallEvent = "webapi_InstallEvent" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn install_event_add_routes_ffi_wasm(obj : JsValue, rules : JsValue) -> JsValue = "webapi_InstallEvent" "addRoutes"
+
+///|
+#cfg(target="wasm-gc")
+fn install_event_add_routes_ffi(
+  obj : JsValue,
+  rules : JsValue,
+) -> JsPromise[JsValue] {
+  install_event_add_routes_ffi_wasm(obj, rules).unsafe_cast()
+}

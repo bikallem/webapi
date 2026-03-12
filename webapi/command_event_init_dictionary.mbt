@@ -59,3 +59,80 @@ pub fn CommandEventInit::source(self : CommandEventInit) -> Element? {
 pub fn CommandEventInit::command(self : CommandEventInit) -> String? {
   command_event_init_get_command_ffi(TJsValue::to_js(self)).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn command_event_init_ffi(
+  bubbles : JsValue,
+  cancelable : JsValue,
+  composed : JsValue,
+  source : JsValue,
+  command : JsValue,
+) -> CommandEventInit =
+  #|(bubbles, cancelable, composed, source, command) => {
+  #|  const obj = {};
+  #|  if (bubbles !== undefined) obj.bubbles = bubbles;
+  #|  if (cancelable !== undefined) obj.cancelable = cancelable;
+  #|  if (composed !== undefined) obj.composed = composed;
+  #|  if (source !== undefined) obj.source = source;
+  #|  if (command !== undefined) obj.command = command;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn command_event_init_empty_ffi() -> CommandEventInit = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn command_event_init_get_bubbles_ffi(obj : JsValue) -> JsValue = "(obj) => obj.bubbles"
+
+///|
+#cfg(target="js")
+extern "js" fn command_event_init_get_cancelable_ffi(obj : JsValue) -> JsValue = "(obj) => obj.cancelable"
+
+///|
+#cfg(target="js")
+extern "js" fn command_event_init_get_composed_ffi(obj : JsValue) -> JsValue = "(obj) => obj.composed"
+
+///|
+#cfg(target="js")
+extern "js" fn command_event_init_get_source_ffi(obj : JsValue) -> JsValue = "(obj) => obj.source"
+
+///|
+#cfg(target="js")
+extern "js" fn command_event_init_get_command_ffi(obj : JsValue) -> JsValue = "(obj) => obj.command"
+
+///|
+#cfg(target="wasm-gc")
+fn command_event_init_ffi(
+  bubbles : JsValue,
+  cancelable : JsValue,
+  composed : JsValue,
+  source : JsValue,
+  command : JsValue,
+) -> CommandEventInit = "webapi_CommandEventInit" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn command_event_init_empty_ffi() -> CommandEventInit = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn command_event_init_get_bubbles_ffi(obj : JsValue) -> JsValue = "webapi_CommandEventInit" "get_bubbles"
+
+///|
+#cfg(target="wasm-gc")
+fn command_event_init_get_cancelable_ffi(obj : JsValue) -> JsValue = "webapi_CommandEventInit" "get_cancelable"
+
+///|
+#cfg(target="wasm-gc")
+fn command_event_init_get_composed_ffi(obj : JsValue) -> JsValue = "webapi_CommandEventInit" "get_composed"
+
+///|
+#cfg(target="wasm-gc")
+fn command_event_init_get_source_ffi(obj : JsValue) -> JsValue = "webapi_CommandEventInit" "get_source"
+
+///|
+#cfg(target="wasm-gc")
+fn command_event_init_get_command_ffi(obj : JsValue) -> JsValue = "webapi_CommandEventInit" "get_command"

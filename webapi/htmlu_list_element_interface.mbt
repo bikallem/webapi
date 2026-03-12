@@ -73,3 +73,67 @@ impl THTMLUListElement with type_(self : Self) -> String {
 impl THTMLUListElement with set_type_(self : Self, type_ : String) -> Unit {
   htmlu_list_element_set_type_ffi(TJsValue::to_js(self), TJsValue::to_js(type_))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn htmlu_list_element_new_ffi() -> HTMLUListElement = "() => new HTMLUListElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn htmlu_list_element_compact_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.compact"
+
+///|
+#cfg(target="js")
+fn htmlu_list_element_compact_ffi(obj : JsValue) -> Bool {
+  htmlu_list_element_compact_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn htmlu_list_element_set_compact_ffi(
+  obj : JsValue,
+  compact : JsValue,
+) -> Unit = "(obj, compact) => { obj.compact = compact; }"
+
+///|
+#cfg(target="js")
+extern "js" fn htmlu_list_element_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.type"
+
+///|
+#cfg(target="js")
+fn htmlu_list_element_type_ffi(obj : JsValue) -> String {
+  htmlu_list_element_type_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn htmlu_list_element_set_type_ffi(
+  obj : JsValue,
+  type_ : JsValue,
+) -> Unit = "(obj, type) => { obj.type = type; }"
+
+///|
+#cfg(target="wasm-gc")
+fn htmlu_list_element_new_ffi() -> HTMLUListElement = "webapi_HTMLUListElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn htmlu_list_element_compact_ffi(obj : JsValue) -> Bool = "webapi_HTMLUListElement" "get_compact"
+
+///|
+#cfg(target="wasm-gc")
+fn htmlu_list_element_set_compact_ffi(obj : JsValue, compact : JsValue) -> Unit = "webapi_HTMLUListElement" "set_compact"
+
+///|
+#cfg(target="wasm-gc")
+fn htmlu_list_element_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLUListElement" "get_type"
+
+///|
+#cfg(target="wasm-gc")
+fn htmlu_list_element_type_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(htmlu_list_element_type_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn htmlu_list_element_set_type_ffi(obj : JsValue, type_ : JsValue) -> Unit = "webapi_HTMLUListElement" "set_type"

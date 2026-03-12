@@ -92,3 +92,165 @@ pub fn IDBKeyRange::bound(
 impl TIDBKeyRange with includes(self : Self, key : JsValue) -> Bool {
   idb_key_range_includes_ffi(TJsValue::to_js(self), TJsValue::to_js(key))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn idb_key_range_lower_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.lower"
+
+///|
+#cfg(target="js")
+fn idb_key_range_lower_ffi(obj : JsValue) -> JsValue {
+  idb_key_range_lower_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_key_range_upper_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.upper"
+
+///|
+#cfg(target="js")
+fn idb_key_range_upper_ffi(obj : JsValue) -> JsValue {
+  idb_key_range_upper_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_key_range_lower_open_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.lowerOpen"
+
+///|
+#cfg(target="js")
+fn idb_key_range_lower_open_ffi(obj : JsValue) -> Bool {
+  idb_key_range_lower_open_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_key_range_upper_open_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.upperOpen"
+
+///|
+#cfg(target="js")
+fn idb_key_range_upper_open_ffi(obj : JsValue) -> Bool {
+  idb_key_range_upper_open_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_key_range_only_ffi_js(value : JsValue) -> JsValue = "(value) => IDBKeyRange.only(value)"
+
+///|
+#cfg(target="js")
+fn idb_key_range_only_ffi(value : JsValue) -> IDBKeyRange {
+  idb_key_range_only_ffi_js(value).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_key_range_lower_bound_ffi_js(
+  lower : JsValue,
+  open : JsValue,
+) -> JsValue = "(lower, open) => IDBKeyRange.lowerBound(lower, open)"
+
+///|
+#cfg(target="js")
+fn idb_key_range_lower_bound_ffi(
+  lower : JsValue,
+  open : JsValue,
+) -> IDBKeyRange {
+  idb_key_range_lower_bound_ffi_js(lower, open).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_key_range_upper_bound_ffi_js(
+  upper : JsValue,
+  open : JsValue,
+) -> JsValue = "(upper, open) => IDBKeyRange.upperBound(upper, open)"
+
+///|
+#cfg(target="js")
+fn idb_key_range_upper_bound_ffi(
+  upper : JsValue,
+  open : JsValue,
+) -> IDBKeyRange {
+  idb_key_range_upper_bound_ffi_js(upper, open).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_key_range_bound_ffi_js(
+  lower : JsValue,
+  upper : JsValue,
+  lower_open : JsValue,
+  upper_open : JsValue,
+) -> JsValue = "(lower, upper, lower_open, upper_open) => IDBKeyRange.bound(lower, upper, lower_open, upper_open)"
+
+///|
+#cfg(target="js")
+fn idb_key_range_bound_ffi(
+  lower : JsValue,
+  upper : JsValue,
+  lower_open : JsValue,
+  upper_open : JsValue,
+) -> IDBKeyRange {
+  idb_key_range_bound_ffi_js(lower, upper, lower_open, upper_open).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_key_range_includes_ffi_js(
+  obj : JsValue,
+  key : JsValue,
+) -> JsValue = "(obj, key) => obj.includes(key)"
+
+///|
+#cfg(target="js")
+fn idb_key_range_includes_ffi(obj : JsValue, key : JsValue) -> Bool {
+  idb_key_range_includes_ffi_js(obj, key).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn idb_key_range_lower_ffi(obj : JsValue) -> JsValue = "webapi_IDBKeyRange" "get_lower"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_key_range_upper_ffi(obj : JsValue) -> JsValue = "webapi_IDBKeyRange" "get_upper"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_key_range_lower_open_ffi(obj : JsValue) -> Bool = "webapi_IDBKeyRange" "get_lowerOpen"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_key_range_upper_open_ffi(obj : JsValue) -> Bool = "webapi_IDBKeyRange" "get_upperOpen"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_key_range_only_ffi(value : JsValue) -> IDBKeyRange = "webapi_IDBKeyRange" "only"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_key_range_lower_bound_ffi(
+  lower : JsValue,
+  open : JsValue,
+) -> IDBKeyRange = "webapi_IDBKeyRange" "lowerBound"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_key_range_upper_bound_ffi(
+  upper : JsValue,
+  open : JsValue,
+) -> IDBKeyRange = "webapi_IDBKeyRange" "upperBound"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_key_range_bound_ffi(
+  lower : JsValue,
+  upper : JsValue,
+  lower_open : JsValue,
+  upper_open : JsValue,
+) -> IDBKeyRange = "webapi_IDBKeyRange" "bound"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_key_range_includes_ffi(obj : JsValue, key : JsValue) -> Bool = "webapi_IDBKeyRange" "includes"

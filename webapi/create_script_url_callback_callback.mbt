@@ -21,3 +21,15 @@ pub fn CreateScriptURLCallback::new(
 ) -> CreateScriptURLCallback {
   create_script_url_callback_ffi(callback)
 }
+
+///|
+#cfg(target="js")
+extern "js" fn create_script_url_callback_ffi(
+  callback : (String, JsValue) -> String,
+) -> CreateScriptURLCallback = "(callback) => callback"
+
+///|
+#cfg(target="wasm-gc")
+fn create_script_url_callback_ffi(
+  callback : (String, JsValue) -> String,
+) -> CreateScriptURLCallback = "webapi_CreateScriptURLCallback" "new"

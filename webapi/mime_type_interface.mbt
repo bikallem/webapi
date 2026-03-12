@@ -51,3 +51,77 @@ impl TMimeType with suffixes(self : Self) -> String {
 impl TMimeType with enabled_plugin(self : Self) -> Plugin {
   mime_type_enabled_plugin_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn mime_type_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.type"
+
+///|
+#cfg(target="js")
+fn mime_type_type_ffi(obj : JsValue) -> String {
+  mime_type_type_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn mime_type_description_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.description"
+
+///|
+#cfg(target="js")
+fn mime_type_description_ffi(obj : JsValue) -> String {
+  mime_type_description_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn mime_type_suffixes_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.suffixes"
+
+///|
+#cfg(target="js")
+fn mime_type_suffixes_ffi(obj : JsValue) -> String {
+  mime_type_suffixes_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn mime_type_enabled_plugin_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.enabledPlugin"
+
+///|
+#cfg(target="js")
+fn mime_type_enabled_plugin_ffi(obj : JsValue) -> Plugin {
+  mime_type_enabled_plugin_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn mime_type_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_MimeType" "get_type"
+
+///|
+#cfg(target="wasm-gc")
+fn mime_type_type_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(mime_type_type_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn mime_type_description_ffi_wasm(obj : JsValue) -> JsValue = "webapi_MimeType" "get_description"
+
+///|
+#cfg(target="wasm-gc")
+fn mime_type_description_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(mime_type_description_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn mime_type_suffixes_ffi_wasm(obj : JsValue) -> JsValue = "webapi_MimeType" "get_suffixes"
+
+///|
+#cfg(target="wasm-gc")
+fn mime_type_suffixes_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(mime_type_suffixes_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn mime_type_enabled_plugin_ffi(obj : JsValue) -> Plugin = "webapi_MimeType" "get_enabledPlugin"

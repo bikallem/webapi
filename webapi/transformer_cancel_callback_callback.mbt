@@ -21,3 +21,15 @@ pub fn TransformerCancelCallback::new(
 ) -> TransformerCancelCallback {
   transformer_cancel_callback_ffi(callback)
 }
+
+///|
+#cfg(target="js")
+extern "js" fn transformer_cancel_callback_ffi(
+  callback : (JsValue) -> JsPromise[JsValue],
+) -> TransformerCancelCallback = "(callback) => callback"
+
+///|
+#cfg(target="wasm-gc")
+fn transformer_cancel_callback_ffi(
+  callback : (JsValue) -> JsPromise[JsValue],
+) -> TransformerCancelCallback = "webapi_TransformerCancelCallback" "new"

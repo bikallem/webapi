@@ -71,3 +71,90 @@ pub fn IDBVersionChangeEventInit::new_version(
 ) -> UInt64? {
   idb_version_change_event_init_get_new_version_ffi(TJsValue::to_js(self)).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn idb_version_change_event_init_ffi(
+  bubbles : JsValue,
+  cancelable : JsValue,
+  composed : JsValue,
+  old_version : JsValue,
+  new_version : JsValue,
+) -> IDBVersionChangeEventInit =
+  #|(bubbles, cancelable, composed, oldVersion, newVersion) => {
+  #|  const obj = {};
+  #|  if (bubbles !== undefined) obj.bubbles = bubbles;
+  #|  if (cancelable !== undefined) obj.cancelable = cancelable;
+  #|  if (composed !== undefined) obj.composed = composed;
+  #|  if (oldVersion !== undefined) obj.oldVersion = oldVersion;
+  #|  if (newVersion !== undefined) obj.newVersion = newVersion;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_version_change_event_init_empty_ffi() -> IDBVersionChangeEventInit = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn idb_version_change_event_init_get_bubbles_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.bubbles"
+
+///|
+#cfg(target="js")
+extern "js" fn idb_version_change_event_init_get_cancelable_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.cancelable"
+
+///|
+#cfg(target="js")
+extern "js" fn idb_version_change_event_init_get_composed_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.composed"
+
+///|
+#cfg(target="js")
+extern "js" fn idb_version_change_event_init_get_old_version_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.oldVersion"
+
+///|
+#cfg(target="js")
+extern "js" fn idb_version_change_event_init_get_new_version_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.newVersion"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_version_change_event_init_ffi(
+  bubbles : JsValue,
+  cancelable : JsValue,
+  composed : JsValue,
+  old_version : JsValue,
+  new_version : JsValue,
+) -> IDBVersionChangeEventInit = "webapi_IDBVersionChangeEventInit" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_version_change_event_init_empty_ffi() -> IDBVersionChangeEventInit = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_version_change_event_init_get_bubbles_ffi(obj : JsValue) -> JsValue = "webapi_IDBVersionChangeEventInit" "get_bubbles"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_version_change_event_init_get_cancelable_ffi(obj : JsValue) -> JsValue = "webapi_IDBVersionChangeEventInit" "get_cancelable"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_version_change_event_init_get_composed_ffi(obj : JsValue) -> JsValue = "webapi_IDBVersionChangeEventInit" "get_composed"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_version_change_event_init_get_old_version_ffi(obj : JsValue) -> JsValue = "webapi_IDBVersionChangeEventInit" "get_oldVersion"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_version_change_event_init_get_new_version_ffi(obj : JsValue) -> JsValue = "webapi_IDBVersionChangeEventInit" "get_newVersion"

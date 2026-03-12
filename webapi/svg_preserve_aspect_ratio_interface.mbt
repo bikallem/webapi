@@ -106,3 +106,61 @@ impl TSVGPreserveAspectRatio with set_meet_or_slice(
     TJsValue::to_js(meet_or_slice),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn svg_preserve_aspect_ratio_align_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.align"
+
+///|
+#cfg(target="js")
+fn svg_preserve_aspect_ratio_align_ffi(obj : JsValue) -> UInt {
+  svg_preserve_aspect_ratio_align_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_preserve_aspect_ratio_set_align_ffi(
+  obj : JsValue,
+  align : JsValue,
+) -> Unit = "(obj, align) => { obj.align = align; }"
+
+///|
+#cfg(target="js")
+extern "js" fn svg_preserve_aspect_ratio_meet_or_slice_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.meetOrSlice"
+
+///|
+#cfg(target="js")
+fn svg_preserve_aspect_ratio_meet_or_slice_ffi(obj : JsValue) -> UInt {
+  svg_preserve_aspect_ratio_meet_or_slice_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_preserve_aspect_ratio_set_meet_or_slice_ffi(
+  obj : JsValue,
+  meet_or_slice : JsValue,
+) -> Unit = "(obj, meetOrSlice) => { obj.meetOrSlice = meetOrSlice; }"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_preserve_aspect_ratio_align_ffi(obj : JsValue) -> UInt = "webapi_SVGPreserveAspectRatio" "get_align"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_preserve_aspect_ratio_set_align_ffi(
+  obj : JsValue,
+  align : JsValue,
+) -> Unit = "webapi_SVGPreserveAspectRatio" "set_align"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_preserve_aspect_ratio_meet_or_slice_ffi(obj : JsValue) -> UInt = "webapi_SVGPreserveAspectRatio" "get_meetOrSlice"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_preserve_aspect_ratio_set_meet_or_slice_ffi(
+  obj : JsValue,
+  meet_or_slice : JsValue,
+) -> Unit = "webapi_SVGPreserveAspectRatio" "set_meetOrSlice"

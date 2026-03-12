@@ -87,3 +87,89 @@ impl THTMLProgressElement with position(self : Self) -> Double {
 impl THTMLProgressElement with labels(self : Self) -> NodeList {
   html_progress_element_labels_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_progress_element_new_ffi() -> HTMLProgressElement = "() => new HTMLProgressElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_progress_element_value_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.value"
+
+///|
+#cfg(target="js")
+fn html_progress_element_value_ffi(obj : JsValue) -> Double {
+  html_progress_element_value_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_progress_element_set_value_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "(obj, value) => { obj.value = value; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_progress_element_max_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.max"
+
+///|
+#cfg(target="js")
+fn html_progress_element_max_ffi(obj : JsValue) -> Double {
+  html_progress_element_max_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_progress_element_set_max_ffi(
+  obj : JsValue,
+  max : JsValue,
+) -> Unit = "(obj, max) => { obj.max = max; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_progress_element_position_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.position"
+
+///|
+#cfg(target="js")
+fn html_progress_element_position_ffi(obj : JsValue) -> Double {
+  html_progress_element_position_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_progress_element_labels_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.labels"
+
+///|
+#cfg(target="js")
+fn html_progress_element_labels_ffi(obj : JsValue) -> NodeList {
+  html_progress_element_labels_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_progress_element_new_ffi() -> HTMLProgressElement = "webapi_HTMLProgressElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_progress_element_value_ffi(obj : JsValue) -> Double = "webapi_HTMLProgressElement" "get_value"
+
+///|
+#cfg(target="wasm-gc")
+fn html_progress_element_set_value_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLProgressElement" "set_value"
+
+///|
+#cfg(target="wasm-gc")
+fn html_progress_element_max_ffi(obj : JsValue) -> Double = "webapi_HTMLProgressElement" "get_max"
+
+///|
+#cfg(target="wasm-gc")
+fn html_progress_element_set_max_ffi(obj : JsValue, max : JsValue) -> Unit = "webapi_HTMLProgressElement" "set_max"
+
+///|
+#cfg(target="wasm-gc")
+fn html_progress_element_position_ffi(obj : JsValue) -> Double = "webapi_HTMLProgressElement" "get_position"
+
+///|
+#cfg(target="wasm-gc")
+fn html_progress_element_labels_ffi(obj : JsValue) -> NodeList = "webapi_HTMLProgressElement" "get_labels"

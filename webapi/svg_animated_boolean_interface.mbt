@@ -49,3 +49,45 @@ impl TSVGAnimatedBoolean with set_base_val(self : Self, base_val : Bool) -> Unit
 impl TSVGAnimatedBoolean with anim_val(self : Self) -> Bool {
   svg_animated_boolean_anim_val_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn svg_animated_boolean_base_val_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.baseVal"
+
+///|
+#cfg(target="js")
+fn svg_animated_boolean_base_val_ffi(obj : JsValue) -> Bool {
+  svg_animated_boolean_base_val_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_animated_boolean_set_base_val_ffi(
+  obj : JsValue,
+  base_val : JsValue,
+) -> Unit = "(obj, baseVal) => { obj.baseVal = baseVal; }"
+
+///|
+#cfg(target="js")
+extern "js" fn svg_animated_boolean_anim_val_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.animVal"
+
+///|
+#cfg(target="js")
+fn svg_animated_boolean_anim_val_ffi(obj : JsValue) -> Bool {
+  svg_animated_boolean_anim_val_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svg_animated_boolean_base_val_ffi(obj : JsValue) -> Bool = "webapi_SVGAnimatedBoolean" "get_baseVal"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_animated_boolean_set_base_val_ffi(
+  obj : JsValue,
+  base_val : JsValue,
+) -> Unit = "webapi_SVGAnimatedBoolean" "set_baseVal"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_animated_boolean_anim_val_ffi(obj : JsValue) -> Bool = "webapi_SVGAnimatedBoolean" "get_animVal"

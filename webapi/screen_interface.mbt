@@ -72,3 +72,101 @@ impl TScreen with pixel_depth(self : Self) -> UInt {
 impl TScreen with orientation(self : Self) -> ScreenOrientation {
   screen_orientation_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn screen_avail_width_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.availWidth"
+
+///|
+#cfg(target="js")
+fn screen_avail_width_ffi(obj : JsValue) -> Int {
+  screen_avail_width_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn screen_avail_height_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.availHeight"
+
+///|
+#cfg(target="js")
+fn screen_avail_height_ffi(obj : JsValue) -> Int {
+  screen_avail_height_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn screen_width_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.width"
+
+///|
+#cfg(target="js")
+fn screen_width_ffi(obj : JsValue) -> Int {
+  screen_width_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn screen_height_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.height"
+
+///|
+#cfg(target="js")
+fn screen_height_ffi(obj : JsValue) -> Int {
+  screen_height_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn screen_color_depth_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.colorDepth"
+
+///|
+#cfg(target="js")
+fn screen_color_depth_ffi(obj : JsValue) -> UInt {
+  screen_color_depth_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn screen_pixel_depth_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.pixelDepth"
+
+///|
+#cfg(target="js")
+fn screen_pixel_depth_ffi(obj : JsValue) -> UInt {
+  screen_pixel_depth_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn screen_orientation_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.orientation"
+
+///|
+#cfg(target="js")
+fn screen_orientation_ffi(obj : JsValue) -> ScreenOrientation {
+  screen_orientation_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn screen_avail_width_ffi(obj : JsValue) -> Int = "webapi_Screen" "get_availWidth"
+
+///|
+#cfg(target="wasm-gc")
+fn screen_avail_height_ffi(obj : JsValue) -> Int = "webapi_Screen" "get_availHeight"
+
+///|
+#cfg(target="wasm-gc")
+fn screen_width_ffi(obj : JsValue) -> Int = "webapi_Screen" "get_width"
+
+///|
+#cfg(target="wasm-gc")
+fn screen_height_ffi(obj : JsValue) -> Int = "webapi_Screen" "get_height"
+
+///|
+#cfg(target="wasm-gc")
+fn screen_color_depth_ffi(obj : JsValue) -> UInt = "webapi_Screen" "get_colorDepth"
+
+///|
+#cfg(target="wasm-gc")
+fn screen_pixel_depth_ffi(obj : JsValue) -> UInt = "webapi_Screen" "get_pixelDepth"
+
+///|
+#cfg(target="wasm-gc")
+fn screen_orientation_ffi(obj : JsValue) -> ScreenOrientation = "webapi_Screen" "get_orientation"

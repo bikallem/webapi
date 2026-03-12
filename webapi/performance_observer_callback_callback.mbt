@@ -27,3 +27,23 @@ pub fn PerformanceObserverCallback::new(
 ) -> PerformanceObserverCallback {
   performance_observer_callback_ffi(callback)
 }
+
+///|
+#cfg(target="js")
+extern "js" fn performance_observer_callback_ffi(
+  callback : (
+    PerformanceObserverEntryList,
+    PerformanceObserver,
+    PerformanceObserverCallbackOptions,
+  ) -> Unit,
+) -> PerformanceObserverCallback = "(callback) => callback"
+
+///|
+#cfg(target="wasm-gc")
+fn performance_observer_callback_ffi(
+  callback : (
+    PerformanceObserverEntryList,
+    PerformanceObserver,
+    PerformanceObserverCallbackOptions,
+  ) -> Unit,
+) -> PerformanceObserverCallback = "webapi_PerformanceObserverCallback" "new"

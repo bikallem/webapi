@@ -145,3 +145,253 @@ impl TPointerEvent with get_coalesced_events(self : Self) -> Array[PointerEvent]
 impl TPointerEvent with get_predicted_events(self : Self) -> Array[PointerEvent] {
   pointer_event_get_predicted_events_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn pointer_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> PointerEvent = "(type_, event_init_dict) => new PointerEvent(type_, event_init_dict)"
+
+///|
+#cfg(target="js")
+extern "js" fn pointer_event_pointer_id_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.pointerId"
+
+///|
+#cfg(target="js")
+fn pointer_event_pointer_id_ffi(obj : JsValue) -> Int {
+  pointer_event_pointer_id_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn pointer_event_width_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.width"
+
+///|
+#cfg(target="js")
+fn pointer_event_width_ffi(obj : JsValue) -> Double {
+  pointer_event_width_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn pointer_event_height_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.height"
+
+///|
+#cfg(target="js")
+fn pointer_event_height_ffi(obj : JsValue) -> Double {
+  pointer_event_height_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn pointer_event_pressure_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.pressure"
+
+///|
+#cfg(target="js")
+fn pointer_event_pressure_ffi(obj : JsValue) -> Float {
+  pointer_event_pressure_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn pointer_event_tangential_pressure_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.tangentialPressure"
+
+///|
+#cfg(target="js")
+fn pointer_event_tangential_pressure_ffi(obj : JsValue) -> Float {
+  pointer_event_tangential_pressure_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn pointer_event_tilt_x_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.tiltX"
+
+///|
+#cfg(target="js")
+fn pointer_event_tilt_x_ffi(obj : JsValue) -> Int {
+  pointer_event_tilt_x_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn pointer_event_tilt_y_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.tiltY"
+
+///|
+#cfg(target="js")
+fn pointer_event_tilt_y_ffi(obj : JsValue) -> Int {
+  pointer_event_tilt_y_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn pointer_event_twist_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.twist"
+
+///|
+#cfg(target="js")
+fn pointer_event_twist_ffi(obj : JsValue) -> Int {
+  pointer_event_twist_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn pointer_event_altitude_angle_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.altitudeAngle"
+
+///|
+#cfg(target="js")
+fn pointer_event_altitude_angle_ffi(obj : JsValue) -> Double {
+  pointer_event_altitude_angle_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn pointer_event_azimuth_angle_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.azimuthAngle"
+
+///|
+#cfg(target="js")
+fn pointer_event_azimuth_angle_ffi(obj : JsValue) -> Double {
+  pointer_event_azimuth_angle_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn pointer_event_pointer_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.pointerType"
+
+///|
+#cfg(target="js")
+fn pointer_event_pointer_type_ffi(obj : JsValue) -> String {
+  pointer_event_pointer_type_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn pointer_event_is_primary_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.isPrimary"
+
+///|
+#cfg(target="js")
+fn pointer_event_is_primary_ffi(obj : JsValue) -> Bool {
+  pointer_event_is_primary_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn pointer_event_persistent_device_id_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.persistentDeviceId"
+
+///|
+#cfg(target="js")
+fn pointer_event_persistent_device_id_ffi(obj : JsValue) -> Int {
+  pointer_event_persistent_device_id_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn pointer_event_get_coalesced_events_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.getCoalescedEvents()"
+
+///|
+#cfg(target="js")
+fn pointer_event_get_coalesced_events_ffi(obj : JsValue) -> Array[PointerEvent] {
+  pointer_event_get_coalesced_events_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn pointer_event_get_predicted_events_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.getPredictedEvents()"
+
+///|
+#cfg(target="js")
+fn pointer_event_get_predicted_events_ffi(obj : JsValue) -> Array[PointerEvent] {
+  pointer_event_get_predicted_events_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn pointer_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> PointerEvent = "webapi_PointerEvent" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn pointer_event_pointer_id_ffi(obj : JsValue) -> Int = "webapi_PointerEvent" "get_pointerId"
+
+///|
+#cfg(target="wasm-gc")
+fn pointer_event_width_ffi(obj : JsValue) -> Double = "webapi_PointerEvent" "get_width"
+
+///|
+#cfg(target="wasm-gc")
+fn pointer_event_height_ffi(obj : JsValue) -> Double = "webapi_PointerEvent" "get_height"
+
+///|
+#cfg(target="wasm-gc")
+fn pointer_event_pressure_ffi(obj : JsValue) -> Float = "webapi_PointerEvent" "get_pressure"
+
+///|
+#cfg(target="wasm-gc")
+fn pointer_event_tangential_pressure_ffi(obj : JsValue) -> Float = "webapi_PointerEvent" "get_tangentialPressure"
+
+///|
+#cfg(target="wasm-gc")
+fn pointer_event_tilt_x_ffi(obj : JsValue) -> Int = "webapi_PointerEvent" "get_tiltX"
+
+///|
+#cfg(target="wasm-gc")
+fn pointer_event_tilt_y_ffi(obj : JsValue) -> Int = "webapi_PointerEvent" "get_tiltY"
+
+///|
+#cfg(target="wasm-gc")
+fn pointer_event_twist_ffi(obj : JsValue) -> Int = "webapi_PointerEvent" "get_twist"
+
+///|
+#cfg(target="wasm-gc")
+fn pointer_event_altitude_angle_ffi(obj : JsValue) -> Double = "webapi_PointerEvent" "get_altitudeAngle"
+
+///|
+#cfg(target="wasm-gc")
+fn pointer_event_azimuth_angle_ffi(obj : JsValue) -> Double = "webapi_PointerEvent" "get_azimuthAngle"
+
+///|
+#cfg(target="wasm-gc")
+fn pointer_event_pointer_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_PointerEvent" "get_pointerType"
+
+///|
+#cfg(target="wasm-gc")
+fn pointer_event_pointer_type_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(pointer_event_pointer_type_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn pointer_event_is_primary_ffi(obj : JsValue) -> Bool = "webapi_PointerEvent" "get_isPrimary"
+
+///|
+#cfg(target="wasm-gc")
+fn pointer_event_persistent_device_id_ffi(obj : JsValue) -> Int = "webapi_PointerEvent" "get_persistentDeviceId"
+
+///|
+#cfg(target="wasm-gc")
+fn pointer_event_get_coalesced_events_ffi_wasm(obj : JsValue) -> JsArray = "webapi_PointerEvent" "getCoalescedEvents"
+
+///|
+#cfg(target="wasm-gc")
+fn pointer_event_get_coalesced_events_ffi(obj : JsValue) -> Array[PointerEvent] {
+  pointer_event_get_coalesced_events_ffi_wasm(obj).to_array()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn pointer_event_get_predicted_events_ffi_wasm(obj : JsValue) -> JsArray = "webapi_PointerEvent" "getPredictedEvents"
+
+///|
+#cfg(target="wasm-gc")
+fn pointer_event_get_predicted_events_ffi(obj : JsValue) -> Array[PointerEvent] {
+  pointer_event_get_predicted_events_ffi_wasm(obj).to_array()
+}

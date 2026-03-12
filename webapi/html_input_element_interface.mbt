@@ -927,3 +927,1551 @@ impl THTMLInputElement with set_popover_target_action(
     TJsValue::to_js(popover_target_action),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_new_ffi() -> HTMLInputElement = "() => new HTMLInputElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_accept_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.accept"
+
+///|
+#cfg(target="js")
+fn html_input_element_accept_ffi(obj : JsValue) -> String {
+  html_input_element_accept_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_accept_ffi(
+  obj : JsValue,
+  accept : JsValue,
+) -> Unit = "(obj, accept) => { obj.accept = accept; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_alpha_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.alpha"
+
+///|
+#cfg(target="js")
+fn html_input_element_alpha_ffi(obj : JsValue) -> Bool {
+  html_input_element_alpha_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_alpha_ffi(
+  obj : JsValue,
+  alpha : JsValue,
+) -> Unit = "(obj, alpha) => { obj.alpha = alpha; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_alt_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.alt"
+
+///|
+#cfg(target="js")
+fn html_input_element_alt_ffi(obj : JsValue) -> String {
+  html_input_element_alt_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_alt_ffi(
+  obj : JsValue,
+  alt : JsValue,
+) -> Unit = "(obj, alt) => { obj.alt = alt; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_autocomplete_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.autocomplete"
+
+///|
+#cfg(target="js")
+fn html_input_element_autocomplete_ffi(obj : JsValue) -> String {
+  html_input_element_autocomplete_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_autocomplete_ffi(
+  obj : JsValue,
+  autocomplete : JsValue,
+) -> Unit = "(obj, autocomplete) => { obj.autocomplete = autocomplete; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_default_checked_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.defaultChecked"
+
+///|
+#cfg(target="js")
+fn html_input_element_default_checked_ffi(obj : JsValue) -> Bool {
+  html_input_element_default_checked_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_default_checked_ffi(
+  obj : JsValue,
+  default_checked : JsValue,
+) -> Unit = "(obj, defaultChecked) => { obj.defaultChecked = defaultChecked; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_checked_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.checked"
+
+///|
+#cfg(target="js")
+fn html_input_element_checked_ffi(obj : JsValue) -> Bool {
+  html_input_element_checked_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_checked_ffi(
+  obj : JsValue,
+  checked : JsValue,
+) -> Unit = "(obj, checked) => { obj.checked = checked; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_color_space_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.colorSpace"
+
+///|
+#cfg(target="js")
+fn html_input_element_color_space_ffi(obj : JsValue) -> String {
+  html_input_element_color_space_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_color_space_ffi(
+  obj : JsValue,
+  color_space : JsValue,
+) -> Unit = "(obj, colorSpace) => { obj.colorSpace = colorSpace; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_dir_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.dirName"
+
+///|
+#cfg(target="js")
+fn html_input_element_dir_name_ffi(obj : JsValue) -> String {
+  html_input_element_dir_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_dir_name_ffi(
+  obj : JsValue,
+  dir_name : JsValue,
+) -> Unit = "(obj, dirName) => { obj.dirName = dirName; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_disabled_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.disabled"
+
+///|
+#cfg(target="js")
+fn html_input_element_disabled_ffi(obj : JsValue) -> Bool {
+  html_input_element_disabled_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_disabled_ffi(
+  obj : JsValue,
+  disabled : JsValue,
+) -> Unit = "(obj, disabled) => { obj.disabled = disabled; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_form_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.form"
+
+///|
+#cfg(target="js")
+fn html_input_element_form_ffi(obj : JsValue) -> HTMLFormElement {
+  html_input_element_form_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_files_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.files"
+
+///|
+#cfg(target="js")
+fn html_input_element_files_ffi(obj : JsValue) -> FileList {
+  html_input_element_files_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_files_ffi(
+  obj : JsValue,
+  files : JsValue,
+) -> Unit = "(obj, files) => { obj.files = files; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_form_action_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.formAction"
+
+///|
+#cfg(target="js")
+fn html_input_element_form_action_ffi(obj : JsValue) -> String {
+  html_input_element_form_action_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_form_action_ffi(
+  obj : JsValue,
+  form_action : JsValue,
+) -> Unit = "(obj, formAction) => { obj.formAction = formAction; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_form_enctype_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.formEnctype"
+
+///|
+#cfg(target="js")
+fn html_input_element_form_enctype_ffi(obj : JsValue) -> String {
+  html_input_element_form_enctype_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_form_enctype_ffi(
+  obj : JsValue,
+  form_enctype : JsValue,
+) -> Unit = "(obj, formEnctype) => { obj.formEnctype = formEnctype; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_form_method_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.formMethod"
+
+///|
+#cfg(target="js")
+fn html_input_element_form_method_ffi(obj : JsValue) -> String {
+  html_input_element_form_method_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_form_method_ffi(
+  obj : JsValue,
+  form_method : JsValue,
+) -> Unit = "(obj, formMethod) => { obj.formMethod = formMethod; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_form_no_validate_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.formNoValidate"
+
+///|
+#cfg(target="js")
+fn html_input_element_form_no_validate_ffi(obj : JsValue) -> Bool {
+  html_input_element_form_no_validate_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_form_no_validate_ffi(
+  obj : JsValue,
+  form_no_validate : JsValue,
+) -> Unit = "(obj, formNoValidate) => { obj.formNoValidate = formNoValidate; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_form_target_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.formTarget"
+
+///|
+#cfg(target="js")
+fn html_input_element_form_target_ffi(obj : JsValue) -> String {
+  html_input_element_form_target_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_form_target_ffi(
+  obj : JsValue,
+  form_target : JsValue,
+) -> Unit = "(obj, formTarget) => { obj.formTarget = formTarget; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_height_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.height"
+
+///|
+#cfg(target="js")
+fn html_input_element_height_ffi(obj : JsValue) -> UInt {
+  html_input_element_height_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_height_ffi(
+  obj : JsValue,
+  height : JsValue,
+) -> Unit = "(obj, height) => { obj.height = height; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_indeterminate_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.indeterminate"
+
+///|
+#cfg(target="js")
+fn html_input_element_indeterminate_ffi(obj : JsValue) -> Bool {
+  html_input_element_indeterminate_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_indeterminate_ffi(
+  obj : JsValue,
+  indeterminate : JsValue,
+) -> Unit = "(obj, indeterminate) => { obj.indeterminate = indeterminate; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_list_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.list"
+
+///|
+#cfg(target="js")
+fn html_input_element_list_ffi(obj : JsValue) -> HTMLDataListElement {
+  html_input_element_list_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_max_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.max"
+
+///|
+#cfg(target="js")
+fn html_input_element_max_ffi(obj : JsValue) -> String {
+  html_input_element_max_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_max_ffi(
+  obj : JsValue,
+  max : JsValue,
+) -> Unit = "(obj, max) => { obj.max = max; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_max_length_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.maxLength"
+
+///|
+#cfg(target="js")
+fn html_input_element_max_length_ffi(obj : JsValue) -> Int {
+  html_input_element_max_length_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_max_length_ffi(
+  obj : JsValue,
+  max_length : JsValue,
+) -> Unit = "(obj, maxLength) => { obj.maxLength = maxLength; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_min_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.min"
+
+///|
+#cfg(target="js")
+fn html_input_element_min_ffi(obj : JsValue) -> String {
+  html_input_element_min_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_min_ffi(
+  obj : JsValue,
+  min : JsValue,
+) -> Unit = "(obj, min) => { obj.min = min; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_min_length_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.minLength"
+
+///|
+#cfg(target="js")
+fn html_input_element_min_length_ffi(obj : JsValue) -> Int {
+  html_input_element_min_length_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_min_length_ffi(
+  obj : JsValue,
+  min_length : JsValue,
+) -> Unit = "(obj, minLength) => { obj.minLength = minLength; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_multiple_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.multiple"
+
+///|
+#cfg(target="js")
+fn html_input_element_multiple_ffi(obj : JsValue) -> Bool {
+  html_input_element_multiple_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_multiple_ffi(
+  obj : JsValue,
+  multiple : JsValue,
+) -> Unit = "(obj, multiple) => { obj.multiple = multiple; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.name"
+
+///|
+#cfg(target="js")
+fn html_input_element_name_ffi(obj : JsValue) -> String {
+  html_input_element_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_name_ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> Unit = "(obj, name) => { obj.name = name; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_pattern_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.pattern"
+
+///|
+#cfg(target="js")
+fn html_input_element_pattern_ffi(obj : JsValue) -> String {
+  html_input_element_pattern_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_pattern_ffi(
+  obj : JsValue,
+  pattern : JsValue,
+) -> Unit = "(obj, pattern) => { obj.pattern = pattern; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_placeholder_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.placeholder"
+
+///|
+#cfg(target="js")
+fn html_input_element_placeholder_ffi(obj : JsValue) -> String {
+  html_input_element_placeholder_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_placeholder_ffi(
+  obj : JsValue,
+  placeholder : JsValue,
+) -> Unit = "(obj, placeholder) => { obj.placeholder = placeholder; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_read_only_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.readOnly"
+
+///|
+#cfg(target="js")
+fn html_input_element_read_only_ffi(obj : JsValue) -> Bool {
+  html_input_element_read_only_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_read_only_ffi(
+  obj : JsValue,
+  read_only : JsValue,
+) -> Unit = "(obj, readOnly) => { obj.readOnly = readOnly; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_required_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.required"
+
+///|
+#cfg(target="js")
+fn html_input_element_required_ffi(obj : JsValue) -> Bool {
+  html_input_element_required_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_required_ffi(
+  obj : JsValue,
+  required : JsValue,
+) -> Unit = "(obj, required) => { obj.required = required; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_size_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.size"
+
+///|
+#cfg(target="js")
+fn html_input_element_size_ffi(obj : JsValue) -> UInt {
+  html_input_element_size_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_size_ffi(
+  obj : JsValue,
+  size : JsValue,
+) -> Unit = "(obj, size) => { obj.size = size; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_src_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.src"
+
+///|
+#cfg(target="js")
+fn html_input_element_src_ffi(obj : JsValue) -> String {
+  html_input_element_src_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_src_ffi(
+  obj : JsValue,
+  src : JsValue,
+) -> Unit = "(obj, src) => { obj.src = src; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_step_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.step"
+
+///|
+#cfg(target="js")
+fn html_input_element_step_ffi(obj : JsValue) -> String {
+  html_input_element_step_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_step_ffi(
+  obj : JsValue,
+  step : JsValue,
+) -> Unit = "(obj, step) => { obj.step = step; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.type"
+
+///|
+#cfg(target="js")
+fn html_input_element_type_ffi(obj : JsValue) -> String {
+  html_input_element_type_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_type_ffi(
+  obj : JsValue,
+  type_ : JsValue,
+) -> Unit = "(obj, type) => { obj.type = type; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_default_value_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.defaultValue"
+
+///|
+#cfg(target="js")
+fn html_input_element_default_value_ffi(obj : JsValue) -> String {
+  html_input_element_default_value_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_default_value_ffi(
+  obj : JsValue,
+  default_value : JsValue,
+) -> Unit = "(obj, defaultValue) => { obj.defaultValue = defaultValue; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_value_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.value"
+
+///|
+#cfg(target="js")
+fn html_input_element_value_ffi(obj : JsValue) -> String {
+  html_input_element_value_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_value_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "(obj, value) => { obj.value = value; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_value_as_date_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.valueAsDate"
+
+///|
+#cfg(target="js")
+fn html_input_element_value_as_date_ffi(obj : JsValue) -> JsValue {
+  html_input_element_value_as_date_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_value_as_date_ffi(
+  obj : JsValue,
+  value_as_date : JsValue,
+) -> Unit = "(obj, valueAsDate) => { obj.valueAsDate = valueAsDate; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_value_as_number_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.valueAsNumber"
+
+///|
+#cfg(target="js")
+fn html_input_element_value_as_number_ffi(obj : JsValue) -> Double {
+  html_input_element_value_as_number_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_value_as_number_ffi(
+  obj : JsValue,
+  value_as_number : JsValue,
+) -> Unit = "(obj, valueAsNumber) => { obj.valueAsNumber = valueAsNumber; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_width_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.width"
+
+///|
+#cfg(target="js")
+fn html_input_element_width_ffi(obj : JsValue) -> UInt {
+  html_input_element_width_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_width_ffi(
+  obj : JsValue,
+  width : JsValue,
+) -> Unit = "(obj, width) => { obj.width = width; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_step_up_ffi(
+  obj : JsValue,
+  n : JsValue,
+) -> Unit = "(obj, n) => obj.stepUp(n)"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_step_down_ffi(
+  obj : JsValue,
+  n : JsValue,
+) -> Unit = "(obj, n) => obj.stepDown(n)"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_will_validate_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.willValidate"
+
+///|
+#cfg(target="js")
+fn html_input_element_will_validate_ffi(obj : JsValue) -> Bool {
+  html_input_element_will_validate_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_validity_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.validity"
+
+///|
+#cfg(target="js")
+fn html_input_element_validity_ffi(obj : JsValue) -> ValidityState {
+  html_input_element_validity_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_validation_message_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.validationMessage"
+
+///|
+#cfg(target="js")
+fn html_input_element_validation_message_ffi(obj : JsValue) -> String {
+  html_input_element_validation_message_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_check_validity_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.checkValidity()"
+
+///|
+#cfg(target="js")
+fn html_input_element_check_validity_ffi(obj : JsValue) -> Bool {
+  html_input_element_check_validity_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_report_validity_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.reportValidity()"
+
+///|
+#cfg(target="js")
+fn html_input_element_report_validity_ffi(obj : JsValue) -> Bool {
+  html_input_element_report_validity_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_custom_validity_ffi(
+  obj : JsValue,
+  error : JsValue,
+) -> Unit = "(obj, error) => obj.setCustomValidity(error)"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_labels_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.labels"
+
+///|
+#cfg(target="js")
+fn html_input_element_labels_ffi(obj : JsValue) -> NodeList {
+  html_input_element_labels_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_select_ffi(obj : JsValue) -> Unit = "(obj) => obj.select()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_selection_start_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.selectionStart"
+
+///|
+#cfg(target="js")
+fn html_input_element_selection_start_ffi(obj : JsValue) -> UInt {
+  html_input_element_selection_start_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_selection_start_ffi(
+  obj : JsValue,
+  selection_start : JsValue,
+) -> Unit = "(obj, selectionStart) => { obj.selectionStart = selectionStart; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_selection_end_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.selectionEnd"
+
+///|
+#cfg(target="js")
+fn html_input_element_selection_end_ffi(obj : JsValue) -> UInt {
+  html_input_element_selection_end_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_selection_end_ffi(
+  obj : JsValue,
+  selection_end : JsValue,
+) -> Unit = "(obj, selectionEnd) => { obj.selectionEnd = selectionEnd; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_selection_direction_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.selectionDirection"
+
+///|
+#cfg(target="js")
+fn html_input_element_selection_direction_ffi(obj : JsValue) -> String {
+  html_input_element_selection_direction_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_selection_direction_ffi(
+  obj : JsValue,
+  selection_direction : JsValue,
+) -> Unit = "(obj, selectionDirection) => { obj.selectionDirection = selectionDirection; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_range_text_ffi(
+  obj : JsValue,
+  replacement : JsValue,
+) -> Unit = "(obj, replacement) => obj.setRangeText(replacement)"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_range_text_in_range_ffi(
+  obj : JsValue,
+  replacement : JsValue,
+  start : JsValue,
+  end : JsValue,
+  selection_mode : JsValue,
+) -> Unit = "(obj, replacement, start, end, selection_mode) => obj.setRangeText(replacement, start, end, selection_mode)"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_selection_range_ffi(
+  obj : JsValue,
+  start : JsValue,
+  end : JsValue,
+  direction : JsValue,
+) -> Unit = "(obj, start, end, direction) => obj.setSelectionRange(start, end, direction)"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_show_picker_ffi(obj : JsValue) -> Unit = "(obj) => obj.showPicker()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_align_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.align"
+
+///|
+#cfg(target="js")
+fn html_input_element_align_ffi(obj : JsValue) -> String {
+  html_input_element_align_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_align_ffi(
+  obj : JsValue,
+  align : JsValue,
+) -> Unit = "(obj, align) => { obj.align = align; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_use_map_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.useMap"
+
+///|
+#cfg(target="js")
+fn html_input_element_use_map_ffi(obj : JsValue) -> String {
+  html_input_element_use_map_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_use_map_ffi(
+  obj : JsValue,
+  use_map : JsValue,
+) -> Unit = "(obj, useMap) => { obj.useMap = useMap; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_popover_target_element_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.popoverTargetElement"
+
+///|
+#cfg(target="js")
+fn html_input_element_popover_target_element_ffi(obj : JsValue) -> Element {
+  html_input_element_popover_target_element_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_popover_target_element_ffi(
+  obj : JsValue,
+  popover_target_element : JsValue,
+) -> Unit = "(obj, popoverTargetElement) => { obj.popoverTargetElement = popoverTargetElement; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_popover_target_action_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.popoverTargetAction"
+
+///|
+#cfg(target="js")
+fn html_input_element_popover_target_action_ffi(obj : JsValue) -> String {
+  html_input_element_popover_target_action_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_input_element_set_popover_target_action_ffi(
+  obj : JsValue,
+  popover_target_action : JsValue,
+) -> Unit = "(obj, popoverTargetAction) => { obj.popoverTargetAction = popoverTargetAction; }"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_new_ffi() -> HTMLInputElement = "webapi_HTMLInputElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_accept_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLInputElement" "get_accept"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_accept_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_input_element_accept_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_accept_ffi(obj : JsValue, accept : JsValue) -> Unit = "webapi_HTMLInputElement" "set_accept"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_alpha_ffi(obj : JsValue) -> Bool = "webapi_HTMLInputElement" "get_alpha"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_alpha_ffi(obj : JsValue, alpha : JsValue) -> Unit = "webapi_HTMLInputElement" "set_alpha"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_alt_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLInputElement" "get_alt"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_alt_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_input_element_alt_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_alt_ffi(obj : JsValue, alt : JsValue) -> Unit = "webapi_HTMLInputElement" "set_alt"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_autocomplete_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLInputElement" "get_autocomplete"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_autocomplete_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_input_element_autocomplete_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_autocomplete_ffi(
+  obj : JsValue,
+  autocomplete : JsValue,
+) -> Unit = "webapi_HTMLInputElement" "set_autocomplete"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_default_checked_ffi(obj : JsValue) -> Bool = "webapi_HTMLInputElement" "get_defaultChecked"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_default_checked_ffi(
+  obj : JsValue,
+  default_checked : JsValue,
+) -> Unit = "webapi_HTMLInputElement" "set_defaultChecked"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_checked_ffi(obj : JsValue) -> Bool = "webapi_HTMLInputElement" "get_checked"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_checked_ffi(obj : JsValue, checked : JsValue) -> Unit = "webapi_HTMLInputElement" "set_checked"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_color_space_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLInputElement" "get_colorSpace"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_color_space_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_input_element_color_space_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_color_space_ffi(
+  obj : JsValue,
+  color_space : JsValue,
+) -> Unit = "webapi_HTMLInputElement" "set_colorSpace"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_dir_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLInputElement" "get_dirName"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_dir_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_input_element_dir_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_dir_name_ffi(
+  obj : JsValue,
+  dir_name : JsValue,
+) -> Unit = "webapi_HTMLInputElement" "set_dirName"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_disabled_ffi(obj : JsValue) -> Bool = "webapi_HTMLInputElement" "get_disabled"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_disabled_ffi(
+  obj : JsValue,
+  disabled : JsValue,
+) -> Unit = "webapi_HTMLInputElement" "set_disabled"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_form_ffi(obj : JsValue) -> HTMLFormElement = "webapi_HTMLInputElement" "get_form"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_files_ffi(obj : JsValue) -> FileList = "webapi_HTMLInputElement" "get_files"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_files_ffi(obj : JsValue, files : JsValue) -> Unit = "webapi_HTMLInputElement" "set_files"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_form_action_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLInputElement" "get_formAction"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_form_action_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_input_element_form_action_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_form_action_ffi(
+  obj : JsValue,
+  form_action : JsValue,
+) -> Unit = "webapi_HTMLInputElement" "set_formAction"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_form_enctype_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLInputElement" "get_formEnctype"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_form_enctype_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_input_element_form_enctype_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_form_enctype_ffi(
+  obj : JsValue,
+  form_enctype : JsValue,
+) -> Unit = "webapi_HTMLInputElement" "set_formEnctype"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_form_method_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLInputElement" "get_formMethod"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_form_method_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_input_element_form_method_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_form_method_ffi(
+  obj : JsValue,
+  form_method : JsValue,
+) -> Unit = "webapi_HTMLInputElement" "set_formMethod"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_form_no_validate_ffi(obj : JsValue) -> Bool = "webapi_HTMLInputElement" "get_formNoValidate"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_form_no_validate_ffi(
+  obj : JsValue,
+  form_no_validate : JsValue,
+) -> Unit = "webapi_HTMLInputElement" "set_formNoValidate"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_form_target_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLInputElement" "get_formTarget"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_form_target_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_input_element_form_target_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_form_target_ffi(
+  obj : JsValue,
+  form_target : JsValue,
+) -> Unit = "webapi_HTMLInputElement" "set_formTarget"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_height_ffi(obj : JsValue) -> UInt = "webapi_HTMLInputElement" "get_height"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_height_ffi(obj : JsValue, height : JsValue) -> Unit = "webapi_HTMLInputElement" "set_height"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_indeterminate_ffi(obj : JsValue) -> Bool = "webapi_HTMLInputElement" "get_indeterminate"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_indeterminate_ffi(
+  obj : JsValue,
+  indeterminate : JsValue,
+) -> Unit = "webapi_HTMLInputElement" "set_indeterminate"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_list_ffi(obj : JsValue) -> HTMLDataListElement = "webapi_HTMLInputElement" "get_list"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_max_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLInputElement" "get_max"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_max_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_input_element_max_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_max_ffi(obj : JsValue, max : JsValue) -> Unit = "webapi_HTMLInputElement" "set_max"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_max_length_ffi(obj : JsValue) -> Int = "webapi_HTMLInputElement" "get_maxLength"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_max_length_ffi(
+  obj : JsValue,
+  max_length : JsValue,
+) -> Unit = "webapi_HTMLInputElement" "set_maxLength"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_min_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLInputElement" "get_min"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_min_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_input_element_min_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_min_ffi(obj : JsValue, min : JsValue) -> Unit = "webapi_HTMLInputElement" "set_min"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_min_length_ffi(obj : JsValue) -> Int = "webapi_HTMLInputElement" "get_minLength"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_min_length_ffi(
+  obj : JsValue,
+  min_length : JsValue,
+) -> Unit = "webapi_HTMLInputElement" "set_minLength"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_multiple_ffi(obj : JsValue) -> Bool = "webapi_HTMLInputElement" "get_multiple"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_multiple_ffi(
+  obj : JsValue,
+  multiple : JsValue,
+) -> Unit = "webapi_HTMLInputElement" "set_multiple"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLInputElement" "get_name"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_input_element_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_name_ffi(obj : JsValue, name : JsValue) -> Unit = "webapi_HTMLInputElement" "set_name"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_pattern_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLInputElement" "get_pattern"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_pattern_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_input_element_pattern_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_pattern_ffi(obj : JsValue, pattern : JsValue) -> Unit = "webapi_HTMLInputElement" "set_pattern"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_placeholder_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLInputElement" "get_placeholder"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_placeholder_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_input_element_placeholder_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_placeholder_ffi(
+  obj : JsValue,
+  placeholder : JsValue,
+) -> Unit = "webapi_HTMLInputElement" "set_placeholder"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_read_only_ffi(obj : JsValue) -> Bool = "webapi_HTMLInputElement" "get_readOnly"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_read_only_ffi(
+  obj : JsValue,
+  read_only : JsValue,
+) -> Unit = "webapi_HTMLInputElement" "set_readOnly"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_required_ffi(obj : JsValue) -> Bool = "webapi_HTMLInputElement" "get_required"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_required_ffi(
+  obj : JsValue,
+  required : JsValue,
+) -> Unit = "webapi_HTMLInputElement" "set_required"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_size_ffi(obj : JsValue) -> UInt = "webapi_HTMLInputElement" "get_size"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_size_ffi(obj : JsValue, size : JsValue) -> Unit = "webapi_HTMLInputElement" "set_size"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_src_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLInputElement" "get_src"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_src_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_input_element_src_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_src_ffi(obj : JsValue, src : JsValue) -> Unit = "webapi_HTMLInputElement" "set_src"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_step_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLInputElement" "get_step"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_step_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_input_element_step_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_step_ffi(obj : JsValue, step : JsValue) -> Unit = "webapi_HTMLInputElement" "set_step"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLInputElement" "get_type"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_type_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_input_element_type_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_type_ffi(obj : JsValue, type_ : JsValue) -> Unit = "webapi_HTMLInputElement" "set_type"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_default_value_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLInputElement" "get_defaultValue"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_default_value_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_input_element_default_value_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_default_value_ffi(
+  obj : JsValue,
+  default_value : JsValue,
+) -> Unit = "webapi_HTMLInputElement" "set_defaultValue"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_value_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLInputElement" "get_value"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_value_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_input_element_value_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_value_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLInputElement" "set_value"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_value_as_date_ffi(obj : JsValue) -> JsValue = "webapi_HTMLInputElement" "get_valueAsDate"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_value_as_date_ffi(
+  obj : JsValue,
+  value_as_date : JsValue,
+) -> Unit = "webapi_HTMLInputElement" "set_valueAsDate"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_value_as_number_ffi(obj : JsValue) -> Double = "webapi_HTMLInputElement" "get_valueAsNumber"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_value_as_number_ffi(
+  obj : JsValue,
+  value_as_number : JsValue,
+) -> Unit = "webapi_HTMLInputElement" "set_valueAsNumber"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_width_ffi(obj : JsValue) -> UInt = "webapi_HTMLInputElement" "get_width"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_width_ffi(obj : JsValue, width : JsValue) -> Unit = "webapi_HTMLInputElement" "set_width"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_step_up_ffi(obj : JsValue, n : JsValue) -> Unit = "webapi_HTMLInputElement" "stepUp"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_step_down_ffi(obj : JsValue, n : JsValue) -> Unit = "webapi_HTMLInputElement" "stepDown"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_will_validate_ffi(obj : JsValue) -> Bool = "webapi_HTMLInputElement" "get_willValidate"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_validity_ffi(obj : JsValue) -> ValidityState = "webapi_HTMLInputElement" "get_validity"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_validation_message_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLInputElement" "get_validationMessage"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_validation_message_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_input_element_validation_message_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_check_validity_ffi(obj : JsValue) -> Bool = "webapi_HTMLInputElement" "checkValidity"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_report_validity_ffi(obj : JsValue) -> Bool = "webapi_HTMLInputElement" "reportValidity"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_custom_validity_ffi(
+  obj : JsValue,
+  error : JsValue,
+) -> Unit = "webapi_HTMLInputElement" "setCustomValidity"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_labels_ffi(obj : JsValue) -> NodeList = "webapi_HTMLInputElement" "get_labels"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_select_ffi(obj : JsValue) -> Unit = "webapi_HTMLInputElement" "select"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_selection_start_ffi(obj : JsValue) -> UInt = "webapi_HTMLInputElement" "get_selectionStart"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_selection_start_ffi(
+  obj : JsValue,
+  selection_start : JsValue,
+) -> Unit = "webapi_HTMLInputElement" "set_selectionStart"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_selection_end_ffi(obj : JsValue) -> UInt = "webapi_HTMLInputElement" "get_selectionEnd"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_selection_end_ffi(
+  obj : JsValue,
+  selection_end : JsValue,
+) -> Unit = "webapi_HTMLInputElement" "set_selectionEnd"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_selection_direction_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLInputElement" "get_selectionDirection"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_selection_direction_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_input_element_selection_direction_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_selection_direction_ffi(
+  obj : JsValue,
+  selection_direction : JsValue,
+) -> Unit = "webapi_HTMLInputElement" "set_selectionDirection"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_range_text_ffi(
+  obj : JsValue,
+  replacement : JsValue,
+) -> Unit = "webapi_HTMLInputElement" "setRangeText"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_range_text_in_range_ffi(
+  obj : JsValue,
+  replacement : JsValue,
+  start : JsValue,
+  end : JsValue,
+  selection_mode : JsValue,
+) -> Unit = "webapi_HTMLInputElement" "set_range_text_in_range"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_selection_range_ffi(
+  obj : JsValue,
+  start : JsValue,
+  end : JsValue,
+  direction : JsValue,
+) -> Unit = "webapi_HTMLInputElement" "setSelectionRange"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_show_picker_ffi(obj : JsValue) -> Unit = "webapi_HTMLInputElement" "showPicker"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_align_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLInputElement" "get_align"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_align_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_input_element_align_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_align_ffi(obj : JsValue, align : JsValue) -> Unit = "webapi_HTMLInputElement" "set_align"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_use_map_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLInputElement" "get_useMap"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_use_map_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_input_element_use_map_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_use_map_ffi(obj : JsValue, use_map : JsValue) -> Unit = "webapi_HTMLInputElement" "set_useMap"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_popover_target_element_ffi(obj : JsValue) -> Element = "webapi_HTMLInputElement" "get_popoverTargetElement"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_popover_target_element_ffi(
+  obj : JsValue,
+  popover_target_element : JsValue,
+) -> Unit = "webapi_HTMLInputElement" "set_popoverTargetElement"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_popover_target_action_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLInputElement" "get_popoverTargetAction"
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_popover_target_action_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_input_element_popover_target_action_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_input_element_set_popover_target_action_ffi(
+  obj : JsValue,
+  popover_target_action : JsValue,
+) -> Unit = "webapi_HTMLInputElement" "set_popoverTargetAction"

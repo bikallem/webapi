@@ -62,3 +62,77 @@ pub fn MultiCacheQueryOptions::cache_name(
 ) -> String? {
   multi_cache_query_options_get_cache_name_ffi(TJsValue::to_js(self)).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn multi_cache_query_options_ffi(
+  ignore_search : JsValue,
+  ignore_method : JsValue,
+  ignore_vary : JsValue,
+  cache_name : JsValue,
+) -> MultiCacheQueryOptions =
+  #|(ignoreSearch, ignoreMethod, ignoreVary, cacheName) => {
+  #|  const obj = {};
+  #|  if (ignoreSearch !== undefined) obj.ignoreSearch = ignoreSearch;
+  #|  if (ignoreMethod !== undefined) obj.ignoreMethod = ignoreMethod;
+  #|  if (ignoreVary !== undefined) obj.ignoreVary = ignoreVary;
+  #|  if (cacheName !== undefined) obj.cacheName = cacheName;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn multi_cache_query_options_empty_ffi() -> MultiCacheQueryOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn multi_cache_query_options_get_ignore_search_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.ignoreSearch"
+
+///|
+#cfg(target="js")
+extern "js" fn multi_cache_query_options_get_ignore_method_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.ignoreMethod"
+
+///|
+#cfg(target="js")
+extern "js" fn multi_cache_query_options_get_ignore_vary_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.ignoreVary"
+
+///|
+#cfg(target="js")
+extern "js" fn multi_cache_query_options_get_cache_name_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.cacheName"
+
+///|
+#cfg(target="wasm-gc")
+fn multi_cache_query_options_ffi(
+  ignore_search : JsValue,
+  ignore_method : JsValue,
+  ignore_vary : JsValue,
+  cache_name : JsValue,
+) -> MultiCacheQueryOptions = "webapi_MultiCacheQueryOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn multi_cache_query_options_empty_ffi() -> MultiCacheQueryOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn multi_cache_query_options_get_ignore_search_ffi(obj : JsValue) -> JsValue = "webapi_MultiCacheQueryOptions" "get_ignoreSearch"
+
+///|
+#cfg(target="wasm-gc")
+fn multi_cache_query_options_get_ignore_method_ffi(obj : JsValue) -> JsValue = "webapi_MultiCacheQueryOptions" "get_ignoreMethod"
+
+///|
+#cfg(target="wasm-gc")
+fn multi_cache_query_options_get_ignore_vary_ffi(obj : JsValue) -> JsValue = "webapi_MultiCacheQueryOptions" "get_ignoreVary"
+
+///|
+#cfg(target="wasm-gc")
+fn multi_cache_query_options_get_cache_name_ffi(obj : JsValue) -> JsValue = "webapi_MultiCacheQueryOptions" "get_cacheName"

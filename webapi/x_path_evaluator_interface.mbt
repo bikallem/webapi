@@ -94,3 +94,97 @@ impl TXPathEvaluator with evaluate(
     opt_to_js(result),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn x_path_evaluator_new_ffi() -> XPathEvaluator = "() => new XPathEvaluator()"
+
+///|
+#cfg(target="js")
+extern "js" fn x_path_evaluator_create_expression_ffi_js(
+  obj : JsValue,
+  expression : JsValue,
+  resolver : JsValue,
+) -> JsValue = "(obj, expression, resolver) => obj.createExpression(expression, resolver)"
+
+///|
+#cfg(target="js")
+fn x_path_evaluator_create_expression_ffi(
+  obj : JsValue,
+  expression : JsValue,
+  resolver : JsValue,
+) -> XPathExpression {
+  x_path_evaluator_create_expression_ffi_js(obj, expression, resolver).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn x_path_evaluator_create_ns_resolver_ffi_js(
+  obj : JsValue,
+  node_resolver : JsValue,
+) -> JsValue = "(obj, node_resolver) => obj.createNSResolver(node_resolver)"
+
+///|
+#cfg(target="js")
+fn x_path_evaluator_create_ns_resolver_ffi(
+  obj : JsValue,
+  node_resolver : JsValue,
+) -> Node {
+  x_path_evaluator_create_ns_resolver_ffi_js(obj, node_resolver).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn x_path_evaluator_evaluate_ffi_js(
+  obj : JsValue,
+  expression : JsValue,
+  context_node : JsValue,
+  resolver : JsValue,
+  type_ : JsValue,
+  result : JsValue,
+) -> JsValue = "(obj, expression, context_node, resolver, type_, result) => obj.evaluate(expression, context_node, resolver, type_, result)"
+
+///|
+#cfg(target="js")
+fn x_path_evaluator_evaluate_ffi(
+  obj : JsValue,
+  expression : JsValue,
+  context_node : JsValue,
+  resolver : JsValue,
+  type_ : JsValue,
+  result : JsValue,
+) -> XPathResult {
+  x_path_evaluator_evaluate_ffi_js(
+    obj, expression, context_node, resolver, type_, result,
+  ).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn x_path_evaluator_new_ffi() -> XPathEvaluator = "webapi_XPathEvaluator" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn x_path_evaluator_create_expression_ffi(
+  obj : JsValue,
+  expression : JsValue,
+  resolver : JsValue,
+) -> XPathExpression = "webapi_XPathEvaluator" "createExpression"
+
+///|
+#cfg(target="wasm-gc")
+fn x_path_evaluator_create_ns_resolver_ffi(
+  obj : JsValue,
+  node_resolver : JsValue,
+) -> Node = "webapi_XPathEvaluator" "createNSResolver"
+
+///|
+#cfg(target="wasm-gc")
+fn x_path_evaluator_evaluate_ffi(
+  obj : JsValue,
+  expression : JsValue,
+  context_node : JsValue,
+  resolver : JsValue,
+  type_ : JsValue,
+  result : JsValue,
+) -> XPathResult = "webapi_XPathEvaluator" "evaluate"

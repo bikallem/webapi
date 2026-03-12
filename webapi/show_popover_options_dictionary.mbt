@@ -27,3 +27,32 @@ pub fn ShowPopoverOptions::empty() -> ShowPopoverOptions {
 pub fn ShowPopoverOptions::source(self : ShowPopoverOptions) -> HTMLElement? {
   show_popover_options_get_source_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn show_popover_options_ffi(source : JsValue) -> ShowPopoverOptions =
+  #|(source) => {
+  #|  const obj = {};
+  #|  if (source !== undefined) obj.source = source;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn show_popover_options_empty_ffi() -> ShowPopoverOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn show_popover_options_get_source_ffi(obj : JsValue) -> JsValue = "(obj) => obj.source"
+
+///|
+#cfg(target="wasm-gc")
+fn show_popover_options_ffi(source : JsValue) -> ShowPopoverOptions = "webapi_ShowPopoverOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn show_popover_options_empty_ffi() -> ShowPopoverOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn show_popover_options_get_source_ffi(obj : JsValue) -> JsValue = "webapi_ShowPopoverOptions" "get_source"

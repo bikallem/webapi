@@ -132,3 +132,104 @@ impl THTMLOptionsCollection with set_selected_index(
     TJsValue::to_js(selected_index),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_options_collection_length_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.length"
+
+///|
+#cfg(target="js")
+fn html_options_collection_length_ffi(obj : JsValue) -> UInt {
+  html_options_collection_length_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_options_collection_set_length_ffi(
+  obj : JsValue,
+  length : JsValue,
+) -> Unit = "(obj, length) => { obj.length = length; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_options_collection_set_ffi(
+  obj : JsValue,
+  index : JsValue,
+  option : JsValue,
+) -> Unit = "(obj, index, option) => { obj[index] = option; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_options_collection_add_ffi(
+  obj : JsValue,
+  element : JsValue,
+  before : JsValue,
+) -> Unit = "(obj, element, before) => obj.add(element, before)"
+
+///|
+#cfg(target="js")
+extern "js" fn html_options_collection_remove_ffi(
+  obj : JsValue,
+  index : JsValue,
+) -> Unit = "(obj, index) => obj.remove(index)"
+
+///|
+#cfg(target="js")
+extern "js" fn html_options_collection_selected_index_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.selectedIndex"
+
+///|
+#cfg(target="js")
+fn html_options_collection_selected_index_ffi(obj : JsValue) -> Int {
+  html_options_collection_selected_index_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_options_collection_set_selected_index_ffi(
+  obj : JsValue,
+  selected_index : JsValue,
+) -> Unit = "(obj, selectedIndex) => { obj.selectedIndex = selectedIndex; }"
+
+///|
+#cfg(target="wasm-gc")
+fn html_options_collection_length_ffi(obj : JsValue) -> UInt = "webapi_HTMLOptionsCollection" "get_length"
+
+///|
+#cfg(target="wasm-gc")
+fn html_options_collection_set_length_ffi(
+  obj : JsValue,
+  length : JsValue,
+) -> Unit = "webapi_HTMLOptionsCollection" "set_length"
+
+///|
+#cfg(target="wasm-gc")
+fn html_options_collection_set_ffi(
+  obj : JsValue,
+  index : JsValue,
+  option : JsValue,
+) -> Unit = "webapi_HTMLOptionsCollection" "set"
+
+///|
+#cfg(target="wasm-gc")
+fn html_options_collection_add_ffi(
+  obj : JsValue,
+  element : JsValue,
+  before : JsValue,
+) -> Unit = "webapi_HTMLOptionsCollection" "add"
+
+///|
+#cfg(target="wasm-gc")
+fn html_options_collection_remove_ffi(obj : JsValue, index : JsValue) -> Unit = "webapi_HTMLOptionsCollection" "remove"
+
+///|
+#cfg(target="wasm-gc")
+fn html_options_collection_selected_index_ffi(obj : JsValue) -> Int = "webapi_HTMLOptionsCollection" "get_selectedIndex"
+
+///|
+#cfg(target="wasm-gc")
+fn html_options_collection_set_selected_index_ffi(
+  obj : JsValue,
+  selected_index : JsValue,
+) -> Unit = "webapi_HTMLOptionsCollection" "set_selectedIndex"

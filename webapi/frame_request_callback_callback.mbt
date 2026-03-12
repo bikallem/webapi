@@ -21,3 +21,15 @@ pub fn FrameRequestCallback::new(
 ) -> FrameRequestCallback {
   frame_request_callback_ffi(callback)
 }
+
+///|
+#cfg(target="js")
+extern "js" fn frame_request_callback_ffi(
+  callback : (DOMHighResTimeStamp) -> Unit,
+) -> FrameRequestCallback = "(callback) => callback"
+
+///|
+#cfg(target="wasm-gc")
+fn frame_request_callback_ffi(
+  callback : (DOMHighResTimeStamp) -> Unit,
+) -> FrameRequestCallback = "webapi_FrameRequestCallback" "new"

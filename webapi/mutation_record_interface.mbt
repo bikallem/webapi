@@ -86,3 +86,157 @@ impl TMutationRecord with attribute_namespace(self : Self) -> String {
 impl TMutationRecord with old_value(self : Self) -> String {
   mutation_record_old_value_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn mutation_record_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.type"
+
+///|
+#cfg(target="js")
+fn mutation_record_type_ffi(obj : JsValue) -> String {
+  mutation_record_type_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn mutation_record_target_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.target"
+
+///|
+#cfg(target="js")
+fn mutation_record_target_ffi(obj : JsValue) -> Node {
+  mutation_record_target_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn mutation_record_added_nodes_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.addedNodes"
+
+///|
+#cfg(target="js")
+fn mutation_record_added_nodes_ffi(obj : JsValue) -> NodeList {
+  mutation_record_added_nodes_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn mutation_record_removed_nodes_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.removedNodes"
+
+///|
+#cfg(target="js")
+fn mutation_record_removed_nodes_ffi(obj : JsValue) -> NodeList {
+  mutation_record_removed_nodes_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn mutation_record_previous_sibling_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.previousSibling"
+
+///|
+#cfg(target="js")
+fn mutation_record_previous_sibling_ffi(obj : JsValue) -> Node {
+  mutation_record_previous_sibling_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn mutation_record_next_sibling_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.nextSibling"
+
+///|
+#cfg(target="js")
+fn mutation_record_next_sibling_ffi(obj : JsValue) -> Node {
+  mutation_record_next_sibling_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn mutation_record_attribute_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.attributeName"
+
+///|
+#cfg(target="js")
+fn mutation_record_attribute_name_ffi(obj : JsValue) -> String {
+  mutation_record_attribute_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn mutation_record_attribute_namespace_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.attributeNamespace"
+
+///|
+#cfg(target="js")
+fn mutation_record_attribute_namespace_ffi(obj : JsValue) -> String {
+  mutation_record_attribute_namespace_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn mutation_record_old_value_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oldValue"
+
+///|
+#cfg(target="js")
+fn mutation_record_old_value_ffi(obj : JsValue) -> String {
+  mutation_record_old_value_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn mutation_record_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_MutationRecord" "get_type"
+
+///|
+#cfg(target="wasm-gc")
+fn mutation_record_type_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(mutation_record_type_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn mutation_record_target_ffi(obj : JsValue) -> Node = "webapi_MutationRecord" "get_target"
+
+///|
+#cfg(target="wasm-gc")
+fn mutation_record_added_nodes_ffi(obj : JsValue) -> NodeList = "webapi_MutationRecord" "get_addedNodes"
+
+///|
+#cfg(target="wasm-gc")
+fn mutation_record_removed_nodes_ffi(obj : JsValue) -> NodeList = "webapi_MutationRecord" "get_removedNodes"
+
+///|
+#cfg(target="wasm-gc")
+fn mutation_record_previous_sibling_ffi(obj : JsValue) -> Node = "webapi_MutationRecord" "get_previousSibling"
+
+///|
+#cfg(target="wasm-gc")
+fn mutation_record_next_sibling_ffi(obj : JsValue) -> Node = "webapi_MutationRecord" "get_nextSibling"
+
+///|
+#cfg(target="wasm-gc")
+fn mutation_record_attribute_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_MutationRecord" "get_attributeName"
+
+///|
+#cfg(target="wasm-gc")
+fn mutation_record_attribute_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(mutation_record_attribute_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn mutation_record_attribute_namespace_ffi_wasm(obj : JsValue) -> JsValue = "webapi_MutationRecord" "get_attributeNamespace"
+
+///|
+#cfg(target="wasm-gc")
+fn mutation_record_attribute_namespace_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(mutation_record_attribute_namespace_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn mutation_record_old_value_ffi_wasm(obj : JsValue) -> JsValue = "webapi_MutationRecord" "get_oldValue"
+
+///|
+#cfg(target="wasm-gc")
+fn mutation_record_old_value_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(mutation_record_old_value_ffi_wasm(obj))
+}

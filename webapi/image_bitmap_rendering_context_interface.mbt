@@ -87,3 +87,43 @@ impl TImageBitmapRenderingContext with transfer_from_image_bitmap(
     TJsValue::to_js(bitmap),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn image_bitmap_rendering_context_canvas_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.canvas"
+
+///|
+#cfg(target="js")
+fn image_bitmap_rendering_context_canvas_ffi(
+  obj : JsValue,
+) -> ImageBitmapRenderingContextCanvas {
+  image_bitmap_rendering_context_canvas_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn image_bitmap_rendering_context_transfer_from_image_bitmap_ffi(
+  obj : JsValue,
+  bitmap : JsValue,
+) -> Unit = "(obj, bitmap) => obj.transferFromImageBitmap(bitmap)"
+
+///|
+#cfg(target="wasm-gc")
+fn image_bitmap_rendering_context_canvas_ffi_wasm(obj : JsValue) -> JsValue = "webapi_ImageBitmapRenderingContext" "get_canvas"
+
+///|
+#cfg(target="wasm-gc")
+fn image_bitmap_rendering_context_canvas_ffi(
+  obj : JsValue,
+) -> ImageBitmapRenderingContextCanvas {
+  image_bitmap_rendering_context_canvas_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn image_bitmap_rendering_context_transfer_from_image_bitmap_ffi(
+  obj : JsValue,
+  bitmap : JsValue,
+) -> Unit = "webapi_ImageBitmapRenderingContext" "transferFromImageBitmap"

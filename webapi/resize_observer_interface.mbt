@@ -61,3 +61,46 @@ impl TResizeObserver with unobserve(self : Self, target : &TElement) -> Unit {
 impl TResizeObserver with disconnect(self : Self) -> Unit {
   resize_observer_disconnect_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn resize_observer_new_ffi(callback : JsValue) -> ResizeObserver = "(callback) => new ResizeObserver(callback)"
+
+///|
+#cfg(target="js")
+extern "js" fn resize_observer_observe_ffi(
+  obj : JsValue,
+  target : JsValue,
+  options : JsValue,
+) -> Unit = "(obj, target, options) => obj.observe(target, options)"
+
+///|
+#cfg(target="js")
+extern "js" fn resize_observer_unobserve_ffi(
+  obj : JsValue,
+  target : JsValue,
+) -> Unit = "(obj, target) => obj.unobserve(target)"
+
+///|
+#cfg(target="js")
+extern "js" fn resize_observer_disconnect_ffi(obj : JsValue) -> Unit = "(obj) => obj.disconnect()"
+
+///|
+#cfg(target="wasm-gc")
+fn resize_observer_new_ffi(callback : JsValue) -> ResizeObserver = "webapi_ResizeObserver" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn resize_observer_observe_ffi(
+  obj : JsValue,
+  target : JsValue,
+  options : JsValue,
+) -> Unit = "webapi_ResizeObserver" "observe"
+
+///|
+#cfg(target="wasm-gc")
+fn resize_observer_unobserve_ffi(obj : JsValue, target : JsValue) -> Unit = "webapi_ResizeObserver" "unobserve"
+
+///|
+#cfg(target="wasm-gc")
+fn resize_observer_disconnect_ffi(obj : JsValue) -> Unit = "webapi_ResizeObserver" "disconnect"

@@ -104,3 +104,129 @@ impl THTMLStyleElement with set_type_(self : Self, type_ : String) -> Unit {
 impl THTMLStyleElement with sheet(self : Self) -> CSSStyleSheet {
   html_style_element_sheet_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_style_element_new_ffi() -> HTMLStyleElement = "() => new HTMLStyleElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_style_element_disabled_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.disabled"
+
+///|
+#cfg(target="js")
+fn html_style_element_disabled_ffi(obj : JsValue) -> Bool {
+  html_style_element_disabled_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_style_element_set_disabled_ffi(
+  obj : JsValue,
+  disabled : JsValue,
+) -> Unit = "(obj, disabled) => { obj.disabled = disabled; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_style_element_media_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.media"
+
+///|
+#cfg(target="js")
+fn html_style_element_media_ffi(obj : JsValue) -> String {
+  html_style_element_media_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_style_element_set_media_ffi(
+  obj : JsValue,
+  media : JsValue,
+) -> Unit = "(obj, media) => { obj.media = media; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_style_element_blocking_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.blocking"
+
+///|
+#cfg(target="js")
+fn html_style_element_blocking_ffi(obj : JsValue) -> DOMTokenList {
+  html_style_element_blocking_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_style_element_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.type"
+
+///|
+#cfg(target="js")
+fn html_style_element_type_ffi(obj : JsValue) -> String {
+  html_style_element_type_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_style_element_set_type_ffi(
+  obj : JsValue,
+  type_ : JsValue,
+) -> Unit = "(obj, type) => { obj.type = type; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_style_element_sheet_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.sheet"
+
+///|
+#cfg(target="js")
+fn html_style_element_sheet_ffi(obj : JsValue) -> CSSStyleSheet {
+  html_style_element_sheet_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_style_element_new_ffi() -> HTMLStyleElement = "webapi_HTMLStyleElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_style_element_disabled_ffi(obj : JsValue) -> Bool = "webapi_HTMLStyleElement" "get_disabled"
+
+///|
+#cfg(target="wasm-gc")
+fn html_style_element_set_disabled_ffi(
+  obj : JsValue,
+  disabled : JsValue,
+) -> Unit = "webapi_HTMLStyleElement" "set_disabled"
+
+///|
+#cfg(target="wasm-gc")
+fn html_style_element_media_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLStyleElement" "get_media"
+
+///|
+#cfg(target="wasm-gc")
+fn html_style_element_media_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_style_element_media_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_style_element_set_media_ffi(obj : JsValue, media : JsValue) -> Unit = "webapi_HTMLStyleElement" "set_media"
+
+///|
+#cfg(target="wasm-gc")
+fn html_style_element_blocking_ffi(obj : JsValue) -> DOMTokenList = "webapi_HTMLStyleElement" "get_blocking"
+
+///|
+#cfg(target="wasm-gc")
+fn html_style_element_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLStyleElement" "get_type"
+
+///|
+#cfg(target="wasm-gc")
+fn html_style_element_type_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_style_element_type_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_style_element_set_type_ffi(obj : JsValue, type_ : JsValue) -> Unit = "webapi_HTMLStyleElement" "set_type"
+
+///|
+#cfg(target="wasm-gc")
+fn html_style_element_sheet_ffi(obj : JsValue) -> CSSStyleSheet = "webapi_HTMLStyleElement" "get_sheet"

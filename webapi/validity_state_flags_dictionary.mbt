@@ -94,3 +94,149 @@ pub fn ValidityStateFlags::bad_input(self : ValidityStateFlags) -> Bool? {
 pub fn ValidityStateFlags::custom_error(self : ValidityStateFlags) -> Bool? {
   validity_state_flags_get_custom_error_ffi(TJsValue::to_js(self)).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn validity_state_flags_ffi(
+  value_missing : JsValue,
+  type_mismatch : JsValue,
+  pattern_mismatch : JsValue,
+  too_long : JsValue,
+  too_short : JsValue,
+  range_underflow : JsValue,
+  range_overflow : JsValue,
+  step_mismatch : JsValue,
+  bad_input : JsValue,
+  custom_error : JsValue,
+) -> ValidityStateFlags =
+  #|(valueMissing, typeMismatch, patternMismatch, tooLong, tooShort, rangeUnderflow, rangeOverflow, stepMismatch, badInput, customError) => {
+  #|  const obj = {};
+  #|  if (valueMissing !== undefined) obj.valueMissing = valueMissing;
+  #|  if (typeMismatch !== undefined) obj.typeMismatch = typeMismatch;
+  #|  if (patternMismatch !== undefined) obj.patternMismatch = patternMismatch;
+  #|  if (tooLong !== undefined) obj.tooLong = tooLong;
+  #|  if (tooShort !== undefined) obj.tooShort = tooShort;
+  #|  if (rangeUnderflow !== undefined) obj.rangeUnderflow = rangeUnderflow;
+  #|  if (rangeOverflow !== undefined) obj.rangeOverflow = rangeOverflow;
+  #|  if (stepMismatch !== undefined) obj.stepMismatch = stepMismatch;
+  #|  if (badInput !== undefined) obj.badInput = badInput;
+  #|  if (customError !== undefined) obj.customError = customError;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn validity_state_flags_empty_ffi() -> ValidityStateFlags = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn validity_state_flags_get_value_missing_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.valueMissing"
+
+///|
+#cfg(target="js")
+extern "js" fn validity_state_flags_get_type_mismatch_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.typeMismatch"
+
+///|
+#cfg(target="js")
+extern "js" fn validity_state_flags_get_pattern_mismatch_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.patternMismatch"
+
+///|
+#cfg(target="js")
+extern "js" fn validity_state_flags_get_too_long_ffi(obj : JsValue) -> JsValue = "(obj) => obj.tooLong"
+
+///|
+#cfg(target="js")
+extern "js" fn validity_state_flags_get_too_short_ffi(obj : JsValue) -> JsValue = "(obj) => obj.tooShort"
+
+///|
+#cfg(target="js")
+extern "js" fn validity_state_flags_get_range_underflow_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.rangeUnderflow"
+
+///|
+#cfg(target="js")
+extern "js" fn validity_state_flags_get_range_overflow_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.rangeOverflow"
+
+///|
+#cfg(target="js")
+extern "js" fn validity_state_flags_get_step_mismatch_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.stepMismatch"
+
+///|
+#cfg(target="js")
+extern "js" fn validity_state_flags_get_bad_input_ffi(obj : JsValue) -> JsValue = "(obj) => obj.badInput"
+
+///|
+#cfg(target="js")
+extern "js" fn validity_state_flags_get_custom_error_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.customError"
+
+///|
+#cfg(target="wasm-gc")
+fn validity_state_flags_ffi(
+  value_missing : JsValue,
+  type_mismatch : JsValue,
+  pattern_mismatch : JsValue,
+  too_long : JsValue,
+  too_short : JsValue,
+  range_underflow : JsValue,
+  range_overflow : JsValue,
+  step_mismatch : JsValue,
+  bad_input : JsValue,
+  custom_error : JsValue,
+) -> ValidityStateFlags = "webapi_ValidityStateFlags" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn validity_state_flags_empty_ffi() -> ValidityStateFlags = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn validity_state_flags_get_value_missing_ffi(obj : JsValue) -> JsValue = "webapi_ValidityStateFlags" "get_valueMissing"
+
+///|
+#cfg(target="wasm-gc")
+fn validity_state_flags_get_type_mismatch_ffi(obj : JsValue) -> JsValue = "webapi_ValidityStateFlags" "get_typeMismatch"
+
+///|
+#cfg(target="wasm-gc")
+fn validity_state_flags_get_pattern_mismatch_ffi(obj : JsValue) -> JsValue = "webapi_ValidityStateFlags" "get_patternMismatch"
+
+///|
+#cfg(target="wasm-gc")
+fn validity_state_flags_get_too_long_ffi(obj : JsValue) -> JsValue = "webapi_ValidityStateFlags" "get_tooLong"
+
+///|
+#cfg(target="wasm-gc")
+fn validity_state_flags_get_too_short_ffi(obj : JsValue) -> JsValue = "webapi_ValidityStateFlags" "get_tooShort"
+
+///|
+#cfg(target="wasm-gc")
+fn validity_state_flags_get_range_underflow_ffi(obj : JsValue) -> JsValue = "webapi_ValidityStateFlags" "get_rangeUnderflow"
+
+///|
+#cfg(target="wasm-gc")
+fn validity_state_flags_get_range_overflow_ffi(obj : JsValue) -> JsValue = "webapi_ValidityStateFlags" "get_rangeOverflow"
+
+///|
+#cfg(target="wasm-gc")
+fn validity_state_flags_get_step_mismatch_ffi(obj : JsValue) -> JsValue = "webapi_ValidityStateFlags" "get_stepMismatch"
+
+///|
+#cfg(target="wasm-gc")
+fn validity_state_flags_get_bad_input_ffi(obj : JsValue) -> JsValue = "webapi_ValidityStateFlags" "get_badInput"
+
+///|
+#cfg(target="wasm-gc")
+fn validity_state_flags_get_custom_error_ffi(obj : JsValue) -> JsValue = "webapi_ValidityStateFlags" "get_customError"

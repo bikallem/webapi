@@ -61,3 +61,73 @@ pub fn FilePickerOptions::start_in(
 ) -> StartInDirectory? {
   file_picker_options_get_start_in_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn file_picker_options_ffi(
+  types : JsValue,
+  exclude_accept_all_option : JsValue,
+  id : JsValue,
+  start_in : JsValue,
+) -> FilePickerOptions =
+  #|(types, excludeAcceptAllOption, id, startIn) => {
+  #|  const obj = {};
+  #|  if (types !== undefined) obj.types = types;
+  #|  if (excludeAcceptAllOption !== undefined) obj.excludeAcceptAllOption = excludeAcceptAllOption;
+  #|  if (id !== undefined) obj.id = id;
+  #|  if (startIn !== undefined) obj.startIn = startIn;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn file_picker_options_empty_ffi() -> FilePickerOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn file_picker_options_get_types_ffi(obj : JsValue) -> JsValue = "(obj) => obj.types"
+
+///|
+#cfg(target="js")
+extern "js" fn file_picker_options_get_exclude_accept_all_option_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.excludeAcceptAllOption"
+
+///|
+#cfg(target="js")
+extern "js" fn file_picker_options_get_id_ffi(obj : JsValue) -> JsValue = "(obj) => obj.id"
+
+///|
+#cfg(target="js")
+extern "js" fn file_picker_options_get_start_in_ffi(obj : JsValue) -> JsValue = "(obj) => obj.startIn"
+
+///|
+#cfg(target="wasm-gc")
+fn file_picker_options_ffi(
+  types : JsValue,
+  exclude_accept_all_option : JsValue,
+  id : JsValue,
+  start_in : JsValue,
+) -> FilePickerOptions = "webapi_FilePickerOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn file_picker_options_empty_ffi() -> FilePickerOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn file_picker_options_get_types_ffi(obj : JsValue) -> JsValue = "webapi_FilePickerOptions" "get_types"
+
+///|
+#cfg(target="wasm-gc")
+fn file_picker_options_get_exclude_accept_all_option_ffi(
+  obj : JsValue,
+) -> JsValue = "webapi_FilePickerOptions" "get_excludeAcceptAllOption"
+
+///|
+#cfg(target="wasm-gc")
+fn file_picker_options_get_id_ffi(obj : JsValue) -> JsValue = "webapi_FilePickerOptions" "get_id"
+
+///|
+#cfg(target="wasm-gc")
+fn file_picker_options_get_start_in_ffi(obj : JsValue) -> JsValue = "webapi_FilePickerOptions" "get_startIn"

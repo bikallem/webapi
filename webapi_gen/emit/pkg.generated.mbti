@@ -8,7 +8,7 @@ import {
 }
 
 // Values
-pub fn[E : Emitter] emit_all_multi(E, Iter[String]) -> MultiTargetFiles
+pub fn[E : Emitter] emit_all_multi(E, Iter[String]) -> Map[Filename, Code]
 
 pub fn emit_js_runtime(@flattened_idl.FlattenedIdl) -> String
 
@@ -17,6 +17,8 @@ pub fn mbt_code_gen_multi(Array[Emit]) -> MultiTargetCode
 pub fn mdn_interface_url(String) -> String
 
 pub fn mdn_member_url(String, String) -> String
+
+pub fn merge_multi_target_code(MultiTargetCode) -> String
 
 // Errors
 
@@ -139,12 +141,6 @@ pub(all) struct MultiTargetCode {
   shared : String
   js_ffi : String
   wasm_ffi : String
-}
-
-pub(all) struct MultiTargetFiles {
-  shared : Map[Filename, Code]
-  js_ffi : Map[Filename, Code]
-  wasm_ffi : Map[Filename, Code]
 }
 
 pub struct NamespaceDef {

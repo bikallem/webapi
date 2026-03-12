@@ -69,3 +69,109 @@ impl TNavigationDestination with same_document(self : Self) -> Bool {
 impl TNavigationDestination with get_state(self : Self) -> JsValue {
   navigation_destination_get_state_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_destination_url_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.url"
+
+///|
+#cfg(target="js")
+fn navigation_destination_url_ffi(obj : JsValue) -> String {
+  navigation_destination_url_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_destination_key_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.key"
+
+///|
+#cfg(target="js")
+fn navigation_destination_key_ffi(obj : JsValue) -> String {
+  navigation_destination_key_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_destination_id_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.id"
+
+///|
+#cfg(target="js")
+fn navigation_destination_id_ffi(obj : JsValue) -> String {
+  navigation_destination_id_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_destination_index_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.index"
+
+///|
+#cfg(target="js")
+fn navigation_destination_index_ffi(obj : JsValue) -> Int64 {
+  navigation_destination_index_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_destination_same_document_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.sameDocument"
+
+///|
+#cfg(target="js")
+fn navigation_destination_same_document_ffi(obj : JsValue) -> Bool {
+  navigation_destination_same_document_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_destination_get_state_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.getState()"
+
+///|
+#cfg(target="js")
+fn navigation_destination_get_state_ffi(obj : JsValue) -> JsValue {
+  navigation_destination_get_state_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_destination_url_ffi_wasm(obj : JsValue) -> JsValue = "webapi_NavigationDestination" "get_url"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_destination_url_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(navigation_destination_url_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_destination_key_ffi_wasm(obj : JsValue) -> JsValue = "webapi_NavigationDestination" "get_key"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_destination_key_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(navigation_destination_key_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_destination_id_ffi_wasm(obj : JsValue) -> JsValue = "webapi_NavigationDestination" "get_id"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_destination_id_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(navigation_destination_id_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_destination_index_ffi(obj : JsValue) -> Int64 = "webapi_NavigationDestination" "get_index"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_destination_same_document_ffi(obj : JsValue) -> Bool = "webapi_NavigationDestination" "get_sameDocument"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_destination_get_state_ffi(obj : JsValue) -> JsValue = "webapi_NavigationDestination" "getState"

@@ -83,3 +83,93 @@ impl TMediaQueryList with set_onchange(
     TJsValue::to_js(event_handler_non_null_ffi(onchange)),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn media_query_list_media_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.media"
+
+///|
+#cfg(target="js")
+fn media_query_list_media_ffi(obj : JsValue) -> CSSOMString {
+  media_query_list_media_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn media_query_list_matches_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.matches"
+
+///|
+#cfg(target="js")
+fn media_query_list_matches_ffi(obj : JsValue) -> Bool {
+  media_query_list_matches_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn media_query_list_add_listener_ffi(
+  obj : JsValue,
+  callback : JsValue,
+) -> Unit = "(obj, callback) => obj.addListener(callback)"
+
+///|
+#cfg(target="js")
+extern "js" fn media_query_list_remove_listener_ffi(
+  obj : JsValue,
+  callback : JsValue,
+) -> Unit = "(obj, callback) => obj.removeListener(callback)"
+
+///|
+#cfg(target="js")
+extern "js" fn media_query_list_onchange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onchange"
+
+///|
+#cfg(target="js")
+fn media_query_list_onchange_ffi(obj : JsValue) -> EventHandler {
+  media_query_list_onchange_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn media_query_list_set_onchange_ffi(
+  obj : JsValue,
+  onchange : JsValue,
+) -> Unit = "(obj, onchange) => { obj.onchange = onchange; }"
+
+///|
+#cfg(target="wasm-gc")
+fn media_query_list_media_ffi_wasm(obj : JsValue) -> JsValue = "webapi_MediaQueryList" "get_media"
+
+///|
+#cfg(target="wasm-gc")
+fn media_query_list_media_ffi(obj : JsValue) -> CSSOMString {
+  media_query_list_media_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn media_query_list_matches_ffi(obj : JsValue) -> Bool = "webapi_MediaQueryList" "get_matches"
+
+///|
+#cfg(target="wasm-gc")
+fn media_query_list_add_listener_ffi(obj : JsValue, callback : JsValue) -> Unit = "webapi_MediaQueryList" "addListener"
+
+///|
+#cfg(target="wasm-gc")
+fn media_query_list_remove_listener_ffi(
+  obj : JsValue,
+  callback : JsValue,
+) -> Unit = "webapi_MediaQueryList" "removeListener"
+
+///|
+#cfg(target="wasm-gc")
+fn media_query_list_onchange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_MediaQueryList" "get_onchange"
+
+///|
+#cfg(target="wasm-gc")
+fn media_query_list_onchange_ffi(obj : JsValue) -> EventHandler {
+  media_query_list_onchange_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn media_query_list_set_onchange_ffi(obj : JsValue, onchange : JsValue) -> Unit = "webapi_MediaQueryList" "set_onchange"

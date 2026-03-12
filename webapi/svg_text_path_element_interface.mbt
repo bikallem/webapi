@@ -89,3 +89,61 @@ impl TSVGTextPathElement with spacing(self : Self) -> SVGAnimatedEnumeration {
 impl TSVGTextPathElement with href(self : Self) -> SVGAnimatedString {
   svg_text_path_element_href_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn svg_text_path_element_start_offset_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.startOffset"
+
+///|
+#cfg(target="js")
+fn svg_text_path_element_start_offset_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_text_path_element_start_offset_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_text_path_element_method_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.method"
+
+///|
+#cfg(target="js")
+fn svg_text_path_element_method_ffi(obj : JsValue) -> SVGAnimatedEnumeration {
+  svg_text_path_element_method_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_text_path_element_spacing_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.spacing"
+
+///|
+#cfg(target="js")
+fn svg_text_path_element_spacing_ffi(obj : JsValue) -> SVGAnimatedEnumeration {
+  svg_text_path_element_spacing_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_text_path_element_href_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.href"
+
+///|
+#cfg(target="js")
+fn svg_text_path_element_href_ffi(obj : JsValue) -> SVGAnimatedString {
+  svg_text_path_element_href_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svg_text_path_element_start_offset_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGTextPathElement" "get_startOffset"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_text_path_element_method_ffi(obj : JsValue) -> SVGAnimatedEnumeration = "webapi_SVGTextPathElement" "get_method"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_text_path_element_spacing_ffi(obj : JsValue) -> SVGAnimatedEnumeration = "webapi_SVGTextPathElement" "get_spacing"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_text_path_element_href_ffi(obj : JsValue) -> SVGAnimatedString = "webapi_SVGTextPathElement" "get_href"

@@ -56,3 +56,42 @@ impl THTMLQuoteElement with cite(self : Self) -> String {
 impl THTMLQuoteElement with set_cite(self : Self, cite : String) -> Unit {
   html_quote_element_set_cite_ffi(TJsValue::to_js(self), TJsValue::to_js(cite))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_quote_element_new_ffi() -> HTMLQuoteElement = "() => new HTMLQuoteElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_quote_element_cite_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.cite"
+
+///|
+#cfg(target="js")
+fn html_quote_element_cite_ffi(obj : JsValue) -> String {
+  html_quote_element_cite_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_quote_element_set_cite_ffi(
+  obj : JsValue,
+  cite : JsValue,
+) -> Unit = "(obj, cite) => { obj.cite = cite; }"
+
+///|
+#cfg(target="wasm-gc")
+fn html_quote_element_new_ffi() -> HTMLQuoteElement = "webapi_HTMLQuoteElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_quote_element_cite_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLQuoteElement" "get_cite"
+
+///|
+#cfg(target="wasm-gc")
+fn html_quote_element_cite_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_quote_element_cite_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_quote_element_set_cite_ffi(obj : JsValue, cite : JsValue) -> Unit = "webapi_HTMLQuoteElement" "set_cite"

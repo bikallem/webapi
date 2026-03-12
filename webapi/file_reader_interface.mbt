@@ -252,3 +252,305 @@ impl TFileReader with set_onloadend(self : Self, onloadend : (Event) -> JsValue)
     TJsValue::to_js(event_handler_non_null_ffi(onloadend)),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn file_reader_new_ffi() -> FileReader = "() => new FileReader()"
+
+///|
+#cfg(target="js")
+extern "js" fn file_reader_read_as_array_buffer_ffi(
+  obj : JsValue,
+  blob : JsValue,
+) -> Unit = "(obj, blob) => obj.readAsArrayBuffer(blob)"
+
+///|
+#cfg(target="js")
+extern "js" fn file_reader_read_as_binary_string_ffi(
+  obj : JsValue,
+  blob : JsValue,
+) -> Unit = "(obj, blob) => obj.readAsBinaryString(blob)"
+
+///|
+#cfg(target="js")
+extern "js" fn file_reader_read_as_text_ffi(
+  obj : JsValue,
+  blob : JsValue,
+  encoding : JsValue,
+) -> Unit = "(obj, blob, encoding) => obj.readAsText(blob, encoding)"
+
+///|
+#cfg(target="js")
+extern "js" fn file_reader_read_as_data_url_ffi(
+  obj : JsValue,
+  blob : JsValue,
+) -> Unit = "(obj, blob) => obj.readAsDataURL(blob)"
+
+///|
+#cfg(target="js")
+extern "js" fn file_reader_abort_ffi(obj : JsValue) -> Unit = "(obj) => obj.abort()"
+
+///|
+#cfg(target="js")
+extern "js" fn file_reader_ready_state_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.readyState"
+
+///|
+#cfg(target="js")
+fn file_reader_ready_state_ffi(obj : JsValue) -> UInt {
+  file_reader_ready_state_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn file_reader_result_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.result"
+
+///|
+#cfg(target="js")
+fn file_reader_result_ffi(obj : JsValue) -> FileReaderResult {
+  file_reader_result_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn file_reader_error_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.error"
+
+///|
+#cfg(target="js")
+fn file_reader_error_ffi(obj : JsValue) -> DOMException {
+  file_reader_error_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn file_reader_onloadstart_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onloadstart"
+
+///|
+#cfg(target="js")
+fn file_reader_onloadstart_ffi(obj : JsValue) -> EventHandler {
+  file_reader_onloadstart_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn file_reader_set_onloadstart_ffi(
+  obj : JsValue,
+  onloadstart : JsValue,
+) -> Unit = "(obj, onloadstart) => { obj.onloadstart = onloadstart; }"
+
+///|
+#cfg(target="js")
+extern "js" fn file_reader_onprogress_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onprogress"
+
+///|
+#cfg(target="js")
+fn file_reader_onprogress_ffi(obj : JsValue) -> EventHandler {
+  file_reader_onprogress_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn file_reader_set_onprogress_ffi(
+  obj : JsValue,
+  onprogress : JsValue,
+) -> Unit = "(obj, onprogress) => { obj.onprogress = onprogress; }"
+
+///|
+#cfg(target="js")
+extern "js" fn file_reader_onload_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onload"
+
+///|
+#cfg(target="js")
+fn file_reader_onload_ffi(obj : JsValue) -> EventHandler {
+  file_reader_onload_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn file_reader_set_onload_ffi(
+  obj : JsValue,
+  onload : JsValue,
+) -> Unit = "(obj, onload) => { obj.onload = onload; }"
+
+///|
+#cfg(target="js")
+extern "js" fn file_reader_onabort_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onabort"
+
+///|
+#cfg(target="js")
+fn file_reader_onabort_ffi(obj : JsValue) -> EventHandler {
+  file_reader_onabort_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn file_reader_set_onabort_ffi(
+  obj : JsValue,
+  onabort : JsValue,
+) -> Unit = "(obj, onabort) => { obj.onabort = onabort; }"
+
+///|
+#cfg(target="js")
+extern "js" fn file_reader_onerror_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onerror"
+
+///|
+#cfg(target="js")
+fn file_reader_onerror_ffi(obj : JsValue) -> EventHandler {
+  file_reader_onerror_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn file_reader_set_onerror_ffi(
+  obj : JsValue,
+  onerror : JsValue,
+) -> Unit = "(obj, onerror) => { obj.onerror = onerror; }"
+
+///|
+#cfg(target="js")
+extern "js" fn file_reader_onloadend_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onloadend"
+
+///|
+#cfg(target="js")
+fn file_reader_onloadend_ffi(obj : JsValue) -> EventHandler {
+  file_reader_onloadend_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn file_reader_set_onloadend_ffi(
+  obj : JsValue,
+  onloadend : JsValue,
+) -> Unit = "(obj, onloadend) => { obj.onloadend = onloadend; }"
+
+///|
+#cfg(target="wasm-gc")
+fn file_reader_new_ffi() -> FileReader = "webapi_FileReader" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn file_reader_read_as_array_buffer_ffi(obj : JsValue, blob : JsValue) -> Unit = "webapi_FileReader" "readAsArrayBuffer"
+
+///|
+#cfg(target="wasm-gc")
+fn file_reader_read_as_binary_string_ffi(obj : JsValue, blob : JsValue) -> Unit = "webapi_FileReader" "readAsBinaryString"
+
+///|
+#cfg(target="wasm-gc")
+fn file_reader_read_as_text_ffi(
+  obj : JsValue,
+  blob : JsValue,
+  encoding : JsValue,
+) -> Unit = "webapi_FileReader" "readAsText"
+
+///|
+#cfg(target="wasm-gc")
+fn file_reader_read_as_data_url_ffi(obj : JsValue, blob : JsValue) -> Unit = "webapi_FileReader" "readAsDataURL"
+
+///|
+#cfg(target="wasm-gc")
+fn file_reader_abort_ffi(obj : JsValue) -> Unit = "webapi_FileReader" "abort"
+
+///|
+#cfg(target="wasm-gc")
+fn file_reader_ready_state_ffi(obj : JsValue) -> UInt = "webapi_FileReader" "get_readyState"
+
+///|
+#cfg(target="wasm-gc")
+fn file_reader_result_ffi_wasm(obj : JsValue) -> JsValue = "webapi_FileReader" "get_result"
+
+///|
+#cfg(target="wasm-gc")
+fn file_reader_result_ffi(obj : JsValue) -> FileReaderResult {
+  file_reader_result_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn file_reader_error_ffi(obj : JsValue) -> DOMException = "webapi_FileReader" "get_error"
+
+///|
+#cfg(target="wasm-gc")
+fn file_reader_onloadstart_ffi_wasm(obj : JsValue) -> JsValue = "webapi_FileReader" "get_onloadstart"
+
+///|
+#cfg(target="wasm-gc")
+fn file_reader_onloadstart_ffi(obj : JsValue) -> EventHandler {
+  file_reader_onloadstart_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn file_reader_set_onloadstart_ffi(
+  obj : JsValue,
+  onloadstart : JsValue,
+) -> Unit = "webapi_FileReader" "set_onloadstart"
+
+///|
+#cfg(target="wasm-gc")
+fn file_reader_onprogress_ffi_wasm(obj : JsValue) -> JsValue = "webapi_FileReader" "get_onprogress"
+
+///|
+#cfg(target="wasm-gc")
+fn file_reader_onprogress_ffi(obj : JsValue) -> EventHandler {
+  file_reader_onprogress_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn file_reader_set_onprogress_ffi(obj : JsValue, onprogress : JsValue) -> Unit = "webapi_FileReader" "set_onprogress"
+
+///|
+#cfg(target="wasm-gc")
+fn file_reader_onload_ffi_wasm(obj : JsValue) -> JsValue = "webapi_FileReader" "get_onload"
+
+///|
+#cfg(target="wasm-gc")
+fn file_reader_onload_ffi(obj : JsValue) -> EventHandler {
+  file_reader_onload_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn file_reader_set_onload_ffi(obj : JsValue, onload : JsValue) -> Unit = "webapi_FileReader" "set_onload"
+
+///|
+#cfg(target="wasm-gc")
+fn file_reader_onabort_ffi_wasm(obj : JsValue) -> JsValue = "webapi_FileReader" "get_onabort"
+
+///|
+#cfg(target="wasm-gc")
+fn file_reader_onabort_ffi(obj : JsValue) -> EventHandler {
+  file_reader_onabort_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn file_reader_set_onabort_ffi(obj : JsValue, onabort : JsValue) -> Unit = "webapi_FileReader" "set_onabort"
+
+///|
+#cfg(target="wasm-gc")
+fn file_reader_onerror_ffi_wasm(obj : JsValue) -> JsValue = "webapi_FileReader" "get_onerror"
+
+///|
+#cfg(target="wasm-gc")
+fn file_reader_onerror_ffi(obj : JsValue) -> EventHandler {
+  file_reader_onerror_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn file_reader_set_onerror_ffi(obj : JsValue, onerror : JsValue) -> Unit = "webapi_FileReader" "set_onerror"
+
+///|
+#cfg(target="wasm-gc")
+fn file_reader_onloadend_ffi_wasm(obj : JsValue) -> JsValue = "webapi_FileReader" "get_onloadend"
+
+///|
+#cfg(target="wasm-gc")
+fn file_reader_onloadend_ffi(obj : JsValue) -> EventHandler {
+  file_reader_onloadend_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn file_reader_set_onloadend_ffi(obj : JsValue, onloadend : JsValue) -> Unit = "webapi_FileReader" "set_onloadend"

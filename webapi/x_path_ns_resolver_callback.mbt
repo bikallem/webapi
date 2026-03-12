@@ -17,3 +17,13 @@ pub impl FromJsAny for XPathNSResolver with from_js_any(value : JsAny) -> XPathN
 pub fn XPathNSResolver::new(callback : (String) -> String) -> XPathNSResolver {
   x_path_ns_resolver_ffi(callback)
 }
+
+///|
+#cfg(target="js")
+extern "js" fn x_path_ns_resolver_ffi(
+  callback : (String) -> String,
+) -> XPathNSResolver = "(callback) => callback"
+
+///|
+#cfg(target="wasm-gc")
+fn x_path_ns_resolver_ffi(callback : (String) -> String) -> XPathNSResolver = "webapi_XPathNSResolver" "new"

@@ -119,3 +119,230 @@ impl TSVGStringList with set(self : Self, index : UInt, new_item : String) -> Un
     TJsValue::to_js(new_item),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn svg_string_list_length_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.length"
+
+///|
+#cfg(target="js")
+fn svg_string_list_length_ffi(obj : JsValue) -> UInt {
+  svg_string_list_length_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_string_list_number_of_items_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.numberOfItems"
+
+///|
+#cfg(target="js")
+fn svg_string_list_number_of_items_ffi(obj : JsValue) -> UInt {
+  svg_string_list_number_of_items_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_string_list_clear_ffi(obj : JsValue) -> Unit = "(obj) => obj.clear()"
+
+///|
+#cfg(target="js")
+extern "js" fn svg_string_list_initialize_ffi_js(
+  obj : JsValue,
+  new_item : JsValue,
+) -> JsValue = "(obj, new_item) => obj.initialize(new_item)"
+
+///|
+#cfg(target="js")
+fn svg_string_list_initialize_ffi(obj : JsValue, new_item : JsValue) -> String {
+  svg_string_list_initialize_ffi_js(obj, new_item).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_string_list_get_item_ffi_js(
+  obj : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, index) => obj.getItem(index)"
+
+///|
+#cfg(target="js")
+fn svg_string_list_get_item_ffi(obj : JsValue, index : JsValue) -> String {
+  svg_string_list_get_item_ffi_js(obj, index).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_string_list_insert_item_before_ffi_js(
+  obj : JsValue,
+  new_item : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, new_item, index) => obj.insertItemBefore(new_item, index)"
+
+///|
+#cfg(target="js")
+fn svg_string_list_insert_item_before_ffi(
+  obj : JsValue,
+  new_item : JsValue,
+  index : JsValue,
+) -> String {
+  svg_string_list_insert_item_before_ffi_js(obj, new_item, index).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_string_list_replace_item_ffi_js(
+  obj : JsValue,
+  new_item : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, new_item, index) => obj.replaceItem(new_item, index)"
+
+///|
+#cfg(target="js")
+fn svg_string_list_replace_item_ffi(
+  obj : JsValue,
+  new_item : JsValue,
+  index : JsValue,
+) -> String {
+  svg_string_list_replace_item_ffi_js(obj, new_item, index).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_string_list_remove_item_ffi_js(
+  obj : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, index) => obj.removeItem(index)"
+
+///|
+#cfg(target="js")
+fn svg_string_list_remove_item_ffi(obj : JsValue, index : JsValue) -> String {
+  svg_string_list_remove_item_ffi_js(obj, index).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_string_list_append_item_ffi_js(
+  obj : JsValue,
+  new_item : JsValue,
+) -> JsValue = "(obj, new_item) => obj.appendItem(new_item)"
+
+///|
+#cfg(target="js")
+fn svg_string_list_append_item_ffi(obj : JsValue, new_item : JsValue) -> String {
+  svg_string_list_append_item_ffi_js(obj, new_item).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_string_list_set_ffi(
+  obj : JsValue,
+  index : JsValue,
+  new_item : JsValue,
+) -> Unit = "(obj, index, new_item) => { obj[index] = new_item; }"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_string_list_length_ffi(obj : JsValue) -> UInt = "webapi_SVGStringList" "get_length"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_string_list_number_of_items_ffi(obj : JsValue) -> UInt = "webapi_SVGStringList" "get_numberOfItems"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_string_list_clear_ffi(obj : JsValue) -> Unit = "webapi_SVGStringList" "clear"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_string_list_initialize_ffi_wasm(
+  obj : JsValue,
+  new_item : JsValue,
+) -> JsValue = "webapi_SVGStringList" "initialize"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_string_list_initialize_ffi(obj : JsValue, new_item : JsValue) -> String {
+  jsvalue_to_string(svg_string_list_initialize_ffi_wasm(obj, new_item))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svg_string_list_get_item_ffi_wasm(obj : JsValue, index : JsValue) -> JsValue = "webapi_SVGStringList" "getItem"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_string_list_get_item_ffi(obj : JsValue, index : JsValue) -> String {
+  jsvalue_to_string(svg_string_list_get_item_ffi_wasm(obj, index))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svg_string_list_insert_item_before_ffi_wasm(
+  obj : JsValue,
+  new_item : JsValue,
+  index : JsValue,
+) -> JsValue = "webapi_SVGStringList" "insertItemBefore"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_string_list_insert_item_before_ffi(
+  obj : JsValue,
+  new_item : JsValue,
+  index : JsValue,
+) -> String {
+  jsvalue_to_string(
+    svg_string_list_insert_item_before_ffi_wasm(obj, new_item, index),
+  )
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svg_string_list_replace_item_ffi_wasm(
+  obj : JsValue,
+  new_item : JsValue,
+  index : JsValue,
+) -> JsValue = "webapi_SVGStringList" "replaceItem"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_string_list_replace_item_ffi(
+  obj : JsValue,
+  new_item : JsValue,
+  index : JsValue,
+) -> String {
+  jsvalue_to_string(svg_string_list_replace_item_ffi_wasm(obj, new_item, index))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svg_string_list_remove_item_ffi_wasm(
+  obj : JsValue,
+  index : JsValue,
+) -> JsValue = "webapi_SVGStringList" "removeItem"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_string_list_remove_item_ffi(obj : JsValue, index : JsValue) -> String {
+  jsvalue_to_string(svg_string_list_remove_item_ffi_wasm(obj, index))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svg_string_list_append_item_ffi_wasm(
+  obj : JsValue,
+  new_item : JsValue,
+) -> JsValue = "webapi_SVGStringList" "appendItem"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_string_list_append_item_ffi(obj : JsValue, new_item : JsValue) -> String {
+  jsvalue_to_string(svg_string_list_append_item_ffi_wasm(obj, new_item))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svg_string_list_set_ffi(
+  obj : JsValue,
+  index : JsValue,
+  new_item : JsValue,
+) -> Unit = "webapi_SVGStringList" "set"

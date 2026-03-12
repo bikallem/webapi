@@ -21,3 +21,15 @@ pub fn TransformerStartCallback::new(
 ) -> TransformerStartCallback {
   transformer_start_callback_ffi(callback)
 }
+
+///|
+#cfg(target="js")
+extern "js" fn transformer_start_callback_ffi(
+  callback : (TransformStreamDefaultController) -> JsValue,
+) -> TransformerStartCallback = "(callback) => callback"
+
+///|
+#cfg(target="wasm-gc")
+fn transformer_start_callback_ffi(
+  callback : (TransformStreamDefaultController) -> JsValue,
+) -> TransformerStartCallback = "webapi_TransformerStartCallback" "new"

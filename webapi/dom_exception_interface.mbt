@@ -124,3 +124,68 @@ impl TDOMException with message(self : Self) -> String {
 impl TDOMException with code(self : Self) -> UInt {
   dom_exception_code_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn dom_exception_new_ffi(
+  message : JsValue,
+  name : JsValue,
+) -> DOMException = "(message, name) => new DOMException(message, name)"
+
+///|
+#cfg(target="js")
+extern "js" fn dom_exception_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.name"
+
+///|
+#cfg(target="js")
+fn dom_exception_name_ffi(obj : JsValue) -> String {
+  dom_exception_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_exception_message_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.message"
+
+///|
+#cfg(target="js")
+fn dom_exception_message_ffi(obj : JsValue) -> String {
+  dom_exception_message_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_exception_code_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.code"
+
+///|
+#cfg(target="js")
+fn dom_exception_code_ffi(obj : JsValue) -> UInt {
+  dom_exception_code_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn dom_exception_new_ffi(message : JsValue, name : JsValue) -> DOMException = "webapi_DOMException" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_exception_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_DOMException" "get_name"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_exception_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(dom_exception_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn dom_exception_message_ffi_wasm(obj : JsValue) -> JsValue = "webapi_DOMException" "get_message"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_exception_message_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(dom_exception_message_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn dom_exception_code_ffi(obj : JsValue) -> UInt = "webapi_DOMException" "get_code"

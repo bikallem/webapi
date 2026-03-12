@@ -39,3 +39,49 @@ pub fn FilePickerAcceptType::description(
 pub fn FilePickerAcceptType::accept(self : FilePickerAcceptType) -> JsValue? {
   file_picker_accept_type_get_accept_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn file_picker_accept_type_ffi(
+  description : JsValue,
+  accept : JsValue,
+) -> FilePickerAcceptType =
+  #|(description, accept) => {
+  #|  const obj = {};
+  #|  if (description !== undefined) obj.description = description;
+  #|  if (accept !== undefined) obj.accept = accept;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn file_picker_accept_type_empty_ffi() -> FilePickerAcceptType = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn file_picker_accept_type_get_description_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.description"
+
+///|
+#cfg(target="js")
+extern "js" fn file_picker_accept_type_get_accept_ffi(obj : JsValue) -> JsValue = "(obj) => obj.accept"
+
+///|
+#cfg(target="wasm-gc")
+fn file_picker_accept_type_ffi(
+  description : JsValue,
+  accept : JsValue,
+) -> FilePickerAcceptType = "webapi_FilePickerAcceptType" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn file_picker_accept_type_empty_ffi() -> FilePickerAcceptType = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn file_picker_accept_type_get_description_ffi(obj : JsValue) -> JsValue = "webapi_FilePickerAcceptType" "get_description"
+
+///|
+#cfg(target="wasm-gc")
+fn file_picker_accept_type_get_accept_ffi(obj : JsValue) -> JsValue = "webapi_FilePickerAcceptType" "get_accept"

@@ -107,3 +107,187 @@ impl TTextMetrics with alphabetic_baseline(self : Self) -> Double {
 impl TTextMetrics with ideographic_baseline(self : Self) -> Double {
   text_metrics_ideographic_baseline_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn text_metrics_width_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.width"
+
+///|
+#cfg(target="js")
+fn text_metrics_width_ffi(obj : JsValue) -> Double {
+  text_metrics_width_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_metrics_actual_bounding_box_left_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.actualBoundingBoxLeft"
+
+///|
+#cfg(target="js")
+fn text_metrics_actual_bounding_box_left_ffi(obj : JsValue) -> Double {
+  text_metrics_actual_bounding_box_left_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_metrics_actual_bounding_box_right_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.actualBoundingBoxRight"
+
+///|
+#cfg(target="js")
+fn text_metrics_actual_bounding_box_right_ffi(obj : JsValue) -> Double {
+  text_metrics_actual_bounding_box_right_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_metrics_font_bounding_box_ascent_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.fontBoundingBoxAscent"
+
+///|
+#cfg(target="js")
+fn text_metrics_font_bounding_box_ascent_ffi(obj : JsValue) -> Double {
+  text_metrics_font_bounding_box_ascent_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_metrics_font_bounding_box_descent_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.fontBoundingBoxDescent"
+
+///|
+#cfg(target="js")
+fn text_metrics_font_bounding_box_descent_ffi(obj : JsValue) -> Double {
+  text_metrics_font_bounding_box_descent_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_metrics_actual_bounding_box_ascent_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.actualBoundingBoxAscent"
+
+///|
+#cfg(target="js")
+fn text_metrics_actual_bounding_box_ascent_ffi(obj : JsValue) -> Double {
+  text_metrics_actual_bounding_box_ascent_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_metrics_actual_bounding_box_descent_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.actualBoundingBoxDescent"
+
+///|
+#cfg(target="js")
+fn text_metrics_actual_bounding_box_descent_ffi(obj : JsValue) -> Double {
+  text_metrics_actual_bounding_box_descent_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_metrics_em_height_ascent_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.emHeightAscent"
+
+///|
+#cfg(target="js")
+fn text_metrics_em_height_ascent_ffi(obj : JsValue) -> Double {
+  text_metrics_em_height_ascent_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_metrics_em_height_descent_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.emHeightDescent"
+
+///|
+#cfg(target="js")
+fn text_metrics_em_height_descent_ffi(obj : JsValue) -> Double {
+  text_metrics_em_height_descent_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_metrics_hanging_baseline_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.hangingBaseline"
+
+///|
+#cfg(target="js")
+fn text_metrics_hanging_baseline_ffi(obj : JsValue) -> Double {
+  text_metrics_hanging_baseline_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_metrics_alphabetic_baseline_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.alphabeticBaseline"
+
+///|
+#cfg(target="js")
+fn text_metrics_alphabetic_baseline_ffi(obj : JsValue) -> Double {
+  text_metrics_alphabetic_baseline_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_metrics_ideographic_baseline_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.ideographicBaseline"
+
+///|
+#cfg(target="js")
+fn text_metrics_ideographic_baseline_ffi(obj : JsValue) -> Double {
+  text_metrics_ideographic_baseline_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn text_metrics_width_ffi(obj : JsValue) -> Double = "webapi_TextMetrics" "get_width"
+
+///|
+#cfg(target="wasm-gc")
+fn text_metrics_actual_bounding_box_left_ffi(obj : JsValue) -> Double = "webapi_TextMetrics" "get_actualBoundingBoxLeft"
+
+///|
+#cfg(target="wasm-gc")
+fn text_metrics_actual_bounding_box_right_ffi(obj : JsValue) -> Double = "webapi_TextMetrics" "get_actualBoundingBoxRight"
+
+///|
+#cfg(target="wasm-gc")
+fn text_metrics_font_bounding_box_ascent_ffi(obj : JsValue) -> Double = "webapi_TextMetrics" "get_fontBoundingBoxAscent"
+
+///|
+#cfg(target="wasm-gc")
+fn text_metrics_font_bounding_box_descent_ffi(obj : JsValue) -> Double = "webapi_TextMetrics" "get_fontBoundingBoxDescent"
+
+///|
+#cfg(target="wasm-gc")
+fn text_metrics_actual_bounding_box_ascent_ffi(obj : JsValue) -> Double = "webapi_TextMetrics" "get_actualBoundingBoxAscent"
+
+///|
+#cfg(target="wasm-gc")
+fn text_metrics_actual_bounding_box_descent_ffi(obj : JsValue) -> Double = "webapi_TextMetrics" "get_actualBoundingBoxDescent"
+
+///|
+#cfg(target="wasm-gc")
+fn text_metrics_em_height_ascent_ffi(obj : JsValue) -> Double = "webapi_TextMetrics" "get_emHeightAscent"
+
+///|
+#cfg(target="wasm-gc")
+fn text_metrics_em_height_descent_ffi(obj : JsValue) -> Double = "webapi_TextMetrics" "get_emHeightDescent"
+
+///|
+#cfg(target="wasm-gc")
+fn text_metrics_hanging_baseline_ffi(obj : JsValue) -> Double = "webapi_TextMetrics" "get_hangingBaseline"
+
+///|
+#cfg(target="wasm-gc")
+fn text_metrics_alphabetic_baseline_ffi(obj : JsValue) -> Double = "webapi_TextMetrics" "get_alphabeticBaseline"
+
+///|
+#cfg(target="wasm-gc")
+fn text_metrics_ideographic_baseline_ffi(obj : JsValue) -> Double = "webapi_TextMetrics" "get_ideographicBaseline"

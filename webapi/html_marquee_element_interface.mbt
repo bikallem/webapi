@@ -246,3 +246,354 @@ impl THTMLMarqueeElement with start(self : Self) -> Unit {
 impl THTMLMarqueeElement with stop(self : Self) -> Unit {
   html_marquee_element_stop_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_marquee_element_new_ffi() -> HTMLMarqueeElement = "() => new HTMLMarqueeElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_marquee_element_behavior_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.behavior"
+
+///|
+#cfg(target="js")
+fn html_marquee_element_behavior_ffi(obj : JsValue) -> String {
+  html_marquee_element_behavior_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_marquee_element_set_behavior_ffi(
+  obj : JsValue,
+  behavior : JsValue,
+) -> Unit = "(obj, behavior) => { obj.behavior = behavior; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_marquee_element_bg_color_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.bgColor"
+
+///|
+#cfg(target="js")
+fn html_marquee_element_bg_color_ffi(obj : JsValue) -> String {
+  html_marquee_element_bg_color_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_marquee_element_set_bg_color_ffi(
+  obj : JsValue,
+  bg_color : JsValue,
+) -> Unit = "(obj, bgColor) => { obj.bgColor = bgColor; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_marquee_element_direction_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.direction"
+
+///|
+#cfg(target="js")
+fn html_marquee_element_direction_ffi(obj : JsValue) -> String {
+  html_marquee_element_direction_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_marquee_element_set_direction_ffi(
+  obj : JsValue,
+  direction : JsValue,
+) -> Unit = "(obj, direction) => { obj.direction = direction; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_marquee_element_height_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.height"
+
+///|
+#cfg(target="js")
+fn html_marquee_element_height_ffi(obj : JsValue) -> String {
+  html_marquee_element_height_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_marquee_element_set_height_ffi(
+  obj : JsValue,
+  height : JsValue,
+) -> Unit = "(obj, height) => { obj.height = height; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_marquee_element_hspace_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.hspace"
+
+///|
+#cfg(target="js")
+fn html_marquee_element_hspace_ffi(obj : JsValue) -> UInt {
+  html_marquee_element_hspace_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_marquee_element_set_hspace_ffi(
+  obj : JsValue,
+  hspace : JsValue,
+) -> Unit = "(obj, hspace) => { obj.hspace = hspace; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_marquee_element_loop_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.loop"
+
+///|
+#cfg(target="js")
+fn html_marquee_element_loop_ffi(obj : JsValue) -> Int {
+  html_marquee_element_loop_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_marquee_element_set_loop_ffi(
+  obj : JsValue,
+  loop_ : JsValue,
+) -> Unit = "(obj, loop) => { obj.loop = loop; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_marquee_element_scroll_amount_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.scrollAmount"
+
+///|
+#cfg(target="js")
+fn html_marquee_element_scroll_amount_ffi(obj : JsValue) -> UInt {
+  html_marquee_element_scroll_amount_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_marquee_element_set_scroll_amount_ffi(
+  obj : JsValue,
+  scroll_amount : JsValue,
+) -> Unit = "(obj, scrollAmount) => { obj.scrollAmount = scrollAmount; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_marquee_element_scroll_delay_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.scrollDelay"
+
+///|
+#cfg(target="js")
+fn html_marquee_element_scroll_delay_ffi(obj : JsValue) -> UInt {
+  html_marquee_element_scroll_delay_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_marquee_element_set_scroll_delay_ffi(
+  obj : JsValue,
+  scroll_delay : JsValue,
+) -> Unit = "(obj, scrollDelay) => { obj.scrollDelay = scrollDelay; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_marquee_element_true_speed_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.trueSpeed"
+
+///|
+#cfg(target="js")
+fn html_marquee_element_true_speed_ffi(obj : JsValue) -> Bool {
+  html_marquee_element_true_speed_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_marquee_element_set_true_speed_ffi(
+  obj : JsValue,
+  true_speed : JsValue,
+) -> Unit = "(obj, trueSpeed) => { obj.trueSpeed = trueSpeed; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_marquee_element_vspace_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.vspace"
+
+///|
+#cfg(target="js")
+fn html_marquee_element_vspace_ffi(obj : JsValue) -> UInt {
+  html_marquee_element_vspace_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_marquee_element_set_vspace_ffi(
+  obj : JsValue,
+  vspace : JsValue,
+) -> Unit = "(obj, vspace) => { obj.vspace = vspace; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_marquee_element_width_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.width"
+
+///|
+#cfg(target="js")
+fn html_marquee_element_width_ffi(obj : JsValue) -> String {
+  html_marquee_element_width_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_marquee_element_set_width_ffi(
+  obj : JsValue,
+  width : JsValue,
+) -> Unit = "(obj, width) => { obj.width = width; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_marquee_element_start_ffi(obj : JsValue) -> Unit = "(obj) => obj.start()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_marquee_element_stop_ffi(obj : JsValue) -> Unit = "(obj) => obj.stop()"
+
+///|
+#cfg(target="wasm-gc")
+fn html_marquee_element_new_ffi() -> HTMLMarqueeElement = "webapi_HTMLMarqueeElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_marquee_element_behavior_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLMarqueeElement" "get_behavior"
+
+///|
+#cfg(target="wasm-gc")
+fn html_marquee_element_behavior_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_marquee_element_behavior_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_marquee_element_set_behavior_ffi(
+  obj : JsValue,
+  behavior : JsValue,
+) -> Unit = "webapi_HTMLMarqueeElement" "set_behavior"
+
+///|
+#cfg(target="wasm-gc")
+fn html_marquee_element_bg_color_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLMarqueeElement" "get_bgColor"
+
+///|
+#cfg(target="wasm-gc")
+fn html_marquee_element_bg_color_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_marquee_element_bg_color_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_marquee_element_set_bg_color_ffi(
+  obj : JsValue,
+  bg_color : JsValue,
+) -> Unit = "webapi_HTMLMarqueeElement" "set_bgColor"
+
+///|
+#cfg(target="wasm-gc")
+fn html_marquee_element_direction_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLMarqueeElement" "get_direction"
+
+///|
+#cfg(target="wasm-gc")
+fn html_marquee_element_direction_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_marquee_element_direction_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_marquee_element_set_direction_ffi(
+  obj : JsValue,
+  direction : JsValue,
+) -> Unit = "webapi_HTMLMarqueeElement" "set_direction"
+
+///|
+#cfg(target="wasm-gc")
+fn html_marquee_element_height_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLMarqueeElement" "get_height"
+
+///|
+#cfg(target="wasm-gc")
+fn html_marquee_element_height_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_marquee_element_height_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_marquee_element_set_height_ffi(obj : JsValue, height : JsValue) -> Unit = "webapi_HTMLMarqueeElement" "set_height"
+
+///|
+#cfg(target="wasm-gc")
+fn html_marquee_element_hspace_ffi(obj : JsValue) -> UInt = "webapi_HTMLMarqueeElement" "get_hspace"
+
+///|
+#cfg(target="wasm-gc")
+fn html_marquee_element_set_hspace_ffi(obj : JsValue, hspace : JsValue) -> Unit = "webapi_HTMLMarqueeElement" "set_hspace"
+
+///|
+#cfg(target="wasm-gc")
+fn html_marquee_element_loop_ffi(obj : JsValue) -> Int = "webapi_HTMLMarqueeElement" "get_loop"
+
+///|
+#cfg(target="wasm-gc")
+fn html_marquee_element_set_loop_ffi(obj : JsValue, loop_ : JsValue) -> Unit = "webapi_HTMLMarqueeElement" "set_loop"
+
+///|
+#cfg(target="wasm-gc")
+fn html_marquee_element_scroll_amount_ffi(obj : JsValue) -> UInt = "webapi_HTMLMarqueeElement" "get_scrollAmount"
+
+///|
+#cfg(target="wasm-gc")
+fn html_marquee_element_set_scroll_amount_ffi(
+  obj : JsValue,
+  scroll_amount : JsValue,
+) -> Unit = "webapi_HTMLMarqueeElement" "set_scrollAmount"
+
+///|
+#cfg(target="wasm-gc")
+fn html_marquee_element_scroll_delay_ffi(obj : JsValue) -> UInt = "webapi_HTMLMarqueeElement" "get_scrollDelay"
+
+///|
+#cfg(target="wasm-gc")
+fn html_marquee_element_set_scroll_delay_ffi(
+  obj : JsValue,
+  scroll_delay : JsValue,
+) -> Unit = "webapi_HTMLMarqueeElement" "set_scrollDelay"
+
+///|
+#cfg(target="wasm-gc")
+fn html_marquee_element_true_speed_ffi(obj : JsValue) -> Bool = "webapi_HTMLMarqueeElement" "get_trueSpeed"
+
+///|
+#cfg(target="wasm-gc")
+fn html_marquee_element_set_true_speed_ffi(
+  obj : JsValue,
+  true_speed : JsValue,
+) -> Unit = "webapi_HTMLMarqueeElement" "set_trueSpeed"
+
+///|
+#cfg(target="wasm-gc")
+fn html_marquee_element_vspace_ffi(obj : JsValue) -> UInt = "webapi_HTMLMarqueeElement" "get_vspace"
+
+///|
+#cfg(target="wasm-gc")
+fn html_marquee_element_set_vspace_ffi(obj : JsValue, vspace : JsValue) -> Unit = "webapi_HTMLMarqueeElement" "set_vspace"
+
+///|
+#cfg(target="wasm-gc")
+fn html_marquee_element_width_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLMarqueeElement" "get_width"
+
+///|
+#cfg(target="wasm-gc")
+fn html_marquee_element_width_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_marquee_element_width_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_marquee_element_set_width_ffi(obj : JsValue, width : JsValue) -> Unit = "webapi_HTMLMarqueeElement" "set_width"
+
+///|
+#cfg(target="wasm-gc")
+fn html_marquee_element_start_ffi(obj : JsValue) -> Unit = "webapi_HTMLMarqueeElement" "start"
+
+///|
+#cfg(target="wasm-gc")
+fn html_marquee_element_stop_ffi(obj : JsValue) -> Unit = "webapi_HTMLMarqueeElement" "stop"

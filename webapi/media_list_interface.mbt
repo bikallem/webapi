@@ -68,3 +68,78 @@ impl TMediaList with append_medium(self : Self, medium : CSSOMString) -> Unit {
 impl TMediaList with delete_medium(self : Self, medium : CSSOMString) -> Unit {
   media_list_delete_medium_ffi(TJsValue::to_js(self), TJsValue::to_js(medium))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn media_list_media_text_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.mediaText"
+
+///|
+#cfg(target="js")
+fn media_list_media_text_ffi(obj : JsValue) -> CSSOMString {
+  media_list_media_text_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn media_list_set_media_text_ffi(
+  obj : JsValue,
+  media_text : JsValue,
+) -> Unit = "(obj, mediaText) => { obj.mediaText = mediaText; }"
+
+///|
+#cfg(target="js")
+extern "js" fn media_list_length_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.length"
+
+///|
+#cfg(target="js")
+fn media_list_length_ffi(obj : JsValue) -> UInt {
+  media_list_length_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn media_list_item_ffi(obj : JsValue, index : JsValue) -> JsValue = "(obj, index) => obj.item(index)"
+
+///|
+#cfg(target="js")
+extern "js" fn media_list_append_medium_ffi(
+  obj : JsValue,
+  medium : JsValue,
+) -> Unit = "(obj, medium) => obj.appendMedium(medium)"
+
+///|
+#cfg(target="js")
+extern "js" fn media_list_delete_medium_ffi(
+  obj : JsValue,
+  medium : JsValue,
+) -> Unit = "(obj, medium) => obj.deleteMedium(medium)"
+
+///|
+#cfg(target="wasm-gc")
+fn media_list_media_text_ffi_wasm(obj : JsValue) -> JsValue = "webapi_MediaList" "get_mediaText"
+
+///|
+#cfg(target="wasm-gc")
+fn media_list_media_text_ffi(obj : JsValue) -> CSSOMString {
+  media_list_media_text_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn media_list_set_media_text_ffi(obj : JsValue, media_text : JsValue) -> Unit = "webapi_MediaList" "set_mediaText"
+
+///|
+#cfg(target="wasm-gc")
+fn media_list_length_ffi(obj : JsValue) -> UInt = "webapi_MediaList" "get_length"
+
+///|
+#cfg(target="wasm-gc")
+fn media_list_item_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_MediaList" "item"
+
+///|
+#cfg(target="wasm-gc")
+fn media_list_append_medium_ffi(obj : JsValue, medium : JsValue) -> Unit = "webapi_MediaList" "appendMedium"
+
+///|
+#cfg(target="wasm-gc")
+fn media_list_delete_medium_ffi(obj : JsValue, medium : JsValue) -> Unit = "webapi_MediaList" "deleteMedium"

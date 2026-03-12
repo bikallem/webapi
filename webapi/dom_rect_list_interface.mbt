@@ -43,3 +43,28 @@ impl TDOMRectList with item_opt(self : Self, index : UInt) -> DOMRect? {
 impl TDOMRectList with item(self : Self, index : UInt) -> DOMRect {
   self.item_opt(index).unwrap()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn dom_rect_list_length_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.length"
+
+///|
+#cfg(target="js")
+fn dom_rect_list_length_ffi(obj : JsValue) -> UInt {
+  dom_rect_list_length_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_rect_list_item_ffi(
+  obj : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, index) => obj.item(index)"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_rect_list_length_ffi(obj : JsValue) -> UInt = "webapi_DOMRectList" "get_length"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_rect_list_item_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_DOMRectList" "item"

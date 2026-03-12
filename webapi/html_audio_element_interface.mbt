@@ -44,3 +44,11 @@ pub fn HTMLAudioElement::new() -> HTMLAudioElement {
 ///|
 /// [HTMLAudioElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement) interface.
 pub trait THTMLAudioElement: THTMLMediaElement {}
+
+///|
+#cfg(target="js")
+extern "js" fn html_audio_element_new_ffi() -> HTMLAudioElement = "() => new HTMLAudioElement()"
+
+///|
+#cfg(target="wasm-gc")
+fn html_audio_element_new_ffi() -> HTMLAudioElement = "webapi_HTMLAudioElement" "new"

@@ -41,3 +41,41 @@ impl TNotRestoredReasonDetails with reason(self : Self) -> String {
 impl TNotRestoredReasonDetails with to_json(self : Self) -> JsValue {
   not_restored_reason_details_to_json_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn not_restored_reason_details_reason_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.reason"
+
+///|
+#cfg(target="js")
+fn not_restored_reason_details_reason_ffi(obj : JsValue) -> String {
+  not_restored_reason_details_reason_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn not_restored_reason_details_to_json_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.toJSON()"
+
+///|
+#cfg(target="js")
+fn not_restored_reason_details_to_json_ffi(obj : JsValue) -> JsValue {
+  not_restored_reason_details_to_json_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn not_restored_reason_details_reason_ffi_wasm(obj : JsValue) -> JsValue = "webapi_NotRestoredReasonDetails" "get_reason"
+
+///|
+#cfg(target="wasm-gc")
+fn not_restored_reason_details_reason_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(not_restored_reason_details_reason_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn not_restored_reason_details_to_json_ffi(obj : JsValue) -> JsValue = "webapi_NotRestoredReasonDetails" "toJSON"

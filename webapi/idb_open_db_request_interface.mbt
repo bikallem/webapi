@@ -71,3 +71,73 @@ impl TIDBOpenDBRequest with set_onupgradeneeded(
     TJsValue::to_js(event_handler_non_null_ffi(onupgradeneeded)),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn idb_open_db_request_onblocked_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onblocked"
+
+///|
+#cfg(target="js")
+fn idb_open_db_request_onblocked_ffi(obj : JsValue) -> EventHandler {
+  idb_open_db_request_onblocked_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_open_db_request_set_onblocked_ffi(
+  obj : JsValue,
+  onblocked : JsValue,
+) -> Unit = "(obj, onblocked) => { obj.onblocked = onblocked; }"
+
+///|
+#cfg(target="js")
+extern "js" fn idb_open_db_request_onupgradeneeded_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.onupgradeneeded"
+
+///|
+#cfg(target="js")
+fn idb_open_db_request_onupgradeneeded_ffi(obj : JsValue) -> EventHandler {
+  idb_open_db_request_onupgradeneeded_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_open_db_request_set_onupgradeneeded_ffi(
+  obj : JsValue,
+  onupgradeneeded : JsValue,
+) -> Unit = "(obj, onupgradeneeded) => { obj.onupgradeneeded = onupgradeneeded; }"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_open_db_request_onblocked_ffi_wasm(obj : JsValue) -> JsValue = "webapi_IDBOpenDBRequest" "get_onblocked"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_open_db_request_onblocked_ffi(obj : JsValue) -> EventHandler {
+  idb_open_db_request_onblocked_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn idb_open_db_request_set_onblocked_ffi(
+  obj : JsValue,
+  onblocked : JsValue,
+) -> Unit = "webapi_IDBOpenDBRequest" "set_onblocked"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_open_db_request_onupgradeneeded_ffi_wasm(obj : JsValue) -> JsValue = "webapi_IDBOpenDBRequest" "get_onupgradeneeded"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_open_db_request_onupgradeneeded_ffi(obj : JsValue) -> EventHandler {
+  idb_open_db_request_onupgradeneeded_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn idb_open_db_request_set_onupgradeneeded_ffi(
+  obj : JsValue,
+  onupgradeneeded : JsValue,
+) -> Unit = "webapi_IDBOpenDBRequest" "set_onupgradeneeded"

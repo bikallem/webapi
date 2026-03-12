@@ -90,3 +90,104 @@ impl TSVGGeometryElement with get_point_at_length(self : Self, distance : Float)
     TJsValue::to_js(distance),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn svg_geometry_element_path_length_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.pathLength"
+
+///|
+#cfg(target="js")
+fn svg_geometry_element_path_length_ffi(obj : JsValue) -> SVGAnimatedNumber {
+  svg_geometry_element_path_length_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_geometry_element_is_point_in_fill_ffi_js(
+  obj : JsValue,
+  point : JsValue,
+) -> JsValue = "(obj, point) => obj.isPointInFill(point)"
+
+///|
+#cfg(target="js")
+fn svg_geometry_element_is_point_in_fill_ffi(
+  obj : JsValue,
+  point : JsValue,
+) -> Bool {
+  svg_geometry_element_is_point_in_fill_ffi_js(obj, point).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_geometry_element_is_point_in_stroke_ffi_js(
+  obj : JsValue,
+  point : JsValue,
+) -> JsValue = "(obj, point) => obj.isPointInStroke(point)"
+
+///|
+#cfg(target="js")
+fn svg_geometry_element_is_point_in_stroke_ffi(
+  obj : JsValue,
+  point : JsValue,
+) -> Bool {
+  svg_geometry_element_is_point_in_stroke_ffi_js(obj, point).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_geometry_element_get_total_length_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.getTotalLength()"
+
+///|
+#cfg(target="js")
+fn svg_geometry_element_get_total_length_ffi(obj : JsValue) -> Float {
+  svg_geometry_element_get_total_length_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_geometry_element_get_point_at_length_ffi_js(
+  obj : JsValue,
+  distance : JsValue,
+) -> JsValue = "(obj, distance) => obj.getPointAtLength(distance)"
+
+///|
+#cfg(target="js")
+fn svg_geometry_element_get_point_at_length_ffi(
+  obj : JsValue,
+  distance : JsValue,
+) -> DOMPoint {
+  svg_geometry_element_get_point_at_length_ffi_js(obj, distance).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svg_geometry_element_path_length_ffi(obj : JsValue) -> SVGAnimatedNumber = "webapi_SVGGeometryElement" "get_pathLength"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_geometry_element_is_point_in_fill_ffi(
+  obj : JsValue,
+  point : JsValue,
+) -> Bool = "webapi_SVGGeometryElement" "isPointInFill"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_geometry_element_is_point_in_stroke_ffi(
+  obj : JsValue,
+  point : JsValue,
+) -> Bool = "webapi_SVGGeometryElement" "isPointInStroke"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_geometry_element_get_total_length_ffi(obj : JsValue) -> Float = "webapi_SVGGeometryElement" "getTotalLength"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_geometry_element_get_point_at_length_ffi(
+  obj : JsValue,
+  distance : JsValue,
+) -> DOMPoint = "webapi_SVGGeometryElement" "getPointAtLength"

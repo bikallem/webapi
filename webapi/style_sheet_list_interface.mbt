@@ -43,3 +43,28 @@ impl TStyleSheetList with length(self : Self) -> UInt {
 impl TStyleSheetList with item(self : Self, index : UInt) -> CSSStyleSheet {
   self.item_opt(index).unwrap()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn style_sheet_list_item_ffi(
+  obj : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, index) => obj.item(index)"
+
+///|
+#cfg(target="js")
+extern "js" fn style_sheet_list_length_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.length"
+
+///|
+#cfg(target="js")
+fn style_sheet_list_length_ffi(obj : JsValue) -> UInt {
+  style_sheet_list_length_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn style_sheet_list_item_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_StyleSheetList" "item"
+
+///|
+#cfg(target="wasm-gc")
+fn style_sheet_list_length_ffi(obj : JsValue) -> UInt = "webapi_StyleSheetList" "get_length"

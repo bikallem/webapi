@@ -62,3 +62,75 @@ pub fn ScrollIntoViewOptions::container(
 ) -> ScrollIntoViewContainer? {
   scroll_into_view_options_get_container_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn scroll_into_view_options_ffi(
+  behavior : JsValue,
+  block : JsValue,
+  inline : JsValue,
+  container : JsValue,
+) -> ScrollIntoViewOptions =
+  #|(behavior, block, inline, container) => {
+  #|  const obj = {};
+  #|  if (behavior !== undefined) obj.behavior = behavior;
+  #|  if (block !== undefined) obj.block = block;
+  #|  if (inline !== undefined) obj.inline = inline;
+  #|  if (container !== undefined) obj.container = container;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn scroll_into_view_options_empty_ffi() -> ScrollIntoViewOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn scroll_into_view_options_get_behavior_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.behavior"
+
+///|
+#cfg(target="js")
+extern "js" fn scroll_into_view_options_get_block_ffi(obj : JsValue) -> JsValue = "(obj) => obj.block"
+
+///|
+#cfg(target="js")
+extern "js" fn scroll_into_view_options_get_inline_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.inline"
+
+///|
+#cfg(target="js")
+extern "js" fn scroll_into_view_options_get_container_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.container"
+
+///|
+#cfg(target="wasm-gc")
+fn scroll_into_view_options_ffi(
+  behavior : JsValue,
+  block : JsValue,
+  inline : JsValue,
+  container : JsValue,
+) -> ScrollIntoViewOptions = "webapi_ScrollIntoViewOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn scroll_into_view_options_empty_ffi() -> ScrollIntoViewOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn scroll_into_view_options_get_behavior_ffi(obj : JsValue) -> JsValue = "webapi_ScrollIntoViewOptions" "get_behavior"
+
+///|
+#cfg(target="wasm-gc")
+fn scroll_into_view_options_get_block_ffi(obj : JsValue) -> JsValue = "webapi_ScrollIntoViewOptions" "get_block"
+
+///|
+#cfg(target="wasm-gc")
+fn scroll_into_view_options_get_inline_ffi(obj : JsValue) -> JsValue = "webapi_ScrollIntoViewOptions" "get_inline"
+
+///|
+#cfg(target="wasm-gc")
+fn scroll_into_view_options_get_container_ffi(obj : JsValue) -> JsValue = "webapi_ScrollIntoViewOptions" "get_container"

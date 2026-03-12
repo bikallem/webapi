@@ -23,3 +23,15 @@ pub fn NavigationPrecommitHandler::new(
 ) -> NavigationPrecommitHandler {
   navigation_precommit_handler_ffi(callback)
 }
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_precommit_handler_ffi(
+  callback : (NavigationPrecommitController) -> JsPromise[JsValue],
+) -> NavigationPrecommitHandler = "(callback) => callback"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_precommit_handler_ffi(
+  callback : (NavigationPrecommitController) -> JsPromise[JsValue],
+) -> NavigationPrecommitHandler = "webapi_NavigationPrecommitHandler" "new"

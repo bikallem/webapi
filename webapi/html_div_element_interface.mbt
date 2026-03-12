@@ -54,3 +54,42 @@ impl THTMLDivElement with align(self : Self) -> String {
 impl THTMLDivElement with set_align(self : Self, align : String) -> Unit {
   html_div_element_set_align_ffi(TJsValue::to_js(self), TJsValue::to_js(align))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_div_element_new_ffi() -> HTMLDivElement = "() => new HTMLDivElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_div_element_align_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.align"
+
+///|
+#cfg(target="js")
+fn html_div_element_align_ffi(obj : JsValue) -> String {
+  html_div_element_align_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_div_element_set_align_ffi(
+  obj : JsValue,
+  align : JsValue,
+) -> Unit = "(obj, align) => { obj.align = align; }"
+
+///|
+#cfg(target="wasm-gc")
+fn html_div_element_new_ffi() -> HTMLDivElement = "webapi_HTMLDivElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_div_element_align_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLDivElement" "get_align"
+
+///|
+#cfg(target="wasm-gc")
+fn html_div_element_align_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_div_element_align_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_div_element_set_align_ffi(obj : JsValue, align : JsValue) -> Unit = "webapi_HTMLDivElement" "set_align"

@@ -61,3 +61,57 @@ impl TMutationObserver with disconnect(self : Self) -> Unit {
 impl TMutationObserver with take_records(self : Self) -> Array[MutationRecord] {
   mutation_observer_take_records_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn mutation_observer_new_ffi(
+  callback : JsValue,
+) -> MutationObserver = "(callback) => new MutationObserver(callback)"
+
+///|
+#cfg(target="js")
+extern "js" fn mutation_observer_observe_ffi(
+  obj : JsValue,
+  target : JsValue,
+  options : JsValue,
+) -> Unit = "(obj, target, options) => obj.observe(target, options)"
+
+///|
+#cfg(target="js")
+extern "js" fn mutation_observer_disconnect_ffi(obj : JsValue) -> Unit = "(obj) => obj.disconnect()"
+
+///|
+#cfg(target="js")
+extern "js" fn mutation_observer_take_records_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.takeRecords()"
+
+///|
+#cfg(target="js")
+fn mutation_observer_take_records_ffi(obj : JsValue) -> Array[MutationRecord] {
+  mutation_observer_take_records_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn mutation_observer_new_ffi(callback : JsValue) -> MutationObserver = "webapi_MutationObserver" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn mutation_observer_observe_ffi(
+  obj : JsValue,
+  target : JsValue,
+  options : JsValue,
+) -> Unit = "webapi_MutationObserver" "observe"
+
+///|
+#cfg(target="wasm-gc")
+fn mutation_observer_disconnect_ffi(obj : JsValue) -> Unit = "webapi_MutationObserver" "disconnect"
+
+///|
+#cfg(target="wasm-gc")
+fn mutation_observer_take_records_ffi_wasm(obj : JsValue) -> JsArray = "webapi_MutationObserver" "takeRecords"
+
+///|
+#cfg(target="wasm-gc")
+fn mutation_observer_take_records_ffi(obj : JsValue) -> Array[MutationRecord] {
+  mutation_observer_take_records_ffi_wasm(obj).to_array()
+}

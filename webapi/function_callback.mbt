@@ -17,3 +17,11 @@ pub impl FromJsAny for Function with from_js_any(value : JsAny) -> Function = "%
 pub fn Function::new(callback : (JsValue) -> JsValue) -> Function {
   function_ffi(callback)
 }
+
+///|
+#cfg(target="js")
+extern "js" fn function_ffi(callback : (JsValue) -> JsValue) -> Function = "(callback) => callback"
+
+///|
+#cfg(target="wasm-gc")
+fn function_ffi(callback : (JsValue) -> JsValue) -> Function = "webapi_Function" "new"

@@ -61,3 +61,47 @@ impl THTMLTableCaptionElement with set_align(self : Self, align : String) -> Uni
     TJsValue::to_js(align),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_caption_element_new_ffi() -> HTMLTableCaptionElement = "() => new HTMLTableCaptionElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_caption_element_align_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.align"
+
+///|
+#cfg(target="js")
+fn html_table_caption_element_align_ffi(obj : JsValue) -> String {
+  html_table_caption_element_align_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_caption_element_set_align_ffi(
+  obj : JsValue,
+  align : JsValue,
+) -> Unit = "(obj, align) => { obj.align = align; }"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_caption_element_new_ffi() -> HTMLTableCaptionElement = "webapi_HTMLTableCaptionElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_caption_element_align_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLTableCaptionElement" "get_align"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_caption_element_align_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_table_caption_element_align_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_caption_element_set_align_ffi(
+  obj : JsValue,
+  align : JsValue,
+) -> Unit = "webapi_HTMLTableCaptionElement" "set_align"

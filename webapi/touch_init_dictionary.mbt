@@ -129,3 +129,202 @@ pub fn TouchInit::azimuth_angle(self : TouchInit) -> Double? {
 pub fn TouchInit::touch_type(self : TouchInit) -> TouchType? {
   touch_init_get_touch_type_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn touch_init_ffi(
+  identifier : JsValue,
+  target : JsValue,
+  client_x : JsValue,
+  client_y : JsValue,
+  screen_x : JsValue,
+  screen_y : JsValue,
+  page_x : JsValue,
+  page_y : JsValue,
+  radius_x : JsValue,
+  radius_y : JsValue,
+  rotation_angle : JsValue,
+  force : JsValue,
+  altitude_angle : JsValue,
+  azimuth_angle : JsValue,
+  touch_type : JsValue,
+) -> TouchInit =
+  #|(identifier, target, clientX, clientY, screenX, screenY, pageX, pageY, radiusX, radiusY, rotationAngle, force, altitudeAngle, azimuthAngle, touchType) => {
+  #|  const obj = {};
+  #|  if (identifier !== undefined) obj.identifier = identifier;
+  #|  if (target !== undefined) obj.target = target;
+  #|  if (clientX !== undefined) obj.clientX = clientX;
+  #|  if (clientY !== undefined) obj.clientY = clientY;
+  #|  if (screenX !== undefined) obj.screenX = screenX;
+  #|  if (screenY !== undefined) obj.screenY = screenY;
+  #|  if (pageX !== undefined) obj.pageX = pageX;
+  #|  if (pageY !== undefined) obj.pageY = pageY;
+  #|  if (radiusX !== undefined) obj.radiusX = radiusX;
+  #|  if (radiusY !== undefined) obj.radiusY = radiusY;
+  #|  if (rotationAngle !== undefined) obj.rotationAngle = rotationAngle;
+  #|  if (force !== undefined) obj.force = force;
+  #|  if (altitudeAngle !== undefined) obj.altitudeAngle = altitudeAngle;
+  #|  if (azimuthAngle !== undefined) obj.azimuthAngle = azimuthAngle;
+  #|  if (touchType !== undefined) obj.touchType = touchType;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn touch_init_empty_ffi() -> TouchInit = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn touch_init_get_identifier_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.identifier"
+
+///|
+#cfg(target="js")
+fn touch_init_get_identifier_ffi(obj : JsValue) -> Int {
+  touch_init_get_identifier_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn touch_init_get_target_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.target"
+
+///|
+#cfg(target="js")
+fn touch_init_get_target_ffi(obj : JsValue) -> EventTarget {
+  touch_init_get_target_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn touch_init_get_client_x_ffi(obj : JsValue) -> JsValue = "(obj) => obj.clientX"
+
+///|
+#cfg(target="js")
+extern "js" fn touch_init_get_client_y_ffi(obj : JsValue) -> JsValue = "(obj) => obj.clientY"
+
+///|
+#cfg(target="js")
+extern "js" fn touch_init_get_screen_x_ffi(obj : JsValue) -> JsValue = "(obj) => obj.screenX"
+
+///|
+#cfg(target="js")
+extern "js" fn touch_init_get_screen_y_ffi(obj : JsValue) -> JsValue = "(obj) => obj.screenY"
+
+///|
+#cfg(target="js")
+extern "js" fn touch_init_get_page_x_ffi(obj : JsValue) -> JsValue = "(obj) => obj.pageX"
+
+///|
+#cfg(target="js")
+extern "js" fn touch_init_get_page_y_ffi(obj : JsValue) -> JsValue = "(obj) => obj.pageY"
+
+///|
+#cfg(target="js")
+extern "js" fn touch_init_get_radius_x_ffi(obj : JsValue) -> JsValue = "(obj) => obj.radiusX"
+
+///|
+#cfg(target="js")
+extern "js" fn touch_init_get_radius_y_ffi(obj : JsValue) -> JsValue = "(obj) => obj.radiusY"
+
+///|
+#cfg(target="js")
+extern "js" fn touch_init_get_rotation_angle_ffi(obj : JsValue) -> JsValue = "(obj) => obj.rotationAngle"
+
+///|
+#cfg(target="js")
+extern "js" fn touch_init_get_force_ffi(obj : JsValue) -> JsValue = "(obj) => obj.force"
+
+///|
+#cfg(target="js")
+extern "js" fn touch_init_get_altitude_angle_ffi(obj : JsValue) -> JsValue = "(obj) => obj.altitudeAngle"
+
+///|
+#cfg(target="js")
+extern "js" fn touch_init_get_azimuth_angle_ffi(obj : JsValue) -> JsValue = "(obj) => obj.azimuthAngle"
+
+///|
+#cfg(target="js")
+extern "js" fn touch_init_get_touch_type_ffi(obj : JsValue) -> JsValue = "(obj) => obj.touchType"
+
+///|
+#cfg(target="wasm-gc")
+fn touch_init_ffi(
+  identifier : JsValue,
+  target : JsValue,
+  client_x : JsValue,
+  client_y : JsValue,
+  screen_x : JsValue,
+  screen_y : JsValue,
+  page_x : JsValue,
+  page_y : JsValue,
+  radius_x : JsValue,
+  radius_y : JsValue,
+  rotation_angle : JsValue,
+  force : JsValue,
+  altitude_angle : JsValue,
+  azimuth_angle : JsValue,
+  touch_type : JsValue,
+) -> TouchInit = "webapi_TouchInit" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn touch_init_empty_ffi() -> TouchInit = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn touch_init_get_identifier_ffi(obj : JsValue) -> Int = "webapi_TouchInit" "get_identifier"
+
+///|
+#cfg(target="wasm-gc")
+fn touch_init_get_target_ffi(obj : JsValue) -> EventTarget = "webapi_TouchInit" "get_target"
+
+///|
+#cfg(target="wasm-gc")
+fn touch_init_get_client_x_ffi(obj : JsValue) -> JsValue = "webapi_TouchInit" "get_clientX"
+
+///|
+#cfg(target="wasm-gc")
+fn touch_init_get_client_y_ffi(obj : JsValue) -> JsValue = "webapi_TouchInit" "get_clientY"
+
+///|
+#cfg(target="wasm-gc")
+fn touch_init_get_screen_x_ffi(obj : JsValue) -> JsValue = "webapi_TouchInit" "get_screenX"
+
+///|
+#cfg(target="wasm-gc")
+fn touch_init_get_screen_y_ffi(obj : JsValue) -> JsValue = "webapi_TouchInit" "get_screenY"
+
+///|
+#cfg(target="wasm-gc")
+fn touch_init_get_page_x_ffi(obj : JsValue) -> JsValue = "webapi_TouchInit" "get_pageX"
+
+///|
+#cfg(target="wasm-gc")
+fn touch_init_get_page_y_ffi(obj : JsValue) -> JsValue = "webapi_TouchInit" "get_pageY"
+
+///|
+#cfg(target="wasm-gc")
+fn touch_init_get_radius_x_ffi(obj : JsValue) -> JsValue = "webapi_TouchInit" "get_radiusX"
+
+///|
+#cfg(target="wasm-gc")
+fn touch_init_get_radius_y_ffi(obj : JsValue) -> JsValue = "webapi_TouchInit" "get_radiusY"
+
+///|
+#cfg(target="wasm-gc")
+fn touch_init_get_rotation_angle_ffi(obj : JsValue) -> JsValue = "webapi_TouchInit" "get_rotationAngle"
+
+///|
+#cfg(target="wasm-gc")
+fn touch_init_get_force_ffi(obj : JsValue) -> JsValue = "webapi_TouchInit" "get_force"
+
+///|
+#cfg(target="wasm-gc")
+fn touch_init_get_altitude_angle_ffi(obj : JsValue) -> JsValue = "webapi_TouchInit" "get_altitudeAngle"
+
+///|
+#cfg(target="wasm-gc")
+fn touch_init_get_azimuth_angle_ffi(obj : JsValue) -> JsValue = "webapi_TouchInit" "get_azimuthAngle"
+
+///|
+#cfg(target="wasm-gc")
+fn touch_init_get_touch_type_ffi(obj : JsValue) -> JsValue = "webapi_TouchInit" "get_touchType"

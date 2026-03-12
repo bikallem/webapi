@@ -62,3 +62,97 @@ impl TNavigationTransition with committed(self : Self) -> JsPromise[JsValue] {
 impl TNavigationTransition with finished(self : Self) -> JsPromise[JsValue] {
   navigation_transition_finished_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_transition_navigation_type_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.navigationType"
+
+///|
+#cfg(target="js")
+fn navigation_transition_navigation_type_ffi(obj : JsValue) -> NavigationType {
+  NavigationType::from_unchecked(
+    navigation_transition_navigation_type_ffi_js(obj).unsafe_cast(),
+  )
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_transition_from_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.from"
+
+///|
+#cfg(target="js")
+fn navigation_transition_from_ffi(obj : JsValue) -> NavigationHistoryEntry {
+  navigation_transition_from_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_transition_to_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.to"
+
+///|
+#cfg(target="js")
+fn navigation_transition_to_ffi(obj : JsValue) -> NavigationDestination {
+  navigation_transition_to_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_transition_committed_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.committed"
+
+///|
+#cfg(target="js")
+fn navigation_transition_committed_ffi(obj : JsValue) -> JsPromise[JsValue] {
+  navigation_transition_committed_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_transition_finished_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.finished"
+
+///|
+#cfg(target="js")
+fn navigation_transition_finished_ffi(obj : JsValue) -> JsPromise[JsValue] {
+  navigation_transition_finished_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_transition_navigation_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_NavigationTransition" "get_navigationType"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_transition_navigation_type_ffi(obj : JsValue) -> NavigationType {
+  NavigationType::from_unchecked(
+    jsvalue_to_string(navigation_transition_navigation_type_ffi_wasm(obj)),
+  )
+}
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_transition_from_ffi(obj : JsValue) -> NavigationHistoryEntry = "webapi_NavigationTransition" "get_from"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_transition_to_ffi(obj : JsValue) -> NavigationDestination = "webapi_NavigationTransition" "get_to"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_transition_committed_ffi_wasm(obj : JsValue) -> JsValue = "webapi_NavigationTransition" "get_committed"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_transition_committed_ffi(obj : JsValue) -> JsPromise[JsValue] {
+  navigation_transition_committed_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_transition_finished_ffi_wasm(obj : JsValue) -> JsValue = "webapi_NavigationTransition" "get_finished"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_transition_finished_ffi(obj : JsValue) -> JsPromise[JsValue] {
+  navigation_transition_finished_ffi_wasm(obj).unsafe_cast()
+}

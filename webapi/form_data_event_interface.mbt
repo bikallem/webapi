@@ -44,3 +44,31 @@ pub trait TFormDataEvent: TEvent {
 impl TFormDataEvent with form_data(self : Self) -> FormData {
   form_data_event_form_data_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn form_data_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> FormDataEvent = "(type_, event_init_dict) => new FormDataEvent(type_, event_init_dict)"
+
+///|
+#cfg(target="js")
+extern "js" fn form_data_event_form_data_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.formData"
+
+///|
+#cfg(target="js")
+fn form_data_event_form_data_ffi(obj : JsValue) -> FormData {
+  form_data_event_form_data_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn form_data_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> FormDataEvent = "webapi_FormDataEvent" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn form_data_event_form_data_ffi(obj : JsValue) -> FormData = "webapi_FormDataEvent" "get_formData"

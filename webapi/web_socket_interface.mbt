@@ -211,3 +211,283 @@ impl TWebSocket with set_binary_type(self : Self, binary_type : BinaryType) -> U
 impl TWebSocket with send(self : Self, data : &TWebSocketSendData) -> Unit {
   web_socket_send_ffi(TJsValue::to_js(self), data.to_js())
 }
+
+///|
+#cfg(target="js")
+extern "js" fn web_socket_new_ffi(
+  url : JsValue,
+  protocols : JsValue,
+) -> WebSocket = "(url, protocols) => new WebSocket(url, protocols)"
+
+///|
+#cfg(target="js")
+extern "js" fn web_socket_url_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.url"
+
+///|
+#cfg(target="js")
+fn web_socket_url_ffi(obj : JsValue) -> String {
+  web_socket_url_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn web_socket_ready_state_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.readyState"
+
+///|
+#cfg(target="js")
+fn web_socket_ready_state_ffi(obj : JsValue) -> UInt {
+  web_socket_ready_state_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn web_socket_buffered_amount_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.bufferedAmount"
+
+///|
+#cfg(target="js")
+fn web_socket_buffered_amount_ffi(obj : JsValue) -> UInt64 {
+  web_socket_buffered_amount_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn web_socket_onopen_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onopen"
+
+///|
+#cfg(target="js")
+fn web_socket_onopen_ffi(obj : JsValue) -> EventHandler {
+  web_socket_onopen_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn web_socket_set_onopen_ffi(
+  obj : JsValue,
+  onopen : JsValue,
+) -> Unit = "(obj, onopen) => { obj.onopen = onopen; }"
+
+///|
+#cfg(target="js")
+extern "js" fn web_socket_onerror_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onerror"
+
+///|
+#cfg(target="js")
+fn web_socket_onerror_ffi(obj : JsValue) -> EventHandler {
+  web_socket_onerror_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn web_socket_set_onerror_ffi(
+  obj : JsValue,
+  onerror : JsValue,
+) -> Unit = "(obj, onerror) => { obj.onerror = onerror; }"
+
+///|
+#cfg(target="js")
+extern "js" fn web_socket_onclose_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onclose"
+
+///|
+#cfg(target="js")
+fn web_socket_onclose_ffi(obj : JsValue) -> EventHandler {
+  web_socket_onclose_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn web_socket_set_onclose_ffi(
+  obj : JsValue,
+  onclose : JsValue,
+) -> Unit = "(obj, onclose) => { obj.onclose = onclose; }"
+
+///|
+#cfg(target="js")
+extern "js" fn web_socket_extensions_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.extensions"
+
+///|
+#cfg(target="js")
+fn web_socket_extensions_ffi(obj : JsValue) -> String {
+  web_socket_extensions_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn web_socket_protocol_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.protocol"
+
+///|
+#cfg(target="js")
+fn web_socket_protocol_ffi(obj : JsValue) -> String {
+  web_socket_protocol_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn web_socket_close_ffi(
+  obj : JsValue,
+  code : JsValue,
+  reason : JsValue,
+) -> Unit = "(obj, code, reason) => obj.close(code, reason)"
+
+///|
+#cfg(target="js")
+extern "js" fn web_socket_onmessage_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onmessage"
+
+///|
+#cfg(target="js")
+fn web_socket_onmessage_ffi(obj : JsValue) -> EventHandler {
+  web_socket_onmessage_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn web_socket_set_onmessage_ffi(
+  obj : JsValue,
+  onmessage : JsValue,
+) -> Unit = "(obj, onmessage) => { obj.onmessage = onmessage; }"
+
+///|
+#cfg(target="js")
+extern "js" fn web_socket_binary_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.binaryType"
+
+///|
+#cfg(target="js")
+fn web_socket_binary_type_ffi(obj : JsValue) -> BinaryType {
+  BinaryType::from_unchecked(web_socket_binary_type_ffi_js(obj).unsafe_cast())
+}
+
+///|
+#cfg(target="js")
+extern "js" fn web_socket_set_binary_type_ffi(
+  obj : JsValue,
+  binary_type : JsValue,
+) -> Unit = "(obj, binaryType) => { obj.binaryType = binaryType; }"
+
+///|
+#cfg(target="js")
+extern "js" fn web_socket_send_ffi(obj : JsValue, data : JsValue) -> Unit = "(obj, data) => obj.send(data)"
+
+///|
+#cfg(target="wasm-gc")
+fn web_socket_new_ffi(url : JsValue, protocols : JsValue) -> WebSocket = "webapi_WebSocket" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn web_socket_url_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WebSocket" "get_url"
+
+///|
+#cfg(target="wasm-gc")
+fn web_socket_url_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(web_socket_url_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn web_socket_ready_state_ffi(obj : JsValue) -> UInt = "webapi_WebSocket" "get_readyState"
+
+///|
+#cfg(target="wasm-gc")
+fn web_socket_buffered_amount_ffi(obj : JsValue) -> UInt64 = "webapi_WebSocket" "get_bufferedAmount"
+
+///|
+#cfg(target="wasm-gc")
+fn web_socket_onopen_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WebSocket" "get_onopen"
+
+///|
+#cfg(target="wasm-gc")
+fn web_socket_onopen_ffi(obj : JsValue) -> EventHandler {
+  web_socket_onopen_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn web_socket_set_onopen_ffi(obj : JsValue, onopen : JsValue) -> Unit = "webapi_WebSocket" "set_onopen"
+
+///|
+#cfg(target="wasm-gc")
+fn web_socket_onerror_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WebSocket" "get_onerror"
+
+///|
+#cfg(target="wasm-gc")
+fn web_socket_onerror_ffi(obj : JsValue) -> EventHandler {
+  web_socket_onerror_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn web_socket_set_onerror_ffi(obj : JsValue, onerror : JsValue) -> Unit = "webapi_WebSocket" "set_onerror"
+
+///|
+#cfg(target="wasm-gc")
+fn web_socket_onclose_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WebSocket" "get_onclose"
+
+///|
+#cfg(target="wasm-gc")
+fn web_socket_onclose_ffi(obj : JsValue) -> EventHandler {
+  web_socket_onclose_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn web_socket_set_onclose_ffi(obj : JsValue, onclose : JsValue) -> Unit = "webapi_WebSocket" "set_onclose"
+
+///|
+#cfg(target="wasm-gc")
+fn web_socket_extensions_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WebSocket" "get_extensions"
+
+///|
+#cfg(target="wasm-gc")
+fn web_socket_extensions_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(web_socket_extensions_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn web_socket_protocol_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WebSocket" "get_protocol"
+
+///|
+#cfg(target="wasm-gc")
+fn web_socket_protocol_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(web_socket_protocol_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn web_socket_close_ffi(
+  obj : JsValue,
+  code : JsValue,
+  reason : JsValue,
+) -> Unit = "webapi_WebSocket" "close"
+
+///|
+#cfg(target="wasm-gc")
+fn web_socket_onmessage_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WebSocket" "get_onmessage"
+
+///|
+#cfg(target="wasm-gc")
+fn web_socket_onmessage_ffi(obj : JsValue) -> EventHandler {
+  web_socket_onmessage_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn web_socket_set_onmessage_ffi(obj : JsValue, onmessage : JsValue) -> Unit = "webapi_WebSocket" "set_onmessage"
+
+///|
+#cfg(target="wasm-gc")
+fn web_socket_binary_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WebSocket" "get_binaryType"
+
+///|
+#cfg(target="wasm-gc")
+fn web_socket_binary_type_ffi(obj : JsValue) -> BinaryType {
+  BinaryType::from_unchecked(
+    jsvalue_to_string(web_socket_binary_type_ffi_wasm(obj)),
+  )
+}
+
+///|
+#cfg(target="wasm-gc")
+fn web_socket_set_binary_type_ffi(obj : JsValue, binary_type : JsValue) -> Unit = "webapi_WebSocket" "set_binaryType"
+
+///|
+#cfg(target="wasm-gc")
+fn web_socket_send_ffi(obj : JsValue, data : JsValue) -> Unit = "webapi_WebSocket" "send"

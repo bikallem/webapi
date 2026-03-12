@@ -43,3 +43,43 @@ impl TSVGAnimatedPreserveAspectRatio with base_val(self : Self) -> SVGPreserveAs
 impl TSVGAnimatedPreserveAspectRatio with anim_val(self : Self) -> SVGPreserveAspectRatio {
   svg_animated_preserve_aspect_ratio_anim_val_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn svg_animated_preserve_aspect_ratio_base_val_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.baseVal"
+
+///|
+#cfg(target="js")
+fn svg_animated_preserve_aspect_ratio_base_val_ffi(
+  obj : JsValue,
+) -> SVGPreserveAspectRatio {
+  svg_animated_preserve_aspect_ratio_base_val_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_animated_preserve_aspect_ratio_anim_val_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.animVal"
+
+///|
+#cfg(target="js")
+fn svg_animated_preserve_aspect_ratio_anim_val_ffi(
+  obj : JsValue,
+) -> SVGPreserveAspectRatio {
+  svg_animated_preserve_aspect_ratio_anim_val_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svg_animated_preserve_aspect_ratio_base_val_ffi(
+  obj : JsValue,
+) -> SVGPreserveAspectRatio = "webapi_SVGAnimatedPreserveAspectRatio" "get_baseVal"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_animated_preserve_aspect_ratio_anim_val_ffi(
+  obj : JsValue,
+) -> SVGPreserveAspectRatio = "webapi_SVGAnimatedPreserveAspectRatio" "get_animVal"

@@ -334,3 +334,556 @@ impl THTMLButtonElement with set_popover_target_action(
     TJsValue::to_js(popover_target_action),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_button_element_new_ffi() -> HTMLButtonElement = "() => new HTMLButtonElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_button_element_command_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.command"
+
+///|
+#cfg(target="js")
+fn html_button_element_command_ffi(obj : JsValue) -> String {
+  html_button_element_command_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_button_element_set_command_ffi(
+  obj : JsValue,
+  command : JsValue,
+) -> Unit = "(obj, command) => { obj.command = command; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_button_element_command_for_element_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.commandForElement"
+
+///|
+#cfg(target="js")
+fn html_button_element_command_for_element_ffi(obj : JsValue) -> Element {
+  html_button_element_command_for_element_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_button_element_set_command_for_element_ffi(
+  obj : JsValue,
+  command_for_element : JsValue,
+) -> Unit = "(obj, commandForElement) => { obj.commandForElement = commandForElement; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_button_element_disabled_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.disabled"
+
+///|
+#cfg(target="js")
+fn html_button_element_disabled_ffi(obj : JsValue) -> Bool {
+  html_button_element_disabled_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_button_element_set_disabled_ffi(
+  obj : JsValue,
+  disabled : JsValue,
+) -> Unit = "(obj, disabled) => { obj.disabled = disabled; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_button_element_form_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.form"
+
+///|
+#cfg(target="js")
+fn html_button_element_form_ffi(obj : JsValue) -> HTMLFormElement {
+  html_button_element_form_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_button_element_form_action_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.formAction"
+
+///|
+#cfg(target="js")
+fn html_button_element_form_action_ffi(obj : JsValue) -> String {
+  html_button_element_form_action_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_button_element_set_form_action_ffi(
+  obj : JsValue,
+  form_action : JsValue,
+) -> Unit = "(obj, formAction) => { obj.formAction = formAction; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_button_element_form_enctype_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.formEnctype"
+
+///|
+#cfg(target="js")
+fn html_button_element_form_enctype_ffi(obj : JsValue) -> String {
+  html_button_element_form_enctype_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_button_element_set_form_enctype_ffi(
+  obj : JsValue,
+  form_enctype : JsValue,
+) -> Unit = "(obj, formEnctype) => { obj.formEnctype = formEnctype; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_button_element_form_method_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.formMethod"
+
+///|
+#cfg(target="js")
+fn html_button_element_form_method_ffi(obj : JsValue) -> String {
+  html_button_element_form_method_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_button_element_set_form_method_ffi(
+  obj : JsValue,
+  form_method : JsValue,
+) -> Unit = "(obj, formMethod) => { obj.formMethod = formMethod; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_button_element_form_no_validate_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.formNoValidate"
+
+///|
+#cfg(target="js")
+fn html_button_element_form_no_validate_ffi(obj : JsValue) -> Bool {
+  html_button_element_form_no_validate_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_button_element_set_form_no_validate_ffi(
+  obj : JsValue,
+  form_no_validate : JsValue,
+) -> Unit = "(obj, formNoValidate) => { obj.formNoValidate = formNoValidate; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_button_element_form_target_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.formTarget"
+
+///|
+#cfg(target="js")
+fn html_button_element_form_target_ffi(obj : JsValue) -> String {
+  html_button_element_form_target_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_button_element_set_form_target_ffi(
+  obj : JsValue,
+  form_target : JsValue,
+) -> Unit = "(obj, formTarget) => { obj.formTarget = formTarget; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_button_element_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.name"
+
+///|
+#cfg(target="js")
+fn html_button_element_name_ffi(obj : JsValue) -> String {
+  html_button_element_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_button_element_set_name_ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> Unit = "(obj, name) => { obj.name = name; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_button_element_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.type"
+
+///|
+#cfg(target="js")
+fn html_button_element_type_ffi(obj : JsValue) -> String {
+  html_button_element_type_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_button_element_set_type_ffi(
+  obj : JsValue,
+  type_ : JsValue,
+) -> Unit = "(obj, type) => { obj.type = type; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_button_element_value_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.value"
+
+///|
+#cfg(target="js")
+fn html_button_element_value_ffi(obj : JsValue) -> String {
+  html_button_element_value_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_button_element_set_value_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "(obj, value) => { obj.value = value; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_button_element_will_validate_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.willValidate"
+
+///|
+#cfg(target="js")
+fn html_button_element_will_validate_ffi(obj : JsValue) -> Bool {
+  html_button_element_will_validate_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_button_element_validity_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.validity"
+
+///|
+#cfg(target="js")
+fn html_button_element_validity_ffi(obj : JsValue) -> ValidityState {
+  html_button_element_validity_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_button_element_validation_message_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.validationMessage"
+
+///|
+#cfg(target="js")
+fn html_button_element_validation_message_ffi(obj : JsValue) -> String {
+  html_button_element_validation_message_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_button_element_check_validity_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.checkValidity()"
+
+///|
+#cfg(target="js")
+fn html_button_element_check_validity_ffi(obj : JsValue) -> Bool {
+  html_button_element_check_validity_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_button_element_report_validity_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.reportValidity()"
+
+///|
+#cfg(target="js")
+fn html_button_element_report_validity_ffi(obj : JsValue) -> Bool {
+  html_button_element_report_validity_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_button_element_set_custom_validity_ffi(
+  obj : JsValue,
+  error : JsValue,
+) -> Unit = "(obj, error) => obj.setCustomValidity(error)"
+
+///|
+#cfg(target="js")
+extern "js" fn html_button_element_labels_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.labels"
+
+///|
+#cfg(target="js")
+fn html_button_element_labels_ffi(obj : JsValue) -> NodeList {
+  html_button_element_labels_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_button_element_popover_target_element_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.popoverTargetElement"
+
+///|
+#cfg(target="js")
+fn html_button_element_popover_target_element_ffi(obj : JsValue) -> Element {
+  html_button_element_popover_target_element_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_button_element_set_popover_target_element_ffi(
+  obj : JsValue,
+  popover_target_element : JsValue,
+) -> Unit = "(obj, popoverTargetElement) => { obj.popoverTargetElement = popoverTargetElement; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_button_element_popover_target_action_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.popoverTargetAction"
+
+///|
+#cfg(target="js")
+fn html_button_element_popover_target_action_ffi(obj : JsValue) -> String {
+  html_button_element_popover_target_action_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_button_element_set_popover_target_action_ffi(
+  obj : JsValue,
+  popover_target_action : JsValue,
+) -> Unit = "(obj, popoverTargetAction) => { obj.popoverTargetAction = popoverTargetAction; }"
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_new_ffi() -> HTMLButtonElement = "webapi_HTMLButtonElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_command_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLButtonElement" "get_command"
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_command_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_button_element_command_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_set_command_ffi(
+  obj : JsValue,
+  command : JsValue,
+) -> Unit = "webapi_HTMLButtonElement" "set_command"
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_command_for_element_ffi(obj : JsValue) -> Element = "webapi_HTMLButtonElement" "get_commandForElement"
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_set_command_for_element_ffi(
+  obj : JsValue,
+  command_for_element : JsValue,
+) -> Unit = "webapi_HTMLButtonElement" "set_commandForElement"
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_disabled_ffi(obj : JsValue) -> Bool = "webapi_HTMLButtonElement" "get_disabled"
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_set_disabled_ffi(
+  obj : JsValue,
+  disabled : JsValue,
+) -> Unit = "webapi_HTMLButtonElement" "set_disabled"
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_form_ffi(obj : JsValue) -> HTMLFormElement = "webapi_HTMLButtonElement" "get_form"
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_form_action_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLButtonElement" "get_formAction"
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_form_action_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_button_element_form_action_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_set_form_action_ffi(
+  obj : JsValue,
+  form_action : JsValue,
+) -> Unit = "webapi_HTMLButtonElement" "set_formAction"
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_form_enctype_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLButtonElement" "get_formEnctype"
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_form_enctype_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_button_element_form_enctype_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_set_form_enctype_ffi(
+  obj : JsValue,
+  form_enctype : JsValue,
+) -> Unit = "webapi_HTMLButtonElement" "set_formEnctype"
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_form_method_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLButtonElement" "get_formMethod"
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_form_method_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_button_element_form_method_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_set_form_method_ffi(
+  obj : JsValue,
+  form_method : JsValue,
+) -> Unit = "webapi_HTMLButtonElement" "set_formMethod"
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_form_no_validate_ffi(obj : JsValue) -> Bool = "webapi_HTMLButtonElement" "get_formNoValidate"
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_set_form_no_validate_ffi(
+  obj : JsValue,
+  form_no_validate : JsValue,
+) -> Unit = "webapi_HTMLButtonElement" "set_formNoValidate"
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_form_target_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLButtonElement" "get_formTarget"
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_form_target_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_button_element_form_target_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_set_form_target_ffi(
+  obj : JsValue,
+  form_target : JsValue,
+) -> Unit = "webapi_HTMLButtonElement" "set_formTarget"
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLButtonElement" "get_name"
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_button_element_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_set_name_ffi(obj : JsValue, name : JsValue) -> Unit = "webapi_HTMLButtonElement" "set_name"
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLButtonElement" "get_type"
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_type_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_button_element_type_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_set_type_ffi(obj : JsValue, type_ : JsValue) -> Unit = "webapi_HTMLButtonElement" "set_type"
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_value_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLButtonElement" "get_value"
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_value_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_button_element_value_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_set_value_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLButtonElement" "set_value"
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_will_validate_ffi(obj : JsValue) -> Bool = "webapi_HTMLButtonElement" "get_willValidate"
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_validity_ffi(obj : JsValue) -> ValidityState = "webapi_HTMLButtonElement" "get_validity"
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_validation_message_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLButtonElement" "get_validationMessage"
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_validation_message_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_button_element_validation_message_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_check_validity_ffi(obj : JsValue) -> Bool = "webapi_HTMLButtonElement" "checkValidity"
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_report_validity_ffi(obj : JsValue) -> Bool = "webapi_HTMLButtonElement" "reportValidity"
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_set_custom_validity_ffi(
+  obj : JsValue,
+  error : JsValue,
+) -> Unit = "webapi_HTMLButtonElement" "setCustomValidity"
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_labels_ffi(obj : JsValue) -> NodeList = "webapi_HTMLButtonElement" "get_labels"
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_popover_target_element_ffi(obj : JsValue) -> Element = "webapi_HTMLButtonElement" "get_popoverTargetElement"
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_set_popover_target_element_ffi(
+  obj : JsValue,
+  popover_target_element : JsValue,
+) -> Unit = "webapi_HTMLButtonElement" "set_popoverTargetElement"
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_popover_target_action_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLButtonElement" "get_popoverTargetAction"
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_popover_target_action_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_button_element_popover_target_action_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_button_element_set_popover_target_action_ffi(
+  obj : JsValue,
+  popover_target_action : JsValue,
+) -> Unit = "webapi_HTMLButtonElement" "set_popoverTargetAction"

@@ -486,3 +486,762 @@ impl THTMLTextAreaElement with set_selection_range(
     opt_to_js(direction),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_new_ffi() -> HTMLTextAreaElement = "() => new HTMLTextAreaElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_autocomplete_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.autocomplete"
+
+///|
+#cfg(target="js")
+fn html_text_area_element_autocomplete_ffi(obj : JsValue) -> String {
+  html_text_area_element_autocomplete_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_set_autocomplete_ffi(
+  obj : JsValue,
+  autocomplete : JsValue,
+) -> Unit = "(obj, autocomplete) => { obj.autocomplete = autocomplete; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_cols_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.cols"
+
+///|
+#cfg(target="js")
+fn html_text_area_element_cols_ffi(obj : JsValue) -> UInt {
+  html_text_area_element_cols_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_set_cols_ffi(
+  obj : JsValue,
+  cols : JsValue,
+) -> Unit = "(obj, cols) => { obj.cols = cols; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_dir_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.dirName"
+
+///|
+#cfg(target="js")
+fn html_text_area_element_dir_name_ffi(obj : JsValue) -> String {
+  html_text_area_element_dir_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_set_dir_name_ffi(
+  obj : JsValue,
+  dir_name : JsValue,
+) -> Unit = "(obj, dirName) => { obj.dirName = dirName; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_disabled_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.disabled"
+
+///|
+#cfg(target="js")
+fn html_text_area_element_disabled_ffi(obj : JsValue) -> Bool {
+  html_text_area_element_disabled_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_set_disabled_ffi(
+  obj : JsValue,
+  disabled : JsValue,
+) -> Unit = "(obj, disabled) => { obj.disabled = disabled; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_form_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.form"
+
+///|
+#cfg(target="js")
+fn html_text_area_element_form_ffi(obj : JsValue) -> HTMLFormElement {
+  html_text_area_element_form_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_max_length_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.maxLength"
+
+///|
+#cfg(target="js")
+fn html_text_area_element_max_length_ffi(obj : JsValue) -> Int {
+  html_text_area_element_max_length_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_set_max_length_ffi(
+  obj : JsValue,
+  max_length : JsValue,
+) -> Unit = "(obj, maxLength) => { obj.maxLength = maxLength; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_min_length_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.minLength"
+
+///|
+#cfg(target="js")
+fn html_text_area_element_min_length_ffi(obj : JsValue) -> Int {
+  html_text_area_element_min_length_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_set_min_length_ffi(
+  obj : JsValue,
+  min_length : JsValue,
+) -> Unit = "(obj, minLength) => { obj.minLength = minLength; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.name"
+
+///|
+#cfg(target="js")
+fn html_text_area_element_name_ffi(obj : JsValue) -> String {
+  html_text_area_element_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_set_name_ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> Unit = "(obj, name) => { obj.name = name; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_placeholder_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.placeholder"
+
+///|
+#cfg(target="js")
+fn html_text_area_element_placeholder_ffi(obj : JsValue) -> String {
+  html_text_area_element_placeholder_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_set_placeholder_ffi(
+  obj : JsValue,
+  placeholder : JsValue,
+) -> Unit = "(obj, placeholder) => { obj.placeholder = placeholder; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_read_only_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.readOnly"
+
+///|
+#cfg(target="js")
+fn html_text_area_element_read_only_ffi(obj : JsValue) -> Bool {
+  html_text_area_element_read_only_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_set_read_only_ffi(
+  obj : JsValue,
+  read_only : JsValue,
+) -> Unit = "(obj, readOnly) => { obj.readOnly = readOnly; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_required_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.required"
+
+///|
+#cfg(target="js")
+fn html_text_area_element_required_ffi(obj : JsValue) -> Bool {
+  html_text_area_element_required_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_set_required_ffi(
+  obj : JsValue,
+  required : JsValue,
+) -> Unit = "(obj, required) => { obj.required = required; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_rows_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.rows"
+
+///|
+#cfg(target="js")
+fn html_text_area_element_rows_ffi(obj : JsValue) -> UInt {
+  html_text_area_element_rows_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_set_rows_ffi(
+  obj : JsValue,
+  rows : JsValue,
+) -> Unit = "(obj, rows) => { obj.rows = rows; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_wrap_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.wrap"
+
+///|
+#cfg(target="js")
+fn html_text_area_element_wrap_ffi(obj : JsValue) -> String {
+  html_text_area_element_wrap_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_set_wrap_ffi(
+  obj : JsValue,
+  wrap : JsValue,
+) -> Unit = "(obj, wrap) => { obj.wrap = wrap; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.type"
+
+///|
+#cfg(target="js")
+fn html_text_area_element_type_ffi(obj : JsValue) -> String {
+  html_text_area_element_type_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_default_value_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.defaultValue"
+
+///|
+#cfg(target="js")
+fn html_text_area_element_default_value_ffi(obj : JsValue) -> String {
+  html_text_area_element_default_value_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_set_default_value_ffi(
+  obj : JsValue,
+  default_value : JsValue,
+) -> Unit = "(obj, defaultValue) => { obj.defaultValue = defaultValue; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_value_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.value"
+
+///|
+#cfg(target="js")
+fn html_text_area_element_value_ffi(obj : JsValue) -> String {
+  html_text_area_element_value_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_set_value_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "(obj, value) => { obj.value = value; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_text_length_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.textLength"
+
+///|
+#cfg(target="js")
+fn html_text_area_element_text_length_ffi(obj : JsValue) -> UInt {
+  html_text_area_element_text_length_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_will_validate_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.willValidate"
+
+///|
+#cfg(target="js")
+fn html_text_area_element_will_validate_ffi(obj : JsValue) -> Bool {
+  html_text_area_element_will_validate_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_validity_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.validity"
+
+///|
+#cfg(target="js")
+fn html_text_area_element_validity_ffi(obj : JsValue) -> ValidityState {
+  html_text_area_element_validity_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_validation_message_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.validationMessage"
+
+///|
+#cfg(target="js")
+fn html_text_area_element_validation_message_ffi(obj : JsValue) -> String {
+  html_text_area_element_validation_message_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_check_validity_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.checkValidity()"
+
+///|
+#cfg(target="js")
+fn html_text_area_element_check_validity_ffi(obj : JsValue) -> Bool {
+  html_text_area_element_check_validity_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_report_validity_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.reportValidity()"
+
+///|
+#cfg(target="js")
+fn html_text_area_element_report_validity_ffi(obj : JsValue) -> Bool {
+  html_text_area_element_report_validity_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_set_custom_validity_ffi(
+  obj : JsValue,
+  error : JsValue,
+) -> Unit = "(obj, error) => obj.setCustomValidity(error)"
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_labels_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.labels"
+
+///|
+#cfg(target="js")
+fn html_text_area_element_labels_ffi(obj : JsValue) -> NodeList {
+  html_text_area_element_labels_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_select_ffi(obj : JsValue) -> Unit = "(obj) => obj.select()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_selection_start_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.selectionStart"
+
+///|
+#cfg(target="js")
+fn html_text_area_element_selection_start_ffi(obj : JsValue) -> UInt {
+  html_text_area_element_selection_start_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_set_selection_start_ffi(
+  obj : JsValue,
+  selection_start : JsValue,
+) -> Unit = "(obj, selectionStart) => { obj.selectionStart = selectionStart; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_selection_end_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.selectionEnd"
+
+///|
+#cfg(target="js")
+fn html_text_area_element_selection_end_ffi(obj : JsValue) -> UInt {
+  html_text_area_element_selection_end_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_set_selection_end_ffi(
+  obj : JsValue,
+  selection_end : JsValue,
+) -> Unit = "(obj, selectionEnd) => { obj.selectionEnd = selectionEnd; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_selection_direction_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.selectionDirection"
+
+///|
+#cfg(target="js")
+fn html_text_area_element_selection_direction_ffi(obj : JsValue) -> String {
+  html_text_area_element_selection_direction_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_set_selection_direction_ffi(
+  obj : JsValue,
+  selection_direction : JsValue,
+) -> Unit = "(obj, selectionDirection) => { obj.selectionDirection = selectionDirection; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_set_range_text_ffi(
+  obj : JsValue,
+  replacement : JsValue,
+) -> Unit = "(obj, replacement) => obj.setRangeText(replacement)"
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_set_range_text_in_range_ffi(
+  obj : JsValue,
+  replacement : JsValue,
+  start : JsValue,
+  end : JsValue,
+  selection_mode : JsValue,
+) -> Unit = "(obj, replacement, start, end, selection_mode) => obj.setRangeText(replacement, start, end, selection_mode)"
+
+///|
+#cfg(target="js")
+extern "js" fn html_text_area_element_set_selection_range_ffi(
+  obj : JsValue,
+  start : JsValue,
+  end : JsValue,
+  direction : JsValue,
+) -> Unit = "(obj, start, end, direction) => obj.setSelectionRange(start, end, direction)"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_new_ffi() -> HTMLTextAreaElement = "webapi_HTMLTextAreaElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_autocomplete_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLTextAreaElement" "get_autocomplete"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_autocomplete_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_text_area_element_autocomplete_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_set_autocomplete_ffi(
+  obj : JsValue,
+  autocomplete : JsValue,
+) -> Unit = "webapi_HTMLTextAreaElement" "set_autocomplete"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_cols_ffi(obj : JsValue) -> UInt = "webapi_HTMLTextAreaElement" "get_cols"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_set_cols_ffi(obj : JsValue, cols : JsValue) -> Unit = "webapi_HTMLTextAreaElement" "set_cols"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_dir_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLTextAreaElement" "get_dirName"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_dir_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_text_area_element_dir_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_set_dir_name_ffi(
+  obj : JsValue,
+  dir_name : JsValue,
+) -> Unit = "webapi_HTMLTextAreaElement" "set_dirName"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_disabled_ffi(obj : JsValue) -> Bool = "webapi_HTMLTextAreaElement" "get_disabled"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_set_disabled_ffi(
+  obj : JsValue,
+  disabled : JsValue,
+) -> Unit = "webapi_HTMLTextAreaElement" "set_disabled"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_form_ffi(obj : JsValue) -> HTMLFormElement = "webapi_HTMLTextAreaElement" "get_form"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_max_length_ffi(obj : JsValue) -> Int = "webapi_HTMLTextAreaElement" "get_maxLength"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_set_max_length_ffi(
+  obj : JsValue,
+  max_length : JsValue,
+) -> Unit = "webapi_HTMLTextAreaElement" "set_maxLength"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_min_length_ffi(obj : JsValue) -> Int = "webapi_HTMLTextAreaElement" "get_minLength"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_set_min_length_ffi(
+  obj : JsValue,
+  min_length : JsValue,
+) -> Unit = "webapi_HTMLTextAreaElement" "set_minLength"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLTextAreaElement" "get_name"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_text_area_element_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_set_name_ffi(obj : JsValue, name : JsValue) -> Unit = "webapi_HTMLTextAreaElement" "set_name"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_placeholder_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLTextAreaElement" "get_placeholder"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_placeholder_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_text_area_element_placeholder_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_set_placeholder_ffi(
+  obj : JsValue,
+  placeholder : JsValue,
+) -> Unit = "webapi_HTMLTextAreaElement" "set_placeholder"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_read_only_ffi(obj : JsValue) -> Bool = "webapi_HTMLTextAreaElement" "get_readOnly"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_set_read_only_ffi(
+  obj : JsValue,
+  read_only : JsValue,
+) -> Unit = "webapi_HTMLTextAreaElement" "set_readOnly"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_required_ffi(obj : JsValue) -> Bool = "webapi_HTMLTextAreaElement" "get_required"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_set_required_ffi(
+  obj : JsValue,
+  required : JsValue,
+) -> Unit = "webapi_HTMLTextAreaElement" "set_required"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_rows_ffi(obj : JsValue) -> UInt = "webapi_HTMLTextAreaElement" "get_rows"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_set_rows_ffi(obj : JsValue, rows : JsValue) -> Unit = "webapi_HTMLTextAreaElement" "set_rows"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_wrap_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLTextAreaElement" "get_wrap"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_wrap_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_text_area_element_wrap_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_set_wrap_ffi(obj : JsValue, wrap : JsValue) -> Unit = "webapi_HTMLTextAreaElement" "set_wrap"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLTextAreaElement" "get_type"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_type_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_text_area_element_type_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_default_value_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLTextAreaElement" "get_defaultValue"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_default_value_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_text_area_element_default_value_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_set_default_value_ffi(
+  obj : JsValue,
+  default_value : JsValue,
+) -> Unit = "webapi_HTMLTextAreaElement" "set_defaultValue"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_value_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLTextAreaElement" "get_value"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_value_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_text_area_element_value_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_set_value_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLTextAreaElement" "set_value"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_text_length_ffi(obj : JsValue) -> UInt = "webapi_HTMLTextAreaElement" "get_textLength"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_will_validate_ffi(obj : JsValue) -> Bool = "webapi_HTMLTextAreaElement" "get_willValidate"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_validity_ffi(obj : JsValue) -> ValidityState = "webapi_HTMLTextAreaElement" "get_validity"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_validation_message_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLTextAreaElement" "get_validationMessage"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_validation_message_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_text_area_element_validation_message_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_check_validity_ffi(obj : JsValue) -> Bool = "webapi_HTMLTextAreaElement" "checkValidity"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_report_validity_ffi(obj : JsValue) -> Bool = "webapi_HTMLTextAreaElement" "reportValidity"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_set_custom_validity_ffi(
+  obj : JsValue,
+  error : JsValue,
+) -> Unit = "webapi_HTMLTextAreaElement" "setCustomValidity"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_labels_ffi(obj : JsValue) -> NodeList = "webapi_HTMLTextAreaElement" "get_labels"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_select_ffi(obj : JsValue) -> Unit = "webapi_HTMLTextAreaElement" "select"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_selection_start_ffi(obj : JsValue) -> UInt = "webapi_HTMLTextAreaElement" "get_selectionStart"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_set_selection_start_ffi(
+  obj : JsValue,
+  selection_start : JsValue,
+) -> Unit = "webapi_HTMLTextAreaElement" "set_selectionStart"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_selection_end_ffi(obj : JsValue) -> UInt = "webapi_HTMLTextAreaElement" "get_selectionEnd"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_set_selection_end_ffi(
+  obj : JsValue,
+  selection_end : JsValue,
+) -> Unit = "webapi_HTMLTextAreaElement" "set_selectionEnd"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_selection_direction_ffi_wasm(
+  obj : JsValue,
+) -> JsValue = "webapi_HTMLTextAreaElement" "get_selectionDirection"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_selection_direction_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_text_area_element_selection_direction_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_set_selection_direction_ffi(
+  obj : JsValue,
+  selection_direction : JsValue,
+) -> Unit = "webapi_HTMLTextAreaElement" "set_selectionDirection"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_set_range_text_ffi(
+  obj : JsValue,
+  replacement : JsValue,
+) -> Unit = "webapi_HTMLTextAreaElement" "setRangeText"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_set_range_text_in_range_ffi(
+  obj : JsValue,
+  replacement : JsValue,
+  start : JsValue,
+  end : JsValue,
+  selection_mode : JsValue,
+) -> Unit = "webapi_HTMLTextAreaElement" "set_range_text_in_range"
+
+///|
+#cfg(target="wasm-gc")
+fn html_text_area_element_set_selection_range_ffi(
+  obj : JsValue,
+  start : JsValue,
+  end : JsValue,
+  direction : JsValue,
+) -> Unit = "webapi_HTMLTextAreaElement" "setSelectionRange"

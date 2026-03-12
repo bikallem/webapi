@@ -37,3 +37,19 @@ impl TExternal with add_search_provider(self : Self) -> Unit {
 impl TExternal with is_search_provider_installed(self : Self) -> Unit {
   external_is_search_provider_installed_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn external_add_search_provider_ffi(obj : JsValue) -> Unit = "(obj) => obj.AddSearchProvider()"
+
+///|
+#cfg(target="js")
+extern "js" fn external_is_search_provider_installed_ffi(obj : JsValue) -> Unit = "(obj) => obj.IsSearchProviderInstalled()"
+
+///|
+#cfg(target="wasm-gc")
+fn external_add_search_provider_ffi(obj : JsValue) -> Unit = "webapi_External" "AddSearchProvider"
+
+///|
+#cfg(target="wasm-gc")
+fn external_is_search_provider_installed_ffi(obj : JsValue) -> Unit = "webapi_External" "IsSearchProviderInstalled"

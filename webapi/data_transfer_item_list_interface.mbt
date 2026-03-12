@@ -101,3 +101,77 @@ impl TDataTransferItemList with add(self : Self, data : String, type_ : String) 
 impl TDataTransferItemList with add_file(self : Self, data : &TFile) -> DataTransferItem {
   self.add_file_opt(data).unwrap()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn data_transfer_item_list_length_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.length"
+
+///|
+#cfg(target="js")
+fn data_transfer_item_list_length_ffi(obj : JsValue) -> UInt {
+  data_transfer_item_list_length_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn data_transfer_item_list_get_ffi(
+  obj : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, index) => obj[index]"
+
+///|
+#cfg(target="js")
+extern "js" fn data_transfer_item_list_add_ffi(
+  obj : JsValue,
+  data : JsValue,
+  type_ : JsValue,
+) -> JsValue = "(obj, data, type_) => obj.add(data, type_)"
+
+///|
+#cfg(target="js")
+extern "js" fn data_transfer_item_list_add_file_ffi(
+  obj : JsValue,
+  data : JsValue,
+) -> JsValue = "(obj, data) => obj.add(data)"
+
+///|
+#cfg(target="js")
+extern "js" fn data_transfer_item_list_remove_ffi(
+  obj : JsValue,
+  index : JsValue,
+) -> Unit = "(obj, index) => obj.remove(index)"
+
+///|
+#cfg(target="js")
+extern "js" fn data_transfer_item_list_clear_ffi(obj : JsValue) -> Unit = "(obj) => obj.clear()"
+
+///|
+#cfg(target="wasm-gc")
+fn data_transfer_item_list_length_ffi(obj : JsValue) -> UInt = "webapi_DataTransferItemList" "get_length"
+
+///|
+#cfg(target="wasm-gc")
+fn data_transfer_item_list_get_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_DataTransferItemList" "get"
+
+///|
+#cfg(target="wasm-gc")
+fn data_transfer_item_list_add_ffi(
+  obj : JsValue,
+  data : JsValue,
+  type_ : JsValue,
+) -> JsValue = "webapi_DataTransferItemList" "add"
+
+///|
+#cfg(target="wasm-gc")
+fn data_transfer_item_list_add_file_ffi(
+  obj : JsValue,
+  data : JsValue,
+) -> JsValue = "webapi_DataTransferItemList" "add_file"
+
+///|
+#cfg(target="wasm-gc")
+fn data_transfer_item_list_remove_ffi(obj : JsValue, index : JsValue) -> Unit = "webapi_DataTransferItemList" "remove"
+
+///|
+#cfg(target="wasm-gc")
+fn data_transfer_item_list_clear_ffi(obj : JsValue) -> Unit = "webapi_DataTransferItemList" "clear"

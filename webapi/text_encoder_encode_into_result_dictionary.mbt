@@ -43,3 +43,51 @@ pub fn TextEncoderEncodeIntoResult::written(
 ) -> UInt64? {
   text_encoder_encode_into_result_get_written_ffi(TJsValue::to_js(self)).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn text_encoder_encode_into_result_ffi(
+  read : JsValue,
+  written : JsValue,
+) -> TextEncoderEncodeIntoResult =
+  #|(read, written) => {
+  #|  const obj = {};
+  #|  if (read !== undefined) obj.read = read;
+  #|  if (written !== undefined) obj.written = written;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn text_encoder_encode_into_result_empty_ffi() -> TextEncoderEncodeIntoResult = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn text_encoder_encode_into_result_get_read_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.read"
+
+///|
+#cfg(target="js")
+extern "js" fn text_encoder_encode_into_result_get_written_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.written"
+
+///|
+#cfg(target="wasm-gc")
+fn text_encoder_encode_into_result_ffi(
+  read : JsValue,
+  written : JsValue,
+) -> TextEncoderEncodeIntoResult = "webapi_TextEncoderEncodeIntoResult" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn text_encoder_encode_into_result_empty_ffi() -> TextEncoderEncodeIntoResult = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn text_encoder_encode_into_result_get_read_ffi(obj : JsValue) -> JsValue = "webapi_TextEncoderEncodeIntoResult" "get_read"
+
+///|
+#cfg(target="wasm-gc")
+fn text_encoder_encode_into_result_get_written_ffi(obj : JsValue) -> JsValue = "webapi_TextEncoderEncodeIntoResult" "get_written"

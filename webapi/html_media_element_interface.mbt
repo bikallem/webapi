@@ -473,3 +473,744 @@ impl THTMLMediaElement with add_text_track(
     opt_to_js(language),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_error_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.error"
+
+///|
+#cfg(target="js")
+fn html_media_element_error_ffi(obj : JsValue) -> MediaError {
+  html_media_element_error_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_src_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.src"
+
+///|
+#cfg(target="js")
+fn html_media_element_src_ffi(obj : JsValue) -> String {
+  html_media_element_src_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_set_src_ffi(
+  obj : JsValue,
+  src : JsValue,
+) -> Unit = "(obj, src) => { obj.src = src; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_src_object_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.srcObject"
+
+///|
+#cfg(target="js")
+fn html_media_element_src_object_ffi(obj : JsValue) -> MediaProvider {
+  html_media_element_src_object_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_set_src_object_ffi(
+  obj : JsValue,
+  src_object : JsValue,
+) -> Unit = "(obj, srcObject) => { obj.srcObject = srcObject; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_current_src_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.currentSrc"
+
+///|
+#cfg(target="js")
+fn html_media_element_current_src_ffi(obj : JsValue) -> String {
+  html_media_element_current_src_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_cross_origin_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.crossOrigin"
+
+///|
+#cfg(target="js")
+fn html_media_element_cross_origin_ffi(obj : JsValue) -> String {
+  html_media_element_cross_origin_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_set_cross_origin_ffi(
+  obj : JsValue,
+  cross_origin : JsValue,
+) -> Unit = "(obj, crossOrigin) => { obj.crossOrigin = crossOrigin; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_network_state_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.networkState"
+
+///|
+#cfg(target="js")
+fn html_media_element_network_state_ffi(obj : JsValue) -> UInt {
+  html_media_element_network_state_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_preload_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.preload"
+
+///|
+#cfg(target="js")
+fn html_media_element_preload_ffi(obj : JsValue) -> String {
+  html_media_element_preload_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_set_preload_ffi(
+  obj : JsValue,
+  preload : JsValue,
+) -> Unit = "(obj, preload) => { obj.preload = preload; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_buffered_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.buffered"
+
+///|
+#cfg(target="js")
+fn html_media_element_buffered_ffi(obj : JsValue) -> TimeRanges {
+  html_media_element_buffered_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_load_ffi(obj : JsValue) -> Unit = "(obj) => obj.load()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_can_play_type_ffi_js(
+  obj : JsValue,
+  type_ : JsValue,
+) -> JsValue = "(obj, type_) => obj.canPlayType(type_)"
+
+///|
+#cfg(target="js")
+fn html_media_element_can_play_type_ffi(
+  obj : JsValue,
+  type_ : JsValue,
+) -> CanPlayTypeResult {
+  CanPlayTypeResult::from_unchecked(
+    html_media_element_can_play_type_ffi_js(obj, type_).unsafe_cast(),
+  )
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_ready_state_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.readyState"
+
+///|
+#cfg(target="js")
+fn html_media_element_ready_state_ffi(obj : JsValue) -> UInt {
+  html_media_element_ready_state_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_seeking_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.seeking"
+
+///|
+#cfg(target="js")
+fn html_media_element_seeking_ffi(obj : JsValue) -> Bool {
+  html_media_element_seeking_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_current_time_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.currentTime"
+
+///|
+#cfg(target="js")
+fn html_media_element_current_time_ffi(obj : JsValue) -> Double {
+  html_media_element_current_time_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_set_current_time_ffi(
+  obj : JsValue,
+  current_time : JsValue,
+) -> Unit = "(obj, currentTime) => { obj.currentTime = currentTime; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_fast_seek_ffi(
+  obj : JsValue,
+  time : JsValue,
+) -> Unit = "(obj, time) => obj.fastSeek(time)"
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_duration_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.duration"
+
+///|
+#cfg(target="js")
+fn html_media_element_duration_ffi(obj : JsValue) -> Double {
+  html_media_element_duration_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_get_start_date_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.getStartDate()"
+
+///|
+#cfg(target="js")
+fn html_media_element_get_start_date_ffi(obj : JsValue) -> JsValue {
+  html_media_element_get_start_date_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_paused_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.paused"
+
+///|
+#cfg(target="js")
+fn html_media_element_paused_ffi(obj : JsValue) -> Bool {
+  html_media_element_paused_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_default_playback_rate_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.defaultPlaybackRate"
+
+///|
+#cfg(target="js")
+fn html_media_element_default_playback_rate_ffi(obj : JsValue) -> Double {
+  html_media_element_default_playback_rate_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_set_default_playback_rate_ffi(
+  obj : JsValue,
+  default_playback_rate : JsValue,
+) -> Unit = "(obj, defaultPlaybackRate) => { obj.defaultPlaybackRate = defaultPlaybackRate; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_playback_rate_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.playbackRate"
+
+///|
+#cfg(target="js")
+fn html_media_element_playback_rate_ffi(obj : JsValue) -> Double {
+  html_media_element_playback_rate_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_set_playback_rate_ffi(
+  obj : JsValue,
+  playback_rate : JsValue,
+) -> Unit = "(obj, playbackRate) => { obj.playbackRate = playbackRate; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_preserves_pitch_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.preservesPitch"
+
+///|
+#cfg(target="js")
+fn html_media_element_preserves_pitch_ffi(obj : JsValue) -> Bool {
+  html_media_element_preserves_pitch_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_set_preserves_pitch_ffi(
+  obj : JsValue,
+  preserves_pitch : JsValue,
+) -> Unit = "(obj, preservesPitch) => { obj.preservesPitch = preservesPitch; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_played_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.played"
+
+///|
+#cfg(target="js")
+fn html_media_element_played_ffi(obj : JsValue) -> TimeRanges {
+  html_media_element_played_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_seekable_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.seekable"
+
+///|
+#cfg(target="js")
+fn html_media_element_seekable_ffi(obj : JsValue) -> TimeRanges {
+  html_media_element_seekable_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_ended_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ended"
+
+///|
+#cfg(target="js")
+fn html_media_element_ended_ffi(obj : JsValue) -> Bool {
+  html_media_element_ended_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_autoplay_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.autoplay"
+
+///|
+#cfg(target="js")
+fn html_media_element_autoplay_ffi(obj : JsValue) -> Bool {
+  html_media_element_autoplay_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_set_autoplay_ffi(
+  obj : JsValue,
+  autoplay : JsValue,
+) -> Unit = "(obj, autoplay) => { obj.autoplay = autoplay; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_loop_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.loop"
+
+///|
+#cfg(target="js")
+fn html_media_element_loop_ffi(obj : JsValue) -> Bool {
+  html_media_element_loop_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_set_loop_ffi(
+  obj : JsValue,
+  loop_ : JsValue,
+) -> Unit = "(obj, loop) => { obj.loop = loop; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_play_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.play()"
+
+///|
+#cfg(target="js")
+fn html_media_element_play_ffi(obj : JsValue) -> JsPromise[JsValue] {
+  html_media_element_play_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_pause_ffi(obj : JsValue) -> Unit = "(obj) => obj.pause()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_controls_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.controls"
+
+///|
+#cfg(target="js")
+fn html_media_element_controls_ffi(obj : JsValue) -> Bool {
+  html_media_element_controls_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_set_controls_ffi(
+  obj : JsValue,
+  controls : JsValue,
+) -> Unit = "(obj, controls) => { obj.controls = controls; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_volume_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.volume"
+
+///|
+#cfg(target="js")
+fn html_media_element_volume_ffi(obj : JsValue) -> Double {
+  html_media_element_volume_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_set_volume_ffi(
+  obj : JsValue,
+  volume : JsValue,
+) -> Unit = "(obj, volume) => { obj.volume = volume; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_muted_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.muted"
+
+///|
+#cfg(target="js")
+fn html_media_element_muted_ffi(obj : JsValue) -> Bool {
+  html_media_element_muted_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_set_muted_ffi(
+  obj : JsValue,
+  muted : JsValue,
+) -> Unit = "(obj, muted) => { obj.muted = muted; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_default_muted_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.defaultMuted"
+
+///|
+#cfg(target="js")
+fn html_media_element_default_muted_ffi(obj : JsValue) -> Bool {
+  html_media_element_default_muted_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_set_default_muted_ffi(
+  obj : JsValue,
+  default_muted : JsValue,
+) -> Unit = "(obj, defaultMuted) => { obj.defaultMuted = defaultMuted; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_audio_tracks_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.audioTracks"
+
+///|
+#cfg(target="js")
+fn html_media_element_audio_tracks_ffi(obj : JsValue) -> AudioTrackList {
+  html_media_element_audio_tracks_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_video_tracks_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.videoTracks"
+
+///|
+#cfg(target="js")
+fn html_media_element_video_tracks_ffi(obj : JsValue) -> VideoTrackList {
+  html_media_element_video_tracks_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_text_tracks_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.textTracks"
+
+///|
+#cfg(target="js")
+fn html_media_element_text_tracks_ffi(obj : JsValue) -> TextTrackList {
+  html_media_element_text_tracks_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_media_element_add_text_track_ffi_js(
+  obj : JsValue,
+  kind : JsValue,
+  label : JsValue,
+  language : JsValue,
+) -> JsValue = "(obj, kind, label, language) => obj.addTextTrack(kind, label, language)"
+
+///|
+#cfg(target="js")
+fn html_media_element_add_text_track_ffi(
+  obj : JsValue,
+  kind : JsValue,
+  label : JsValue,
+  language : JsValue,
+) -> TextTrack {
+  html_media_element_add_text_track_ffi_js(obj, kind, label, language).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_error_ffi(obj : JsValue) -> MediaError = "webapi_HTMLMediaElement" "get_error"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_src_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLMediaElement" "get_src"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_src_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_media_element_src_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_set_src_ffi(obj : JsValue, src : JsValue) -> Unit = "webapi_HTMLMediaElement" "set_src"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_src_object_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLMediaElement" "get_srcObject"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_src_object_ffi(obj : JsValue) -> MediaProvider {
+  html_media_element_src_object_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_set_src_object_ffi(
+  obj : JsValue,
+  src_object : JsValue,
+) -> Unit = "webapi_HTMLMediaElement" "set_srcObject"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_current_src_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLMediaElement" "get_currentSrc"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_current_src_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_media_element_current_src_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_cross_origin_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLMediaElement" "get_crossOrigin"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_cross_origin_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_media_element_cross_origin_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_set_cross_origin_ffi(
+  obj : JsValue,
+  cross_origin : JsValue,
+) -> Unit = "webapi_HTMLMediaElement" "set_crossOrigin"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_network_state_ffi(obj : JsValue) -> UInt = "webapi_HTMLMediaElement" "get_networkState"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_preload_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLMediaElement" "get_preload"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_preload_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_media_element_preload_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_set_preload_ffi(obj : JsValue, preload : JsValue) -> Unit = "webapi_HTMLMediaElement" "set_preload"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_buffered_ffi(obj : JsValue) -> TimeRanges = "webapi_HTMLMediaElement" "get_buffered"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_load_ffi(obj : JsValue) -> Unit = "webapi_HTMLMediaElement" "load"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_can_play_type_ffi_wasm(
+  obj : JsValue,
+  type_ : JsValue,
+) -> JsValue = "webapi_HTMLMediaElement" "canPlayType"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_can_play_type_ffi(
+  obj : JsValue,
+  type_ : JsValue,
+) -> CanPlayTypeResult {
+  CanPlayTypeResult::from_unchecked(
+    jsvalue_to_string(html_media_element_can_play_type_ffi_wasm(obj, type_)),
+  )
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_ready_state_ffi(obj : JsValue) -> UInt = "webapi_HTMLMediaElement" "get_readyState"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_seeking_ffi(obj : JsValue) -> Bool = "webapi_HTMLMediaElement" "get_seeking"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_current_time_ffi(obj : JsValue) -> Double = "webapi_HTMLMediaElement" "get_currentTime"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_set_current_time_ffi(
+  obj : JsValue,
+  current_time : JsValue,
+) -> Unit = "webapi_HTMLMediaElement" "set_currentTime"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_fast_seek_ffi(obj : JsValue, time : JsValue) -> Unit = "webapi_HTMLMediaElement" "fastSeek"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_duration_ffi(obj : JsValue) -> Double = "webapi_HTMLMediaElement" "get_duration"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_get_start_date_ffi(obj : JsValue) -> JsValue = "webapi_HTMLMediaElement" "getStartDate"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_paused_ffi(obj : JsValue) -> Bool = "webapi_HTMLMediaElement" "get_paused"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_default_playback_rate_ffi(obj : JsValue) -> Double = "webapi_HTMLMediaElement" "get_defaultPlaybackRate"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_set_default_playback_rate_ffi(
+  obj : JsValue,
+  default_playback_rate : JsValue,
+) -> Unit = "webapi_HTMLMediaElement" "set_defaultPlaybackRate"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_playback_rate_ffi(obj : JsValue) -> Double = "webapi_HTMLMediaElement" "get_playbackRate"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_set_playback_rate_ffi(
+  obj : JsValue,
+  playback_rate : JsValue,
+) -> Unit = "webapi_HTMLMediaElement" "set_playbackRate"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_preserves_pitch_ffi(obj : JsValue) -> Bool = "webapi_HTMLMediaElement" "get_preservesPitch"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_set_preserves_pitch_ffi(
+  obj : JsValue,
+  preserves_pitch : JsValue,
+) -> Unit = "webapi_HTMLMediaElement" "set_preservesPitch"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_played_ffi(obj : JsValue) -> TimeRanges = "webapi_HTMLMediaElement" "get_played"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_seekable_ffi(obj : JsValue) -> TimeRanges = "webapi_HTMLMediaElement" "get_seekable"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_ended_ffi(obj : JsValue) -> Bool = "webapi_HTMLMediaElement" "get_ended"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_autoplay_ffi(obj : JsValue) -> Bool = "webapi_HTMLMediaElement" "get_autoplay"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_set_autoplay_ffi(
+  obj : JsValue,
+  autoplay : JsValue,
+) -> Unit = "webapi_HTMLMediaElement" "set_autoplay"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_loop_ffi(obj : JsValue) -> Bool = "webapi_HTMLMediaElement" "get_loop"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_set_loop_ffi(obj : JsValue, loop_ : JsValue) -> Unit = "webapi_HTMLMediaElement" "set_loop"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_play_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLMediaElement" "play"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_play_ffi(obj : JsValue) -> JsPromise[JsValue] {
+  html_media_element_play_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_pause_ffi(obj : JsValue) -> Unit = "webapi_HTMLMediaElement" "pause"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_controls_ffi(obj : JsValue) -> Bool = "webapi_HTMLMediaElement" "get_controls"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_set_controls_ffi(
+  obj : JsValue,
+  controls : JsValue,
+) -> Unit = "webapi_HTMLMediaElement" "set_controls"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_volume_ffi(obj : JsValue) -> Double = "webapi_HTMLMediaElement" "get_volume"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_set_volume_ffi(obj : JsValue, volume : JsValue) -> Unit = "webapi_HTMLMediaElement" "set_volume"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_muted_ffi(obj : JsValue) -> Bool = "webapi_HTMLMediaElement" "get_muted"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_set_muted_ffi(obj : JsValue, muted : JsValue) -> Unit = "webapi_HTMLMediaElement" "set_muted"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_default_muted_ffi(obj : JsValue) -> Bool = "webapi_HTMLMediaElement" "get_defaultMuted"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_set_default_muted_ffi(
+  obj : JsValue,
+  default_muted : JsValue,
+) -> Unit = "webapi_HTMLMediaElement" "set_defaultMuted"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_audio_tracks_ffi(obj : JsValue) -> AudioTrackList = "webapi_HTMLMediaElement" "get_audioTracks"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_video_tracks_ffi(obj : JsValue) -> VideoTrackList = "webapi_HTMLMediaElement" "get_videoTracks"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_text_tracks_ffi(obj : JsValue) -> TextTrackList = "webapi_HTMLMediaElement" "get_textTracks"
+
+///|
+#cfg(target="wasm-gc")
+fn html_media_element_add_text_track_ffi(
+  obj : JsValue,
+  kind : JsValue,
+  label : JsValue,
+  language : JsValue,
+) -> TextTrack = "webapi_HTMLMediaElement" "addTextTrack"

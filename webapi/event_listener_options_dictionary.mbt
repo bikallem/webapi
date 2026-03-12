@@ -29,3 +29,34 @@ pub fn EventListenerOptions::empty() -> EventListenerOptions {
 pub fn EventListenerOptions::capture(self : EventListenerOptions) -> Bool? {
   event_listener_options_get_capture_ffi(TJsValue::to_js(self)).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn event_listener_options_ffi(
+  capture : JsValue,
+) -> EventListenerOptions =
+  #|(capture) => {
+  #|  const obj = {};
+  #|  if (capture !== undefined) obj.capture = capture;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn event_listener_options_empty_ffi() -> EventListenerOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn event_listener_options_get_capture_ffi(obj : JsValue) -> JsValue = "(obj) => obj.capture"
+
+///|
+#cfg(target="wasm-gc")
+fn event_listener_options_ffi(capture : JsValue) -> EventListenerOptions = "webapi_EventListenerOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn event_listener_options_empty_ffi() -> EventListenerOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn event_listener_options_get_capture_ffi(obj : JsValue) -> JsValue = "webapi_EventListenerOptions" "get_capture"

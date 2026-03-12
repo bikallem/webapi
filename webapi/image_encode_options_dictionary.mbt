@@ -35,3 +35,47 @@ pub fn ImageEncodeOptions::type_(self : ImageEncodeOptions) -> String? {
 pub fn ImageEncodeOptions::quality(self : ImageEncodeOptions) -> Double? {
   image_encode_options_get_quality_ffi(TJsValue::to_js(self)).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn image_encode_options_ffi(
+  type_ : JsValue,
+  quality : JsValue,
+) -> ImageEncodeOptions =
+  #|(type, quality) => {
+  #|  const obj = {};
+  #|  if (type !== undefined) obj.type = type;
+  #|  if (quality !== undefined) obj.quality = quality;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn image_encode_options_empty_ffi() -> ImageEncodeOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn image_encode_options_get_type_ffi(obj : JsValue) -> JsValue = "(obj) => obj.type"
+
+///|
+#cfg(target="js")
+extern "js" fn image_encode_options_get_quality_ffi(obj : JsValue) -> JsValue = "(obj) => obj.quality"
+
+///|
+#cfg(target="wasm-gc")
+fn image_encode_options_ffi(
+  type_ : JsValue,
+  quality : JsValue,
+) -> ImageEncodeOptions = "webapi_ImageEncodeOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn image_encode_options_empty_ffi() -> ImageEncodeOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn image_encode_options_get_type_ffi(obj : JsValue) -> JsValue = "webapi_ImageEncodeOptions" "get_type"
+
+///|
+#cfg(target="wasm-gc")
+fn image_encode_options_get_quality_ffi(obj : JsValue) -> JsValue = "webapi_ImageEncodeOptions" "get_quality"

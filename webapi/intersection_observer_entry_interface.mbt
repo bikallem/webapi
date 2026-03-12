@@ -92,3 +92,155 @@ impl TIntersectionObserverEntry with intersection_ratio(self : Self) -> Double {
 impl TIntersectionObserverEntry with target(self : Self) -> Element {
   intersection_observer_entry_target_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn intersection_observer_entry_new_ffi(
+  intersection_observer_entry_init : JsValue,
+) -> IntersectionObserverEntry = "(intersection_observer_entry_init) => new IntersectionObserverEntry(intersection_observer_entry_init)"
+
+///|
+#cfg(target="js")
+extern "js" fn intersection_observer_entry_time_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.time"
+
+///|
+#cfg(target="js")
+fn intersection_observer_entry_time_ffi(obj : JsValue) -> DOMHighResTimeStamp {
+  intersection_observer_entry_time_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn intersection_observer_entry_root_bounds_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.rootBounds"
+
+///|
+#cfg(target="js")
+fn intersection_observer_entry_root_bounds_ffi(
+  obj : JsValue,
+) -> DOMRectReadOnly {
+  intersection_observer_entry_root_bounds_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn intersection_observer_entry_bounding_client_rect_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.boundingClientRect"
+
+///|
+#cfg(target="js")
+fn intersection_observer_entry_bounding_client_rect_ffi(
+  obj : JsValue,
+) -> DOMRectReadOnly {
+  intersection_observer_entry_bounding_client_rect_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn intersection_observer_entry_intersection_rect_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.intersectionRect"
+
+///|
+#cfg(target="js")
+fn intersection_observer_entry_intersection_rect_ffi(
+  obj : JsValue,
+) -> DOMRectReadOnly {
+  intersection_observer_entry_intersection_rect_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn intersection_observer_entry_is_intersecting_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.isIntersecting"
+
+///|
+#cfg(target="js")
+fn intersection_observer_entry_is_intersecting_ffi(obj : JsValue) -> Bool {
+  intersection_observer_entry_is_intersecting_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn intersection_observer_entry_is_visible_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.isVisible"
+
+///|
+#cfg(target="js")
+fn intersection_observer_entry_is_visible_ffi(obj : JsValue) -> Bool {
+  intersection_observer_entry_is_visible_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn intersection_observer_entry_intersection_ratio_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.intersectionRatio"
+
+///|
+#cfg(target="js")
+fn intersection_observer_entry_intersection_ratio_ffi(obj : JsValue) -> Double {
+  intersection_observer_entry_intersection_ratio_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn intersection_observer_entry_target_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.target"
+
+///|
+#cfg(target="js")
+fn intersection_observer_entry_target_ffi(obj : JsValue) -> Element {
+  intersection_observer_entry_target_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn intersection_observer_entry_new_ffi(
+  intersection_observer_entry_init : JsValue,
+) -> IntersectionObserverEntry = "webapi_IntersectionObserverEntry" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn intersection_observer_entry_time_ffi(obj : JsValue) -> DOMHighResTimeStamp = "webapi_IntersectionObserverEntry" "get_time"
+
+///|
+#cfg(target="wasm-gc")
+fn intersection_observer_entry_root_bounds_ffi(
+  obj : JsValue,
+) -> DOMRectReadOnly = "webapi_IntersectionObserverEntry" "get_rootBounds"
+
+///|
+#cfg(target="wasm-gc")
+fn intersection_observer_entry_bounding_client_rect_ffi(
+  obj : JsValue,
+) -> DOMRectReadOnly = "webapi_IntersectionObserverEntry" "get_boundingClientRect"
+
+///|
+#cfg(target="wasm-gc")
+fn intersection_observer_entry_intersection_rect_ffi(
+  obj : JsValue,
+) -> DOMRectReadOnly = "webapi_IntersectionObserverEntry" "get_intersectionRect"
+
+///|
+#cfg(target="wasm-gc")
+fn intersection_observer_entry_is_intersecting_ffi(obj : JsValue) -> Bool = "webapi_IntersectionObserverEntry" "get_isIntersecting"
+
+///|
+#cfg(target="wasm-gc")
+fn intersection_observer_entry_is_visible_ffi(obj : JsValue) -> Bool = "webapi_IntersectionObserverEntry" "get_isVisible"
+
+///|
+#cfg(target="wasm-gc")
+fn intersection_observer_entry_intersection_ratio_ffi(obj : JsValue) -> Double = "webapi_IntersectionObserverEntry" "get_intersectionRatio"
+
+///|
+#cfg(target="wasm-gc")
+fn intersection_observer_entry_target_ffi(obj : JsValue) -> Element = "webapi_IntersectionObserverEntry" "get_target"

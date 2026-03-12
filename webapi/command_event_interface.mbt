@@ -48,3 +48,51 @@ impl TCommandEvent with source(self : Self) -> Element {
 impl TCommandEvent with command(self : Self) -> String {
   command_event_command_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn command_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> CommandEvent = "(type_, event_init_dict) => new CommandEvent(type_, event_init_dict)"
+
+///|
+#cfg(target="js")
+extern "js" fn command_event_source_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.source"
+
+///|
+#cfg(target="js")
+fn command_event_source_ffi(obj : JsValue) -> Element {
+  command_event_source_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn command_event_command_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.command"
+
+///|
+#cfg(target="js")
+fn command_event_command_ffi(obj : JsValue) -> String {
+  command_event_command_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn command_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> CommandEvent = "webapi_CommandEvent" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn command_event_source_ffi(obj : JsValue) -> Element = "webapi_CommandEvent" "get_source"
+
+///|
+#cfg(target="wasm-gc")
+fn command_event_command_ffi_wasm(obj : JsValue) -> JsValue = "webapi_CommandEvent" "get_command"
+
+///|
+#cfg(target="wasm-gc")
+fn command_event_command_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(command_event_command_ffi_wasm(obj))
+}

@@ -48,3 +48,39 @@ impl TBeforeUnloadEvent with set_return_value(
     TJsValue::to_js(return_value),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn before_unload_event_return_value_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.returnValue"
+
+///|
+#cfg(target="js")
+fn before_unload_event_return_value_ffi(obj : JsValue) -> String {
+  before_unload_event_return_value_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn before_unload_event_set_return_value_ffi(
+  obj : JsValue,
+  return_value : JsValue,
+) -> Unit = "(obj, returnValue) => { obj.returnValue = returnValue; }"
+
+///|
+#cfg(target="wasm-gc")
+fn before_unload_event_return_value_ffi_wasm(obj : JsValue) -> JsValue = "webapi_BeforeUnloadEvent" "get_returnValue"
+
+///|
+#cfg(target="wasm-gc")
+fn before_unload_event_return_value_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(before_unload_event_return_value_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn before_unload_event_set_return_value_ffi(
+  obj : JsValue,
+  return_value : JsValue,
+) -> Unit = "webapi_BeforeUnloadEvent" "set_returnValue"

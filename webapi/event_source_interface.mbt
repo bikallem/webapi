@@ -125,3 +125,166 @@ impl TEventSource with set_onerror(self : Self, onerror : (Event) -> JsValue) ->
 impl TEventSource with close(self : Self) -> Unit {
   event_source_close_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn event_source_new_ffi(
+  url : JsValue,
+  event_source_init_dict : JsValue,
+) -> EventSource = "(url, event_source_init_dict) => new EventSource(url, event_source_init_dict)"
+
+///|
+#cfg(target="js")
+extern "js" fn event_source_url_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.url"
+
+///|
+#cfg(target="js")
+fn event_source_url_ffi(obj : JsValue) -> String {
+  event_source_url_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn event_source_with_credentials_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.withCredentials"
+
+///|
+#cfg(target="js")
+fn event_source_with_credentials_ffi(obj : JsValue) -> Bool {
+  event_source_with_credentials_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn event_source_ready_state_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.readyState"
+
+///|
+#cfg(target="js")
+fn event_source_ready_state_ffi(obj : JsValue) -> UInt {
+  event_source_ready_state_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn event_source_onopen_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onopen"
+
+///|
+#cfg(target="js")
+fn event_source_onopen_ffi(obj : JsValue) -> EventHandler {
+  event_source_onopen_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn event_source_set_onopen_ffi(
+  obj : JsValue,
+  onopen : JsValue,
+) -> Unit = "(obj, onopen) => { obj.onopen = onopen; }"
+
+///|
+#cfg(target="js")
+extern "js" fn event_source_onmessage_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onmessage"
+
+///|
+#cfg(target="js")
+fn event_source_onmessage_ffi(obj : JsValue) -> EventHandler {
+  event_source_onmessage_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn event_source_set_onmessage_ffi(
+  obj : JsValue,
+  onmessage : JsValue,
+) -> Unit = "(obj, onmessage) => { obj.onmessage = onmessage; }"
+
+///|
+#cfg(target="js")
+extern "js" fn event_source_onerror_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onerror"
+
+///|
+#cfg(target="js")
+fn event_source_onerror_ffi(obj : JsValue) -> EventHandler {
+  event_source_onerror_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn event_source_set_onerror_ffi(
+  obj : JsValue,
+  onerror : JsValue,
+) -> Unit = "(obj, onerror) => { obj.onerror = onerror; }"
+
+///|
+#cfg(target="js")
+extern "js" fn event_source_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.close()"
+
+///|
+#cfg(target="wasm-gc")
+fn event_source_new_ffi(
+  url : JsValue,
+  event_source_init_dict : JsValue,
+) -> EventSource = "webapi_EventSource" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn event_source_url_ffi_wasm(obj : JsValue) -> JsValue = "webapi_EventSource" "get_url"
+
+///|
+#cfg(target="wasm-gc")
+fn event_source_url_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(event_source_url_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn event_source_with_credentials_ffi(obj : JsValue) -> Bool = "webapi_EventSource" "get_withCredentials"
+
+///|
+#cfg(target="wasm-gc")
+fn event_source_ready_state_ffi(obj : JsValue) -> UInt = "webapi_EventSource" "get_readyState"
+
+///|
+#cfg(target="wasm-gc")
+fn event_source_onopen_ffi_wasm(obj : JsValue) -> JsValue = "webapi_EventSource" "get_onopen"
+
+///|
+#cfg(target="wasm-gc")
+fn event_source_onopen_ffi(obj : JsValue) -> EventHandler {
+  event_source_onopen_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn event_source_set_onopen_ffi(obj : JsValue, onopen : JsValue) -> Unit = "webapi_EventSource" "set_onopen"
+
+///|
+#cfg(target="wasm-gc")
+fn event_source_onmessage_ffi_wasm(obj : JsValue) -> JsValue = "webapi_EventSource" "get_onmessage"
+
+///|
+#cfg(target="wasm-gc")
+fn event_source_onmessage_ffi(obj : JsValue) -> EventHandler {
+  event_source_onmessage_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn event_source_set_onmessage_ffi(obj : JsValue, onmessage : JsValue) -> Unit = "webapi_EventSource" "set_onmessage"
+
+///|
+#cfg(target="wasm-gc")
+fn event_source_onerror_ffi_wasm(obj : JsValue) -> JsValue = "webapi_EventSource" "get_onerror"
+
+///|
+#cfg(target="wasm-gc")
+fn event_source_onerror_ffi(obj : JsValue) -> EventHandler {
+  event_source_onerror_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn event_source_set_onerror_ffi(obj : JsValue, onerror : JsValue) -> Unit = "webapi_EventSource" "set_onerror"
+
+///|
+#cfg(target="wasm-gc")
+fn event_source_close_ffi(obj : JsValue) -> Unit = "webapi_EventSource" "close"

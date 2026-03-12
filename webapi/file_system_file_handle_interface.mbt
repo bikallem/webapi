@@ -63,3 +63,85 @@ impl TFileSystemFileHandle with create_sync_access_handle(self : Self) -> JsProm
 ] {
   file_system_file_handle_create_sync_access_handle_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn file_system_file_handle_get_file_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.getFile()"
+
+///|
+#cfg(target="js")
+fn file_system_file_handle_get_file_ffi(obj : JsValue) -> JsPromise[File] {
+  file_system_file_handle_get_file_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn file_system_file_handle_create_writable_ffi_js(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, options) => obj.createWritable(options)"
+
+///|
+#cfg(target="js")
+fn file_system_file_handle_create_writable_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> JsPromise[FileSystemWritableFileStream] {
+  file_system_file_handle_create_writable_ffi_js(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn file_system_file_handle_create_sync_access_handle_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.createSyncAccessHandle()"
+
+///|
+#cfg(target="js")
+fn file_system_file_handle_create_sync_access_handle_ffi(
+  obj : JsValue,
+) -> JsPromise[FileSystemSyncAccessHandle] {
+  file_system_file_handle_create_sync_access_handle_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn file_system_file_handle_get_file_ffi_wasm(obj : JsValue) -> JsValue = "webapi_FileSystemFileHandle" "getFile"
+
+///|
+#cfg(target="wasm-gc")
+fn file_system_file_handle_get_file_ffi(obj : JsValue) -> JsPromise[File] {
+  file_system_file_handle_get_file_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn file_system_file_handle_create_writable_ffi_wasm(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_FileSystemFileHandle" "createWritable"
+
+///|
+#cfg(target="wasm-gc")
+fn file_system_file_handle_create_writable_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> JsPromise[FileSystemWritableFileStream] {
+  file_system_file_handle_create_writable_ffi_wasm(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn file_system_file_handle_create_sync_access_handle_ffi_wasm(
+  obj : JsValue,
+) -> JsValue = "webapi_FileSystemFileHandle" "createSyncAccessHandle"
+
+///|
+#cfg(target="wasm-gc")
+fn file_system_file_handle_create_sync_access_handle_ffi(
+  obj : JsValue,
+) -> JsPromise[FileSystemSyncAccessHandle] {
+  file_system_file_handle_create_sync_access_handle_ffi_wasm(obj).unsafe_cast()
+}

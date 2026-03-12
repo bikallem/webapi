@@ -119,3 +119,147 @@ impl TURLSearchParams with set(self : Self, name : String, value : String) -> Un
 impl TURLSearchParams with sort(self : Self) -> Unit {
   url_search_params_sort_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn url_search_params_new_ffi(init : JsValue) -> URLSearchParams = "(init) => new URLSearchParams(init)"
+
+///|
+#cfg(target="js")
+extern "js" fn url_search_params_size_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.size"
+
+///|
+#cfg(target="js")
+fn url_search_params_size_ffi(obj : JsValue) -> UInt {
+  url_search_params_size_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn url_search_params_append_ffi(
+  obj : JsValue,
+  name : JsValue,
+  value : JsValue,
+) -> Unit = "(obj, name, value) => obj.append(name, value)"
+
+///|
+#cfg(target="js")
+extern "js" fn url_search_params_delete_ffi(
+  obj : JsValue,
+  name : JsValue,
+  value : JsValue,
+) -> Unit = "(obj, name, value) => obj.delete(name, value)"
+
+///|
+#cfg(target="js")
+extern "js" fn url_search_params_get_ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> JsValue = "(obj, name) => obj.get(name)"
+
+///|
+#cfg(target="js")
+extern "js" fn url_search_params_get_all_ffi_js(
+  obj : JsValue,
+  name : JsValue,
+) -> JsValue = "(obj, name) => obj.getAll(name)"
+
+///|
+#cfg(target="js")
+fn url_search_params_get_all_ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> Array[String] {
+  url_search_params_get_all_ffi_js(obj, name).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn url_search_params_has_ffi_js(
+  obj : JsValue,
+  name : JsValue,
+  value : JsValue,
+) -> JsValue = "(obj, name, value) => obj.has(name, value)"
+
+///|
+#cfg(target="js")
+fn url_search_params_has_ffi(
+  obj : JsValue,
+  name : JsValue,
+  value : JsValue,
+) -> Bool {
+  url_search_params_has_ffi_js(obj, name, value).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn url_search_params_set_ffi(
+  obj : JsValue,
+  name : JsValue,
+  value : JsValue,
+) -> Unit = "(obj, name, value) => obj.set(name, value)"
+
+///|
+#cfg(target="js")
+extern "js" fn url_search_params_sort_ffi(obj : JsValue) -> Unit = "(obj) => obj.sort()"
+
+///|
+#cfg(target="wasm-gc")
+fn url_search_params_new_ffi(init : JsValue) -> URLSearchParams = "webapi_URLSearchParams" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn url_search_params_size_ffi(obj : JsValue) -> UInt = "webapi_URLSearchParams" "get_size"
+
+///|
+#cfg(target="wasm-gc")
+fn url_search_params_append_ffi(
+  obj : JsValue,
+  name : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_URLSearchParams" "append"
+
+///|
+#cfg(target="wasm-gc")
+fn url_search_params_delete_ffi(
+  obj : JsValue,
+  name : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_URLSearchParams" "delete"
+
+///|
+#cfg(target="wasm-gc")
+fn url_search_params_get_ffi(obj : JsValue, name : JsValue) -> JsValue = "webapi_URLSearchParams" "get"
+
+///|
+#cfg(target="wasm-gc")
+fn url_search_params_get_all_ffi_wasm(obj : JsValue, name : JsValue) -> JsArray = "webapi_URLSearchParams" "getAll"
+
+///|
+#cfg(target="wasm-gc")
+fn url_search_params_get_all_ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> Array[String] {
+  url_search_params_get_all_ffi_wasm(obj, name).to_string_array()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn url_search_params_has_ffi(
+  obj : JsValue,
+  name : JsValue,
+  value : JsValue,
+) -> Bool = "webapi_URLSearchParams" "has"
+
+///|
+#cfg(target="wasm-gc")
+fn url_search_params_set_ffi(
+  obj : JsValue,
+  name : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_URLSearchParams" "set"
+
+///|
+#cfg(target="wasm-gc")
+fn url_search_params_sort_ffi(obj : JsValue) -> Unit = "webapi_URLSearchParams" "sort"

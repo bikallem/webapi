@@ -1,4 +1,0 @@
-///|
-extern "js" fn frame_request_callback_ffi(
-  callback : (DOMHighResTimeStamp) -> Unit,
-) -> FrameRequestCallback = "(callback) => callback"

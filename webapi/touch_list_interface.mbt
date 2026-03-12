@@ -43,3 +43,25 @@ impl TTouchList with item_opt(self : Self, index : UInt) -> Touch? {
 impl TTouchList with item(self : Self, index : UInt) -> Touch {
   self.item_opt(index).unwrap()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn touch_list_length_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.length"
+
+///|
+#cfg(target="js")
+fn touch_list_length_ffi(obj : JsValue) -> UInt {
+  touch_list_length_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn touch_list_item_ffi(obj : JsValue, index : JsValue) -> JsValue = "(obj, index) => obj.item(index)"
+
+///|
+#cfg(target="wasm-gc")
+fn touch_list_length_ffi(obj : JsValue) -> UInt = "webapi_TouchList" "get_length"
+
+///|
+#cfg(target="wasm-gc")
+fn touch_list_item_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_TouchList" "item"

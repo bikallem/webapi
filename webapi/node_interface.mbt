@@ -314,3 +314,491 @@ impl TNode with replace_child(self : Self, node : &TNode, child : &TNode) -> Nod
 impl TNode with remove_child(self : Self, child : &TNode) -> Node {
   node_remove_child_ffi(TJsValue::to_js(self), TJsValue::to_js(child))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn node_node_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.nodeType"
+
+///|
+#cfg(target="js")
+fn node_node_type_ffi(obj : JsValue) -> UInt {
+  node_node_type_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn node_node_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.nodeName"
+
+///|
+#cfg(target="js")
+fn node_node_name_ffi(obj : JsValue) -> String {
+  node_node_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn node_base_uri_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.baseURI"
+
+///|
+#cfg(target="js")
+fn node_base_uri_ffi(obj : JsValue) -> String {
+  node_base_uri_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn node_is_connected_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.isConnected"
+
+///|
+#cfg(target="js")
+fn node_is_connected_ffi(obj : JsValue) -> Bool {
+  node_is_connected_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn node_owner_document_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ownerDocument"
+
+///|
+#cfg(target="js")
+fn node_owner_document_ffi(obj : JsValue) -> Document {
+  node_owner_document_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn node_get_root_node_ffi_js(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, options) => obj.getRootNode(options)"
+
+///|
+#cfg(target="js")
+fn node_get_root_node_ffi(obj : JsValue, options : JsValue) -> Node {
+  node_get_root_node_ffi_js(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn node_parent_node_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.parentNode"
+
+///|
+#cfg(target="js")
+fn node_parent_node_ffi(obj : JsValue) -> Node {
+  node_parent_node_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn node_parent_element_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.parentElement"
+
+///|
+#cfg(target="js")
+fn node_parent_element_ffi(obj : JsValue) -> Element {
+  node_parent_element_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn node_has_child_nodes_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.hasChildNodes()"
+
+///|
+#cfg(target="js")
+fn node_has_child_nodes_ffi(obj : JsValue) -> Bool {
+  node_has_child_nodes_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn node_child_nodes_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.childNodes"
+
+///|
+#cfg(target="js")
+fn node_child_nodes_ffi(obj : JsValue) -> NodeList {
+  node_child_nodes_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn node_first_child_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.firstChild"
+
+///|
+#cfg(target="js")
+fn node_first_child_ffi(obj : JsValue) -> Node {
+  node_first_child_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn node_last_child_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.lastChild"
+
+///|
+#cfg(target="js")
+fn node_last_child_ffi(obj : JsValue) -> Node {
+  node_last_child_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn node_previous_sibling_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.previousSibling"
+
+///|
+#cfg(target="js")
+fn node_previous_sibling_ffi(obj : JsValue) -> Node {
+  node_previous_sibling_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn node_next_sibling_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.nextSibling"
+
+///|
+#cfg(target="js")
+fn node_next_sibling_ffi(obj : JsValue) -> Node {
+  node_next_sibling_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn node_node_value_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.nodeValue"
+
+///|
+#cfg(target="js")
+fn node_node_value_ffi(obj : JsValue) -> String {
+  node_node_value_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn node_set_node_value_ffi(
+  obj : JsValue,
+  node_value : JsValue,
+) -> Unit = "(obj, nodeValue) => { obj.nodeValue = nodeValue; }"
+
+///|
+#cfg(target="js")
+extern "js" fn node_text_content_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.textContent"
+
+///|
+#cfg(target="js")
+fn node_text_content_ffi(obj : JsValue) -> String {
+  node_text_content_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn node_set_text_content_ffi(
+  obj : JsValue,
+  text_content : JsValue,
+) -> Unit = "(obj, textContent) => { obj.textContent = textContent; }"
+
+///|
+#cfg(target="js")
+extern "js" fn node_normalize_ffi(obj : JsValue) -> Unit = "(obj) => obj.normalize()"
+
+///|
+#cfg(target="js")
+extern "js" fn node_clone_node_ffi_js(
+  obj : JsValue,
+  subtree : JsValue,
+) -> JsValue = "(obj, subtree) => obj.cloneNode(subtree)"
+
+///|
+#cfg(target="js")
+fn node_clone_node_ffi(obj : JsValue, subtree : JsValue) -> Node {
+  node_clone_node_ffi_js(obj, subtree).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn node_is_equal_node_ffi_js(
+  obj : JsValue,
+  other_node : JsValue,
+) -> JsValue = "(obj, other_node) => obj.isEqualNode(other_node)"
+
+///|
+#cfg(target="js")
+fn node_is_equal_node_ffi(obj : JsValue, other_node : JsValue) -> Bool {
+  node_is_equal_node_ffi_js(obj, other_node).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn node_is_same_node_ffi_js(
+  obj : JsValue,
+  other_node : JsValue,
+) -> JsValue = "(obj, other_node) => obj.isSameNode(other_node)"
+
+///|
+#cfg(target="js")
+fn node_is_same_node_ffi(obj : JsValue, other_node : JsValue) -> Bool {
+  node_is_same_node_ffi_js(obj, other_node).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn node_compare_document_position_ffi_js(
+  obj : JsValue,
+  other : JsValue,
+) -> JsValue = "(obj, other) => obj.compareDocumentPosition(other)"
+
+///|
+#cfg(target="js")
+fn node_compare_document_position_ffi(obj : JsValue, other : JsValue) -> UInt {
+  node_compare_document_position_ffi_js(obj, other).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn node_contains_ffi_js(obj : JsValue, other : JsValue) -> JsValue = "(obj, other) => obj.contains(other)"
+
+///|
+#cfg(target="js")
+fn node_contains_ffi(obj : JsValue, other : JsValue) -> Bool {
+  node_contains_ffi_js(obj, other).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn node_lookup_prefix_ffi(
+  obj : JsValue,
+  namespace_ : JsValue,
+) -> JsValue = "(obj, namespace_) => obj.lookupPrefix(namespace_)"
+
+///|
+#cfg(target="js")
+extern "js" fn node_lookup_namespace_uri_ffi(
+  obj : JsValue,
+  prefix : JsValue,
+) -> JsValue = "(obj, prefix) => obj.lookupNamespaceURI(prefix)"
+
+///|
+#cfg(target="js")
+extern "js" fn node_is_default_namespace_ffi_js(
+  obj : JsValue,
+  namespace_ : JsValue,
+) -> JsValue = "(obj, namespace_) => obj.isDefaultNamespace(namespace_)"
+
+///|
+#cfg(target="js")
+fn node_is_default_namespace_ffi(obj : JsValue, namespace_ : JsValue) -> Bool {
+  node_is_default_namespace_ffi_js(obj, namespace_).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn node_insert_before_ffi_js(
+  obj : JsValue,
+  node : JsValue,
+  child : JsValue,
+) -> JsValue = "(obj, node, child) => obj.insertBefore(node, child)"
+
+///|
+#cfg(target="js")
+fn node_insert_before_ffi(
+  obj : JsValue,
+  node : JsValue,
+  child : JsValue,
+) -> Node {
+  node_insert_before_ffi_js(obj, node, child).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn node_append_child_ffi_js(
+  obj : JsValue,
+  node : JsValue,
+) -> JsValue = "(obj, node) => obj.appendChild(node)"
+
+///|
+#cfg(target="js")
+fn node_append_child_ffi(obj : JsValue, node : JsValue) -> Node {
+  node_append_child_ffi_js(obj, node).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn node_replace_child_ffi_js(
+  obj : JsValue,
+  node : JsValue,
+  child : JsValue,
+) -> JsValue = "(obj, node, child) => obj.replaceChild(node, child)"
+
+///|
+#cfg(target="js")
+fn node_replace_child_ffi(
+  obj : JsValue,
+  node : JsValue,
+  child : JsValue,
+) -> Node {
+  node_replace_child_ffi_js(obj, node, child).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn node_remove_child_ffi_js(
+  obj : JsValue,
+  child : JsValue,
+) -> JsValue = "(obj, child) => obj.removeChild(child)"
+
+///|
+#cfg(target="js")
+fn node_remove_child_ffi(obj : JsValue, child : JsValue) -> Node {
+  node_remove_child_ffi_js(obj, child).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn node_node_type_ffi(obj : JsValue) -> UInt = "webapi_Node" "get_nodeType"
+
+///|
+#cfg(target="wasm-gc")
+fn node_node_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Node" "get_nodeName"
+
+///|
+#cfg(target="wasm-gc")
+fn node_node_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(node_node_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn node_base_uri_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Node" "get_baseURI"
+
+///|
+#cfg(target="wasm-gc")
+fn node_base_uri_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(node_base_uri_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn node_is_connected_ffi(obj : JsValue) -> Bool = "webapi_Node" "get_isConnected"
+
+///|
+#cfg(target="wasm-gc")
+fn node_owner_document_ffi(obj : JsValue) -> Document = "webapi_Node" "get_ownerDocument"
+
+///|
+#cfg(target="wasm-gc")
+fn node_get_root_node_ffi(obj : JsValue, options : JsValue) -> Node = "webapi_Node" "getRootNode"
+
+///|
+#cfg(target="wasm-gc")
+fn node_parent_node_ffi(obj : JsValue) -> Node = "webapi_Node" "get_parentNode"
+
+///|
+#cfg(target="wasm-gc")
+fn node_parent_element_ffi(obj : JsValue) -> Element = "webapi_Node" "get_parentElement"
+
+///|
+#cfg(target="wasm-gc")
+fn node_has_child_nodes_ffi(obj : JsValue) -> Bool = "webapi_Node" "hasChildNodes"
+
+///|
+#cfg(target="wasm-gc")
+fn node_child_nodes_ffi(obj : JsValue) -> NodeList = "webapi_Node" "get_childNodes"
+
+///|
+#cfg(target="wasm-gc")
+fn node_first_child_ffi(obj : JsValue) -> Node = "webapi_Node" "get_firstChild"
+
+///|
+#cfg(target="wasm-gc")
+fn node_last_child_ffi(obj : JsValue) -> Node = "webapi_Node" "get_lastChild"
+
+///|
+#cfg(target="wasm-gc")
+fn node_previous_sibling_ffi(obj : JsValue) -> Node = "webapi_Node" "get_previousSibling"
+
+///|
+#cfg(target="wasm-gc")
+fn node_next_sibling_ffi(obj : JsValue) -> Node = "webapi_Node" "get_nextSibling"
+
+///|
+#cfg(target="wasm-gc")
+fn node_node_value_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Node" "get_nodeValue"
+
+///|
+#cfg(target="wasm-gc")
+fn node_node_value_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(node_node_value_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn node_set_node_value_ffi(obj : JsValue, node_value : JsValue) -> Unit = "webapi_Node" "set_nodeValue"
+
+///|
+#cfg(target="wasm-gc")
+fn node_text_content_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Node" "get_textContent"
+
+///|
+#cfg(target="wasm-gc")
+fn node_text_content_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(node_text_content_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn node_set_text_content_ffi(obj : JsValue, text_content : JsValue) -> Unit = "webapi_Node" "set_textContent"
+
+///|
+#cfg(target="wasm-gc")
+fn node_normalize_ffi(obj : JsValue) -> Unit = "webapi_Node" "normalize"
+
+///|
+#cfg(target="wasm-gc")
+fn node_clone_node_ffi(obj : JsValue, subtree : JsValue) -> Node = "webapi_Node" "cloneNode"
+
+///|
+#cfg(target="wasm-gc")
+fn node_is_equal_node_ffi(obj : JsValue, other_node : JsValue) -> Bool = "webapi_Node" "isEqualNode"
+
+///|
+#cfg(target="wasm-gc")
+fn node_is_same_node_ffi(obj : JsValue, other_node : JsValue) -> Bool = "webapi_Node" "isSameNode"
+
+///|
+#cfg(target="wasm-gc")
+fn node_compare_document_position_ffi(obj : JsValue, other : JsValue) -> UInt = "webapi_Node" "compareDocumentPosition"
+
+///|
+#cfg(target="wasm-gc")
+fn node_contains_ffi(obj : JsValue, other : JsValue) -> Bool = "webapi_Node" "contains"
+
+///|
+#cfg(target="wasm-gc")
+fn node_lookup_prefix_ffi(obj : JsValue, namespace_ : JsValue) -> JsValue = "webapi_Node" "lookupPrefix"
+
+///|
+#cfg(target="wasm-gc")
+fn node_lookup_namespace_uri_ffi(obj : JsValue, prefix : JsValue) -> JsValue = "webapi_Node" "lookupNamespaceURI"
+
+///|
+#cfg(target="wasm-gc")
+fn node_is_default_namespace_ffi(obj : JsValue, namespace_ : JsValue) -> Bool = "webapi_Node" "isDefaultNamespace"
+
+///|
+#cfg(target="wasm-gc")
+fn node_insert_before_ffi(
+  obj : JsValue,
+  node : JsValue,
+  child : JsValue,
+) -> Node = "webapi_Node" "insertBefore"
+
+///|
+#cfg(target="wasm-gc")
+fn node_append_child_ffi(obj : JsValue, node : JsValue) -> Node = "webapi_Node" "appendChild"
+
+///|
+#cfg(target="wasm-gc")
+fn node_replace_child_ffi(
+  obj : JsValue,
+  node : JsValue,
+  child : JsValue,
+) -> Node = "webapi_Node" "replaceChild"
+
+///|
+#cfg(target="wasm-gc")
+fn node_remove_child_ffi(obj : JsValue, child : JsValue) -> Node = "webapi_Node" "removeChild"

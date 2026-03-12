@@ -1,4 +1,0 @@
-///|
-extern "js" fn on_before_unload_event_handler_non_null_ffi(
-  callback : (Event) -> String,
-) -> OnBeforeUnloadEventHandlerNonNull = "(callback) => callback"

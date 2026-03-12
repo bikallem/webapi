@@ -21,3 +21,15 @@ pub fn FunctionStringCallback::new(
 ) -> FunctionStringCallback {
   function_string_callback_ffi(callback)
 }
+
+///|
+#cfg(target="js")
+extern "js" fn function_string_callback_ffi(
+  callback : (String) -> Unit,
+) -> FunctionStringCallback = "(callback) => callback"
+
+///|
+#cfg(target="wasm-gc")
+fn function_string_callback_ffi(
+  callback : (String) -> Unit,
+) -> FunctionStringCallback = "webapi_FunctionStringCallback" "new"

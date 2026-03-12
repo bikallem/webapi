@@ -242,3 +242,488 @@ impl TNavigator with hardware_concurrency(self : Self) -> UInt64 {
 impl TNavigator with storage(self : Self) -> StorageManager {
   navigator_storage_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn navigator_user_activation_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.userActivation"
+
+///|
+#cfg(target="js")
+fn navigator_user_activation_ffi(obj : JsValue) -> UserActivation {
+  navigator_user_activation_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigator_vibrate_ffi_js(
+  obj : JsValue,
+  pattern : JsValue,
+) -> JsValue = "(obj, pattern) => obj.vibrate(pattern)"
+
+///|
+#cfg(target="js")
+fn navigator_vibrate_ffi(obj : JsValue, pattern : JsValue) -> Bool {
+  navigator_vibrate_ffi_js(obj, pattern).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigator_permissions_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.permissions"
+
+///|
+#cfg(target="js")
+fn navigator_permissions_ffi(obj : JsValue) -> Permissions {
+  navigator_permissions_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigator_max_touch_points_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.maxTouchPoints"
+
+///|
+#cfg(target="js")
+fn navigator_max_touch_points_ffi(obj : JsValue) -> Int {
+  navigator_max_touch_points_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigator_clipboard_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.clipboard"
+
+///|
+#cfg(target="js")
+fn navigator_clipboard_ffi(obj : JsValue) -> Clipboard {
+  navigator_clipboard_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigator_service_worker_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.serviceWorker"
+
+///|
+#cfg(target="js")
+fn navigator_service_worker_ffi(obj : JsValue) -> ServiceWorkerContainer {
+  navigator_service_worker_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigator_app_code_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.appCodeName"
+
+///|
+#cfg(target="js")
+fn navigator_app_code_name_ffi(obj : JsValue) -> String {
+  navigator_app_code_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigator_app_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.appName"
+
+///|
+#cfg(target="js")
+fn navigator_app_name_ffi(obj : JsValue) -> String {
+  navigator_app_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigator_app_version_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.appVersion"
+
+///|
+#cfg(target="js")
+fn navigator_app_version_ffi(obj : JsValue) -> String {
+  navigator_app_version_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigator_platform_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.platform"
+
+///|
+#cfg(target="js")
+fn navigator_platform_ffi(obj : JsValue) -> String {
+  navigator_platform_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigator_product_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.product"
+
+///|
+#cfg(target="js")
+fn navigator_product_ffi(obj : JsValue) -> String {
+  navigator_product_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigator_product_sub_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.productSub"
+
+///|
+#cfg(target="js")
+fn navigator_product_sub_ffi(obj : JsValue) -> String {
+  navigator_product_sub_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigator_user_agent_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.userAgent"
+
+///|
+#cfg(target="js")
+fn navigator_user_agent_ffi(obj : JsValue) -> String {
+  navigator_user_agent_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigator_vendor_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.vendor"
+
+///|
+#cfg(target="js")
+fn navigator_vendor_ffi(obj : JsValue) -> String {
+  navigator_vendor_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigator_vendor_sub_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.vendorSub"
+
+///|
+#cfg(target="js")
+fn navigator_vendor_sub_ffi(obj : JsValue) -> String {
+  navigator_vendor_sub_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigator_taint_enabled_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.taintEnabled()"
+
+///|
+#cfg(target="js")
+fn navigator_taint_enabled_ffi(obj : JsValue) -> Bool {
+  navigator_taint_enabled_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigator_oscpu_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oscpu"
+
+///|
+#cfg(target="js")
+fn navigator_oscpu_ffi(obj : JsValue) -> String {
+  navigator_oscpu_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigator_language_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.language"
+
+///|
+#cfg(target="js")
+fn navigator_language_ffi(obj : JsValue) -> String {
+  navigator_language_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigator_languages_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.languages"
+
+///|
+#cfg(target="js")
+fn navigator_languages_ffi(obj : JsValue) -> Array[String] {
+  navigator_languages_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigator_on_line_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onLine"
+
+///|
+#cfg(target="js")
+fn navigator_on_line_ffi(obj : JsValue) -> Bool {
+  navigator_on_line_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigator_register_protocol_handler_ffi(
+  obj : JsValue,
+  scheme : JsValue,
+  url : JsValue,
+) -> Unit = "(obj, scheme, url) => obj.registerProtocolHandler(scheme, url)"
+
+///|
+#cfg(target="js")
+extern "js" fn navigator_unregister_protocol_handler_ffi(
+  obj : JsValue,
+  scheme : JsValue,
+  url : JsValue,
+) -> Unit = "(obj, scheme, url) => obj.unregisterProtocolHandler(scheme, url)"
+
+///|
+#cfg(target="js")
+extern "js" fn navigator_cookie_enabled_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.cookieEnabled"
+
+///|
+#cfg(target="js")
+fn navigator_cookie_enabled_ffi(obj : JsValue) -> Bool {
+  navigator_cookie_enabled_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigator_plugins_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.plugins"
+
+///|
+#cfg(target="js")
+fn navigator_plugins_ffi(obj : JsValue) -> PluginArray {
+  navigator_plugins_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigator_mime_types_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.mimeTypes"
+
+///|
+#cfg(target="js")
+fn navigator_mime_types_ffi(obj : JsValue) -> MimeTypeArray {
+  navigator_mime_types_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigator_java_enabled_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.javaEnabled()"
+
+///|
+#cfg(target="js")
+fn navigator_java_enabled_ffi(obj : JsValue) -> Bool {
+  navigator_java_enabled_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigator_pdf_viewer_enabled_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.pdfViewerEnabled"
+
+///|
+#cfg(target="js")
+fn navigator_pdf_viewer_enabled_ffi(obj : JsValue) -> Bool {
+  navigator_pdf_viewer_enabled_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigator_hardware_concurrency_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.hardwareConcurrency"
+
+///|
+#cfg(target="js")
+fn navigator_hardware_concurrency_ffi(obj : JsValue) -> UInt64 {
+  navigator_hardware_concurrency_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigator_storage_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.storage"
+
+///|
+#cfg(target="js")
+fn navigator_storage_ffi(obj : JsValue) -> StorageManager {
+  navigator_storage_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_user_activation_ffi(obj : JsValue) -> UserActivation = "webapi_Navigator" "get_userActivation"
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_vibrate_ffi(obj : JsValue, pattern : JsValue) -> Bool = "webapi_Navigator" "vibrate"
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_permissions_ffi(obj : JsValue) -> Permissions = "webapi_Navigator" "get_permissions"
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_max_touch_points_ffi(obj : JsValue) -> Int = "webapi_Navigator" "get_maxTouchPoints"
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_clipboard_ffi(obj : JsValue) -> Clipboard = "webapi_Navigator" "get_clipboard"
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_service_worker_ffi(obj : JsValue) -> ServiceWorkerContainer = "webapi_Navigator" "get_serviceWorker"
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_app_code_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Navigator" "get_appCodeName"
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_app_code_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(navigator_app_code_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_app_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Navigator" "get_appName"
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_app_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(navigator_app_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_app_version_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Navigator" "get_appVersion"
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_app_version_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(navigator_app_version_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_platform_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Navigator" "get_platform"
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_platform_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(navigator_platform_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_product_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Navigator" "get_product"
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_product_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(navigator_product_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_product_sub_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Navigator" "get_productSub"
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_product_sub_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(navigator_product_sub_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_user_agent_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Navigator" "get_userAgent"
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_user_agent_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(navigator_user_agent_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_vendor_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Navigator" "get_vendor"
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_vendor_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(navigator_vendor_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_vendor_sub_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Navigator" "get_vendorSub"
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_vendor_sub_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(navigator_vendor_sub_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_taint_enabled_ffi(obj : JsValue) -> Bool = "webapi_Navigator" "taintEnabled"
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_oscpu_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Navigator" "get_oscpu"
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_oscpu_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(navigator_oscpu_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_language_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Navigator" "get_language"
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_language_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(navigator_language_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_languages_ffi_wasm(obj : JsValue) -> JsArray = "webapi_Navigator" "get_languages"
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_languages_ffi(obj : JsValue) -> Array[String] {
+  navigator_languages_ffi_wasm(obj).to_string_array()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_on_line_ffi(obj : JsValue) -> Bool = "webapi_Navigator" "get_onLine"
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_register_protocol_handler_ffi(
+  obj : JsValue,
+  scheme : JsValue,
+  url : JsValue,
+) -> Unit = "webapi_Navigator" "registerProtocolHandler"
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_unregister_protocol_handler_ffi(
+  obj : JsValue,
+  scheme : JsValue,
+  url : JsValue,
+) -> Unit = "webapi_Navigator" "unregisterProtocolHandler"
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_cookie_enabled_ffi(obj : JsValue) -> Bool = "webapi_Navigator" "get_cookieEnabled"
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_plugins_ffi(obj : JsValue) -> PluginArray = "webapi_Navigator" "get_plugins"
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_mime_types_ffi(obj : JsValue) -> MimeTypeArray = "webapi_Navigator" "get_mimeTypes"
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_java_enabled_ffi(obj : JsValue) -> Bool = "webapi_Navigator" "javaEnabled"
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_pdf_viewer_enabled_ffi(obj : JsValue) -> Bool = "webapi_Navigator" "get_pdfViewerEnabled"
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_hardware_concurrency_ffi(obj : JsValue) -> UInt64 = "webapi_Navigator" "get_hardwareConcurrency"
+
+///|
+#cfg(target="wasm-gc")
+fn navigator_storage_ffi(obj : JsValue) -> StorageManager = "webapi_Navigator" "get_storage"

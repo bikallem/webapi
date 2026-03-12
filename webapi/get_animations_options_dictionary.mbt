@@ -39,3 +39,49 @@ pub fn GetAnimationsOptions::pseudo_element(
 ) -> CSSOMString? {
   get_animations_options_get_pseudo_element_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn get_animations_options_ffi(
+  subtree : JsValue,
+  pseudo_element : JsValue,
+) -> GetAnimationsOptions =
+  #|(subtree, pseudoElement) => {
+  #|  const obj = {};
+  #|  if (subtree !== undefined) obj.subtree = subtree;
+  #|  if (pseudoElement !== undefined) obj.pseudoElement = pseudoElement;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn get_animations_options_empty_ffi() -> GetAnimationsOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn get_animations_options_get_subtree_ffi(obj : JsValue) -> JsValue = "(obj) => obj.subtree"
+
+///|
+#cfg(target="js")
+extern "js" fn get_animations_options_get_pseudo_element_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.pseudoElement"
+
+///|
+#cfg(target="wasm-gc")
+fn get_animations_options_ffi(
+  subtree : JsValue,
+  pseudo_element : JsValue,
+) -> GetAnimationsOptions = "webapi_GetAnimationsOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn get_animations_options_empty_ffi() -> GetAnimationsOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn get_animations_options_get_subtree_ffi(obj : JsValue) -> JsValue = "webapi_GetAnimationsOptions" "get_subtree"
+
+///|
+#cfg(target="wasm-gc")
+fn get_animations_options_get_pseudo_element_ffi(obj : JsValue) -> JsValue = "webapi_GetAnimationsOptions" "get_pseudoElement"

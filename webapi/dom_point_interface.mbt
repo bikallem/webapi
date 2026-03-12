@@ -98,3 +98,123 @@ impl TDOMPoint with w(self : Self) -> Double {
 impl TDOMPoint with set_w(self : Self, w : Double) -> Unit {
   dom_point_set_w_ffi(TJsValue::to_js(self), TJsValue::to_js(w))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn dom_point_new_ffi(
+  x : JsValue,
+  y : JsValue,
+  z : JsValue,
+  w : JsValue,
+) -> DOMPoint = "(x, y, z, w) => new DOMPoint(x, y, z, w)"
+
+///|
+#cfg(target="js")
+extern "js" fn dom_point_from_point_ffi_js(other : JsValue) -> JsValue = "(other) => DOMPoint.fromPoint(other)"
+
+///|
+#cfg(target="js")
+fn dom_point_from_point_ffi(other : JsValue) -> DOMPoint {
+  dom_point_from_point_ffi_js(other).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_point_x_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.x"
+
+///|
+#cfg(target="js")
+fn dom_point_x_ffi(obj : JsValue) -> Double {
+  dom_point_x_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_point_set_x_ffi(obj : JsValue, x : JsValue) -> Unit = "(obj, x) => { obj.x = x; }"
+
+///|
+#cfg(target="js")
+extern "js" fn dom_point_y_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.y"
+
+///|
+#cfg(target="js")
+fn dom_point_y_ffi(obj : JsValue) -> Double {
+  dom_point_y_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_point_set_y_ffi(obj : JsValue, y : JsValue) -> Unit = "(obj, y) => { obj.y = y; }"
+
+///|
+#cfg(target="js")
+extern "js" fn dom_point_z_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.z"
+
+///|
+#cfg(target="js")
+fn dom_point_z_ffi(obj : JsValue) -> Double {
+  dom_point_z_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_point_set_z_ffi(obj : JsValue, z : JsValue) -> Unit = "(obj, z) => { obj.z = z; }"
+
+///|
+#cfg(target="js")
+extern "js" fn dom_point_w_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.w"
+
+///|
+#cfg(target="js")
+fn dom_point_w_ffi(obj : JsValue) -> Double {
+  dom_point_w_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_point_set_w_ffi(obj : JsValue, w : JsValue) -> Unit = "(obj, w) => { obj.w = w; }"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_point_new_ffi(
+  x : JsValue,
+  y : JsValue,
+  z : JsValue,
+  w : JsValue,
+) -> DOMPoint = "webapi_DOMPoint" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_point_from_point_ffi(other : JsValue) -> DOMPoint = "webapi_DOMPoint" "fromPoint"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_point_x_ffi(obj : JsValue) -> Double = "webapi_DOMPoint" "get_x"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_point_set_x_ffi(obj : JsValue, x : JsValue) -> Unit = "webapi_DOMPoint" "set_x"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_point_y_ffi(obj : JsValue) -> Double = "webapi_DOMPoint" "get_y"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_point_set_y_ffi(obj : JsValue, y : JsValue) -> Unit = "webapi_DOMPoint" "set_y"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_point_z_ffi(obj : JsValue) -> Double = "webapi_DOMPoint" "get_z"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_point_set_z_ffi(obj : JsValue, z : JsValue) -> Unit = "webapi_DOMPoint" "set_z"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_point_w_ffi(obj : JsValue) -> Double = "webapi_DOMPoint" "get_w"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_point_set_w_ffi(obj : JsValue, w : JsValue) -> Unit = "webapi_DOMPoint" "set_w"

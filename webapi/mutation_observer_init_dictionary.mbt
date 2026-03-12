@@ -83,3 +83,116 @@ pub fn MutationObserverInit::attribute_filter(
 ) -> Array[String]? {
   mutation_observer_init_get_attribute_filter_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn mutation_observer_init_ffi(
+  child_list : JsValue,
+  attributes : JsValue,
+  character_data : JsValue,
+  subtree : JsValue,
+  attribute_old_value : JsValue,
+  character_data_old_value : JsValue,
+  attribute_filter : JsValue,
+) -> MutationObserverInit =
+  #|(childList, attributes, characterData, subtree, attributeOldValue, characterDataOldValue, attributeFilter) => {
+  #|  const obj = {};
+  #|  if (childList !== undefined) obj.childList = childList;
+  #|  if (attributes !== undefined) obj.attributes = attributes;
+  #|  if (characterData !== undefined) obj.characterData = characterData;
+  #|  if (subtree !== undefined) obj.subtree = subtree;
+  #|  if (attributeOldValue !== undefined) obj.attributeOldValue = attributeOldValue;
+  #|  if (characterDataOldValue !== undefined) obj.characterDataOldValue = characterDataOldValue;
+  #|  if (attributeFilter !== undefined) obj.attributeFilter = attributeFilter;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn mutation_observer_init_empty_ffi() -> MutationObserverInit = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn mutation_observer_init_get_child_list_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.childList"
+
+///|
+#cfg(target="js")
+extern "js" fn mutation_observer_init_get_attributes_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.attributes"
+
+///|
+#cfg(target="js")
+extern "js" fn mutation_observer_init_get_character_data_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.characterData"
+
+///|
+#cfg(target="js")
+extern "js" fn mutation_observer_init_get_subtree_ffi(obj : JsValue) -> JsValue = "(obj) => obj.subtree"
+
+///|
+#cfg(target="js")
+extern "js" fn mutation_observer_init_get_attribute_old_value_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.attributeOldValue"
+
+///|
+#cfg(target="js")
+extern "js" fn mutation_observer_init_get_character_data_old_value_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.characterDataOldValue"
+
+///|
+#cfg(target="js")
+extern "js" fn mutation_observer_init_get_attribute_filter_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.attributeFilter"
+
+///|
+#cfg(target="wasm-gc")
+fn mutation_observer_init_ffi(
+  child_list : JsValue,
+  attributes : JsValue,
+  character_data : JsValue,
+  subtree : JsValue,
+  attribute_old_value : JsValue,
+  character_data_old_value : JsValue,
+  attribute_filter : JsValue,
+) -> MutationObserverInit = "webapi_MutationObserverInit" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn mutation_observer_init_empty_ffi() -> MutationObserverInit = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn mutation_observer_init_get_child_list_ffi(obj : JsValue) -> JsValue = "webapi_MutationObserverInit" "get_childList"
+
+///|
+#cfg(target="wasm-gc")
+fn mutation_observer_init_get_attributes_ffi(obj : JsValue) -> JsValue = "webapi_MutationObserverInit" "get_attributes"
+
+///|
+#cfg(target="wasm-gc")
+fn mutation_observer_init_get_character_data_ffi(obj : JsValue) -> JsValue = "webapi_MutationObserverInit" "get_characterData"
+
+///|
+#cfg(target="wasm-gc")
+fn mutation_observer_init_get_subtree_ffi(obj : JsValue) -> JsValue = "webapi_MutationObserverInit" "get_subtree"
+
+///|
+#cfg(target="wasm-gc")
+fn mutation_observer_init_get_attribute_old_value_ffi(obj : JsValue) -> JsValue = "webapi_MutationObserverInit" "get_attributeOldValue"
+
+///|
+#cfg(target="wasm-gc")
+fn mutation_observer_init_get_character_data_old_value_ffi(
+  obj : JsValue,
+) -> JsValue = "webapi_MutationObserverInit" "get_characterDataOldValue"
+
+///|
+#cfg(target="wasm-gc")
+fn mutation_observer_init_get_attribute_filter_ffi(obj : JsValue) -> JsValue = "webapi_MutationObserverInit" "get_attributeFilter"

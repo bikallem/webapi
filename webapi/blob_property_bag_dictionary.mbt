@@ -35,3 +35,44 @@ pub fn BlobPropertyBag::type_(self : BlobPropertyBag) -> String? {
 pub fn BlobPropertyBag::endings(self : BlobPropertyBag) -> EndingType? {
   blob_property_bag_get_endings_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn blob_property_bag_ffi(
+  type_ : JsValue,
+  endings : JsValue,
+) -> BlobPropertyBag =
+  #|(type, endings) => {
+  #|  const obj = {};
+  #|  if (type !== undefined) obj.type = type;
+  #|  if (endings !== undefined) obj.endings = endings;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn blob_property_bag_empty_ffi() -> BlobPropertyBag = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn blob_property_bag_get_type_ffi(obj : JsValue) -> JsValue = "(obj) => obj.type"
+
+///|
+#cfg(target="js")
+extern "js" fn blob_property_bag_get_endings_ffi(obj : JsValue) -> JsValue = "(obj) => obj.endings"
+
+///|
+#cfg(target="wasm-gc")
+fn blob_property_bag_ffi(type_ : JsValue, endings : JsValue) -> BlobPropertyBag = "webapi_BlobPropertyBag" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn blob_property_bag_empty_ffi() -> BlobPropertyBag = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn blob_property_bag_get_type_ffi(obj : JsValue) -> JsValue = "webapi_BlobPropertyBag" "get_type"
+
+///|
+#cfg(target="wasm-gc")
+fn blob_property_bag_get_endings_ffi(obj : JsValue) -> JsValue = "webapi_BlobPropertyBag" "get_endings"

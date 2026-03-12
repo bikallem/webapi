@@ -170,3 +170,255 @@ impl TXMLHttpRequestEventTarget with set_onloadend(
     TJsValue::to_js(event_handler_non_null_ffi(onloadend)),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_event_target_onloadstart_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.onloadstart"
+
+///|
+#cfg(target="js")
+fn xml_http_request_event_target_onloadstart_ffi(obj : JsValue) -> EventHandler {
+  xml_http_request_event_target_onloadstart_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_event_target_set_onloadstart_ffi(
+  obj : JsValue,
+  onloadstart : JsValue,
+) -> Unit = "(obj, onloadstart) => { obj.onloadstart = onloadstart; }"
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_event_target_onprogress_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.onprogress"
+
+///|
+#cfg(target="js")
+fn xml_http_request_event_target_onprogress_ffi(obj : JsValue) -> EventHandler {
+  xml_http_request_event_target_onprogress_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_event_target_set_onprogress_ffi(
+  obj : JsValue,
+  onprogress : JsValue,
+) -> Unit = "(obj, onprogress) => { obj.onprogress = onprogress; }"
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_event_target_onabort_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.onabort"
+
+///|
+#cfg(target="js")
+fn xml_http_request_event_target_onabort_ffi(obj : JsValue) -> EventHandler {
+  xml_http_request_event_target_onabort_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_event_target_set_onabort_ffi(
+  obj : JsValue,
+  onabort : JsValue,
+) -> Unit = "(obj, onabort) => { obj.onabort = onabort; }"
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_event_target_onerror_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.onerror"
+
+///|
+#cfg(target="js")
+fn xml_http_request_event_target_onerror_ffi(obj : JsValue) -> EventHandler {
+  xml_http_request_event_target_onerror_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_event_target_set_onerror_ffi(
+  obj : JsValue,
+  onerror : JsValue,
+) -> Unit = "(obj, onerror) => { obj.onerror = onerror; }"
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_event_target_onload_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.onload"
+
+///|
+#cfg(target="js")
+fn xml_http_request_event_target_onload_ffi(obj : JsValue) -> EventHandler {
+  xml_http_request_event_target_onload_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_event_target_set_onload_ffi(
+  obj : JsValue,
+  onload : JsValue,
+) -> Unit = "(obj, onload) => { obj.onload = onload; }"
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_event_target_ontimeout_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.ontimeout"
+
+///|
+#cfg(target="js")
+fn xml_http_request_event_target_ontimeout_ffi(obj : JsValue) -> EventHandler {
+  xml_http_request_event_target_ontimeout_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_event_target_set_ontimeout_ffi(
+  obj : JsValue,
+  ontimeout : JsValue,
+) -> Unit = "(obj, ontimeout) => { obj.ontimeout = ontimeout; }"
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_event_target_onloadend_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.onloadend"
+
+///|
+#cfg(target="js")
+fn xml_http_request_event_target_onloadend_ffi(obj : JsValue) -> EventHandler {
+  xml_http_request_event_target_onloadend_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_event_target_set_onloadend_ffi(
+  obj : JsValue,
+  onloadend : JsValue,
+) -> Unit = "(obj, onloadend) => { obj.onloadend = onloadend; }"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_event_target_onloadstart_ffi_wasm(obj : JsValue) -> JsValue = "webapi_XMLHttpRequestEventTarget" "get_onloadstart"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_event_target_onloadstart_ffi(obj : JsValue) -> EventHandler {
+  xml_http_request_event_target_onloadstart_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_event_target_set_onloadstart_ffi(
+  obj : JsValue,
+  onloadstart : JsValue,
+) -> Unit = "webapi_XMLHttpRequestEventTarget" "set_onloadstart"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_event_target_onprogress_ffi_wasm(obj : JsValue) -> JsValue = "webapi_XMLHttpRequestEventTarget" "get_onprogress"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_event_target_onprogress_ffi(obj : JsValue) -> EventHandler {
+  xml_http_request_event_target_onprogress_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_event_target_set_onprogress_ffi(
+  obj : JsValue,
+  onprogress : JsValue,
+) -> Unit = "webapi_XMLHttpRequestEventTarget" "set_onprogress"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_event_target_onabort_ffi_wasm(obj : JsValue) -> JsValue = "webapi_XMLHttpRequestEventTarget" "get_onabort"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_event_target_onabort_ffi(obj : JsValue) -> EventHandler {
+  xml_http_request_event_target_onabort_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_event_target_set_onabort_ffi(
+  obj : JsValue,
+  onabort : JsValue,
+) -> Unit = "webapi_XMLHttpRequestEventTarget" "set_onabort"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_event_target_onerror_ffi_wasm(obj : JsValue) -> JsValue = "webapi_XMLHttpRequestEventTarget" "get_onerror"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_event_target_onerror_ffi(obj : JsValue) -> EventHandler {
+  xml_http_request_event_target_onerror_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_event_target_set_onerror_ffi(
+  obj : JsValue,
+  onerror : JsValue,
+) -> Unit = "webapi_XMLHttpRequestEventTarget" "set_onerror"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_event_target_onload_ffi_wasm(obj : JsValue) -> JsValue = "webapi_XMLHttpRequestEventTarget" "get_onload"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_event_target_onload_ffi(obj : JsValue) -> EventHandler {
+  xml_http_request_event_target_onload_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_event_target_set_onload_ffi(
+  obj : JsValue,
+  onload : JsValue,
+) -> Unit = "webapi_XMLHttpRequestEventTarget" "set_onload"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_event_target_ontimeout_ffi_wasm(obj : JsValue) -> JsValue = "webapi_XMLHttpRequestEventTarget" "get_ontimeout"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_event_target_ontimeout_ffi(obj : JsValue) -> EventHandler {
+  xml_http_request_event_target_ontimeout_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_event_target_set_ontimeout_ffi(
+  obj : JsValue,
+  ontimeout : JsValue,
+) -> Unit = "webapi_XMLHttpRequestEventTarget" "set_ontimeout"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_event_target_onloadend_ffi_wasm(obj : JsValue) -> JsValue = "webapi_XMLHttpRequestEventTarget" "get_onloadend"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_event_target_onloadend_ffi(obj : JsValue) -> EventHandler {
+  xml_http_request_event_target_onloadend_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_event_target_set_onloadend_ffi(
+  obj : JsValue,
+  onloadend : JsValue,
+) -> Unit = "webapi_XMLHttpRequestEventTarget" "set_onloadend"

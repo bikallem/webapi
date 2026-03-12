@@ -33,3 +33,38 @@ pub fn DocumentTimelineOptions::origin_time(
 ) -> DOMHighResTimeStamp? {
   document_timeline_options_get_origin_time_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn document_timeline_options_ffi(
+  origin_time : JsValue,
+) -> DocumentTimelineOptions =
+  #|(originTime) => {
+  #|  const obj = {};
+  #|  if (originTime !== undefined) obj.originTime = originTime;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn document_timeline_options_empty_ffi() -> DocumentTimelineOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn document_timeline_options_get_origin_time_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.originTime"
+
+///|
+#cfg(target="wasm-gc")
+fn document_timeline_options_ffi(
+  origin_time : JsValue,
+) -> DocumentTimelineOptions = "webapi_DocumentTimelineOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn document_timeline_options_empty_ffi() -> DocumentTimelineOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn document_timeline_options_get_origin_time_ffi(obj : JsValue) -> JsValue = "webapi_DocumentTimelineOptions" "get_originTime"

@@ -1256,3 +1256,1711 @@ impl TElement with insert_adjacent_element(
 impl TElement with query_selector(self : Self, selectors : String) -> Element {
   self.query_selector_opt(selectors).unwrap()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn element_namespace_uri_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.namespaceURI"
+
+///|
+#cfg(target="js")
+fn element_namespace_uri_ffi(obj : JsValue) -> String {
+  element_namespace_uri_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_prefix_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.prefix"
+
+///|
+#cfg(target="js")
+fn element_prefix_ffi(obj : JsValue) -> String {
+  element_prefix_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_local_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.localName"
+
+///|
+#cfg(target="js")
+fn element_local_name_ffi(obj : JsValue) -> String {
+  element_local_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_tag_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.tagName"
+
+///|
+#cfg(target="js")
+fn element_tag_name_ffi(obj : JsValue) -> String {
+  element_tag_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_id_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.id"
+
+///|
+#cfg(target="js")
+fn element_id_ffi(obj : JsValue) -> String {
+  element_id_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_set_id_ffi(obj : JsValue, id : JsValue) -> Unit = "(obj, id) => { obj.id = id; }"
+
+///|
+#cfg(target="js")
+extern "js" fn element_class_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.className"
+
+///|
+#cfg(target="js")
+fn element_class_name_ffi(obj : JsValue) -> String {
+  element_class_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_set_class_name_ffi(
+  obj : JsValue,
+  class_name : JsValue,
+) -> Unit = "(obj, className) => { obj.className = className; }"
+
+///|
+#cfg(target="js")
+extern "js" fn element_class_list_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.classList"
+
+///|
+#cfg(target="js")
+fn element_class_list_ffi(obj : JsValue) -> DOMTokenList {
+  element_class_list_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_slot_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.slot"
+
+///|
+#cfg(target="js")
+fn element_slot_ffi(obj : JsValue) -> String {
+  element_slot_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_set_slot_ffi(obj : JsValue, slot : JsValue) -> Unit = "(obj, slot) => { obj.slot = slot; }"
+
+///|
+#cfg(target="js")
+extern "js" fn element_has_attributes_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.hasAttributes()"
+
+///|
+#cfg(target="js")
+fn element_has_attributes_ffi(obj : JsValue) -> Bool {
+  element_has_attributes_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_attributes_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.attributes"
+
+///|
+#cfg(target="js")
+fn element_attributes_ffi(obj : JsValue) -> NamedNodeMap {
+  element_attributes_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_get_attribute_names_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.getAttributeNames()"
+
+///|
+#cfg(target="js")
+fn element_get_attribute_names_ffi(obj : JsValue) -> Array[String] {
+  element_get_attribute_names_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_get_attribute_ffi(
+  obj : JsValue,
+  qualified_name : JsValue,
+) -> JsValue = "(obj, qualified_name) => obj.getAttribute(qualified_name)"
+
+///|
+#cfg(target="js")
+extern "js" fn element_get_attribute_ns_ffi(
+  obj : JsValue,
+  namespace_ : JsValue,
+  local_name : JsValue,
+) -> JsValue = "(obj, namespace_, local_name) => obj.getAttributeNS(namespace_, local_name)"
+
+///|
+#cfg(target="js")
+extern "js" fn element_set_attribute_ffi(
+  obj : JsValue,
+  qualified_name : JsValue,
+  value : JsValue,
+) -> Unit = "(obj, qualified_name, value) => obj.setAttribute(qualified_name, value)"
+
+///|
+#cfg(target="js")
+extern "js" fn element_set_attribute_ns_ffi(
+  obj : JsValue,
+  namespace_ : JsValue,
+  qualified_name : JsValue,
+  value : JsValue,
+) -> Unit = "(obj, namespace_, qualified_name, value) => obj.setAttributeNS(namespace_, qualified_name, value)"
+
+///|
+#cfg(target="js")
+extern "js" fn element_remove_attribute_ffi(
+  obj : JsValue,
+  qualified_name : JsValue,
+) -> Unit = "(obj, qualified_name) => obj.removeAttribute(qualified_name)"
+
+///|
+#cfg(target="js")
+extern "js" fn element_remove_attribute_ns_ffi(
+  obj : JsValue,
+  namespace_ : JsValue,
+  local_name : JsValue,
+) -> Unit = "(obj, namespace_, local_name) => obj.removeAttributeNS(namespace_, local_name)"
+
+///|
+#cfg(target="js")
+extern "js" fn element_toggle_attribute_ffi_js(
+  obj : JsValue,
+  qualified_name : JsValue,
+  force : JsValue,
+) -> JsValue = "(obj, qualified_name, force) => obj.toggleAttribute(qualified_name, force)"
+
+///|
+#cfg(target="js")
+fn element_toggle_attribute_ffi(
+  obj : JsValue,
+  qualified_name : JsValue,
+  force : JsValue,
+) -> Bool {
+  element_toggle_attribute_ffi_js(obj, qualified_name, force).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_has_attribute_ffi_js(
+  obj : JsValue,
+  qualified_name : JsValue,
+) -> JsValue = "(obj, qualified_name) => obj.hasAttribute(qualified_name)"
+
+///|
+#cfg(target="js")
+fn element_has_attribute_ffi(obj : JsValue, qualified_name : JsValue) -> Bool {
+  element_has_attribute_ffi_js(obj, qualified_name).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_has_attribute_ns_ffi_js(
+  obj : JsValue,
+  namespace_ : JsValue,
+  local_name : JsValue,
+) -> JsValue = "(obj, namespace_, local_name) => obj.hasAttributeNS(namespace_, local_name)"
+
+///|
+#cfg(target="js")
+fn element_has_attribute_ns_ffi(
+  obj : JsValue,
+  namespace_ : JsValue,
+  local_name : JsValue,
+) -> Bool {
+  element_has_attribute_ns_ffi_js(obj, namespace_, local_name).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_get_attribute_node_ffi(
+  obj : JsValue,
+  qualified_name : JsValue,
+) -> JsValue = "(obj, qualified_name) => obj.getAttributeNode(qualified_name)"
+
+///|
+#cfg(target="js")
+extern "js" fn element_get_attribute_node_ns_ffi(
+  obj : JsValue,
+  namespace_ : JsValue,
+  local_name : JsValue,
+) -> JsValue = "(obj, namespace_, local_name) => obj.getAttributeNodeNS(namespace_, local_name)"
+
+///|
+#cfg(target="js")
+extern "js" fn element_set_attribute_node_ffi(
+  obj : JsValue,
+  attr : JsValue,
+) -> JsValue = "(obj, attr) => obj.setAttributeNode(attr)"
+
+///|
+#cfg(target="js")
+extern "js" fn element_set_attribute_node_ns_ffi(
+  obj : JsValue,
+  attr : JsValue,
+) -> JsValue = "(obj, attr) => obj.setAttributeNodeNS(attr)"
+
+///|
+#cfg(target="js")
+extern "js" fn element_remove_attribute_node_ffi_js(
+  obj : JsValue,
+  attr : JsValue,
+) -> JsValue = "(obj, attr) => obj.removeAttributeNode(attr)"
+
+///|
+#cfg(target="js")
+fn element_remove_attribute_node_ffi(obj : JsValue, attr : JsValue) -> Attr {
+  element_remove_attribute_node_ffi_js(obj, attr).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_attach_shadow_ffi_js(
+  obj : JsValue,
+  init : JsValue,
+) -> JsValue = "(obj, init) => obj.attachShadow(init)"
+
+///|
+#cfg(target="js")
+fn element_attach_shadow_ffi(obj : JsValue, init : JsValue) -> ShadowRoot {
+  element_attach_shadow_ffi_js(obj, init).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_shadow_root_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.shadowRoot"
+
+///|
+#cfg(target="js")
+fn element_shadow_root_ffi(obj : JsValue) -> ShadowRoot {
+  element_shadow_root_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_custom_element_registry_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.customElementRegistry"
+
+///|
+#cfg(target="js")
+fn element_custom_element_registry_ffi(obj : JsValue) -> CustomElementRegistry {
+  element_custom_element_registry_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_closest_ffi(
+  obj : JsValue,
+  selectors : JsValue,
+) -> JsValue = "(obj, selectors) => obj.closest(selectors)"
+
+///|
+#cfg(target="js")
+extern "js" fn element_matches_ffi_js(
+  obj : JsValue,
+  selectors : JsValue,
+) -> JsValue = "(obj, selectors) => obj.matches(selectors)"
+
+///|
+#cfg(target="js")
+fn element_matches_ffi(obj : JsValue, selectors : JsValue) -> Bool {
+  element_matches_ffi_js(obj, selectors).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_webkit_matches_selector_ffi_js(
+  obj : JsValue,
+  selectors : JsValue,
+) -> JsValue = "(obj, selectors) => obj.webkitMatchesSelector(selectors)"
+
+///|
+#cfg(target="js")
+fn element_webkit_matches_selector_ffi(
+  obj : JsValue,
+  selectors : JsValue,
+) -> Bool {
+  element_webkit_matches_selector_ffi_js(obj, selectors).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_get_elements_by_tag_name_ffi_js(
+  obj : JsValue,
+  qualified_name : JsValue,
+) -> JsValue = "(obj, qualified_name) => obj.getElementsByTagName(qualified_name)"
+
+///|
+#cfg(target="js")
+fn element_get_elements_by_tag_name_ffi(
+  obj : JsValue,
+  qualified_name : JsValue,
+) -> HTMLCollection {
+  element_get_elements_by_tag_name_ffi_js(obj, qualified_name).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_get_elements_by_tag_name_ns_ffi_js(
+  obj : JsValue,
+  namespace_ : JsValue,
+  local_name : JsValue,
+) -> JsValue = "(obj, namespace_, local_name) => obj.getElementsByTagNameNS(namespace_, local_name)"
+
+///|
+#cfg(target="js")
+fn element_get_elements_by_tag_name_ns_ffi(
+  obj : JsValue,
+  namespace_ : JsValue,
+  local_name : JsValue,
+) -> HTMLCollection {
+  element_get_elements_by_tag_name_ns_ffi_js(obj, namespace_, local_name).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_get_elements_by_class_name_ffi_js(
+  obj : JsValue,
+  class_names : JsValue,
+) -> JsValue = "(obj, class_names) => obj.getElementsByClassName(class_names)"
+
+///|
+#cfg(target="js")
+fn element_get_elements_by_class_name_ffi(
+  obj : JsValue,
+  class_names : JsValue,
+) -> HTMLCollection {
+  element_get_elements_by_class_name_ffi_js(obj, class_names).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_insert_adjacent_element_ffi(
+  obj : JsValue,
+  where_ : JsValue,
+  element : JsValue,
+) -> JsValue = "(obj, where_, element) => obj.insertAdjacentElement(where_, element)"
+
+///|
+#cfg(target="js")
+extern "js" fn element_insert_adjacent_text_ffi(
+  obj : JsValue,
+  where_ : JsValue,
+  data : JsValue,
+) -> Unit = "(obj, where_, data) => obj.insertAdjacentText(where_, data)"
+
+///|
+#cfg(target="js")
+extern "js" fn element_set_html_unsafe_ffi(
+  obj : JsValue,
+  html : JsValue,
+) -> Unit = "(obj, html) => obj.setHTMLUnsafe(html)"
+
+///|
+#cfg(target="js")
+extern "js" fn element_get_html_ffi_js(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, options) => obj.getHTML(options)"
+
+///|
+#cfg(target="js")
+fn element_get_html_ffi(obj : JsValue, options : JsValue) -> String {
+  element_get_html_ffi_js(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_inner_html_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.innerHTML"
+
+///|
+#cfg(target="js")
+fn element_inner_html_ffi(obj : JsValue) -> ElementInnerHTML {
+  element_inner_html_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_set_inner_html_ffi(
+  obj : JsValue,
+  inner_html : JsValue,
+) -> Unit = "(obj, innerHTML) => { obj.innerHTML = innerHTML; }"
+
+///|
+#cfg(target="js")
+extern "js" fn element_outer_html_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.outerHTML"
+
+///|
+#cfg(target="js")
+fn element_outer_html_ffi(obj : JsValue) -> ElementOuterHTML {
+  element_outer_html_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_set_outer_html_ffi(
+  obj : JsValue,
+  outer_html : JsValue,
+) -> Unit = "(obj, outerHTML) => { obj.outerHTML = outerHTML; }"
+
+///|
+#cfg(target="js")
+extern "js" fn element_insert_adjacent_html_ffi(
+  obj : JsValue,
+  position : JsValue,
+  string : JsValue,
+) -> Unit = "(obj, position, string) => obj.insertAdjacentHTML(position, string)"
+
+///|
+#cfg(target="js")
+extern "js" fn element_get_client_rects_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.getClientRects()"
+
+///|
+#cfg(target="js")
+fn element_get_client_rects_ffi(obj : JsValue) -> DOMRectList {
+  element_get_client_rects_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_get_bounding_client_rect_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.getBoundingClientRect()"
+
+///|
+#cfg(target="js")
+fn element_get_bounding_client_rect_ffi(obj : JsValue) -> DOMRect {
+  element_get_bounding_client_rect_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_check_visibility_ffi_js(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, options) => obj.checkVisibility(options)"
+
+///|
+#cfg(target="js")
+fn element_check_visibility_ffi(obj : JsValue, options : JsValue) -> Bool {
+  element_check_visibility_ffi_js(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_scroll_into_view_ffi_js(
+  obj : JsValue,
+  arg : JsValue,
+) -> JsValue = "(obj, arg) => obj.scrollIntoView(arg)"
+
+///|
+#cfg(target="js")
+fn element_scroll_into_view_ffi(
+  obj : JsValue,
+  arg : JsValue,
+) -> JsPromise[JsValue] {
+  element_scroll_into_view_ffi_js(obj, arg).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_scroll_ffi_js(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, options) => obj.scroll(options)"
+
+///|
+#cfg(target="js")
+fn element_scroll_ffi(obj : JsValue, options : JsValue) -> JsPromise[JsValue] {
+  element_scroll_ffi_js(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_scroll_xy_ffi_js(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+) -> JsValue = "(obj, x, y) => obj.scroll(x, y)"
+
+///|
+#cfg(target="js")
+fn element_scroll_xy_ffi(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+) -> JsPromise[JsValue] {
+  element_scroll_xy_ffi_js(obj, x, y).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_scroll_to_ffi_js(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, options) => obj.scrollTo(options)"
+
+///|
+#cfg(target="js")
+fn element_scroll_to_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> JsPromise[JsValue] {
+  element_scroll_to_ffi_js(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_scroll_to_xy_ffi_js(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+) -> JsValue = "(obj, x, y) => obj.scrollTo(x, y)"
+
+///|
+#cfg(target="js")
+fn element_scroll_to_xy_ffi(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+) -> JsPromise[JsValue] {
+  element_scroll_to_xy_ffi_js(obj, x, y).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_scroll_by_ffi_js(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, options) => obj.scrollBy(options)"
+
+///|
+#cfg(target="js")
+fn element_scroll_by_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> JsPromise[JsValue] {
+  element_scroll_by_ffi_js(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_scroll_by_xy_ffi_js(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+) -> JsValue = "(obj, x, y) => obj.scrollBy(x, y)"
+
+///|
+#cfg(target="js")
+fn element_scroll_by_xy_ffi(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+) -> JsPromise[JsValue] {
+  element_scroll_by_xy_ffi_js(obj, x, y).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_scroll_top_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.scrollTop"
+
+///|
+#cfg(target="js")
+fn element_scroll_top_ffi(obj : JsValue) -> Double {
+  element_scroll_top_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_set_scroll_top_ffi(
+  obj : JsValue,
+  scroll_top : JsValue,
+) -> Unit = "(obj, scrollTop) => { obj.scrollTop = scrollTop; }"
+
+///|
+#cfg(target="js")
+extern "js" fn element_scroll_left_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.scrollLeft"
+
+///|
+#cfg(target="js")
+fn element_scroll_left_ffi(obj : JsValue) -> Double {
+  element_scroll_left_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_set_scroll_left_ffi(
+  obj : JsValue,
+  scroll_left : JsValue,
+) -> Unit = "(obj, scrollLeft) => { obj.scrollLeft = scrollLeft; }"
+
+///|
+#cfg(target="js")
+extern "js" fn element_scroll_width_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.scrollWidth"
+
+///|
+#cfg(target="js")
+fn element_scroll_width_ffi(obj : JsValue) -> Int {
+  element_scroll_width_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_scroll_height_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.scrollHeight"
+
+///|
+#cfg(target="js")
+fn element_scroll_height_ffi(obj : JsValue) -> Int {
+  element_scroll_height_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_client_top_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.clientTop"
+
+///|
+#cfg(target="js")
+fn element_client_top_ffi(obj : JsValue) -> Int {
+  element_client_top_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_client_left_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.clientLeft"
+
+///|
+#cfg(target="js")
+fn element_client_left_ffi(obj : JsValue) -> Int {
+  element_client_left_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_client_width_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.clientWidth"
+
+///|
+#cfg(target="js")
+fn element_client_width_ffi(obj : JsValue) -> Int {
+  element_client_width_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_client_height_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.clientHeight"
+
+///|
+#cfg(target="js")
+fn element_client_height_ffi(obj : JsValue) -> Int {
+  element_client_height_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_current_css_zoom_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.currentCSSZoom"
+
+///|
+#cfg(target="js")
+fn element_current_css_zoom_ffi(obj : JsValue) -> Double {
+  element_current_css_zoom_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_request_fullscreen_ffi_js(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, options) => obj.requestFullscreen(options)"
+
+///|
+#cfg(target="js")
+fn element_request_fullscreen_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> JsPromise[JsValue] {
+  element_request_fullscreen_ffi_js(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_onfullscreenchange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onfullscreenchange"
+
+///|
+#cfg(target="js")
+fn element_onfullscreenchange_ffi(obj : JsValue) -> EventHandler {
+  element_onfullscreenchange_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_set_onfullscreenchange_ffi(
+  obj : JsValue,
+  onfullscreenchange : JsValue,
+) -> Unit = "(obj, onfullscreenchange) => { obj.onfullscreenchange = onfullscreenchange; }"
+
+///|
+#cfg(target="js")
+extern "js" fn element_onfullscreenerror_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onfullscreenerror"
+
+///|
+#cfg(target="js")
+fn element_onfullscreenerror_ffi(obj : JsValue) -> EventHandler {
+  element_onfullscreenerror_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_set_onfullscreenerror_ffi(
+  obj : JsValue,
+  onfullscreenerror : JsValue,
+) -> Unit = "(obj, onfullscreenerror) => { obj.onfullscreenerror = onfullscreenerror; }"
+
+///|
+#cfg(target="js")
+extern "js" fn element_set_pointer_capture_ffi(
+  obj : JsValue,
+  pointer_id : JsValue,
+) -> Unit = "(obj, pointer_id) => obj.setPointerCapture(pointer_id)"
+
+///|
+#cfg(target="js")
+extern "js" fn element_release_pointer_capture_ffi(
+  obj : JsValue,
+  pointer_id : JsValue,
+) -> Unit = "(obj, pointer_id) => obj.releasePointerCapture(pointer_id)"
+
+///|
+#cfg(target="js")
+extern "js" fn element_has_pointer_capture_ffi_js(
+  obj : JsValue,
+  pointer_id : JsValue,
+) -> JsValue = "(obj, pointer_id) => obj.hasPointerCapture(pointer_id)"
+
+///|
+#cfg(target="js")
+fn element_has_pointer_capture_ffi(obj : JsValue, pointer_id : JsValue) -> Bool {
+  element_has_pointer_capture_ffi_js(obj, pointer_id).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_children_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.children"
+
+///|
+#cfg(target="js")
+fn element_children_ffi(obj : JsValue) -> HTMLCollection {
+  element_children_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_first_element_child_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.firstElementChild"
+
+///|
+#cfg(target="js")
+fn element_first_element_child_ffi(obj : JsValue) -> Element {
+  element_first_element_child_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_last_element_child_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.lastElementChild"
+
+///|
+#cfg(target="js")
+fn element_last_element_child_ffi(obj : JsValue) -> Element {
+  element_last_element_child_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_child_element_count_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.childElementCount"
+
+///|
+#cfg(target="js")
+fn element_child_element_count_ffi(obj : JsValue) -> UInt {
+  element_child_element_count_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_prepend_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.prepend(...nodes)"
+
+///|
+#cfg(target="js")
+extern "js" fn element_append_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.append(...nodes)"
+
+///|
+#cfg(target="js")
+extern "js" fn element_replace_children_ffi(
+  obj : JsValue,
+  nodes : JsValue,
+) -> Unit = "(obj, nodes) => obj.replaceChildren(...nodes)"
+
+///|
+#cfg(target="js")
+extern "js" fn element_move_before_ffi(
+  obj : JsValue,
+  node : JsValue,
+  child : JsValue,
+) -> Unit = "(obj, node, child) => obj.moveBefore(node, child)"
+
+///|
+#cfg(target="js")
+extern "js" fn element_query_selector_ffi(
+  obj : JsValue,
+  selectors : JsValue,
+) -> JsValue = "(obj, selectors) => obj.querySelector(selectors)"
+
+///|
+#cfg(target="js")
+extern "js" fn element_query_selector_all_ffi_js(
+  obj : JsValue,
+  selectors : JsValue,
+) -> JsValue = "(obj, selectors) => obj.querySelectorAll(selectors)"
+
+///|
+#cfg(target="js")
+fn element_query_selector_all_ffi(
+  obj : JsValue,
+  selectors : JsValue,
+) -> NodeList {
+  element_query_selector_all_ffi_js(obj, selectors).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_previous_element_sibling_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.previousElementSibling"
+
+///|
+#cfg(target="js")
+fn element_previous_element_sibling_ffi(obj : JsValue) -> Element {
+  element_previous_element_sibling_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_next_element_sibling_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.nextElementSibling"
+
+///|
+#cfg(target="js")
+fn element_next_element_sibling_ffi(obj : JsValue) -> Element {
+  element_next_element_sibling_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_before_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.before(...nodes)"
+
+///|
+#cfg(target="js")
+extern "js" fn element_after_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.after(...nodes)"
+
+///|
+#cfg(target="js")
+extern "js" fn element_replace_with_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.replaceWith(...nodes)"
+
+///|
+#cfg(target="js")
+extern "js" fn element_remove_ffi(obj : JsValue) -> Unit = "(obj) => obj.remove()"
+
+///|
+#cfg(target="js")
+extern "js" fn element_assigned_slot_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.assignedSlot"
+
+///|
+#cfg(target="js")
+fn element_assigned_slot_ffi(obj : JsValue) -> HTMLSlotElement {
+  element_assigned_slot_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_get_box_quads_ffi_js(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, options) => obj.getBoxQuads(options)"
+
+///|
+#cfg(target="js")
+fn element_get_box_quads_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> Array[DOMQuad] {
+  element_get_box_quads_ffi_js(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_convert_quad_from_node_ffi_js(
+  obj : JsValue,
+  quad : JsValue,
+  from : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, quad, from, options) => obj.convertQuadFromNode(quad, from, options)"
+
+///|
+#cfg(target="js")
+fn element_convert_quad_from_node_ffi(
+  obj : JsValue,
+  quad : JsValue,
+  from : JsValue,
+  options : JsValue,
+) -> DOMQuad {
+  element_convert_quad_from_node_ffi_js(obj, quad, from, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_convert_rect_from_node_ffi_js(
+  obj : JsValue,
+  rect : JsValue,
+  from : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, rect, from, options) => obj.convertRectFromNode(rect, from, options)"
+
+///|
+#cfg(target="js")
+fn element_convert_rect_from_node_ffi(
+  obj : JsValue,
+  rect : JsValue,
+  from : JsValue,
+  options : JsValue,
+) -> DOMQuad {
+  element_convert_rect_from_node_ffi_js(obj, rect, from, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_convert_point_from_node_ffi_js(
+  obj : JsValue,
+  point : JsValue,
+  from : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, point, from, options) => obj.convertPointFromNode(point, from, options)"
+
+///|
+#cfg(target="js")
+fn element_convert_point_from_node_ffi(
+  obj : JsValue,
+  point : JsValue,
+  from : JsValue,
+  options : JsValue,
+) -> DOMPoint {
+  element_convert_point_from_node_ffi_js(obj, point, from, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_animate_ffi_js(
+  obj : JsValue,
+  keyframes : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, keyframes, options) => obj.animate(keyframes, options)"
+
+///|
+#cfg(target="js")
+fn element_animate_ffi(
+  obj : JsValue,
+  keyframes : JsValue,
+  options : JsValue,
+) -> Animation {
+  element_animate_ffi_js(obj, keyframes, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_get_animations_ffi_js(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, options) => obj.getAnimations(options)"
+
+///|
+#cfg(target="js")
+fn element_get_animations_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> Array[Animation] {
+  element_get_animations_ffi_js(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn element_namespace_uri_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Element" "get_namespaceURI"
+
+///|
+#cfg(target="wasm-gc")
+fn element_namespace_uri_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(element_namespace_uri_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn element_prefix_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Element" "get_prefix"
+
+///|
+#cfg(target="wasm-gc")
+fn element_prefix_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(element_prefix_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn element_local_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Element" "get_localName"
+
+///|
+#cfg(target="wasm-gc")
+fn element_local_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(element_local_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn element_tag_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Element" "get_tagName"
+
+///|
+#cfg(target="wasm-gc")
+fn element_tag_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(element_tag_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn element_id_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Element" "get_id"
+
+///|
+#cfg(target="wasm-gc")
+fn element_id_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(element_id_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn element_set_id_ffi(obj : JsValue, id : JsValue) -> Unit = "webapi_Element" "set_id"
+
+///|
+#cfg(target="wasm-gc")
+fn element_class_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Element" "get_className"
+
+///|
+#cfg(target="wasm-gc")
+fn element_class_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(element_class_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn element_set_class_name_ffi(obj : JsValue, class_name : JsValue) -> Unit = "webapi_Element" "set_className"
+
+///|
+#cfg(target="wasm-gc")
+fn element_class_list_ffi(obj : JsValue) -> DOMTokenList = "webapi_Element" "get_classList"
+
+///|
+#cfg(target="wasm-gc")
+fn element_slot_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Element" "get_slot"
+
+///|
+#cfg(target="wasm-gc")
+fn element_slot_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(element_slot_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn element_set_slot_ffi(obj : JsValue, slot : JsValue) -> Unit = "webapi_Element" "set_slot"
+
+///|
+#cfg(target="wasm-gc")
+fn element_has_attributes_ffi(obj : JsValue) -> Bool = "webapi_Element" "hasAttributes"
+
+///|
+#cfg(target="wasm-gc")
+fn element_attributes_ffi(obj : JsValue) -> NamedNodeMap = "webapi_Element" "get_attributes"
+
+///|
+#cfg(target="wasm-gc")
+fn element_get_attribute_names_ffi_wasm(obj : JsValue) -> JsArray = "webapi_Element" "getAttributeNames"
+
+///|
+#cfg(target="wasm-gc")
+fn element_get_attribute_names_ffi(obj : JsValue) -> Array[String] {
+  element_get_attribute_names_ffi_wasm(obj).to_string_array()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn element_get_attribute_ffi(
+  obj : JsValue,
+  qualified_name : JsValue,
+) -> JsValue = "webapi_Element" "getAttribute"
+
+///|
+#cfg(target="wasm-gc")
+fn element_get_attribute_ns_ffi(
+  obj : JsValue,
+  namespace_ : JsValue,
+  local_name : JsValue,
+) -> JsValue = "webapi_Element" "getAttributeNS"
+
+///|
+#cfg(target="wasm-gc")
+fn element_set_attribute_ffi(
+  obj : JsValue,
+  qualified_name : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_Element" "setAttribute"
+
+///|
+#cfg(target="wasm-gc")
+fn element_set_attribute_ns_ffi(
+  obj : JsValue,
+  namespace_ : JsValue,
+  qualified_name : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_Element" "setAttributeNS"
+
+///|
+#cfg(target="wasm-gc")
+fn element_remove_attribute_ffi(
+  obj : JsValue,
+  qualified_name : JsValue,
+) -> Unit = "webapi_Element" "removeAttribute"
+
+///|
+#cfg(target="wasm-gc")
+fn element_remove_attribute_ns_ffi(
+  obj : JsValue,
+  namespace_ : JsValue,
+  local_name : JsValue,
+) -> Unit = "webapi_Element" "removeAttributeNS"
+
+///|
+#cfg(target="wasm-gc")
+fn element_toggle_attribute_ffi(
+  obj : JsValue,
+  qualified_name : JsValue,
+  force : JsValue,
+) -> Bool = "webapi_Element" "toggleAttribute"
+
+///|
+#cfg(target="wasm-gc")
+fn element_has_attribute_ffi(obj : JsValue, qualified_name : JsValue) -> Bool = "webapi_Element" "hasAttribute"
+
+///|
+#cfg(target="wasm-gc")
+fn element_has_attribute_ns_ffi(
+  obj : JsValue,
+  namespace_ : JsValue,
+  local_name : JsValue,
+) -> Bool = "webapi_Element" "hasAttributeNS"
+
+///|
+#cfg(target="wasm-gc")
+fn element_get_attribute_node_ffi(
+  obj : JsValue,
+  qualified_name : JsValue,
+) -> JsValue = "webapi_Element" "getAttributeNode"
+
+///|
+#cfg(target="wasm-gc")
+fn element_get_attribute_node_ns_ffi(
+  obj : JsValue,
+  namespace_ : JsValue,
+  local_name : JsValue,
+) -> JsValue = "webapi_Element" "getAttributeNodeNS"
+
+///|
+#cfg(target="wasm-gc")
+fn element_set_attribute_node_ffi(obj : JsValue, attr : JsValue) -> JsValue = "webapi_Element" "setAttributeNode"
+
+///|
+#cfg(target="wasm-gc")
+fn element_set_attribute_node_ns_ffi(obj : JsValue, attr : JsValue) -> JsValue = "webapi_Element" "setAttributeNodeNS"
+
+///|
+#cfg(target="wasm-gc")
+fn element_remove_attribute_node_ffi(obj : JsValue, attr : JsValue) -> Attr = "webapi_Element" "removeAttributeNode"
+
+///|
+#cfg(target="wasm-gc")
+fn element_attach_shadow_ffi(obj : JsValue, init : JsValue) -> ShadowRoot = "webapi_Element" "attachShadow"
+
+///|
+#cfg(target="wasm-gc")
+fn element_shadow_root_ffi(obj : JsValue) -> ShadowRoot = "webapi_Element" "get_shadowRoot"
+
+///|
+#cfg(target="wasm-gc")
+fn element_custom_element_registry_ffi(obj : JsValue) -> CustomElementRegistry = "webapi_Element" "get_customElementRegistry"
+
+///|
+#cfg(target="wasm-gc")
+fn element_closest_ffi(obj : JsValue, selectors : JsValue) -> JsValue = "webapi_Element" "closest"
+
+///|
+#cfg(target="wasm-gc")
+fn element_matches_ffi(obj : JsValue, selectors : JsValue) -> Bool = "webapi_Element" "matches"
+
+///|
+#cfg(target="wasm-gc")
+fn element_webkit_matches_selector_ffi(
+  obj : JsValue,
+  selectors : JsValue,
+) -> Bool = "webapi_Element" "webkitMatchesSelector"
+
+///|
+#cfg(target="wasm-gc")
+fn element_get_elements_by_tag_name_ffi(
+  obj : JsValue,
+  qualified_name : JsValue,
+) -> HTMLCollection = "webapi_Element" "getElementsByTagName"
+
+///|
+#cfg(target="wasm-gc")
+fn element_get_elements_by_tag_name_ns_ffi(
+  obj : JsValue,
+  namespace_ : JsValue,
+  local_name : JsValue,
+) -> HTMLCollection = "webapi_Element" "getElementsByTagNameNS"
+
+///|
+#cfg(target="wasm-gc")
+fn element_get_elements_by_class_name_ffi(
+  obj : JsValue,
+  class_names : JsValue,
+) -> HTMLCollection = "webapi_Element" "getElementsByClassName"
+
+///|
+#cfg(target="wasm-gc")
+fn element_insert_adjacent_element_ffi(
+  obj : JsValue,
+  where_ : JsValue,
+  element : JsValue,
+) -> JsValue = "webapi_Element" "insertAdjacentElement"
+
+///|
+#cfg(target="wasm-gc")
+fn element_insert_adjacent_text_ffi(
+  obj : JsValue,
+  where_ : JsValue,
+  data : JsValue,
+) -> Unit = "webapi_Element" "insertAdjacentText"
+
+///|
+#cfg(target="wasm-gc")
+fn element_set_html_unsafe_ffi(obj : JsValue, html : JsValue) -> Unit = "webapi_Element" "setHTMLUnsafe"
+
+///|
+#cfg(target="wasm-gc")
+fn element_get_html_ffi_wasm(obj : JsValue, options : JsValue) -> JsValue = "webapi_Element" "getHTML"
+
+///|
+#cfg(target="wasm-gc")
+fn element_get_html_ffi(obj : JsValue, options : JsValue) -> String {
+  jsvalue_to_string(element_get_html_ffi_wasm(obj, options))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn element_inner_html_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Element" "get_innerHTML"
+
+///|
+#cfg(target="wasm-gc")
+fn element_inner_html_ffi(obj : JsValue) -> ElementInnerHTML {
+  element_inner_html_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn element_set_inner_html_ffi(obj : JsValue, inner_html : JsValue) -> Unit = "webapi_Element" "set_innerHTML"
+
+///|
+#cfg(target="wasm-gc")
+fn element_outer_html_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Element" "get_outerHTML"
+
+///|
+#cfg(target="wasm-gc")
+fn element_outer_html_ffi(obj : JsValue) -> ElementOuterHTML {
+  element_outer_html_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn element_set_outer_html_ffi(obj : JsValue, outer_html : JsValue) -> Unit = "webapi_Element" "set_outerHTML"
+
+///|
+#cfg(target="wasm-gc")
+fn element_insert_adjacent_html_ffi(
+  obj : JsValue,
+  position : JsValue,
+  string : JsValue,
+) -> Unit = "webapi_Element" "insertAdjacentHTML"
+
+///|
+#cfg(target="wasm-gc")
+fn element_get_client_rects_ffi(obj : JsValue) -> DOMRectList = "webapi_Element" "getClientRects"
+
+///|
+#cfg(target="wasm-gc")
+fn element_get_bounding_client_rect_ffi(obj : JsValue) -> DOMRect = "webapi_Element" "getBoundingClientRect"
+
+///|
+#cfg(target="wasm-gc")
+fn element_check_visibility_ffi(obj : JsValue, options : JsValue) -> Bool = "webapi_Element" "checkVisibility"
+
+///|
+#cfg(target="wasm-gc")
+fn element_scroll_into_view_ffi_wasm(obj : JsValue, arg : JsValue) -> JsValue = "webapi_Element" "scrollIntoView"
+
+///|
+#cfg(target="wasm-gc")
+fn element_scroll_into_view_ffi(
+  obj : JsValue,
+  arg : JsValue,
+) -> JsPromise[JsValue] {
+  element_scroll_into_view_ffi_wasm(obj, arg).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn element_scroll_ffi_wasm(obj : JsValue, options : JsValue) -> JsValue = "webapi_Element" "scroll"
+
+///|
+#cfg(target="wasm-gc")
+fn element_scroll_ffi(obj : JsValue, options : JsValue) -> JsPromise[JsValue] {
+  element_scroll_ffi_wasm(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn element_scroll_xy_ffi_wasm(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+) -> JsValue = "webapi_Element" "scroll_xy"
+
+///|
+#cfg(target="wasm-gc")
+fn element_scroll_xy_ffi(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+) -> JsPromise[JsValue] {
+  element_scroll_xy_ffi_wasm(obj, x, y).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn element_scroll_to_ffi_wasm(obj : JsValue, options : JsValue) -> JsValue = "webapi_Element" "scrollTo"
+
+///|
+#cfg(target="wasm-gc")
+fn element_scroll_to_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> JsPromise[JsValue] {
+  element_scroll_to_ffi_wasm(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn element_scroll_to_xy_ffi_wasm(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+) -> JsValue = "webapi_Element" "scroll_to_xy"
+
+///|
+#cfg(target="wasm-gc")
+fn element_scroll_to_xy_ffi(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+) -> JsPromise[JsValue] {
+  element_scroll_to_xy_ffi_wasm(obj, x, y).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn element_scroll_by_ffi_wasm(obj : JsValue, options : JsValue) -> JsValue = "webapi_Element" "scrollBy"
+
+///|
+#cfg(target="wasm-gc")
+fn element_scroll_by_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> JsPromise[JsValue] {
+  element_scroll_by_ffi_wasm(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn element_scroll_by_xy_ffi_wasm(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+) -> JsValue = "webapi_Element" "scroll_by_xy"
+
+///|
+#cfg(target="wasm-gc")
+fn element_scroll_by_xy_ffi(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+) -> JsPromise[JsValue] {
+  element_scroll_by_xy_ffi_wasm(obj, x, y).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn element_scroll_top_ffi(obj : JsValue) -> Double = "webapi_Element" "get_scrollTop"
+
+///|
+#cfg(target="wasm-gc")
+fn element_set_scroll_top_ffi(obj : JsValue, scroll_top : JsValue) -> Unit = "webapi_Element" "set_scrollTop"
+
+///|
+#cfg(target="wasm-gc")
+fn element_scroll_left_ffi(obj : JsValue) -> Double = "webapi_Element" "get_scrollLeft"
+
+///|
+#cfg(target="wasm-gc")
+fn element_set_scroll_left_ffi(obj : JsValue, scroll_left : JsValue) -> Unit = "webapi_Element" "set_scrollLeft"
+
+///|
+#cfg(target="wasm-gc")
+fn element_scroll_width_ffi(obj : JsValue) -> Int = "webapi_Element" "get_scrollWidth"
+
+///|
+#cfg(target="wasm-gc")
+fn element_scroll_height_ffi(obj : JsValue) -> Int = "webapi_Element" "get_scrollHeight"
+
+///|
+#cfg(target="wasm-gc")
+fn element_client_top_ffi(obj : JsValue) -> Int = "webapi_Element" "get_clientTop"
+
+///|
+#cfg(target="wasm-gc")
+fn element_client_left_ffi(obj : JsValue) -> Int = "webapi_Element" "get_clientLeft"
+
+///|
+#cfg(target="wasm-gc")
+fn element_client_width_ffi(obj : JsValue) -> Int = "webapi_Element" "get_clientWidth"
+
+///|
+#cfg(target="wasm-gc")
+fn element_client_height_ffi(obj : JsValue) -> Int = "webapi_Element" "get_clientHeight"
+
+///|
+#cfg(target="wasm-gc")
+fn element_current_css_zoom_ffi(obj : JsValue) -> Double = "webapi_Element" "get_currentCSSZoom"
+
+///|
+#cfg(target="wasm-gc")
+fn element_request_fullscreen_ffi_wasm(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Element" "requestFullscreen"
+
+///|
+#cfg(target="wasm-gc")
+fn element_request_fullscreen_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> JsPromise[JsValue] {
+  element_request_fullscreen_ffi_wasm(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn element_onfullscreenchange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Element" "get_onfullscreenchange"
+
+///|
+#cfg(target="wasm-gc")
+fn element_onfullscreenchange_ffi(obj : JsValue) -> EventHandler {
+  element_onfullscreenchange_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn element_set_onfullscreenchange_ffi(
+  obj : JsValue,
+  onfullscreenchange : JsValue,
+) -> Unit = "webapi_Element" "set_onfullscreenchange"
+
+///|
+#cfg(target="wasm-gc")
+fn element_onfullscreenerror_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Element" "get_onfullscreenerror"
+
+///|
+#cfg(target="wasm-gc")
+fn element_onfullscreenerror_ffi(obj : JsValue) -> EventHandler {
+  element_onfullscreenerror_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn element_set_onfullscreenerror_ffi(
+  obj : JsValue,
+  onfullscreenerror : JsValue,
+) -> Unit = "webapi_Element" "set_onfullscreenerror"
+
+///|
+#cfg(target="wasm-gc")
+fn element_set_pointer_capture_ffi(obj : JsValue, pointer_id : JsValue) -> Unit = "webapi_Element" "setPointerCapture"
+
+///|
+#cfg(target="wasm-gc")
+fn element_release_pointer_capture_ffi(
+  obj : JsValue,
+  pointer_id : JsValue,
+) -> Unit = "webapi_Element" "releasePointerCapture"
+
+///|
+#cfg(target="wasm-gc")
+fn element_has_pointer_capture_ffi(obj : JsValue, pointer_id : JsValue) -> Bool = "webapi_Element" "hasPointerCapture"
+
+///|
+#cfg(target="wasm-gc")
+fn element_children_ffi(obj : JsValue) -> HTMLCollection = "webapi_Element" "get_children"
+
+///|
+#cfg(target="wasm-gc")
+fn element_first_element_child_ffi(obj : JsValue) -> Element = "webapi_Element" "get_firstElementChild"
+
+///|
+#cfg(target="wasm-gc")
+fn element_last_element_child_ffi(obj : JsValue) -> Element = "webapi_Element" "get_lastElementChild"
+
+///|
+#cfg(target="wasm-gc")
+fn element_child_element_count_ffi(obj : JsValue) -> UInt = "webapi_Element" "get_childElementCount"
+
+///|
+#cfg(target="wasm-gc")
+fn element_prepend_ffi(obj : JsValue, nodes : JsValue) -> Unit = "webapi_Element" "prepend"
+
+///|
+#cfg(target="wasm-gc")
+fn element_append_ffi(obj : JsValue, nodes : JsValue) -> Unit = "webapi_Element" "append"
+
+///|
+#cfg(target="wasm-gc")
+fn element_replace_children_ffi(obj : JsValue, nodes : JsValue) -> Unit = "webapi_Element" "replaceChildren"
+
+///|
+#cfg(target="wasm-gc")
+fn element_move_before_ffi(
+  obj : JsValue,
+  node : JsValue,
+  child : JsValue,
+) -> Unit = "webapi_Element" "moveBefore"
+
+///|
+#cfg(target="wasm-gc")
+fn element_query_selector_ffi(obj : JsValue, selectors : JsValue) -> JsValue = "webapi_Element" "querySelector"
+
+///|
+#cfg(target="wasm-gc")
+fn element_query_selector_all_ffi(
+  obj : JsValue,
+  selectors : JsValue,
+) -> NodeList = "webapi_Element" "querySelectorAll"
+
+///|
+#cfg(target="wasm-gc")
+fn element_previous_element_sibling_ffi(obj : JsValue) -> Element = "webapi_Element" "get_previousElementSibling"
+
+///|
+#cfg(target="wasm-gc")
+fn element_next_element_sibling_ffi(obj : JsValue) -> Element = "webapi_Element" "get_nextElementSibling"
+
+///|
+#cfg(target="wasm-gc")
+fn element_before_ffi(obj : JsValue, nodes : JsValue) -> Unit = "webapi_Element" "before"
+
+///|
+#cfg(target="wasm-gc")
+fn element_after_ffi(obj : JsValue, nodes : JsValue) -> Unit = "webapi_Element" "after"
+
+///|
+#cfg(target="wasm-gc")
+fn element_replace_with_ffi(obj : JsValue, nodes : JsValue) -> Unit = "webapi_Element" "replaceWith"
+
+///|
+#cfg(target="wasm-gc")
+fn element_remove_ffi(obj : JsValue) -> Unit = "webapi_Element" "remove"
+
+///|
+#cfg(target="wasm-gc")
+fn element_assigned_slot_ffi(obj : JsValue) -> HTMLSlotElement = "webapi_Element" "get_assignedSlot"
+
+///|
+#cfg(target="wasm-gc")
+fn element_get_box_quads_ffi_wasm(obj : JsValue, options : JsValue) -> JsArray = "webapi_Element" "getBoxQuads"
+
+///|
+#cfg(target="wasm-gc")
+fn element_get_box_quads_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> Array[DOMQuad] {
+  element_get_box_quads_ffi_wasm(obj, options).to_array()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn element_convert_quad_from_node_ffi(
+  obj : JsValue,
+  quad : JsValue,
+  from : JsValue,
+  options : JsValue,
+) -> DOMQuad = "webapi_Element" "convertQuadFromNode"
+
+///|
+#cfg(target="wasm-gc")
+fn element_convert_rect_from_node_ffi(
+  obj : JsValue,
+  rect : JsValue,
+  from : JsValue,
+  options : JsValue,
+) -> DOMQuad = "webapi_Element" "convertRectFromNode"
+
+///|
+#cfg(target="wasm-gc")
+fn element_convert_point_from_node_ffi(
+  obj : JsValue,
+  point : JsValue,
+  from : JsValue,
+  options : JsValue,
+) -> DOMPoint = "webapi_Element" "convertPointFromNode"
+
+///|
+#cfg(target="wasm-gc")
+fn element_animate_ffi(
+  obj : JsValue,
+  keyframes : JsValue,
+  options : JsValue,
+) -> Animation = "webapi_Element" "animate"
+
+///|
+#cfg(target="wasm-gc")
+fn element_get_animations_ffi_wasm(obj : JsValue, options : JsValue) -> JsArray = "webapi_Element" "getAnimations"
+
+///|
+#cfg(target="wasm-gc")
+fn element_get_animations_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> Array[Animation] {
+  element_get_animations_ffi_wasm(obj, options).to_array()
+}

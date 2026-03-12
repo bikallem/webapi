@@ -49,3 +49,37 @@ impl TSVGViewElement with view_box(self : Self) -> SVGAnimatedRect {
 impl TSVGViewElement with preserve_aspect_ratio(self : Self) -> SVGAnimatedPreserveAspectRatio {
   svg_view_element_preserve_aspect_ratio_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn svg_view_element_view_box_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.viewBox"
+
+///|
+#cfg(target="js")
+fn svg_view_element_view_box_ffi(obj : JsValue) -> SVGAnimatedRect {
+  svg_view_element_view_box_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_view_element_preserve_aspect_ratio_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.preserveAspectRatio"
+
+///|
+#cfg(target="js")
+fn svg_view_element_preserve_aspect_ratio_ffi(
+  obj : JsValue,
+) -> SVGAnimatedPreserveAspectRatio {
+  svg_view_element_preserve_aspect_ratio_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svg_view_element_view_box_ffi(obj : JsValue) -> SVGAnimatedRect = "webapi_SVGViewElement" "get_viewBox"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_view_element_preserve_aspect_ratio_ffi(
+  obj : JsValue,
+) -> SVGAnimatedPreserveAspectRatio = "webapi_SVGViewElement" "get_preserveAspectRatio"

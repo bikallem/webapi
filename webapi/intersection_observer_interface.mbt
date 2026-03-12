@@ -152,3 +152,189 @@ impl TIntersectionObserver with take_records(self : Self) -> Array[
 ] {
   intersection_observer_take_records_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn intersection_observer_new_ffi(
+  callback : JsValue,
+  options : JsValue,
+) -> IntersectionObserver = "(callback, options) => new IntersectionObserver(callback, options)"
+
+///|
+#cfg(target="js")
+extern "js" fn intersection_observer_root_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.root"
+
+///|
+#cfg(target="js")
+fn intersection_observer_root_ffi(obj : JsValue) -> IntersectionObserverRoot {
+  intersection_observer_root_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn intersection_observer_root_margin_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.rootMargin"
+
+///|
+#cfg(target="js")
+fn intersection_observer_root_margin_ffi(obj : JsValue) -> String {
+  intersection_observer_root_margin_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn intersection_observer_scroll_margin_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.scrollMargin"
+
+///|
+#cfg(target="js")
+fn intersection_observer_scroll_margin_ffi(obj : JsValue) -> String {
+  intersection_observer_scroll_margin_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn intersection_observer_thresholds_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.thresholds"
+
+///|
+#cfg(target="js")
+fn intersection_observer_thresholds_ffi(obj : JsValue) -> Array[Double] {
+  intersection_observer_thresholds_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn intersection_observer_delay_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.delay"
+
+///|
+#cfg(target="js")
+fn intersection_observer_delay_ffi(obj : JsValue) -> Int {
+  intersection_observer_delay_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn intersection_observer_track_visibility_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.trackVisibility"
+
+///|
+#cfg(target="js")
+fn intersection_observer_track_visibility_ffi(obj : JsValue) -> Bool {
+  intersection_observer_track_visibility_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn intersection_observer_observe_ffi(
+  obj : JsValue,
+  target : JsValue,
+) -> Unit = "(obj, target) => obj.observe(target)"
+
+///|
+#cfg(target="js")
+extern "js" fn intersection_observer_unobserve_ffi(
+  obj : JsValue,
+  target : JsValue,
+) -> Unit = "(obj, target) => obj.unobserve(target)"
+
+///|
+#cfg(target="js")
+extern "js" fn intersection_observer_disconnect_ffi(obj : JsValue) -> Unit = "(obj) => obj.disconnect()"
+
+///|
+#cfg(target="js")
+extern "js" fn intersection_observer_take_records_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.takeRecords()"
+
+///|
+#cfg(target="js")
+fn intersection_observer_take_records_ffi(
+  obj : JsValue,
+) -> Array[IntersectionObserverEntry] {
+  intersection_observer_take_records_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn intersection_observer_new_ffi(
+  callback : JsValue,
+  options : JsValue,
+) -> IntersectionObserver = "webapi_IntersectionObserver" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn intersection_observer_root_ffi_wasm(obj : JsValue) -> JsValue = "webapi_IntersectionObserver" "get_root"
+
+///|
+#cfg(target="wasm-gc")
+fn intersection_observer_root_ffi(obj : JsValue) -> IntersectionObserverRoot {
+  intersection_observer_root_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn intersection_observer_root_margin_ffi_wasm(obj : JsValue) -> JsValue = "webapi_IntersectionObserver" "get_rootMargin"
+
+///|
+#cfg(target="wasm-gc")
+fn intersection_observer_root_margin_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(intersection_observer_root_margin_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn intersection_observer_scroll_margin_ffi_wasm(obj : JsValue) -> JsValue = "webapi_IntersectionObserver" "get_scrollMargin"
+
+///|
+#cfg(target="wasm-gc")
+fn intersection_observer_scroll_margin_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(intersection_observer_scroll_margin_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn intersection_observer_thresholds_ffi_wasm(obj : JsValue) -> JsArray = "webapi_IntersectionObserver" "get_thresholds"
+
+///|
+#cfg(target="wasm-gc")
+fn intersection_observer_thresholds_ffi(obj : JsValue) -> Array[Double] {
+  intersection_observer_thresholds_ffi_wasm(obj).to_value_array()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn intersection_observer_delay_ffi(obj : JsValue) -> Int = "webapi_IntersectionObserver" "get_delay"
+
+///|
+#cfg(target="wasm-gc")
+fn intersection_observer_track_visibility_ffi(obj : JsValue) -> Bool = "webapi_IntersectionObserver" "get_trackVisibility"
+
+///|
+#cfg(target="wasm-gc")
+fn intersection_observer_observe_ffi(obj : JsValue, target : JsValue) -> Unit = "webapi_IntersectionObserver" "observe"
+
+///|
+#cfg(target="wasm-gc")
+fn intersection_observer_unobserve_ffi(obj : JsValue, target : JsValue) -> Unit = "webapi_IntersectionObserver" "unobserve"
+
+///|
+#cfg(target="wasm-gc")
+fn intersection_observer_disconnect_ffi(obj : JsValue) -> Unit = "webapi_IntersectionObserver" "disconnect"
+
+///|
+#cfg(target="wasm-gc")
+fn intersection_observer_take_records_ffi_wasm(obj : JsValue) -> JsArray = "webapi_IntersectionObserver" "takeRecords"
+
+///|
+#cfg(target="wasm-gc")
+fn intersection_observer_take_records_ffi(
+  obj : JsValue,
+) -> Array[IntersectionObserverEntry] {
+  intersection_observer_take_records_ffi_wasm(obj).to_array()
+}

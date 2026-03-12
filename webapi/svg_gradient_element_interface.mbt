@@ -77,3 +77,77 @@ impl TSVGGradientElement with spread_method(self : Self) -> SVGAnimatedEnumerati
 impl TSVGGradientElement with href(self : Self) -> SVGAnimatedString {
   svg_gradient_element_href_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn svg_gradient_element_gradient_units_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.gradientUnits"
+
+///|
+#cfg(target="js")
+fn svg_gradient_element_gradient_units_ffi(
+  obj : JsValue,
+) -> SVGAnimatedEnumeration {
+  svg_gradient_element_gradient_units_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_gradient_element_gradient_transform_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.gradientTransform"
+
+///|
+#cfg(target="js")
+fn svg_gradient_element_gradient_transform_ffi(
+  obj : JsValue,
+) -> SVGAnimatedTransformList {
+  svg_gradient_element_gradient_transform_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_gradient_element_spread_method_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.spreadMethod"
+
+///|
+#cfg(target="js")
+fn svg_gradient_element_spread_method_ffi(
+  obj : JsValue,
+) -> SVGAnimatedEnumeration {
+  svg_gradient_element_spread_method_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_gradient_element_href_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.href"
+
+///|
+#cfg(target="js")
+fn svg_gradient_element_href_ffi(obj : JsValue) -> SVGAnimatedString {
+  svg_gradient_element_href_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svg_gradient_element_gradient_units_ffi(
+  obj : JsValue,
+) -> SVGAnimatedEnumeration = "webapi_SVGGradientElement" "get_gradientUnits"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_gradient_element_gradient_transform_ffi(
+  obj : JsValue,
+) -> SVGAnimatedTransformList = "webapi_SVGGradientElement" "get_gradientTransform"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_gradient_element_spread_method_ffi(
+  obj : JsValue,
+) -> SVGAnimatedEnumeration = "webapi_SVGGradientElement" "get_spreadMethod"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_gradient_element_href_ffi(obj : JsValue) -> SVGAnimatedString = "webapi_SVGGradientElement" "get_href"

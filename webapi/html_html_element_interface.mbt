@@ -57,3 +57,42 @@ impl THTMLHtmlElement with set_version(self : Self, version : String) -> Unit {
     TJsValue::to_js(version),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_html_element_new_ffi() -> HTMLHtmlElement = "() => new HTMLHtmlElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_html_element_version_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.version"
+
+///|
+#cfg(target="js")
+fn html_html_element_version_ffi(obj : JsValue) -> String {
+  html_html_element_version_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_html_element_set_version_ffi(
+  obj : JsValue,
+  version : JsValue,
+) -> Unit = "(obj, version) => { obj.version = version; }"
+
+///|
+#cfg(target="wasm-gc")
+fn html_html_element_new_ffi() -> HTMLHtmlElement = "webapi_HTMLHtmlElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_html_element_version_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLHtmlElement" "get_version"
+
+///|
+#cfg(target="wasm-gc")
+fn html_html_element_version_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_html_element_version_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_html_element_set_version_ffi(obj : JsValue, version : JsValue) -> Unit = "webapi_HTMLHtmlElement" "set_version"

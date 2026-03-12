@@ -55,3 +55,49 @@ impl TIDBVersionChangeEvent with old_version(self : Self) -> UInt64 {
 impl TIDBVersionChangeEvent with new_version(self : Self) -> UInt64 {
   idb_version_change_event_new_version_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn idb_version_change_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> IDBVersionChangeEvent = "(type_, event_init_dict) => new IDBVersionChangeEvent(type_, event_init_dict)"
+
+///|
+#cfg(target="js")
+extern "js" fn idb_version_change_event_old_version_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.oldVersion"
+
+///|
+#cfg(target="js")
+fn idb_version_change_event_old_version_ffi(obj : JsValue) -> UInt64 {
+  idb_version_change_event_old_version_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_version_change_event_new_version_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.newVersion"
+
+///|
+#cfg(target="js")
+fn idb_version_change_event_new_version_ffi(obj : JsValue) -> UInt64 {
+  idb_version_change_event_new_version_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn idb_version_change_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> IDBVersionChangeEvent = "webapi_IDBVersionChangeEvent" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_version_change_event_old_version_ffi(obj : JsValue) -> UInt64 = "webapi_IDBVersionChangeEvent" "get_oldVersion"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_version_change_event_new_version_ffi(obj : JsValue) -> UInt64 = "webapi_IDBVersionChangeEvent" "get_newVersion"

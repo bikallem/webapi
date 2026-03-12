@@ -661,3 +661,1050 @@ impl TSVGSVGElement with set_onunload(
 impl TSVGSVGElement with get_element_by_id(self : Self, element_id : String) -> Element {
   self.get_element_by_id_opt(element_id).unwrap()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_x_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.x"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_x_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svgsvg_element_x_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_y_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.y"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_y_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svgsvg_element_y_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_width_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.width"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_width_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svgsvg_element_width_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_height_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.height"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_height_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svgsvg_element_height_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_current_scale_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.currentScale"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_current_scale_ffi(obj : JsValue) -> Float {
+  svgsvg_element_current_scale_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_set_current_scale_ffi(
+  obj : JsValue,
+  current_scale : JsValue,
+) -> Unit = "(obj, currentScale) => { obj.currentScale = currentScale; }"
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_current_translate_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.currentTranslate"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_current_translate_ffi(obj : JsValue) -> DOMPointReadOnly {
+  svgsvg_element_current_translate_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_get_intersection_list_ffi_js(
+  obj : JsValue,
+  rect : JsValue,
+  reference_element : JsValue,
+) -> JsValue = "(obj, rect, reference_element) => obj.getIntersectionList(rect, reference_element)"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_get_intersection_list_ffi(
+  obj : JsValue,
+  rect : JsValue,
+  reference_element : JsValue,
+) -> NodeList {
+  svgsvg_element_get_intersection_list_ffi_js(obj, rect, reference_element).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_get_enclosure_list_ffi_js(
+  obj : JsValue,
+  rect : JsValue,
+  reference_element : JsValue,
+) -> JsValue = "(obj, rect, reference_element) => obj.getEnclosureList(rect, reference_element)"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_get_enclosure_list_ffi(
+  obj : JsValue,
+  rect : JsValue,
+  reference_element : JsValue,
+) -> NodeList {
+  svgsvg_element_get_enclosure_list_ffi_js(obj, rect, reference_element).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_check_intersection_ffi_js(
+  obj : JsValue,
+  element : JsValue,
+  rect : JsValue,
+) -> JsValue = "(obj, element, rect) => obj.checkIntersection(element, rect)"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_check_intersection_ffi(
+  obj : JsValue,
+  element : JsValue,
+  rect : JsValue,
+) -> Bool {
+  svgsvg_element_check_intersection_ffi_js(obj, element, rect).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_check_enclosure_ffi_js(
+  obj : JsValue,
+  element : JsValue,
+  rect : JsValue,
+) -> JsValue = "(obj, element, rect) => obj.checkEnclosure(element, rect)"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_check_enclosure_ffi(
+  obj : JsValue,
+  element : JsValue,
+  rect : JsValue,
+) -> Bool {
+  svgsvg_element_check_enclosure_ffi_js(obj, element, rect).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_deselect_all_ffi(obj : JsValue) -> Unit = "(obj) => obj.deselectAll()"
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_create_svg_number_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.createSVGNumber()"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_create_svg_number_ffi(obj : JsValue) -> SVGNumber {
+  svgsvg_element_create_svg_number_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_create_svg_length_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.createSVGLength()"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_create_svg_length_ffi(obj : JsValue) -> SVGLength {
+  svgsvg_element_create_svg_length_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_create_svg_angle_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.createSVGAngle()"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_create_svg_angle_ffi(obj : JsValue) -> SVGAngle {
+  svgsvg_element_create_svg_angle_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_create_svg_point_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.createSVGPoint()"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_create_svg_point_ffi(obj : JsValue) -> DOMPoint {
+  svgsvg_element_create_svg_point_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_create_svg_matrix_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.createSVGMatrix()"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_create_svg_matrix_ffi(obj : JsValue) -> DOMMatrix {
+  svgsvg_element_create_svg_matrix_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_create_svg_rect_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.createSVGRect()"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_create_svg_rect_ffi(obj : JsValue) -> DOMRect {
+  svgsvg_element_create_svg_rect_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_create_svg_transform_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.createSVGTransform()"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_create_svg_transform_ffi(obj : JsValue) -> SVGTransform {
+  svgsvg_element_create_svg_transform_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_create_svg_transform_from_matrix_ffi_js(
+  obj : JsValue,
+  matrix : JsValue,
+) -> JsValue = "(obj, matrix) => obj.createSVGTransformFromMatrix(matrix)"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_create_svg_transform_from_matrix_ffi(
+  obj : JsValue,
+  matrix : JsValue,
+) -> SVGTransform {
+  svgsvg_element_create_svg_transform_from_matrix_ffi_js(obj, matrix).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_get_element_by_id_ffi(
+  obj : JsValue,
+  element_id : JsValue,
+) -> JsValue = "(obj, element_id) => obj.getElementById(element_id)"
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_suspend_redraw_ffi_js(
+  obj : JsValue,
+  max_wait_milliseconds : JsValue,
+) -> JsValue = "(obj, max_wait_milliseconds) => obj.suspendRedraw(max_wait_milliseconds)"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_suspend_redraw_ffi(
+  obj : JsValue,
+  max_wait_milliseconds : JsValue,
+) -> UInt {
+  svgsvg_element_suspend_redraw_ffi_js(obj, max_wait_milliseconds).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_unsuspend_redraw_ffi(
+  obj : JsValue,
+  suspend_handle_id : JsValue,
+) -> Unit = "(obj, suspend_handle_id) => obj.unsuspendRedraw(suspend_handle_id)"
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_unsuspend_redraw_all_ffi(obj : JsValue) -> Unit = "(obj) => obj.unsuspendRedrawAll()"
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_force_redraw_ffi(obj : JsValue) -> Unit = "(obj) => obj.forceRedraw()"
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_view_box_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.viewBox"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_view_box_ffi(obj : JsValue) -> SVGAnimatedRect {
+  svgsvg_element_view_box_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_preserve_aspect_ratio_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.preserveAspectRatio"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_preserve_aspect_ratio_ffi(
+  obj : JsValue,
+) -> SVGAnimatedPreserveAspectRatio {
+  svgsvg_element_preserve_aspect_ratio_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_onafterprint_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onafterprint"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_onafterprint_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onafterprint_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_set_onafterprint_ffi(
+  obj : JsValue,
+  onafterprint : JsValue,
+) -> Unit = "(obj, onafterprint) => { obj.onafterprint = onafterprint; }"
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_onbeforeprint_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onbeforeprint"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_onbeforeprint_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onbeforeprint_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_set_onbeforeprint_ffi(
+  obj : JsValue,
+  onbeforeprint : JsValue,
+) -> Unit = "(obj, onbeforeprint) => { obj.onbeforeprint = onbeforeprint; }"
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_onbeforeunload_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onbeforeunload"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_onbeforeunload_ffi(
+  obj : JsValue,
+) -> OnBeforeUnloadEventHandler {
+  svgsvg_element_onbeforeunload_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_set_onbeforeunload_ffi(
+  obj : JsValue,
+  onbeforeunload : JsValue,
+) -> Unit = "(obj, onbeforeunload) => { obj.onbeforeunload = onbeforeunload; }"
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_onhashchange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onhashchange"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_onhashchange_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onhashchange_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_set_onhashchange_ffi(
+  obj : JsValue,
+  onhashchange : JsValue,
+) -> Unit = "(obj, onhashchange) => { obj.onhashchange = onhashchange; }"
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_onlanguagechange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onlanguagechange"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_onlanguagechange_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onlanguagechange_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_set_onlanguagechange_ffi(
+  obj : JsValue,
+  onlanguagechange : JsValue,
+) -> Unit = "(obj, onlanguagechange) => { obj.onlanguagechange = onlanguagechange; }"
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_onmessage_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onmessage"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_onmessage_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onmessage_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_set_onmessage_ffi(
+  obj : JsValue,
+  onmessage : JsValue,
+) -> Unit = "(obj, onmessage) => { obj.onmessage = onmessage; }"
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_onmessageerror_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onmessageerror"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_onmessageerror_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onmessageerror_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_set_onmessageerror_ffi(
+  obj : JsValue,
+  onmessageerror : JsValue,
+) -> Unit = "(obj, onmessageerror) => { obj.onmessageerror = onmessageerror; }"
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_onoffline_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onoffline"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_onoffline_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onoffline_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_set_onoffline_ffi(
+  obj : JsValue,
+  onoffline : JsValue,
+) -> Unit = "(obj, onoffline) => { obj.onoffline = onoffline; }"
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_ononline_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ononline"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_ononline_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_ononline_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_set_ononline_ffi(
+  obj : JsValue,
+  ononline : JsValue,
+) -> Unit = "(obj, ononline) => { obj.ononline = ononline; }"
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_onpagehide_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpagehide"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_onpagehide_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onpagehide_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_set_onpagehide_ffi(
+  obj : JsValue,
+  onpagehide : JsValue,
+) -> Unit = "(obj, onpagehide) => { obj.onpagehide = onpagehide; }"
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_onpagereveal_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpagereveal"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_onpagereveal_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onpagereveal_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_set_onpagereveal_ffi(
+  obj : JsValue,
+  onpagereveal : JsValue,
+) -> Unit = "(obj, onpagereveal) => { obj.onpagereveal = onpagereveal; }"
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_onpageshow_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpageshow"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_onpageshow_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onpageshow_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_set_onpageshow_ffi(
+  obj : JsValue,
+  onpageshow : JsValue,
+) -> Unit = "(obj, onpageshow) => { obj.onpageshow = onpageshow; }"
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_onpageswap_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpageswap"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_onpageswap_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onpageswap_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_set_onpageswap_ffi(
+  obj : JsValue,
+  onpageswap : JsValue,
+) -> Unit = "(obj, onpageswap) => { obj.onpageswap = onpageswap; }"
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_onpopstate_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpopstate"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_onpopstate_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onpopstate_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_set_onpopstate_ffi(
+  obj : JsValue,
+  onpopstate : JsValue,
+) -> Unit = "(obj, onpopstate) => { obj.onpopstate = onpopstate; }"
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_onrejectionhandled_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.onrejectionhandled"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_onrejectionhandled_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onrejectionhandled_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_set_onrejectionhandled_ffi(
+  obj : JsValue,
+  onrejectionhandled : JsValue,
+) -> Unit = "(obj, onrejectionhandled) => { obj.onrejectionhandled = onrejectionhandled; }"
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_onstorage_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onstorage"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_onstorage_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onstorage_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_set_onstorage_ffi(
+  obj : JsValue,
+  onstorage : JsValue,
+) -> Unit = "(obj, onstorage) => { obj.onstorage = onstorage; }"
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_onunhandledrejection_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.onunhandledrejection"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_onunhandledrejection_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onunhandledrejection_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_set_onunhandledrejection_ffi(
+  obj : JsValue,
+  onunhandledrejection : JsValue,
+) -> Unit = "(obj, onunhandledrejection) => { obj.onunhandledrejection = onunhandledrejection; }"
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_onunload_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onunload"
+
+///|
+#cfg(target="js")
+fn svgsvg_element_onunload_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onunload_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svgsvg_element_set_onunload_ffi(
+  obj : JsValue,
+  onunload : JsValue,
+) -> Unit = "(obj, onunload) => { obj.onunload = onunload; }"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_x_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGSVGElement" "get_x"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_y_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGSVGElement" "get_y"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_width_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGSVGElement" "get_width"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_height_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGSVGElement" "get_height"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_current_scale_ffi(obj : JsValue) -> Float = "webapi_SVGSVGElement" "get_currentScale"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_set_current_scale_ffi(
+  obj : JsValue,
+  current_scale : JsValue,
+) -> Unit = "webapi_SVGSVGElement" "set_currentScale"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_current_translate_ffi(obj : JsValue) -> DOMPointReadOnly = "webapi_SVGSVGElement" "get_currentTranslate"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_get_intersection_list_ffi(
+  obj : JsValue,
+  rect : JsValue,
+  reference_element : JsValue,
+) -> NodeList = "webapi_SVGSVGElement" "getIntersectionList"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_get_enclosure_list_ffi(
+  obj : JsValue,
+  rect : JsValue,
+  reference_element : JsValue,
+) -> NodeList = "webapi_SVGSVGElement" "getEnclosureList"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_check_intersection_ffi(
+  obj : JsValue,
+  element : JsValue,
+  rect : JsValue,
+) -> Bool = "webapi_SVGSVGElement" "checkIntersection"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_check_enclosure_ffi(
+  obj : JsValue,
+  element : JsValue,
+  rect : JsValue,
+) -> Bool = "webapi_SVGSVGElement" "checkEnclosure"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_deselect_all_ffi(obj : JsValue) -> Unit = "webapi_SVGSVGElement" "deselectAll"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_create_svg_number_ffi(obj : JsValue) -> SVGNumber = "webapi_SVGSVGElement" "createSVGNumber"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_create_svg_length_ffi(obj : JsValue) -> SVGLength = "webapi_SVGSVGElement" "createSVGLength"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_create_svg_angle_ffi(obj : JsValue) -> SVGAngle = "webapi_SVGSVGElement" "createSVGAngle"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_create_svg_point_ffi(obj : JsValue) -> DOMPoint = "webapi_SVGSVGElement" "createSVGPoint"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_create_svg_matrix_ffi(obj : JsValue) -> DOMMatrix = "webapi_SVGSVGElement" "createSVGMatrix"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_create_svg_rect_ffi(obj : JsValue) -> DOMRect = "webapi_SVGSVGElement" "createSVGRect"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_create_svg_transform_ffi(obj : JsValue) -> SVGTransform = "webapi_SVGSVGElement" "createSVGTransform"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_create_svg_transform_from_matrix_ffi(
+  obj : JsValue,
+  matrix : JsValue,
+) -> SVGTransform = "webapi_SVGSVGElement" "createSVGTransformFromMatrix"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_get_element_by_id_ffi(
+  obj : JsValue,
+  element_id : JsValue,
+) -> JsValue = "webapi_SVGSVGElement" "getElementById"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_suspend_redraw_ffi(
+  obj : JsValue,
+  max_wait_milliseconds : JsValue,
+) -> UInt = "webapi_SVGSVGElement" "suspendRedraw"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_unsuspend_redraw_ffi(
+  obj : JsValue,
+  suspend_handle_id : JsValue,
+) -> Unit = "webapi_SVGSVGElement" "unsuspendRedraw"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_unsuspend_redraw_all_ffi(obj : JsValue) -> Unit = "webapi_SVGSVGElement" "unsuspendRedrawAll"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_force_redraw_ffi(obj : JsValue) -> Unit = "webapi_SVGSVGElement" "forceRedraw"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_view_box_ffi(obj : JsValue) -> SVGAnimatedRect = "webapi_SVGSVGElement" "get_viewBox"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_preserve_aspect_ratio_ffi(
+  obj : JsValue,
+) -> SVGAnimatedPreserveAspectRatio = "webapi_SVGSVGElement" "get_preserveAspectRatio"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_onafterprint_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGSVGElement" "get_onafterprint"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_onafterprint_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onafterprint_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_set_onafterprint_ffi(
+  obj : JsValue,
+  onafterprint : JsValue,
+) -> Unit = "webapi_SVGSVGElement" "set_onafterprint"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_onbeforeprint_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGSVGElement" "get_onbeforeprint"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_onbeforeprint_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onbeforeprint_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_set_onbeforeprint_ffi(
+  obj : JsValue,
+  onbeforeprint : JsValue,
+) -> Unit = "webapi_SVGSVGElement" "set_onbeforeprint"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_onbeforeunload_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGSVGElement" "get_onbeforeunload"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_onbeforeunload_ffi(
+  obj : JsValue,
+) -> OnBeforeUnloadEventHandler {
+  svgsvg_element_onbeforeunload_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_set_onbeforeunload_ffi(
+  obj : JsValue,
+  onbeforeunload : JsValue,
+) -> Unit = "webapi_SVGSVGElement" "set_onbeforeunload"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_onhashchange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGSVGElement" "get_onhashchange"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_onhashchange_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onhashchange_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_set_onhashchange_ffi(
+  obj : JsValue,
+  onhashchange : JsValue,
+) -> Unit = "webapi_SVGSVGElement" "set_onhashchange"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_onlanguagechange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGSVGElement" "get_onlanguagechange"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_onlanguagechange_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onlanguagechange_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_set_onlanguagechange_ffi(
+  obj : JsValue,
+  onlanguagechange : JsValue,
+) -> Unit = "webapi_SVGSVGElement" "set_onlanguagechange"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_onmessage_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGSVGElement" "get_onmessage"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_onmessage_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onmessage_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_set_onmessage_ffi(obj : JsValue, onmessage : JsValue) -> Unit = "webapi_SVGSVGElement" "set_onmessage"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_onmessageerror_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGSVGElement" "get_onmessageerror"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_onmessageerror_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onmessageerror_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_set_onmessageerror_ffi(
+  obj : JsValue,
+  onmessageerror : JsValue,
+) -> Unit = "webapi_SVGSVGElement" "set_onmessageerror"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_onoffline_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGSVGElement" "get_onoffline"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_onoffline_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onoffline_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_set_onoffline_ffi(obj : JsValue, onoffline : JsValue) -> Unit = "webapi_SVGSVGElement" "set_onoffline"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_ononline_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGSVGElement" "get_ononline"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_ononline_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_ononline_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_set_ononline_ffi(obj : JsValue, ononline : JsValue) -> Unit = "webapi_SVGSVGElement" "set_ononline"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_onpagehide_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGSVGElement" "get_onpagehide"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_onpagehide_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onpagehide_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_set_onpagehide_ffi(
+  obj : JsValue,
+  onpagehide : JsValue,
+) -> Unit = "webapi_SVGSVGElement" "set_onpagehide"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_onpagereveal_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGSVGElement" "get_onpagereveal"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_onpagereveal_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onpagereveal_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_set_onpagereveal_ffi(
+  obj : JsValue,
+  onpagereveal : JsValue,
+) -> Unit = "webapi_SVGSVGElement" "set_onpagereveal"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_onpageshow_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGSVGElement" "get_onpageshow"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_onpageshow_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onpageshow_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_set_onpageshow_ffi(
+  obj : JsValue,
+  onpageshow : JsValue,
+) -> Unit = "webapi_SVGSVGElement" "set_onpageshow"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_onpageswap_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGSVGElement" "get_onpageswap"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_onpageswap_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onpageswap_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_set_onpageswap_ffi(
+  obj : JsValue,
+  onpageswap : JsValue,
+) -> Unit = "webapi_SVGSVGElement" "set_onpageswap"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_onpopstate_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGSVGElement" "get_onpopstate"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_onpopstate_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onpopstate_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_set_onpopstate_ffi(
+  obj : JsValue,
+  onpopstate : JsValue,
+) -> Unit = "webapi_SVGSVGElement" "set_onpopstate"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_onrejectionhandled_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGSVGElement" "get_onrejectionhandled"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_onrejectionhandled_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onrejectionhandled_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_set_onrejectionhandled_ffi(
+  obj : JsValue,
+  onrejectionhandled : JsValue,
+) -> Unit = "webapi_SVGSVGElement" "set_onrejectionhandled"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_onstorage_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGSVGElement" "get_onstorage"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_onstorage_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onstorage_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_set_onstorage_ffi(obj : JsValue, onstorage : JsValue) -> Unit = "webapi_SVGSVGElement" "set_onstorage"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_onunhandledrejection_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGSVGElement" "get_onunhandledrejection"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_onunhandledrejection_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onunhandledrejection_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_set_onunhandledrejection_ffi(
+  obj : JsValue,
+  onunhandledrejection : JsValue,
+) -> Unit = "webapi_SVGSVGElement" "set_onunhandledrejection"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_onunload_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGSVGElement" "get_onunload"
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_onunload_ffi(obj : JsValue) -> EventHandler {
+  svgsvg_element_onunload_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svgsvg_element_set_onunload_ffi(obj : JsValue, onunload : JsValue) -> Unit = "webapi_SVGSVGElement" "set_onunload"

@@ -104,3 +104,85 @@ pub fn WriteParams::position(self : WriteParams) -> UInt64? {
 pub fn WriteParams::data(self : WriteParams) -> WriteParamsGetData? {
   write_params_get_data_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn write_params_ffi(
+  type_ : JsValue,
+  size : JsValue,
+  position : JsValue,
+  data : JsValue,
+) -> WriteParams =
+  #|(type, size, position, data) => {
+  #|  const obj = {};
+  #|  if (type !== undefined) obj.type = type;
+  #|  if (size !== undefined) obj.size = size;
+  #|  if (position !== undefined) obj.position = position;
+  #|  if (data !== undefined) obj.data = data;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn write_params_empty_ffi() -> WriteParams = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn write_params_get_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.type"
+
+///|
+#cfg(target="js")
+fn write_params_get_type_ffi(obj : JsValue) -> WriteCommandType {
+  WriteCommandType::from_unchecked(
+    write_params_get_type_ffi_js(obj).unsafe_cast(),
+  )
+}
+
+///|
+#cfg(target="js")
+extern "js" fn write_params_get_size_ffi(obj : JsValue) -> JsValue = "(obj) => obj.size"
+
+///|
+#cfg(target="js")
+extern "js" fn write_params_get_position_ffi(obj : JsValue) -> JsValue = "(obj) => obj.position"
+
+///|
+#cfg(target="js")
+extern "js" fn write_params_get_data_ffi(obj : JsValue) -> JsValue = "(obj) => obj.data"
+
+///|
+#cfg(target="wasm-gc")
+fn write_params_ffi(
+  type_ : JsValue,
+  size : JsValue,
+  position : JsValue,
+  data : JsValue,
+) -> WriteParams = "webapi_WriteParams" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn write_params_empty_ffi() -> WriteParams = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn write_params_get_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WriteParams" "get_type"
+
+///|
+#cfg(target="wasm-gc")
+fn write_params_get_type_ffi(obj : JsValue) -> WriteCommandType {
+  WriteCommandType::from_unchecked(
+    jsvalue_to_string(write_params_get_type_ffi_wasm(obj)),
+  )
+}
+
+///|
+#cfg(target="wasm-gc")
+fn write_params_get_size_ffi(obj : JsValue) -> JsValue = "webapi_WriteParams" "get_size"
+
+///|
+#cfg(target="wasm-gc")
+fn write_params_get_position_ffi(obj : JsValue) -> JsValue = "webapi_WriteParams" "get_position"
+
+///|
+#cfg(target="wasm-gc")
+fn write_params_get_data_ffi(obj : JsValue) -> JsValue = "webapi_WriteParams" "get_data"

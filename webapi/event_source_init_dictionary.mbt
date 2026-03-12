@@ -27,3 +27,36 @@ pub fn EventSourceInit::empty() -> EventSourceInit {
 pub fn EventSourceInit::with_credentials(self : EventSourceInit) -> Bool? {
   event_source_init_get_with_credentials_ffi(TJsValue::to_js(self)).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn event_source_init_ffi(
+  with_credentials : JsValue,
+) -> EventSourceInit =
+  #|(withCredentials) => {
+  #|  const obj = {};
+  #|  if (withCredentials !== undefined) obj.withCredentials = withCredentials;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn event_source_init_empty_ffi() -> EventSourceInit = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn event_source_init_get_with_credentials_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.withCredentials"
+
+///|
+#cfg(target="wasm-gc")
+fn event_source_init_ffi(with_credentials : JsValue) -> EventSourceInit = "webapi_EventSourceInit" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn event_source_init_empty_ffi() -> EventSourceInit = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn event_source_init_get_with_credentials_ffi(obj : JsValue) -> JsValue = "webapi_EventSourceInit" "get_withCredentials"

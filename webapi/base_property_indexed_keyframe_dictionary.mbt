@@ -209,3 +209,64 @@ pub fn BasePropertyIndexedKeyframe::composite(
 ) -> BasePropertyIndexedKeyframeGetComposite? {
   base_property_indexed_keyframe_get_composite_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn base_property_indexed_keyframe_ffi(
+  offset : JsValue,
+  easing : JsValue,
+  composite : JsValue,
+) -> BasePropertyIndexedKeyframe =
+  #|(offset, easing, composite) => {
+  #|  const obj = {};
+  #|  if (offset !== undefined) obj.offset = offset;
+  #|  if (easing !== undefined) obj.easing = easing;
+  #|  if (composite !== undefined) obj.composite = composite;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn base_property_indexed_keyframe_empty_ffi() -> BasePropertyIndexedKeyframe = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn base_property_indexed_keyframe_get_offset_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.offset"
+
+///|
+#cfg(target="js")
+extern "js" fn base_property_indexed_keyframe_get_easing_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.easing"
+
+///|
+#cfg(target="js")
+extern "js" fn base_property_indexed_keyframe_get_composite_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.composite"
+
+///|
+#cfg(target="wasm-gc")
+fn base_property_indexed_keyframe_ffi(
+  offset : JsValue,
+  easing : JsValue,
+  composite : JsValue,
+) -> BasePropertyIndexedKeyframe = "webapi_BasePropertyIndexedKeyframe" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn base_property_indexed_keyframe_empty_ffi() -> BasePropertyIndexedKeyframe = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn base_property_indexed_keyframe_get_offset_ffi(obj : JsValue) -> JsValue = "webapi_BasePropertyIndexedKeyframe" "get_offset"
+
+///|
+#cfg(target="wasm-gc")
+fn base_property_indexed_keyframe_get_easing_ffi(obj : JsValue) -> JsValue = "webapi_BasePropertyIndexedKeyframe" "get_easing"
+
+///|
+#cfg(target="wasm-gc")
+fn base_property_indexed_keyframe_get_composite_ffi(obj : JsValue) -> JsValue = "webapi_BasePropertyIndexedKeyframe" "get_composite"

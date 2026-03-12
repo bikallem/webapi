@@ -97,3 +97,120 @@ impl TBroadcastChannel with set_onmessageerror(
     TJsValue::to_js(event_handler_non_null_ffi(onmessageerror)),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn broadcast_channel_new_ffi(name : JsValue) -> BroadcastChannel = "(name) => new BroadcastChannel(name)"
+
+///|
+#cfg(target="js")
+extern "js" fn broadcast_channel_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.name"
+
+///|
+#cfg(target="js")
+fn broadcast_channel_name_ffi(obj : JsValue) -> String {
+  broadcast_channel_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn broadcast_channel_post_message_ffi(
+  obj : JsValue,
+  message : JsValue,
+) -> Unit = "(obj, message) => obj.postMessage(message)"
+
+///|
+#cfg(target="js")
+extern "js" fn broadcast_channel_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.close()"
+
+///|
+#cfg(target="js")
+extern "js" fn broadcast_channel_onmessage_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onmessage"
+
+///|
+#cfg(target="js")
+fn broadcast_channel_onmessage_ffi(obj : JsValue) -> EventHandler {
+  broadcast_channel_onmessage_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn broadcast_channel_set_onmessage_ffi(
+  obj : JsValue,
+  onmessage : JsValue,
+) -> Unit = "(obj, onmessage) => { obj.onmessage = onmessage; }"
+
+///|
+#cfg(target="js")
+extern "js" fn broadcast_channel_onmessageerror_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.onmessageerror"
+
+///|
+#cfg(target="js")
+fn broadcast_channel_onmessageerror_ffi(obj : JsValue) -> EventHandler {
+  broadcast_channel_onmessageerror_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn broadcast_channel_set_onmessageerror_ffi(
+  obj : JsValue,
+  onmessageerror : JsValue,
+) -> Unit = "(obj, onmessageerror) => { obj.onmessageerror = onmessageerror; }"
+
+///|
+#cfg(target="wasm-gc")
+fn broadcast_channel_new_ffi(name : JsValue) -> BroadcastChannel = "webapi_BroadcastChannel" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn broadcast_channel_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_BroadcastChannel" "get_name"
+
+///|
+#cfg(target="wasm-gc")
+fn broadcast_channel_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(broadcast_channel_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn broadcast_channel_post_message_ffi(obj : JsValue, message : JsValue) -> Unit = "webapi_BroadcastChannel" "postMessage"
+
+///|
+#cfg(target="wasm-gc")
+fn broadcast_channel_close_ffi(obj : JsValue) -> Unit = "webapi_BroadcastChannel" "close"
+
+///|
+#cfg(target="wasm-gc")
+fn broadcast_channel_onmessage_ffi_wasm(obj : JsValue) -> JsValue = "webapi_BroadcastChannel" "get_onmessage"
+
+///|
+#cfg(target="wasm-gc")
+fn broadcast_channel_onmessage_ffi(obj : JsValue) -> EventHandler {
+  broadcast_channel_onmessage_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn broadcast_channel_set_onmessage_ffi(
+  obj : JsValue,
+  onmessage : JsValue,
+) -> Unit = "webapi_BroadcastChannel" "set_onmessage"
+
+///|
+#cfg(target="wasm-gc")
+fn broadcast_channel_onmessageerror_ffi_wasm(obj : JsValue) -> JsValue = "webapi_BroadcastChannel" "get_onmessageerror"
+
+///|
+#cfg(target="wasm-gc")
+fn broadcast_channel_onmessageerror_ffi(obj : JsValue) -> EventHandler {
+  broadcast_channel_onmessageerror_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn broadcast_channel_set_onmessageerror_ffi(
+  obj : JsValue,
+  onmessageerror : JsValue,
+) -> Unit = "webapi_BroadcastChannel" "set_onmessageerror"

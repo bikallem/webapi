@@ -37,3 +37,40 @@ pub fn FileSystemCreateWritableOptions::keep_existing_data(
     TJsValue::to_js(self),
   ).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn file_system_create_writable_options_ffi(
+  keep_existing_data : JsValue,
+) -> FileSystemCreateWritableOptions =
+  #|(keepExistingData) => {
+  #|  const obj = {};
+  #|  if (keepExistingData !== undefined) obj.keepExistingData = keepExistingData;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn file_system_create_writable_options_empty_ffi() -> FileSystemCreateWritableOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn file_system_create_writable_options_get_keep_existing_data_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.keepExistingData"
+
+///|
+#cfg(target="wasm-gc")
+fn file_system_create_writable_options_ffi(
+  keep_existing_data : JsValue,
+) -> FileSystemCreateWritableOptions = "webapi_FileSystemCreateWritableOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn file_system_create_writable_options_empty_ffi() -> FileSystemCreateWritableOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn file_system_create_writable_options_get_keep_existing_data_ffi(
+  obj : JsValue,
+) -> JsValue = "webapi_FileSystemCreateWritableOptions" "get_keepExistingData"

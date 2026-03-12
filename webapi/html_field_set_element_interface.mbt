@@ -142,3 +142,216 @@ impl THTMLFieldSetElement with set_custom_validity(self : Self, error : String) 
     TJsValue::to_js(error),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_field_set_element_new_ffi() -> HTMLFieldSetElement = "() => new HTMLFieldSetElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_field_set_element_disabled_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.disabled"
+
+///|
+#cfg(target="js")
+fn html_field_set_element_disabled_ffi(obj : JsValue) -> Bool {
+  html_field_set_element_disabled_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_field_set_element_set_disabled_ffi(
+  obj : JsValue,
+  disabled : JsValue,
+) -> Unit = "(obj, disabled) => { obj.disabled = disabled; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_field_set_element_form_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.form"
+
+///|
+#cfg(target="js")
+fn html_field_set_element_form_ffi(obj : JsValue) -> HTMLFormElement {
+  html_field_set_element_form_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_field_set_element_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.name"
+
+///|
+#cfg(target="js")
+fn html_field_set_element_name_ffi(obj : JsValue) -> String {
+  html_field_set_element_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_field_set_element_set_name_ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> Unit = "(obj, name) => { obj.name = name; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_field_set_element_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.type"
+
+///|
+#cfg(target="js")
+fn html_field_set_element_type_ffi(obj : JsValue) -> String {
+  html_field_set_element_type_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_field_set_element_elements_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.elements"
+
+///|
+#cfg(target="js")
+fn html_field_set_element_elements_ffi(obj : JsValue) -> HTMLCollection {
+  html_field_set_element_elements_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_field_set_element_will_validate_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.willValidate"
+
+///|
+#cfg(target="js")
+fn html_field_set_element_will_validate_ffi(obj : JsValue) -> Bool {
+  html_field_set_element_will_validate_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_field_set_element_validity_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.validity"
+
+///|
+#cfg(target="js")
+fn html_field_set_element_validity_ffi(obj : JsValue) -> ValidityState {
+  html_field_set_element_validity_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_field_set_element_validation_message_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.validationMessage"
+
+///|
+#cfg(target="js")
+fn html_field_set_element_validation_message_ffi(obj : JsValue) -> String {
+  html_field_set_element_validation_message_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_field_set_element_check_validity_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.checkValidity()"
+
+///|
+#cfg(target="js")
+fn html_field_set_element_check_validity_ffi(obj : JsValue) -> Bool {
+  html_field_set_element_check_validity_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_field_set_element_report_validity_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.reportValidity()"
+
+///|
+#cfg(target="js")
+fn html_field_set_element_report_validity_ffi(obj : JsValue) -> Bool {
+  html_field_set_element_report_validity_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_field_set_element_set_custom_validity_ffi(
+  obj : JsValue,
+  error : JsValue,
+) -> Unit = "(obj, error) => obj.setCustomValidity(error)"
+
+///|
+#cfg(target="wasm-gc")
+fn html_field_set_element_new_ffi() -> HTMLFieldSetElement = "webapi_HTMLFieldSetElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_field_set_element_disabled_ffi(obj : JsValue) -> Bool = "webapi_HTMLFieldSetElement" "get_disabled"
+
+///|
+#cfg(target="wasm-gc")
+fn html_field_set_element_set_disabled_ffi(
+  obj : JsValue,
+  disabled : JsValue,
+) -> Unit = "webapi_HTMLFieldSetElement" "set_disabled"
+
+///|
+#cfg(target="wasm-gc")
+fn html_field_set_element_form_ffi(obj : JsValue) -> HTMLFormElement = "webapi_HTMLFieldSetElement" "get_form"
+
+///|
+#cfg(target="wasm-gc")
+fn html_field_set_element_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLFieldSetElement" "get_name"
+
+///|
+#cfg(target="wasm-gc")
+fn html_field_set_element_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_field_set_element_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_field_set_element_set_name_ffi(obj : JsValue, name : JsValue) -> Unit = "webapi_HTMLFieldSetElement" "set_name"
+
+///|
+#cfg(target="wasm-gc")
+fn html_field_set_element_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLFieldSetElement" "get_type"
+
+///|
+#cfg(target="wasm-gc")
+fn html_field_set_element_type_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_field_set_element_type_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_field_set_element_elements_ffi(obj : JsValue) -> HTMLCollection = "webapi_HTMLFieldSetElement" "get_elements"
+
+///|
+#cfg(target="wasm-gc")
+fn html_field_set_element_will_validate_ffi(obj : JsValue) -> Bool = "webapi_HTMLFieldSetElement" "get_willValidate"
+
+///|
+#cfg(target="wasm-gc")
+fn html_field_set_element_validity_ffi(obj : JsValue) -> ValidityState = "webapi_HTMLFieldSetElement" "get_validity"
+
+///|
+#cfg(target="wasm-gc")
+fn html_field_set_element_validation_message_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLFieldSetElement" "get_validationMessage"
+
+///|
+#cfg(target="wasm-gc")
+fn html_field_set_element_validation_message_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_field_set_element_validation_message_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_field_set_element_check_validity_ffi(obj : JsValue) -> Bool = "webapi_HTMLFieldSetElement" "checkValidity"
+
+///|
+#cfg(target="wasm-gc")
+fn html_field_set_element_report_validity_ffi(obj : JsValue) -> Bool = "webapi_HTMLFieldSetElement" "reportValidity"
+
+///|
+#cfg(target="wasm-gc")
+fn html_field_set_element_set_custom_validity_ffi(
+  obj : JsValue,
+  error : JsValue,
+) -> Unit = "webapi_HTMLFieldSetElement" "setCustomValidity"

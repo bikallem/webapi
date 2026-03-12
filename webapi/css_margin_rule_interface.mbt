@@ -40,3 +40,37 @@ impl TCSSMarginRule with name(self : Self) -> CSSOMString {
 impl TCSSMarginRule with style(self : Self) -> CSSStyleDeclaration {
   css_margin_rule_style_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn css_margin_rule_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.name"
+
+///|
+#cfg(target="js")
+fn css_margin_rule_name_ffi(obj : JsValue) -> CSSOMString {
+  css_margin_rule_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn css_margin_rule_style_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.style"
+
+///|
+#cfg(target="js")
+fn css_margin_rule_style_ffi(obj : JsValue) -> CSSStyleDeclaration {
+  css_margin_rule_style_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn css_margin_rule_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_CSSMarginRule" "get_name"
+
+///|
+#cfg(target="wasm-gc")
+fn css_margin_rule_name_ffi(obj : JsValue) -> CSSOMString {
+  css_margin_rule_name_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn css_margin_rule_style_ffi(obj : JsValue) -> CSSStyleDeclaration = "webapi_CSSMarginRule" "get_style"

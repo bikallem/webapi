@@ -58,3 +58,75 @@ impl TVisibilityStateEntry with start_time(self : Self) -> DOMHighResTimeStamp {
 impl TVisibilityStateEntry with duration(self : Self) -> UInt {
   visibility_state_entry_duration_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn visibility_state_entry_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.name"
+
+///|
+#cfg(target="js")
+fn visibility_state_entry_name_ffi(obj : JsValue) -> String {
+  visibility_state_entry_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn visibility_state_entry_entry_type_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.entryType"
+
+///|
+#cfg(target="js")
+fn visibility_state_entry_entry_type_ffi(obj : JsValue) -> String {
+  visibility_state_entry_entry_type_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn visibility_state_entry_start_time_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.startTime"
+
+///|
+#cfg(target="js")
+fn visibility_state_entry_start_time_ffi(obj : JsValue) -> DOMHighResTimeStamp {
+  visibility_state_entry_start_time_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn visibility_state_entry_duration_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.duration"
+
+///|
+#cfg(target="js")
+fn visibility_state_entry_duration_ffi(obj : JsValue) -> UInt {
+  visibility_state_entry_duration_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn visibility_state_entry_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_VisibilityStateEntry" "get_name"
+
+///|
+#cfg(target="wasm-gc")
+fn visibility_state_entry_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(visibility_state_entry_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn visibility_state_entry_entry_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_VisibilityStateEntry" "get_entryType"
+
+///|
+#cfg(target="wasm-gc")
+fn visibility_state_entry_entry_type_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(visibility_state_entry_entry_type_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn visibility_state_entry_start_time_ffi(obj : JsValue) -> DOMHighResTimeStamp = "webapi_VisibilityStateEntry" "get_startTime"
+
+///|
+#cfg(target="wasm-gc")
+fn visibility_state_entry_duration_ffi(obj : JsValue) -> UInt = "webapi_VisibilityStateEntry" "get_duration"

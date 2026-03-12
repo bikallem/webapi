@@ -41,3 +41,11 @@ pub fn HTMLPictureElement::new() -> HTMLPictureElement {
 ///|
 /// [HTMLPictureElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLPictureElement) interface.
 pub trait THTMLPictureElement: THTMLElement {}
+
+///|
+#cfg(target="js")
+extern "js" fn html_picture_element_new_ffi() -> HTMLPictureElement = "() => new HTMLPictureElement()"
+
+///|
+#cfg(target="wasm-gc")
+fn html_picture_element_new_ffi() -> HTMLPictureElement = "webapi_HTMLPictureElement" "new"

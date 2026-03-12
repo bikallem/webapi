@@ -253,3 +253,334 @@ impl TRange with get_client_rects(self : Self) -> DOMRectList {
 impl TRange with get_bounding_client_rect(self : Self) -> DOMRect {
   range_get_bounding_client_rect_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn range_new_ffi() -> Range = "() => new Range()"
+
+///|
+#cfg(target="js")
+extern "js" fn range_common_ancestor_container_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.commonAncestorContainer"
+
+///|
+#cfg(target="js")
+fn range_common_ancestor_container_ffi(obj : JsValue) -> Node {
+  range_common_ancestor_container_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn range_set_start_ffi(
+  obj : JsValue,
+  node : JsValue,
+  offset : JsValue,
+) -> Unit = "(obj, node, offset) => obj.setStart(node, offset)"
+
+///|
+#cfg(target="js")
+extern "js" fn range_set_end_ffi(
+  obj : JsValue,
+  node : JsValue,
+  offset : JsValue,
+) -> Unit = "(obj, node, offset) => obj.setEnd(node, offset)"
+
+///|
+#cfg(target="js")
+extern "js" fn range_set_start_before_ffi(
+  obj : JsValue,
+  node : JsValue,
+) -> Unit = "(obj, node) => obj.setStartBefore(node)"
+
+///|
+#cfg(target="js")
+extern "js" fn range_set_start_after_ffi(obj : JsValue, node : JsValue) -> Unit = "(obj, node) => obj.setStartAfter(node)"
+
+///|
+#cfg(target="js")
+extern "js" fn range_set_end_before_ffi(obj : JsValue, node : JsValue) -> Unit = "(obj, node) => obj.setEndBefore(node)"
+
+///|
+#cfg(target="js")
+extern "js" fn range_set_end_after_ffi(obj : JsValue, node : JsValue) -> Unit = "(obj, node) => obj.setEndAfter(node)"
+
+///|
+#cfg(target="js")
+extern "js" fn range_collapse_ffi(obj : JsValue, to_start : JsValue) -> Unit = "(obj, to_start) => obj.collapse(to_start)"
+
+///|
+#cfg(target="js")
+extern "js" fn range_select_node_ffi(obj : JsValue, node : JsValue) -> Unit = "(obj, node) => obj.selectNode(node)"
+
+///|
+#cfg(target="js")
+extern "js" fn range_select_node_contents_ffi(
+  obj : JsValue,
+  node : JsValue,
+) -> Unit = "(obj, node) => obj.selectNodeContents(node)"
+
+///|
+#cfg(target="js")
+extern "js" fn range_compare_boundary_points_ffi_js(
+  obj : JsValue,
+  how : JsValue,
+  source_range : JsValue,
+) -> JsValue = "(obj, how, source_range) => obj.compareBoundaryPoints(how, source_range)"
+
+///|
+#cfg(target="js")
+fn range_compare_boundary_points_ffi(
+  obj : JsValue,
+  how : JsValue,
+  source_range : JsValue,
+) -> Int {
+  range_compare_boundary_points_ffi_js(obj, how, source_range).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn range_delete_contents_ffi(obj : JsValue) -> Unit = "(obj) => obj.deleteContents()"
+
+///|
+#cfg(target="js")
+extern "js" fn range_extract_contents_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.extractContents()"
+
+///|
+#cfg(target="js")
+fn range_extract_contents_ffi(obj : JsValue) -> DocumentFragment {
+  range_extract_contents_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn range_clone_contents_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.cloneContents()"
+
+///|
+#cfg(target="js")
+fn range_clone_contents_ffi(obj : JsValue) -> DocumentFragment {
+  range_clone_contents_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn range_insert_node_ffi(obj : JsValue, node : JsValue) -> Unit = "(obj, node) => obj.insertNode(node)"
+
+///|
+#cfg(target="js")
+extern "js" fn range_surround_contents_ffi(
+  obj : JsValue,
+  new_parent : JsValue,
+) -> Unit = "(obj, new_parent) => obj.surroundContents(new_parent)"
+
+///|
+#cfg(target="js")
+extern "js" fn range_clone_range_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.cloneRange()"
+
+///|
+#cfg(target="js")
+fn range_clone_range_ffi(obj : JsValue) -> Range {
+  range_clone_range_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn range_detach_ffi(obj : JsValue) -> Unit = "(obj) => obj.detach()"
+
+///|
+#cfg(target="js")
+extern "js" fn range_is_point_in_range_ffi_js(
+  obj : JsValue,
+  node : JsValue,
+  offset : JsValue,
+) -> JsValue = "(obj, node, offset) => obj.isPointInRange(node, offset)"
+
+///|
+#cfg(target="js")
+fn range_is_point_in_range_ffi(
+  obj : JsValue,
+  node : JsValue,
+  offset : JsValue,
+) -> Bool {
+  range_is_point_in_range_ffi_js(obj, node, offset).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn range_compare_point_ffi_js(
+  obj : JsValue,
+  node : JsValue,
+  offset : JsValue,
+) -> JsValue = "(obj, node, offset) => obj.comparePoint(node, offset)"
+
+///|
+#cfg(target="js")
+fn range_compare_point_ffi(
+  obj : JsValue,
+  node : JsValue,
+  offset : JsValue,
+) -> Int {
+  range_compare_point_ffi_js(obj, node, offset).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn range_intersects_node_ffi_js(
+  obj : JsValue,
+  node : JsValue,
+) -> JsValue = "(obj, node) => obj.intersectsNode(node)"
+
+///|
+#cfg(target="js")
+fn range_intersects_node_ffi(obj : JsValue, node : JsValue) -> Bool {
+  range_intersects_node_ffi_js(obj, node).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn range_create_contextual_fragment_ffi_js(
+  obj : JsValue,
+  string : JsValue,
+) -> JsValue = "(obj, string) => obj.createContextualFragment(string)"
+
+///|
+#cfg(target="js")
+fn range_create_contextual_fragment_ffi(
+  obj : JsValue,
+  string : JsValue,
+) -> DocumentFragment {
+  range_create_contextual_fragment_ffi_js(obj, string).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn range_get_client_rects_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.getClientRects()"
+
+///|
+#cfg(target="js")
+fn range_get_client_rects_ffi(obj : JsValue) -> DOMRectList {
+  range_get_client_rects_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn range_get_bounding_client_rect_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.getBoundingClientRect()"
+
+///|
+#cfg(target="js")
+fn range_get_bounding_client_rect_ffi(obj : JsValue) -> DOMRect {
+  range_get_bounding_client_rect_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn range_new_ffi() -> Range = "webapi_Range" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn range_common_ancestor_container_ffi(obj : JsValue) -> Node = "webapi_Range" "get_commonAncestorContainer"
+
+///|
+#cfg(target="wasm-gc")
+fn range_set_start_ffi(obj : JsValue, node : JsValue, offset : JsValue) -> Unit = "webapi_Range" "setStart"
+
+///|
+#cfg(target="wasm-gc")
+fn range_set_end_ffi(obj : JsValue, node : JsValue, offset : JsValue) -> Unit = "webapi_Range" "setEnd"
+
+///|
+#cfg(target="wasm-gc")
+fn range_set_start_before_ffi(obj : JsValue, node : JsValue) -> Unit = "webapi_Range" "setStartBefore"
+
+///|
+#cfg(target="wasm-gc")
+fn range_set_start_after_ffi(obj : JsValue, node : JsValue) -> Unit = "webapi_Range" "setStartAfter"
+
+///|
+#cfg(target="wasm-gc")
+fn range_set_end_before_ffi(obj : JsValue, node : JsValue) -> Unit = "webapi_Range" "setEndBefore"
+
+///|
+#cfg(target="wasm-gc")
+fn range_set_end_after_ffi(obj : JsValue, node : JsValue) -> Unit = "webapi_Range" "setEndAfter"
+
+///|
+#cfg(target="wasm-gc")
+fn range_collapse_ffi(obj : JsValue, to_start : JsValue) -> Unit = "webapi_Range" "collapse"
+
+///|
+#cfg(target="wasm-gc")
+fn range_select_node_ffi(obj : JsValue, node : JsValue) -> Unit = "webapi_Range" "selectNode"
+
+///|
+#cfg(target="wasm-gc")
+fn range_select_node_contents_ffi(obj : JsValue, node : JsValue) -> Unit = "webapi_Range" "selectNodeContents"
+
+///|
+#cfg(target="wasm-gc")
+fn range_compare_boundary_points_ffi(
+  obj : JsValue,
+  how : JsValue,
+  source_range : JsValue,
+) -> Int = "webapi_Range" "compareBoundaryPoints"
+
+///|
+#cfg(target="wasm-gc")
+fn range_delete_contents_ffi(obj : JsValue) -> Unit = "webapi_Range" "deleteContents"
+
+///|
+#cfg(target="wasm-gc")
+fn range_extract_contents_ffi(obj : JsValue) -> DocumentFragment = "webapi_Range" "extractContents"
+
+///|
+#cfg(target="wasm-gc")
+fn range_clone_contents_ffi(obj : JsValue) -> DocumentFragment = "webapi_Range" "cloneContents"
+
+///|
+#cfg(target="wasm-gc")
+fn range_insert_node_ffi(obj : JsValue, node : JsValue) -> Unit = "webapi_Range" "insertNode"
+
+///|
+#cfg(target="wasm-gc")
+fn range_surround_contents_ffi(obj : JsValue, new_parent : JsValue) -> Unit = "webapi_Range" "surroundContents"
+
+///|
+#cfg(target="wasm-gc")
+fn range_clone_range_ffi(obj : JsValue) -> Range = "webapi_Range" "cloneRange"
+
+///|
+#cfg(target="wasm-gc")
+fn range_detach_ffi(obj : JsValue) -> Unit = "webapi_Range" "detach"
+
+///|
+#cfg(target="wasm-gc")
+fn range_is_point_in_range_ffi(
+  obj : JsValue,
+  node : JsValue,
+  offset : JsValue,
+) -> Bool = "webapi_Range" "isPointInRange"
+
+///|
+#cfg(target="wasm-gc")
+fn range_compare_point_ffi(
+  obj : JsValue,
+  node : JsValue,
+  offset : JsValue,
+) -> Int = "webapi_Range" "comparePoint"
+
+///|
+#cfg(target="wasm-gc")
+fn range_intersects_node_ffi(obj : JsValue, node : JsValue) -> Bool = "webapi_Range" "intersectsNode"
+
+///|
+#cfg(target="wasm-gc")
+fn range_create_contextual_fragment_ffi(
+  obj : JsValue,
+  string : JsValue,
+) -> DocumentFragment = "webapi_Range" "createContextualFragment"
+
+///|
+#cfg(target="wasm-gc")
+fn range_get_client_rects_ffi(obj : JsValue) -> DOMRectList = "webapi_Range" "getClientRects"
+
+///|
+#cfg(target="wasm-gc")
+fn range_get_bounding_client_rect_ffi(obj : JsValue) -> DOMRect = "webapi_Range" "getBoundingClientRect"

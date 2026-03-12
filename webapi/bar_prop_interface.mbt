@@ -30,3 +30,17 @@ pub trait TBarProp: TJsValue {
 impl TBarProp with visible(self : Self) -> Bool {
   bar_prop_visible_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn bar_prop_visible_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.visible"
+
+///|
+#cfg(target="js")
+fn bar_prop_visible_ffi(obj : JsValue) -> Bool {
+  bar_prop_visible_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn bar_prop_visible_ffi(obj : JsValue) -> Bool = "webapi_BarProp" "get_visible"

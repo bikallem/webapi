@@ -149,3 +149,329 @@ impl TWorkerNavigator with hardware_concurrency(self : Self) -> UInt64 {
 impl TWorkerNavigator with storage(self : Self) -> StorageManager {
   worker_navigator_storage_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn worker_navigator_permissions_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.permissions"
+
+///|
+#cfg(target="js")
+fn worker_navigator_permissions_ffi(obj : JsValue) -> Permissions {
+  worker_navigator_permissions_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_navigator_service_worker_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.serviceWorker"
+
+///|
+#cfg(target="js")
+fn worker_navigator_service_worker_ffi(obj : JsValue) -> ServiceWorkerContainer {
+  worker_navigator_service_worker_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_navigator_app_code_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.appCodeName"
+
+///|
+#cfg(target="js")
+fn worker_navigator_app_code_name_ffi(obj : JsValue) -> String {
+  worker_navigator_app_code_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_navigator_app_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.appName"
+
+///|
+#cfg(target="js")
+fn worker_navigator_app_name_ffi(obj : JsValue) -> String {
+  worker_navigator_app_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_navigator_app_version_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.appVersion"
+
+///|
+#cfg(target="js")
+fn worker_navigator_app_version_ffi(obj : JsValue) -> String {
+  worker_navigator_app_version_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_navigator_platform_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.platform"
+
+///|
+#cfg(target="js")
+fn worker_navigator_platform_ffi(obj : JsValue) -> String {
+  worker_navigator_platform_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_navigator_product_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.product"
+
+///|
+#cfg(target="js")
+fn worker_navigator_product_ffi(obj : JsValue) -> String {
+  worker_navigator_product_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_navigator_product_sub_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.productSub"
+
+///|
+#cfg(target="js")
+fn worker_navigator_product_sub_ffi(obj : JsValue) -> String {
+  worker_navigator_product_sub_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_navigator_user_agent_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.userAgent"
+
+///|
+#cfg(target="js")
+fn worker_navigator_user_agent_ffi(obj : JsValue) -> String {
+  worker_navigator_user_agent_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_navigator_vendor_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.vendor"
+
+///|
+#cfg(target="js")
+fn worker_navigator_vendor_ffi(obj : JsValue) -> String {
+  worker_navigator_vendor_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_navigator_vendor_sub_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.vendorSub"
+
+///|
+#cfg(target="js")
+fn worker_navigator_vendor_sub_ffi(obj : JsValue) -> String {
+  worker_navigator_vendor_sub_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_navigator_taint_enabled_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.taintEnabled()"
+
+///|
+#cfg(target="js")
+fn worker_navigator_taint_enabled_ffi(obj : JsValue) -> Bool {
+  worker_navigator_taint_enabled_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_navigator_oscpu_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oscpu"
+
+///|
+#cfg(target="js")
+fn worker_navigator_oscpu_ffi(obj : JsValue) -> String {
+  worker_navigator_oscpu_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_navigator_language_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.language"
+
+///|
+#cfg(target="js")
+fn worker_navigator_language_ffi(obj : JsValue) -> String {
+  worker_navigator_language_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_navigator_languages_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.languages"
+
+///|
+#cfg(target="js")
+fn worker_navigator_languages_ffi(obj : JsValue) -> Array[String] {
+  worker_navigator_languages_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_navigator_on_line_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onLine"
+
+///|
+#cfg(target="js")
+fn worker_navigator_on_line_ffi(obj : JsValue) -> Bool {
+  worker_navigator_on_line_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_navigator_hardware_concurrency_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.hardwareConcurrency"
+
+///|
+#cfg(target="js")
+fn worker_navigator_hardware_concurrency_ffi(obj : JsValue) -> UInt64 {
+  worker_navigator_hardware_concurrency_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_navigator_storage_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.storage"
+
+///|
+#cfg(target="js")
+fn worker_navigator_storage_ffi(obj : JsValue) -> StorageManager {
+  worker_navigator_storage_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_navigator_permissions_ffi(obj : JsValue) -> Permissions = "webapi_WorkerNavigator" "get_permissions"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_navigator_service_worker_ffi(obj : JsValue) -> ServiceWorkerContainer = "webapi_WorkerNavigator" "get_serviceWorker"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_navigator_app_code_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WorkerNavigator" "get_appCodeName"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_navigator_app_code_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(worker_navigator_app_code_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_navigator_app_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WorkerNavigator" "get_appName"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_navigator_app_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(worker_navigator_app_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_navigator_app_version_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WorkerNavigator" "get_appVersion"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_navigator_app_version_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(worker_navigator_app_version_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_navigator_platform_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WorkerNavigator" "get_platform"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_navigator_platform_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(worker_navigator_platform_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_navigator_product_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WorkerNavigator" "get_product"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_navigator_product_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(worker_navigator_product_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_navigator_product_sub_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WorkerNavigator" "get_productSub"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_navigator_product_sub_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(worker_navigator_product_sub_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_navigator_user_agent_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WorkerNavigator" "get_userAgent"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_navigator_user_agent_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(worker_navigator_user_agent_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_navigator_vendor_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WorkerNavigator" "get_vendor"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_navigator_vendor_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(worker_navigator_vendor_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_navigator_vendor_sub_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WorkerNavigator" "get_vendorSub"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_navigator_vendor_sub_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(worker_navigator_vendor_sub_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_navigator_taint_enabled_ffi(obj : JsValue) -> Bool = "webapi_WorkerNavigator" "taintEnabled"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_navigator_oscpu_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WorkerNavigator" "get_oscpu"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_navigator_oscpu_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(worker_navigator_oscpu_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_navigator_language_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WorkerNavigator" "get_language"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_navigator_language_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(worker_navigator_language_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_navigator_languages_ffi_wasm(obj : JsValue) -> JsArray = "webapi_WorkerNavigator" "get_languages"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_navigator_languages_ffi(obj : JsValue) -> Array[String] {
+  worker_navigator_languages_ffi_wasm(obj).to_string_array()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_navigator_on_line_ffi(obj : JsValue) -> Bool = "webapi_WorkerNavigator" "get_onLine"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_navigator_hardware_concurrency_ffi(obj : JsValue) -> UInt64 = "webapi_WorkerNavigator" "get_hardwareConcurrency"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_navigator_storage_ffi(obj : JsValue) -> StorageManager = "webapi_WorkerNavigator" "get_storage"

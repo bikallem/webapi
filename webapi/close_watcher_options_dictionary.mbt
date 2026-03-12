@@ -27,3 +27,34 @@ pub fn CloseWatcherOptions::empty() -> CloseWatcherOptions {
 pub fn CloseWatcherOptions::signal(self : CloseWatcherOptions) -> AbortSignal? {
   close_watcher_options_get_signal_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn close_watcher_options_ffi(
+  signal : JsValue,
+) -> CloseWatcherOptions =
+  #|(signal) => {
+  #|  const obj = {};
+  #|  if (signal !== undefined) obj.signal = signal;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn close_watcher_options_empty_ffi() -> CloseWatcherOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn close_watcher_options_get_signal_ffi(obj : JsValue) -> JsValue = "(obj) => obj.signal"
+
+///|
+#cfg(target="wasm-gc")
+fn close_watcher_options_ffi(signal : JsValue) -> CloseWatcherOptions = "webapi_CloseWatcherOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn close_watcher_options_empty_ffi() -> CloseWatcherOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn close_watcher_options_get_signal_ffi(obj : JsValue) -> JsValue = "webapi_CloseWatcherOptions" "get_signal"

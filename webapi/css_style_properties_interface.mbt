@@ -48,3 +48,37 @@ impl TCSSStyleProperties with set_css_float(
     TJsValue::to_js(css_float),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn css_style_properties_css_float_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.cssFloat"
+
+///|
+#cfg(target="js")
+fn css_style_properties_css_float_ffi(obj : JsValue) -> CSSOMString {
+  css_style_properties_css_float_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn css_style_properties_set_css_float_ffi(
+  obj : JsValue,
+  css_float : JsValue,
+) -> Unit = "(obj, cssFloat) => { obj.cssFloat = cssFloat; }"
+
+///|
+#cfg(target="wasm-gc")
+fn css_style_properties_css_float_ffi_wasm(obj : JsValue) -> JsValue = "webapi_CSSStyleProperties" "get_cssFloat"
+
+///|
+#cfg(target="wasm-gc")
+fn css_style_properties_css_float_ffi(obj : JsValue) -> CSSOMString {
+  css_style_properties_css_float_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn css_style_properties_set_css_float_ffi(
+  obj : JsValue,
+  css_float : JsValue,
+) -> Unit = "webapi_CSSStyleProperties" "set_cssFloat"

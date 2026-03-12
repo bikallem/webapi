@@ -78,3 +78,37 @@ pub trait TTrackEvent: TEvent {
 impl TTrackEvent with track(self : Self) -> TrackEventTrack {
   track_event_track_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn track_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> TrackEvent = "(type_, event_init_dict) => new TrackEvent(type_, event_init_dict)"
+
+///|
+#cfg(target="js")
+extern "js" fn track_event_track_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.track"
+
+///|
+#cfg(target="js")
+fn track_event_track_ffi(obj : JsValue) -> TrackEventTrack {
+  track_event_track_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn track_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> TrackEvent = "webapi_TrackEvent" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn track_event_track_ffi_wasm(obj : JsValue) -> JsValue = "webapi_TrackEvent" "get_track"
+
+///|
+#cfg(target="wasm-gc")
+fn track_event_track_ffi(obj : JsValue) -> TrackEventTrack {
+  track_event_track_ffi_wasm(obj).unsafe_cast()
+}

@@ -19,3 +19,15 @@ pub fn EventHandlerNonNull::new(
 ) -> EventHandlerNonNull {
   event_handler_non_null_ffi(callback)
 }
+
+///|
+#cfg(target="js")
+extern "js" fn event_handler_non_null_ffi(
+  callback : (Event) -> JsValue,
+) -> EventHandlerNonNull = "(callback) => callback"
+
+///|
+#cfg(target="wasm-gc")
+fn event_handler_non_null_ffi(
+  callback : (Event) -> JsValue,
+) -> EventHandlerNonNull = "webapi_EventHandlerNonNull" "new"

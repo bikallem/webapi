@@ -108,3 +108,188 @@ impl TReadableStream with pipe_to(
 impl TReadableStream with tee(self : Self) -> Array[ReadableStream] {
   readable_stream_tee_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn readable_stream_new_ffi(
+  underlying_source : JsValue,
+  strategy : JsValue,
+) -> ReadableStream = "(underlying_source, strategy) => new ReadableStream(underlying_source, strategy)"
+
+///|
+#cfg(target="js")
+extern "js" fn readable_stream_from_ffi_js(async_iterable : JsValue) -> JsValue = "(async_iterable) => ReadableStream.from(async_iterable)"
+
+///|
+#cfg(target="js")
+fn readable_stream_from_ffi(async_iterable : JsValue) -> ReadableStream {
+  readable_stream_from_ffi_js(async_iterable).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn readable_stream_locked_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.locked"
+
+///|
+#cfg(target="js")
+fn readable_stream_locked_ffi(obj : JsValue) -> Bool {
+  readable_stream_locked_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn readable_stream_cancel_ffi_js(
+  obj : JsValue,
+  reason : JsValue,
+) -> JsValue = "(obj, reason) => obj.cancel(reason)"
+
+///|
+#cfg(target="js")
+fn readable_stream_cancel_ffi(
+  obj : JsValue,
+  reason : JsValue,
+) -> JsPromise[JsValue] {
+  readable_stream_cancel_ffi_js(obj, reason).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn readable_stream_get_reader_ffi_js(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, options) => obj.getReader(options)"
+
+///|
+#cfg(target="js")
+fn readable_stream_get_reader_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> ReadableStreamReader {
+  readable_stream_get_reader_ffi_js(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn readable_stream_pipe_through_ffi_js(
+  obj : JsValue,
+  transform : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, transform, options) => obj.pipeThrough(transform, options)"
+
+///|
+#cfg(target="js")
+fn readable_stream_pipe_through_ffi(
+  obj : JsValue,
+  transform : JsValue,
+  options : JsValue,
+) -> ReadableStream {
+  readable_stream_pipe_through_ffi_js(obj, transform, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn readable_stream_pipe_to_ffi_js(
+  obj : JsValue,
+  destination : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, destination, options) => obj.pipeTo(destination, options)"
+
+///|
+#cfg(target="js")
+fn readable_stream_pipe_to_ffi(
+  obj : JsValue,
+  destination : JsValue,
+  options : JsValue,
+) -> JsPromise[JsValue] {
+  readable_stream_pipe_to_ffi_js(obj, destination, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn readable_stream_tee_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.tee()"
+
+///|
+#cfg(target="js")
+fn readable_stream_tee_ffi(obj : JsValue) -> Array[ReadableStream] {
+  readable_stream_tee_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn readable_stream_new_ffi(
+  underlying_source : JsValue,
+  strategy : JsValue,
+) -> ReadableStream = "webapi_ReadableStream" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn readable_stream_from_ffi(async_iterable : JsValue) -> ReadableStream = "webapi_ReadableStream" "from"
+
+///|
+#cfg(target="wasm-gc")
+fn readable_stream_locked_ffi(obj : JsValue) -> Bool = "webapi_ReadableStream" "get_locked"
+
+///|
+#cfg(target="wasm-gc")
+fn readable_stream_cancel_ffi_wasm(obj : JsValue, reason : JsValue) -> JsValue = "webapi_ReadableStream" "cancel"
+
+///|
+#cfg(target="wasm-gc")
+fn readable_stream_cancel_ffi(
+  obj : JsValue,
+  reason : JsValue,
+) -> JsPromise[JsValue] {
+  readable_stream_cancel_ffi_wasm(obj, reason).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn readable_stream_get_reader_ffi_wasm(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_ReadableStream" "getReader"
+
+///|
+#cfg(target="wasm-gc")
+fn readable_stream_get_reader_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> ReadableStreamReader {
+  readable_stream_get_reader_ffi_wasm(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn readable_stream_pipe_through_ffi(
+  obj : JsValue,
+  transform : JsValue,
+  options : JsValue,
+) -> ReadableStream = "webapi_ReadableStream" "pipeThrough"
+
+///|
+#cfg(target="wasm-gc")
+fn readable_stream_pipe_to_ffi_wasm(
+  obj : JsValue,
+  destination : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_ReadableStream" "pipeTo"
+
+///|
+#cfg(target="wasm-gc")
+fn readable_stream_pipe_to_ffi(
+  obj : JsValue,
+  destination : JsValue,
+  options : JsValue,
+) -> JsPromise[JsValue] {
+  readable_stream_pipe_to_ffi_wasm(obj, destination, options).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn readable_stream_tee_ffi_wasm(obj : JsValue) -> JsArray = "webapi_ReadableStream" "tee"
+
+///|
+#cfg(target="wasm-gc")
+fn readable_stream_tee_ffi(obj : JsValue) -> Array[ReadableStream] {
+  readable_stream_tee_ffi_wasm(obj).to_array()
+}

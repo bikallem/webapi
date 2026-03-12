@@ -87,3 +87,124 @@ pub fn InputEventInit::is_composing(self : InputEventInit) -> Bool? {
 pub fn InputEventInit::input_type(self : InputEventInit) -> String? {
   input_event_init_get_input_type_ffi(TJsValue::to_js(self)).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn input_event_init_ffi(
+  bubbles : JsValue,
+  cancelable : JsValue,
+  composed : JsValue,
+  view : JsValue,
+  detail : JsValue,
+  which : JsValue,
+  data : JsValue,
+  is_composing : JsValue,
+  input_type : JsValue,
+) -> InputEventInit =
+  #|(bubbles, cancelable, composed, view, detail, which, data, isComposing, inputType) => {
+  #|  const obj = {};
+  #|  if (bubbles !== undefined) obj.bubbles = bubbles;
+  #|  if (cancelable !== undefined) obj.cancelable = cancelable;
+  #|  if (composed !== undefined) obj.composed = composed;
+  #|  if (view !== undefined) obj.view = view;
+  #|  if (detail !== undefined) obj.detail = detail;
+  #|  if (which !== undefined) obj.which = which;
+  #|  if (data !== undefined) obj.data = data;
+  #|  if (isComposing !== undefined) obj.isComposing = isComposing;
+  #|  if (inputType !== undefined) obj.inputType = inputType;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn input_event_init_empty_ffi() -> InputEventInit = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn input_event_init_get_bubbles_ffi(obj : JsValue) -> JsValue = "(obj) => obj.bubbles"
+
+///|
+#cfg(target="js")
+extern "js" fn input_event_init_get_cancelable_ffi(obj : JsValue) -> JsValue = "(obj) => obj.cancelable"
+
+///|
+#cfg(target="js")
+extern "js" fn input_event_init_get_composed_ffi(obj : JsValue) -> JsValue = "(obj) => obj.composed"
+
+///|
+#cfg(target="js")
+extern "js" fn input_event_init_get_view_ffi(obj : JsValue) -> JsValue = "(obj) => obj.view"
+
+///|
+#cfg(target="js")
+extern "js" fn input_event_init_get_detail_ffi(obj : JsValue) -> JsValue = "(obj) => obj.detail"
+
+///|
+#cfg(target="js")
+extern "js" fn input_event_init_get_which_ffi(obj : JsValue) -> JsValue = "(obj) => obj.which"
+
+///|
+#cfg(target="js")
+extern "js" fn input_event_init_get_data_ffi(obj : JsValue) -> JsValue = "(obj) => obj.data"
+
+///|
+#cfg(target="js")
+extern "js" fn input_event_init_get_is_composing_ffi(obj : JsValue) -> JsValue = "(obj) => obj.isComposing"
+
+///|
+#cfg(target="js")
+extern "js" fn input_event_init_get_input_type_ffi(obj : JsValue) -> JsValue = "(obj) => obj.inputType"
+
+///|
+#cfg(target="wasm-gc")
+fn input_event_init_ffi(
+  bubbles : JsValue,
+  cancelable : JsValue,
+  composed : JsValue,
+  view : JsValue,
+  detail : JsValue,
+  which : JsValue,
+  data : JsValue,
+  is_composing : JsValue,
+  input_type : JsValue,
+) -> InputEventInit = "webapi_InputEventInit" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn input_event_init_empty_ffi() -> InputEventInit = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn input_event_init_get_bubbles_ffi(obj : JsValue) -> JsValue = "webapi_InputEventInit" "get_bubbles"
+
+///|
+#cfg(target="wasm-gc")
+fn input_event_init_get_cancelable_ffi(obj : JsValue) -> JsValue = "webapi_InputEventInit" "get_cancelable"
+
+///|
+#cfg(target="wasm-gc")
+fn input_event_init_get_composed_ffi(obj : JsValue) -> JsValue = "webapi_InputEventInit" "get_composed"
+
+///|
+#cfg(target="wasm-gc")
+fn input_event_init_get_view_ffi(obj : JsValue) -> JsValue = "webapi_InputEventInit" "get_view"
+
+///|
+#cfg(target="wasm-gc")
+fn input_event_init_get_detail_ffi(obj : JsValue) -> JsValue = "webapi_InputEventInit" "get_detail"
+
+///|
+#cfg(target="wasm-gc")
+fn input_event_init_get_which_ffi(obj : JsValue) -> JsValue = "webapi_InputEventInit" "get_which"
+
+///|
+#cfg(target="wasm-gc")
+fn input_event_init_get_data_ffi(obj : JsValue) -> JsValue = "webapi_InputEventInit" "get_data"
+
+///|
+#cfg(target="wasm-gc")
+fn input_event_init_get_is_composing_ffi(obj : JsValue) -> JsValue = "webapi_InputEventInit" "get_isComposing"
+
+///|
+#cfg(target="wasm-gc")
+fn input_event_init_get_input_type_ffi(obj : JsValue) -> JsValue = "webapi_InputEventInit" "get_inputType"

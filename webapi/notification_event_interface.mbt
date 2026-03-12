@@ -56,3 +56,51 @@ impl TNotificationEvent with notification(self : Self) -> Notification {
 impl TNotificationEvent with action(self : Self) -> String {
   notification_event_action_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn notification_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> NotificationEvent = "(type_, event_init_dict) => new NotificationEvent(type_, event_init_dict)"
+
+///|
+#cfg(target="js")
+extern "js" fn notification_event_notification_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.notification"
+
+///|
+#cfg(target="js")
+fn notification_event_notification_ffi(obj : JsValue) -> Notification {
+  notification_event_notification_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn notification_event_action_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.action"
+
+///|
+#cfg(target="js")
+fn notification_event_action_ffi(obj : JsValue) -> String {
+  notification_event_action_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn notification_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> NotificationEvent = "webapi_NotificationEvent" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn notification_event_notification_ffi(obj : JsValue) -> Notification = "webapi_NotificationEvent" "get_notification"
+
+///|
+#cfg(target="wasm-gc")
+fn notification_event_action_ffi_wasm(obj : JsValue) -> JsValue = "webapi_NotificationEvent" "get_action"
+
+///|
+#cfg(target="wasm-gc")
+fn notification_event_action_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(notification_event_action_ffi_wasm(obj))
+}

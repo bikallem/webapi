@@ -23,3 +23,15 @@ pub fn UnderlyingSinkWriteCallback::new(
 ) -> UnderlyingSinkWriteCallback {
   underlying_sink_write_callback_ffi(callback)
 }
+
+///|
+#cfg(target="js")
+extern "js" fn underlying_sink_write_callback_ffi(
+  callback : (JsValue, WritableStreamDefaultController) -> JsPromise[JsValue],
+) -> UnderlyingSinkWriteCallback = "(callback) => callback"
+
+///|
+#cfg(target="wasm-gc")
+fn underlying_sink_write_callback_ffi(
+  callback : (JsValue, WritableStreamDefaultController) -> JsPromise[JsValue],
+) -> UnderlyingSinkWriteCallback = "webapi_UnderlyingSinkWriteCallback" "new"

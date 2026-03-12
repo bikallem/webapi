@@ -49,3 +49,25 @@ pub trait THTMLDataListElement: THTMLElement {
 impl THTMLDataListElement with options(self : Self) -> HTMLCollection {
   html_data_list_element_options_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_data_list_element_new_ffi() -> HTMLDataListElement = "() => new HTMLDataListElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_data_list_element_options_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.options"
+
+///|
+#cfg(target="js")
+fn html_data_list_element_options_ffi(obj : JsValue) -> HTMLCollection {
+  html_data_list_element_options_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_data_list_element_new_ffi() -> HTMLDataListElement = "webapi_HTMLDataListElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_data_list_element_options_ffi(obj : JsValue) -> HTMLCollection = "webapi_HTMLDataListElement" "get_options"

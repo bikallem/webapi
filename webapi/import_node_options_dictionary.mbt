@@ -40,3 +40,51 @@ pub fn ImportNodeOptions::custom_element_registry(
 pub fn ImportNodeOptions::self_only(self : ImportNodeOptions) -> Bool? {
   import_node_options_get_self_only_ffi(TJsValue::to_js(self)).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn import_node_options_ffi(
+  custom_element_registry : JsValue,
+  self_only : JsValue,
+) -> ImportNodeOptions =
+  #|(customElementRegistry, selfOnly) => {
+  #|  const obj = {};
+  #|  if (customElementRegistry !== undefined) obj.customElementRegistry = customElementRegistry;
+  #|  if (selfOnly !== undefined) obj.selfOnly = selfOnly;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn import_node_options_empty_ffi() -> ImportNodeOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn import_node_options_get_custom_element_registry_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.customElementRegistry"
+
+///|
+#cfg(target="js")
+extern "js" fn import_node_options_get_self_only_ffi(obj : JsValue) -> JsValue = "(obj) => obj.selfOnly"
+
+///|
+#cfg(target="wasm-gc")
+fn import_node_options_ffi(
+  custom_element_registry : JsValue,
+  self_only : JsValue,
+) -> ImportNodeOptions = "webapi_ImportNodeOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn import_node_options_empty_ffi() -> ImportNodeOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn import_node_options_get_custom_element_registry_ffi(
+  obj : JsValue,
+) -> JsValue = "webapi_ImportNodeOptions" "get_customElementRegistry"
+
+///|
+#cfg(target="wasm-gc")
+fn import_node_options_get_self_only_ffi(obj : JsValue) -> JsValue = "webapi_ImportNodeOptions" "get_selfOnly"

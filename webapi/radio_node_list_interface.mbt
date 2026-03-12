@@ -40,3 +40,34 @@ impl TRadioNodeList with value(self : Self) -> String {
 impl TRadioNodeList with set_value(self : Self, value : String) -> Unit {
   radio_node_list_set_value_ffi(TJsValue::to_js(self), TJsValue::to_js(value))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn radio_node_list_value_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.value"
+
+///|
+#cfg(target="js")
+fn radio_node_list_value_ffi(obj : JsValue) -> String {
+  radio_node_list_value_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn radio_node_list_set_value_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "(obj, value) => { obj.value = value; }"
+
+///|
+#cfg(target="wasm-gc")
+fn radio_node_list_value_ffi_wasm(obj : JsValue) -> JsValue = "webapi_RadioNodeList" "get_value"
+
+///|
+#cfg(target="wasm-gc")
+fn radio_node_list_value_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(radio_node_list_value_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn radio_node_list_set_value_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_RadioNodeList" "set_value"

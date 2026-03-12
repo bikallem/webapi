@@ -32,3 +32,17 @@ pub trait TFetchLaterResult: TJsValue {
 impl TFetchLaterResult with activated(self : Self) -> Bool {
   fetch_later_result_activated_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn fetch_later_result_activated_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.activated"
+
+///|
+#cfg(target="js")
+fn fetch_later_result_activated_ffi(obj : JsValue) -> Bool {
+  fetch_later_result_activated_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn fetch_later_result_activated_ffi(obj : JsValue) -> Bool = "webapi_FetchLaterResult" "get_activated"

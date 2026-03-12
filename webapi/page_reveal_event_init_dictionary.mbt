@@ -54,3 +54,75 @@ pub fn PageRevealEventInit::view_transition(
 ) -> ViewTransition? {
   page_reveal_event_init_get_view_transition_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn page_reveal_event_init_ffi(
+  bubbles : JsValue,
+  cancelable : JsValue,
+  composed : JsValue,
+  view_transition : JsValue,
+) -> PageRevealEventInit =
+  #|(bubbles, cancelable, composed, viewTransition) => {
+  #|  const obj = {};
+  #|  if (bubbles !== undefined) obj.bubbles = bubbles;
+  #|  if (cancelable !== undefined) obj.cancelable = cancelable;
+  #|  if (composed !== undefined) obj.composed = composed;
+  #|  if (viewTransition !== undefined) obj.viewTransition = viewTransition;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn page_reveal_event_init_empty_ffi() -> PageRevealEventInit = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn page_reveal_event_init_get_bubbles_ffi(obj : JsValue) -> JsValue = "(obj) => obj.bubbles"
+
+///|
+#cfg(target="js")
+extern "js" fn page_reveal_event_init_get_cancelable_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.cancelable"
+
+///|
+#cfg(target="js")
+extern "js" fn page_reveal_event_init_get_composed_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.composed"
+
+///|
+#cfg(target="js")
+extern "js" fn page_reveal_event_init_get_view_transition_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.viewTransition"
+
+///|
+#cfg(target="wasm-gc")
+fn page_reveal_event_init_ffi(
+  bubbles : JsValue,
+  cancelable : JsValue,
+  composed : JsValue,
+  view_transition : JsValue,
+) -> PageRevealEventInit = "webapi_PageRevealEventInit" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn page_reveal_event_init_empty_ffi() -> PageRevealEventInit = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn page_reveal_event_init_get_bubbles_ffi(obj : JsValue) -> JsValue = "webapi_PageRevealEventInit" "get_bubbles"
+
+///|
+#cfg(target="wasm-gc")
+fn page_reveal_event_init_get_cancelable_ffi(obj : JsValue) -> JsValue = "webapi_PageRevealEventInit" "get_cancelable"
+
+///|
+#cfg(target="wasm-gc")
+fn page_reveal_event_init_get_composed_ffi(obj : JsValue) -> JsValue = "webapi_PageRevealEventInit" "get_composed"
+
+///|
+#cfg(target="wasm-gc")
+fn page_reveal_event_init_get_view_transition_ffi(obj : JsValue) -> JsValue = "webapi_PageRevealEventInit" "get_viewTransition"

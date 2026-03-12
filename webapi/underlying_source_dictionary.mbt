@@ -76,3 +76,82 @@ pub fn UnderlyingSource::auto_allocate_chunk_size(
 ) -> UInt64? {
   underlying_source_get_auto_allocate_chunk_size_ffi(TJsValue::to_js(self)).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn underlying_source_ffi(
+  start : JsValue,
+  pull : JsValue,
+  cancel : JsValue,
+  type_ : JsValue,
+  auto_allocate_chunk_size : JsValue,
+) -> UnderlyingSource =
+  #|(start, pull, cancel, type, autoAllocateChunkSize) => {
+  #|  const obj = {};
+  #|  if (start !== undefined) obj.start = start;
+  #|  if (pull !== undefined) obj.pull = pull;
+  #|  if (cancel !== undefined) obj.cancel = cancel;
+  #|  if (type !== undefined) obj.type = type;
+  #|  if (autoAllocateChunkSize !== undefined) obj.autoAllocateChunkSize = autoAllocateChunkSize;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn underlying_source_empty_ffi() -> UnderlyingSource = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn underlying_source_get_start_ffi(obj : JsValue) -> JsValue = "(obj) => obj.start"
+
+///|
+#cfg(target="js")
+extern "js" fn underlying_source_get_pull_ffi(obj : JsValue) -> JsValue = "(obj) => obj.pull"
+
+///|
+#cfg(target="js")
+extern "js" fn underlying_source_get_cancel_ffi(obj : JsValue) -> JsValue = "(obj) => obj.cancel"
+
+///|
+#cfg(target="js")
+extern "js" fn underlying_source_get_type_ffi(obj : JsValue) -> JsValue = "(obj) => obj.type"
+
+///|
+#cfg(target="js")
+extern "js" fn underlying_source_get_auto_allocate_chunk_size_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.autoAllocateChunkSize"
+
+///|
+#cfg(target="wasm-gc")
+fn underlying_source_ffi(
+  start : JsValue,
+  pull : JsValue,
+  cancel : JsValue,
+  type_ : JsValue,
+  auto_allocate_chunk_size : JsValue,
+) -> UnderlyingSource = "webapi_UnderlyingSource" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn underlying_source_empty_ffi() -> UnderlyingSource = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn underlying_source_get_start_ffi(obj : JsValue) -> JsValue = "webapi_UnderlyingSource" "get_start"
+
+///|
+#cfg(target="wasm-gc")
+fn underlying_source_get_pull_ffi(obj : JsValue) -> JsValue = "webapi_UnderlyingSource" "get_pull"
+
+///|
+#cfg(target="wasm-gc")
+fn underlying_source_get_cancel_ffi(obj : JsValue) -> JsValue = "webapi_UnderlyingSource" "get_cancel"
+
+///|
+#cfg(target="wasm-gc")
+fn underlying_source_get_type_ffi(obj : JsValue) -> JsValue = "webapi_UnderlyingSource" "get_type"
+
+///|
+#cfg(target="wasm-gc")
+fn underlying_source_get_auto_allocate_chunk_size_ffi(obj : JsValue) -> JsValue = "webapi_UnderlyingSource" "get_autoAllocateChunkSize"

@@ -35,3 +35,38 @@ pub fn FileSystemReadWriteOptions::at(
 ) -> UInt64? {
   file_system_read_write_options_get_at_ffi(TJsValue::to_js(self)).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn file_system_read_write_options_ffi(
+  at : JsValue,
+) -> FileSystemReadWriteOptions =
+  #|(at) => {
+  #|  const obj = {};
+  #|  if (at !== undefined) obj.at = at;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn file_system_read_write_options_empty_ffi() -> FileSystemReadWriteOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn file_system_read_write_options_get_at_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.at"
+
+///|
+#cfg(target="wasm-gc")
+fn file_system_read_write_options_ffi(
+  at : JsValue,
+) -> FileSystemReadWriteOptions = "webapi_FileSystemReadWriteOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn file_system_read_write_options_empty_ffi() -> FileSystemReadWriteOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn file_system_read_write_options_get_at_ffi(obj : JsValue) -> JsValue = "webapi_FileSystemReadWriteOptions" "get_at"

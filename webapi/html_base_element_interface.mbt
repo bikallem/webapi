@@ -71,3 +71,73 @@ impl THTMLBaseElement with set_target(self : Self, target : String) -> Unit {
     TJsValue::to_js(target),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_base_element_new_ffi() -> HTMLBaseElement = "() => new HTMLBaseElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_base_element_href_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.href"
+
+///|
+#cfg(target="js")
+fn html_base_element_href_ffi(obj : JsValue) -> String {
+  html_base_element_href_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_base_element_set_href_ffi(
+  obj : JsValue,
+  href : JsValue,
+) -> Unit = "(obj, href) => { obj.href = href; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_base_element_target_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.target"
+
+///|
+#cfg(target="js")
+fn html_base_element_target_ffi(obj : JsValue) -> String {
+  html_base_element_target_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_base_element_set_target_ffi(
+  obj : JsValue,
+  target : JsValue,
+) -> Unit = "(obj, target) => { obj.target = target; }"
+
+///|
+#cfg(target="wasm-gc")
+fn html_base_element_new_ffi() -> HTMLBaseElement = "webapi_HTMLBaseElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_base_element_href_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLBaseElement" "get_href"
+
+///|
+#cfg(target="wasm-gc")
+fn html_base_element_href_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_base_element_href_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_base_element_set_href_ffi(obj : JsValue, href : JsValue) -> Unit = "webapi_HTMLBaseElement" "set_href"
+
+///|
+#cfg(target="wasm-gc")
+fn html_base_element_target_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLBaseElement" "get_target"
+
+///|
+#cfg(target="wasm-gc")
+fn html_base_element_target_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_base_element_target_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_base_element_set_target_ffi(obj : JsValue, target : JsValue) -> Unit = "webapi_HTMLBaseElement" "set_target"

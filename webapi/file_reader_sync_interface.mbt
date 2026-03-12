@@ -73,3 +73,134 @@ impl TFileReaderSync with read_as_data_url(self : Self, blob : &TBlob) -> String
     TJsValue::to_js(blob),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn file_reader_sync_new_ffi() -> FileReaderSync = "() => new FileReaderSync()"
+
+///|
+#cfg(target="js")
+extern "js" fn file_reader_sync_read_as_array_buffer_ffi_js(
+  obj : JsValue,
+  blob : JsValue,
+) -> JsValue = "(obj, blob) => obj.readAsArrayBuffer(blob)"
+
+///|
+#cfg(target="js")
+fn file_reader_sync_read_as_array_buffer_ffi(
+  obj : JsValue,
+  blob : JsValue,
+) -> ArrayBuffer {
+  file_reader_sync_read_as_array_buffer_ffi_js(obj, blob).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn file_reader_sync_read_as_binary_string_ffi_js(
+  obj : JsValue,
+  blob : JsValue,
+) -> JsValue = "(obj, blob) => obj.readAsBinaryString(blob)"
+
+///|
+#cfg(target="js")
+fn file_reader_sync_read_as_binary_string_ffi(
+  obj : JsValue,
+  blob : JsValue,
+) -> String {
+  file_reader_sync_read_as_binary_string_ffi_js(obj, blob).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn file_reader_sync_read_as_text_ffi_js(
+  obj : JsValue,
+  blob : JsValue,
+  encoding : JsValue,
+) -> JsValue = "(obj, blob, encoding) => obj.readAsText(blob, encoding)"
+
+///|
+#cfg(target="js")
+fn file_reader_sync_read_as_text_ffi(
+  obj : JsValue,
+  blob : JsValue,
+  encoding : JsValue,
+) -> String {
+  file_reader_sync_read_as_text_ffi_js(obj, blob, encoding).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn file_reader_sync_read_as_data_url_ffi_js(
+  obj : JsValue,
+  blob : JsValue,
+) -> JsValue = "(obj, blob) => obj.readAsDataURL(blob)"
+
+///|
+#cfg(target="js")
+fn file_reader_sync_read_as_data_url_ffi(
+  obj : JsValue,
+  blob : JsValue,
+) -> String {
+  file_reader_sync_read_as_data_url_ffi_js(obj, blob).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn file_reader_sync_new_ffi() -> FileReaderSync = "webapi_FileReaderSync" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn file_reader_sync_read_as_array_buffer_ffi(
+  obj : JsValue,
+  blob : JsValue,
+) -> ArrayBuffer = "webapi_FileReaderSync" "readAsArrayBuffer"
+
+///|
+#cfg(target="wasm-gc")
+fn file_reader_sync_read_as_binary_string_ffi_wasm(
+  obj : JsValue,
+  blob : JsValue,
+) -> JsValue = "webapi_FileReaderSync" "readAsBinaryString"
+
+///|
+#cfg(target="wasm-gc")
+fn file_reader_sync_read_as_binary_string_ffi(
+  obj : JsValue,
+  blob : JsValue,
+) -> String {
+  jsvalue_to_string(file_reader_sync_read_as_binary_string_ffi_wasm(obj, blob))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn file_reader_sync_read_as_text_ffi_wasm(
+  obj : JsValue,
+  blob : JsValue,
+  encoding : JsValue,
+) -> JsValue = "webapi_FileReaderSync" "readAsText"
+
+///|
+#cfg(target="wasm-gc")
+fn file_reader_sync_read_as_text_ffi(
+  obj : JsValue,
+  blob : JsValue,
+  encoding : JsValue,
+) -> String {
+  jsvalue_to_string(file_reader_sync_read_as_text_ffi_wasm(obj, blob, encoding))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn file_reader_sync_read_as_data_url_ffi_wasm(
+  obj : JsValue,
+  blob : JsValue,
+) -> JsValue = "webapi_FileReaderSync" "readAsDataURL"
+
+///|
+#cfg(target="wasm-gc")
+fn file_reader_sync_read_as_data_url_ffi(
+  obj : JsValue,
+  blob : JsValue,
+) -> String {
+  jsvalue_to_string(file_reader_sync_read_as_data_url_ffi_wasm(obj, blob))
+}

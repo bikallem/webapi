@@ -135,3 +135,152 @@ impl TIDBCursor with update(self : Self, value : JsValue) -> IDBRequest {
 impl TIDBCursor with delete(self : Self) -> IDBRequest {
   idb_cursor_delete_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn idb_cursor_source_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.source"
+
+///|
+#cfg(target="js")
+fn idb_cursor_source_ffi(obj : JsValue) -> IDBCursorSource {
+  idb_cursor_source_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_cursor_direction_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.direction"
+
+///|
+#cfg(target="js")
+fn idb_cursor_direction_ffi(obj : JsValue) -> IDBCursorDirection {
+  IDBCursorDirection::from_unchecked(
+    idb_cursor_direction_ffi_js(obj).unsafe_cast(),
+  )
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_cursor_key_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.key"
+
+///|
+#cfg(target="js")
+fn idb_cursor_key_ffi(obj : JsValue) -> JsValue {
+  idb_cursor_key_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_cursor_primary_key_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.primaryKey"
+
+///|
+#cfg(target="js")
+fn idb_cursor_primary_key_ffi(obj : JsValue) -> JsValue {
+  idb_cursor_primary_key_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_cursor_request_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.request"
+
+///|
+#cfg(target="js")
+fn idb_cursor_request_ffi(obj : JsValue) -> IDBRequest {
+  idb_cursor_request_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_cursor_advance_ffi(obj : JsValue, count : JsValue) -> Unit = "(obj, count) => obj.advance(count)"
+
+///|
+#cfg(target="js")
+extern "js" fn idb_cursor_continue_ffi(obj : JsValue, key : JsValue) -> Unit = "(obj, key) => obj.continue(key)"
+
+///|
+#cfg(target="js")
+extern "js" fn idb_cursor_continue_primary_key_ffi(
+  obj : JsValue,
+  key : JsValue,
+  primary_key : JsValue,
+) -> Unit = "(obj, key, primary_key) => obj.continuePrimaryKey(key, primary_key)"
+
+///|
+#cfg(target="js")
+extern "js" fn idb_cursor_update_ffi_js(
+  obj : JsValue,
+  value : JsValue,
+) -> JsValue = "(obj, value) => obj.update(value)"
+
+///|
+#cfg(target="js")
+fn idb_cursor_update_ffi(obj : JsValue, value : JsValue) -> IDBRequest {
+  idb_cursor_update_ffi_js(obj, value).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_cursor_delete_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.delete()"
+
+///|
+#cfg(target="js")
+fn idb_cursor_delete_ffi(obj : JsValue) -> IDBRequest {
+  idb_cursor_delete_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn idb_cursor_source_ffi_wasm(obj : JsValue) -> JsValue = "webapi_IDBCursor" "get_source"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_cursor_source_ffi(obj : JsValue) -> IDBCursorSource {
+  idb_cursor_source_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn idb_cursor_direction_ffi_wasm(obj : JsValue) -> JsValue = "webapi_IDBCursor" "get_direction"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_cursor_direction_ffi(obj : JsValue) -> IDBCursorDirection {
+  IDBCursorDirection::from_unchecked(
+    jsvalue_to_string(idb_cursor_direction_ffi_wasm(obj)),
+  )
+}
+
+///|
+#cfg(target="wasm-gc")
+fn idb_cursor_key_ffi(obj : JsValue) -> JsValue = "webapi_IDBCursor" "get_key"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_cursor_primary_key_ffi(obj : JsValue) -> JsValue = "webapi_IDBCursor" "get_primaryKey"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_cursor_request_ffi(obj : JsValue) -> IDBRequest = "webapi_IDBCursor" "get_request"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_cursor_advance_ffi(obj : JsValue, count : JsValue) -> Unit = "webapi_IDBCursor" "advance"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_cursor_continue_ffi(obj : JsValue, key : JsValue) -> Unit = "webapi_IDBCursor" "continue"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_cursor_continue_primary_key_ffi(
+  obj : JsValue,
+  key : JsValue,
+  primary_key : JsValue,
+) -> Unit = "webapi_IDBCursor" "continuePrimaryKey"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_cursor_update_ffi(obj : JsValue, value : JsValue) -> IDBRequest = "webapi_IDBCursor" "update"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_cursor_delete_ffi(obj : JsValue) -> IDBRequest = "webapi_IDBCursor" "delete"

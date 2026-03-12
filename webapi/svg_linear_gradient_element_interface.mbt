@@ -70,3 +70,59 @@ impl TSVGLinearGradientElement with x2(self : Self) -> SVGAnimatedLength {
 impl TSVGLinearGradientElement with y2(self : Self) -> SVGAnimatedLength {
   svg_linear_gradient_element_y2_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn svg_linear_gradient_element_x1_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.x1"
+
+///|
+#cfg(target="js")
+fn svg_linear_gradient_element_x1_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_linear_gradient_element_x1_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_linear_gradient_element_y1_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.y1"
+
+///|
+#cfg(target="js")
+fn svg_linear_gradient_element_y1_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_linear_gradient_element_y1_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_linear_gradient_element_x2_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.x2"
+
+///|
+#cfg(target="js")
+fn svg_linear_gradient_element_x2_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_linear_gradient_element_x2_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_linear_gradient_element_y2_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.y2"
+
+///|
+#cfg(target="js")
+fn svg_linear_gradient_element_y2_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_linear_gradient_element_y2_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svg_linear_gradient_element_x1_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGLinearGradientElement" "get_x1"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_linear_gradient_element_y1_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGLinearGradientElement" "get_y1"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_linear_gradient_element_x2_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGLinearGradientElement" "get_x2"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_linear_gradient_element_y2_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGLinearGradientElement" "get_y2"

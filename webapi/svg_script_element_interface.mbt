@@ -75,3 +75,82 @@ impl TSVGScriptElement with set_cross_origin(self : Self, cross_origin : String)
 impl TSVGScriptElement with href(self : Self) -> SVGAnimatedString {
   svg_script_element_href_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn svg_script_element_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.type"
+
+///|
+#cfg(target="js")
+fn svg_script_element_type_ffi(obj : JsValue) -> String {
+  svg_script_element_type_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_script_element_set_type_ffi(
+  obj : JsValue,
+  type_ : JsValue,
+) -> Unit = "(obj, type) => { obj.type = type; }"
+
+///|
+#cfg(target="js")
+extern "js" fn svg_script_element_cross_origin_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.crossOrigin"
+
+///|
+#cfg(target="js")
+fn svg_script_element_cross_origin_ffi(obj : JsValue) -> String {
+  svg_script_element_cross_origin_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_script_element_set_cross_origin_ffi(
+  obj : JsValue,
+  cross_origin : JsValue,
+) -> Unit = "(obj, crossOrigin) => { obj.crossOrigin = crossOrigin; }"
+
+///|
+#cfg(target="js")
+extern "js" fn svg_script_element_href_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.href"
+
+///|
+#cfg(target="js")
+fn svg_script_element_href_ffi(obj : JsValue) -> SVGAnimatedString {
+  svg_script_element_href_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svg_script_element_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGScriptElement" "get_type"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_script_element_type_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(svg_script_element_type_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svg_script_element_set_type_ffi(obj : JsValue, type_ : JsValue) -> Unit = "webapi_SVGScriptElement" "set_type"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_script_element_cross_origin_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGScriptElement" "get_crossOrigin"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_script_element_cross_origin_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(svg_script_element_cross_origin_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svg_script_element_set_cross_origin_ffi(
+  obj : JsValue,
+  cross_origin : JsValue,
+) -> Unit = "webapi_SVGScriptElement" "set_crossOrigin"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_script_element_href_ffi(obj : JsValue) -> SVGAnimatedString = "webapi_SVGScriptElement" "get_href"

@@ -122,3 +122,133 @@ impl TFormData with set_blob(
     opt_to_js(filename),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn form_data_new_ffi(
+  form : JsValue,
+  submitter : JsValue,
+) -> FormData = "(form, submitter) => new FormData(form, submitter)"
+
+///|
+#cfg(target="js")
+extern "js" fn form_data_append_ffi(
+  obj : JsValue,
+  name : JsValue,
+  value : JsValue,
+) -> Unit = "(obj, name, value) => obj.append(name, value)"
+
+///|
+#cfg(target="js")
+extern "js" fn form_data_append_blob_ffi(
+  obj : JsValue,
+  name : JsValue,
+  blob_value : JsValue,
+  filename : JsValue,
+) -> Unit = "(obj, name, blob_value, filename) => obj.append(name, blob_value, filename)"
+
+///|
+#cfg(target="js")
+extern "js" fn form_data_delete_ffi(obj : JsValue, name : JsValue) -> Unit = "(obj, name) => obj.delete(name)"
+
+///|
+#cfg(target="js")
+extern "js" fn form_data_get_ffi(obj : JsValue, name : JsValue) -> JsValue = "(obj, name) => obj.get(name)"
+
+///|
+#cfg(target="js")
+extern "js" fn form_data_get_all_ffi_js(
+  obj : JsValue,
+  name : JsValue,
+) -> JsValue = "(obj, name) => obj.getAll(name)"
+
+///|
+#cfg(target="js")
+fn form_data_get_all_ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> Array[FormDataEntryValue] {
+  form_data_get_all_ffi_js(obj, name).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn form_data_has_ffi_js(obj : JsValue, name : JsValue) -> JsValue = "(obj, name) => obj.has(name)"
+
+///|
+#cfg(target="js")
+fn form_data_has_ffi(obj : JsValue, name : JsValue) -> Bool {
+  form_data_has_ffi_js(obj, name).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn form_data_set_ffi(
+  obj : JsValue,
+  name : JsValue,
+  value : JsValue,
+) -> Unit = "(obj, name, value) => obj.set(name, value)"
+
+///|
+#cfg(target="js")
+extern "js" fn form_data_set_blob_ffi(
+  obj : JsValue,
+  name : JsValue,
+  blob_value : JsValue,
+  filename : JsValue,
+) -> Unit = "(obj, name, blob_value, filename) => obj.set(name, blob_value, filename)"
+
+///|
+#cfg(target="wasm-gc")
+fn form_data_new_ffi(form : JsValue, submitter : JsValue) -> FormData = "webapi_FormData" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn form_data_append_ffi(obj : JsValue, name : JsValue, value : JsValue) -> Unit = "webapi_FormData" "append"
+
+///|
+#cfg(target="wasm-gc")
+fn form_data_append_blob_ffi(
+  obj : JsValue,
+  name : JsValue,
+  blob_value : JsValue,
+  filename : JsValue,
+) -> Unit = "webapi_FormData" "append_blob"
+
+///|
+#cfg(target="wasm-gc")
+fn form_data_delete_ffi(obj : JsValue, name : JsValue) -> Unit = "webapi_FormData" "delete"
+
+///|
+#cfg(target="wasm-gc")
+fn form_data_get_ffi(obj : JsValue, name : JsValue) -> JsValue = "webapi_FormData" "get"
+
+///|
+#cfg(target="wasm-gc")
+fn form_data_get_all_ffi_wasm(obj : JsValue, name : JsValue) -> JsArray = "webapi_FormData" "getAll"
+
+///|
+#cfg(target="wasm-gc")
+fn form_data_get_all_ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> Array[FormDataEntryValue] {
+  form_data_get_all_ffi_wasm(obj, name).to_array()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn form_data_has_ffi(obj : JsValue, name : JsValue) -> Bool = "webapi_FormData" "has"
+
+///|
+#cfg(target="wasm-gc")
+fn form_data_set_ffi(obj : JsValue, name : JsValue, value : JsValue) -> Unit = "webapi_FormData" "set"
+
+///|
+#cfg(target="wasm-gc")
+fn form_data_set_blob_ffi(
+  obj : JsValue,
+  name : JsValue,
+  blob_value : JsValue,
+  filename : JsValue,
+) -> Unit = "webapi_FormData" "set_blob"

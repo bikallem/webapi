@@ -129,3 +129,98 @@ impl TDocumentType with replace_with(
 impl TDocumentType with remove(self : Self) -> Unit {
   document_type_remove_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn document_type_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.name"
+
+///|
+#cfg(target="js")
+fn document_type_name_ffi(obj : JsValue) -> String {
+  document_type_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn document_type_public_id_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.publicId"
+
+///|
+#cfg(target="js")
+fn document_type_public_id_ffi(obj : JsValue) -> String {
+  document_type_public_id_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn document_type_system_id_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.systemId"
+
+///|
+#cfg(target="js")
+fn document_type_system_id_ffi(obj : JsValue) -> String {
+  document_type_system_id_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn document_type_before_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.before(...nodes)"
+
+///|
+#cfg(target="js")
+extern "js" fn document_type_after_ffi(obj : JsValue, nodes : JsValue) -> Unit = "(obj, nodes) => obj.after(...nodes)"
+
+///|
+#cfg(target="js")
+extern "js" fn document_type_replace_with_ffi(
+  obj : JsValue,
+  nodes : JsValue,
+) -> Unit = "(obj, nodes) => obj.replaceWith(...nodes)"
+
+///|
+#cfg(target="js")
+extern "js" fn document_type_remove_ffi(obj : JsValue) -> Unit = "(obj) => obj.remove()"
+
+///|
+#cfg(target="wasm-gc")
+fn document_type_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_DocumentType" "get_name"
+
+///|
+#cfg(target="wasm-gc")
+fn document_type_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(document_type_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn document_type_public_id_ffi_wasm(obj : JsValue) -> JsValue = "webapi_DocumentType" "get_publicId"
+
+///|
+#cfg(target="wasm-gc")
+fn document_type_public_id_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(document_type_public_id_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn document_type_system_id_ffi_wasm(obj : JsValue) -> JsValue = "webapi_DocumentType" "get_systemId"
+
+///|
+#cfg(target="wasm-gc")
+fn document_type_system_id_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(document_type_system_id_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn document_type_before_ffi(obj : JsValue, nodes : JsValue) -> Unit = "webapi_DocumentType" "before"
+
+///|
+#cfg(target="wasm-gc")
+fn document_type_after_ffi(obj : JsValue, nodes : JsValue) -> Unit = "webapi_DocumentType" "after"
+
+///|
+#cfg(target="wasm-gc")
+fn document_type_replace_with_ffi(obj : JsValue, nodes : JsValue) -> Unit = "webapi_DocumentType" "replaceWith"
+
+///|
+#cfg(target="wasm-gc")
+fn document_type_remove_ffi(obj : JsValue) -> Unit = "webapi_DocumentType" "remove"

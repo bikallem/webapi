@@ -70,3 +70,75 @@ impl TReadableByteStreamController with enqueue(
 impl TReadableByteStreamController with error(self : Self, e? : JsValue) -> Unit {
   readable_byte_stream_controller_error_ffi(TJsValue::to_js(self), opt_to_js(e))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn readable_byte_stream_controller_byob_request_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.byobRequest"
+
+///|
+#cfg(target="js")
+fn readable_byte_stream_controller_byob_request_ffi(
+  obj : JsValue,
+) -> ReadableStreamBYOBRequest {
+  readable_byte_stream_controller_byob_request_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn readable_byte_stream_controller_desired_size_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.desiredSize"
+
+///|
+#cfg(target="js")
+fn readable_byte_stream_controller_desired_size_ffi(obj : JsValue) -> Double {
+  readable_byte_stream_controller_desired_size_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn readable_byte_stream_controller_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.close()"
+
+///|
+#cfg(target="js")
+extern "js" fn readable_byte_stream_controller_enqueue_ffi(
+  obj : JsValue,
+  chunk : JsValue,
+) -> Unit = "(obj, chunk) => obj.enqueue(chunk)"
+
+///|
+#cfg(target="js")
+extern "js" fn readable_byte_stream_controller_error_ffi(
+  obj : JsValue,
+  e : JsValue,
+) -> Unit = "(obj, e) => obj.error(e)"
+
+///|
+#cfg(target="wasm-gc")
+fn readable_byte_stream_controller_byob_request_ffi(
+  obj : JsValue,
+) -> ReadableStreamBYOBRequest = "webapi_ReadableByteStreamController" "get_byobRequest"
+
+///|
+#cfg(target="wasm-gc")
+fn readable_byte_stream_controller_desired_size_ffi(obj : JsValue) -> Double = "webapi_ReadableByteStreamController" "get_desiredSize"
+
+///|
+#cfg(target="wasm-gc")
+fn readable_byte_stream_controller_close_ffi(obj : JsValue) -> Unit = "webapi_ReadableByteStreamController" "close"
+
+///|
+#cfg(target="wasm-gc")
+fn readable_byte_stream_controller_enqueue_ffi(
+  obj : JsValue,
+  chunk : JsValue,
+) -> Unit = "webapi_ReadableByteStreamController" "enqueue"
+
+///|
+#cfg(target="wasm-gc")
+fn readable_byte_stream_controller_error_ffi(
+  obj : JsValue,
+  e : JsValue,
+) -> Unit = "webapi_ReadableByteStreamController" "error"

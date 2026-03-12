@@ -66,3 +66,91 @@ pub fn UIEventInit::detail(self : UIEventInit) -> Int? {
 pub fn UIEventInit::which(self : UIEventInit) -> UInt? {
   ui_event_init_get_which_ffi(TJsValue::to_js(self)).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn ui_event_init_ffi(
+  bubbles : JsValue,
+  cancelable : JsValue,
+  composed : JsValue,
+  view : JsValue,
+  detail : JsValue,
+  which : JsValue,
+) -> UIEventInit =
+  #|(bubbles, cancelable, composed, view, detail, which) => {
+  #|  const obj = {};
+  #|  if (bubbles !== undefined) obj.bubbles = bubbles;
+  #|  if (cancelable !== undefined) obj.cancelable = cancelable;
+  #|  if (composed !== undefined) obj.composed = composed;
+  #|  if (view !== undefined) obj.view = view;
+  #|  if (detail !== undefined) obj.detail = detail;
+  #|  if (which !== undefined) obj.which = which;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn ui_event_init_empty_ffi() -> UIEventInit = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn ui_event_init_get_bubbles_ffi(obj : JsValue) -> JsValue = "(obj) => obj.bubbles"
+
+///|
+#cfg(target="js")
+extern "js" fn ui_event_init_get_cancelable_ffi(obj : JsValue) -> JsValue = "(obj) => obj.cancelable"
+
+///|
+#cfg(target="js")
+extern "js" fn ui_event_init_get_composed_ffi(obj : JsValue) -> JsValue = "(obj) => obj.composed"
+
+///|
+#cfg(target="js")
+extern "js" fn ui_event_init_get_view_ffi(obj : JsValue) -> JsValue = "(obj) => obj.view"
+
+///|
+#cfg(target="js")
+extern "js" fn ui_event_init_get_detail_ffi(obj : JsValue) -> JsValue = "(obj) => obj.detail"
+
+///|
+#cfg(target="js")
+extern "js" fn ui_event_init_get_which_ffi(obj : JsValue) -> JsValue = "(obj) => obj.which"
+
+///|
+#cfg(target="wasm-gc")
+fn ui_event_init_ffi(
+  bubbles : JsValue,
+  cancelable : JsValue,
+  composed : JsValue,
+  view : JsValue,
+  detail : JsValue,
+  which : JsValue,
+) -> UIEventInit = "webapi_UIEventInit" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn ui_event_init_empty_ffi() -> UIEventInit = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn ui_event_init_get_bubbles_ffi(obj : JsValue) -> JsValue = "webapi_UIEventInit" "get_bubbles"
+
+///|
+#cfg(target="wasm-gc")
+fn ui_event_init_get_cancelable_ffi(obj : JsValue) -> JsValue = "webapi_UIEventInit" "get_cancelable"
+
+///|
+#cfg(target="wasm-gc")
+fn ui_event_init_get_composed_ffi(obj : JsValue) -> JsValue = "webapi_UIEventInit" "get_composed"
+
+///|
+#cfg(target="wasm-gc")
+fn ui_event_init_get_view_ffi(obj : JsValue) -> JsValue = "webapi_UIEventInit" "get_view"
+
+///|
+#cfg(target="wasm-gc")
+fn ui_event_init_get_detail_ffi(obj : JsValue) -> JsValue = "webapi_UIEventInit" "get_detail"
+
+///|
+#cfg(target="wasm-gc")
+fn ui_event_init_get_which_ffi(obj : JsValue) -> JsValue = "webapi_UIEventInit" "get_which"

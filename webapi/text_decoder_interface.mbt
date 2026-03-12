@@ -74,3 +74,98 @@ impl TTextDecoder with fatal(self : Self) -> Bool {
 impl TTextDecoder with ignore_bom(self : Self) -> Bool {
   text_decoder_ignore_bom_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn text_decoder_new_ffi(
+  label : JsValue,
+  options : JsValue,
+) -> TextDecoder = "(label, options) => new TextDecoder(label, options)"
+
+///|
+#cfg(target="js")
+extern "js" fn text_decoder_decode_ffi_js(
+  obj : JsValue,
+  input : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, input, options) => obj.decode(input, options)"
+
+///|
+#cfg(target="js")
+fn text_decoder_decode_ffi(
+  obj : JsValue,
+  input : JsValue,
+  options : JsValue,
+) -> String {
+  text_decoder_decode_ffi_js(obj, input, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_decoder_encoding_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.encoding"
+
+///|
+#cfg(target="js")
+fn text_decoder_encoding_ffi(obj : JsValue) -> String {
+  text_decoder_encoding_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_decoder_fatal_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.fatal"
+
+///|
+#cfg(target="js")
+fn text_decoder_fatal_ffi(obj : JsValue) -> Bool {
+  text_decoder_fatal_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_decoder_ignore_bom_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ignoreBOM"
+
+///|
+#cfg(target="js")
+fn text_decoder_ignore_bom_ffi(obj : JsValue) -> Bool {
+  text_decoder_ignore_bom_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn text_decoder_new_ffi(label : JsValue, options : JsValue) -> TextDecoder = "webapi_TextDecoder" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn text_decoder_decode_ffi_wasm(
+  obj : JsValue,
+  input : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_TextDecoder" "decode"
+
+///|
+#cfg(target="wasm-gc")
+fn text_decoder_decode_ffi(
+  obj : JsValue,
+  input : JsValue,
+  options : JsValue,
+) -> String {
+  jsvalue_to_string(text_decoder_decode_ffi_wasm(obj, input, options))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn text_decoder_encoding_ffi_wasm(obj : JsValue) -> JsValue = "webapi_TextDecoder" "get_encoding"
+
+///|
+#cfg(target="wasm-gc")
+fn text_decoder_encoding_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(text_decoder_encoding_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn text_decoder_fatal_ffi(obj : JsValue) -> Bool = "webapi_TextDecoder" "get_fatal"
+
+///|
+#cfg(target="wasm-gc")
+fn text_decoder_ignore_bom_ffi(obj : JsValue) -> Bool = "webapi_TextDecoder" "get_ignoreBOM"

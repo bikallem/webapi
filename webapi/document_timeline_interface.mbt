@@ -34,3 +34,11 @@ pub fn DocumentTimeline::new(
 ///|
 /// [DocumentTimeline](https://developer.mozilla.org/en-US/docs/Web/API/DocumentTimeline) interface.
 pub trait TDocumentTimeline: TAnimationTimeline {}
+
+///|
+#cfg(target="js")
+extern "js" fn document_timeline_new_ffi(options : JsValue) -> DocumentTimeline = "(options) => new DocumentTimeline(options)"
+
+///|
+#cfg(target="wasm-gc")
+fn document_timeline_new_ffi(options : JsValue) -> DocumentTimeline = "webapi_DocumentTimeline" "new"

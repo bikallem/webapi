@@ -58,3 +58,71 @@ impl TInputEvent with is_composing(self : Self) -> Bool {
 impl TInputEvent with input_type(self : Self) -> String {
   input_event_input_type_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn input_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> InputEvent = "(type_, event_init_dict) => new InputEvent(type_, event_init_dict)"
+
+///|
+#cfg(target="js")
+extern "js" fn input_event_data_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.data"
+
+///|
+#cfg(target="js")
+fn input_event_data_ffi(obj : JsValue) -> String {
+  input_event_data_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn input_event_is_composing_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.isComposing"
+
+///|
+#cfg(target="js")
+fn input_event_is_composing_ffi(obj : JsValue) -> Bool {
+  input_event_is_composing_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn input_event_input_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.inputType"
+
+///|
+#cfg(target="js")
+fn input_event_input_type_ffi(obj : JsValue) -> String {
+  input_event_input_type_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn input_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> InputEvent = "webapi_InputEvent" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn input_event_data_ffi_wasm(obj : JsValue) -> JsValue = "webapi_InputEvent" "get_data"
+
+///|
+#cfg(target="wasm-gc")
+fn input_event_data_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(input_event_data_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn input_event_is_composing_ffi(obj : JsValue) -> Bool = "webapi_InputEvent" "get_isComposing"
+
+///|
+#cfg(target="wasm-gc")
+fn input_event_input_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_InputEvent" "get_inputType"
+
+///|
+#cfg(target="wasm-gc")
+fn input_event_input_type_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(input_event_input_type_ffi_wasm(obj))
+}

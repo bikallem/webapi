@@ -178,3 +178,105 @@ pub fn IntersectionObserverInit::track_visibility(
 ) -> Bool? {
   intersection_observer_init_get_track_visibility_ffi(TJsValue::to_js(self)).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn intersection_observer_init_ffi(
+  root : JsValue,
+  root_margin : JsValue,
+  scroll_margin : JsValue,
+  threshold : JsValue,
+  delay : JsValue,
+  track_visibility : JsValue,
+) -> IntersectionObserverInit =
+  #|(root, rootMargin, scrollMargin, threshold, delay, trackVisibility) => {
+  #|  const obj = {};
+  #|  if (root !== undefined) obj.root = root;
+  #|  if (rootMargin !== undefined) obj.rootMargin = rootMargin;
+  #|  if (scrollMargin !== undefined) obj.scrollMargin = scrollMargin;
+  #|  if (threshold !== undefined) obj.threshold = threshold;
+  #|  if (delay !== undefined) obj.delay = delay;
+  #|  if (trackVisibility !== undefined) obj.trackVisibility = trackVisibility;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn intersection_observer_init_empty_ffi() -> IntersectionObserverInit = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn intersection_observer_init_get_root_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.root"
+
+///|
+#cfg(target="js")
+extern "js" fn intersection_observer_init_get_root_margin_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.rootMargin"
+
+///|
+#cfg(target="js")
+extern "js" fn intersection_observer_init_get_scroll_margin_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.scrollMargin"
+
+///|
+#cfg(target="js")
+extern "js" fn intersection_observer_init_get_threshold_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.threshold"
+
+///|
+#cfg(target="js")
+extern "js" fn intersection_observer_init_get_delay_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.delay"
+
+///|
+#cfg(target="js")
+extern "js" fn intersection_observer_init_get_track_visibility_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.trackVisibility"
+
+///|
+#cfg(target="wasm-gc")
+fn intersection_observer_init_ffi(
+  root : JsValue,
+  root_margin : JsValue,
+  scroll_margin : JsValue,
+  threshold : JsValue,
+  delay : JsValue,
+  track_visibility : JsValue,
+) -> IntersectionObserverInit = "webapi_IntersectionObserverInit" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn intersection_observer_init_empty_ffi() -> IntersectionObserverInit = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn intersection_observer_init_get_root_ffi(obj : JsValue) -> JsValue = "webapi_IntersectionObserverInit" "get_root"
+
+///|
+#cfg(target="wasm-gc")
+fn intersection_observer_init_get_root_margin_ffi(obj : JsValue) -> JsValue = "webapi_IntersectionObserverInit" "get_rootMargin"
+
+///|
+#cfg(target="wasm-gc")
+fn intersection_observer_init_get_scroll_margin_ffi(obj : JsValue) -> JsValue = "webapi_IntersectionObserverInit" "get_scrollMargin"
+
+///|
+#cfg(target="wasm-gc")
+fn intersection_observer_init_get_threshold_ffi(obj : JsValue) -> JsValue = "webapi_IntersectionObserverInit" "get_threshold"
+
+///|
+#cfg(target="wasm-gc")
+fn intersection_observer_init_get_delay_ffi(obj : JsValue) -> JsValue = "webapi_IntersectionObserverInit" "get_delay"
+
+///|
+#cfg(target="wasm-gc")
+fn intersection_observer_init_get_track_visibility_ffi(
+  obj : JsValue,
+) -> JsValue = "webapi_IntersectionObserverInit" "get_trackVisibility"

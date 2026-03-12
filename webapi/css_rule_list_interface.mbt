@@ -43,3 +43,28 @@ impl TCSSRuleList with length(self : Self) -> UInt {
 impl TCSSRuleList with item(self : Self, index : UInt) -> CSSRule {
   self.item_opt(index).unwrap()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn css_rule_list_item_ffi(
+  obj : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, index) => obj.item(index)"
+
+///|
+#cfg(target="js")
+extern "js" fn css_rule_list_length_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.length"
+
+///|
+#cfg(target="js")
+fn css_rule_list_length_ffi(obj : JsValue) -> UInt {
+  css_rule_list_length_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn css_rule_list_item_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_CSSRuleList" "item"
+
+///|
+#cfg(target="wasm-gc")
+fn css_rule_list_length_ffi(obj : JsValue) -> UInt = "webapi_CSSRuleList" "get_length"

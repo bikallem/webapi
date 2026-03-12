@@ -94,3 +94,130 @@ impl TDOMPointReadOnly with matrix_transform(
 impl TDOMPointReadOnly with to_json(self : Self) -> JsValue {
   dom_point_read_only_to_json_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn dom_point_read_only_new_ffi(
+  x : JsValue,
+  y : JsValue,
+  z : JsValue,
+  w : JsValue,
+) -> DOMPointReadOnly = "(x, y, z, w) => new DOMPointReadOnly(x, y, z, w)"
+
+///|
+#cfg(target="js")
+extern "js" fn dom_point_read_only_from_point_ffi_js(
+  other : JsValue,
+) -> JsValue = "(other) => DOMPointReadOnly.fromPoint(other)"
+
+///|
+#cfg(target="js")
+fn dom_point_read_only_from_point_ffi(other : JsValue) -> DOMPointReadOnly {
+  dom_point_read_only_from_point_ffi_js(other).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_point_read_only_x_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.x"
+
+///|
+#cfg(target="js")
+fn dom_point_read_only_x_ffi(obj : JsValue) -> Double {
+  dom_point_read_only_x_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_point_read_only_y_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.y"
+
+///|
+#cfg(target="js")
+fn dom_point_read_only_y_ffi(obj : JsValue) -> Double {
+  dom_point_read_only_y_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_point_read_only_z_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.z"
+
+///|
+#cfg(target="js")
+fn dom_point_read_only_z_ffi(obj : JsValue) -> Double {
+  dom_point_read_only_z_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_point_read_only_w_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.w"
+
+///|
+#cfg(target="js")
+fn dom_point_read_only_w_ffi(obj : JsValue) -> Double {
+  dom_point_read_only_w_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_point_read_only_matrix_transform_ffi_js(
+  obj : JsValue,
+  matrix : JsValue,
+) -> JsValue = "(obj, matrix) => obj.matrixTransform(matrix)"
+
+///|
+#cfg(target="js")
+fn dom_point_read_only_matrix_transform_ffi(
+  obj : JsValue,
+  matrix : JsValue,
+) -> DOMPoint {
+  dom_point_read_only_matrix_transform_ffi_js(obj, matrix).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_point_read_only_to_json_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.toJSON()"
+
+///|
+#cfg(target="js")
+fn dom_point_read_only_to_json_ffi(obj : JsValue) -> JsValue {
+  dom_point_read_only_to_json_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn dom_point_read_only_new_ffi(
+  x : JsValue,
+  y : JsValue,
+  z : JsValue,
+  w : JsValue,
+) -> DOMPointReadOnly = "webapi_DOMPointReadOnly" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_point_read_only_from_point_ffi(other : JsValue) -> DOMPointReadOnly = "webapi_DOMPointReadOnly" "fromPoint"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_point_read_only_x_ffi(obj : JsValue) -> Double = "webapi_DOMPointReadOnly" "get_x"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_point_read_only_y_ffi(obj : JsValue) -> Double = "webapi_DOMPointReadOnly" "get_y"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_point_read_only_z_ffi(obj : JsValue) -> Double = "webapi_DOMPointReadOnly" "get_z"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_point_read_only_w_ffi(obj : JsValue) -> Double = "webapi_DOMPointReadOnly" "get_w"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_point_read_only_matrix_transform_ffi(
+  obj : JsValue,
+  matrix : JsValue,
+) -> DOMPoint = "webapi_DOMPointReadOnly" "matrixTransform"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_point_read_only_to_json_ffi(obj : JsValue) -> JsValue = "webapi_DOMPointReadOnly" "toJSON"

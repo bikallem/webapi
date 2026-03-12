@@ -41,3 +41,31 @@ pub trait TSubmitEvent: TEvent {
 impl TSubmitEvent with submitter(self : Self) -> HTMLElement {
   submit_event_submitter_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn submit_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> SubmitEvent = "(type_, event_init_dict) => new SubmitEvent(type_, event_init_dict)"
+
+///|
+#cfg(target="js")
+extern "js" fn submit_event_submitter_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.submitter"
+
+///|
+#cfg(target="js")
+fn submit_event_submitter_ffi(obj : JsValue) -> HTMLElement {
+  submit_event_submitter_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn submit_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> SubmitEvent = "webapi_SubmitEvent" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn submit_event_submitter_ffi(obj : JsValue) -> HTMLElement = "webapi_SubmitEvent" "get_submitter"

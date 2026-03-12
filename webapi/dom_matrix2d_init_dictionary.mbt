@@ -108,3 +108,157 @@ pub fn DOMMatrix2DInit::m41(self : DOMMatrix2DInit) -> Double? {
 pub fn DOMMatrix2DInit::m42(self : DOMMatrix2DInit) -> Double? {
   dom_matrix2d_init_get_m42_ffi(TJsValue::to_js(self)).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix2d_init_ffi(
+  a : JsValue,
+  b : JsValue,
+  c : JsValue,
+  d : JsValue,
+  e : JsValue,
+  f : JsValue,
+  m11 : JsValue,
+  m12 : JsValue,
+  m21 : JsValue,
+  m22 : JsValue,
+  m41 : JsValue,
+  m42 : JsValue,
+) -> DOMMatrix2DInit =
+  #|(a, b, c, d, e, f, m11, m12, m21, m22, m41, m42) => {
+  #|  const obj = {};
+  #|  if (a !== undefined) obj.a = a;
+  #|  if (b !== undefined) obj.b = b;
+  #|  if (c !== undefined) obj.c = c;
+  #|  if (d !== undefined) obj.d = d;
+  #|  if (e !== undefined) obj.e = e;
+  #|  if (f !== undefined) obj.f = f;
+  #|  if (m11 !== undefined) obj.m11 = m11;
+  #|  if (m12 !== undefined) obj.m12 = m12;
+  #|  if (m21 !== undefined) obj.m21 = m21;
+  #|  if (m22 !== undefined) obj.m22 = m22;
+  #|  if (m41 !== undefined) obj.m41 = m41;
+  #|  if (m42 !== undefined) obj.m42 = m42;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix2d_init_empty_ffi() -> DOMMatrix2DInit = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix2d_init_get_a_ffi(obj : JsValue) -> JsValue = "(obj) => obj.a"
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix2d_init_get_b_ffi(obj : JsValue) -> JsValue = "(obj) => obj.b"
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix2d_init_get_c_ffi(obj : JsValue) -> JsValue = "(obj) => obj.c"
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix2d_init_get_d_ffi(obj : JsValue) -> JsValue = "(obj) => obj.d"
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix2d_init_get_e_ffi(obj : JsValue) -> JsValue = "(obj) => obj.e"
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix2d_init_get_f_ffi(obj : JsValue) -> JsValue = "(obj) => obj.f"
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix2d_init_get_m11_ffi(obj : JsValue) -> JsValue = "(obj) => obj.m11"
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix2d_init_get_m12_ffi(obj : JsValue) -> JsValue = "(obj) => obj.m12"
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix2d_init_get_m21_ffi(obj : JsValue) -> JsValue = "(obj) => obj.m21"
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix2d_init_get_m22_ffi(obj : JsValue) -> JsValue = "(obj) => obj.m22"
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix2d_init_get_m41_ffi(obj : JsValue) -> JsValue = "(obj) => obj.m41"
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix2d_init_get_m42_ffi(obj : JsValue) -> JsValue = "(obj) => obj.m42"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix2d_init_ffi(
+  a : JsValue,
+  b : JsValue,
+  c : JsValue,
+  d : JsValue,
+  e : JsValue,
+  f : JsValue,
+  m11 : JsValue,
+  m12 : JsValue,
+  m21 : JsValue,
+  m22 : JsValue,
+  m41 : JsValue,
+  m42 : JsValue,
+) -> DOMMatrix2DInit = "webapi_DOMMatrix2DInit" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix2d_init_empty_ffi() -> DOMMatrix2DInit = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix2d_init_get_a_ffi(obj : JsValue) -> JsValue = "webapi_DOMMatrix2DInit" "get_a"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix2d_init_get_b_ffi(obj : JsValue) -> JsValue = "webapi_DOMMatrix2DInit" "get_b"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix2d_init_get_c_ffi(obj : JsValue) -> JsValue = "webapi_DOMMatrix2DInit" "get_c"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix2d_init_get_d_ffi(obj : JsValue) -> JsValue = "webapi_DOMMatrix2DInit" "get_d"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix2d_init_get_e_ffi(obj : JsValue) -> JsValue = "webapi_DOMMatrix2DInit" "get_e"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix2d_init_get_f_ffi(obj : JsValue) -> JsValue = "webapi_DOMMatrix2DInit" "get_f"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix2d_init_get_m11_ffi(obj : JsValue) -> JsValue = "webapi_DOMMatrix2DInit" "get_m11"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix2d_init_get_m12_ffi(obj : JsValue) -> JsValue = "webapi_DOMMatrix2DInit" "get_m12"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix2d_init_get_m21_ffi(obj : JsValue) -> JsValue = "webapi_DOMMatrix2DInit" "get_m21"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix2d_init_get_m22_ffi(obj : JsValue) -> JsValue = "webapi_DOMMatrix2DInit" "get_m22"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix2d_init_get_m41_ffi(obj : JsValue) -> JsValue = "webapi_DOMMatrix2DInit" "get_m41"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix2d_init_get_m42_ffi(obj : JsValue) -> JsValue = "webapi_DOMMatrix2DInit" "get_m42"

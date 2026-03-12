@@ -69,3 +69,61 @@ impl TStorage with remove_item(self : Self, key : String) -> Unit {
 impl TStorage with clear(self : Self) -> Unit {
   storage_clear_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn storage_length_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.length"
+
+///|
+#cfg(target="js")
+fn storage_length_ffi(obj : JsValue) -> UInt {
+  storage_length_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn storage_key_ffi(obj : JsValue, index : JsValue) -> JsValue = "(obj, index) => obj.key(index)"
+
+///|
+#cfg(target="js")
+extern "js" fn storage_get_item_ffi(obj : JsValue, key : JsValue) -> JsValue = "(obj, key) => obj.getItem(key)"
+
+///|
+#cfg(target="js")
+extern "js" fn storage_set_item_ffi(
+  obj : JsValue,
+  key : JsValue,
+  value : JsValue,
+) -> Unit = "(obj, key, value) => obj.setItem(key, value)"
+
+///|
+#cfg(target="js")
+extern "js" fn storage_remove_item_ffi(obj : JsValue, key : JsValue) -> Unit = "(obj, key) => obj.removeItem(key)"
+
+///|
+#cfg(target="js")
+extern "js" fn storage_clear_ffi(obj : JsValue) -> Unit = "(obj) => obj.clear()"
+
+///|
+#cfg(target="wasm-gc")
+fn storage_length_ffi(obj : JsValue) -> UInt = "webapi_Storage" "get_length"
+
+///|
+#cfg(target="wasm-gc")
+fn storage_key_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_Storage" "key"
+
+///|
+#cfg(target="wasm-gc")
+fn storage_get_item_ffi(obj : JsValue, key : JsValue) -> JsValue = "webapi_Storage" "getItem"
+
+///|
+#cfg(target="wasm-gc")
+fn storage_set_item_ffi(obj : JsValue, key : JsValue, value : JsValue) -> Unit = "webapi_Storage" "setItem"
+
+///|
+#cfg(target="wasm-gc")
+fn storage_remove_item_ffi(obj : JsValue, key : JsValue) -> Unit = "webapi_Storage" "removeItem"
+
+///|
+#cfg(target="wasm-gc")
+fn storage_clear_ffi(obj : JsValue) -> Unit = "webapi_Storage" "clear"

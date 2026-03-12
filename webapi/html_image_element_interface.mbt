@@ -428,3 +428,734 @@ impl THTMLImageElement with x(self : Self) -> Int {
 impl THTMLImageElement with y(self : Self) -> Int {
   html_image_element_y_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_new_ffi() -> HTMLImageElement = "() => new HTMLImageElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_alt_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.alt"
+
+///|
+#cfg(target="js")
+fn html_image_element_alt_ffi(obj : JsValue) -> String {
+  html_image_element_alt_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_set_alt_ffi(
+  obj : JsValue,
+  alt : JsValue,
+) -> Unit = "(obj, alt) => { obj.alt = alt; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_src_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.src"
+
+///|
+#cfg(target="js")
+fn html_image_element_src_ffi(obj : JsValue) -> String {
+  html_image_element_src_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_set_src_ffi(
+  obj : JsValue,
+  src : JsValue,
+) -> Unit = "(obj, src) => { obj.src = src; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_srcset_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.srcset"
+
+///|
+#cfg(target="js")
+fn html_image_element_srcset_ffi(obj : JsValue) -> String {
+  html_image_element_srcset_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_set_srcset_ffi(
+  obj : JsValue,
+  srcset : JsValue,
+) -> Unit = "(obj, srcset) => { obj.srcset = srcset; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_sizes_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.sizes"
+
+///|
+#cfg(target="js")
+fn html_image_element_sizes_ffi(obj : JsValue) -> String {
+  html_image_element_sizes_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_set_sizes_ffi(
+  obj : JsValue,
+  sizes : JsValue,
+) -> Unit = "(obj, sizes) => { obj.sizes = sizes; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_cross_origin_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.crossOrigin"
+
+///|
+#cfg(target="js")
+fn html_image_element_cross_origin_ffi(obj : JsValue) -> String {
+  html_image_element_cross_origin_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_set_cross_origin_ffi(
+  obj : JsValue,
+  cross_origin : JsValue,
+) -> Unit = "(obj, crossOrigin) => { obj.crossOrigin = crossOrigin; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_use_map_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.useMap"
+
+///|
+#cfg(target="js")
+fn html_image_element_use_map_ffi(obj : JsValue) -> String {
+  html_image_element_use_map_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_set_use_map_ffi(
+  obj : JsValue,
+  use_map : JsValue,
+) -> Unit = "(obj, useMap) => { obj.useMap = useMap; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_is_map_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.isMap"
+
+///|
+#cfg(target="js")
+fn html_image_element_is_map_ffi(obj : JsValue) -> Bool {
+  html_image_element_is_map_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_set_is_map_ffi(
+  obj : JsValue,
+  is_map : JsValue,
+) -> Unit = "(obj, isMap) => { obj.isMap = isMap; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_width_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.width"
+
+///|
+#cfg(target="js")
+fn html_image_element_width_ffi(obj : JsValue) -> UInt {
+  html_image_element_width_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_set_width_ffi(
+  obj : JsValue,
+  width : JsValue,
+) -> Unit = "(obj, width) => { obj.width = width; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_height_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.height"
+
+///|
+#cfg(target="js")
+fn html_image_element_height_ffi(obj : JsValue) -> UInt {
+  html_image_element_height_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_set_height_ffi(
+  obj : JsValue,
+  height : JsValue,
+) -> Unit = "(obj, height) => { obj.height = height; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_natural_width_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.naturalWidth"
+
+///|
+#cfg(target="js")
+fn html_image_element_natural_width_ffi(obj : JsValue) -> UInt {
+  html_image_element_natural_width_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_natural_height_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.naturalHeight"
+
+///|
+#cfg(target="js")
+fn html_image_element_natural_height_ffi(obj : JsValue) -> UInt {
+  html_image_element_natural_height_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_complete_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.complete"
+
+///|
+#cfg(target="js")
+fn html_image_element_complete_ffi(obj : JsValue) -> Bool {
+  html_image_element_complete_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_current_src_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.currentSrc"
+
+///|
+#cfg(target="js")
+fn html_image_element_current_src_ffi(obj : JsValue) -> String {
+  html_image_element_current_src_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_referrer_policy_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.referrerPolicy"
+
+///|
+#cfg(target="js")
+fn html_image_element_referrer_policy_ffi(obj : JsValue) -> String {
+  html_image_element_referrer_policy_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_set_referrer_policy_ffi(
+  obj : JsValue,
+  referrer_policy : JsValue,
+) -> Unit = "(obj, referrerPolicy) => { obj.referrerPolicy = referrerPolicy; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_decoding_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.decoding"
+
+///|
+#cfg(target="js")
+fn html_image_element_decoding_ffi(obj : JsValue) -> String {
+  html_image_element_decoding_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_set_decoding_ffi(
+  obj : JsValue,
+  decoding : JsValue,
+) -> Unit = "(obj, decoding) => { obj.decoding = decoding; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_loading_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.loading"
+
+///|
+#cfg(target="js")
+fn html_image_element_loading_ffi(obj : JsValue) -> String {
+  html_image_element_loading_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_set_loading_ffi(
+  obj : JsValue,
+  loading : JsValue,
+) -> Unit = "(obj, loading) => { obj.loading = loading; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_fetch_priority_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.fetchPriority"
+
+///|
+#cfg(target="js")
+fn html_image_element_fetch_priority_ffi(obj : JsValue) -> String {
+  html_image_element_fetch_priority_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_set_fetch_priority_ffi(
+  obj : JsValue,
+  fetch_priority : JsValue,
+) -> Unit = "(obj, fetchPriority) => { obj.fetchPriority = fetchPriority; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_decode_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.decode()"
+
+///|
+#cfg(target="js")
+fn html_image_element_decode_ffi(obj : JsValue) -> JsPromise[JsValue] {
+  html_image_element_decode_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.name"
+
+///|
+#cfg(target="js")
+fn html_image_element_name_ffi(obj : JsValue) -> String {
+  html_image_element_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_set_name_ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> Unit = "(obj, name) => { obj.name = name; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_lowsrc_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.lowsrc"
+
+///|
+#cfg(target="js")
+fn html_image_element_lowsrc_ffi(obj : JsValue) -> String {
+  html_image_element_lowsrc_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_set_lowsrc_ffi(
+  obj : JsValue,
+  lowsrc : JsValue,
+) -> Unit = "(obj, lowsrc) => { obj.lowsrc = lowsrc; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_align_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.align"
+
+///|
+#cfg(target="js")
+fn html_image_element_align_ffi(obj : JsValue) -> String {
+  html_image_element_align_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_set_align_ffi(
+  obj : JsValue,
+  align : JsValue,
+) -> Unit = "(obj, align) => { obj.align = align; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_hspace_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.hspace"
+
+///|
+#cfg(target="js")
+fn html_image_element_hspace_ffi(obj : JsValue) -> UInt {
+  html_image_element_hspace_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_set_hspace_ffi(
+  obj : JsValue,
+  hspace : JsValue,
+) -> Unit = "(obj, hspace) => { obj.hspace = hspace; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_vspace_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.vspace"
+
+///|
+#cfg(target="js")
+fn html_image_element_vspace_ffi(obj : JsValue) -> UInt {
+  html_image_element_vspace_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_set_vspace_ffi(
+  obj : JsValue,
+  vspace : JsValue,
+) -> Unit = "(obj, vspace) => { obj.vspace = vspace; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_long_desc_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.longDesc"
+
+///|
+#cfg(target="js")
+fn html_image_element_long_desc_ffi(obj : JsValue) -> String {
+  html_image_element_long_desc_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_set_long_desc_ffi(
+  obj : JsValue,
+  long_desc : JsValue,
+) -> Unit = "(obj, longDesc) => { obj.longDesc = longDesc; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_border_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.border"
+
+///|
+#cfg(target="js")
+fn html_image_element_border_ffi(obj : JsValue) -> String {
+  html_image_element_border_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_set_border_ffi(
+  obj : JsValue,
+  border : JsValue,
+) -> Unit = "(obj, border) => { obj.border = border; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_x_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.x"
+
+///|
+#cfg(target="js")
+fn html_image_element_x_ffi(obj : JsValue) -> Int {
+  html_image_element_x_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_image_element_y_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.y"
+
+///|
+#cfg(target="js")
+fn html_image_element_y_ffi(obj : JsValue) -> Int {
+  html_image_element_y_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_new_ffi() -> HTMLImageElement = "webapi_HTMLImageElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_alt_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLImageElement" "get_alt"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_alt_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_image_element_alt_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_set_alt_ffi(obj : JsValue, alt : JsValue) -> Unit = "webapi_HTMLImageElement" "set_alt"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_src_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLImageElement" "get_src"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_src_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_image_element_src_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_set_src_ffi(obj : JsValue, src : JsValue) -> Unit = "webapi_HTMLImageElement" "set_src"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_srcset_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLImageElement" "get_srcset"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_srcset_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_image_element_srcset_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_set_srcset_ffi(obj : JsValue, srcset : JsValue) -> Unit = "webapi_HTMLImageElement" "set_srcset"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_sizes_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLImageElement" "get_sizes"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_sizes_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_image_element_sizes_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_set_sizes_ffi(obj : JsValue, sizes : JsValue) -> Unit = "webapi_HTMLImageElement" "set_sizes"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_cross_origin_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLImageElement" "get_crossOrigin"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_cross_origin_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_image_element_cross_origin_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_set_cross_origin_ffi(
+  obj : JsValue,
+  cross_origin : JsValue,
+) -> Unit = "webapi_HTMLImageElement" "set_crossOrigin"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_use_map_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLImageElement" "get_useMap"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_use_map_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_image_element_use_map_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_set_use_map_ffi(obj : JsValue, use_map : JsValue) -> Unit = "webapi_HTMLImageElement" "set_useMap"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_is_map_ffi(obj : JsValue) -> Bool = "webapi_HTMLImageElement" "get_isMap"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_set_is_map_ffi(obj : JsValue, is_map : JsValue) -> Unit = "webapi_HTMLImageElement" "set_isMap"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_width_ffi(obj : JsValue) -> UInt = "webapi_HTMLImageElement" "get_width"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_set_width_ffi(obj : JsValue, width : JsValue) -> Unit = "webapi_HTMLImageElement" "set_width"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_height_ffi(obj : JsValue) -> UInt = "webapi_HTMLImageElement" "get_height"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_set_height_ffi(obj : JsValue, height : JsValue) -> Unit = "webapi_HTMLImageElement" "set_height"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_natural_width_ffi(obj : JsValue) -> UInt = "webapi_HTMLImageElement" "get_naturalWidth"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_natural_height_ffi(obj : JsValue) -> UInt = "webapi_HTMLImageElement" "get_naturalHeight"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_complete_ffi(obj : JsValue) -> Bool = "webapi_HTMLImageElement" "get_complete"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_current_src_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLImageElement" "get_currentSrc"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_current_src_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_image_element_current_src_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_referrer_policy_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLImageElement" "get_referrerPolicy"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_referrer_policy_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_image_element_referrer_policy_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_set_referrer_policy_ffi(
+  obj : JsValue,
+  referrer_policy : JsValue,
+) -> Unit = "webapi_HTMLImageElement" "set_referrerPolicy"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_decoding_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLImageElement" "get_decoding"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_decoding_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_image_element_decoding_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_set_decoding_ffi(
+  obj : JsValue,
+  decoding : JsValue,
+) -> Unit = "webapi_HTMLImageElement" "set_decoding"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_loading_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLImageElement" "get_loading"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_loading_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_image_element_loading_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_set_loading_ffi(obj : JsValue, loading : JsValue) -> Unit = "webapi_HTMLImageElement" "set_loading"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_fetch_priority_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLImageElement" "get_fetchPriority"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_fetch_priority_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_image_element_fetch_priority_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_set_fetch_priority_ffi(
+  obj : JsValue,
+  fetch_priority : JsValue,
+) -> Unit = "webapi_HTMLImageElement" "set_fetchPriority"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_decode_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLImageElement" "decode"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_decode_ffi(obj : JsValue) -> JsPromise[JsValue] {
+  html_image_element_decode_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLImageElement" "get_name"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_image_element_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_set_name_ffi(obj : JsValue, name : JsValue) -> Unit = "webapi_HTMLImageElement" "set_name"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_lowsrc_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLImageElement" "get_lowsrc"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_lowsrc_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_image_element_lowsrc_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_set_lowsrc_ffi(obj : JsValue, lowsrc : JsValue) -> Unit = "webapi_HTMLImageElement" "set_lowsrc"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_align_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLImageElement" "get_align"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_align_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_image_element_align_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_set_align_ffi(obj : JsValue, align : JsValue) -> Unit = "webapi_HTMLImageElement" "set_align"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_hspace_ffi(obj : JsValue) -> UInt = "webapi_HTMLImageElement" "get_hspace"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_set_hspace_ffi(obj : JsValue, hspace : JsValue) -> Unit = "webapi_HTMLImageElement" "set_hspace"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_vspace_ffi(obj : JsValue) -> UInt = "webapi_HTMLImageElement" "get_vspace"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_set_vspace_ffi(obj : JsValue, vspace : JsValue) -> Unit = "webapi_HTMLImageElement" "set_vspace"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_long_desc_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLImageElement" "get_longDesc"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_long_desc_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_image_element_long_desc_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_set_long_desc_ffi(
+  obj : JsValue,
+  long_desc : JsValue,
+) -> Unit = "webapi_HTMLImageElement" "set_longDesc"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_border_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLImageElement" "get_border"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_border_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_image_element_border_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_set_border_ffi(obj : JsValue, border : JsValue) -> Unit = "webapi_HTMLImageElement" "set_border"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_x_ffi(obj : JsValue) -> Int = "webapi_HTMLImageElement" "get_x"
+
+///|
+#cfg(target="wasm-gc")
+fn html_image_element_y_ffi(obj : JsValue) -> Int = "webapi_HTMLImageElement" "get_y"

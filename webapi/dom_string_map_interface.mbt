@@ -48,3 +48,38 @@ impl TDOMStringMap with set(self : Self, name : String, value : String) -> Unit 
 impl TDOMStringMap with delete_(self : Self, name : String) -> Unit {
   dom_string_map_delete__ffi(TJsValue::to_js(self), TJsValue::to_js(name))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn dom_string_map_get_ffi(obj : JsValue, name : JsValue) -> JsValue = "(obj, name) => obj[name]"
+
+///|
+#cfg(target="js")
+extern "js" fn dom_string_map_set_ffi(
+  obj : JsValue,
+  name : JsValue,
+  value : JsValue,
+) -> Unit = "(obj, name, value) => { obj[name] = value; }"
+
+///|
+#cfg(target="js")
+extern "js" fn dom_string_map_delete__ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> Unit = "(obj, name) => { delete obj[name]; }"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_string_map_get_ffi(obj : JsValue, name : JsValue) -> JsValue = "webapi_DOMStringMap" "get"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_string_map_set_ffi(
+  obj : JsValue,
+  name : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_DOMStringMap" "set"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_string_map_delete__ffi(obj : JsValue, name : JsValue) -> Unit = "webapi_DOMStringMap" "delete_"

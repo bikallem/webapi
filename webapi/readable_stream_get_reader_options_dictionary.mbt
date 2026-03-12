@@ -35,3 +35,38 @@ pub fn ReadableStreamGetReaderOptions::mode(
 ) -> ReadableStreamReaderMode? {
   readable_stream_get_reader_options_get_mode_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn readable_stream_get_reader_options_ffi(
+  mode : JsValue,
+) -> ReadableStreamGetReaderOptions =
+  #|(mode) => {
+  #|  const obj = {};
+  #|  if (mode !== undefined) obj.mode = mode;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn readable_stream_get_reader_options_empty_ffi() -> ReadableStreamGetReaderOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn readable_stream_get_reader_options_get_mode_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.mode"
+
+///|
+#cfg(target="wasm-gc")
+fn readable_stream_get_reader_options_ffi(
+  mode : JsValue,
+) -> ReadableStreamGetReaderOptions = "webapi_ReadableStreamGetReaderOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn readable_stream_get_reader_options_empty_ffi() -> ReadableStreamGetReaderOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn readable_stream_get_reader_options_get_mode_ffi(obj : JsValue) -> JsValue = "webapi_ReadableStreamGetReaderOptions" "get_mode"

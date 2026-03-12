@@ -79,3 +79,80 @@ pub fn UnderlyingSink::abort(
 pub fn UnderlyingSink::type_(self : UnderlyingSink) -> JsValue? {
   underlying_sink_get_type_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn underlying_sink_ffi(
+  start : JsValue,
+  write : JsValue,
+  close : JsValue,
+  abort : JsValue,
+  type_ : JsValue,
+) -> UnderlyingSink =
+  #|(start, write, close, abort, type) => {
+  #|  const obj = {};
+  #|  if (start !== undefined) obj.start = start;
+  #|  if (write !== undefined) obj.write = write;
+  #|  if (close !== undefined) obj.close = close;
+  #|  if (abort !== undefined) obj.abort = abort;
+  #|  if (type !== undefined) obj.type = type;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn underlying_sink_empty_ffi() -> UnderlyingSink = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn underlying_sink_get_start_ffi(obj : JsValue) -> JsValue = "(obj) => obj.start"
+
+///|
+#cfg(target="js")
+extern "js" fn underlying_sink_get_write_ffi(obj : JsValue) -> JsValue = "(obj) => obj.write"
+
+///|
+#cfg(target="js")
+extern "js" fn underlying_sink_get_close_ffi(obj : JsValue) -> JsValue = "(obj) => obj.close"
+
+///|
+#cfg(target="js")
+extern "js" fn underlying_sink_get_abort_ffi(obj : JsValue) -> JsValue = "(obj) => obj.abort"
+
+///|
+#cfg(target="js")
+extern "js" fn underlying_sink_get_type_ffi(obj : JsValue) -> JsValue = "(obj) => obj.type"
+
+///|
+#cfg(target="wasm-gc")
+fn underlying_sink_ffi(
+  start : JsValue,
+  write : JsValue,
+  close : JsValue,
+  abort : JsValue,
+  type_ : JsValue,
+) -> UnderlyingSink = "webapi_UnderlyingSink" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn underlying_sink_empty_ffi() -> UnderlyingSink = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn underlying_sink_get_start_ffi(obj : JsValue) -> JsValue = "webapi_UnderlyingSink" "get_start"
+
+///|
+#cfg(target="wasm-gc")
+fn underlying_sink_get_write_ffi(obj : JsValue) -> JsValue = "webapi_UnderlyingSink" "get_write"
+
+///|
+#cfg(target="wasm-gc")
+fn underlying_sink_get_close_ffi(obj : JsValue) -> JsValue = "webapi_UnderlyingSink" "get_close"
+
+///|
+#cfg(target="wasm-gc")
+fn underlying_sink_get_abort_ffi(obj : JsValue) -> JsValue = "webapi_UnderlyingSink" "get_abort"
+
+///|
+#cfg(target="wasm-gc")
+fn underlying_sink_get_type_ffi(obj : JsValue) -> JsValue = "webapi_UnderlyingSink" "get_type"

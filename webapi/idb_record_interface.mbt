@@ -44,3 +44,45 @@ impl TIDBRecord with primary_key(self : Self) -> JsValue {
 impl TIDBRecord with value(self : Self) -> JsValue {
   idb_record_value_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn idb_record_key_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.key"
+
+///|
+#cfg(target="js")
+fn idb_record_key_ffi(obj : JsValue) -> JsValue {
+  idb_record_key_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_record_primary_key_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.primaryKey"
+
+///|
+#cfg(target="js")
+fn idb_record_primary_key_ffi(obj : JsValue) -> JsValue {
+  idb_record_primary_key_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_record_value_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.value"
+
+///|
+#cfg(target="js")
+fn idb_record_value_ffi(obj : JsValue) -> JsValue {
+  idb_record_value_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn idb_record_key_ffi(obj : JsValue) -> JsValue = "webapi_IDBRecord" "get_key"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_record_primary_key_ffi(obj : JsValue) -> JsValue = "webapi_IDBRecord" "get_primaryKey"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_record_value_ffi(obj : JsValue) -> JsValue = "webapi_IDBRecord" "get_value"

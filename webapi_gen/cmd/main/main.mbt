@@ -117,50 +117,70 @@ fn reconcile_output_dir(
 }
 
 ///|
+fn strip_template_target_suffix(filename : String) -> String {
+  if filename.has_suffix("_js.mbt") {
+    let stem = filename.strip_suffix("_js.mbt").unwrap()
+    "\{stem}.mbt"
+  } else if filename.has_suffix("_wasm.mbt") {
+    let stem = filename.strip_suffix("_wasm.mbt").unwrap()
+    "\{stem}.mbt"
+  } else {
+    filename
+  }
+}
+
+///|
 /// Copy all .mbt template files from templates_dir to output_dir.
-/// Returns arrays of JS-only and wasm-only filenames for conditional compilation.
+/// Target-specific template fragments are merged into a single output file
+/// using #cfg(target=...) guards.
 fn copy_templates(
   templates_dir : String,
   output_dir : String,
   expected_files : @hashset.HashSet[String],
-) -> (Array[String], Array[String]) raise {
+) -> Unit raise {
   println("=== Copying Template Files ===")
   let template_files = @fs.read_dir(templates_dir) catch {
     e => fail("failed to read templates directory \{templates_dir}: \{e}")
   }
-  let js_files : Array[String] = []
-  let wasm_files : Array[String] = []
+  let merged_templates : Map[String, @emit.MultiTargetCode] = {}
   for filename in template_files {
-    // Only copy .mbt files (skip non-.mbt files like README.md)
-    if filename.has_suffix(".mbt") {
-      let src_path = "\{templates_dir}/\{filename}"
-      println("  Copying \{filename}...")
-      let content = @fs.read_file_to_string(src_path) catch {
-        e => fail("failed to read template \{src_path}: \{e}")
-      }
-      write_output_file(output_dir, filename, content, expected_files)
-      // Track target-specific files
-      if filename.has_suffix("_js.mbt") {
-        js_files.push(filename)
-      } else if filename.has_suffix("_wasm.mbt") {
-        wasm_files.push(filename)
-      }
+    if !filename.has_suffix(".mbt") {
+      continue
     }
+    let src_path = "\{templates_dir}/\{filename}"
+    println("  Copying \{filename}...")
+    let content = @fs.read_file_to_string(src_path) catch {
+      e => fail("failed to read template \{src_path}: \{e}")
+    }
+    let output_name = strip_template_target_suffix(filename)
+    let current = merged_templates
+      .get(output_name)
+      .unwrap_or(@emit.MultiTargetCode::{ shared: "", js_ffi: "", wasm_ffi: "" })
+    let updated = if filename.has_suffix("_js.mbt") {
+      { ..current, js_ffi: content }
+    } else if filename.has_suffix("_wasm.mbt") {
+      { ..current, wasm_ffi: content }
+    } else {
+      { ..current, shared: content }
+    }
+    merged_templates[output_name] = updated
   }
-  (js_files, wasm_files)
+  let output_filenames = merged_templates.keys().collect()
+  output_filenames.sort()
+  for filename in output_filenames {
+    let merged = @emit.merge_multi_target_code(merged_templates[filename])
+    write_output_file(output_dir, filename, merged, expected_files)
+  }
 }
 
 ///|
-/// Emit and write multi-target files of a specific type.
-/// Returns the count of types processed, and appends target-specific
-/// filenames to the provided arrays.
+/// Emit and write merged multi-target files of a specific type.
+/// Returns the count of types processed.
 fn[E : @emit.Emitter] emit_and_write_multi(
   output_dir : String,
   type_name : String,
   emitter : E,
   keys : Iter[String],
-  js_files : Array[String],
-  wasm_files : Array[String],
   expected_files : @hashset.HashSet[String],
 ) -> Int raise {
   fn sorted_keys(keys : Iter[String]) -> Array[String] {
@@ -169,38 +189,25 @@ fn[E : @emit.Emitter] emit_and_write_multi(
     names
   }
 
-  fn write_files(
-    files : Map[@emit.Filename, @emit.Code],
-    track : Array[String]?,
-  ) -> Unit raise {
-    let filenames = files
-      .keys()
-      .map(fn(f) {
-        let @emit.Filename(n) = f
-        n
-      })
-      .collect()
-    filenames.sort()
-    for filename in filenames {
-      write_output_file(
-        output_dir,
-        filename,
-        files[@emit.Filename(filename)].0,
-        expected_files,
-      )
-      match track {
-        Some(arr) => arr.push(filename)
-        None => ()
-      }
-    }
-  }
-
   println("=== Generating \{type_name} ===")
-  let multi = @emit.emit_all_multi(emitter, sorted_keys(keys).iter())
-  let count = multi.shared.length()
-  write_files(multi.shared, None)
-  write_files(multi.js_ffi, Some(js_files))
-  write_files(multi.wasm_ffi, Some(wasm_files))
+  let files = @emit.emit_all_multi(emitter, sorted_keys(keys).iter())
+  let count = files.length()
+  let filenames = files
+    .keys()
+    .map(fn(f) {
+      let @emit.Filename(n) = f
+      n
+    })
+    .collect()
+  filenames.sort()
+  for filename in filenames {
+    write_output_file(
+      output_dir,
+      filename,
+      files[@emit.Filename(filename)].0,
+      expected_files,
+    )
+  }
   count
 }
 
@@ -236,30 +243,15 @@ fn filter_idl(
 }
 
 ///|
-/// Generate moon.pkg content with conditional compilation targets
-fn generate_moon_pkg(
-  js_files : Array[String],
-  wasm_files : Array[String],
-) -> String {
-  let buf = StringBuilder::new()
-  buf.write_string("warnings = \"-53\"\n\n")
-  buf.write_string("options(\n")
-  buf.write_string("  targets: {")
-  let entries : Array[String] = []
-  // Sort for deterministic output
-  js_files.sort()
-  wasm_files.sort()
-  for f in js_files {
-    entries.push(" \"\{f}\": [\"js\"]")
-  }
-  for f in wasm_files {
-    entries.push(" \"\{f}\": [\"wasm-gc\"]")
-  }
-  buf.write_string(entries.join(","))
-  buf.write_string(" },\n")
-  buf.write_string("  \"supported-targets\": \"js+wasm-gc\",\n")
-  buf.write_string(")\n")
-  buf.to_string()
+/// Generate moon.pkg content for unified cross-target source files.
+fn generate_moon_pkg() -> String {
+  (
+    #|warnings = "-53"
+    #|
+    #|options(
+    #|  "supported-targets": "js+wasm-gc",
+    #|)
+  )
 }
 
 ///|
@@ -336,11 +328,9 @@ fn main {
       }
     }
 
-    // Copy base template files (returns target-specific filenames)
+    // Copy base template files
     let expected_files : @hashset.HashSet[String] = @hashset.new()
-    let (js_files, wasm_files) = copy_templates(
-      templates_dir, output_dir, expected_files,
-    )
+    copy_templates(templates_dir, output_dir, expected_files)
 
     // Write skipped log
     if skipped_logs.length() > 0 {
@@ -356,8 +346,6 @@ fn main {
       "Enums",
       @emit.EnumEmitter::{ idl: flattened },
       flattened.enums.keys(),
-      js_files,
-      wasm_files,
       expected_files,
     )
     let typedef_count = emit_and_write_multi(
@@ -365,8 +353,6 @@ fn main {
       "Typedefs",
       @emit.TypedefEmitter::{ idl: flattened, type_registry },
       flattened.typedefs.keys(),
-      js_files,
-      wasm_files,
       expected_files,
     )
     let dict_count = emit_and_write_multi(
@@ -374,8 +360,6 @@ fn main {
       "Dictionaries",
       @emit.DictionaryEmitter::{ idl: flattened, type_registry },
       flattened.dictionaries.keys(),
-      js_files,
-      wasm_files,
       expected_files,
     )
     let iface_count = emit_and_write_multi(
@@ -383,8 +367,6 @@ fn main {
       "Interfaces",
       @emit.InterfaceEmitter::{ idl: flattened, type_registry, log_skipped },
       flattened.interfaces.keys(),
-      js_files,
-      wasm_files,
       expected_files,
     )
     let callback_count = emit_and_write_multi(
@@ -392,8 +374,6 @@ fn main {
       "Callbacks",
       @emit.CallbackEmitter::{ idl: flattened, type_registry },
       flattened.callbacks.keys(),
-      js_files,
-      wasm_files,
       expected_files,
     )
     let namespace_count = emit_and_write_multi(
@@ -401,8 +381,6 @@ fn main {
       "Namespaces",
       @emit.NamespaceEmitter::{ idl: flattened, type_registry },
       flattened.namespaces.keys(),
-      js_files,
-      wasm_files,
       expected_files,
     )
 
@@ -413,7 +391,7 @@ fn main {
 
     // Generate moon.pkg with conditional compilation targets
     println("=== Generating moon.pkg ===")
-    let moon_pkg_content = generate_moon_pkg(js_files, wasm_files)
+    let moon_pkg_content = generate_moon_pkg()
     write_output_file(output_dir, "moon.pkg", moon_pkg_content, expected_files)
     reconcile_output_dir(output_dir, expected_files)
     println("\n=== Generation complete! ===")

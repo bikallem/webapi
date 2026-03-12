@@ -23,3 +23,15 @@ pub fn NotificationPermissionCallback::new(
 ) -> NotificationPermissionCallback {
   notification_permission_callback_ffi(callback)
 }
+
+///|
+#cfg(target="js")
+extern "js" fn notification_permission_callback_ffi(
+  callback : (NotificationPermission) -> Unit,
+) -> NotificationPermissionCallback = "(callback) => callback"
+
+///|
+#cfg(target="wasm-gc")
+fn notification_permission_callback_ffi(
+  callback : (NotificationPermission) -> Unit,
+) -> NotificationPermissionCallback = "webapi_NotificationPermissionCallback" "new"

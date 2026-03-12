@@ -56,3 +56,39 @@ impl TMimeTypeArray with item(self : Self, index : UInt) -> MimeType {
 impl TMimeTypeArray with named_item(self : Self, name : String) -> MimeType {
   self.named_item_opt(name).unwrap()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn mime_type_array_length_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.length"
+
+///|
+#cfg(target="js")
+fn mime_type_array_length_ffi(obj : JsValue) -> UInt {
+  mime_type_array_length_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn mime_type_array_item_ffi(
+  obj : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, index) => obj.item(index)"
+
+///|
+#cfg(target="js")
+extern "js" fn mime_type_array_named_item_ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> JsValue = "(obj, name) => obj.namedItem(name)"
+
+///|
+#cfg(target="wasm-gc")
+fn mime_type_array_length_ffi(obj : JsValue) -> UInt = "webapi_MimeTypeArray" "get_length"
+
+///|
+#cfg(target="wasm-gc")
+fn mime_type_array_item_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_MimeTypeArray" "item"
+
+///|
+#cfg(target="wasm-gc")
+fn mime_type_array_named_item_ffi(obj : JsValue, name : JsValue) -> JsValue = "webapi_MimeTypeArray" "namedItem"

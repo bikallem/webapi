@@ -229,3 +229,322 @@ impl TShadowRoot with fullscreen_element(self : Self) -> Element {
 impl TShadowRoot with get_animations(self : Self) -> Array[Animation] {
   shadow_root_get_animations_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn shadow_root_mode_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.mode"
+
+///|
+#cfg(target="js")
+fn shadow_root_mode_ffi(obj : JsValue) -> ShadowRootMode {
+  ShadowRootMode::from_unchecked(shadow_root_mode_ffi_js(obj).unsafe_cast())
+}
+
+///|
+#cfg(target="js")
+extern "js" fn shadow_root_delegates_focus_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.delegatesFocus"
+
+///|
+#cfg(target="js")
+fn shadow_root_delegates_focus_ffi(obj : JsValue) -> Bool {
+  shadow_root_delegates_focus_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn shadow_root_slot_assignment_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.slotAssignment"
+
+///|
+#cfg(target="js")
+fn shadow_root_slot_assignment_ffi(obj : JsValue) -> SlotAssignmentMode {
+  SlotAssignmentMode::from_unchecked(
+    shadow_root_slot_assignment_ffi_js(obj).unsafe_cast(),
+  )
+}
+
+///|
+#cfg(target="js")
+extern "js" fn shadow_root_clonable_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.clonable"
+
+///|
+#cfg(target="js")
+fn shadow_root_clonable_ffi(obj : JsValue) -> Bool {
+  shadow_root_clonable_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn shadow_root_serializable_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.serializable"
+
+///|
+#cfg(target="js")
+fn shadow_root_serializable_ffi(obj : JsValue) -> Bool {
+  shadow_root_serializable_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn shadow_root_host_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.host"
+
+///|
+#cfg(target="js")
+fn shadow_root_host_ffi(obj : JsValue) -> Element {
+  shadow_root_host_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn shadow_root_onslotchange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onslotchange"
+
+///|
+#cfg(target="js")
+fn shadow_root_onslotchange_ffi(obj : JsValue) -> EventHandler {
+  shadow_root_onslotchange_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn shadow_root_set_onslotchange_ffi(
+  obj : JsValue,
+  onslotchange : JsValue,
+) -> Unit = "(obj, onslotchange) => { obj.onslotchange = onslotchange; }"
+
+///|
+#cfg(target="js")
+extern "js" fn shadow_root_set_html_unsafe_ffi(
+  obj : JsValue,
+  html : JsValue,
+) -> Unit = "(obj, html) => obj.setHTMLUnsafe(html)"
+
+///|
+#cfg(target="js")
+extern "js" fn shadow_root_get_html_ffi_js(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, options) => obj.getHTML(options)"
+
+///|
+#cfg(target="js")
+fn shadow_root_get_html_ffi(obj : JsValue, options : JsValue) -> String {
+  shadow_root_get_html_ffi_js(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn shadow_root_inner_html_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.innerHTML"
+
+///|
+#cfg(target="js")
+fn shadow_root_inner_html_ffi(obj : JsValue) -> ShadowRootInnerHTML {
+  shadow_root_inner_html_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn shadow_root_set_inner_html_ffi(
+  obj : JsValue,
+  inner_html : JsValue,
+) -> Unit = "(obj, innerHTML) => { obj.innerHTML = innerHTML; }"
+
+///|
+#cfg(target="js")
+extern "js" fn shadow_root_custom_element_registry_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.customElementRegistry"
+
+///|
+#cfg(target="js")
+fn shadow_root_custom_element_registry_ffi(
+  obj : JsValue,
+) -> CustomElementRegistry {
+  shadow_root_custom_element_registry_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn shadow_root_active_element_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.activeElement"
+
+///|
+#cfg(target="js")
+fn shadow_root_active_element_ffi(obj : JsValue) -> Element {
+  shadow_root_active_element_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn shadow_root_style_sheets_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.styleSheets"
+
+///|
+#cfg(target="js")
+fn shadow_root_style_sheets_ffi(obj : JsValue) -> StyleSheetList {
+  shadow_root_style_sheets_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn shadow_root_adopted_style_sheets_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.adoptedStyleSheets"
+
+///|
+#cfg(target="js")
+fn shadow_root_adopted_style_sheets_ffi(obj : JsValue) -> Array[CSSStyleSheet] {
+  shadow_root_adopted_style_sheets_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn shadow_root_set_adopted_style_sheets_ffi(
+  obj : JsValue,
+  adopted_style_sheets : JsValue,
+) -> Unit = "(obj, adoptedStyleSheets) => { obj.adoptedStyleSheets = adoptedStyleSheets; }"
+
+///|
+#cfg(target="js")
+extern "js" fn shadow_root_fullscreen_element_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.fullscreenElement"
+
+///|
+#cfg(target="js")
+fn shadow_root_fullscreen_element_ffi(obj : JsValue) -> Element {
+  shadow_root_fullscreen_element_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn shadow_root_get_animations_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.getAnimations()"
+
+///|
+#cfg(target="js")
+fn shadow_root_get_animations_ffi(obj : JsValue) -> Array[Animation] {
+  shadow_root_get_animations_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn shadow_root_mode_ffi_wasm(obj : JsValue) -> JsValue = "webapi_ShadowRoot" "get_mode"
+
+///|
+#cfg(target="wasm-gc")
+fn shadow_root_mode_ffi(obj : JsValue) -> ShadowRootMode {
+  ShadowRootMode::from_unchecked(
+    jsvalue_to_string(shadow_root_mode_ffi_wasm(obj)),
+  )
+}
+
+///|
+#cfg(target="wasm-gc")
+fn shadow_root_delegates_focus_ffi(obj : JsValue) -> Bool = "webapi_ShadowRoot" "get_delegatesFocus"
+
+///|
+#cfg(target="wasm-gc")
+fn shadow_root_slot_assignment_ffi_wasm(obj : JsValue) -> JsValue = "webapi_ShadowRoot" "get_slotAssignment"
+
+///|
+#cfg(target="wasm-gc")
+fn shadow_root_slot_assignment_ffi(obj : JsValue) -> SlotAssignmentMode {
+  SlotAssignmentMode::from_unchecked(
+    jsvalue_to_string(shadow_root_slot_assignment_ffi_wasm(obj)),
+  )
+}
+
+///|
+#cfg(target="wasm-gc")
+fn shadow_root_clonable_ffi(obj : JsValue) -> Bool = "webapi_ShadowRoot" "get_clonable"
+
+///|
+#cfg(target="wasm-gc")
+fn shadow_root_serializable_ffi(obj : JsValue) -> Bool = "webapi_ShadowRoot" "get_serializable"
+
+///|
+#cfg(target="wasm-gc")
+fn shadow_root_host_ffi(obj : JsValue) -> Element = "webapi_ShadowRoot" "get_host"
+
+///|
+#cfg(target="wasm-gc")
+fn shadow_root_onslotchange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_ShadowRoot" "get_onslotchange"
+
+///|
+#cfg(target="wasm-gc")
+fn shadow_root_onslotchange_ffi(obj : JsValue) -> EventHandler {
+  shadow_root_onslotchange_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn shadow_root_set_onslotchange_ffi(
+  obj : JsValue,
+  onslotchange : JsValue,
+) -> Unit = "webapi_ShadowRoot" "set_onslotchange"
+
+///|
+#cfg(target="wasm-gc")
+fn shadow_root_set_html_unsafe_ffi(obj : JsValue, html : JsValue) -> Unit = "webapi_ShadowRoot" "setHTMLUnsafe"
+
+///|
+#cfg(target="wasm-gc")
+fn shadow_root_get_html_ffi_wasm(obj : JsValue, options : JsValue) -> JsValue = "webapi_ShadowRoot" "getHTML"
+
+///|
+#cfg(target="wasm-gc")
+fn shadow_root_get_html_ffi(obj : JsValue, options : JsValue) -> String {
+  jsvalue_to_string(shadow_root_get_html_ffi_wasm(obj, options))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn shadow_root_inner_html_ffi_wasm(obj : JsValue) -> JsValue = "webapi_ShadowRoot" "get_innerHTML"
+
+///|
+#cfg(target="wasm-gc")
+fn shadow_root_inner_html_ffi(obj : JsValue) -> ShadowRootInnerHTML {
+  shadow_root_inner_html_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn shadow_root_set_inner_html_ffi(obj : JsValue, inner_html : JsValue) -> Unit = "webapi_ShadowRoot" "set_innerHTML"
+
+///|
+#cfg(target="wasm-gc")
+fn shadow_root_custom_element_registry_ffi(
+  obj : JsValue,
+) -> CustomElementRegistry = "webapi_ShadowRoot" "get_customElementRegistry"
+
+///|
+#cfg(target="wasm-gc")
+fn shadow_root_active_element_ffi(obj : JsValue) -> Element = "webapi_ShadowRoot" "get_activeElement"
+
+///|
+#cfg(target="wasm-gc")
+fn shadow_root_style_sheets_ffi(obj : JsValue) -> StyleSheetList = "webapi_ShadowRoot" "get_styleSheets"
+
+///|
+#cfg(target="wasm-gc")
+fn shadow_root_adopted_style_sheets_ffi_wasm(obj : JsValue) -> JsArray = "webapi_ShadowRoot" "get_adoptedStyleSheets"
+
+///|
+#cfg(target="wasm-gc")
+fn shadow_root_adopted_style_sheets_ffi(obj : JsValue) -> Array[CSSStyleSheet] {
+  shadow_root_adopted_style_sheets_ffi_wasm(obj).to_array()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn shadow_root_set_adopted_style_sheets_ffi(
+  obj : JsValue,
+  adopted_style_sheets : JsValue,
+) -> Unit = "webapi_ShadowRoot" "set_adoptedStyleSheets"
+
+///|
+#cfg(target="wasm-gc")
+fn shadow_root_fullscreen_element_ffi(obj : JsValue) -> Element = "webapi_ShadowRoot" "get_fullscreenElement"
+
+///|
+#cfg(target="wasm-gc")
+fn shadow_root_get_animations_ffi_wasm(obj : JsValue) -> JsArray = "webapi_ShadowRoot" "getAnimations"
+
+///|
+#cfg(target="wasm-gc")
+fn shadow_root_get_animations_ffi(obj : JsValue) -> Array[Animation] {
+  shadow_root_get_animations_ffi_wasm(obj).to_array()
+}

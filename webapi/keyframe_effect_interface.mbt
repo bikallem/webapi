@@ -127,3 +127,158 @@ impl TKeyframeEffect with set_keyframes(self : Self, keyframes : JsValue) -> Uni
     TJsValue::to_js(keyframes),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn keyframe_effect_new_ffi(
+  target : JsValue,
+  keyframes : JsValue,
+  options : JsValue,
+) -> KeyframeEffect = "(target, keyframes, options) => new KeyframeEffect(target, keyframes, options)"
+
+///|
+#cfg(target="js")
+extern "js" fn keyframe_effect_new_2_ffi(source : JsValue) -> KeyframeEffect = "(source) => new KeyframeEffect(source)"
+
+///|
+#cfg(target="js")
+extern "js" fn keyframe_effect_target_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.target"
+
+///|
+#cfg(target="js")
+fn keyframe_effect_target_ffi(obj : JsValue) -> Element {
+  keyframe_effect_target_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn keyframe_effect_set_target_ffi(
+  obj : JsValue,
+  target : JsValue,
+) -> Unit = "(obj, target) => { obj.target = target; }"
+
+///|
+#cfg(target="js")
+extern "js" fn keyframe_effect_pseudo_element_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.pseudoElement"
+
+///|
+#cfg(target="js")
+fn keyframe_effect_pseudo_element_ffi(obj : JsValue) -> CSSOMString {
+  keyframe_effect_pseudo_element_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn keyframe_effect_set_pseudo_element_ffi(
+  obj : JsValue,
+  pseudo_element : JsValue,
+) -> Unit = "(obj, pseudoElement) => { obj.pseudoElement = pseudoElement; }"
+
+///|
+#cfg(target="js")
+extern "js" fn keyframe_effect_composite_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.composite"
+
+///|
+#cfg(target="js")
+fn keyframe_effect_composite_ffi(obj : JsValue) -> CompositeOperation {
+  CompositeOperation::from_unchecked(
+    keyframe_effect_composite_ffi_js(obj).unsafe_cast(),
+  )
+}
+
+///|
+#cfg(target="js")
+extern "js" fn keyframe_effect_set_composite_ffi(
+  obj : JsValue,
+  composite : JsValue,
+) -> Unit = "(obj, composite) => { obj.composite = composite; }"
+
+///|
+#cfg(target="js")
+extern "js" fn keyframe_effect_get_keyframes_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.getKeyframes()"
+
+///|
+#cfg(target="js")
+fn keyframe_effect_get_keyframes_ffi(obj : JsValue) -> Array[JsValue] {
+  keyframe_effect_get_keyframes_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn keyframe_effect_set_keyframes_ffi(
+  obj : JsValue,
+  keyframes : JsValue,
+) -> Unit = "(obj, keyframes) => obj.setKeyframes(keyframes)"
+
+///|
+#cfg(target="wasm-gc")
+fn keyframe_effect_new_ffi(
+  target : JsValue,
+  keyframes : JsValue,
+  options : JsValue,
+) -> KeyframeEffect = "webapi_KeyframeEffect" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn keyframe_effect_new_2_ffi(source : JsValue) -> KeyframeEffect = "webapi_KeyframeEffect" "new_2"
+
+///|
+#cfg(target="wasm-gc")
+fn keyframe_effect_target_ffi(obj : JsValue) -> Element = "webapi_KeyframeEffect" "get_target"
+
+///|
+#cfg(target="wasm-gc")
+fn keyframe_effect_set_target_ffi(obj : JsValue, target : JsValue) -> Unit = "webapi_KeyframeEffect" "set_target"
+
+///|
+#cfg(target="wasm-gc")
+fn keyframe_effect_pseudo_element_ffi_wasm(obj : JsValue) -> JsValue = "webapi_KeyframeEffect" "get_pseudoElement"
+
+///|
+#cfg(target="wasm-gc")
+fn keyframe_effect_pseudo_element_ffi(obj : JsValue) -> CSSOMString {
+  keyframe_effect_pseudo_element_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn keyframe_effect_set_pseudo_element_ffi(
+  obj : JsValue,
+  pseudo_element : JsValue,
+) -> Unit = "webapi_KeyframeEffect" "set_pseudoElement"
+
+///|
+#cfg(target="wasm-gc")
+fn keyframe_effect_composite_ffi_wasm(obj : JsValue) -> JsValue = "webapi_KeyframeEffect" "get_composite"
+
+///|
+#cfg(target="wasm-gc")
+fn keyframe_effect_composite_ffi(obj : JsValue) -> CompositeOperation {
+  CompositeOperation::from_unchecked(
+    jsvalue_to_string(keyframe_effect_composite_ffi_wasm(obj)),
+  )
+}
+
+///|
+#cfg(target="wasm-gc")
+fn keyframe_effect_set_composite_ffi(
+  obj : JsValue,
+  composite : JsValue,
+) -> Unit = "webapi_KeyframeEffect" "set_composite"
+
+///|
+#cfg(target="wasm-gc")
+fn keyframe_effect_get_keyframes_ffi_wasm(obj : JsValue) -> JsArray = "webapi_KeyframeEffect" "getKeyframes"
+
+///|
+#cfg(target="wasm-gc")
+fn keyframe_effect_get_keyframes_ffi(obj : JsValue) -> Array[JsValue] {
+  keyframe_effect_get_keyframes_ffi_wasm(obj).to_array()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn keyframe_effect_set_keyframes_ffi(
+  obj : JsValue,
+  keyframes : JsValue,
+) -> Unit = "webapi_KeyframeEffect" "setKeyframes"

@@ -82,3 +82,112 @@ impl TAbortSignal with set_onabort(self : Self, onabort : (Event) -> JsValue) ->
     TJsValue::to_js(event_handler_non_null_ffi(onabort)),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn abort_signal_abort_ffi_js(reason : JsValue) -> JsValue = "(reason) => AbortSignal.abort(reason)"
+
+///|
+#cfg(target="js")
+fn abort_signal_abort_ffi(reason : JsValue) -> AbortSignal {
+  abort_signal_abort_ffi_js(reason).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn abort_signal_timeout_ffi_js(milliseconds : JsValue) -> JsValue = "(milliseconds) => AbortSignal.timeout(milliseconds)"
+
+///|
+#cfg(target="js")
+fn abort_signal_timeout_ffi(milliseconds : JsValue) -> AbortSignal {
+  abort_signal_timeout_ffi_js(milliseconds).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn abort_signal_any_ffi_js(signals : JsValue) -> JsValue = "(signals) => AbortSignal.any(signals)"
+
+///|
+#cfg(target="js")
+fn abort_signal_any_ffi(signals : JsValue) -> AbortSignal {
+  abort_signal_any_ffi_js(signals).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn abort_signal_aborted_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.aborted"
+
+///|
+#cfg(target="js")
+fn abort_signal_aborted_ffi(obj : JsValue) -> Bool {
+  abort_signal_aborted_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn abort_signal_reason_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.reason"
+
+///|
+#cfg(target="js")
+fn abort_signal_reason_ffi(obj : JsValue) -> JsValue {
+  abort_signal_reason_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn abort_signal_throw_if_aborted_ffi(obj : JsValue) -> Unit = "(obj) => obj.throwIfAborted()"
+
+///|
+#cfg(target="js")
+extern "js" fn abort_signal_onabort_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onabort"
+
+///|
+#cfg(target="js")
+fn abort_signal_onabort_ffi(obj : JsValue) -> EventHandler {
+  abort_signal_onabort_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn abort_signal_set_onabort_ffi(
+  obj : JsValue,
+  onabort : JsValue,
+) -> Unit = "(obj, onabort) => { obj.onabort = onabort; }"
+
+///|
+#cfg(target="wasm-gc")
+fn abort_signal_abort_ffi(reason : JsValue) -> AbortSignal = "webapi_AbortSignal" "abort"
+
+///|
+#cfg(target="wasm-gc")
+fn abort_signal_timeout_ffi(milliseconds : JsValue) -> AbortSignal = "webapi_AbortSignal" "timeout"
+
+///|
+#cfg(target="wasm-gc")
+fn abort_signal_any_ffi(signals : JsValue) -> AbortSignal = "webapi_AbortSignal" "any"
+
+///|
+#cfg(target="wasm-gc")
+fn abort_signal_aborted_ffi(obj : JsValue) -> Bool = "webapi_AbortSignal" "get_aborted"
+
+///|
+#cfg(target="wasm-gc")
+fn abort_signal_reason_ffi(obj : JsValue) -> JsValue = "webapi_AbortSignal" "get_reason"
+
+///|
+#cfg(target="wasm-gc")
+fn abort_signal_throw_if_aborted_ffi(obj : JsValue) -> Unit = "webapi_AbortSignal" "throwIfAborted"
+
+///|
+#cfg(target="wasm-gc")
+fn abort_signal_onabort_ffi_wasm(obj : JsValue) -> JsValue = "webapi_AbortSignal" "get_onabort"
+
+///|
+#cfg(target="wasm-gc")
+fn abort_signal_onabort_ffi(obj : JsValue) -> EventHandler {
+  abort_signal_onabort_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn abort_signal_set_onabort_ffi(obj : JsValue, onabort : JsValue) -> Unit = "webapi_AbortSignal" "set_onabort"

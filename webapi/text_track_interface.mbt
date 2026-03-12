@@ -123,3 +123,216 @@ impl TTextTrack with set_oncuechange(
     TJsValue::to_js(event_handler_non_null_ffi(oncuechange)),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn text_track_kind_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.kind"
+
+///|
+#cfg(target="js")
+fn text_track_kind_ffi(obj : JsValue) -> TextTrackKind {
+  TextTrackKind::from_unchecked(text_track_kind_ffi_js(obj).unsafe_cast())
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_track_label_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.label"
+
+///|
+#cfg(target="js")
+fn text_track_label_ffi(obj : JsValue) -> String {
+  text_track_label_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_track_language_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.language"
+
+///|
+#cfg(target="js")
+fn text_track_language_ffi(obj : JsValue) -> String {
+  text_track_language_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_track_id_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.id"
+
+///|
+#cfg(target="js")
+fn text_track_id_ffi(obj : JsValue) -> String {
+  text_track_id_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_track_in_band_metadata_track_dispatch_type_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.inBandMetadataTrackDispatchType"
+
+///|
+#cfg(target="js")
+fn text_track_in_band_metadata_track_dispatch_type_ffi(obj : JsValue) -> String {
+  text_track_in_band_metadata_track_dispatch_type_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_track_mode_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.mode"
+
+///|
+#cfg(target="js")
+fn text_track_mode_ffi(obj : JsValue) -> TextTrackMode {
+  TextTrackMode::from_unchecked(text_track_mode_ffi_js(obj).unsafe_cast())
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_track_set_mode_ffi(obj : JsValue, mode : JsValue) -> Unit = "(obj, mode) => { obj.mode = mode; }"
+
+///|
+#cfg(target="js")
+extern "js" fn text_track_cues_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.cues"
+
+///|
+#cfg(target="js")
+fn text_track_cues_ffi(obj : JsValue) -> TextTrackCueList {
+  text_track_cues_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_track_active_cues_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.activeCues"
+
+///|
+#cfg(target="js")
+fn text_track_active_cues_ffi(obj : JsValue) -> TextTrackCueList {
+  text_track_active_cues_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_track_add_cue_ffi(obj : JsValue, cue : JsValue) -> Unit = "(obj, cue) => obj.addCue(cue)"
+
+///|
+#cfg(target="js")
+extern "js" fn text_track_remove_cue_ffi(obj : JsValue, cue : JsValue) -> Unit = "(obj, cue) => obj.removeCue(cue)"
+
+///|
+#cfg(target="js")
+extern "js" fn text_track_oncuechange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oncuechange"
+
+///|
+#cfg(target="js")
+fn text_track_oncuechange_ffi(obj : JsValue) -> EventHandler {
+  text_track_oncuechange_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_track_set_oncuechange_ffi(
+  obj : JsValue,
+  oncuechange : JsValue,
+) -> Unit = "(obj, oncuechange) => { obj.oncuechange = oncuechange; }"
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_kind_ffi_wasm(obj : JsValue) -> JsValue = "webapi_TextTrack" "get_kind"
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_kind_ffi(obj : JsValue) -> TextTrackKind {
+  TextTrackKind::from_unchecked(
+    jsvalue_to_string(text_track_kind_ffi_wasm(obj)),
+  )
+}
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_label_ffi_wasm(obj : JsValue) -> JsValue = "webapi_TextTrack" "get_label"
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_label_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(text_track_label_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_language_ffi_wasm(obj : JsValue) -> JsValue = "webapi_TextTrack" "get_language"
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_language_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(text_track_language_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_id_ffi_wasm(obj : JsValue) -> JsValue = "webapi_TextTrack" "get_id"
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_id_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(text_track_id_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_in_band_metadata_track_dispatch_type_ffi_wasm(
+  obj : JsValue,
+) -> JsValue = "webapi_TextTrack" "get_inBandMetadataTrackDispatchType"
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_in_band_metadata_track_dispatch_type_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(
+    text_track_in_band_metadata_track_dispatch_type_ffi_wasm(obj),
+  )
+}
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_mode_ffi_wasm(obj : JsValue) -> JsValue = "webapi_TextTrack" "get_mode"
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_mode_ffi(obj : JsValue) -> TextTrackMode {
+  TextTrackMode::from_unchecked(
+    jsvalue_to_string(text_track_mode_ffi_wasm(obj)),
+  )
+}
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_set_mode_ffi(obj : JsValue, mode : JsValue) -> Unit = "webapi_TextTrack" "set_mode"
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_cues_ffi(obj : JsValue) -> TextTrackCueList = "webapi_TextTrack" "get_cues"
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_active_cues_ffi(obj : JsValue) -> TextTrackCueList = "webapi_TextTrack" "get_activeCues"
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_add_cue_ffi(obj : JsValue, cue : JsValue) -> Unit = "webapi_TextTrack" "addCue"
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_remove_cue_ffi(obj : JsValue, cue : JsValue) -> Unit = "webapi_TextTrack" "removeCue"
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_oncuechange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_TextTrack" "get_oncuechange"
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_oncuechange_ffi(obj : JsValue) -> EventHandler {
+  text_track_oncuechange_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_set_oncuechange_ffi(obj : JsValue, oncuechange : JsValue) -> Unit = "webapi_TextTrack" "set_oncuechange"

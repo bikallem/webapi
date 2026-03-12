@@ -42,3 +42,49 @@ pub fn GetHTMLOptions::shadow_roots(
 ) -> Array[ShadowRoot]? {
   get_html_options_get_shadow_roots_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn get_html_options_ffi(
+  serializable_shadow_roots : JsValue,
+  shadow_roots : JsValue,
+) -> GetHTMLOptions =
+  #|(serializableShadowRoots, shadowRoots) => {
+  #|  const obj = {};
+  #|  if (serializableShadowRoots !== undefined) obj.serializableShadowRoots = serializableShadowRoots;
+  #|  if (shadowRoots !== undefined) obj.shadowRoots = shadowRoots;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn get_html_options_empty_ffi() -> GetHTMLOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn get_html_options_get_serializable_shadow_roots_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.serializableShadowRoots"
+
+///|
+#cfg(target="js")
+extern "js" fn get_html_options_get_shadow_roots_ffi(obj : JsValue) -> JsValue = "(obj) => obj.shadowRoots"
+
+///|
+#cfg(target="wasm-gc")
+fn get_html_options_ffi(
+  serializable_shadow_roots : JsValue,
+  shadow_roots : JsValue,
+) -> GetHTMLOptions = "webapi_GetHTMLOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn get_html_options_empty_ffi() -> GetHTMLOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn get_html_options_get_serializable_shadow_roots_ffi(obj : JsValue) -> JsValue = "webapi_GetHTMLOptions" "get_serializableShadowRoots"
+
+///|
+#cfg(target="wasm-gc")
+fn get_html_options_get_shadow_roots_ffi(obj : JsValue) -> JsValue = "webapi_GetHTMLOptions" "get_shadowRoots"

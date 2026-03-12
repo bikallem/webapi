@@ -71,3 +71,76 @@ impl THTMLModElement with set_date_time(self : Self, date_time : String) -> Unit
     TJsValue::to_js(date_time),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_mod_element_new_ffi() -> HTMLModElement = "() => new HTMLModElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_mod_element_cite_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.cite"
+
+///|
+#cfg(target="js")
+fn html_mod_element_cite_ffi(obj : JsValue) -> String {
+  html_mod_element_cite_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_mod_element_set_cite_ffi(
+  obj : JsValue,
+  cite : JsValue,
+) -> Unit = "(obj, cite) => { obj.cite = cite; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_mod_element_date_time_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.dateTime"
+
+///|
+#cfg(target="js")
+fn html_mod_element_date_time_ffi(obj : JsValue) -> String {
+  html_mod_element_date_time_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_mod_element_set_date_time_ffi(
+  obj : JsValue,
+  date_time : JsValue,
+) -> Unit = "(obj, dateTime) => { obj.dateTime = dateTime; }"
+
+///|
+#cfg(target="wasm-gc")
+fn html_mod_element_new_ffi() -> HTMLModElement = "webapi_HTMLModElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_mod_element_cite_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLModElement" "get_cite"
+
+///|
+#cfg(target="wasm-gc")
+fn html_mod_element_cite_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_mod_element_cite_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_mod_element_set_cite_ffi(obj : JsValue, cite : JsValue) -> Unit = "webapi_HTMLModElement" "set_cite"
+
+///|
+#cfg(target="wasm-gc")
+fn html_mod_element_date_time_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLModElement" "get_dateTime"
+
+///|
+#cfg(target="wasm-gc")
+fn html_mod_element_date_time_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_mod_element_date_time_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_mod_element_set_date_time_ffi(
+  obj : JsValue,
+  date_time : JsValue,
+) -> Unit = "webapi_HTMLModElement" "set_dateTime"

@@ -68,3 +68,93 @@ impl TTextDecoderStream with readable(self : Self) -> ReadableStream {
 impl TTextDecoderStream with writable(self : Self) -> WritableStream {
   text_decoder_stream_writable_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn text_decoder_stream_new_ffi(
+  label : JsValue,
+  options : JsValue,
+) -> TextDecoderStream = "(label, options) => new TextDecoderStream(label, options)"
+
+///|
+#cfg(target="js")
+extern "js" fn text_decoder_stream_encoding_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.encoding"
+
+///|
+#cfg(target="js")
+fn text_decoder_stream_encoding_ffi(obj : JsValue) -> String {
+  text_decoder_stream_encoding_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_decoder_stream_fatal_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.fatal"
+
+///|
+#cfg(target="js")
+fn text_decoder_stream_fatal_ffi(obj : JsValue) -> Bool {
+  text_decoder_stream_fatal_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_decoder_stream_ignore_bom_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ignoreBOM"
+
+///|
+#cfg(target="js")
+fn text_decoder_stream_ignore_bom_ffi(obj : JsValue) -> Bool {
+  text_decoder_stream_ignore_bom_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_decoder_stream_readable_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.readable"
+
+///|
+#cfg(target="js")
+fn text_decoder_stream_readable_ffi(obj : JsValue) -> ReadableStream {
+  text_decoder_stream_readable_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_decoder_stream_writable_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.writable"
+
+///|
+#cfg(target="js")
+fn text_decoder_stream_writable_ffi(obj : JsValue) -> WritableStream {
+  text_decoder_stream_writable_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn text_decoder_stream_new_ffi(
+  label : JsValue,
+  options : JsValue,
+) -> TextDecoderStream = "webapi_TextDecoderStream" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn text_decoder_stream_encoding_ffi_wasm(obj : JsValue) -> JsValue = "webapi_TextDecoderStream" "get_encoding"
+
+///|
+#cfg(target="wasm-gc")
+fn text_decoder_stream_encoding_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(text_decoder_stream_encoding_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn text_decoder_stream_fatal_ffi(obj : JsValue) -> Bool = "webapi_TextDecoderStream" "get_fatal"
+
+///|
+#cfg(target="wasm-gc")
+fn text_decoder_stream_ignore_bom_ffi(obj : JsValue) -> Bool = "webapi_TextDecoderStream" "get_ignoreBOM"
+
+///|
+#cfg(target="wasm-gc")
+fn text_decoder_stream_readable_ffi(obj : JsValue) -> ReadableStream = "webapi_TextDecoderStream" "get_readable"
+
+///|
+#cfg(target="wasm-gc")
+fn text_decoder_stream_writable_ffi(obj : JsValue) -> WritableStream = "webapi_TextDecoderStream" "get_writable"

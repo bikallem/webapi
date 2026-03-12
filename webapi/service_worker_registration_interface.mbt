@@ -140,3 +140,279 @@ impl TServiceWorkerRegistration with set_onupdatefound(
     TJsValue::to_js(event_handler_non_null_ffi(onupdatefound)),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn service_worker_registration_show_notification_ffi_js(
+  obj : JsValue,
+  title : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, title, options) => obj.showNotification(title, options)"
+
+///|
+#cfg(target="js")
+fn service_worker_registration_show_notification_ffi(
+  obj : JsValue,
+  title : JsValue,
+  options : JsValue,
+) -> JsPromise[JsValue] {
+  service_worker_registration_show_notification_ffi_js(obj, title, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn service_worker_registration_get_notifications_ffi_js(
+  obj : JsValue,
+  filter : JsValue,
+) -> JsValue = "(obj, filter) => obj.getNotifications(filter)"
+
+///|
+#cfg(target="js")
+fn service_worker_registration_get_notifications_ffi(
+  obj : JsValue,
+  filter : JsValue,
+) -> JsPromise[Array[Notification]] {
+  service_worker_registration_get_notifications_ffi_js(obj, filter).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn service_worker_registration_installing_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.installing"
+
+///|
+#cfg(target="js")
+fn service_worker_registration_installing_ffi(obj : JsValue) -> ServiceWorker {
+  service_worker_registration_installing_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn service_worker_registration_waiting_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.waiting"
+
+///|
+#cfg(target="js")
+fn service_worker_registration_waiting_ffi(obj : JsValue) -> ServiceWorker {
+  service_worker_registration_waiting_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn service_worker_registration_active_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.active"
+
+///|
+#cfg(target="js")
+fn service_worker_registration_active_ffi(obj : JsValue) -> ServiceWorker {
+  service_worker_registration_active_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn service_worker_registration_navigation_preload_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.navigationPreload"
+
+///|
+#cfg(target="js")
+fn service_worker_registration_navigation_preload_ffi(
+  obj : JsValue,
+) -> NavigationPreloadManager {
+  service_worker_registration_navigation_preload_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn service_worker_registration_scope_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.scope"
+
+///|
+#cfg(target="js")
+fn service_worker_registration_scope_ffi(obj : JsValue) -> String {
+  service_worker_registration_scope_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn service_worker_registration_update_via_cache_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.updateViaCache"
+
+///|
+#cfg(target="js")
+fn service_worker_registration_update_via_cache_ffi(
+  obj : JsValue,
+) -> ServiceWorkerUpdateViaCache {
+  ServiceWorkerUpdateViaCache::from_unchecked(
+    service_worker_registration_update_via_cache_ffi_js(obj).unsafe_cast(),
+  )
+}
+
+///|
+#cfg(target="js")
+extern "js" fn service_worker_registration_update_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.update()"
+
+///|
+#cfg(target="js")
+fn service_worker_registration_update_ffi(
+  obj : JsValue,
+) -> JsPromise[ServiceWorkerRegistration] {
+  service_worker_registration_update_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn service_worker_registration_unregister_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.unregister()"
+
+///|
+#cfg(target="js")
+fn service_worker_registration_unregister_ffi(obj : JsValue) -> JsPromise[Bool] {
+  service_worker_registration_unregister_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn service_worker_registration_onupdatefound_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.onupdatefound"
+
+///|
+#cfg(target="js")
+fn service_worker_registration_onupdatefound_ffi(obj : JsValue) -> EventHandler {
+  service_worker_registration_onupdatefound_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn service_worker_registration_set_onupdatefound_ffi(
+  obj : JsValue,
+  onupdatefound : JsValue,
+) -> Unit = "(obj, onupdatefound) => { obj.onupdatefound = onupdatefound; }"
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_registration_show_notification_ffi_wasm(
+  obj : JsValue,
+  title : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_ServiceWorkerRegistration" "showNotification"
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_registration_show_notification_ffi(
+  obj : JsValue,
+  title : JsValue,
+  options : JsValue,
+) -> JsPromise[JsValue] {
+  service_worker_registration_show_notification_ffi_wasm(obj, title, options).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_registration_get_notifications_ffi_wasm(
+  obj : JsValue,
+  filter : JsValue,
+) -> JsValue = "webapi_ServiceWorkerRegistration" "getNotifications"
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_registration_get_notifications_ffi(
+  obj : JsValue,
+  filter : JsValue,
+) -> JsPromise[Array[Notification]] {
+  service_worker_registration_get_notifications_ffi_wasm(obj, filter).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_registration_installing_ffi(obj : JsValue) -> ServiceWorker = "webapi_ServiceWorkerRegistration" "get_installing"
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_registration_waiting_ffi(obj : JsValue) -> ServiceWorker = "webapi_ServiceWorkerRegistration" "get_waiting"
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_registration_active_ffi(obj : JsValue) -> ServiceWorker = "webapi_ServiceWorkerRegistration" "get_active"
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_registration_navigation_preload_ffi(
+  obj : JsValue,
+) -> NavigationPreloadManager = "webapi_ServiceWorkerRegistration" "get_navigationPreload"
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_registration_scope_ffi_wasm(obj : JsValue) -> JsValue = "webapi_ServiceWorkerRegistration" "get_scope"
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_registration_scope_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(service_worker_registration_scope_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_registration_update_via_cache_ffi_wasm(
+  obj : JsValue,
+) -> JsValue = "webapi_ServiceWorkerRegistration" "get_updateViaCache"
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_registration_update_via_cache_ffi(
+  obj : JsValue,
+) -> ServiceWorkerUpdateViaCache {
+  ServiceWorkerUpdateViaCache::from_unchecked(
+    jsvalue_to_string(
+      service_worker_registration_update_via_cache_ffi_wasm(obj),
+    ),
+  )
+}
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_registration_update_ffi_wasm(obj : JsValue) -> JsValue = "webapi_ServiceWorkerRegistration" "update"
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_registration_update_ffi(
+  obj : JsValue,
+) -> JsPromise[ServiceWorkerRegistration] {
+  service_worker_registration_update_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_registration_unregister_ffi_wasm(obj : JsValue) -> JsValue = "webapi_ServiceWorkerRegistration" "unregister"
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_registration_unregister_ffi(obj : JsValue) -> JsPromise[Bool] {
+  service_worker_registration_unregister_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_registration_onupdatefound_ffi_wasm(obj : JsValue) -> JsValue = "webapi_ServiceWorkerRegistration" "get_onupdatefound"
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_registration_onupdatefound_ffi(obj : JsValue) -> EventHandler {
+  service_worker_registration_onupdatefound_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_registration_set_onupdatefound_ffi(
+  obj : JsValue,
+  onupdatefound : JsValue,
+) -> Unit = "webapi_ServiceWorkerRegistration" "set_onupdatefound"

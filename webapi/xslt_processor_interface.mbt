@@ -129,3 +129,147 @@ impl TXSLTProcessor with clear_parameters(self : Self) -> Unit {
 impl TXSLTProcessor with reset(self : Self) -> Unit {
   xslt_processor_reset_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn xslt_processor_new_ffi() -> XSLTProcessor = "() => new XSLTProcessor()"
+
+///|
+#cfg(target="js")
+extern "js" fn xslt_processor_import_stylesheet_ffi(
+  obj : JsValue,
+  style : JsValue,
+) -> Unit = "(obj, style) => obj.importStylesheet(style)"
+
+///|
+#cfg(target="js")
+extern "js" fn xslt_processor_transform_to_fragment_ffi_js(
+  obj : JsValue,
+  source : JsValue,
+  output : JsValue,
+) -> JsValue = "(obj, source, output) => obj.transformToFragment(source, output)"
+
+///|
+#cfg(target="js")
+fn xslt_processor_transform_to_fragment_ffi(
+  obj : JsValue,
+  source : JsValue,
+  output : JsValue,
+) -> DocumentFragment {
+  xslt_processor_transform_to_fragment_ffi_js(obj, source, output).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn xslt_processor_transform_to_document_ffi_js(
+  obj : JsValue,
+  source : JsValue,
+) -> JsValue = "(obj, source) => obj.transformToDocument(source)"
+
+///|
+#cfg(target="js")
+fn xslt_processor_transform_to_document_ffi(
+  obj : JsValue,
+  source : JsValue,
+) -> Document {
+  xslt_processor_transform_to_document_ffi_js(obj, source).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn xslt_processor_set_parameter_ffi(
+  obj : JsValue,
+  namespace_uri : JsValue,
+  local_name : JsValue,
+  value : JsValue,
+) -> Unit = "(obj, namespace_uri, local_name, value) => obj.setParameter(namespace_uri, local_name, value)"
+
+///|
+#cfg(target="js")
+extern "js" fn xslt_processor_get_parameter_ffi_js(
+  obj : JsValue,
+  namespace_uri : JsValue,
+  local_name : JsValue,
+) -> JsValue = "(obj, namespace_uri, local_name) => obj.getParameter(namespace_uri, local_name)"
+
+///|
+#cfg(target="js")
+fn xslt_processor_get_parameter_ffi(
+  obj : JsValue,
+  namespace_uri : JsValue,
+  local_name : JsValue,
+) -> JsValue {
+  xslt_processor_get_parameter_ffi_js(obj, namespace_uri, local_name).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn xslt_processor_remove_parameter_ffi(
+  obj : JsValue,
+  namespace_uri : JsValue,
+  local_name : JsValue,
+) -> Unit = "(obj, namespace_uri, local_name) => obj.removeParameter(namespace_uri, local_name)"
+
+///|
+#cfg(target="js")
+extern "js" fn xslt_processor_clear_parameters_ffi(obj : JsValue) -> Unit = "(obj) => obj.clearParameters()"
+
+///|
+#cfg(target="js")
+extern "js" fn xslt_processor_reset_ffi(obj : JsValue) -> Unit = "(obj) => obj.reset()"
+
+///|
+#cfg(target="wasm-gc")
+fn xslt_processor_new_ffi() -> XSLTProcessor = "webapi_XSLTProcessor" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn xslt_processor_import_stylesheet_ffi(obj : JsValue, style : JsValue) -> Unit = "webapi_XSLTProcessor" "importStylesheet"
+
+///|
+#cfg(target="wasm-gc")
+fn xslt_processor_transform_to_fragment_ffi(
+  obj : JsValue,
+  source : JsValue,
+  output : JsValue,
+) -> DocumentFragment = "webapi_XSLTProcessor" "transformToFragment"
+
+///|
+#cfg(target="wasm-gc")
+fn xslt_processor_transform_to_document_ffi(
+  obj : JsValue,
+  source : JsValue,
+) -> Document = "webapi_XSLTProcessor" "transformToDocument"
+
+///|
+#cfg(target="wasm-gc")
+fn xslt_processor_set_parameter_ffi(
+  obj : JsValue,
+  namespace_uri : JsValue,
+  local_name : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_XSLTProcessor" "setParameter"
+
+///|
+#cfg(target="wasm-gc")
+fn xslt_processor_get_parameter_ffi(
+  obj : JsValue,
+  namespace_uri : JsValue,
+  local_name : JsValue,
+) -> JsValue = "webapi_XSLTProcessor" "getParameter"
+
+///|
+#cfg(target="wasm-gc")
+fn xslt_processor_remove_parameter_ffi(
+  obj : JsValue,
+  namespace_uri : JsValue,
+  local_name : JsValue,
+) -> Unit = "webapi_XSLTProcessor" "removeParameter"
+
+///|
+#cfg(target="wasm-gc")
+fn xslt_processor_clear_parameters_ffi(obj : JsValue) -> Unit = "webapi_XSLTProcessor" "clearParameters"
+
+///|
+#cfg(target="wasm-gc")
+fn xslt_processor_reset_ffi(obj : JsValue) -> Unit = "webapi_XSLTProcessor" "reset"

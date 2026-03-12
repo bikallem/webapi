@@ -61,3 +61,39 @@ impl THTMLDirectoryElement with set_compact(self : Self, compact : Bool) -> Unit
     TJsValue::to_js(compact),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_directory_element_new_ffi() -> HTMLDirectoryElement = "() => new HTMLDirectoryElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_directory_element_compact_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.compact"
+
+///|
+#cfg(target="js")
+fn html_directory_element_compact_ffi(obj : JsValue) -> Bool {
+  html_directory_element_compact_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_directory_element_set_compact_ffi(
+  obj : JsValue,
+  compact : JsValue,
+) -> Unit = "(obj, compact) => { obj.compact = compact; }"
+
+///|
+#cfg(target="wasm-gc")
+fn html_directory_element_new_ffi() -> HTMLDirectoryElement = "webapi_HTMLDirectoryElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_directory_element_compact_ffi(obj : JsValue) -> Bool = "webapi_HTMLDirectoryElement" "get_compact"
+
+///|
+#cfg(target="wasm-gc")
+fn html_directory_element_set_compact_ffi(
+  obj : JsValue,
+  compact : JsValue,
+) -> Unit = "webapi_HTMLDirectoryElement" "set_compact"

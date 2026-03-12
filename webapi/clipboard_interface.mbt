@@ -62,3 +62,101 @@ impl TClipboard with write_text(self : Self, data : String) -> JsPromise[
 ] {
   clipboard_write_text_ffi(TJsValue::to_js(self), TJsValue::to_js(data))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn clipboard_read_ffi_js(
+  obj : JsValue,
+  formats : JsValue,
+) -> JsValue = "(obj, formats) => obj.read(formats)"
+
+///|
+#cfg(target="js")
+fn clipboard_read_ffi(
+  obj : JsValue,
+  formats : JsValue,
+) -> JsPromise[ClipboardItems] {
+  clipboard_read_ffi_js(obj, formats).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn clipboard_read_text_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.readText()"
+
+///|
+#cfg(target="js")
+fn clipboard_read_text_ffi(obj : JsValue) -> JsPromise[String] {
+  clipboard_read_text_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn clipboard_write_ffi_js(obj : JsValue, data : JsValue) -> JsValue = "(obj, data) => obj.write(data)"
+
+///|
+#cfg(target="js")
+fn clipboard_write_ffi(obj : JsValue, data : JsValue) -> JsPromise[JsValue] {
+  clipboard_write_ffi_js(obj, data).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn clipboard_write_text_ffi_js(
+  obj : JsValue,
+  data : JsValue,
+) -> JsValue = "(obj, data) => obj.writeText(data)"
+
+///|
+#cfg(target="js")
+fn clipboard_write_text_ffi(
+  obj : JsValue,
+  data : JsValue,
+) -> JsPromise[JsValue] {
+  clipboard_write_text_ffi_js(obj, data).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn clipboard_read_ffi_wasm(obj : JsValue, formats : JsValue) -> JsValue = "webapi_Clipboard" "read"
+
+///|
+#cfg(target="wasm-gc")
+fn clipboard_read_ffi(
+  obj : JsValue,
+  formats : JsValue,
+) -> JsPromise[ClipboardItems] {
+  clipboard_read_ffi_wasm(obj, formats).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn clipboard_read_text_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Clipboard" "readText"
+
+///|
+#cfg(target="wasm-gc")
+fn clipboard_read_text_ffi(obj : JsValue) -> JsPromise[String] {
+  clipboard_read_text_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn clipboard_write_ffi_wasm(obj : JsValue, data : JsValue) -> JsValue = "webapi_Clipboard" "write"
+
+///|
+#cfg(target="wasm-gc")
+fn clipboard_write_ffi(obj : JsValue, data : JsValue) -> JsPromise[JsValue] {
+  clipboard_write_ffi_wasm(obj, data).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn clipboard_write_text_ffi_wasm(obj : JsValue, data : JsValue) -> JsValue = "webapi_Clipboard" "writeText"
+
+///|
+#cfg(target="wasm-gc")
+fn clipboard_write_text_ffi(
+  obj : JsValue,
+  data : JsValue,
+) -> JsPromise[JsValue] {
+  clipboard_write_text_ffi_wasm(obj, data).unsafe_cast()
+}

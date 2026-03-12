@@ -77,3 +77,93 @@ impl TPlugin with item(self : Self, index : UInt) -> MimeType {
 impl TPlugin with named_item(self : Self, name : String) -> MimeType {
   self.named_item_opt(name).unwrap()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn plugin_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.name"
+
+///|
+#cfg(target="js")
+fn plugin_name_ffi(obj : JsValue) -> String {
+  plugin_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn plugin_description_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.description"
+
+///|
+#cfg(target="js")
+fn plugin_description_ffi(obj : JsValue) -> String {
+  plugin_description_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn plugin_filename_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.filename"
+
+///|
+#cfg(target="js")
+fn plugin_filename_ffi(obj : JsValue) -> String {
+  plugin_filename_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn plugin_length_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.length"
+
+///|
+#cfg(target="js")
+fn plugin_length_ffi(obj : JsValue) -> UInt {
+  plugin_length_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn plugin_item_ffi(obj : JsValue, index : JsValue) -> JsValue = "(obj, index) => obj.item(index)"
+
+///|
+#cfg(target="js")
+extern "js" fn plugin_named_item_ffi(obj : JsValue, name : JsValue) -> JsValue = "(obj, name) => obj.namedItem(name)"
+
+///|
+#cfg(target="wasm-gc")
+fn plugin_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Plugin" "get_name"
+
+///|
+#cfg(target="wasm-gc")
+fn plugin_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(plugin_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn plugin_description_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Plugin" "get_description"
+
+///|
+#cfg(target="wasm-gc")
+fn plugin_description_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(plugin_description_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn plugin_filename_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Plugin" "get_filename"
+
+///|
+#cfg(target="wasm-gc")
+fn plugin_filename_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(plugin_filename_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn plugin_length_ffi(obj : JsValue) -> UInt = "webapi_Plugin" "get_length"
+
+///|
+#cfg(target="wasm-gc")
+fn plugin_item_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_Plugin" "item"
+
+///|
+#cfg(target="wasm-gc")
+fn plugin_named_item_ffi(obj : JsValue, name : JsValue) -> JsValue = "webapi_Plugin" "namedItem"

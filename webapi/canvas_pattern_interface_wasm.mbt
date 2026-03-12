@@ -1,2 +1,0 @@
-///|
-fn canvas_pattern_set_transform_ffi(obj : JsValue, transform : JsValue) -> Unit = "webapi_CanvasPattern" "setTransform"

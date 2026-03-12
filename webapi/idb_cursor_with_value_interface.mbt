@@ -35,3 +35,17 @@ pub trait TIDBCursorWithValue: TIDBCursor {
 impl TIDBCursorWithValue with value(self : Self) -> JsValue {
   idb_cursor_with_value_value_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn idb_cursor_with_value_value_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.value"
+
+///|
+#cfg(target="js")
+fn idb_cursor_with_value_value_ffi(obj : JsValue) -> JsValue {
+  idb_cursor_with_value_value_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn idb_cursor_with_value_value_ffi(obj : JsValue) -> JsValue = "webapi_IDBCursorWithValue" "get_value"

@@ -136,3 +136,53 @@ impl THTMLAllCollection with item(self : Self, name_or_index? : String) -> HTMLA
 impl THTMLAllCollection with get(self : Self, index : UInt) -> Element {
   self.get_opt(index).unwrap()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_all_collection_length_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.length"
+
+///|
+#cfg(target="js")
+fn html_all_collection_length_ffi(obj : JsValue) -> UInt {
+  html_all_collection_length_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_all_collection_get_ffi(
+  obj : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, index) => obj[index]"
+
+///|
+#cfg(target="js")
+extern "js" fn html_all_collection_named_item_ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> JsValue = "(obj, name) => obj.namedItem(name)"
+
+///|
+#cfg(target="js")
+extern "js" fn html_all_collection_item_ffi(
+  obj : JsValue,
+  name_or_index : JsValue,
+) -> JsValue = "(obj, name_or_index) => obj.item(name_or_index)"
+
+///|
+#cfg(target="wasm-gc")
+fn html_all_collection_length_ffi(obj : JsValue) -> UInt = "webapi_HTMLAllCollection" "get_length"
+
+///|
+#cfg(target="wasm-gc")
+fn html_all_collection_get_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_HTMLAllCollection" "get"
+
+///|
+#cfg(target="wasm-gc")
+fn html_all_collection_named_item_ffi(obj : JsValue, name : JsValue) -> JsValue = "webapi_HTMLAllCollection" "namedItem"
+
+///|
+#cfg(target="wasm-gc")
+fn html_all_collection_item_ffi(
+  obj : JsValue,
+  name_or_index : JsValue,
+) -> JsValue = "webapi_HTMLAllCollection" "item"

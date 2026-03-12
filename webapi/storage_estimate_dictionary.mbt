@@ -35,3 +35,44 @@ pub fn StorageEstimate::usage(self : StorageEstimate) -> UInt64? {
 pub fn StorageEstimate::quota(self : StorageEstimate) -> UInt64? {
   storage_estimate_get_quota_ffi(TJsValue::to_js(self)).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn storage_estimate_ffi(
+  usage : JsValue,
+  quota : JsValue,
+) -> StorageEstimate =
+  #|(usage, quota) => {
+  #|  const obj = {};
+  #|  if (usage !== undefined) obj.usage = usage;
+  #|  if (quota !== undefined) obj.quota = quota;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn storage_estimate_empty_ffi() -> StorageEstimate = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn storage_estimate_get_usage_ffi(obj : JsValue) -> JsValue = "(obj) => obj.usage"
+
+///|
+#cfg(target="js")
+extern "js" fn storage_estimate_get_quota_ffi(obj : JsValue) -> JsValue = "(obj) => obj.quota"
+
+///|
+#cfg(target="wasm-gc")
+fn storage_estimate_ffi(usage : JsValue, quota : JsValue) -> StorageEstimate = "webapi_StorageEstimate" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn storage_estimate_empty_ffi() -> StorageEstimate = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn storage_estimate_get_usage_ffi(obj : JsValue) -> JsValue = "webapi_StorageEstimate" "get_usage"
+
+///|
+#cfg(target="wasm-gc")
+fn storage_estimate_get_quota_ffi(obj : JsValue) -> JsValue = "webapi_StorageEstimate" "get_quota"

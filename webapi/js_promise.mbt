@@ -53,3 +53,196 @@ pub fn[T] JsPromise::finally_(
 ) -> JsPromise[T] {
   js_promise_finally_ffi(TJsValue::to_js(self), on_finally).unsafe_cast()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn js_promise_resolve_ffi(value : JsValue) -> JsValue = "(value) => Promise.resolve(value)"
+
+///|
+#cfg(target="js")
+extern "js" fn js_promise_reject_ffi(reason : JsValue) -> JsValue = "(reason) => Promise.reject(reason)"
+
+///|
+#cfg(target="js")
+extern "js" fn js_promise_then_ffi(
+  promise : JsValue,
+  on_fulfilled : (JsAny) -> JsValue,
+) -> JsValue = "(p, f) => p.then(f)"
+
+///|
+#cfg(target="js")
+extern "js" fn js_promise_catch_ffi(
+  promise : JsValue,
+  on_rejected : (JsAny) -> JsValue,
+) -> JsValue = "(p, f) => p.catch(f)"
+
+///|
+#cfg(target="js")
+extern "js" fn js_promise_finally_ffi(
+  promise : JsValue,
+  on_finally : () -> Unit,
+) -> JsValue = "(p, f) => p.finally(f)"
+
+///|
+#cfg(target="js")
+pub impl FromJsAny for Bool with from_js_any(value : JsAny) -> Bool = "%identity"
+
+///|
+#cfg(target="js")
+pub impl FromJsAny for Int with from_js_any(value : JsAny) -> Int = "%identity"
+
+///|
+#cfg(target="js")
+pub impl FromJsAny for UInt with from_js_any(value : JsAny) -> UInt = "%identity"
+
+///|
+#cfg(target="js")
+pub impl FromJsAny for Int64 with from_js_any(value : JsAny) -> Int64 = "%identity"
+
+///|
+#cfg(target="js")
+pub impl FromJsAny for UInt64 with from_js_any(value : JsAny) -> UInt64 = "%identity"
+
+///|
+#cfg(target="js")
+pub impl FromJsAny for Float with from_js_any(value : JsAny) -> Float = "%identity"
+
+///|
+#cfg(target="js")
+pub impl FromJsAny for Double with from_js_any(value : JsAny) -> Double = "%identity"
+
+///|
+#cfg(target="js")
+pub impl FromJsAny for Unit with from_js_any(_value : JsAny) -> Unit = "%identity"
+
+///|
+#cfg(target="js")
+pub impl[T : FromJsAny] FromJsAny for Array[T] with from_js_any(value : JsAny) -> Array[
+  T,
+] = "%identity"
+
+///|
+#cfg(target="wasm-gc")
+fn js_promise_resolve_ffi(value : JsValue) -> JsValue = "webapi_JsPromise" "resolve"
+
+///|
+#cfg(target="wasm-gc")
+fn js_promise_reject_ffi(reason : JsValue) -> JsValue = "webapi_JsPromise" "reject"
+
+///|
+#cfg(target="wasm-gc")
+fn js_promise_then_ffi(
+  promise : JsValue,
+  on_fulfilled : (JsAny) -> JsValue,
+) -> JsValue = "webapi_JsPromise" "then"
+
+///|
+#cfg(target="wasm-gc")
+fn js_promise_catch_ffi(
+  promise : JsValue,
+  on_rejected : (JsAny) -> JsValue,
+) -> JsValue = "webapi_JsPromise" "catch"
+
+///|
+#cfg(target="wasm-gc")
+fn js_promise_finally_ffi(
+  promise : JsValue,
+  on_finally : () -> Unit,
+) -> JsValue = "webapi_JsPromise" "finally"
+
+///|
+#cfg(target="wasm-gc")
+fn js_any_to_bool_ffi(value : JsAny) -> Bool = "webapi_JsPromise" "toBool"
+
+///|
+#cfg(target="wasm-gc")
+pub impl FromJsAny for Bool with from_js_any(value : JsAny) -> Bool {
+  js_any_to_bool_ffi(value)
+}
+
+///|
+#cfg(target="wasm-gc")
+fn js_any_to_int_ffi(value : JsAny) -> Int = "webapi_JsPromise" "toInt"
+
+///|
+#cfg(target="wasm-gc")
+pub impl FromJsAny for Int with from_js_any(value : JsAny) -> Int {
+  js_any_to_int_ffi(value)
+}
+
+///|
+#cfg(target="wasm-gc")
+fn js_any_to_uint_ffi(value : JsAny) -> UInt = "webapi_JsPromise" "toUint"
+
+///|
+#cfg(target="wasm-gc")
+pub impl FromJsAny for UInt with from_js_any(value : JsAny) -> UInt {
+  js_any_to_uint_ffi(value)
+}
+
+///|
+#cfg(target="wasm-gc")
+fn js_any_to_int64_ffi(value : JsAny) -> Int64 = "webapi_JsPromise" "toInt64"
+
+///|
+#cfg(target="wasm-gc")
+pub impl FromJsAny for Int64 with from_js_any(value : JsAny) -> Int64 {
+  js_any_to_int64_ffi(value)
+}
+
+///|
+#cfg(target="wasm-gc")
+fn js_any_to_uint64_ffi(value : JsAny) -> UInt64 = "webapi_JsPromise" "toUint64"
+
+///|
+#cfg(target="wasm-gc")
+pub impl FromJsAny for UInt64 with from_js_any(value : JsAny) -> UInt64 {
+  js_any_to_uint64_ffi(value)
+}
+
+///|
+#cfg(target="wasm-gc")
+fn js_any_to_float_ffi(value : JsAny) -> Float = "webapi_JsPromise" "toFloat"
+
+///|
+#cfg(target="wasm-gc")
+pub impl FromJsAny for Float with from_js_any(value : JsAny) -> Float {
+  js_any_to_float_ffi(value)
+}
+
+///|
+#cfg(target="wasm-gc")
+fn js_any_to_double_ffi(value : JsAny) -> Double = "webapi_JsPromise" "toDouble"
+
+///|
+#cfg(target="wasm-gc")
+pub impl FromJsAny for Double with from_js_any(value : JsAny) -> Double {
+  js_any_to_double_ffi(value)
+}
+
+///|
+#cfg(target="wasm-gc")
+pub impl FromJsAny for Unit with from_js_any(_value : JsAny) -> Unit {
+  ()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn js_array_length_for_promise(arr : JsAny) -> Int = "webapi_Primitives" "arrayLength"
+
+///|
+#cfg(target="wasm-gc")
+fn js_array_get_for_promise(arr : JsAny, index : Int) -> JsAny = "webapi_Primitives" "arrayGet"
+
+///|
+#cfg(target="wasm-gc")
+pub impl[T : FromJsAny] FromJsAny for Array[T] with from_js_any(value : JsAny) -> Array[
+  T,
+] {
+  let len = js_array_length_for_promise(value)
+  let arr : Array[T] = []
+  for i = 0; i < len; i = i + 1 {
+    arr.push(FromJsAny::from_js_any(js_array_get_for_promise(value, i)))
+  }
+  arr
+}

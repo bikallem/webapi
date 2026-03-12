@@ -33,3 +33,36 @@ pub fn IDBTransactionOptions::durability(
 ) -> IDBTransactionDurability? {
   idb_transaction_options_get_durability_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn idb_transaction_options_ffi(
+  durability : JsValue,
+) -> IDBTransactionOptions =
+  #|(durability) => {
+  #|  const obj = {};
+  #|  if (durability !== undefined) obj.durability = durability;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_transaction_options_empty_ffi() -> IDBTransactionOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn idb_transaction_options_get_durability_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.durability"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_transaction_options_ffi(durability : JsValue) -> IDBTransactionOptions = "webapi_IDBTransactionOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_transaction_options_empty_ffi() -> IDBTransactionOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_transaction_options_get_durability_ffi(obj : JsValue) -> JsValue = "webapi_IDBTransactionOptions" "get_durability"

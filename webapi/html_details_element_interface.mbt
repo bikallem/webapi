@@ -76,3 +76,67 @@ impl THTMLDetailsElement with set_open(self : Self, open : Bool) -> Unit {
     TJsValue::to_js(open),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_details_element_new_ffi() -> HTMLDetailsElement = "() => new HTMLDetailsElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_details_element_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.name"
+
+///|
+#cfg(target="js")
+fn html_details_element_name_ffi(obj : JsValue) -> String {
+  html_details_element_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_details_element_set_name_ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> Unit = "(obj, name) => { obj.name = name; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_details_element_open_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.open"
+
+///|
+#cfg(target="js")
+fn html_details_element_open_ffi(obj : JsValue) -> Bool {
+  html_details_element_open_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_details_element_set_open_ffi(
+  obj : JsValue,
+  open : JsValue,
+) -> Unit = "(obj, open) => { obj.open = open; }"
+
+///|
+#cfg(target="wasm-gc")
+fn html_details_element_new_ffi() -> HTMLDetailsElement = "webapi_HTMLDetailsElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_details_element_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLDetailsElement" "get_name"
+
+///|
+#cfg(target="wasm-gc")
+fn html_details_element_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_details_element_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_details_element_set_name_ffi(obj : JsValue, name : JsValue) -> Unit = "webapi_HTMLDetailsElement" "set_name"
+
+///|
+#cfg(target="wasm-gc")
+fn html_details_element_open_ffi(obj : JsValue) -> Bool = "webapi_HTMLDetailsElement" "get_open"
+
+///|
+#cfg(target="wasm-gc")
+fn html_details_element_set_open_ffi(obj : JsValue, open : JsValue) -> Unit = "webapi_HTMLDetailsElement" "set_open"

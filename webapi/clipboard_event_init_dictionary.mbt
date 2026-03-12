@@ -54,3 +54,73 @@ pub fn ClipboardEventInit::clipboard_data(
 ) -> DataTransfer? {
   clipboard_event_init_get_clipboard_data_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn clipboard_event_init_ffi(
+  bubbles : JsValue,
+  cancelable : JsValue,
+  composed : JsValue,
+  clipboard_data : JsValue,
+) -> ClipboardEventInit =
+  #|(bubbles, cancelable, composed, clipboardData) => {
+  #|  const obj = {};
+  #|  if (bubbles !== undefined) obj.bubbles = bubbles;
+  #|  if (cancelable !== undefined) obj.cancelable = cancelable;
+  #|  if (composed !== undefined) obj.composed = composed;
+  #|  if (clipboardData !== undefined) obj.clipboardData = clipboardData;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn clipboard_event_init_empty_ffi() -> ClipboardEventInit = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn clipboard_event_init_get_bubbles_ffi(obj : JsValue) -> JsValue = "(obj) => obj.bubbles"
+
+///|
+#cfg(target="js")
+extern "js" fn clipboard_event_init_get_cancelable_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.cancelable"
+
+///|
+#cfg(target="js")
+extern "js" fn clipboard_event_init_get_composed_ffi(obj : JsValue) -> JsValue = "(obj) => obj.composed"
+
+///|
+#cfg(target="js")
+extern "js" fn clipboard_event_init_get_clipboard_data_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.clipboardData"
+
+///|
+#cfg(target="wasm-gc")
+fn clipboard_event_init_ffi(
+  bubbles : JsValue,
+  cancelable : JsValue,
+  composed : JsValue,
+  clipboard_data : JsValue,
+) -> ClipboardEventInit = "webapi_ClipboardEventInit" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn clipboard_event_init_empty_ffi() -> ClipboardEventInit = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn clipboard_event_init_get_bubbles_ffi(obj : JsValue) -> JsValue = "webapi_ClipboardEventInit" "get_bubbles"
+
+///|
+#cfg(target="wasm-gc")
+fn clipboard_event_init_get_cancelable_ffi(obj : JsValue) -> JsValue = "webapi_ClipboardEventInit" "get_cancelable"
+
+///|
+#cfg(target="wasm-gc")
+fn clipboard_event_init_get_composed_ffi(obj : JsValue) -> JsValue = "webapi_ClipboardEventInit" "get_composed"
+
+///|
+#cfg(target="wasm-gc")
+fn clipboard_event_init_get_clipboard_data_ffi(obj : JsValue) -> JsValue = "webapi_ClipboardEventInit" "get_clipboardData"

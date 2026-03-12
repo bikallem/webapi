@@ -94,3 +94,51 @@ pub fn IDBObjectStoreParameters::auto_increment(
 ) -> Bool? {
   idb_object_store_parameters_get_auto_increment_ffi(TJsValue::to_js(self)).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn idb_object_store_parameters_ffi(
+  key_path : JsValue,
+  auto_increment : JsValue,
+) -> IDBObjectStoreParameters =
+  #|(keyPath, autoIncrement) => {
+  #|  const obj = {};
+  #|  if (keyPath !== undefined) obj.keyPath = keyPath;
+  #|  if (autoIncrement !== undefined) obj.autoIncrement = autoIncrement;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_object_store_parameters_empty_ffi() -> IDBObjectStoreParameters = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn idb_object_store_parameters_get_key_path_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.keyPath"
+
+///|
+#cfg(target="js")
+extern "js" fn idb_object_store_parameters_get_auto_increment_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.autoIncrement"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_object_store_parameters_ffi(
+  key_path : JsValue,
+  auto_increment : JsValue,
+) -> IDBObjectStoreParameters = "webapi_IDBObjectStoreParameters" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_object_store_parameters_empty_ffi() -> IDBObjectStoreParameters = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_object_store_parameters_get_key_path_ffi(obj : JsValue) -> JsValue = "webapi_IDBObjectStoreParameters" "get_keyPath"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_object_store_parameters_get_auto_increment_ffi(obj : JsValue) -> JsValue = "webapi_IDBObjectStoreParameters" "get_autoIncrement"

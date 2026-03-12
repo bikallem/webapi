@@ -17,3 +17,11 @@ pub impl FromJsAny for NodeFilter with from_js_any(value : JsAny) -> NodeFilter 
 pub fn NodeFilter::new(callback : (Node) -> UInt) -> NodeFilter {
   node_filter_ffi(callback)
 }
+
+///|
+#cfg(target="js")
+extern "js" fn node_filter_ffi(callback : (Node) -> UInt) -> NodeFilter = "(callback) => callback"
+
+///|
+#cfg(target="wasm-gc")
+fn node_filter_ffi(callback : (Node) -> UInt) -> NodeFilter = "webapi_NodeFilter" "new"

@@ -68,3 +68,74 @@ impl TPerformanceObserver with take_records(self : Self) -> PerformanceEntryList
 pub fn PerformanceObserver::supported_entry_types() -> Array[String] {
   performance_observer_supported_entry_types_ffi()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn performance_observer_new_ffi(
+  callback : JsValue,
+) -> PerformanceObserver = "(callback) => new PerformanceObserver(callback)"
+
+///|
+#cfg(target="js")
+extern "js" fn performance_observer_observe_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> Unit = "(obj, options) => obj.observe(options)"
+
+///|
+#cfg(target="js")
+extern "js" fn performance_observer_disconnect_ffi(obj : JsValue) -> Unit = "(obj) => obj.disconnect()"
+
+///|
+#cfg(target="js")
+extern "js" fn performance_observer_take_records_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.takeRecords()"
+
+///|
+#cfg(target="js")
+fn performance_observer_take_records_ffi(obj : JsValue) -> PerformanceEntryList {
+  performance_observer_take_records_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn performance_observer_supported_entry_types_ffi_js() -> JsValue = "() => PerformanceObserver.supportedEntryTypes"
+
+///|
+#cfg(target="js")
+fn performance_observer_supported_entry_types_ffi() -> Array[String] {
+  performance_observer_supported_entry_types_ffi_js().unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn performance_observer_new_ffi(callback : JsValue) -> PerformanceObserver = "webapi_PerformanceObserver" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn performance_observer_observe_ffi(obj : JsValue, options : JsValue) -> Unit = "webapi_PerformanceObserver" "observe"
+
+///|
+#cfg(target="wasm-gc")
+fn performance_observer_disconnect_ffi(obj : JsValue) -> Unit = "webapi_PerformanceObserver" "disconnect"
+
+///|
+#cfg(target="wasm-gc")
+fn performance_observer_take_records_ffi_wasm(obj : JsValue) -> JsValue = "webapi_PerformanceObserver" "takeRecords"
+
+///|
+#cfg(target="wasm-gc")
+fn performance_observer_take_records_ffi(obj : JsValue) -> PerformanceEntryList {
+  performance_observer_take_records_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn performance_observer_supported_entry_types_ffi_wasm() -> JsArray = "webapi_PerformanceObserver" "get_supportedEntryTypes"
+
+///|
+#cfg(target="wasm-gc")
+fn performance_observer_supported_entry_types_ffi() -> Array[String] {
+  performance_observer_supported_entry_types_ffi_wasm().to_string_array()
+}

@@ -239,7 +239,7 @@ test "reconcile_output_dir removes stale generated files and keeps unrelated fil
   }
 
   let files = [
-    "keep_template.mbt", "keep_js.mbt", "stale_shared.mbt", "webapi.mjs", "moon.pkg",
+    "keep_template.mbt", "keep_unified.mbt", "stale_shared.mbt", "webapi.mjs", "moon.pkg",
     "moon.pkg.json", "skipped.log", "README.md",
   ]
   for filename in files {
@@ -249,13 +249,13 @@ test "reconcile_output_dir removes stale generated files and keeps unrelated fil
   }
 
   let expected_files : @hashset.HashSet[String] = @hashset.from_array([
-    "keep_template.mbt", "keep_js.mbt", "webapi.mjs", "moon.pkg",
+    "keep_template.mbt", "keep_unified.mbt", "webapi.mjs", "moon.pkg",
   ])
 
   try {
     reconcile_output_dir(output_dir, expected_files)
     inspect(@fs.path_exists("\{output_dir}/keep_template.mbt"), content="true")
-    inspect(@fs.path_exists("\{output_dir}/keep_js.mbt"), content="true")
+    inspect(@fs.path_exists("\{output_dir}/keep_unified.mbt"), content="true")
     inspect(@fs.path_exists("\{output_dir}/webapi.mjs"), content="true")
     inspect(@fs.path_exists("\{output_dir}/moon.pkg"), content="true")
     inspect(@fs.path_exists("\{output_dir}/stale_shared.mbt"), content="false")

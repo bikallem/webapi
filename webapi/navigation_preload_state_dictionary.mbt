@@ -39,3 +39,51 @@ pub fn NavigationPreloadState::header_value(
 ) -> String? {
   navigation_preload_state_get_header_value_ffi(TJsValue::to_js(self)).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_preload_state_ffi(
+  enabled : JsValue,
+  header_value : JsValue,
+) -> NavigationPreloadState =
+  #|(enabled, headerValue) => {
+  #|  const obj = {};
+  #|  if (enabled !== undefined) obj.enabled = enabled;
+  #|  if (headerValue !== undefined) obj.headerValue = headerValue;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_preload_state_empty_ffi() -> NavigationPreloadState = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_preload_state_get_enabled_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.enabled"
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_preload_state_get_header_value_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.headerValue"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_preload_state_ffi(
+  enabled : JsValue,
+  header_value : JsValue,
+) -> NavigationPreloadState = "webapi_NavigationPreloadState" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_preload_state_empty_ffi() -> NavigationPreloadState = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_preload_state_get_enabled_ffi(obj : JsValue) -> JsValue = "webapi_NavigationPreloadState" "get_enabled"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_preload_state_get_header_value_ffi(obj : JsValue) -> JsValue = "webapi_NavigationPreloadState" "get_headerValue"

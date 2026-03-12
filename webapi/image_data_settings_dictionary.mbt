@@ -39,3 +39,51 @@ pub fn ImageDataSettings::pixel_format(
 ) -> ImageDataPixelFormat? {
   image_data_settings_get_pixel_format_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn image_data_settings_ffi(
+  color_space : JsValue,
+  pixel_format : JsValue,
+) -> ImageDataSettings =
+  #|(colorSpace, pixelFormat) => {
+  #|  const obj = {};
+  #|  if (colorSpace !== undefined) obj.colorSpace = colorSpace;
+  #|  if (pixelFormat !== undefined) obj.pixelFormat = pixelFormat;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn image_data_settings_empty_ffi() -> ImageDataSettings = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn image_data_settings_get_color_space_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.colorSpace"
+
+///|
+#cfg(target="js")
+extern "js" fn image_data_settings_get_pixel_format_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.pixelFormat"
+
+///|
+#cfg(target="wasm-gc")
+fn image_data_settings_ffi(
+  color_space : JsValue,
+  pixel_format : JsValue,
+) -> ImageDataSettings = "webapi_ImageDataSettings" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn image_data_settings_empty_ffi() -> ImageDataSettings = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn image_data_settings_get_color_space_ffi(obj : JsValue) -> JsValue = "webapi_ImageDataSettings" "get_colorSpace"
+
+///|
+#cfg(target="wasm-gc")
+fn image_data_settings_get_pixel_format_ffi(obj : JsValue) -> JsValue = "webapi_ImageDataSettings" "get_pixelFormat"

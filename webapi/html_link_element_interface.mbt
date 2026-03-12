@@ -328,3 +328,585 @@ impl THTMLLinkElement with set_target(self : Self, target : String) -> Unit {
 impl THTMLLinkElement with sheet(self : Self) -> CSSStyleSheet {
   html_link_element_sheet_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_link_element_new_ffi() -> HTMLLinkElement = "() => new HTMLLinkElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_link_element_href_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.href"
+
+///|
+#cfg(target="js")
+fn html_link_element_href_ffi(obj : JsValue) -> String {
+  html_link_element_href_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_link_element_set_href_ffi(
+  obj : JsValue,
+  href : JsValue,
+) -> Unit = "(obj, href) => { obj.href = href; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_link_element_cross_origin_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.crossOrigin"
+
+///|
+#cfg(target="js")
+fn html_link_element_cross_origin_ffi(obj : JsValue) -> String {
+  html_link_element_cross_origin_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_link_element_set_cross_origin_ffi(
+  obj : JsValue,
+  cross_origin : JsValue,
+) -> Unit = "(obj, crossOrigin) => { obj.crossOrigin = crossOrigin; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_link_element_rel_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.rel"
+
+///|
+#cfg(target="js")
+fn html_link_element_rel_ffi(obj : JsValue) -> String {
+  html_link_element_rel_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_link_element_set_rel_ffi(
+  obj : JsValue,
+  rel : JsValue,
+) -> Unit = "(obj, rel) => { obj.rel = rel; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_link_element_as_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.as"
+
+///|
+#cfg(target="js")
+fn html_link_element_as_ffi(obj : JsValue) -> String {
+  html_link_element_as_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_link_element_set_as_ffi(
+  obj : JsValue,
+  as_ : JsValue,
+) -> Unit = "(obj, as) => { obj.as = as; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_link_element_rel_list_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.relList"
+
+///|
+#cfg(target="js")
+fn html_link_element_rel_list_ffi(obj : JsValue) -> DOMTokenList {
+  html_link_element_rel_list_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_link_element_media_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.media"
+
+///|
+#cfg(target="js")
+fn html_link_element_media_ffi(obj : JsValue) -> String {
+  html_link_element_media_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_link_element_set_media_ffi(
+  obj : JsValue,
+  media : JsValue,
+) -> Unit = "(obj, media) => { obj.media = media; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_link_element_integrity_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.integrity"
+
+///|
+#cfg(target="js")
+fn html_link_element_integrity_ffi(obj : JsValue) -> String {
+  html_link_element_integrity_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_link_element_set_integrity_ffi(
+  obj : JsValue,
+  integrity : JsValue,
+) -> Unit = "(obj, integrity) => { obj.integrity = integrity; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_link_element_hreflang_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.hreflang"
+
+///|
+#cfg(target="js")
+fn html_link_element_hreflang_ffi(obj : JsValue) -> String {
+  html_link_element_hreflang_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_link_element_set_hreflang_ffi(
+  obj : JsValue,
+  hreflang : JsValue,
+) -> Unit = "(obj, hreflang) => { obj.hreflang = hreflang; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_link_element_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.type"
+
+///|
+#cfg(target="js")
+fn html_link_element_type_ffi(obj : JsValue) -> String {
+  html_link_element_type_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_link_element_set_type_ffi(
+  obj : JsValue,
+  type_ : JsValue,
+) -> Unit = "(obj, type) => { obj.type = type; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_link_element_sizes_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.sizes"
+
+///|
+#cfg(target="js")
+fn html_link_element_sizes_ffi(obj : JsValue) -> DOMTokenList {
+  html_link_element_sizes_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_link_element_image_srcset_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.imageSrcset"
+
+///|
+#cfg(target="js")
+fn html_link_element_image_srcset_ffi(obj : JsValue) -> String {
+  html_link_element_image_srcset_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_link_element_set_image_srcset_ffi(
+  obj : JsValue,
+  image_srcset : JsValue,
+) -> Unit = "(obj, imageSrcset) => { obj.imageSrcset = imageSrcset; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_link_element_image_sizes_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.imageSizes"
+
+///|
+#cfg(target="js")
+fn html_link_element_image_sizes_ffi(obj : JsValue) -> String {
+  html_link_element_image_sizes_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_link_element_set_image_sizes_ffi(
+  obj : JsValue,
+  image_sizes : JsValue,
+) -> Unit = "(obj, imageSizes) => { obj.imageSizes = imageSizes; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_link_element_referrer_policy_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.referrerPolicy"
+
+///|
+#cfg(target="js")
+fn html_link_element_referrer_policy_ffi(obj : JsValue) -> String {
+  html_link_element_referrer_policy_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_link_element_set_referrer_policy_ffi(
+  obj : JsValue,
+  referrer_policy : JsValue,
+) -> Unit = "(obj, referrerPolicy) => { obj.referrerPolicy = referrerPolicy; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_link_element_blocking_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.blocking"
+
+///|
+#cfg(target="js")
+fn html_link_element_blocking_ffi(obj : JsValue) -> DOMTokenList {
+  html_link_element_blocking_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_link_element_disabled_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.disabled"
+
+///|
+#cfg(target="js")
+fn html_link_element_disabled_ffi(obj : JsValue) -> Bool {
+  html_link_element_disabled_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_link_element_set_disabled_ffi(
+  obj : JsValue,
+  disabled : JsValue,
+) -> Unit = "(obj, disabled) => { obj.disabled = disabled; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_link_element_fetch_priority_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.fetchPriority"
+
+///|
+#cfg(target="js")
+fn html_link_element_fetch_priority_ffi(obj : JsValue) -> String {
+  html_link_element_fetch_priority_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_link_element_set_fetch_priority_ffi(
+  obj : JsValue,
+  fetch_priority : JsValue,
+) -> Unit = "(obj, fetchPriority) => { obj.fetchPriority = fetchPriority; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_link_element_charset_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.charset"
+
+///|
+#cfg(target="js")
+fn html_link_element_charset_ffi(obj : JsValue) -> String {
+  html_link_element_charset_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_link_element_set_charset_ffi(
+  obj : JsValue,
+  charset : JsValue,
+) -> Unit = "(obj, charset) => { obj.charset = charset; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_link_element_rev_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.rev"
+
+///|
+#cfg(target="js")
+fn html_link_element_rev_ffi(obj : JsValue) -> String {
+  html_link_element_rev_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_link_element_set_rev_ffi(
+  obj : JsValue,
+  rev : JsValue,
+) -> Unit = "(obj, rev) => { obj.rev = rev; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_link_element_target_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.target"
+
+///|
+#cfg(target="js")
+fn html_link_element_target_ffi(obj : JsValue) -> String {
+  html_link_element_target_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_link_element_set_target_ffi(
+  obj : JsValue,
+  target : JsValue,
+) -> Unit = "(obj, target) => { obj.target = target; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_link_element_sheet_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.sheet"
+
+///|
+#cfg(target="js")
+fn html_link_element_sheet_ffi(obj : JsValue) -> CSSStyleSheet {
+  html_link_element_sheet_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_new_ffi() -> HTMLLinkElement = "webapi_HTMLLinkElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_href_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLLinkElement" "get_href"
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_href_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_link_element_href_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_set_href_ffi(obj : JsValue, href : JsValue) -> Unit = "webapi_HTMLLinkElement" "set_href"
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_cross_origin_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLLinkElement" "get_crossOrigin"
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_cross_origin_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_link_element_cross_origin_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_set_cross_origin_ffi(
+  obj : JsValue,
+  cross_origin : JsValue,
+) -> Unit = "webapi_HTMLLinkElement" "set_crossOrigin"
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_rel_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLLinkElement" "get_rel"
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_rel_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_link_element_rel_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_set_rel_ffi(obj : JsValue, rel : JsValue) -> Unit = "webapi_HTMLLinkElement" "set_rel"
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_as_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLLinkElement" "get_as"
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_as_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_link_element_as_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_set_as_ffi(obj : JsValue, as_ : JsValue) -> Unit = "webapi_HTMLLinkElement" "set_as"
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_rel_list_ffi(obj : JsValue) -> DOMTokenList = "webapi_HTMLLinkElement" "get_relList"
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_media_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLLinkElement" "get_media"
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_media_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_link_element_media_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_set_media_ffi(obj : JsValue, media : JsValue) -> Unit = "webapi_HTMLLinkElement" "set_media"
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_integrity_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLLinkElement" "get_integrity"
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_integrity_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_link_element_integrity_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_set_integrity_ffi(
+  obj : JsValue,
+  integrity : JsValue,
+) -> Unit = "webapi_HTMLLinkElement" "set_integrity"
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_hreflang_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLLinkElement" "get_hreflang"
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_hreflang_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_link_element_hreflang_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_set_hreflang_ffi(
+  obj : JsValue,
+  hreflang : JsValue,
+) -> Unit = "webapi_HTMLLinkElement" "set_hreflang"
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLLinkElement" "get_type"
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_type_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_link_element_type_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_set_type_ffi(obj : JsValue, type_ : JsValue) -> Unit = "webapi_HTMLLinkElement" "set_type"
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_sizes_ffi(obj : JsValue) -> DOMTokenList = "webapi_HTMLLinkElement" "get_sizes"
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_image_srcset_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLLinkElement" "get_imageSrcset"
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_image_srcset_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_link_element_image_srcset_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_set_image_srcset_ffi(
+  obj : JsValue,
+  image_srcset : JsValue,
+) -> Unit = "webapi_HTMLLinkElement" "set_imageSrcset"
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_image_sizes_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLLinkElement" "get_imageSizes"
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_image_sizes_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_link_element_image_sizes_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_set_image_sizes_ffi(
+  obj : JsValue,
+  image_sizes : JsValue,
+) -> Unit = "webapi_HTMLLinkElement" "set_imageSizes"
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_referrer_policy_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLLinkElement" "get_referrerPolicy"
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_referrer_policy_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_link_element_referrer_policy_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_set_referrer_policy_ffi(
+  obj : JsValue,
+  referrer_policy : JsValue,
+) -> Unit = "webapi_HTMLLinkElement" "set_referrerPolicy"
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_blocking_ffi(obj : JsValue) -> DOMTokenList = "webapi_HTMLLinkElement" "get_blocking"
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_disabled_ffi(obj : JsValue) -> Bool = "webapi_HTMLLinkElement" "get_disabled"
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_set_disabled_ffi(
+  obj : JsValue,
+  disabled : JsValue,
+) -> Unit = "webapi_HTMLLinkElement" "set_disabled"
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_fetch_priority_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLLinkElement" "get_fetchPriority"
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_fetch_priority_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_link_element_fetch_priority_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_set_fetch_priority_ffi(
+  obj : JsValue,
+  fetch_priority : JsValue,
+) -> Unit = "webapi_HTMLLinkElement" "set_fetchPriority"
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_charset_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLLinkElement" "get_charset"
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_charset_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_link_element_charset_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_set_charset_ffi(obj : JsValue, charset : JsValue) -> Unit = "webapi_HTMLLinkElement" "set_charset"
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_rev_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLLinkElement" "get_rev"
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_rev_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_link_element_rev_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_set_rev_ffi(obj : JsValue, rev : JsValue) -> Unit = "webapi_HTMLLinkElement" "set_rev"
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_target_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLLinkElement" "get_target"
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_target_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_link_element_target_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_set_target_ffi(obj : JsValue, target : JsValue) -> Unit = "webapi_HTMLLinkElement" "set_target"
+
+///|
+#cfg(target="wasm-gc")
+fn html_link_element_sheet_ffi(obj : JsValue) -> CSSStyleSheet = "webapi_HTMLLinkElement" "get_sheet"

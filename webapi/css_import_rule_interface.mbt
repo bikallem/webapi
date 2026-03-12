@@ -61,3 +61,91 @@ impl TCSSImportRule with layer_name(self : Self) -> CSSOMString {
 impl TCSSImportRule with supports_text(self : Self) -> CSSOMString {
   css_import_rule_supports_text_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn css_import_rule_href_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.href"
+
+///|
+#cfg(target="js")
+fn css_import_rule_href_ffi(obj : JsValue) -> String {
+  css_import_rule_href_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn css_import_rule_media_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.media"
+
+///|
+#cfg(target="js")
+fn css_import_rule_media_ffi(obj : JsValue) -> MediaList {
+  css_import_rule_media_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn css_import_rule_style_sheet_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.styleSheet"
+
+///|
+#cfg(target="js")
+fn css_import_rule_style_sheet_ffi(obj : JsValue) -> CSSStyleSheet {
+  css_import_rule_style_sheet_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn css_import_rule_layer_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.layerName"
+
+///|
+#cfg(target="js")
+fn css_import_rule_layer_name_ffi(obj : JsValue) -> CSSOMString {
+  css_import_rule_layer_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn css_import_rule_supports_text_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.supportsText"
+
+///|
+#cfg(target="js")
+fn css_import_rule_supports_text_ffi(obj : JsValue) -> CSSOMString {
+  css_import_rule_supports_text_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn css_import_rule_href_ffi_wasm(obj : JsValue) -> JsValue = "webapi_CSSImportRule" "get_href"
+
+///|
+#cfg(target="wasm-gc")
+fn css_import_rule_href_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(css_import_rule_href_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn css_import_rule_media_ffi(obj : JsValue) -> MediaList = "webapi_CSSImportRule" "get_media"
+
+///|
+#cfg(target="wasm-gc")
+fn css_import_rule_style_sheet_ffi(obj : JsValue) -> CSSStyleSheet = "webapi_CSSImportRule" "get_styleSheet"
+
+///|
+#cfg(target="wasm-gc")
+fn css_import_rule_layer_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_CSSImportRule" "get_layerName"
+
+///|
+#cfg(target="wasm-gc")
+fn css_import_rule_layer_name_ffi(obj : JsValue) -> CSSOMString {
+  css_import_rule_layer_name_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn css_import_rule_supports_text_ffi_wasm(obj : JsValue) -> JsValue = "webapi_CSSImportRule" "get_supportsText"
+
+///|
+#cfg(target="wasm-gc")
+fn css_import_rule_supports_text_ffi(obj : JsValue) -> CSSOMString {
+  css_import_rule_supports_text_ffi_wasm(obj).unsafe_cast()
+}

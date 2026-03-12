@@ -80,3 +80,91 @@ pub fn Transformer::readable_type(self : Transformer) -> JsValue? {
 pub fn Transformer::writable_type(self : Transformer) -> JsValue? {
   transformer_get_writable_type_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn transformer_ffi(
+  start : JsValue,
+  transform : JsValue,
+  flush : JsValue,
+  cancel : JsValue,
+  readable_type : JsValue,
+  writable_type : JsValue,
+) -> Transformer =
+  #|(start, transform, flush, cancel, readableType, writableType) => {
+  #|  const obj = {};
+  #|  if (start !== undefined) obj.start = start;
+  #|  if (transform !== undefined) obj.transform = transform;
+  #|  if (flush !== undefined) obj.flush = flush;
+  #|  if (cancel !== undefined) obj.cancel = cancel;
+  #|  if (readableType !== undefined) obj.readableType = readableType;
+  #|  if (writableType !== undefined) obj.writableType = writableType;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn transformer_empty_ffi() -> Transformer = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn transformer_get_start_ffi(obj : JsValue) -> JsValue = "(obj) => obj.start"
+
+///|
+#cfg(target="js")
+extern "js" fn transformer_get_transform_ffi(obj : JsValue) -> JsValue = "(obj) => obj.transform"
+
+///|
+#cfg(target="js")
+extern "js" fn transformer_get_flush_ffi(obj : JsValue) -> JsValue = "(obj) => obj.flush"
+
+///|
+#cfg(target="js")
+extern "js" fn transformer_get_cancel_ffi(obj : JsValue) -> JsValue = "(obj) => obj.cancel"
+
+///|
+#cfg(target="js")
+extern "js" fn transformer_get_readable_type_ffi(obj : JsValue) -> JsValue = "(obj) => obj.readableType"
+
+///|
+#cfg(target="js")
+extern "js" fn transformer_get_writable_type_ffi(obj : JsValue) -> JsValue = "(obj) => obj.writableType"
+
+///|
+#cfg(target="wasm-gc")
+fn transformer_ffi(
+  start : JsValue,
+  transform : JsValue,
+  flush : JsValue,
+  cancel : JsValue,
+  readable_type : JsValue,
+  writable_type : JsValue,
+) -> Transformer = "webapi_Transformer" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn transformer_empty_ffi() -> Transformer = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn transformer_get_start_ffi(obj : JsValue) -> JsValue = "webapi_Transformer" "get_start"
+
+///|
+#cfg(target="wasm-gc")
+fn transformer_get_transform_ffi(obj : JsValue) -> JsValue = "webapi_Transformer" "get_transform"
+
+///|
+#cfg(target="wasm-gc")
+fn transformer_get_flush_ffi(obj : JsValue) -> JsValue = "webapi_Transformer" "get_flush"
+
+///|
+#cfg(target="wasm-gc")
+fn transformer_get_cancel_ffi(obj : JsValue) -> JsValue = "webapi_Transformer" "get_cancel"
+
+///|
+#cfg(target="wasm-gc")
+fn transformer_get_readable_type_ffi(obj : JsValue) -> JsValue = "webapi_Transformer" "get_readableType"
+
+///|
+#cfg(target="wasm-gc")
+fn transformer_get_writable_type_ffi(obj : JsValue) -> JsValue = "webapi_Transformer" "get_writableType"

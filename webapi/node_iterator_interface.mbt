@@ -91,3 +91,105 @@ impl TNodeIterator with next_node(self : Self) -> Node {
 impl TNodeIterator with previous_node(self : Self) -> Node {
   self.previous_node_opt().unwrap()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn node_iterator_root_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.root"
+
+///|
+#cfg(target="js")
+fn node_iterator_root_ffi(obj : JsValue) -> Node {
+  node_iterator_root_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn node_iterator_reference_node_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.referenceNode"
+
+///|
+#cfg(target="js")
+fn node_iterator_reference_node_ffi(obj : JsValue) -> Node {
+  node_iterator_reference_node_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn node_iterator_pointer_before_reference_node_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.pointerBeforeReferenceNode"
+
+///|
+#cfg(target="js")
+fn node_iterator_pointer_before_reference_node_ffi(obj : JsValue) -> Bool {
+  node_iterator_pointer_before_reference_node_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn node_iterator_what_to_show_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.whatToShow"
+
+///|
+#cfg(target="js")
+fn node_iterator_what_to_show_ffi(obj : JsValue) -> UInt {
+  node_iterator_what_to_show_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn node_iterator_filter_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.filter"
+
+///|
+#cfg(target="js")
+fn node_iterator_filter_ffi(obj : JsValue) -> NodeFilter {
+  node_iterator_filter_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn node_iterator_next_node_ffi(obj : JsValue) -> JsValue = "(obj) => obj.nextNode()"
+
+///|
+#cfg(target="js")
+extern "js" fn node_iterator_previous_node_ffi(obj : JsValue) -> JsValue = "(obj) => obj.previousNode()"
+
+///|
+#cfg(target="js")
+extern "js" fn node_iterator_detach_ffi(obj : JsValue) -> Unit = "(obj) => obj.detach()"
+
+///|
+#cfg(target="wasm-gc")
+fn node_iterator_root_ffi(obj : JsValue) -> Node = "webapi_NodeIterator" "get_root"
+
+///|
+#cfg(target="wasm-gc")
+fn node_iterator_reference_node_ffi(obj : JsValue) -> Node = "webapi_NodeIterator" "get_referenceNode"
+
+///|
+#cfg(target="wasm-gc")
+fn node_iterator_pointer_before_reference_node_ffi(obj : JsValue) -> Bool = "webapi_NodeIterator" "get_pointerBeforeReferenceNode"
+
+///|
+#cfg(target="wasm-gc")
+fn node_iterator_what_to_show_ffi(obj : JsValue) -> UInt = "webapi_NodeIterator" "get_whatToShow"
+
+///|
+#cfg(target="wasm-gc")
+fn node_iterator_filter_ffi_wasm(obj : JsValue) -> JsValue = "webapi_NodeIterator" "get_filter"
+
+///|
+#cfg(target="wasm-gc")
+fn node_iterator_filter_ffi(obj : JsValue) -> NodeFilter {
+  node_iterator_filter_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn node_iterator_next_node_ffi(obj : JsValue) -> JsValue = "webapi_NodeIterator" "nextNode"
+
+///|
+#cfg(target="wasm-gc")
+fn node_iterator_previous_node_ffi(obj : JsValue) -> JsValue = "webapi_NodeIterator" "previousNode"
+
+///|
+#cfg(target="wasm-gc")
+fn node_iterator_detach_ffi(obj : JsValue) -> Unit = "webapi_NodeIterator" "detach"

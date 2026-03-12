@@ -56,3 +56,37 @@ impl TDOMParser with parse_from_string(
     TJsValue::to_js(type_),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn dom_parser_new_ffi() -> DOMParser = "() => new DOMParser()"
+
+///|
+#cfg(target="js")
+extern "js" fn dom_parser_parse_from_string_ffi_js(
+  obj : JsValue,
+  string : JsValue,
+  type_ : JsValue,
+) -> JsValue = "(obj, string, type_) => obj.parseFromString(string, type_)"
+
+///|
+#cfg(target="js")
+fn dom_parser_parse_from_string_ffi(
+  obj : JsValue,
+  string : JsValue,
+  type_ : JsValue,
+) -> Document {
+  dom_parser_parse_from_string_ffi_js(obj, string, type_).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn dom_parser_new_ffi() -> DOMParser = "webapi_DOMParser" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_parser_parse_from_string_ffi(
+  obj : JsValue,
+  string : JsValue,
+  type_ : JsValue,
+) -> Document = "webapi_DOMParser" "parseFromString"

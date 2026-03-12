@@ -49,3 +49,37 @@ impl TMediaError with code(self : Self) -> UInt {
 impl TMediaError with message(self : Self) -> String {
   media_error_message_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn media_error_code_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.code"
+
+///|
+#cfg(target="js")
+fn media_error_code_ffi(obj : JsValue) -> UInt {
+  media_error_code_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn media_error_message_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.message"
+
+///|
+#cfg(target="js")
+fn media_error_message_ffi(obj : JsValue) -> String {
+  media_error_message_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn media_error_code_ffi(obj : JsValue) -> UInt = "webapi_MediaError" "get_code"
+
+///|
+#cfg(target="wasm-gc")
+fn media_error_message_ffi_wasm(obj : JsValue) -> JsValue = "webapi_MediaError" "get_message"
+
+///|
+#cfg(target="wasm-gc")
+fn media_error_message_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(media_error_message_ffi_wasm(obj))
+}

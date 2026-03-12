@@ -185,3 +185,252 @@ impl TIDBDatabase with set_onversionchange(
     TJsValue::to_js(event_handler_non_null_ffi(onversionchange)),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn idb_database_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.name"
+
+///|
+#cfg(target="js")
+fn idb_database_name_ffi(obj : JsValue) -> String {
+  idb_database_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_database_version_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.version"
+
+///|
+#cfg(target="js")
+fn idb_database_version_ffi(obj : JsValue) -> UInt64 {
+  idb_database_version_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_database_object_store_names_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.objectStoreNames"
+
+///|
+#cfg(target="js")
+fn idb_database_object_store_names_ffi(obj : JsValue) -> DOMStringList {
+  idb_database_object_store_names_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_database_transaction_ffi_js(
+  obj : JsValue,
+  store_names : JsValue,
+  mode : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, store_names, mode, options) => obj.transaction(store_names, mode, options)"
+
+///|
+#cfg(target="js")
+fn idb_database_transaction_ffi(
+  obj : JsValue,
+  store_names : JsValue,
+  mode : JsValue,
+  options : JsValue,
+) -> IDBTransaction {
+  idb_database_transaction_ffi_js(obj, store_names, mode, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_database_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.close()"
+
+///|
+#cfg(target="js")
+extern "js" fn idb_database_create_object_store_ffi_js(
+  obj : JsValue,
+  name : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, name, options) => obj.createObjectStore(name, options)"
+
+///|
+#cfg(target="js")
+fn idb_database_create_object_store_ffi(
+  obj : JsValue,
+  name : JsValue,
+  options : JsValue,
+) -> IDBObjectStore {
+  idb_database_create_object_store_ffi_js(obj, name, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_database_delete_object_store_ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> Unit = "(obj, name) => obj.deleteObjectStore(name)"
+
+///|
+#cfg(target="js")
+extern "js" fn idb_database_onabort_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onabort"
+
+///|
+#cfg(target="js")
+fn idb_database_onabort_ffi(obj : JsValue) -> EventHandler {
+  idb_database_onabort_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_database_set_onabort_ffi(
+  obj : JsValue,
+  onabort : JsValue,
+) -> Unit = "(obj, onabort) => { obj.onabort = onabort; }"
+
+///|
+#cfg(target="js")
+extern "js" fn idb_database_onclose_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onclose"
+
+///|
+#cfg(target="js")
+fn idb_database_onclose_ffi(obj : JsValue) -> EventHandler {
+  idb_database_onclose_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_database_set_onclose_ffi(
+  obj : JsValue,
+  onclose : JsValue,
+) -> Unit = "(obj, onclose) => { obj.onclose = onclose; }"
+
+///|
+#cfg(target="js")
+extern "js" fn idb_database_onerror_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onerror"
+
+///|
+#cfg(target="js")
+fn idb_database_onerror_ffi(obj : JsValue) -> EventHandler {
+  idb_database_onerror_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_database_set_onerror_ffi(
+  obj : JsValue,
+  onerror : JsValue,
+) -> Unit = "(obj, onerror) => { obj.onerror = onerror; }"
+
+///|
+#cfg(target="js")
+extern "js" fn idb_database_onversionchange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onversionchange"
+
+///|
+#cfg(target="js")
+fn idb_database_onversionchange_ffi(obj : JsValue) -> EventHandler {
+  idb_database_onversionchange_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_database_set_onversionchange_ffi(
+  obj : JsValue,
+  onversionchange : JsValue,
+) -> Unit = "(obj, onversionchange) => { obj.onversionchange = onversionchange; }"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_database_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_IDBDatabase" "get_name"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_database_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(idb_database_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn idb_database_version_ffi(obj : JsValue) -> UInt64 = "webapi_IDBDatabase" "get_version"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_database_object_store_names_ffi(obj : JsValue) -> DOMStringList = "webapi_IDBDatabase" "get_objectStoreNames"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_database_transaction_ffi(
+  obj : JsValue,
+  store_names : JsValue,
+  mode : JsValue,
+  options : JsValue,
+) -> IDBTransaction = "webapi_IDBDatabase" "transaction"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_database_close_ffi(obj : JsValue) -> Unit = "webapi_IDBDatabase" "close"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_database_create_object_store_ffi(
+  obj : JsValue,
+  name : JsValue,
+  options : JsValue,
+) -> IDBObjectStore = "webapi_IDBDatabase" "createObjectStore"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_database_delete_object_store_ffi(obj : JsValue, name : JsValue) -> Unit = "webapi_IDBDatabase" "deleteObjectStore"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_database_onabort_ffi_wasm(obj : JsValue) -> JsValue = "webapi_IDBDatabase" "get_onabort"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_database_onabort_ffi(obj : JsValue) -> EventHandler {
+  idb_database_onabort_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn idb_database_set_onabort_ffi(obj : JsValue, onabort : JsValue) -> Unit = "webapi_IDBDatabase" "set_onabort"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_database_onclose_ffi_wasm(obj : JsValue) -> JsValue = "webapi_IDBDatabase" "get_onclose"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_database_onclose_ffi(obj : JsValue) -> EventHandler {
+  idb_database_onclose_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn idb_database_set_onclose_ffi(obj : JsValue, onclose : JsValue) -> Unit = "webapi_IDBDatabase" "set_onclose"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_database_onerror_ffi_wasm(obj : JsValue) -> JsValue = "webapi_IDBDatabase" "get_onerror"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_database_onerror_ffi(obj : JsValue) -> EventHandler {
+  idb_database_onerror_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn idb_database_set_onerror_ffi(obj : JsValue, onerror : JsValue) -> Unit = "webapi_IDBDatabase" "set_onerror"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_database_onversionchange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_IDBDatabase" "get_onversionchange"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_database_onversionchange_ffi(obj : JsValue) -> EventHandler {
+  idb_database_onversionchange_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn idb_database_set_onversionchange_ffi(
+  obj : JsValue,
+  onversionchange : JsValue,
+) -> Unit = "webapi_IDBDatabase" "set_onversionchange"

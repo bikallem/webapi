@@ -79,3 +79,133 @@ impl TPerformance with get_entries_by_name(
     opt_to_js(type_),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn performance_now_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.now()"
+
+///|
+#cfg(target="js")
+fn performance_now_ffi(obj : JsValue) -> DOMHighResTimeStamp {
+  performance_now_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn performance_time_origin_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.timeOrigin"
+
+///|
+#cfg(target="js")
+fn performance_time_origin_ffi(obj : JsValue) -> DOMHighResTimeStamp {
+  performance_time_origin_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn performance_to_json_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.toJSON()"
+
+///|
+#cfg(target="js")
+fn performance_to_json_ffi(obj : JsValue) -> JsValue {
+  performance_to_json_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn performance_get_entries_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.getEntries()"
+
+///|
+#cfg(target="js")
+fn performance_get_entries_ffi(obj : JsValue) -> PerformanceEntryList {
+  performance_get_entries_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn performance_get_entries_by_type_ffi_js(
+  obj : JsValue,
+  type_ : JsValue,
+) -> JsValue = "(obj, type_) => obj.getEntriesByType(type_)"
+
+///|
+#cfg(target="js")
+fn performance_get_entries_by_type_ffi(
+  obj : JsValue,
+  type_ : JsValue,
+) -> PerformanceEntryList {
+  performance_get_entries_by_type_ffi_js(obj, type_).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn performance_get_entries_by_name_ffi_js(
+  obj : JsValue,
+  name : JsValue,
+  type_ : JsValue,
+) -> JsValue = "(obj, name, type_) => obj.getEntriesByName(name, type_)"
+
+///|
+#cfg(target="js")
+fn performance_get_entries_by_name_ffi(
+  obj : JsValue,
+  name : JsValue,
+  type_ : JsValue,
+) -> PerformanceEntryList {
+  performance_get_entries_by_name_ffi_js(obj, name, type_).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn performance_now_ffi(obj : JsValue) -> DOMHighResTimeStamp = "webapi_Performance" "now"
+
+///|
+#cfg(target="wasm-gc")
+fn performance_time_origin_ffi(obj : JsValue) -> DOMHighResTimeStamp = "webapi_Performance" "get_timeOrigin"
+
+///|
+#cfg(target="wasm-gc")
+fn performance_to_json_ffi(obj : JsValue) -> JsValue = "webapi_Performance" "toJSON"
+
+///|
+#cfg(target="wasm-gc")
+fn performance_get_entries_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Performance" "getEntries"
+
+///|
+#cfg(target="wasm-gc")
+fn performance_get_entries_ffi(obj : JsValue) -> PerformanceEntryList {
+  performance_get_entries_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn performance_get_entries_by_type_ffi_wasm(
+  obj : JsValue,
+  type_ : JsValue,
+) -> JsValue = "webapi_Performance" "getEntriesByType"
+
+///|
+#cfg(target="wasm-gc")
+fn performance_get_entries_by_type_ffi(
+  obj : JsValue,
+  type_ : JsValue,
+) -> PerformanceEntryList {
+  performance_get_entries_by_type_ffi_wasm(obj, type_).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn performance_get_entries_by_name_ffi_wasm(
+  obj : JsValue,
+  name : JsValue,
+  type_ : JsValue,
+) -> JsValue = "webapi_Performance" "getEntriesByName"
+
+///|
+#cfg(target="wasm-gc")
+fn performance_get_entries_by_name_ffi(
+  obj : JsValue,
+  name : JsValue,
+  type_ : JsValue,
+) -> PerformanceEntryList {
+  performance_get_entries_by_name_ffi_wasm(obj, name, type_).unsafe_cast()
+}

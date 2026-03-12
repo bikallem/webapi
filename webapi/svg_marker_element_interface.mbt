@@ -155,3 +155,190 @@ impl TSVGMarkerElement with view_box(self : Self) -> SVGAnimatedRect {
 impl TSVGMarkerElement with preserve_aspect_ratio(self : Self) -> SVGAnimatedPreserveAspectRatio {
   svg_marker_element_preserve_aspect_ratio_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn svg_marker_element_ref_x_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.refX"
+
+///|
+#cfg(target="js")
+fn svg_marker_element_ref_x_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_marker_element_ref_x_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_marker_element_ref_y_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.refY"
+
+///|
+#cfg(target="js")
+fn svg_marker_element_ref_y_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_marker_element_ref_y_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_marker_element_marker_units_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.markerUnits"
+
+///|
+#cfg(target="js")
+fn svg_marker_element_marker_units_ffi(obj : JsValue) -> SVGAnimatedEnumeration {
+  svg_marker_element_marker_units_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_marker_element_marker_width_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.markerWidth"
+
+///|
+#cfg(target="js")
+fn svg_marker_element_marker_width_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_marker_element_marker_width_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_marker_element_marker_height_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.markerHeight"
+
+///|
+#cfg(target="js")
+fn svg_marker_element_marker_height_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_marker_element_marker_height_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_marker_element_orient_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.orientType"
+
+///|
+#cfg(target="js")
+fn svg_marker_element_orient_type_ffi(obj : JsValue) -> SVGAnimatedEnumeration {
+  svg_marker_element_orient_type_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_marker_element_orient_angle_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.orientAngle"
+
+///|
+#cfg(target="js")
+fn svg_marker_element_orient_angle_ffi(obj : JsValue) -> SVGAnimatedAngle {
+  svg_marker_element_orient_angle_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_marker_element_orient_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.orient"
+
+///|
+#cfg(target="js")
+fn svg_marker_element_orient_ffi(obj : JsValue) -> String {
+  svg_marker_element_orient_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_marker_element_set_orient_ffi(
+  obj : JsValue,
+  orient : JsValue,
+) -> Unit = "(obj, orient) => { obj.orient = orient; }"
+
+///|
+#cfg(target="js")
+extern "js" fn svg_marker_element_set_orient_to_auto_ffi(obj : JsValue) -> Unit = "(obj) => obj.setOrientToAuto()"
+
+///|
+#cfg(target="js")
+extern "js" fn svg_marker_element_set_orient_to_angle_ffi(
+  obj : JsValue,
+  angle : JsValue,
+) -> Unit = "(obj, angle) => obj.setOrientToAngle(angle)"
+
+///|
+#cfg(target="js")
+extern "js" fn svg_marker_element_view_box_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.viewBox"
+
+///|
+#cfg(target="js")
+fn svg_marker_element_view_box_ffi(obj : JsValue) -> SVGAnimatedRect {
+  svg_marker_element_view_box_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_marker_element_preserve_aspect_ratio_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.preserveAspectRatio"
+
+///|
+#cfg(target="js")
+fn svg_marker_element_preserve_aspect_ratio_ffi(
+  obj : JsValue,
+) -> SVGAnimatedPreserveAspectRatio {
+  svg_marker_element_preserve_aspect_ratio_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svg_marker_element_ref_x_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGMarkerElement" "get_refX"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_marker_element_ref_y_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGMarkerElement" "get_refY"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_marker_element_marker_units_ffi(obj : JsValue) -> SVGAnimatedEnumeration = "webapi_SVGMarkerElement" "get_markerUnits"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_marker_element_marker_width_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGMarkerElement" "get_markerWidth"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_marker_element_marker_height_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGMarkerElement" "get_markerHeight"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_marker_element_orient_type_ffi(obj : JsValue) -> SVGAnimatedEnumeration = "webapi_SVGMarkerElement" "get_orientType"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_marker_element_orient_angle_ffi(obj : JsValue) -> SVGAnimatedAngle = "webapi_SVGMarkerElement" "get_orientAngle"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_marker_element_orient_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGMarkerElement" "get_orient"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_marker_element_orient_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(svg_marker_element_orient_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svg_marker_element_set_orient_ffi(obj : JsValue, orient : JsValue) -> Unit = "webapi_SVGMarkerElement" "set_orient"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_marker_element_set_orient_to_auto_ffi(obj : JsValue) -> Unit = "webapi_SVGMarkerElement" "setOrientToAuto"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_marker_element_set_orient_to_angle_ffi(
+  obj : JsValue,
+  angle : JsValue,
+) -> Unit = "webapi_SVGMarkerElement" "setOrientToAngle"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_marker_element_view_box_ffi(obj : JsValue) -> SVGAnimatedRect = "webapi_SVGMarkerElement" "get_viewBox"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_marker_element_preserve_aspect_ratio_ffi(
+  obj : JsValue,
+) -> SVGAnimatedPreserveAspectRatio = "webapi_SVGMarkerElement" "get_preserveAspectRatio"

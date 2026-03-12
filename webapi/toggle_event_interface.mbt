@@ -55,3 +55,71 @@ impl TToggleEvent with new_state(self : Self) -> String {
 impl TToggleEvent with source(self : Self) -> Element {
   toggle_event_source_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn toggle_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> ToggleEvent = "(type_, event_init_dict) => new ToggleEvent(type_, event_init_dict)"
+
+///|
+#cfg(target="js")
+extern "js" fn toggle_event_old_state_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oldState"
+
+///|
+#cfg(target="js")
+fn toggle_event_old_state_ffi(obj : JsValue) -> String {
+  toggle_event_old_state_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn toggle_event_new_state_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.newState"
+
+///|
+#cfg(target="js")
+fn toggle_event_new_state_ffi(obj : JsValue) -> String {
+  toggle_event_new_state_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn toggle_event_source_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.source"
+
+///|
+#cfg(target="js")
+fn toggle_event_source_ffi(obj : JsValue) -> Element {
+  toggle_event_source_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn toggle_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> ToggleEvent = "webapi_ToggleEvent" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn toggle_event_old_state_ffi_wasm(obj : JsValue) -> JsValue = "webapi_ToggleEvent" "get_oldState"
+
+///|
+#cfg(target="wasm-gc")
+fn toggle_event_old_state_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(toggle_event_old_state_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn toggle_event_new_state_ffi_wasm(obj : JsValue) -> JsValue = "webapi_ToggleEvent" "get_newState"
+
+///|
+#cfg(target="wasm-gc")
+fn toggle_event_new_state_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(toggle_event_new_state_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn toggle_event_source_ffi(obj : JsValue) -> Element = "webapi_ToggleEvent" "get_source"

@@ -279,3 +279,451 @@ impl THTMLScriptElement with set_html_for(self : Self, html_for : String) -> Uni
     TJsValue::to_js(html_for),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_script_element_new_ffi() -> HTMLScriptElement = "() => new HTMLScriptElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_script_element_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.type"
+
+///|
+#cfg(target="js")
+fn html_script_element_type_ffi(obj : JsValue) -> String {
+  html_script_element_type_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_script_element_set_type_ffi(
+  obj : JsValue,
+  type_ : JsValue,
+) -> Unit = "(obj, type) => { obj.type = type; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_script_element_src_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.src"
+
+///|
+#cfg(target="js")
+fn html_script_element_src_ffi(obj : JsValue) -> String {
+  html_script_element_src_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_script_element_set_src_ffi(
+  obj : JsValue,
+  src : JsValue,
+) -> Unit = "(obj, src) => { obj.src = src; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_script_element_no_module_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.noModule"
+
+///|
+#cfg(target="js")
+fn html_script_element_no_module_ffi(obj : JsValue) -> Bool {
+  html_script_element_no_module_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_script_element_set_no_module_ffi(
+  obj : JsValue,
+  no_module : JsValue,
+) -> Unit = "(obj, noModule) => { obj.noModule = noModule; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_script_element_async_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.async"
+
+///|
+#cfg(target="js")
+fn html_script_element_async_ffi(obj : JsValue) -> Bool {
+  html_script_element_async_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_script_element_set_async_ffi(
+  obj : JsValue,
+  async_ : JsValue,
+) -> Unit = "(obj, async) => { obj.async = async; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_script_element_defer_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.defer"
+
+///|
+#cfg(target="js")
+fn html_script_element_defer_ffi(obj : JsValue) -> Bool {
+  html_script_element_defer_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_script_element_set_defer_ffi(
+  obj : JsValue,
+  defer_ : JsValue,
+) -> Unit = "(obj, defer) => { obj.defer = defer; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_script_element_blocking_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.blocking"
+
+///|
+#cfg(target="js")
+fn html_script_element_blocking_ffi(obj : JsValue) -> DOMTokenList {
+  html_script_element_blocking_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_script_element_cross_origin_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.crossOrigin"
+
+///|
+#cfg(target="js")
+fn html_script_element_cross_origin_ffi(obj : JsValue) -> String {
+  html_script_element_cross_origin_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_script_element_set_cross_origin_ffi(
+  obj : JsValue,
+  cross_origin : JsValue,
+) -> Unit = "(obj, crossOrigin) => { obj.crossOrigin = crossOrigin; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_script_element_referrer_policy_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.referrerPolicy"
+
+///|
+#cfg(target="js")
+fn html_script_element_referrer_policy_ffi(obj : JsValue) -> String {
+  html_script_element_referrer_policy_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_script_element_set_referrer_policy_ffi(
+  obj : JsValue,
+  referrer_policy : JsValue,
+) -> Unit = "(obj, referrerPolicy) => { obj.referrerPolicy = referrerPolicy; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_script_element_integrity_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.integrity"
+
+///|
+#cfg(target="js")
+fn html_script_element_integrity_ffi(obj : JsValue) -> String {
+  html_script_element_integrity_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_script_element_set_integrity_ffi(
+  obj : JsValue,
+  integrity : JsValue,
+) -> Unit = "(obj, integrity) => { obj.integrity = integrity; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_script_element_fetch_priority_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.fetchPriority"
+
+///|
+#cfg(target="js")
+fn html_script_element_fetch_priority_ffi(obj : JsValue) -> String {
+  html_script_element_fetch_priority_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_script_element_set_fetch_priority_ffi(
+  obj : JsValue,
+  fetch_priority : JsValue,
+) -> Unit = "(obj, fetchPriority) => { obj.fetchPriority = fetchPriority; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_script_element_text_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.text"
+
+///|
+#cfg(target="js")
+fn html_script_element_text_ffi(obj : JsValue) -> String {
+  html_script_element_text_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_script_element_set_text_ffi(
+  obj : JsValue,
+  text : JsValue,
+) -> Unit = "(obj, text) => { obj.text = text; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_script_element_supports_ffi_js(type_ : JsValue) -> JsValue = "(type_) => HTMLScriptElement.supports(type_)"
+
+///|
+#cfg(target="js")
+fn html_script_element_supports_ffi(type_ : JsValue) -> Bool {
+  html_script_element_supports_ffi_js(type_).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_script_element_charset_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.charset"
+
+///|
+#cfg(target="js")
+fn html_script_element_charset_ffi(obj : JsValue) -> String {
+  html_script_element_charset_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_script_element_set_charset_ffi(
+  obj : JsValue,
+  charset : JsValue,
+) -> Unit = "(obj, charset) => { obj.charset = charset; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_script_element_event_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.event"
+
+///|
+#cfg(target="js")
+fn html_script_element_event_ffi(obj : JsValue) -> String {
+  html_script_element_event_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_script_element_set_event_ffi(
+  obj : JsValue,
+  event : JsValue,
+) -> Unit = "(obj, event) => { obj.event = event; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_script_element_html_for_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.htmlFor"
+
+///|
+#cfg(target="js")
+fn html_script_element_html_for_ffi(obj : JsValue) -> String {
+  html_script_element_html_for_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_script_element_set_html_for_ffi(
+  obj : JsValue,
+  html_for : JsValue,
+) -> Unit = "(obj, htmlFor) => { obj.htmlFor = htmlFor; }"
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_new_ffi() -> HTMLScriptElement = "webapi_HTMLScriptElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLScriptElement" "get_type"
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_type_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_script_element_type_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_set_type_ffi(obj : JsValue, type_ : JsValue) -> Unit = "webapi_HTMLScriptElement" "set_type"
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_src_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLScriptElement" "get_src"
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_src_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_script_element_src_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_set_src_ffi(obj : JsValue, src : JsValue) -> Unit = "webapi_HTMLScriptElement" "set_src"
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_no_module_ffi(obj : JsValue) -> Bool = "webapi_HTMLScriptElement" "get_noModule"
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_set_no_module_ffi(
+  obj : JsValue,
+  no_module : JsValue,
+) -> Unit = "webapi_HTMLScriptElement" "set_noModule"
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_async_ffi(obj : JsValue) -> Bool = "webapi_HTMLScriptElement" "get_async"
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_set_async_ffi(obj : JsValue, async_ : JsValue) -> Unit = "webapi_HTMLScriptElement" "set_async"
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_defer_ffi(obj : JsValue) -> Bool = "webapi_HTMLScriptElement" "get_defer"
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_set_defer_ffi(obj : JsValue, defer_ : JsValue) -> Unit = "webapi_HTMLScriptElement" "set_defer"
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_blocking_ffi(obj : JsValue) -> DOMTokenList = "webapi_HTMLScriptElement" "get_blocking"
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_cross_origin_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLScriptElement" "get_crossOrigin"
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_cross_origin_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_script_element_cross_origin_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_set_cross_origin_ffi(
+  obj : JsValue,
+  cross_origin : JsValue,
+) -> Unit = "webapi_HTMLScriptElement" "set_crossOrigin"
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_referrer_policy_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLScriptElement" "get_referrerPolicy"
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_referrer_policy_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_script_element_referrer_policy_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_set_referrer_policy_ffi(
+  obj : JsValue,
+  referrer_policy : JsValue,
+) -> Unit = "webapi_HTMLScriptElement" "set_referrerPolicy"
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_integrity_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLScriptElement" "get_integrity"
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_integrity_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_script_element_integrity_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_set_integrity_ffi(
+  obj : JsValue,
+  integrity : JsValue,
+) -> Unit = "webapi_HTMLScriptElement" "set_integrity"
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_fetch_priority_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLScriptElement" "get_fetchPriority"
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_fetch_priority_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_script_element_fetch_priority_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_set_fetch_priority_ffi(
+  obj : JsValue,
+  fetch_priority : JsValue,
+) -> Unit = "webapi_HTMLScriptElement" "set_fetchPriority"
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_text_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLScriptElement" "get_text"
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_text_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_script_element_text_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_set_text_ffi(obj : JsValue, text : JsValue) -> Unit = "webapi_HTMLScriptElement" "set_text"
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_supports_ffi(type_ : JsValue) -> Bool = "webapi_HTMLScriptElement" "supports"
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_charset_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLScriptElement" "get_charset"
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_charset_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_script_element_charset_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_set_charset_ffi(
+  obj : JsValue,
+  charset : JsValue,
+) -> Unit = "webapi_HTMLScriptElement" "set_charset"
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_event_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLScriptElement" "get_event"
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_event_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_script_element_event_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_set_event_ffi(obj : JsValue, event : JsValue) -> Unit = "webapi_HTMLScriptElement" "set_event"
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_html_for_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLScriptElement" "get_htmlFor"
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_html_for_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_script_element_html_for_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_script_element_set_html_for_ffi(
+  obj : JsValue,
+  html_for : JsValue,
+) -> Unit = "webapi_HTMLScriptElement" "set_htmlFor"

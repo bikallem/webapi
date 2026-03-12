@@ -196,3 +196,305 @@ impl TCSSPageDescriptors with set_bleed(self : Self, bleed : CSSOMString) -> Uni
     TJsValue::to_js(bleed),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn css_page_descriptors_margin_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.margin"
+
+///|
+#cfg(target="js")
+fn css_page_descriptors_margin_ffi(obj : JsValue) -> CSSOMString {
+  css_page_descriptors_margin_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn css_page_descriptors_set_margin_ffi(
+  obj : JsValue,
+  margin : JsValue,
+) -> Unit = "(obj, margin) => { obj.margin = margin; }"
+
+///|
+#cfg(target="js")
+extern "js" fn css_page_descriptors_margin_top_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.marginTop"
+
+///|
+#cfg(target="js")
+fn css_page_descriptors_margin_top_ffi(obj : JsValue) -> CSSOMString {
+  css_page_descriptors_margin_top_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn css_page_descriptors_set_margin_top_ffi(
+  obj : JsValue,
+  margin_top : JsValue,
+) -> Unit = "(obj, marginTop) => { obj.marginTop = marginTop; }"
+
+///|
+#cfg(target="js")
+extern "js" fn css_page_descriptors_margin_right_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.marginRight"
+
+///|
+#cfg(target="js")
+fn css_page_descriptors_margin_right_ffi(obj : JsValue) -> CSSOMString {
+  css_page_descriptors_margin_right_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn css_page_descriptors_set_margin_right_ffi(
+  obj : JsValue,
+  margin_right : JsValue,
+) -> Unit = "(obj, marginRight) => { obj.marginRight = marginRight; }"
+
+///|
+#cfg(target="js")
+extern "js" fn css_page_descriptors_margin_bottom_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.marginBottom"
+
+///|
+#cfg(target="js")
+fn css_page_descriptors_margin_bottom_ffi(obj : JsValue) -> CSSOMString {
+  css_page_descriptors_margin_bottom_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn css_page_descriptors_set_margin_bottom_ffi(
+  obj : JsValue,
+  margin_bottom : JsValue,
+) -> Unit = "(obj, marginBottom) => { obj.marginBottom = marginBottom; }"
+
+///|
+#cfg(target="js")
+extern "js" fn css_page_descriptors_margin_left_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.marginLeft"
+
+///|
+#cfg(target="js")
+fn css_page_descriptors_margin_left_ffi(obj : JsValue) -> CSSOMString {
+  css_page_descriptors_margin_left_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn css_page_descriptors_set_margin_left_ffi(
+  obj : JsValue,
+  margin_left : JsValue,
+) -> Unit = "(obj, marginLeft) => { obj.marginLeft = marginLeft; }"
+
+///|
+#cfg(target="js")
+extern "js" fn css_page_descriptors_size_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.size"
+
+///|
+#cfg(target="js")
+fn css_page_descriptors_size_ffi(obj : JsValue) -> CSSOMString {
+  css_page_descriptors_size_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn css_page_descriptors_set_size_ffi(
+  obj : JsValue,
+  size : JsValue,
+) -> Unit = "(obj, size) => { obj.size = size; }"
+
+///|
+#cfg(target="js")
+extern "js" fn css_page_descriptors_page_orientation_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.pageOrientation"
+
+///|
+#cfg(target="js")
+fn css_page_descriptors_page_orientation_ffi(obj : JsValue) -> CSSOMString {
+  css_page_descriptors_page_orientation_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn css_page_descriptors_set_page_orientation_ffi(
+  obj : JsValue,
+  page_orientation : JsValue,
+) -> Unit = "(obj, pageOrientation) => { obj.pageOrientation = pageOrientation; }"
+
+///|
+#cfg(target="js")
+extern "js" fn css_page_descriptors_marks_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.marks"
+
+///|
+#cfg(target="js")
+fn css_page_descriptors_marks_ffi(obj : JsValue) -> CSSOMString {
+  css_page_descriptors_marks_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn css_page_descriptors_set_marks_ffi(
+  obj : JsValue,
+  marks : JsValue,
+) -> Unit = "(obj, marks) => { obj.marks = marks; }"
+
+///|
+#cfg(target="js")
+extern "js" fn css_page_descriptors_bleed_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.bleed"
+
+///|
+#cfg(target="js")
+fn css_page_descriptors_bleed_ffi(obj : JsValue) -> CSSOMString {
+  css_page_descriptors_bleed_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn css_page_descriptors_set_bleed_ffi(
+  obj : JsValue,
+  bleed : JsValue,
+) -> Unit = "(obj, bleed) => { obj.bleed = bleed; }"
+
+///|
+#cfg(target="wasm-gc")
+fn css_page_descriptors_margin_ffi_wasm(obj : JsValue) -> JsValue = "webapi_CSSPageDescriptors" "get_margin"
+
+///|
+#cfg(target="wasm-gc")
+fn css_page_descriptors_margin_ffi(obj : JsValue) -> CSSOMString {
+  css_page_descriptors_margin_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn css_page_descriptors_set_margin_ffi(obj : JsValue, margin : JsValue) -> Unit = "webapi_CSSPageDescriptors" "set_margin"
+
+///|
+#cfg(target="wasm-gc")
+fn css_page_descriptors_margin_top_ffi_wasm(obj : JsValue) -> JsValue = "webapi_CSSPageDescriptors" "get_marginTop"
+
+///|
+#cfg(target="wasm-gc")
+fn css_page_descriptors_margin_top_ffi(obj : JsValue) -> CSSOMString {
+  css_page_descriptors_margin_top_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn css_page_descriptors_set_margin_top_ffi(
+  obj : JsValue,
+  margin_top : JsValue,
+) -> Unit = "webapi_CSSPageDescriptors" "set_marginTop"
+
+///|
+#cfg(target="wasm-gc")
+fn css_page_descriptors_margin_right_ffi_wasm(obj : JsValue) -> JsValue = "webapi_CSSPageDescriptors" "get_marginRight"
+
+///|
+#cfg(target="wasm-gc")
+fn css_page_descriptors_margin_right_ffi(obj : JsValue) -> CSSOMString {
+  css_page_descriptors_margin_right_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn css_page_descriptors_set_margin_right_ffi(
+  obj : JsValue,
+  margin_right : JsValue,
+) -> Unit = "webapi_CSSPageDescriptors" "set_marginRight"
+
+///|
+#cfg(target="wasm-gc")
+fn css_page_descriptors_margin_bottom_ffi_wasm(obj : JsValue) -> JsValue = "webapi_CSSPageDescriptors" "get_marginBottom"
+
+///|
+#cfg(target="wasm-gc")
+fn css_page_descriptors_margin_bottom_ffi(obj : JsValue) -> CSSOMString {
+  css_page_descriptors_margin_bottom_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn css_page_descriptors_set_margin_bottom_ffi(
+  obj : JsValue,
+  margin_bottom : JsValue,
+) -> Unit = "webapi_CSSPageDescriptors" "set_marginBottom"
+
+///|
+#cfg(target="wasm-gc")
+fn css_page_descriptors_margin_left_ffi_wasm(obj : JsValue) -> JsValue = "webapi_CSSPageDescriptors" "get_marginLeft"
+
+///|
+#cfg(target="wasm-gc")
+fn css_page_descriptors_margin_left_ffi(obj : JsValue) -> CSSOMString {
+  css_page_descriptors_margin_left_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn css_page_descriptors_set_margin_left_ffi(
+  obj : JsValue,
+  margin_left : JsValue,
+) -> Unit = "webapi_CSSPageDescriptors" "set_marginLeft"
+
+///|
+#cfg(target="wasm-gc")
+fn css_page_descriptors_size_ffi_wasm(obj : JsValue) -> JsValue = "webapi_CSSPageDescriptors" "get_size"
+
+///|
+#cfg(target="wasm-gc")
+fn css_page_descriptors_size_ffi(obj : JsValue) -> CSSOMString {
+  css_page_descriptors_size_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn css_page_descriptors_set_size_ffi(obj : JsValue, size : JsValue) -> Unit = "webapi_CSSPageDescriptors" "set_size"
+
+///|
+#cfg(target="wasm-gc")
+fn css_page_descriptors_page_orientation_ffi_wasm(obj : JsValue) -> JsValue = "webapi_CSSPageDescriptors" "get_pageOrientation"
+
+///|
+#cfg(target="wasm-gc")
+fn css_page_descriptors_page_orientation_ffi(obj : JsValue) -> CSSOMString {
+  css_page_descriptors_page_orientation_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn css_page_descriptors_set_page_orientation_ffi(
+  obj : JsValue,
+  page_orientation : JsValue,
+) -> Unit = "webapi_CSSPageDescriptors" "set_pageOrientation"
+
+///|
+#cfg(target="wasm-gc")
+fn css_page_descriptors_marks_ffi_wasm(obj : JsValue) -> JsValue = "webapi_CSSPageDescriptors" "get_marks"
+
+///|
+#cfg(target="wasm-gc")
+fn css_page_descriptors_marks_ffi(obj : JsValue) -> CSSOMString {
+  css_page_descriptors_marks_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn css_page_descriptors_set_marks_ffi(obj : JsValue, marks : JsValue) -> Unit = "webapi_CSSPageDescriptors" "set_marks"
+
+///|
+#cfg(target="wasm-gc")
+fn css_page_descriptors_bleed_ffi_wasm(obj : JsValue) -> JsValue = "webapi_CSSPageDescriptors" "get_bleed"
+
+///|
+#cfg(target="wasm-gc")
+fn css_page_descriptors_bleed_ffi(obj : JsValue) -> CSSOMString {
+  css_page_descriptors_bleed_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn css_page_descriptors_set_bleed_ffi(obj : JsValue, bleed : JsValue) -> Unit = "webapi_CSSPageDescriptors" "set_bleed"

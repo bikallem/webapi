@@ -58,3 +58,73 @@ pub fn BaseComputedKeyframe::composite(
 ) -> CompositeOperationOrAuto? {
   base_computed_keyframe_get_composite_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn base_computed_keyframe_ffi(
+  offset : JsValue,
+  computed_offset : JsValue,
+  easing : JsValue,
+  composite : JsValue,
+) -> BaseComputedKeyframe =
+  #|(offset, computedOffset, easing, composite) => {
+  #|  const obj = {};
+  #|  if (offset !== undefined) obj.offset = offset;
+  #|  if (computedOffset !== undefined) obj.computedOffset = computedOffset;
+  #|  if (easing !== undefined) obj.easing = easing;
+  #|  if (composite !== undefined) obj.composite = composite;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn base_computed_keyframe_empty_ffi() -> BaseComputedKeyframe = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn base_computed_keyframe_get_offset_ffi(obj : JsValue) -> JsValue = "(obj) => obj.offset"
+
+///|
+#cfg(target="js")
+extern "js" fn base_computed_keyframe_get_computed_offset_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.computedOffset"
+
+///|
+#cfg(target="js")
+extern "js" fn base_computed_keyframe_get_easing_ffi(obj : JsValue) -> JsValue = "(obj) => obj.easing"
+
+///|
+#cfg(target="js")
+extern "js" fn base_computed_keyframe_get_composite_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.composite"
+
+///|
+#cfg(target="wasm-gc")
+fn base_computed_keyframe_ffi(
+  offset : JsValue,
+  computed_offset : JsValue,
+  easing : JsValue,
+  composite : JsValue,
+) -> BaseComputedKeyframe = "webapi_BaseComputedKeyframe" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn base_computed_keyframe_empty_ffi() -> BaseComputedKeyframe = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn base_computed_keyframe_get_offset_ffi(obj : JsValue) -> JsValue = "webapi_BaseComputedKeyframe" "get_offset"
+
+///|
+#cfg(target="wasm-gc")
+fn base_computed_keyframe_get_computed_offset_ffi(obj : JsValue) -> JsValue = "webapi_BaseComputedKeyframe" "get_computedOffset"
+
+///|
+#cfg(target="wasm-gc")
+fn base_computed_keyframe_get_easing_ffi(obj : JsValue) -> JsValue = "webapi_BaseComputedKeyframe" "get_easing"
+
+///|
+#cfg(target="wasm-gc")
+fn base_computed_keyframe_get_composite_ffi(obj : JsValue) -> JsValue = "webapi_BaseComputedKeyframe" "get_composite"

@@ -33,3 +33,38 @@ pub fn FileSystemRemoveOptions::recursive(
 ) -> Bool? {
   file_system_remove_options_get_recursive_ffi(TJsValue::to_js(self)).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn file_system_remove_options_ffi(
+  recursive : JsValue,
+) -> FileSystemRemoveOptions =
+  #|(recursive) => {
+  #|  const obj = {};
+  #|  if (recursive !== undefined) obj.recursive = recursive;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn file_system_remove_options_empty_ffi() -> FileSystemRemoveOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn file_system_remove_options_get_recursive_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.recursive"
+
+///|
+#cfg(target="wasm-gc")
+fn file_system_remove_options_ffi(
+  recursive : JsValue,
+) -> FileSystemRemoveOptions = "webapi_FileSystemRemoveOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn file_system_remove_options_empty_ffi() -> FileSystemRemoveOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn file_system_remove_options_get_recursive_ffi(obj : JsValue) -> JsValue = "webapi_FileSystemRemoveOptions" "get_recursive"

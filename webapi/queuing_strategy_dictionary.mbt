@@ -41,3 +41,49 @@ pub fn QueuingStrategy::high_water_mark(self : QueuingStrategy) -> Double? {
 pub fn QueuingStrategy::size(self : QueuingStrategy) -> QueuingStrategySize? {
   queuing_strategy_get_size_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn queuing_strategy_ffi(
+  high_water_mark : JsValue,
+  size : JsValue,
+) -> QueuingStrategy =
+  #|(highWaterMark, size) => {
+  #|  const obj = {};
+  #|  if (highWaterMark !== undefined) obj.highWaterMark = highWaterMark;
+  #|  if (size !== undefined) obj.size = size;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn queuing_strategy_empty_ffi() -> QueuingStrategy = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn queuing_strategy_get_high_water_mark_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.highWaterMark"
+
+///|
+#cfg(target="js")
+extern "js" fn queuing_strategy_get_size_ffi(obj : JsValue) -> JsValue = "(obj) => obj.size"
+
+///|
+#cfg(target="wasm-gc")
+fn queuing_strategy_ffi(
+  high_water_mark : JsValue,
+  size : JsValue,
+) -> QueuingStrategy = "webapi_QueuingStrategy" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn queuing_strategy_empty_ffi() -> QueuingStrategy = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn queuing_strategy_get_high_water_mark_ffi(obj : JsValue) -> JsValue = "webapi_QueuingStrategy" "get_highWaterMark"
+
+///|
+#cfg(target="wasm-gc")
+fn queuing_strategy_get_size_ffi(obj : JsValue) -> JsValue = "webapi_QueuingStrategy" "get_size"

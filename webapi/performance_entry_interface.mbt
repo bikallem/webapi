@@ -74,3 +74,113 @@ impl TPerformanceEntry with navigation_id(self : Self) -> UInt64 {
 impl TPerformanceEntry with to_json(self : Self) -> JsValue {
   performance_entry_to_json_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn performance_entry_id_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.id"
+
+///|
+#cfg(target="js")
+fn performance_entry_id_ffi(obj : JsValue) -> UInt64 {
+  performance_entry_id_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn performance_entry_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.name"
+
+///|
+#cfg(target="js")
+fn performance_entry_name_ffi(obj : JsValue) -> String {
+  performance_entry_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn performance_entry_entry_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.entryType"
+
+///|
+#cfg(target="js")
+fn performance_entry_entry_type_ffi(obj : JsValue) -> String {
+  performance_entry_entry_type_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn performance_entry_start_time_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.startTime"
+
+///|
+#cfg(target="js")
+fn performance_entry_start_time_ffi(obj : JsValue) -> DOMHighResTimeStamp {
+  performance_entry_start_time_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn performance_entry_duration_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.duration"
+
+///|
+#cfg(target="js")
+fn performance_entry_duration_ffi(obj : JsValue) -> DOMHighResTimeStamp {
+  performance_entry_duration_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn performance_entry_navigation_id_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.navigationId"
+
+///|
+#cfg(target="js")
+fn performance_entry_navigation_id_ffi(obj : JsValue) -> UInt64 {
+  performance_entry_navigation_id_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn performance_entry_to_json_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.toJSON()"
+
+///|
+#cfg(target="js")
+fn performance_entry_to_json_ffi(obj : JsValue) -> JsValue {
+  performance_entry_to_json_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn performance_entry_id_ffi(obj : JsValue) -> UInt64 = "webapi_PerformanceEntry" "get_id"
+
+///|
+#cfg(target="wasm-gc")
+fn performance_entry_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_PerformanceEntry" "get_name"
+
+///|
+#cfg(target="wasm-gc")
+fn performance_entry_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(performance_entry_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn performance_entry_entry_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_PerformanceEntry" "get_entryType"
+
+///|
+#cfg(target="wasm-gc")
+fn performance_entry_entry_type_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(performance_entry_entry_type_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn performance_entry_start_time_ffi(obj : JsValue) -> DOMHighResTimeStamp = "webapi_PerformanceEntry" "get_startTime"
+
+///|
+#cfg(target="wasm-gc")
+fn performance_entry_duration_ffi(obj : JsValue) -> DOMHighResTimeStamp = "webapi_PerformanceEntry" "get_duration"
+
+///|
+#cfg(target="wasm-gc")
+fn performance_entry_navigation_id_ffi(obj : JsValue) -> UInt64 = "webapi_PerformanceEntry" "get_navigationId"
+
+///|
+#cfg(target="wasm-gc")
+fn performance_entry_to_json_ffi(obj : JsValue) -> JsValue = "webapi_PerformanceEntry" "toJSON"

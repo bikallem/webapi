@@ -48,3 +48,57 @@ impl TNavigationActivation with entry(self : Self) -> NavigationHistoryEntry {
 impl TNavigationActivation with navigation_type(self : Self) -> NavigationType {
   navigation_activation_navigation_type_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_activation_from_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.from"
+
+///|
+#cfg(target="js")
+fn navigation_activation_from_ffi(obj : JsValue) -> NavigationHistoryEntry {
+  navigation_activation_from_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_activation_entry_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.entry"
+
+///|
+#cfg(target="js")
+fn navigation_activation_entry_ffi(obj : JsValue) -> NavigationHistoryEntry {
+  navigation_activation_entry_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_activation_navigation_type_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.navigationType"
+
+///|
+#cfg(target="js")
+fn navigation_activation_navigation_type_ffi(obj : JsValue) -> NavigationType {
+  NavigationType::from_unchecked(
+    navigation_activation_navigation_type_ffi_js(obj).unsafe_cast(),
+  )
+}
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_activation_from_ffi(obj : JsValue) -> NavigationHistoryEntry = "webapi_NavigationActivation" "get_from"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_activation_entry_ffi(obj : JsValue) -> NavigationHistoryEntry = "webapi_NavigationActivation" "get_entry"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_activation_navigation_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_NavigationActivation" "get_navigationType"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_activation_navigation_type_ffi(obj : JsValue) -> NavigationType {
+  NavigationType::from_unchecked(
+    jsvalue_to_string(navigation_activation_navigation_type_ffi_wasm(obj)),
+  )
+}

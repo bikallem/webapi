@@ -41,3 +41,58 @@ pub fn WorkerOptions::type_(self : WorkerOptions) -> WorkerType? {
 pub fn WorkerOptions::credentials(self : WorkerOptions) -> RequestCredentials? {
   worker_options_get_credentials_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn worker_options_ffi(
+  name : JsValue,
+  type_ : JsValue,
+  credentials : JsValue,
+) -> WorkerOptions =
+  #|(name, type, credentials) => {
+  #|  const obj = {};
+  #|  if (name !== undefined) obj.name = name;
+  #|  if (type !== undefined) obj.type = type;
+  #|  if (credentials !== undefined) obj.credentials = credentials;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_options_empty_ffi() -> WorkerOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn worker_options_get_name_ffi(obj : JsValue) -> JsValue = "(obj) => obj.name"
+
+///|
+#cfg(target="js")
+extern "js" fn worker_options_get_type_ffi(obj : JsValue) -> JsValue = "(obj) => obj.type"
+
+///|
+#cfg(target="js")
+extern "js" fn worker_options_get_credentials_ffi(obj : JsValue) -> JsValue = "(obj) => obj.credentials"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_options_ffi(
+  name : JsValue,
+  type_ : JsValue,
+  credentials : JsValue,
+) -> WorkerOptions = "webapi_WorkerOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_options_empty_ffi() -> WorkerOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_options_get_name_ffi(obj : JsValue) -> JsValue = "webapi_WorkerOptions" "get_name"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_options_get_type_ffi(obj : JsValue) -> JsValue = "webapi_WorkerOptions" "get_type"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_options_get_credentials_ffi(obj : JsValue) -> JsValue = "webapi_WorkerOptions" "get_credentials"

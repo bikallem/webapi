@@ -54,3 +54,42 @@ impl THTMLBRElement with clear(self : Self) -> String {
 impl THTMLBRElement with set_clear(self : Self, clear : String) -> Unit {
   htmlbr_element_set_clear_ffi(TJsValue::to_js(self), TJsValue::to_js(clear))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn htmlbr_element_new_ffi() -> HTMLBRElement = "() => new HTMLBRElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn htmlbr_element_clear_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.clear"
+
+///|
+#cfg(target="js")
+fn htmlbr_element_clear_ffi(obj : JsValue) -> String {
+  htmlbr_element_clear_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn htmlbr_element_set_clear_ffi(
+  obj : JsValue,
+  clear : JsValue,
+) -> Unit = "(obj, clear) => { obj.clear = clear; }"
+
+///|
+#cfg(target="wasm-gc")
+fn htmlbr_element_new_ffi() -> HTMLBRElement = "webapi_HTMLBRElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn htmlbr_element_clear_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLBRElement" "get_clear"
+
+///|
+#cfg(target="wasm-gc")
+fn htmlbr_element_clear_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(htmlbr_element_clear_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn htmlbr_element_set_clear_ffi(obj : JsValue, clear : JsValue) -> Unit = "webapi_HTMLBRElement" "set_clear"

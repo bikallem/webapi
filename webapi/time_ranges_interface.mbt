@@ -44,3 +44,51 @@ impl TTimeRanges with start(self : Self, index : UInt) -> Double {
 impl TTimeRanges with end(self : Self, index : UInt) -> Double {
   time_ranges_end_ffi(TJsValue::to_js(self), TJsValue::to_js(index))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn time_ranges_length_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.length"
+
+///|
+#cfg(target="js")
+fn time_ranges_length_ffi(obj : JsValue) -> UInt {
+  time_ranges_length_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn time_ranges_start_ffi_js(
+  obj : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, index) => obj.start(index)"
+
+///|
+#cfg(target="js")
+fn time_ranges_start_ffi(obj : JsValue, index : JsValue) -> Double {
+  time_ranges_start_ffi_js(obj, index).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn time_ranges_end_ffi_js(
+  obj : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, index) => obj.end(index)"
+
+///|
+#cfg(target="js")
+fn time_ranges_end_ffi(obj : JsValue, index : JsValue) -> Double {
+  time_ranges_end_ffi_js(obj, index).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn time_ranges_length_ffi(obj : JsValue) -> UInt = "webapi_TimeRanges" "get_length"
+
+///|
+#cfg(target="wasm-gc")
+fn time_ranges_start_ffi(obj : JsValue, index : JsValue) -> Double = "webapi_TimeRanges" "start"
+
+///|
+#cfg(target="wasm-gc")
+fn time_ranges_end_ffi(obj : JsValue, index : JsValue) -> Double = "webapi_TimeRanges" "end"

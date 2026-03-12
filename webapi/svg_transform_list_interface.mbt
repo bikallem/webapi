@@ -154,3 +154,232 @@ impl TSVGTransformList with consolidate_opt(self : Self) -> SVGTransform? {
 impl TSVGTransformList with consolidate(self : Self) -> SVGTransform {
   self.consolidate_opt().unwrap()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn svg_transform_list_length_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.length"
+
+///|
+#cfg(target="js")
+fn svg_transform_list_length_ffi(obj : JsValue) -> UInt {
+  svg_transform_list_length_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_transform_list_number_of_items_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.numberOfItems"
+
+///|
+#cfg(target="js")
+fn svg_transform_list_number_of_items_ffi(obj : JsValue) -> UInt {
+  svg_transform_list_number_of_items_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_transform_list_clear_ffi(obj : JsValue) -> Unit = "(obj) => obj.clear()"
+
+///|
+#cfg(target="js")
+extern "js" fn svg_transform_list_initialize_ffi_js(
+  obj : JsValue,
+  new_item : JsValue,
+) -> JsValue = "(obj, new_item) => obj.initialize(new_item)"
+
+///|
+#cfg(target="js")
+fn svg_transform_list_initialize_ffi(
+  obj : JsValue,
+  new_item : JsValue,
+) -> SVGTransform {
+  svg_transform_list_initialize_ffi_js(obj, new_item).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_transform_list_get_item_ffi_js(
+  obj : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, index) => obj.getItem(index)"
+
+///|
+#cfg(target="js")
+fn svg_transform_list_get_item_ffi(
+  obj : JsValue,
+  index : JsValue,
+) -> SVGTransform {
+  svg_transform_list_get_item_ffi_js(obj, index).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_transform_list_insert_item_before_ffi_js(
+  obj : JsValue,
+  new_item : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, new_item, index) => obj.insertItemBefore(new_item, index)"
+
+///|
+#cfg(target="js")
+fn svg_transform_list_insert_item_before_ffi(
+  obj : JsValue,
+  new_item : JsValue,
+  index : JsValue,
+) -> SVGTransform {
+  svg_transform_list_insert_item_before_ffi_js(obj, new_item, index).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_transform_list_replace_item_ffi_js(
+  obj : JsValue,
+  new_item : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, new_item, index) => obj.replaceItem(new_item, index)"
+
+///|
+#cfg(target="js")
+fn svg_transform_list_replace_item_ffi(
+  obj : JsValue,
+  new_item : JsValue,
+  index : JsValue,
+) -> SVGTransform {
+  svg_transform_list_replace_item_ffi_js(obj, new_item, index).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_transform_list_remove_item_ffi_js(
+  obj : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, index) => obj.removeItem(index)"
+
+///|
+#cfg(target="js")
+fn svg_transform_list_remove_item_ffi(
+  obj : JsValue,
+  index : JsValue,
+) -> SVGTransform {
+  svg_transform_list_remove_item_ffi_js(obj, index).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_transform_list_append_item_ffi_js(
+  obj : JsValue,
+  new_item : JsValue,
+) -> JsValue = "(obj, new_item) => obj.appendItem(new_item)"
+
+///|
+#cfg(target="js")
+fn svg_transform_list_append_item_ffi(
+  obj : JsValue,
+  new_item : JsValue,
+) -> SVGTransform {
+  svg_transform_list_append_item_ffi_js(obj, new_item).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_transform_list_set_ffi(
+  obj : JsValue,
+  index : JsValue,
+  new_item : JsValue,
+) -> Unit = "(obj, index, new_item) => { obj[index] = new_item; }"
+
+///|
+#cfg(target="js")
+extern "js" fn svg_transform_list_create_svg_transform_from_matrix_ffi_js(
+  obj : JsValue,
+  matrix : JsValue,
+) -> JsValue = "(obj, matrix) => obj.createSVGTransformFromMatrix(matrix)"
+
+///|
+#cfg(target="js")
+fn svg_transform_list_create_svg_transform_from_matrix_ffi(
+  obj : JsValue,
+  matrix : JsValue,
+) -> SVGTransform {
+  svg_transform_list_create_svg_transform_from_matrix_ffi_js(obj, matrix).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_transform_list_consolidate_ffi(obj : JsValue) -> JsValue = "(obj) => obj.consolidate()"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_transform_list_length_ffi(obj : JsValue) -> UInt = "webapi_SVGTransformList" "get_length"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_transform_list_number_of_items_ffi(obj : JsValue) -> UInt = "webapi_SVGTransformList" "get_numberOfItems"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_transform_list_clear_ffi(obj : JsValue) -> Unit = "webapi_SVGTransformList" "clear"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_transform_list_initialize_ffi(
+  obj : JsValue,
+  new_item : JsValue,
+) -> SVGTransform = "webapi_SVGTransformList" "initialize"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_transform_list_get_item_ffi(
+  obj : JsValue,
+  index : JsValue,
+) -> SVGTransform = "webapi_SVGTransformList" "getItem"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_transform_list_insert_item_before_ffi(
+  obj : JsValue,
+  new_item : JsValue,
+  index : JsValue,
+) -> SVGTransform = "webapi_SVGTransformList" "insertItemBefore"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_transform_list_replace_item_ffi(
+  obj : JsValue,
+  new_item : JsValue,
+  index : JsValue,
+) -> SVGTransform = "webapi_SVGTransformList" "replaceItem"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_transform_list_remove_item_ffi(
+  obj : JsValue,
+  index : JsValue,
+) -> SVGTransform = "webapi_SVGTransformList" "removeItem"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_transform_list_append_item_ffi(
+  obj : JsValue,
+  new_item : JsValue,
+) -> SVGTransform = "webapi_SVGTransformList" "appendItem"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_transform_list_set_ffi(
+  obj : JsValue,
+  index : JsValue,
+  new_item : JsValue,
+) -> Unit = "webapi_SVGTransformList" "set"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_transform_list_create_svg_transform_from_matrix_ffi(
+  obj : JsValue,
+  matrix : JsValue,
+) -> SVGTransform = "webapi_SVGTransformList" "createSVGTransformFromMatrix"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_transform_list_consolidate_ffi(obj : JsValue) -> JsValue = "webapi_SVGTransformList" "consolidate"

@@ -174,3 +174,263 @@ impl TServiceWorkerContainer with set_onmessageerror(
     TJsValue::to_js(event_handler_non_null_ffi(onmessageerror)),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn service_worker_container_controller_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.controller"
+
+///|
+#cfg(target="js")
+fn service_worker_container_controller_ffi(obj : JsValue) -> ServiceWorker {
+  service_worker_container_controller_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn service_worker_container_ready_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ready"
+
+///|
+#cfg(target="js")
+fn service_worker_container_ready_ffi(
+  obj : JsValue,
+) -> JsPromise[ServiceWorkerRegistration] {
+  service_worker_container_ready_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn service_worker_container_register_ffi_js(
+  obj : JsValue,
+  script_url : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, script_url, options) => obj.register(script_url, options)"
+
+///|
+#cfg(target="js")
+fn service_worker_container_register_ffi(
+  obj : JsValue,
+  script_url : JsValue,
+  options : JsValue,
+) -> JsPromise[ServiceWorkerRegistration] {
+  service_worker_container_register_ffi_js(obj, script_url, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn service_worker_container_get_registration_ffi_js(
+  obj : JsValue,
+  client_url : JsValue,
+) -> JsValue = "(obj, client_url) => obj.getRegistration(client_url)"
+
+///|
+#cfg(target="js")
+fn service_worker_container_get_registration_ffi(
+  obj : JsValue,
+  client_url : JsValue,
+) -> JsPromise[&TServiceWorkerContainerGetRegistration] {
+  service_worker_container_get_registration_ffi_js(obj, client_url).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn service_worker_container_get_registrations_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.getRegistrations()"
+
+///|
+#cfg(target="js")
+fn service_worker_container_get_registrations_ffi(
+  obj : JsValue,
+) -> JsPromise[Array[ServiceWorkerRegistration]] {
+  service_worker_container_get_registrations_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn service_worker_container_start_messages_ffi(
+  obj : JsValue,
+) -> Unit = "(obj) => obj.startMessages()"
+
+///|
+#cfg(target="js")
+extern "js" fn service_worker_container_oncontrollerchange_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.oncontrollerchange"
+
+///|
+#cfg(target="js")
+fn service_worker_container_oncontrollerchange_ffi(
+  obj : JsValue,
+) -> EventHandler {
+  service_worker_container_oncontrollerchange_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn service_worker_container_set_oncontrollerchange_ffi(
+  obj : JsValue,
+  oncontrollerchange : JsValue,
+) -> Unit = "(obj, oncontrollerchange) => { obj.oncontrollerchange = oncontrollerchange; }"
+
+///|
+#cfg(target="js")
+extern "js" fn service_worker_container_onmessage_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.onmessage"
+
+///|
+#cfg(target="js")
+fn service_worker_container_onmessage_ffi(obj : JsValue) -> EventHandler {
+  service_worker_container_onmessage_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn service_worker_container_set_onmessage_ffi(
+  obj : JsValue,
+  onmessage : JsValue,
+) -> Unit = "(obj, onmessage) => { obj.onmessage = onmessage; }"
+
+///|
+#cfg(target="js")
+extern "js" fn service_worker_container_onmessageerror_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.onmessageerror"
+
+///|
+#cfg(target="js")
+fn service_worker_container_onmessageerror_ffi(obj : JsValue) -> EventHandler {
+  service_worker_container_onmessageerror_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn service_worker_container_set_onmessageerror_ffi(
+  obj : JsValue,
+  onmessageerror : JsValue,
+) -> Unit = "(obj, onmessageerror) => { obj.onmessageerror = onmessageerror; }"
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_container_controller_ffi(obj : JsValue) -> ServiceWorker = "webapi_ServiceWorkerContainer" "get_controller"
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_container_ready_ffi_wasm(obj : JsValue) -> JsValue = "webapi_ServiceWorkerContainer" "get_ready"
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_container_ready_ffi(
+  obj : JsValue,
+) -> JsPromise[ServiceWorkerRegistration] {
+  service_worker_container_ready_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_container_register_ffi_wasm(
+  obj : JsValue,
+  script_url : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_ServiceWorkerContainer" "register"
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_container_register_ffi(
+  obj : JsValue,
+  script_url : JsValue,
+  options : JsValue,
+) -> JsPromise[ServiceWorkerRegistration] {
+  service_worker_container_register_ffi_wasm(obj, script_url, options).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_container_get_registration_ffi_wasm(
+  obj : JsValue,
+  client_url : JsValue,
+) -> JsValue = "webapi_ServiceWorkerContainer" "getRegistration"
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_container_get_registration_ffi(
+  obj : JsValue,
+  client_url : JsValue,
+) -> JsPromise[&TServiceWorkerContainerGetRegistration] {
+  service_worker_container_get_registration_ffi_wasm(obj, client_url).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_container_get_registrations_ffi_wasm(
+  obj : JsValue,
+) -> JsValue = "webapi_ServiceWorkerContainer" "getRegistrations"
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_container_get_registrations_ffi(
+  obj : JsValue,
+) -> JsPromise[Array[ServiceWorkerRegistration]] {
+  service_worker_container_get_registrations_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_container_start_messages_ffi(obj : JsValue) -> Unit = "webapi_ServiceWorkerContainer" "startMessages"
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_container_oncontrollerchange_ffi_wasm(
+  obj : JsValue,
+) -> JsValue = "webapi_ServiceWorkerContainer" "get_oncontrollerchange"
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_container_oncontrollerchange_ffi(
+  obj : JsValue,
+) -> EventHandler {
+  service_worker_container_oncontrollerchange_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_container_set_oncontrollerchange_ffi(
+  obj : JsValue,
+  oncontrollerchange : JsValue,
+) -> Unit = "webapi_ServiceWorkerContainer" "set_oncontrollerchange"
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_container_onmessage_ffi_wasm(obj : JsValue) -> JsValue = "webapi_ServiceWorkerContainer" "get_onmessage"
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_container_onmessage_ffi(obj : JsValue) -> EventHandler {
+  service_worker_container_onmessage_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_container_set_onmessage_ffi(
+  obj : JsValue,
+  onmessage : JsValue,
+) -> Unit = "webapi_ServiceWorkerContainer" "set_onmessage"
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_container_onmessageerror_ffi_wasm(obj : JsValue) -> JsValue = "webapi_ServiceWorkerContainer" "get_onmessageerror"
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_container_onmessageerror_ffi(obj : JsValue) -> EventHandler {
+  service_worker_container_onmessageerror_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn service_worker_container_set_onmessageerror_ffi(
+  obj : JsValue,
+  onmessageerror : JsValue,
+) -> Unit = "webapi_ServiceWorkerContainer" "set_onmessageerror"

@@ -1,4 +1,0 @@
-///|
-fn create_script_callback_ffi(
-  callback : (String, JsValue) -> String,
-) -> CreateScriptCallback = "webapi_CreateScriptCallback" "new"

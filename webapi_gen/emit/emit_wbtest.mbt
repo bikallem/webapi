@@ -436,6 +436,42 @@ test "mbt_code_gen_multi adapts wasm callback Array return with JsArray" {
 }
 
 ///|
+test "merge_multi_target_code prefixes each backend block with cfg" {
+  let merged = merge_multi_target_code(MultiTargetCode::{
+    shared: "pub fn MyType::empty() -> MyType { my_type_empty_ffi() }",
+    js_ffi: (
+      #|extern "js" fn my_type_empty_ffi() -> MyType = "() => ({})"
+      #|
+      #|///|
+      #|fn my_type_name_ffi() -> String {
+      #|  "js"
+      #|}
+    ),
+    wasm_ffi: (
+      #|fn my_type_empty_ffi() -> MyType = "webapi_MyType" "empty"
+    ),
+  })
+  inspect(
+    merged,
+    content=(
+      #|pub fn MyType::empty() -> MyType { my_type_empty_ffi() }
+      #|
+      #|#cfg(target="js")
+      #|extern "js" fn my_type_empty_ffi() -> MyType = "() => ({})"
+      #|
+      #|///|
+      #|#cfg(target="js")
+      #|fn my_type_name_ffi() -> String {
+      #|  "js"
+      #|}
+      #|
+      #|#cfg(target="wasm-gc")
+      #|fn my_type_empty_ffi() -> MyType = "webapi_MyType" "empty"
+    ),
+  )
+}
+
+///|
 test "extract_trait_ref extracts simple trait ref" {
   inspect(
     extract_trait_ref("&TFoo"),

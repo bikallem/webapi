@@ -100,3 +100,143 @@ impl TFileSystemDirectoryHandle with resolve(
     TJsValue::to_js(possible_descendant),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn file_system_directory_handle_get_file_handle_ffi_js(
+  obj : JsValue,
+  name : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, name, options) => obj.getFileHandle(name, options)"
+
+///|
+#cfg(target="js")
+fn file_system_directory_handle_get_file_handle_ffi(
+  obj : JsValue,
+  name : JsValue,
+  options : JsValue,
+) -> JsPromise[FileSystemFileHandle] {
+  file_system_directory_handle_get_file_handle_ffi_js(obj, name, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn file_system_directory_handle_get_directory_handle_ffi_js(
+  obj : JsValue,
+  name : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, name, options) => obj.getDirectoryHandle(name, options)"
+
+///|
+#cfg(target="js")
+fn file_system_directory_handle_get_directory_handle_ffi(
+  obj : JsValue,
+  name : JsValue,
+  options : JsValue,
+) -> JsPromise[FileSystemDirectoryHandle] {
+  file_system_directory_handle_get_directory_handle_ffi_js(obj, name, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn file_system_directory_handle_remove_entry_ffi_js(
+  obj : JsValue,
+  name : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, name, options) => obj.removeEntry(name, options)"
+
+///|
+#cfg(target="js")
+fn file_system_directory_handle_remove_entry_ffi(
+  obj : JsValue,
+  name : JsValue,
+  options : JsValue,
+) -> JsPromise[JsValue] {
+  file_system_directory_handle_remove_entry_ffi_js(obj, name, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn file_system_directory_handle_resolve_ffi_js(
+  obj : JsValue,
+  possible_descendant : JsValue,
+) -> JsValue = "(obj, possible_descendant) => obj.resolve(possible_descendant)"
+
+///|
+#cfg(target="js")
+fn file_system_directory_handle_resolve_ffi(
+  obj : JsValue,
+  possible_descendant : JsValue,
+) -> JsPromise[Array[String]] {
+  file_system_directory_handle_resolve_ffi_js(obj, possible_descendant).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn file_system_directory_handle_get_file_handle_ffi_wasm(
+  obj : JsValue,
+  name : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_FileSystemDirectoryHandle" "getFileHandle"
+
+///|
+#cfg(target="wasm-gc")
+fn file_system_directory_handle_get_file_handle_ffi(
+  obj : JsValue,
+  name : JsValue,
+  options : JsValue,
+) -> JsPromise[FileSystemFileHandle] {
+  file_system_directory_handle_get_file_handle_ffi_wasm(obj, name, options).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn file_system_directory_handle_get_directory_handle_ffi_wasm(
+  obj : JsValue,
+  name : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_FileSystemDirectoryHandle" "getDirectoryHandle"
+
+///|
+#cfg(target="wasm-gc")
+fn file_system_directory_handle_get_directory_handle_ffi(
+  obj : JsValue,
+  name : JsValue,
+  options : JsValue,
+) -> JsPromise[FileSystemDirectoryHandle] {
+  file_system_directory_handle_get_directory_handle_ffi_wasm(obj, name, options).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn file_system_directory_handle_remove_entry_ffi_wasm(
+  obj : JsValue,
+  name : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_FileSystemDirectoryHandle" "removeEntry"
+
+///|
+#cfg(target="wasm-gc")
+fn file_system_directory_handle_remove_entry_ffi(
+  obj : JsValue,
+  name : JsValue,
+  options : JsValue,
+) -> JsPromise[JsValue] {
+  file_system_directory_handle_remove_entry_ffi_wasm(obj, name, options).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn file_system_directory_handle_resolve_ffi_wasm(
+  obj : JsValue,
+  possible_descendant : JsValue,
+) -> JsValue = "webapi_FileSystemDirectoryHandle" "resolve"
+
+///|
+#cfg(target="wasm-gc")
+fn file_system_directory_handle_resolve_ffi(
+  obj : JsValue,
+  possible_descendant : JsValue,
+) -> JsPromise[Array[String]] {
+  file_system_directory_handle_resolve_ffi_wasm(obj, possible_descendant).unsafe_cast()
+}

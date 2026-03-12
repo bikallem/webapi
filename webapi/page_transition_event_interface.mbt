@@ -46,3 +46,31 @@ pub trait TPageTransitionEvent: TEvent {
 impl TPageTransitionEvent with persisted(self : Self) -> Bool {
   page_transition_event_persisted_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn page_transition_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> PageTransitionEvent = "(type_, event_init_dict) => new PageTransitionEvent(type_, event_init_dict)"
+
+///|
+#cfg(target="js")
+extern "js" fn page_transition_event_persisted_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.persisted"
+
+///|
+#cfg(target="js")
+fn page_transition_event_persisted_ffi(obj : JsValue) -> Bool {
+  page_transition_event_persisted_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn page_transition_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> PageTransitionEvent = "webapi_PageTransitionEvent" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn page_transition_event_persisted_ffi(obj : JsValue) -> Bool = "webapi_PageTransitionEvent" "get_persisted"

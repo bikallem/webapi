@@ -119,3 +119,169 @@ impl THTMLMetaElement with set_scheme(self : Self, scheme : String) -> Unit {
     TJsValue::to_js(scheme),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_meta_element_new_ffi() -> HTMLMetaElement = "() => new HTMLMetaElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_meta_element_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.name"
+
+///|
+#cfg(target="js")
+fn html_meta_element_name_ffi(obj : JsValue) -> String {
+  html_meta_element_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_meta_element_set_name_ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> Unit = "(obj, name) => { obj.name = name; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_meta_element_http_equiv_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.httpEquiv"
+
+///|
+#cfg(target="js")
+fn html_meta_element_http_equiv_ffi(obj : JsValue) -> String {
+  html_meta_element_http_equiv_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_meta_element_set_http_equiv_ffi(
+  obj : JsValue,
+  http_equiv : JsValue,
+) -> Unit = "(obj, httpEquiv) => { obj.httpEquiv = httpEquiv; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_meta_element_content_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.content"
+
+///|
+#cfg(target="js")
+fn html_meta_element_content_ffi(obj : JsValue) -> String {
+  html_meta_element_content_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_meta_element_set_content_ffi(
+  obj : JsValue,
+  content : JsValue,
+) -> Unit = "(obj, content) => { obj.content = content; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_meta_element_media_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.media"
+
+///|
+#cfg(target="js")
+fn html_meta_element_media_ffi(obj : JsValue) -> String {
+  html_meta_element_media_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_meta_element_set_media_ffi(
+  obj : JsValue,
+  media : JsValue,
+) -> Unit = "(obj, media) => { obj.media = media; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_meta_element_scheme_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.scheme"
+
+///|
+#cfg(target="js")
+fn html_meta_element_scheme_ffi(obj : JsValue) -> String {
+  html_meta_element_scheme_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_meta_element_set_scheme_ffi(
+  obj : JsValue,
+  scheme : JsValue,
+) -> Unit = "(obj, scheme) => { obj.scheme = scheme; }"
+
+///|
+#cfg(target="wasm-gc")
+fn html_meta_element_new_ffi() -> HTMLMetaElement = "webapi_HTMLMetaElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_meta_element_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLMetaElement" "get_name"
+
+///|
+#cfg(target="wasm-gc")
+fn html_meta_element_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_meta_element_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_meta_element_set_name_ffi(obj : JsValue, name : JsValue) -> Unit = "webapi_HTMLMetaElement" "set_name"
+
+///|
+#cfg(target="wasm-gc")
+fn html_meta_element_http_equiv_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLMetaElement" "get_httpEquiv"
+
+///|
+#cfg(target="wasm-gc")
+fn html_meta_element_http_equiv_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_meta_element_http_equiv_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_meta_element_set_http_equiv_ffi(
+  obj : JsValue,
+  http_equiv : JsValue,
+) -> Unit = "webapi_HTMLMetaElement" "set_httpEquiv"
+
+///|
+#cfg(target="wasm-gc")
+fn html_meta_element_content_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLMetaElement" "get_content"
+
+///|
+#cfg(target="wasm-gc")
+fn html_meta_element_content_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_meta_element_content_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_meta_element_set_content_ffi(obj : JsValue, content : JsValue) -> Unit = "webapi_HTMLMetaElement" "set_content"
+
+///|
+#cfg(target="wasm-gc")
+fn html_meta_element_media_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLMetaElement" "get_media"
+
+///|
+#cfg(target="wasm-gc")
+fn html_meta_element_media_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_meta_element_media_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_meta_element_set_media_ffi(obj : JsValue, media : JsValue) -> Unit = "webapi_HTMLMetaElement" "set_media"
+
+///|
+#cfg(target="wasm-gc")
+fn html_meta_element_scheme_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLMetaElement" "get_scheme"
+
+///|
+#cfg(target="wasm-gc")
+fn html_meta_element_scheme_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_meta_element_scheme_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_meta_element_set_scheme_ffi(obj : JsValue, scheme : JsValue) -> Unit = "webapi_HTMLMetaElement" "set_scheme"

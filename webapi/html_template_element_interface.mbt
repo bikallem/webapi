@@ -157,3 +157,195 @@ impl THTMLTemplateElement with set_shadow_root_custom_element_registry(
     TJsValue::to_js(shadow_root_custom_element_registry),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_template_element_new_ffi() -> HTMLTemplateElement = "() => new HTMLTemplateElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_template_element_content_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.content"
+
+///|
+#cfg(target="js")
+fn html_template_element_content_ffi(obj : JsValue) -> DocumentFragment {
+  html_template_element_content_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_template_element_shadow_root_mode_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.shadowRootMode"
+
+///|
+#cfg(target="js")
+fn html_template_element_shadow_root_mode_ffi(obj : JsValue) -> String {
+  html_template_element_shadow_root_mode_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_template_element_set_shadow_root_mode_ffi(
+  obj : JsValue,
+  shadow_root_mode : JsValue,
+) -> Unit = "(obj, shadowRootMode) => { obj.shadowRootMode = shadowRootMode; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_template_element_shadow_root_delegates_focus_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.shadowRootDelegatesFocus"
+
+///|
+#cfg(target="js")
+fn html_template_element_shadow_root_delegates_focus_ffi(obj : JsValue) -> Bool {
+  html_template_element_shadow_root_delegates_focus_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_template_element_set_shadow_root_delegates_focus_ffi(
+  obj : JsValue,
+  shadow_root_delegates_focus : JsValue,
+) -> Unit = "(obj, shadowRootDelegatesFocus) => { obj.shadowRootDelegatesFocus = shadowRootDelegatesFocus; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_template_element_shadow_root_clonable_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.shadowRootClonable"
+
+///|
+#cfg(target="js")
+fn html_template_element_shadow_root_clonable_ffi(obj : JsValue) -> Bool {
+  html_template_element_shadow_root_clonable_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_template_element_set_shadow_root_clonable_ffi(
+  obj : JsValue,
+  shadow_root_clonable : JsValue,
+) -> Unit = "(obj, shadowRootClonable) => { obj.shadowRootClonable = shadowRootClonable; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_template_element_shadow_root_serializable_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.shadowRootSerializable"
+
+///|
+#cfg(target="js")
+fn html_template_element_shadow_root_serializable_ffi(obj : JsValue) -> Bool {
+  html_template_element_shadow_root_serializable_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_template_element_set_shadow_root_serializable_ffi(
+  obj : JsValue,
+  shadow_root_serializable : JsValue,
+) -> Unit = "(obj, shadowRootSerializable) => { obj.shadowRootSerializable = shadowRootSerializable; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_template_element_shadow_root_custom_element_registry_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.shadowRootCustomElementRegistry"
+
+///|
+#cfg(target="js")
+fn html_template_element_shadow_root_custom_element_registry_ffi(
+  obj : JsValue,
+) -> String {
+  html_template_element_shadow_root_custom_element_registry_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_template_element_set_shadow_root_custom_element_registry_ffi(
+  obj : JsValue,
+  shadow_root_custom_element_registry : JsValue,
+) -> Unit = "(obj, shadowRootCustomElementRegistry) => { obj.shadowRootCustomElementRegistry = shadowRootCustomElementRegistry; }"
+
+///|
+#cfg(target="wasm-gc")
+fn html_template_element_new_ffi() -> HTMLTemplateElement = "webapi_HTMLTemplateElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_template_element_content_ffi(obj : JsValue) -> DocumentFragment = "webapi_HTMLTemplateElement" "get_content"
+
+///|
+#cfg(target="wasm-gc")
+fn html_template_element_shadow_root_mode_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLTemplateElement" "get_shadowRootMode"
+
+///|
+#cfg(target="wasm-gc")
+fn html_template_element_shadow_root_mode_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_template_element_shadow_root_mode_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_template_element_set_shadow_root_mode_ffi(
+  obj : JsValue,
+  shadow_root_mode : JsValue,
+) -> Unit = "webapi_HTMLTemplateElement" "set_shadowRootMode"
+
+///|
+#cfg(target="wasm-gc")
+fn html_template_element_shadow_root_delegates_focus_ffi(obj : JsValue) -> Bool = "webapi_HTMLTemplateElement" "get_shadowRootDelegatesFocus"
+
+///|
+#cfg(target="wasm-gc")
+fn html_template_element_set_shadow_root_delegates_focus_ffi(
+  obj : JsValue,
+  shadow_root_delegates_focus : JsValue,
+) -> Unit = "webapi_HTMLTemplateElement" "set_shadowRootDelegatesFocus"
+
+///|
+#cfg(target="wasm-gc")
+fn html_template_element_shadow_root_clonable_ffi(obj : JsValue) -> Bool = "webapi_HTMLTemplateElement" "get_shadowRootClonable"
+
+///|
+#cfg(target="wasm-gc")
+fn html_template_element_set_shadow_root_clonable_ffi(
+  obj : JsValue,
+  shadow_root_clonable : JsValue,
+) -> Unit = "webapi_HTMLTemplateElement" "set_shadowRootClonable"
+
+///|
+#cfg(target="wasm-gc")
+fn html_template_element_shadow_root_serializable_ffi(obj : JsValue) -> Bool = "webapi_HTMLTemplateElement" "get_shadowRootSerializable"
+
+///|
+#cfg(target="wasm-gc")
+fn html_template_element_set_shadow_root_serializable_ffi(
+  obj : JsValue,
+  shadow_root_serializable : JsValue,
+) -> Unit = "webapi_HTMLTemplateElement" "set_shadowRootSerializable"
+
+///|
+#cfg(target="wasm-gc")
+fn html_template_element_shadow_root_custom_element_registry_ffi_wasm(
+  obj : JsValue,
+) -> JsValue = "webapi_HTMLTemplateElement" "get_shadowRootCustomElementRegistry"
+
+///|
+#cfg(target="wasm-gc")
+fn html_template_element_shadow_root_custom_element_registry_ffi(
+  obj : JsValue,
+) -> String {
+  jsvalue_to_string(
+    html_template_element_shadow_root_custom_element_registry_ffi_wasm(obj),
+  )
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_template_element_set_shadow_root_custom_element_registry_ffi(
+  obj : JsValue,
+  shadow_root_custom_element_registry : JsValue,
+) -> Unit = "webapi_HTMLTemplateElement" "set_shadowRootCustomElementRegistry"

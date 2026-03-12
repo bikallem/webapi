@@ -189,3 +189,311 @@ impl THTMLFrameElement with set_margin_width(self : Self, margin_width : String)
     TJsValue::to_js(margin_width),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_frame_element_new_ffi() -> HTMLFrameElement = "() => new HTMLFrameElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_frame_element_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.name"
+
+///|
+#cfg(target="js")
+fn html_frame_element_name_ffi(obj : JsValue) -> String {
+  html_frame_element_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_frame_element_set_name_ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> Unit = "(obj, name) => { obj.name = name; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_frame_element_scrolling_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.scrolling"
+
+///|
+#cfg(target="js")
+fn html_frame_element_scrolling_ffi(obj : JsValue) -> String {
+  html_frame_element_scrolling_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_frame_element_set_scrolling_ffi(
+  obj : JsValue,
+  scrolling : JsValue,
+) -> Unit = "(obj, scrolling) => { obj.scrolling = scrolling; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_frame_element_src_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.src"
+
+///|
+#cfg(target="js")
+fn html_frame_element_src_ffi(obj : JsValue) -> String {
+  html_frame_element_src_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_frame_element_set_src_ffi(
+  obj : JsValue,
+  src : JsValue,
+) -> Unit = "(obj, src) => { obj.src = src; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_frame_element_frame_border_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.frameBorder"
+
+///|
+#cfg(target="js")
+fn html_frame_element_frame_border_ffi(obj : JsValue) -> String {
+  html_frame_element_frame_border_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_frame_element_set_frame_border_ffi(
+  obj : JsValue,
+  frame_border : JsValue,
+) -> Unit = "(obj, frameBorder) => { obj.frameBorder = frameBorder; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_frame_element_long_desc_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.longDesc"
+
+///|
+#cfg(target="js")
+fn html_frame_element_long_desc_ffi(obj : JsValue) -> String {
+  html_frame_element_long_desc_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_frame_element_set_long_desc_ffi(
+  obj : JsValue,
+  long_desc : JsValue,
+) -> Unit = "(obj, longDesc) => { obj.longDesc = longDesc; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_frame_element_no_resize_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.noResize"
+
+///|
+#cfg(target="js")
+fn html_frame_element_no_resize_ffi(obj : JsValue) -> Bool {
+  html_frame_element_no_resize_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_frame_element_set_no_resize_ffi(
+  obj : JsValue,
+  no_resize : JsValue,
+) -> Unit = "(obj, noResize) => { obj.noResize = noResize; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_frame_element_content_document_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.contentDocument"
+
+///|
+#cfg(target="js")
+fn html_frame_element_content_document_ffi(obj : JsValue) -> Document {
+  html_frame_element_content_document_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_frame_element_content_window_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.contentWindow"
+
+///|
+#cfg(target="js")
+fn html_frame_element_content_window_ffi(obj : JsValue) -> WindowProxy {
+  html_frame_element_content_window_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_frame_element_margin_height_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.marginHeight"
+
+///|
+#cfg(target="js")
+fn html_frame_element_margin_height_ffi(obj : JsValue) -> String {
+  html_frame_element_margin_height_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_frame_element_set_margin_height_ffi(
+  obj : JsValue,
+  margin_height : JsValue,
+) -> Unit = "(obj, marginHeight) => { obj.marginHeight = marginHeight; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_frame_element_margin_width_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.marginWidth"
+
+///|
+#cfg(target="js")
+fn html_frame_element_margin_width_ffi(obj : JsValue) -> String {
+  html_frame_element_margin_width_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_frame_element_set_margin_width_ffi(
+  obj : JsValue,
+  margin_width : JsValue,
+) -> Unit = "(obj, marginWidth) => { obj.marginWidth = marginWidth; }"
+
+///|
+#cfg(target="wasm-gc")
+fn html_frame_element_new_ffi() -> HTMLFrameElement = "webapi_HTMLFrameElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_frame_element_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLFrameElement" "get_name"
+
+///|
+#cfg(target="wasm-gc")
+fn html_frame_element_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_frame_element_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_frame_element_set_name_ffi(obj : JsValue, name : JsValue) -> Unit = "webapi_HTMLFrameElement" "set_name"
+
+///|
+#cfg(target="wasm-gc")
+fn html_frame_element_scrolling_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLFrameElement" "get_scrolling"
+
+///|
+#cfg(target="wasm-gc")
+fn html_frame_element_scrolling_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_frame_element_scrolling_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_frame_element_set_scrolling_ffi(
+  obj : JsValue,
+  scrolling : JsValue,
+) -> Unit = "webapi_HTMLFrameElement" "set_scrolling"
+
+///|
+#cfg(target="wasm-gc")
+fn html_frame_element_src_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLFrameElement" "get_src"
+
+///|
+#cfg(target="wasm-gc")
+fn html_frame_element_src_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_frame_element_src_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_frame_element_set_src_ffi(obj : JsValue, src : JsValue) -> Unit = "webapi_HTMLFrameElement" "set_src"
+
+///|
+#cfg(target="wasm-gc")
+fn html_frame_element_frame_border_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLFrameElement" "get_frameBorder"
+
+///|
+#cfg(target="wasm-gc")
+fn html_frame_element_frame_border_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_frame_element_frame_border_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_frame_element_set_frame_border_ffi(
+  obj : JsValue,
+  frame_border : JsValue,
+) -> Unit = "webapi_HTMLFrameElement" "set_frameBorder"
+
+///|
+#cfg(target="wasm-gc")
+fn html_frame_element_long_desc_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLFrameElement" "get_longDesc"
+
+///|
+#cfg(target="wasm-gc")
+fn html_frame_element_long_desc_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_frame_element_long_desc_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_frame_element_set_long_desc_ffi(
+  obj : JsValue,
+  long_desc : JsValue,
+) -> Unit = "webapi_HTMLFrameElement" "set_longDesc"
+
+///|
+#cfg(target="wasm-gc")
+fn html_frame_element_no_resize_ffi(obj : JsValue) -> Bool = "webapi_HTMLFrameElement" "get_noResize"
+
+///|
+#cfg(target="wasm-gc")
+fn html_frame_element_set_no_resize_ffi(
+  obj : JsValue,
+  no_resize : JsValue,
+) -> Unit = "webapi_HTMLFrameElement" "set_noResize"
+
+///|
+#cfg(target="wasm-gc")
+fn html_frame_element_content_document_ffi(obj : JsValue) -> Document = "webapi_HTMLFrameElement" "get_contentDocument"
+
+///|
+#cfg(target="wasm-gc")
+fn html_frame_element_content_window_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLFrameElement" "get_contentWindow"
+
+///|
+#cfg(target="wasm-gc")
+fn html_frame_element_content_window_ffi(obj : JsValue) -> WindowProxy {
+  html_frame_element_content_window_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_frame_element_margin_height_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLFrameElement" "get_marginHeight"
+
+///|
+#cfg(target="wasm-gc")
+fn html_frame_element_margin_height_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_frame_element_margin_height_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_frame_element_set_margin_height_ffi(
+  obj : JsValue,
+  margin_height : JsValue,
+) -> Unit = "webapi_HTMLFrameElement" "set_marginHeight"
+
+///|
+#cfg(target="wasm-gc")
+fn html_frame_element_margin_width_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLFrameElement" "get_marginWidth"
+
+///|
+#cfg(target="wasm-gc")
+fn html_frame_element_margin_width_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_frame_element_margin_width_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_frame_element_set_margin_width_ffi(
+  obj : JsValue,
+  margin_width : JsValue,
+) -> Unit = "webapi_HTMLFrameElement" "set_marginWidth"

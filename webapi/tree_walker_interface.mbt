@@ -152,3 +152,135 @@ impl TTreeWalker with previous_node(self : Self) -> Node {
 impl TTreeWalker with next_node(self : Self) -> Node {
   self.next_node_opt().unwrap()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn tree_walker_root_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.root"
+
+///|
+#cfg(target="js")
+fn tree_walker_root_ffi(obj : JsValue) -> Node {
+  tree_walker_root_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn tree_walker_what_to_show_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.whatToShow"
+
+///|
+#cfg(target="js")
+fn tree_walker_what_to_show_ffi(obj : JsValue) -> UInt {
+  tree_walker_what_to_show_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn tree_walker_filter_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.filter"
+
+///|
+#cfg(target="js")
+fn tree_walker_filter_ffi(obj : JsValue) -> NodeFilter {
+  tree_walker_filter_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn tree_walker_current_node_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.currentNode"
+
+///|
+#cfg(target="js")
+fn tree_walker_current_node_ffi(obj : JsValue) -> Node {
+  tree_walker_current_node_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn tree_walker_set_current_node_ffi(
+  obj : JsValue,
+  current_node : JsValue,
+) -> Unit = "(obj, currentNode) => { obj.currentNode = currentNode; }"
+
+///|
+#cfg(target="js")
+extern "js" fn tree_walker_parent_node_ffi(obj : JsValue) -> JsValue = "(obj) => obj.parentNode()"
+
+///|
+#cfg(target="js")
+extern "js" fn tree_walker_first_child_ffi(obj : JsValue) -> JsValue = "(obj) => obj.firstChild()"
+
+///|
+#cfg(target="js")
+extern "js" fn tree_walker_last_child_ffi(obj : JsValue) -> JsValue = "(obj) => obj.lastChild()"
+
+///|
+#cfg(target="js")
+extern "js" fn tree_walker_previous_sibling_ffi(obj : JsValue) -> JsValue = "(obj) => obj.previousSibling()"
+
+///|
+#cfg(target="js")
+extern "js" fn tree_walker_next_sibling_ffi(obj : JsValue) -> JsValue = "(obj) => obj.nextSibling()"
+
+///|
+#cfg(target="js")
+extern "js" fn tree_walker_previous_node_ffi(obj : JsValue) -> JsValue = "(obj) => obj.previousNode()"
+
+///|
+#cfg(target="js")
+extern "js" fn tree_walker_next_node_ffi(obj : JsValue) -> JsValue = "(obj) => obj.nextNode()"
+
+///|
+#cfg(target="wasm-gc")
+fn tree_walker_root_ffi(obj : JsValue) -> Node = "webapi_TreeWalker" "get_root"
+
+///|
+#cfg(target="wasm-gc")
+fn tree_walker_what_to_show_ffi(obj : JsValue) -> UInt = "webapi_TreeWalker" "get_whatToShow"
+
+///|
+#cfg(target="wasm-gc")
+fn tree_walker_filter_ffi_wasm(obj : JsValue) -> JsValue = "webapi_TreeWalker" "get_filter"
+
+///|
+#cfg(target="wasm-gc")
+fn tree_walker_filter_ffi(obj : JsValue) -> NodeFilter {
+  tree_walker_filter_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn tree_walker_current_node_ffi(obj : JsValue) -> Node = "webapi_TreeWalker" "get_currentNode"
+
+///|
+#cfg(target="wasm-gc")
+fn tree_walker_set_current_node_ffi(
+  obj : JsValue,
+  current_node : JsValue,
+) -> Unit = "webapi_TreeWalker" "set_currentNode"
+
+///|
+#cfg(target="wasm-gc")
+fn tree_walker_parent_node_ffi(obj : JsValue) -> JsValue = "webapi_TreeWalker" "parentNode"
+
+///|
+#cfg(target="wasm-gc")
+fn tree_walker_first_child_ffi(obj : JsValue) -> JsValue = "webapi_TreeWalker" "firstChild"
+
+///|
+#cfg(target="wasm-gc")
+fn tree_walker_last_child_ffi(obj : JsValue) -> JsValue = "webapi_TreeWalker" "lastChild"
+
+///|
+#cfg(target="wasm-gc")
+fn tree_walker_previous_sibling_ffi(obj : JsValue) -> JsValue = "webapi_TreeWalker" "previousSibling"
+
+///|
+#cfg(target="wasm-gc")
+fn tree_walker_next_sibling_ffi(obj : JsValue) -> JsValue = "webapi_TreeWalker" "nextSibling"
+
+///|
+#cfg(target="wasm-gc")
+fn tree_walker_previous_node_ffi(obj : JsValue) -> JsValue = "webapi_TreeWalker" "previousNode"
+
+///|
+#cfg(target="wasm-gc")
+fn tree_walker_next_node_ffi(obj : JsValue) -> JsValue = "webapi_TreeWalker" "nextNode"

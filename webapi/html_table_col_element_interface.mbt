@@ -141,3 +141,197 @@ impl THTMLTableColElement with set_width(self : Self, width : String) -> Unit {
     TJsValue::to_js(width),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_col_element_new_ffi() -> HTMLTableColElement = "() => new HTMLTableColElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_col_element_span_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.span"
+
+///|
+#cfg(target="js")
+fn html_table_col_element_span_ffi(obj : JsValue) -> UInt {
+  html_table_col_element_span_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_col_element_set_span_ffi(
+  obj : JsValue,
+  span : JsValue,
+) -> Unit = "(obj, span) => { obj.span = span; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_col_element_align_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.align"
+
+///|
+#cfg(target="js")
+fn html_table_col_element_align_ffi(obj : JsValue) -> String {
+  html_table_col_element_align_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_col_element_set_align_ffi(
+  obj : JsValue,
+  align : JsValue,
+) -> Unit = "(obj, align) => { obj.align = align; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_col_element_ch_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ch"
+
+///|
+#cfg(target="js")
+fn html_table_col_element_ch_ffi(obj : JsValue) -> String {
+  html_table_col_element_ch_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_col_element_set_ch_ffi(
+  obj : JsValue,
+  ch : JsValue,
+) -> Unit = "(obj, ch) => { obj.ch = ch; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_col_element_ch_off_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.chOff"
+
+///|
+#cfg(target="js")
+fn html_table_col_element_ch_off_ffi(obj : JsValue) -> String {
+  html_table_col_element_ch_off_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_col_element_set_ch_off_ffi(
+  obj : JsValue,
+  ch_off : JsValue,
+) -> Unit = "(obj, chOff) => { obj.chOff = chOff; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_col_element_v_align_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.vAlign"
+
+///|
+#cfg(target="js")
+fn html_table_col_element_v_align_ffi(obj : JsValue) -> String {
+  html_table_col_element_v_align_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_col_element_set_v_align_ffi(
+  obj : JsValue,
+  v_align : JsValue,
+) -> Unit = "(obj, vAlign) => { obj.vAlign = vAlign; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_col_element_width_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.width"
+
+///|
+#cfg(target="js")
+fn html_table_col_element_width_ffi(obj : JsValue) -> String {
+  html_table_col_element_width_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_col_element_set_width_ffi(
+  obj : JsValue,
+  width : JsValue,
+) -> Unit = "(obj, width) => { obj.width = width; }"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_col_element_new_ffi() -> HTMLTableColElement = "webapi_HTMLTableColElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_col_element_span_ffi(obj : JsValue) -> UInt = "webapi_HTMLTableColElement" "get_span"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_col_element_set_span_ffi(obj : JsValue, span : JsValue) -> Unit = "webapi_HTMLTableColElement" "set_span"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_col_element_align_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLTableColElement" "get_align"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_col_element_align_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_table_col_element_align_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_col_element_set_align_ffi(obj : JsValue, align : JsValue) -> Unit = "webapi_HTMLTableColElement" "set_align"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_col_element_ch_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLTableColElement" "get_ch"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_col_element_ch_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_table_col_element_ch_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_col_element_set_ch_ffi(obj : JsValue, ch : JsValue) -> Unit = "webapi_HTMLTableColElement" "set_ch"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_col_element_ch_off_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLTableColElement" "get_chOff"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_col_element_ch_off_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_table_col_element_ch_off_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_col_element_set_ch_off_ffi(
+  obj : JsValue,
+  ch_off : JsValue,
+) -> Unit = "webapi_HTMLTableColElement" "set_chOff"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_col_element_v_align_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLTableColElement" "get_vAlign"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_col_element_v_align_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_table_col_element_v_align_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_col_element_set_v_align_ffi(
+  obj : JsValue,
+  v_align : JsValue,
+) -> Unit = "webapi_HTMLTableColElement" "set_vAlign"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_col_element_width_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLTableColElement" "get_width"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_col_element_width_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_table_col_element_width_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_col_element_set_width_ffi(obj : JsValue, width : JsValue) -> Unit = "webapi_HTMLTableColElement" "set_width"

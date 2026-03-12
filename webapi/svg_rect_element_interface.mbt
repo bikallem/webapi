@@ -83,3 +83,87 @@ impl TSVGRectElement with rx(self : Self) -> SVGAnimatedLength {
 impl TSVGRectElement with ry(self : Self) -> SVGAnimatedLength {
   svg_rect_element_ry_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn svg_rect_element_x_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.x"
+
+///|
+#cfg(target="js")
+fn svg_rect_element_x_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_rect_element_x_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_rect_element_y_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.y"
+
+///|
+#cfg(target="js")
+fn svg_rect_element_y_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_rect_element_y_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_rect_element_width_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.width"
+
+///|
+#cfg(target="js")
+fn svg_rect_element_width_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_rect_element_width_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_rect_element_height_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.height"
+
+///|
+#cfg(target="js")
+fn svg_rect_element_height_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_rect_element_height_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_rect_element_rx_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.rx"
+
+///|
+#cfg(target="js")
+fn svg_rect_element_rx_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_rect_element_rx_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_rect_element_ry_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ry"
+
+///|
+#cfg(target="js")
+fn svg_rect_element_ry_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_rect_element_ry_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svg_rect_element_x_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGRectElement" "get_x"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_rect_element_y_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGRectElement" "get_y"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_rect_element_width_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGRectElement" "get_width"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_rect_element_height_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGRectElement" "get_height"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_rect_element_rx_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGRectElement" "get_rx"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_rect_element_ry_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGRectElement" "get_ry"

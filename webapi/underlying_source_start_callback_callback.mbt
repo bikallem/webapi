@@ -23,3 +23,15 @@ pub fn UnderlyingSourceStartCallback::new(
 ) -> UnderlyingSourceStartCallback {
   underlying_source_start_callback_ffi(callback)
 }
+
+///|
+#cfg(target="js")
+extern "js" fn underlying_source_start_callback_ffi(
+  callback : (ReadableStreamController) -> JsValue,
+) -> UnderlyingSourceStartCallback = "(callback) => callback"
+
+///|
+#cfg(target="wasm-gc")
+fn underlying_source_start_callback_ffi(
+  callback : (ReadableStreamController) -> JsValue,
+) -> UnderlyingSourceStartCallback = "webapi_UnderlyingSourceStartCallback" "new"

@@ -1,4 +1,0 @@
-///|
-extern "js" fn underlying_sink_close_callback_ffi(
-  callback : () -> JsPromise[JsValue],
-) -> UnderlyingSinkCloseCallback = "(callback) => callback"

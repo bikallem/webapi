@@ -286,3 +286,482 @@ impl THTMLTableCellElement with set_bg_color(self : Self, bg_color : String) -> 
     TJsValue::to_js(bg_color),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_cell_element_new_ffi() -> HTMLTableCellElement = "() => new HTMLTableCellElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_cell_element_col_span_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.colSpan"
+
+///|
+#cfg(target="js")
+fn html_table_cell_element_col_span_ffi(obj : JsValue) -> UInt {
+  html_table_cell_element_col_span_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_cell_element_set_col_span_ffi(
+  obj : JsValue,
+  col_span : JsValue,
+) -> Unit = "(obj, colSpan) => { obj.colSpan = colSpan; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_cell_element_row_span_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.rowSpan"
+
+///|
+#cfg(target="js")
+fn html_table_cell_element_row_span_ffi(obj : JsValue) -> UInt {
+  html_table_cell_element_row_span_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_cell_element_set_row_span_ffi(
+  obj : JsValue,
+  row_span : JsValue,
+) -> Unit = "(obj, rowSpan) => { obj.rowSpan = rowSpan; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_cell_element_headers_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.headers"
+
+///|
+#cfg(target="js")
+fn html_table_cell_element_headers_ffi(obj : JsValue) -> String {
+  html_table_cell_element_headers_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_cell_element_set_headers_ffi(
+  obj : JsValue,
+  headers : JsValue,
+) -> Unit = "(obj, headers) => { obj.headers = headers; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_cell_element_cell_index_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.cellIndex"
+
+///|
+#cfg(target="js")
+fn html_table_cell_element_cell_index_ffi(obj : JsValue) -> Int {
+  html_table_cell_element_cell_index_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_cell_element_scope_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.scope"
+
+///|
+#cfg(target="js")
+fn html_table_cell_element_scope_ffi(obj : JsValue) -> String {
+  html_table_cell_element_scope_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_cell_element_set_scope_ffi(
+  obj : JsValue,
+  scope : JsValue,
+) -> Unit = "(obj, scope) => { obj.scope = scope; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_cell_element_abbr_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.abbr"
+
+///|
+#cfg(target="js")
+fn html_table_cell_element_abbr_ffi(obj : JsValue) -> String {
+  html_table_cell_element_abbr_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_cell_element_set_abbr_ffi(
+  obj : JsValue,
+  abbr : JsValue,
+) -> Unit = "(obj, abbr) => { obj.abbr = abbr; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_cell_element_align_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.align"
+
+///|
+#cfg(target="js")
+fn html_table_cell_element_align_ffi(obj : JsValue) -> String {
+  html_table_cell_element_align_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_cell_element_set_align_ffi(
+  obj : JsValue,
+  align : JsValue,
+) -> Unit = "(obj, align) => { obj.align = align; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_cell_element_axis_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.axis"
+
+///|
+#cfg(target="js")
+fn html_table_cell_element_axis_ffi(obj : JsValue) -> String {
+  html_table_cell_element_axis_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_cell_element_set_axis_ffi(
+  obj : JsValue,
+  axis : JsValue,
+) -> Unit = "(obj, axis) => { obj.axis = axis; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_cell_element_height_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.height"
+
+///|
+#cfg(target="js")
+fn html_table_cell_element_height_ffi(obj : JsValue) -> String {
+  html_table_cell_element_height_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_cell_element_set_height_ffi(
+  obj : JsValue,
+  height : JsValue,
+) -> Unit = "(obj, height) => { obj.height = height; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_cell_element_width_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.width"
+
+///|
+#cfg(target="js")
+fn html_table_cell_element_width_ffi(obj : JsValue) -> String {
+  html_table_cell_element_width_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_cell_element_set_width_ffi(
+  obj : JsValue,
+  width : JsValue,
+) -> Unit = "(obj, width) => { obj.width = width; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_cell_element_ch_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ch"
+
+///|
+#cfg(target="js")
+fn html_table_cell_element_ch_ffi(obj : JsValue) -> String {
+  html_table_cell_element_ch_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_cell_element_set_ch_ffi(
+  obj : JsValue,
+  ch : JsValue,
+) -> Unit = "(obj, ch) => { obj.ch = ch; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_cell_element_ch_off_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.chOff"
+
+///|
+#cfg(target="js")
+fn html_table_cell_element_ch_off_ffi(obj : JsValue) -> String {
+  html_table_cell_element_ch_off_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_cell_element_set_ch_off_ffi(
+  obj : JsValue,
+  ch_off : JsValue,
+) -> Unit = "(obj, chOff) => { obj.chOff = chOff; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_cell_element_no_wrap_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.noWrap"
+
+///|
+#cfg(target="js")
+fn html_table_cell_element_no_wrap_ffi(obj : JsValue) -> Bool {
+  html_table_cell_element_no_wrap_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_cell_element_set_no_wrap_ffi(
+  obj : JsValue,
+  no_wrap : JsValue,
+) -> Unit = "(obj, noWrap) => { obj.noWrap = noWrap; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_cell_element_v_align_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.vAlign"
+
+///|
+#cfg(target="js")
+fn html_table_cell_element_v_align_ffi(obj : JsValue) -> String {
+  html_table_cell_element_v_align_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_cell_element_set_v_align_ffi(
+  obj : JsValue,
+  v_align : JsValue,
+) -> Unit = "(obj, vAlign) => { obj.vAlign = vAlign; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_cell_element_bg_color_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.bgColor"
+
+///|
+#cfg(target="js")
+fn html_table_cell_element_bg_color_ffi(obj : JsValue) -> String {
+  html_table_cell_element_bg_color_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_cell_element_set_bg_color_ffi(
+  obj : JsValue,
+  bg_color : JsValue,
+) -> Unit = "(obj, bgColor) => { obj.bgColor = bgColor; }"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_new_ffi() -> HTMLTableCellElement = "webapi_HTMLTableCellElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_col_span_ffi(obj : JsValue) -> UInt = "webapi_HTMLTableCellElement" "get_colSpan"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_set_col_span_ffi(
+  obj : JsValue,
+  col_span : JsValue,
+) -> Unit = "webapi_HTMLTableCellElement" "set_colSpan"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_row_span_ffi(obj : JsValue) -> UInt = "webapi_HTMLTableCellElement" "get_rowSpan"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_set_row_span_ffi(
+  obj : JsValue,
+  row_span : JsValue,
+) -> Unit = "webapi_HTMLTableCellElement" "set_rowSpan"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_headers_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLTableCellElement" "get_headers"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_headers_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_table_cell_element_headers_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_set_headers_ffi(
+  obj : JsValue,
+  headers : JsValue,
+) -> Unit = "webapi_HTMLTableCellElement" "set_headers"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_cell_index_ffi(obj : JsValue) -> Int = "webapi_HTMLTableCellElement" "get_cellIndex"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_scope_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLTableCellElement" "get_scope"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_scope_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_table_cell_element_scope_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_set_scope_ffi(
+  obj : JsValue,
+  scope : JsValue,
+) -> Unit = "webapi_HTMLTableCellElement" "set_scope"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_abbr_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLTableCellElement" "get_abbr"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_abbr_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_table_cell_element_abbr_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_set_abbr_ffi(obj : JsValue, abbr : JsValue) -> Unit = "webapi_HTMLTableCellElement" "set_abbr"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_align_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLTableCellElement" "get_align"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_align_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_table_cell_element_align_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_set_align_ffi(
+  obj : JsValue,
+  align : JsValue,
+) -> Unit = "webapi_HTMLTableCellElement" "set_align"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_axis_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLTableCellElement" "get_axis"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_axis_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_table_cell_element_axis_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_set_axis_ffi(obj : JsValue, axis : JsValue) -> Unit = "webapi_HTMLTableCellElement" "set_axis"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_height_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLTableCellElement" "get_height"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_height_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_table_cell_element_height_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_set_height_ffi(
+  obj : JsValue,
+  height : JsValue,
+) -> Unit = "webapi_HTMLTableCellElement" "set_height"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_width_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLTableCellElement" "get_width"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_width_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_table_cell_element_width_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_set_width_ffi(
+  obj : JsValue,
+  width : JsValue,
+) -> Unit = "webapi_HTMLTableCellElement" "set_width"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_ch_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLTableCellElement" "get_ch"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_ch_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_table_cell_element_ch_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_set_ch_ffi(obj : JsValue, ch : JsValue) -> Unit = "webapi_HTMLTableCellElement" "set_ch"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_ch_off_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLTableCellElement" "get_chOff"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_ch_off_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_table_cell_element_ch_off_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_set_ch_off_ffi(
+  obj : JsValue,
+  ch_off : JsValue,
+) -> Unit = "webapi_HTMLTableCellElement" "set_chOff"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_no_wrap_ffi(obj : JsValue) -> Bool = "webapi_HTMLTableCellElement" "get_noWrap"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_set_no_wrap_ffi(
+  obj : JsValue,
+  no_wrap : JsValue,
+) -> Unit = "webapi_HTMLTableCellElement" "set_noWrap"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_v_align_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLTableCellElement" "get_vAlign"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_v_align_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_table_cell_element_v_align_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_set_v_align_ffi(
+  obj : JsValue,
+  v_align : JsValue,
+) -> Unit = "webapi_HTMLTableCellElement" "set_vAlign"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_bg_color_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLTableCellElement" "get_bgColor"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_bg_color_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_table_cell_element_bg_color_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_cell_element_set_bg_color_ffi(
+  obj : JsValue,
+  bg_color : JsValue,
+) -> Unit = "webapi_HTMLTableCellElement" "set_bgColor"

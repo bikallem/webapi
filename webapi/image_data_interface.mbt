@@ -86,3 +86,133 @@ impl TImageData with pixel_format(self : Self) -> ImageDataPixelFormat {
 impl TImageData with color_space(self : Self) -> PredefinedColorSpace {
   image_data_color_space_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn image_data_new_ffi(
+  sw : JsValue,
+  sh : JsValue,
+  settings : JsValue,
+) -> ImageData = "(sw, sh, settings) => new ImageData(sw, sh, settings)"
+
+///|
+#cfg(target="js")
+extern "js" fn image_data_new_from_array_ffi(
+  data : JsValue,
+  sw : JsValue,
+  sh : JsValue,
+  settings : JsValue,
+) -> ImageData = "(data, sw, sh, settings) => new ImageData(data, sw, sh, settings)"
+
+///|
+#cfg(target="js")
+extern "js" fn image_data_width_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.width"
+
+///|
+#cfg(target="js")
+fn image_data_width_ffi(obj : JsValue) -> UInt {
+  image_data_width_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn image_data_height_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.height"
+
+///|
+#cfg(target="js")
+fn image_data_height_ffi(obj : JsValue) -> UInt {
+  image_data_height_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn image_data_data_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.data"
+
+///|
+#cfg(target="js")
+fn image_data_data_ffi(obj : JsValue) -> ImageDataArray {
+  image_data_data_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn image_data_pixel_format_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.pixelFormat"
+
+///|
+#cfg(target="js")
+fn image_data_pixel_format_ffi(obj : JsValue) -> ImageDataPixelFormat {
+  ImageDataPixelFormat::from_unchecked(
+    image_data_pixel_format_ffi_js(obj).unsafe_cast(),
+  )
+}
+
+///|
+#cfg(target="js")
+extern "js" fn image_data_color_space_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.colorSpace"
+
+///|
+#cfg(target="js")
+fn image_data_color_space_ffi(obj : JsValue) -> PredefinedColorSpace {
+  PredefinedColorSpace::from_unchecked(
+    image_data_color_space_ffi_js(obj).unsafe_cast(),
+  )
+}
+
+///|
+#cfg(target="wasm-gc")
+fn image_data_new_ffi(
+  sw : JsValue,
+  sh : JsValue,
+  settings : JsValue,
+) -> ImageData = "webapi_ImageData" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn image_data_new_from_array_ffi(
+  data : JsValue,
+  sw : JsValue,
+  sh : JsValue,
+  settings : JsValue,
+) -> ImageData = "webapi_ImageData" "new_from_array"
+
+///|
+#cfg(target="wasm-gc")
+fn image_data_width_ffi(obj : JsValue) -> UInt = "webapi_ImageData" "get_width"
+
+///|
+#cfg(target="wasm-gc")
+fn image_data_height_ffi(obj : JsValue) -> UInt = "webapi_ImageData" "get_height"
+
+///|
+#cfg(target="wasm-gc")
+fn image_data_data_ffi_wasm(obj : JsValue) -> JsValue = "webapi_ImageData" "get_data"
+
+///|
+#cfg(target="wasm-gc")
+fn image_data_data_ffi(obj : JsValue) -> ImageDataArray {
+  image_data_data_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn image_data_pixel_format_ffi_wasm(obj : JsValue) -> JsValue = "webapi_ImageData" "get_pixelFormat"
+
+///|
+#cfg(target="wasm-gc")
+fn image_data_pixel_format_ffi(obj : JsValue) -> ImageDataPixelFormat {
+  ImageDataPixelFormat::from_unchecked(
+    jsvalue_to_string(image_data_pixel_format_ffi_wasm(obj)),
+  )
+}
+
+///|
+#cfg(target="wasm-gc")
+fn image_data_color_space_ffi_wasm(obj : JsValue) -> JsValue = "webapi_ImageData" "get_colorSpace"
+
+///|
+#cfg(target="wasm-gc")
+fn image_data_color_space_ffi(obj : JsValue) -> PredefinedColorSpace {
+  PredefinedColorSpace::from_unchecked(
+    jsvalue_to_string(image_data_color_space_ffi_wasm(obj)),
+  )
+}

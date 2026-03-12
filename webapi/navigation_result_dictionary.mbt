@@ -39,3 +39,47 @@ pub fn NavigationResult::finished(
 ) -> JsPromise[NavigationHistoryEntry]? {
   navigation_result_get_finished_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_result_ffi(
+  committed : JsValue,
+  finished : JsValue,
+) -> NavigationResult =
+  #|(committed, finished) => {
+  #|  const obj = {};
+  #|  if (committed !== undefined) obj.committed = committed;
+  #|  if (finished !== undefined) obj.finished = finished;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_result_empty_ffi() -> NavigationResult = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_result_get_committed_ffi(obj : JsValue) -> JsValue = "(obj) => obj.committed"
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_result_get_finished_ffi(obj : JsValue) -> JsValue = "(obj) => obj.finished"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_result_ffi(
+  committed : JsValue,
+  finished : JsValue,
+) -> NavigationResult = "webapi_NavigationResult" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_result_empty_ffi() -> NavigationResult = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_result_get_committed_ffi(obj : JsValue) -> JsValue = "webapi_NavigationResult" "get_committed"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_result_get_finished_ffi(obj : JsValue) -> JsValue = "webapi_NavigationResult" "get_finished"

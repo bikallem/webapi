@@ -41,3 +41,51 @@ pub fn QuotaExceededErrorOptions::requested(
 ) -> Double? {
   quota_exceeded_error_options_get_requested_ffi(TJsValue::to_js(self)).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn quota_exceeded_error_options_ffi(
+  quota : JsValue,
+  requested : JsValue,
+) -> QuotaExceededErrorOptions =
+  #|(quota, requested) => {
+  #|  const obj = {};
+  #|  if (quota !== undefined) obj.quota = quota;
+  #|  if (requested !== undefined) obj.requested = requested;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn quota_exceeded_error_options_empty_ffi() -> QuotaExceededErrorOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn quota_exceeded_error_options_get_quota_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.quota"
+
+///|
+#cfg(target="js")
+extern "js" fn quota_exceeded_error_options_get_requested_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.requested"
+
+///|
+#cfg(target="wasm-gc")
+fn quota_exceeded_error_options_ffi(
+  quota : JsValue,
+  requested : JsValue,
+) -> QuotaExceededErrorOptions = "webapi_QuotaExceededErrorOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn quota_exceeded_error_options_empty_ffi() -> QuotaExceededErrorOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn quota_exceeded_error_options_get_quota_ffi(obj : JsValue) -> JsValue = "webapi_QuotaExceededErrorOptions" "get_quota"
+
+///|
+#cfg(target="wasm-gc")
+fn quota_exceeded_error_options_get_requested_ffi(obj : JsValue) -> JsValue = "webapi_QuotaExceededErrorOptions" "get_requested"

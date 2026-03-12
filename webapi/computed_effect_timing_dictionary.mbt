@@ -154,3 +154,149 @@ pub fn ComputedEffectTiming::current_iteration(
 ) -> Double? {
   computed_effect_timing_get_current_iteration_ffi(TJsValue::to_js(self)).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn computed_effect_timing_ffi(
+  fill : JsValue,
+  iteration_start : JsValue,
+  iterations : JsValue,
+  direction : JsValue,
+  easing : JsValue,
+  delay : JsValue,
+  end_delay : JsValue,
+  duration : JsValue,
+  progress : JsValue,
+  current_iteration : JsValue,
+) -> ComputedEffectTiming =
+  #|(fill, iterationStart, iterations, direction, easing, delay, endDelay, duration, progress, currentIteration) => {
+  #|  const obj = {};
+  #|  if (fill !== undefined) obj.fill = fill;
+  #|  if (iterationStart !== undefined) obj.iterationStart = iterationStart;
+  #|  if (iterations !== undefined) obj.iterations = iterations;
+  #|  if (direction !== undefined) obj.direction = direction;
+  #|  if (easing !== undefined) obj.easing = easing;
+  #|  if (delay !== undefined) obj.delay = delay;
+  #|  if (endDelay !== undefined) obj.endDelay = endDelay;
+  #|  if (duration !== undefined) obj.duration = duration;
+  #|  if (progress !== undefined) obj.progress = progress;
+  #|  if (currentIteration !== undefined) obj.currentIteration = currentIteration;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn computed_effect_timing_empty_ffi() -> ComputedEffectTiming = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn computed_effect_timing_get_fill_ffi(obj : JsValue) -> JsValue = "(obj) => obj.fill"
+
+///|
+#cfg(target="js")
+extern "js" fn computed_effect_timing_get_iteration_start_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.iterationStart"
+
+///|
+#cfg(target="js")
+extern "js" fn computed_effect_timing_get_iterations_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.iterations"
+
+///|
+#cfg(target="js")
+extern "js" fn computed_effect_timing_get_direction_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.direction"
+
+///|
+#cfg(target="js")
+extern "js" fn computed_effect_timing_get_easing_ffi(obj : JsValue) -> JsValue = "(obj) => obj.easing"
+
+///|
+#cfg(target="js")
+extern "js" fn computed_effect_timing_get_delay_ffi(obj : JsValue) -> JsValue = "(obj) => obj.delay"
+
+///|
+#cfg(target="js")
+extern "js" fn computed_effect_timing_get_end_delay_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.endDelay"
+
+///|
+#cfg(target="js")
+extern "js" fn computed_effect_timing_get_duration_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.duration"
+
+///|
+#cfg(target="js")
+extern "js" fn computed_effect_timing_get_progress_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.progress"
+
+///|
+#cfg(target="js")
+extern "js" fn computed_effect_timing_get_current_iteration_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.currentIteration"
+
+///|
+#cfg(target="wasm-gc")
+fn computed_effect_timing_ffi(
+  fill : JsValue,
+  iteration_start : JsValue,
+  iterations : JsValue,
+  direction : JsValue,
+  easing : JsValue,
+  delay : JsValue,
+  end_delay : JsValue,
+  duration : JsValue,
+  progress : JsValue,
+  current_iteration : JsValue,
+) -> ComputedEffectTiming = "webapi_ComputedEffectTiming" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn computed_effect_timing_empty_ffi() -> ComputedEffectTiming = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn computed_effect_timing_get_fill_ffi(obj : JsValue) -> JsValue = "webapi_ComputedEffectTiming" "get_fill"
+
+///|
+#cfg(target="wasm-gc")
+fn computed_effect_timing_get_iteration_start_ffi(obj : JsValue) -> JsValue = "webapi_ComputedEffectTiming" "get_iterationStart"
+
+///|
+#cfg(target="wasm-gc")
+fn computed_effect_timing_get_iterations_ffi(obj : JsValue) -> JsValue = "webapi_ComputedEffectTiming" "get_iterations"
+
+///|
+#cfg(target="wasm-gc")
+fn computed_effect_timing_get_direction_ffi(obj : JsValue) -> JsValue = "webapi_ComputedEffectTiming" "get_direction"
+
+///|
+#cfg(target="wasm-gc")
+fn computed_effect_timing_get_easing_ffi(obj : JsValue) -> JsValue = "webapi_ComputedEffectTiming" "get_easing"
+
+///|
+#cfg(target="wasm-gc")
+fn computed_effect_timing_get_delay_ffi(obj : JsValue) -> JsValue = "webapi_ComputedEffectTiming" "get_delay"
+
+///|
+#cfg(target="wasm-gc")
+fn computed_effect_timing_get_end_delay_ffi(obj : JsValue) -> JsValue = "webapi_ComputedEffectTiming" "get_endDelay"
+
+///|
+#cfg(target="wasm-gc")
+fn computed_effect_timing_get_duration_ffi(obj : JsValue) -> JsValue = "webapi_ComputedEffectTiming" "get_duration"
+
+///|
+#cfg(target="wasm-gc")
+fn computed_effect_timing_get_progress_ffi(obj : JsValue) -> JsValue = "webapi_ComputedEffectTiming" "get_progress"
+
+///|
+#cfg(target="wasm-gc")
+fn computed_effect_timing_get_current_iteration_ffi(obj : JsValue) -> JsValue = "webapi_ComputedEffectTiming" "get_currentIteration"

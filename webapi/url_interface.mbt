@@ -231,3 +231,395 @@ pub fn URL::parse(url : String, base? : String) -> URL {
   }
   result.unwrap()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn url_new_ffi(url : JsValue, base : JsValue) -> URL = "(url, base) => new URL(url, base)"
+
+///|
+#cfg(target="js")
+extern "js" fn url_parse_ffi(url : JsValue, base : JsValue) -> JsValue = "(url, base) => URL.parse(url, base)"
+
+///|
+#cfg(target="js")
+extern "js" fn url_can_parse_ffi_js(url : JsValue, base : JsValue) -> JsValue = "(url, base) => URL.canParse(url, base)"
+
+///|
+#cfg(target="js")
+fn url_can_parse_ffi(url : JsValue, base : JsValue) -> Bool {
+  url_can_parse_ffi_js(url, base).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn url_href_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.href"
+
+///|
+#cfg(target="js")
+fn url_href_ffi(obj : JsValue) -> String {
+  url_href_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn url_set_href_ffi(obj : JsValue, href : JsValue) -> Unit = "(obj, href) => { obj.href = href; }"
+
+///|
+#cfg(target="js")
+extern "js" fn url_origin_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.origin"
+
+///|
+#cfg(target="js")
+fn url_origin_ffi(obj : JsValue) -> String {
+  url_origin_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn url_protocol_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.protocol"
+
+///|
+#cfg(target="js")
+fn url_protocol_ffi(obj : JsValue) -> String {
+  url_protocol_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn url_set_protocol_ffi(obj : JsValue, protocol : JsValue) -> Unit = "(obj, protocol) => { obj.protocol = protocol; }"
+
+///|
+#cfg(target="js")
+extern "js" fn url_username_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.username"
+
+///|
+#cfg(target="js")
+fn url_username_ffi(obj : JsValue) -> String {
+  url_username_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn url_set_username_ffi(obj : JsValue, username : JsValue) -> Unit = "(obj, username) => { obj.username = username; }"
+
+///|
+#cfg(target="js")
+extern "js" fn url_password_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.password"
+
+///|
+#cfg(target="js")
+fn url_password_ffi(obj : JsValue) -> String {
+  url_password_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn url_set_password_ffi(obj : JsValue, password : JsValue) -> Unit = "(obj, password) => { obj.password = password; }"
+
+///|
+#cfg(target="js")
+extern "js" fn url_host_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.host"
+
+///|
+#cfg(target="js")
+fn url_host_ffi(obj : JsValue) -> String {
+  url_host_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn url_set_host_ffi(obj : JsValue, host : JsValue) -> Unit = "(obj, host) => { obj.host = host; }"
+
+///|
+#cfg(target="js")
+extern "js" fn url_hostname_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.hostname"
+
+///|
+#cfg(target="js")
+fn url_hostname_ffi(obj : JsValue) -> String {
+  url_hostname_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn url_set_hostname_ffi(obj : JsValue, hostname : JsValue) -> Unit = "(obj, hostname) => { obj.hostname = hostname; }"
+
+///|
+#cfg(target="js")
+extern "js" fn url_port_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.port"
+
+///|
+#cfg(target="js")
+fn url_port_ffi(obj : JsValue) -> String {
+  url_port_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn url_set_port_ffi(obj : JsValue, port : JsValue) -> Unit = "(obj, port) => { obj.port = port; }"
+
+///|
+#cfg(target="js")
+extern "js" fn url_pathname_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.pathname"
+
+///|
+#cfg(target="js")
+fn url_pathname_ffi(obj : JsValue) -> String {
+  url_pathname_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn url_set_pathname_ffi(obj : JsValue, pathname : JsValue) -> Unit = "(obj, pathname) => { obj.pathname = pathname; }"
+
+///|
+#cfg(target="js")
+extern "js" fn url_search_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.search"
+
+///|
+#cfg(target="js")
+fn url_search_ffi(obj : JsValue) -> String {
+  url_search_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn url_set_search_ffi(obj : JsValue, search : JsValue) -> Unit = "(obj, search) => { obj.search = search; }"
+
+///|
+#cfg(target="js")
+extern "js" fn url_search_params_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.searchParams"
+
+///|
+#cfg(target="js")
+fn url_search_params_ffi(obj : JsValue) -> URLSearchParams {
+  url_search_params_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn url_hash_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.hash"
+
+///|
+#cfg(target="js")
+fn url_hash_ffi(obj : JsValue) -> String {
+  url_hash_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn url_set_hash_ffi(obj : JsValue, hash : JsValue) -> Unit = "(obj, hash) => { obj.hash = hash; }"
+
+///|
+#cfg(target="js")
+extern "js" fn url_to_json_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.toJSON()"
+
+///|
+#cfg(target="js")
+fn url_to_json_ffi(obj : JsValue) -> String {
+  url_to_json_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn url_create_object_url_ffi_js(obj : JsValue) -> JsValue = "(obj) => URL.createObjectURL(obj)"
+
+///|
+#cfg(target="js")
+fn url_create_object_url_ffi(obj : JsValue) -> String {
+  url_create_object_url_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn url_revoke_object_url_ffi(url : JsValue) -> Unit = "(url) => URL.revokeObjectURL(url)"
+
+///|
+#cfg(target="wasm-gc")
+fn url_new_ffi(url : JsValue, base : JsValue) -> URL = "webapi_URL" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn url_parse_ffi(url : JsValue, base : JsValue) -> JsValue = "webapi_URL" "parse"
+
+///|
+#cfg(target="wasm-gc")
+fn url_can_parse_ffi(url : JsValue, base : JsValue) -> Bool = "webapi_URL" "canParse"
+
+///|
+#cfg(target="wasm-gc")
+fn url_href_ffi_wasm(obj : JsValue) -> JsValue = "webapi_URL" "get_href"
+
+///|
+#cfg(target="wasm-gc")
+fn url_href_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(url_href_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn url_set_href_ffi(obj : JsValue, href : JsValue) -> Unit = "webapi_URL" "set_href"
+
+///|
+#cfg(target="wasm-gc")
+fn url_origin_ffi_wasm(obj : JsValue) -> JsValue = "webapi_URL" "get_origin"
+
+///|
+#cfg(target="wasm-gc")
+fn url_origin_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(url_origin_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn url_protocol_ffi_wasm(obj : JsValue) -> JsValue = "webapi_URL" "get_protocol"
+
+///|
+#cfg(target="wasm-gc")
+fn url_protocol_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(url_protocol_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn url_set_protocol_ffi(obj : JsValue, protocol : JsValue) -> Unit = "webapi_URL" "set_protocol"
+
+///|
+#cfg(target="wasm-gc")
+fn url_username_ffi_wasm(obj : JsValue) -> JsValue = "webapi_URL" "get_username"
+
+///|
+#cfg(target="wasm-gc")
+fn url_username_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(url_username_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn url_set_username_ffi(obj : JsValue, username : JsValue) -> Unit = "webapi_URL" "set_username"
+
+///|
+#cfg(target="wasm-gc")
+fn url_password_ffi_wasm(obj : JsValue) -> JsValue = "webapi_URL" "get_password"
+
+///|
+#cfg(target="wasm-gc")
+fn url_password_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(url_password_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn url_set_password_ffi(obj : JsValue, password : JsValue) -> Unit = "webapi_URL" "set_password"
+
+///|
+#cfg(target="wasm-gc")
+fn url_host_ffi_wasm(obj : JsValue) -> JsValue = "webapi_URL" "get_host"
+
+///|
+#cfg(target="wasm-gc")
+fn url_host_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(url_host_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn url_set_host_ffi(obj : JsValue, host : JsValue) -> Unit = "webapi_URL" "set_host"
+
+///|
+#cfg(target="wasm-gc")
+fn url_hostname_ffi_wasm(obj : JsValue) -> JsValue = "webapi_URL" "get_hostname"
+
+///|
+#cfg(target="wasm-gc")
+fn url_hostname_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(url_hostname_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn url_set_hostname_ffi(obj : JsValue, hostname : JsValue) -> Unit = "webapi_URL" "set_hostname"
+
+///|
+#cfg(target="wasm-gc")
+fn url_port_ffi_wasm(obj : JsValue) -> JsValue = "webapi_URL" "get_port"
+
+///|
+#cfg(target="wasm-gc")
+fn url_port_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(url_port_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn url_set_port_ffi(obj : JsValue, port : JsValue) -> Unit = "webapi_URL" "set_port"
+
+///|
+#cfg(target="wasm-gc")
+fn url_pathname_ffi_wasm(obj : JsValue) -> JsValue = "webapi_URL" "get_pathname"
+
+///|
+#cfg(target="wasm-gc")
+fn url_pathname_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(url_pathname_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn url_set_pathname_ffi(obj : JsValue, pathname : JsValue) -> Unit = "webapi_URL" "set_pathname"
+
+///|
+#cfg(target="wasm-gc")
+fn url_search_ffi_wasm(obj : JsValue) -> JsValue = "webapi_URL" "get_search"
+
+///|
+#cfg(target="wasm-gc")
+fn url_search_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(url_search_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn url_set_search_ffi(obj : JsValue, search : JsValue) -> Unit = "webapi_URL" "set_search"
+
+///|
+#cfg(target="wasm-gc")
+fn url_search_params_ffi(obj : JsValue) -> URLSearchParams = "webapi_URL" "get_searchParams"
+
+///|
+#cfg(target="wasm-gc")
+fn url_hash_ffi_wasm(obj : JsValue) -> JsValue = "webapi_URL" "get_hash"
+
+///|
+#cfg(target="wasm-gc")
+fn url_hash_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(url_hash_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn url_set_hash_ffi(obj : JsValue, hash : JsValue) -> Unit = "webapi_URL" "set_hash"
+
+///|
+#cfg(target="wasm-gc")
+fn url_to_json_ffi_wasm(obj : JsValue) -> JsValue = "webapi_URL" "toJSON"
+
+///|
+#cfg(target="wasm-gc")
+fn url_to_json_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(url_to_json_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn url_create_object_url_ffi_wasm(obj : JsValue) -> JsValue = "webapi_URL" "createObjectURL"
+
+///|
+#cfg(target="wasm-gc")
+fn url_create_object_url_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(url_create_object_url_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn url_revoke_object_url_ffi(url : JsValue) -> Unit = "webapi_URL" "revokeObjectURL"

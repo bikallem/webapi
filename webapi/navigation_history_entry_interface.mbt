@@ -92,3 +92,145 @@ impl TNavigationHistoryEntry with set_ondispose(
     TJsValue::to_js(event_handler_non_null_ffi(ondispose)),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_history_entry_url_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.url"
+
+///|
+#cfg(target="js")
+fn navigation_history_entry_url_ffi(obj : JsValue) -> String {
+  navigation_history_entry_url_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_history_entry_key_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.key"
+
+///|
+#cfg(target="js")
+fn navigation_history_entry_key_ffi(obj : JsValue) -> String {
+  navigation_history_entry_key_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_history_entry_id_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.id"
+
+///|
+#cfg(target="js")
+fn navigation_history_entry_id_ffi(obj : JsValue) -> String {
+  navigation_history_entry_id_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_history_entry_index_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.index"
+
+///|
+#cfg(target="js")
+fn navigation_history_entry_index_ffi(obj : JsValue) -> Int64 {
+  navigation_history_entry_index_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_history_entry_same_document_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.sameDocument"
+
+///|
+#cfg(target="js")
+fn navigation_history_entry_same_document_ffi(obj : JsValue) -> Bool {
+  navigation_history_entry_same_document_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_history_entry_get_state_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.getState()"
+
+///|
+#cfg(target="js")
+fn navigation_history_entry_get_state_ffi(obj : JsValue) -> JsValue {
+  navigation_history_entry_get_state_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_history_entry_ondispose_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.ondispose"
+
+///|
+#cfg(target="js")
+fn navigation_history_entry_ondispose_ffi(obj : JsValue) -> EventHandler {
+  navigation_history_entry_ondispose_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_history_entry_set_ondispose_ffi(
+  obj : JsValue,
+  ondispose : JsValue,
+) -> Unit = "(obj, ondispose) => { obj.ondispose = ondispose; }"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_history_entry_url_ffi_wasm(obj : JsValue) -> JsValue = "webapi_NavigationHistoryEntry" "get_url"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_history_entry_url_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(navigation_history_entry_url_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_history_entry_key_ffi_wasm(obj : JsValue) -> JsValue = "webapi_NavigationHistoryEntry" "get_key"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_history_entry_key_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(navigation_history_entry_key_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_history_entry_id_ffi_wasm(obj : JsValue) -> JsValue = "webapi_NavigationHistoryEntry" "get_id"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_history_entry_id_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(navigation_history_entry_id_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_history_entry_index_ffi(obj : JsValue) -> Int64 = "webapi_NavigationHistoryEntry" "get_index"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_history_entry_same_document_ffi(obj : JsValue) -> Bool = "webapi_NavigationHistoryEntry" "get_sameDocument"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_history_entry_get_state_ffi(obj : JsValue) -> JsValue = "webapi_NavigationHistoryEntry" "getState"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_history_entry_ondispose_ffi_wasm(obj : JsValue) -> JsValue = "webapi_NavigationHistoryEntry" "get_ondispose"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_history_entry_ondispose_ffi(obj : JsValue) -> EventHandler {
+  navigation_history_entry_ondispose_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_history_entry_set_ondispose_ffi(
+  obj : JsValue,
+  ondispose : JsValue,
+) -> Unit = "webapi_NavigationHistoryEntry" "set_ondispose"

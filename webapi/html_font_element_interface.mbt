@@ -82,3 +82,104 @@ impl THTMLFontElement with size(self : Self) -> String {
 impl THTMLFontElement with set_size(self : Self, size : String) -> Unit {
   html_font_element_set_size_ffi(TJsValue::to_js(self), TJsValue::to_js(size))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_font_element_new_ffi() -> HTMLFontElement = "() => new HTMLFontElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_font_element_color_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.color"
+
+///|
+#cfg(target="js")
+fn html_font_element_color_ffi(obj : JsValue) -> String {
+  html_font_element_color_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_font_element_set_color_ffi(
+  obj : JsValue,
+  color : JsValue,
+) -> Unit = "(obj, color) => { obj.color = color; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_font_element_face_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.face"
+
+///|
+#cfg(target="js")
+fn html_font_element_face_ffi(obj : JsValue) -> String {
+  html_font_element_face_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_font_element_set_face_ffi(
+  obj : JsValue,
+  face : JsValue,
+) -> Unit = "(obj, face) => { obj.face = face; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_font_element_size_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.size"
+
+///|
+#cfg(target="js")
+fn html_font_element_size_ffi(obj : JsValue) -> String {
+  html_font_element_size_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_font_element_set_size_ffi(
+  obj : JsValue,
+  size : JsValue,
+) -> Unit = "(obj, size) => { obj.size = size; }"
+
+///|
+#cfg(target="wasm-gc")
+fn html_font_element_new_ffi() -> HTMLFontElement = "webapi_HTMLFontElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_font_element_color_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLFontElement" "get_color"
+
+///|
+#cfg(target="wasm-gc")
+fn html_font_element_color_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_font_element_color_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_font_element_set_color_ffi(obj : JsValue, color : JsValue) -> Unit = "webapi_HTMLFontElement" "set_color"
+
+///|
+#cfg(target="wasm-gc")
+fn html_font_element_face_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLFontElement" "get_face"
+
+///|
+#cfg(target="wasm-gc")
+fn html_font_element_face_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_font_element_face_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_font_element_set_face_ffi(obj : JsValue, face : JsValue) -> Unit = "webapi_HTMLFontElement" "set_face"
+
+///|
+#cfg(target="wasm-gc")
+fn html_font_element_size_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLFontElement" "get_size"
+
+///|
+#cfg(target="wasm-gc")
+fn html_font_element_size_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_font_element_size_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_font_element_set_size_ffi(obj : JsValue, size : JsValue) -> Unit = "webapi_HTMLFontElement" "set_size"

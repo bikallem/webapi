@@ -35,3 +35,38 @@ pub fn ClipboardUnsanitizedFormats::unsanitized(
 ) -> Array[String]? {
   clipboard_unsanitized_formats_get_unsanitized_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn clipboard_unsanitized_formats_ffi(
+  unsanitized : JsValue,
+) -> ClipboardUnsanitizedFormats =
+  #|(unsanitized) => {
+  #|  const obj = {};
+  #|  if (unsanitized !== undefined) obj.unsanitized = unsanitized;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn clipboard_unsanitized_formats_empty_ffi() -> ClipboardUnsanitizedFormats = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn clipboard_unsanitized_formats_get_unsanitized_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.unsanitized"
+
+///|
+#cfg(target="wasm-gc")
+fn clipboard_unsanitized_formats_ffi(
+  unsanitized : JsValue,
+) -> ClipboardUnsanitizedFormats = "webapi_ClipboardUnsanitizedFormats" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn clipboard_unsanitized_formats_empty_ffi() -> ClipboardUnsanitizedFormats = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn clipboard_unsanitized_formats_get_unsanitized_ffi(obj : JsValue) -> JsValue = "webapi_ClipboardUnsanitizedFormats" "get_unsanitized"

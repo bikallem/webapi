@@ -66,3 +66,91 @@ pub fn CloseEventInit::code(self : CloseEventInit) -> UInt? {
 pub fn CloseEventInit::reason(self : CloseEventInit) -> String? {
   close_event_init_get_reason_ffi(TJsValue::to_js(self)).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn close_event_init_ffi(
+  bubbles : JsValue,
+  cancelable : JsValue,
+  composed : JsValue,
+  was_clean : JsValue,
+  code : JsValue,
+  reason : JsValue,
+) -> CloseEventInit =
+  #|(bubbles, cancelable, composed, wasClean, code, reason) => {
+  #|  const obj = {};
+  #|  if (bubbles !== undefined) obj.bubbles = bubbles;
+  #|  if (cancelable !== undefined) obj.cancelable = cancelable;
+  #|  if (composed !== undefined) obj.composed = composed;
+  #|  if (wasClean !== undefined) obj.wasClean = wasClean;
+  #|  if (code !== undefined) obj.code = code;
+  #|  if (reason !== undefined) obj.reason = reason;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn close_event_init_empty_ffi() -> CloseEventInit = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn close_event_init_get_bubbles_ffi(obj : JsValue) -> JsValue = "(obj) => obj.bubbles"
+
+///|
+#cfg(target="js")
+extern "js" fn close_event_init_get_cancelable_ffi(obj : JsValue) -> JsValue = "(obj) => obj.cancelable"
+
+///|
+#cfg(target="js")
+extern "js" fn close_event_init_get_composed_ffi(obj : JsValue) -> JsValue = "(obj) => obj.composed"
+
+///|
+#cfg(target="js")
+extern "js" fn close_event_init_get_was_clean_ffi(obj : JsValue) -> JsValue = "(obj) => obj.wasClean"
+
+///|
+#cfg(target="js")
+extern "js" fn close_event_init_get_code_ffi(obj : JsValue) -> JsValue = "(obj) => obj.code"
+
+///|
+#cfg(target="js")
+extern "js" fn close_event_init_get_reason_ffi(obj : JsValue) -> JsValue = "(obj) => obj.reason"
+
+///|
+#cfg(target="wasm-gc")
+fn close_event_init_ffi(
+  bubbles : JsValue,
+  cancelable : JsValue,
+  composed : JsValue,
+  was_clean : JsValue,
+  code : JsValue,
+  reason : JsValue,
+) -> CloseEventInit = "webapi_CloseEventInit" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn close_event_init_empty_ffi() -> CloseEventInit = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn close_event_init_get_bubbles_ffi(obj : JsValue) -> JsValue = "webapi_CloseEventInit" "get_bubbles"
+
+///|
+#cfg(target="wasm-gc")
+fn close_event_init_get_cancelable_ffi(obj : JsValue) -> JsValue = "webapi_CloseEventInit" "get_cancelable"
+
+///|
+#cfg(target="wasm-gc")
+fn close_event_init_get_composed_ffi(obj : JsValue) -> JsValue = "webapi_CloseEventInit" "get_composed"
+
+///|
+#cfg(target="wasm-gc")
+fn close_event_init_get_was_clean_ffi(obj : JsValue) -> JsValue = "webapi_CloseEventInit" "get_wasClean"
+
+///|
+#cfg(target="wasm-gc")
+fn close_event_init_get_code_ffi(obj : JsValue) -> JsValue = "webapi_CloseEventInit" "get_code"
+
+///|
+#cfg(target="wasm-gc")
+fn close_event_init_get_reason_ffi(obj : JsValue) -> JsValue = "webapi_CloseEventInit" "get_reason"

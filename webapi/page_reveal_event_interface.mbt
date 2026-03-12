@@ -41,3 +41,39 @@ pub trait TPageRevealEvent: TEvent {
 impl TPageRevealEvent with view_transition(self : Self) -> ViewTransition {
   page_reveal_event_view_transition_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn page_reveal_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> PageRevealEvent = "(type_, event_init_dict) => new PageRevealEvent(type_, event_init_dict)"
+
+///|
+#cfg(target="js")
+extern "js" fn page_reveal_event_view_transition_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.viewTransition"
+
+///|
+#cfg(target="js")
+fn page_reveal_event_view_transition_ffi(obj : JsValue) -> ViewTransition {
+  page_reveal_event_view_transition_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn page_reveal_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> PageRevealEvent = "webapi_PageRevealEvent" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn page_reveal_event_view_transition_ffi_wasm(obj : JsValue) -> JsValue = "webapi_PageRevealEvent" "get_viewTransition"
+
+///|
+#cfg(target="wasm-gc")
+fn page_reveal_event_view_transition_ffi(obj : JsValue) -> ViewTransition {
+  page_reveal_event_view_transition_ffi_wasm(obj).unsafe_cast()
+}

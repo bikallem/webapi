@@ -218,3 +218,343 @@ impl TNavigation with set_oncurrententrychange(
     TJsValue::to_js(event_handler_non_null_ffi(oncurrententrychange)),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_entries_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.entries()"
+
+///|
+#cfg(target="js")
+fn navigation_entries_ffi(obj : JsValue) -> Array[NavigationHistoryEntry] {
+  navigation_entries_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_current_entry_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.currentEntry"
+
+///|
+#cfg(target="js")
+fn navigation_current_entry_ffi(obj : JsValue) -> NavigationHistoryEntry {
+  navigation_current_entry_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_update_current_entry_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> Unit = "(obj, options) => obj.updateCurrentEntry(options)"
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_transition_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.transition"
+
+///|
+#cfg(target="js")
+fn navigation_transition_ffi(obj : JsValue) -> NavigationTransition {
+  navigation_transition_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_activation_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.activation"
+
+///|
+#cfg(target="js")
+fn navigation_activation_ffi(obj : JsValue) -> NavigationActivation {
+  navigation_activation_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_can_go_back_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.canGoBack"
+
+///|
+#cfg(target="js")
+fn navigation_can_go_back_ffi(obj : JsValue) -> Bool {
+  navigation_can_go_back_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_can_go_forward_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.canGoForward"
+
+///|
+#cfg(target="js")
+fn navigation_can_go_forward_ffi(obj : JsValue) -> Bool {
+  navigation_can_go_forward_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_navigate_ffi_js(
+  obj : JsValue,
+  url : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, url, options) => obj.navigate(url, options)"
+
+///|
+#cfg(target="js")
+fn navigation_navigate_ffi(
+  obj : JsValue,
+  url : JsValue,
+  options : JsValue,
+) -> NavigationResult {
+  navigation_navigate_ffi_js(obj, url, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_reload_ffi_js(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, options) => obj.reload(options)"
+
+///|
+#cfg(target="js")
+fn navigation_reload_ffi(obj : JsValue, options : JsValue) -> NavigationResult {
+  navigation_reload_ffi_js(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_traverse_to_ffi_js(
+  obj : JsValue,
+  key : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, key, options) => obj.traverseTo(key, options)"
+
+///|
+#cfg(target="js")
+fn navigation_traverse_to_ffi(
+  obj : JsValue,
+  key : JsValue,
+  options : JsValue,
+) -> NavigationResult {
+  navigation_traverse_to_ffi_js(obj, key, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_back_ffi_js(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, options) => obj.back(options)"
+
+///|
+#cfg(target="js")
+fn navigation_back_ffi(obj : JsValue, options : JsValue) -> NavigationResult {
+  navigation_back_ffi_js(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_forward_ffi_js(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, options) => obj.forward(options)"
+
+///|
+#cfg(target="js")
+fn navigation_forward_ffi(obj : JsValue, options : JsValue) -> NavigationResult {
+  navigation_forward_ffi_js(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_onnavigate_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onnavigate"
+
+///|
+#cfg(target="js")
+fn navigation_onnavigate_ffi(obj : JsValue) -> EventHandler {
+  navigation_onnavigate_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_set_onnavigate_ffi(
+  obj : JsValue,
+  onnavigate : JsValue,
+) -> Unit = "(obj, onnavigate) => { obj.onnavigate = onnavigate; }"
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_onnavigatesuccess_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onnavigatesuccess"
+
+///|
+#cfg(target="js")
+fn navigation_onnavigatesuccess_ffi(obj : JsValue) -> EventHandler {
+  navigation_onnavigatesuccess_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_set_onnavigatesuccess_ffi(
+  obj : JsValue,
+  onnavigatesuccess : JsValue,
+) -> Unit = "(obj, onnavigatesuccess) => { obj.onnavigatesuccess = onnavigatesuccess; }"
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_onnavigateerror_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onnavigateerror"
+
+///|
+#cfg(target="js")
+fn navigation_onnavigateerror_ffi(obj : JsValue) -> EventHandler {
+  navigation_onnavigateerror_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_set_onnavigateerror_ffi(
+  obj : JsValue,
+  onnavigateerror : JsValue,
+) -> Unit = "(obj, onnavigateerror) => { obj.onnavigateerror = onnavigateerror; }"
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_oncurrententrychange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oncurrententrychange"
+
+///|
+#cfg(target="js")
+fn navigation_oncurrententrychange_ffi(obj : JsValue) -> EventHandler {
+  navigation_oncurrententrychange_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_set_oncurrententrychange_ffi(
+  obj : JsValue,
+  oncurrententrychange : JsValue,
+) -> Unit = "(obj, oncurrententrychange) => { obj.oncurrententrychange = oncurrententrychange; }"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_entries_ffi_wasm(obj : JsValue) -> JsArray = "webapi_Navigation" "entries"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_entries_ffi(obj : JsValue) -> Array[NavigationHistoryEntry] {
+  navigation_entries_ffi_wasm(obj).to_array()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_current_entry_ffi(obj : JsValue) -> NavigationHistoryEntry = "webapi_Navigation" "get_currentEntry"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_update_current_entry_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> Unit = "webapi_Navigation" "updateCurrentEntry"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_transition_ffi(obj : JsValue) -> NavigationTransition = "webapi_Navigation" "get_transition"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_activation_ffi(obj : JsValue) -> NavigationActivation = "webapi_Navigation" "get_activation"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_can_go_back_ffi(obj : JsValue) -> Bool = "webapi_Navigation" "get_canGoBack"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_can_go_forward_ffi(obj : JsValue) -> Bool = "webapi_Navigation" "get_canGoForward"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_navigate_ffi(
+  obj : JsValue,
+  url : JsValue,
+  options : JsValue,
+) -> NavigationResult = "webapi_Navigation" "navigate"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_reload_ffi(obj : JsValue, options : JsValue) -> NavigationResult = "webapi_Navigation" "reload"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_traverse_to_ffi(
+  obj : JsValue,
+  key : JsValue,
+  options : JsValue,
+) -> NavigationResult = "webapi_Navigation" "traverseTo"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_back_ffi(obj : JsValue, options : JsValue) -> NavigationResult = "webapi_Navigation" "back"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_forward_ffi(obj : JsValue, options : JsValue) -> NavigationResult = "webapi_Navigation" "forward"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_onnavigate_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Navigation" "get_onnavigate"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_onnavigate_ffi(obj : JsValue) -> EventHandler {
+  navigation_onnavigate_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_set_onnavigate_ffi(obj : JsValue, onnavigate : JsValue) -> Unit = "webapi_Navigation" "set_onnavigate"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_onnavigatesuccess_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Navigation" "get_onnavigatesuccess"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_onnavigatesuccess_ffi(obj : JsValue) -> EventHandler {
+  navigation_onnavigatesuccess_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_set_onnavigatesuccess_ffi(
+  obj : JsValue,
+  onnavigatesuccess : JsValue,
+) -> Unit = "webapi_Navigation" "set_onnavigatesuccess"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_onnavigateerror_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Navigation" "get_onnavigateerror"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_onnavigateerror_ffi(obj : JsValue) -> EventHandler {
+  navigation_onnavigateerror_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_set_onnavigateerror_ffi(
+  obj : JsValue,
+  onnavigateerror : JsValue,
+) -> Unit = "webapi_Navigation" "set_onnavigateerror"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_oncurrententrychange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Navigation" "get_oncurrententrychange"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_oncurrententrychange_ffi(obj : JsValue) -> EventHandler {
+  navigation_oncurrententrychange_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_set_oncurrententrychange_ffi(
+  obj : JsValue,
+  oncurrententrychange : JsValue,
+) -> Unit = "webapi_Navigation" "set_oncurrententrychange"

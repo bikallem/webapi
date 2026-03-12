@@ -45,3 +45,60 @@ pub fn ExtendableEventInit::cancelable(self : ExtendableEventInit) -> Bool? {
 pub fn ExtendableEventInit::composed(self : ExtendableEventInit) -> Bool? {
   extendable_event_init_get_composed_ffi(TJsValue::to_js(self)).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn extendable_event_init_ffi(
+  bubbles : JsValue,
+  cancelable : JsValue,
+  composed : JsValue,
+) -> ExtendableEventInit =
+  #|(bubbles, cancelable, composed) => {
+  #|  const obj = {};
+  #|  if (bubbles !== undefined) obj.bubbles = bubbles;
+  #|  if (cancelable !== undefined) obj.cancelable = cancelable;
+  #|  if (composed !== undefined) obj.composed = composed;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn extendable_event_init_empty_ffi() -> ExtendableEventInit = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn extendable_event_init_get_bubbles_ffi(obj : JsValue) -> JsValue = "(obj) => obj.bubbles"
+
+///|
+#cfg(target="js")
+extern "js" fn extendable_event_init_get_cancelable_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.cancelable"
+
+///|
+#cfg(target="js")
+extern "js" fn extendable_event_init_get_composed_ffi(obj : JsValue) -> JsValue = "(obj) => obj.composed"
+
+///|
+#cfg(target="wasm-gc")
+fn extendable_event_init_ffi(
+  bubbles : JsValue,
+  cancelable : JsValue,
+  composed : JsValue,
+) -> ExtendableEventInit = "webapi_ExtendableEventInit" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn extendable_event_init_empty_ffi() -> ExtendableEventInit = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn extendable_event_init_get_bubbles_ffi(obj : JsValue) -> JsValue = "webapi_ExtendableEventInit" "get_bubbles"
+
+///|
+#cfg(target="wasm-gc")
+fn extendable_event_init_get_cancelable_ffi(obj : JsValue) -> JsValue = "webapi_ExtendableEventInit" "get_cancelable"
+
+///|
+#cfg(target="wasm-gc")
+fn extendable_event_init_get_composed_ffi(obj : JsValue) -> JsValue = "webapi_ExtendableEventInit" "get_composed"

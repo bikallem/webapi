@@ -141,3 +141,132 @@ impl TNamedNodeMap with set_named_item(self : Self, attr : &TAttr) -> Attr {
 impl TNamedNodeMap with set_named_item_ns(self : Self, attr : &TAttr) -> Attr {
   self.set_named_item_ns_opt(attr).unwrap()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn named_node_map_length_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.length"
+
+///|
+#cfg(target="js")
+fn named_node_map_length_ffi(obj : JsValue) -> UInt {
+  named_node_map_length_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn named_node_map_item_ffi(
+  obj : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, index) => obj.item(index)"
+
+///|
+#cfg(target="js")
+extern "js" fn named_node_map_get_named_item_ffi(
+  obj : JsValue,
+  qualified_name : JsValue,
+) -> JsValue = "(obj, qualified_name) => obj.getNamedItem(qualified_name)"
+
+///|
+#cfg(target="js")
+extern "js" fn named_node_map_get_named_item_ns_ffi(
+  obj : JsValue,
+  namespace_ : JsValue,
+  local_name : JsValue,
+) -> JsValue = "(obj, namespace_, local_name) => obj.getNamedItemNS(namespace_, local_name)"
+
+///|
+#cfg(target="js")
+extern "js" fn named_node_map_set_named_item_ffi(
+  obj : JsValue,
+  attr : JsValue,
+) -> JsValue = "(obj, attr) => obj.setNamedItem(attr)"
+
+///|
+#cfg(target="js")
+extern "js" fn named_node_map_set_named_item_ns_ffi(
+  obj : JsValue,
+  attr : JsValue,
+) -> JsValue = "(obj, attr) => obj.setNamedItemNS(attr)"
+
+///|
+#cfg(target="js")
+extern "js" fn named_node_map_remove_named_item_ffi_js(
+  obj : JsValue,
+  qualified_name : JsValue,
+) -> JsValue = "(obj, qualified_name) => obj.removeNamedItem(qualified_name)"
+
+///|
+#cfg(target="js")
+fn named_node_map_remove_named_item_ffi(
+  obj : JsValue,
+  qualified_name : JsValue,
+) -> Attr {
+  named_node_map_remove_named_item_ffi_js(obj, qualified_name).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn named_node_map_remove_named_item_ns_ffi_js(
+  obj : JsValue,
+  namespace_ : JsValue,
+  local_name : JsValue,
+) -> JsValue = "(obj, namespace_, local_name) => obj.removeNamedItemNS(namespace_, local_name)"
+
+///|
+#cfg(target="js")
+fn named_node_map_remove_named_item_ns_ffi(
+  obj : JsValue,
+  namespace_ : JsValue,
+  local_name : JsValue,
+) -> Attr {
+  named_node_map_remove_named_item_ns_ffi_js(obj, namespace_, local_name).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn named_node_map_length_ffi(obj : JsValue) -> UInt = "webapi_NamedNodeMap" "get_length"
+
+///|
+#cfg(target="wasm-gc")
+fn named_node_map_item_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_NamedNodeMap" "item"
+
+///|
+#cfg(target="wasm-gc")
+fn named_node_map_get_named_item_ffi(
+  obj : JsValue,
+  qualified_name : JsValue,
+) -> JsValue = "webapi_NamedNodeMap" "getNamedItem"
+
+///|
+#cfg(target="wasm-gc")
+fn named_node_map_get_named_item_ns_ffi(
+  obj : JsValue,
+  namespace_ : JsValue,
+  local_name : JsValue,
+) -> JsValue = "webapi_NamedNodeMap" "getNamedItemNS"
+
+///|
+#cfg(target="wasm-gc")
+fn named_node_map_set_named_item_ffi(obj : JsValue, attr : JsValue) -> JsValue = "webapi_NamedNodeMap" "setNamedItem"
+
+///|
+#cfg(target="wasm-gc")
+fn named_node_map_set_named_item_ns_ffi(
+  obj : JsValue,
+  attr : JsValue,
+) -> JsValue = "webapi_NamedNodeMap" "setNamedItemNS"
+
+///|
+#cfg(target="wasm-gc")
+fn named_node_map_remove_named_item_ffi(
+  obj : JsValue,
+  qualified_name : JsValue,
+) -> Attr = "webapi_NamedNodeMap" "removeNamedItem"
+
+///|
+#cfg(target="wasm-gc")
+fn named_node_map_remove_named_item_ns_ffi(
+  obj : JsValue,
+  namespace_ : JsValue,
+  local_name : JsValue,
+) -> Attr = "webapi_NamedNodeMap" "removeNamedItemNS"

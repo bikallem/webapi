@@ -86,3 +86,183 @@ impl TWorkerLocation with search(self : Self) -> String {
 impl TWorkerLocation with hash(self : Self) -> String {
   worker_location_hash_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn worker_location_href_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.href"
+
+///|
+#cfg(target="js")
+fn worker_location_href_ffi(obj : JsValue) -> String {
+  worker_location_href_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_location_origin_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.origin"
+
+///|
+#cfg(target="js")
+fn worker_location_origin_ffi(obj : JsValue) -> String {
+  worker_location_origin_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_location_protocol_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.protocol"
+
+///|
+#cfg(target="js")
+fn worker_location_protocol_ffi(obj : JsValue) -> String {
+  worker_location_protocol_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_location_host_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.host"
+
+///|
+#cfg(target="js")
+fn worker_location_host_ffi(obj : JsValue) -> String {
+  worker_location_host_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_location_hostname_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.hostname"
+
+///|
+#cfg(target="js")
+fn worker_location_hostname_ffi(obj : JsValue) -> String {
+  worker_location_hostname_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_location_port_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.port"
+
+///|
+#cfg(target="js")
+fn worker_location_port_ffi(obj : JsValue) -> String {
+  worker_location_port_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_location_pathname_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.pathname"
+
+///|
+#cfg(target="js")
+fn worker_location_pathname_ffi(obj : JsValue) -> String {
+  worker_location_pathname_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_location_search_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.search"
+
+///|
+#cfg(target="js")
+fn worker_location_search_ffi(obj : JsValue) -> String {
+  worker_location_search_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_location_hash_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.hash"
+
+///|
+#cfg(target="js")
+fn worker_location_hash_ffi(obj : JsValue) -> String {
+  worker_location_hash_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_location_href_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WorkerLocation" "get_href"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_location_href_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(worker_location_href_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_location_origin_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WorkerLocation" "get_origin"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_location_origin_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(worker_location_origin_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_location_protocol_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WorkerLocation" "get_protocol"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_location_protocol_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(worker_location_protocol_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_location_host_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WorkerLocation" "get_host"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_location_host_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(worker_location_host_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_location_hostname_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WorkerLocation" "get_hostname"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_location_hostname_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(worker_location_hostname_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_location_port_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WorkerLocation" "get_port"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_location_port_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(worker_location_port_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_location_pathname_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WorkerLocation" "get_pathname"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_location_pathname_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(worker_location_pathname_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_location_search_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WorkerLocation" "get_search"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_location_search_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(worker_location_search_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_location_hash_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WorkerLocation" "get_hash"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_location_hash_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(worker_location_hash_ffi_wasm(obj))
+}

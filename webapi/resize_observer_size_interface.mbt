@@ -39,3 +39,33 @@ impl TResizeObserverSize with inline_size(self : Self) -> Double {
 impl TResizeObserverSize with block_size(self : Self) -> Double {
   resize_observer_size_block_size_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn resize_observer_size_inline_size_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.inlineSize"
+
+///|
+#cfg(target="js")
+fn resize_observer_size_inline_size_ffi(obj : JsValue) -> Double {
+  resize_observer_size_inline_size_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn resize_observer_size_block_size_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.blockSize"
+
+///|
+#cfg(target="js")
+fn resize_observer_size_block_size_ffi(obj : JsValue) -> Double {
+  resize_observer_size_block_size_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn resize_observer_size_inline_size_ffi(obj : JsValue) -> Double = "webapi_ResizeObserverSize" "get_inlineSize"
+
+///|
+#cfg(target="wasm-gc")
+fn resize_observer_size_block_size_ffi(obj : JsValue) -> Double = "webapi_ResizeObserverSize" "get_blockSize"

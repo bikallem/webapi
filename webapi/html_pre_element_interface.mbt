@@ -54,3 +54,36 @@ impl THTMLPreElement with width(self : Self) -> Int {
 impl THTMLPreElement with set_width(self : Self, width : Int) -> Unit {
   html_pre_element_set_width_ffi(TJsValue::to_js(self), TJsValue::to_js(width))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_pre_element_new_ffi() -> HTMLPreElement = "() => new HTMLPreElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_pre_element_width_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.width"
+
+///|
+#cfg(target="js")
+fn html_pre_element_width_ffi(obj : JsValue) -> Int {
+  html_pre_element_width_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_pre_element_set_width_ffi(
+  obj : JsValue,
+  width : JsValue,
+) -> Unit = "(obj, width) => { obj.width = width; }"
+
+///|
+#cfg(target="wasm-gc")
+fn html_pre_element_new_ffi() -> HTMLPreElement = "webapi_HTMLPreElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_pre_element_width_ffi(obj : JsValue) -> Int = "webapi_HTMLPreElement" "get_width"
+
+///|
+#cfg(target="wasm-gc")
+fn html_pre_element_set_width_ffi(obj : JsValue, width : JsValue) -> Unit = "webapi_HTMLPreElement" "set_width"

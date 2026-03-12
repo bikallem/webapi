@@ -40,3 +40,39 @@ impl TWorklet with add_module(
     opt_to_js(options),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn worklet_add_module_ffi_js(
+  obj : JsValue,
+  module_url : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, module_url, options) => obj.addModule(module_url, options)"
+
+///|
+#cfg(target="js")
+fn worklet_add_module_ffi(
+  obj : JsValue,
+  module_url : JsValue,
+  options : JsValue,
+) -> JsPromise[JsValue] {
+  worklet_add_module_ffi_js(obj, module_url, options).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worklet_add_module_ffi_wasm(
+  obj : JsValue,
+  module_url : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Worklet" "addModule"
+
+///|
+#cfg(target="wasm-gc")
+fn worklet_add_module_ffi(
+  obj : JsValue,
+  module_url : JsValue,
+  options : JsValue,
+) -> JsPromise[JsValue] {
+  worklet_add_module_ffi_wasm(obj, module_url, options).unsafe_cast()
+}

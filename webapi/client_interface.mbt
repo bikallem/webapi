@@ -85,3 +85,115 @@ impl TClient with post_message_with_options(
     opt_to_js(options),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn client_url_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.url"
+
+///|
+#cfg(target="js")
+fn client_url_ffi(obj : JsValue) -> String {
+  client_url_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn client_frame_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.frameType"
+
+///|
+#cfg(target="js")
+fn client_frame_type_ffi(obj : JsValue) -> FrameType {
+  FrameType::from_unchecked(client_frame_type_ffi_js(obj).unsafe_cast())
+}
+
+///|
+#cfg(target="js")
+extern "js" fn client_id_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.id"
+
+///|
+#cfg(target="js")
+fn client_id_ffi(obj : JsValue) -> String {
+  client_id_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn client_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.type"
+
+///|
+#cfg(target="js")
+fn client_type_ffi(obj : JsValue) -> ClientType {
+  ClientType::from_unchecked(client_type_ffi_js(obj).unsafe_cast())
+}
+
+///|
+#cfg(target="js")
+extern "js" fn client_post_message_ffi(
+  obj : JsValue,
+  message : JsValue,
+  transfer : JsValue,
+) -> Unit = "(obj, message, transfer) => obj.postMessage(message, transfer)"
+
+///|
+#cfg(target="js")
+extern "js" fn client_post_message_with_options_ffi(
+  obj : JsValue,
+  message : JsValue,
+  options : JsValue,
+) -> Unit = "(obj, message, options) => obj.postMessage(message, options)"
+
+///|
+#cfg(target="wasm-gc")
+fn client_url_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Client" "get_url"
+
+///|
+#cfg(target="wasm-gc")
+fn client_url_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(client_url_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn client_frame_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Client" "get_frameType"
+
+///|
+#cfg(target="wasm-gc")
+fn client_frame_type_ffi(obj : JsValue) -> FrameType {
+  FrameType::from_unchecked(jsvalue_to_string(client_frame_type_ffi_wasm(obj)))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn client_id_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Client" "get_id"
+
+///|
+#cfg(target="wasm-gc")
+fn client_id_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(client_id_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn client_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Client" "get_type"
+
+///|
+#cfg(target="wasm-gc")
+fn client_type_ffi(obj : JsValue) -> ClientType {
+  ClientType::from_unchecked(jsvalue_to_string(client_type_ffi_wasm(obj)))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn client_post_message_ffi(
+  obj : JsValue,
+  message : JsValue,
+  transfer : JsValue,
+) -> Unit = "webapi_Client" "postMessage"
+
+///|
+#cfg(target="wasm-gc")
+fn client_post_message_with_options_ffi(
+  obj : JsValue,
+  message : JsValue,
+  options : JsValue,
+) -> Unit = "webapi_Client" "post_message_with_options"

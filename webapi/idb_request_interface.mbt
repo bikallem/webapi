@@ -132,3 +132,151 @@ impl TIDBRequest with set_onerror(self : Self, onerror : (Event) -> JsValue) -> 
     TJsValue::to_js(event_handler_non_null_ffi(onerror)),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn idb_request_result_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.result"
+
+///|
+#cfg(target="js")
+fn idb_request_result_ffi(obj : JsValue) -> JsValue {
+  idb_request_result_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_request_error_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.error"
+
+///|
+#cfg(target="js")
+fn idb_request_error_ffi(obj : JsValue) -> DOMException {
+  idb_request_error_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_request_source_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.source"
+
+///|
+#cfg(target="js")
+fn idb_request_source_ffi(obj : JsValue) -> IDBRequestSource {
+  idb_request_source_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_request_transaction_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.transaction"
+
+///|
+#cfg(target="js")
+fn idb_request_transaction_ffi(obj : JsValue) -> IDBTransaction {
+  idb_request_transaction_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_request_ready_state_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.readyState"
+
+///|
+#cfg(target="js")
+fn idb_request_ready_state_ffi(obj : JsValue) -> IDBRequestReadyState {
+  IDBRequestReadyState::from_unchecked(
+    idb_request_ready_state_ffi_js(obj).unsafe_cast(),
+  )
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_request_onsuccess_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onsuccess"
+
+///|
+#cfg(target="js")
+fn idb_request_onsuccess_ffi(obj : JsValue) -> EventHandler {
+  idb_request_onsuccess_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_request_set_onsuccess_ffi(
+  obj : JsValue,
+  onsuccess : JsValue,
+) -> Unit = "(obj, onsuccess) => { obj.onsuccess = onsuccess; }"
+
+///|
+#cfg(target="js")
+extern "js" fn idb_request_onerror_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onerror"
+
+///|
+#cfg(target="js")
+fn idb_request_onerror_ffi(obj : JsValue) -> EventHandler {
+  idb_request_onerror_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_request_set_onerror_ffi(
+  obj : JsValue,
+  onerror : JsValue,
+) -> Unit = "(obj, onerror) => { obj.onerror = onerror; }"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_request_result_ffi(obj : JsValue) -> JsValue = "webapi_IDBRequest" "get_result"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_request_error_ffi(obj : JsValue) -> DOMException = "webapi_IDBRequest" "get_error"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_request_source_ffi_wasm(obj : JsValue) -> JsValue = "webapi_IDBRequest" "get_source"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_request_source_ffi(obj : JsValue) -> IDBRequestSource {
+  idb_request_source_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn idb_request_transaction_ffi(obj : JsValue) -> IDBTransaction = "webapi_IDBRequest" "get_transaction"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_request_ready_state_ffi_wasm(obj : JsValue) -> JsValue = "webapi_IDBRequest" "get_readyState"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_request_ready_state_ffi(obj : JsValue) -> IDBRequestReadyState {
+  IDBRequestReadyState::from_unchecked(
+    jsvalue_to_string(idb_request_ready_state_ffi_wasm(obj)),
+  )
+}
+
+///|
+#cfg(target="wasm-gc")
+fn idb_request_onsuccess_ffi_wasm(obj : JsValue) -> JsValue = "webapi_IDBRequest" "get_onsuccess"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_request_onsuccess_ffi(obj : JsValue) -> EventHandler {
+  idb_request_onsuccess_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn idb_request_set_onsuccess_ffi(obj : JsValue, onsuccess : JsValue) -> Unit = "webapi_IDBRequest" "set_onsuccess"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_request_onerror_ffi_wasm(obj : JsValue) -> JsValue = "webapi_IDBRequest" "get_onerror"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_request_onerror_ffi(obj : JsValue) -> EventHandler {
+  idb_request_onerror_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn idb_request_set_onerror_ffi(obj : JsValue, onerror : JsValue) -> Unit = "webapi_IDBRequest" "set_onerror"

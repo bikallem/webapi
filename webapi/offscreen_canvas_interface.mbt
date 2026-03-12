@@ -141,3 +141,201 @@ impl TOffscreenCanvas with set_oncontextrestored(
     TJsValue::to_js(event_handler_non_null_ffi(oncontextrestored)),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn offscreen_canvas_new_ffi(
+  width : JsValue,
+  height : JsValue,
+) -> OffscreenCanvas = "(width, height) => new OffscreenCanvas(width, height)"
+
+///|
+#cfg(target="js")
+extern "js" fn offscreen_canvas_width_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.width"
+
+///|
+#cfg(target="js")
+fn offscreen_canvas_width_ffi(obj : JsValue) -> UInt64 {
+  offscreen_canvas_width_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn offscreen_canvas_set_width_ffi(
+  obj : JsValue,
+  width : JsValue,
+) -> Unit = "(obj, width) => { obj.width = width; }"
+
+///|
+#cfg(target="js")
+extern "js" fn offscreen_canvas_height_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.height"
+
+///|
+#cfg(target="js")
+fn offscreen_canvas_height_ffi(obj : JsValue) -> UInt64 {
+  offscreen_canvas_height_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn offscreen_canvas_set_height_ffi(
+  obj : JsValue,
+  height : JsValue,
+) -> Unit = "(obj, height) => { obj.height = height; }"
+
+///|
+#cfg(target="js")
+extern "js" fn offscreen_canvas_get_context_ffi(
+  obj : JsValue,
+  context_id : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, context_id, options) => obj.getContext(context_id, options)"
+
+///|
+#cfg(target="js")
+extern "js" fn offscreen_canvas_transfer_to_image_bitmap_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.transferToImageBitmap()"
+
+///|
+#cfg(target="js")
+fn offscreen_canvas_transfer_to_image_bitmap_ffi(obj : JsValue) -> ImageBitmap {
+  offscreen_canvas_transfer_to_image_bitmap_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn offscreen_canvas_convert_to_blob_ffi_js(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, options) => obj.convertToBlob(options)"
+
+///|
+#cfg(target="js")
+fn offscreen_canvas_convert_to_blob_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> JsPromise[Blob] {
+  offscreen_canvas_convert_to_blob_ffi_js(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn offscreen_canvas_oncontextlost_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oncontextlost"
+
+///|
+#cfg(target="js")
+fn offscreen_canvas_oncontextlost_ffi(obj : JsValue) -> EventHandler {
+  offscreen_canvas_oncontextlost_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn offscreen_canvas_set_oncontextlost_ffi(
+  obj : JsValue,
+  oncontextlost : JsValue,
+) -> Unit = "(obj, oncontextlost) => { obj.oncontextlost = oncontextlost; }"
+
+///|
+#cfg(target="js")
+extern "js" fn offscreen_canvas_oncontextrestored_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.oncontextrestored"
+
+///|
+#cfg(target="js")
+fn offscreen_canvas_oncontextrestored_ffi(obj : JsValue) -> EventHandler {
+  offscreen_canvas_oncontextrestored_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn offscreen_canvas_set_oncontextrestored_ffi(
+  obj : JsValue,
+  oncontextrestored : JsValue,
+) -> Unit = "(obj, oncontextrestored) => { obj.oncontextrestored = oncontextrestored; }"
+
+///|
+#cfg(target="wasm-gc")
+fn offscreen_canvas_new_ffi(
+  width : JsValue,
+  height : JsValue,
+) -> OffscreenCanvas = "webapi_OffscreenCanvas" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn offscreen_canvas_width_ffi(obj : JsValue) -> UInt64 = "webapi_OffscreenCanvas" "get_width"
+
+///|
+#cfg(target="wasm-gc")
+fn offscreen_canvas_set_width_ffi(obj : JsValue, width : JsValue) -> Unit = "webapi_OffscreenCanvas" "set_width"
+
+///|
+#cfg(target="wasm-gc")
+fn offscreen_canvas_height_ffi(obj : JsValue) -> UInt64 = "webapi_OffscreenCanvas" "get_height"
+
+///|
+#cfg(target="wasm-gc")
+fn offscreen_canvas_set_height_ffi(obj : JsValue, height : JsValue) -> Unit = "webapi_OffscreenCanvas" "set_height"
+
+///|
+#cfg(target="wasm-gc")
+fn offscreen_canvas_get_context_ffi(
+  obj : JsValue,
+  context_id : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_OffscreenCanvas" "getContext"
+
+///|
+#cfg(target="wasm-gc")
+fn offscreen_canvas_transfer_to_image_bitmap_ffi(obj : JsValue) -> ImageBitmap = "webapi_OffscreenCanvas" "transferToImageBitmap"
+
+///|
+#cfg(target="wasm-gc")
+fn offscreen_canvas_convert_to_blob_ffi_wasm(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_OffscreenCanvas" "convertToBlob"
+
+///|
+#cfg(target="wasm-gc")
+fn offscreen_canvas_convert_to_blob_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> JsPromise[Blob] {
+  offscreen_canvas_convert_to_blob_ffi_wasm(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn offscreen_canvas_oncontextlost_ffi_wasm(obj : JsValue) -> JsValue = "webapi_OffscreenCanvas" "get_oncontextlost"
+
+///|
+#cfg(target="wasm-gc")
+fn offscreen_canvas_oncontextlost_ffi(obj : JsValue) -> EventHandler {
+  offscreen_canvas_oncontextlost_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn offscreen_canvas_set_oncontextlost_ffi(
+  obj : JsValue,
+  oncontextlost : JsValue,
+) -> Unit = "webapi_OffscreenCanvas" "set_oncontextlost"
+
+///|
+#cfg(target="wasm-gc")
+fn offscreen_canvas_oncontextrestored_ffi_wasm(obj : JsValue) -> JsValue = "webapi_OffscreenCanvas" "get_oncontextrestored"
+
+///|
+#cfg(target="wasm-gc")
+fn offscreen_canvas_oncontextrestored_ffi(obj : JsValue) -> EventHandler {
+  offscreen_canvas_oncontextrestored_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn offscreen_canvas_set_oncontextrestored_ffi(
+  obj : JsValue,
+  oncontextrestored : JsValue,
+) -> Unit = "webapi_OffscreenCanvas" "set_oncontextrestored"

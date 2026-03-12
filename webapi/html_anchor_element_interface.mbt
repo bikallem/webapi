@@ -423,3 +423,787 @@ impl THTMLAnchorElement with hash(self : Self) -> String {
 impl THTMLAnchorElement with set_hash(self : Self, hash : String) -> Unit {
   html_anchor_element_set_hash_ffi(TJsValue::to_js(self), TJsValue::to_js(hash))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_new_ffi() -> HTMLAnchorElement = "() => new HTMLAnchorElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_target_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.target"
+
+///|
+#cfg(target="js")
+fn html_anchor_element_target_ffi(obj : JsValue) -> String {
+  html_anchor_element_target_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_set_target_ffi(
+  obj : JsValue,
+  target : JsValue,
+) -> Unit = "(obj, target) => { obj.target = target; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_download_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.download"
+
+///|
+#cfg(target="js")
+fn html_anchor_element_download_ffi(obj : JsValue) -> String {
+  html_anchor_element_download_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_set_download_ffi(
+  obj : JsValue,
+  download : JsValue,
+) -> Unit = "(obj, download) => { obj.download = download; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_ping_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ping"
+
+///|
+#cfg(target="js")
+fn html_anchor_element_ping_ffi(obj : JsValue) -> String {
+  html_anchor_element_ping_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_set_ping_ffi(
+  obj : JsValue,
+  ping : JsValue,
+) -> Unit = "(obj, ping) => { obj.ping = ping; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_rel_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.rel"
+
+///|
+#cfg(target="js")
+fn html_anchor_element_rel_ffi(obj : JsValue) -> String {
+  html_anchor_element_rel_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_set_rel_ffi(
+  obj : JsValue,
+  rel : JsValue,
+) -> Unit = "(obj, rel) => { obj.rel = rel; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_rel_list_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.relList"
+
+///|
+#cfg(target="js")
+fn html_anchor_element_rel_list_ffi(obj : JsValue) -> DOMTokenList {
+  html_anchor_element_rel_list_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_hreflang_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.hreflang"
+
+///|
+#cfg(target="js")
+fn html_anchor_element_hreflang_ffi(obj : JsValue) -> String {
+  html_anchor_element_hreflang_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_set_hreflang_ffi(
+  obj : JsValue,
+  hreflang : JsValue,
+) -> Unit = "(obj, hreflang) => { obj.hreflang = hreflang; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.type"
+
+///|
+#cfg(target="js")
+fn html_anchor_element_type_ffi(obj : JsValue) -> String {
+  html_anchor_element_type_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_set_type_ffi(
+  obj : JsValue,
+  type_ : JsValue,
+) -> Unit = "(obj, type) => { obj.type = type; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_text_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.text"
+
+///|
+#cfg(target="js")
+fn html_anchor_element_text_ffi(obj : JsValue) -> String {
+  html_anchor_element_text_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_set_text_ffi(
+  obj : JsValue,
+  text : JsValue,
+) -> Unit = "(obj, text) => { obj.text = text; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_referrer_policy_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.referrerPolicy"
+
+///|
+#cfg(target="js")
+fn html_anchor_element_referrer_policy_ffi(obj : JsValue) -> String {
+  html_anchor_element_referrer_policy_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_set_referrer_policy_ffi(
+  obj : JsValue,
+  referrer_policy : JsValue,
+) -> Unit = "(obj, referrerPolicy) => { obj.referrerPolicy = referrerPolicy; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_coords_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.coords"
+
+///|
+#cfg(target="js")
+fn html_anchor_element_coords_ffi(obj : JsValue) -> String {
+  html_anchor_element_coords_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_set_coords_ffi(
+  obj : JsValue,
+  coords : JsValue,
+) -> Unit = "(obj, coords) => { obj.coords = coords; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_charset_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.charset"
+
+///|
+#cfg(target="js")
+fn html_anchor_element_charset_ffi(obj : JsValue) -> String {
+  html_anchor_element_charset_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_set_charset_ffi(
+  obj : JsValue,
+  charset : JsValue,
+) -> Unit = "(obj, charset) => { obj.charset = charset; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.name"
+
+///|
+#cfg(target="js")
+fn html_anchor_element_name_ffi(obj : JsValue) -> String {
+  html_anchor_element_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_set_name_ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> Unit = "(obj, name) => { obj.name = name; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_rev_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.rev"
+
+///|
+#cfg(target="js")
+fn html_anchor_element_rev_ffi(obj : JsValue) -> String {
+  html_anchor_element_rev_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_set_rev_ffi(
+  obj : JsValue,
+  rev : JsValue,
+) -> Unit = "(obj, rev) => { obj.rev = rev; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_shape_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.shape"
+
+///|
+#cfg(target="js")
+fn html_anchor_element_shape_ffi(obj : JsValue) -> String {
+  html_anchor_element_shape_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_set_shape_ffi(
+  obj : JsValue,
+  shape : JsValue,
+) -> Unit = "(obj, shape) => { obj.shape = shape; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_href_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.href"
+
+///|
+#cfg(target="js")
+fn html_anchor_element_href_ffi(obj : JsValue) -> String {
+  html_anchor_element_href_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_set_href_ffi(
+  obj : JsValue,
+  href : JsValue,
+) -> Unit = "(obj, href) => { obj.href = href; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_origin_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.origin"
+
+///|
+#cfg(target="js")
+fn html_anchor_element_origin_ffi(obj : JsValue) -> String {
+  html_anchor_element_origin_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_protocol_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.protocol"
+
+///|
+#cfg(target="js")
+fn html_anchor_element_protocol_ffi(obj : JsValue) -> String {
+  html_anchor_element_protocol_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_set_protocol_ffi(
+  obj : JsValue,
+  protocol : JsValue,
+) -> Unit = "(obj, protocol) => { obj.protocol = protocol; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_username_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.username"
+
+///|
+#cfg(target="js")
+fn html_anchor_element_username_ffi(obj : JsValue) -> String {
+  html_anchor_element_username_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_set_username_ffi(
+  obj : JsValue,
+  username : JsValue,
+) -> Unit = "(obj, username) => { obj.username = username; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_password_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.password"
+
+///|
+#cfg(target="js")
+fn html_anchor_element_password_ffi(obj : JsValue) -> String {
+  html_anchor_element_password_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_set_password_ffi(
+  obj : JsValue,
+  password : JsValue,
+) -> Unit = "(obj, password) => { obj.password = password; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_host_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.host"
+
+///|
+#cfg(target="js")
+fn html_anchor_element_host_ffi(obj : JsValue) -> String {
+  html_anchor_element_host_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_set_host_ffi(
+  obj : JsValue,
+  host : JsValue,
+) -> Unit = "(obj, host) => { obj.host = host; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_hostname_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.hostname"
+
+///|
+#cfg(target="js")
+fn html_anchor_element_hostname_ffi(obj : JsValue) -> String {
+  html_anchor_element_hostname_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_set_hostname_ffi(
+  obj : JsValue,
+  hostname : JsValue,
+) -> Unit = "(obj, hostname) => { obj.hostname = hostname; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_port_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.port"
+
+///|
+#cfg(target="js")
+fn html_anchor_element_port_ffi(obj : JsValue) -> String {
+  html_anchor_element_port_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_set_port_ffi(
+  obj : JsValue,
+  port : JsValue,
+) -> Unit = "(obj, port) => { obj.port = port; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_pathname_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.pathname"
+
+///|
+#cfg(target="js")
+fn html_anchor_element_pathname_ffi(obj : JsValue) -> String {
+  html_anchor_element_pathname_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_set_pathname_ffi(
+  obj : JsValue,
+  pathname : JsValue,
+) -> Unit = "(obj, pathname) => { obj.pathname = pathname; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_search_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.search"
+
+///|
+#cfg(target="js")
+fn html_anchor_element_search_ffi(obj : JsValue) -> String {
+  html_anchor_element_search_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_set_search_ffi(
+  obj : JsValue,
+  search : JsValue,
+) -> Unit = "(obj, search) => { obj.search = search; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_hash_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.hash"
+
+///|
+#cfg(target="js")
+fn html_anchor_element_hash_ffi(obj : JsValue) -> String {
+  html_anchor_element_hash_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_anchor_element_set_hash_ffi(
+  obj : JsValue,
+  hash : JsValue,
+) -> Unit = "(obj, hash) => { obj.hash = hash; }"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_new_ffi() -> HTMLAnchorElement = "webapi_HTMLAnchorElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_target_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLAnchorElement" "get_target"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_target_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_anchor_element_target_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_set_target_ffi(obj : JsValue, target : JsValue) -> Unit = "webapi_HTMLAnchorElement" "set_target"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_download_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLAnchorElement" "get_download"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_download_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_anchor_element_download_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_set_download_ffi(
+  obj : JsValue,
+  download : JsValue,
+) -> Unit = "webapi_HTMLAnchorElement" "set_download"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_ping_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLAnchorElement" "get_ping"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_ping_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_anchor_element_ping_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_set_ping_ffi(obj : JsValue, ping : JsValue) -> Unit = "webapi_HTMLAnchorElement" "set_ping"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_rel_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLAnchorElement" "get_rel"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_rel_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_anchor_element_rel_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_set_rel_ffi(obj : JsValue, rel : JsValue) -> Unit = "webapi_HTMLAnchorElement" "set_rel"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_rel_list_ffi(obj : JsValue) -> DOMTokenList = "webapi_HTMLAnchorElement" "get_relList"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_hreflang_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLAnchorElement" "get_hreflang"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_hreflang_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_anchor_element_hreflang_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_set_hreflang_ffi(
+  obj : JsValue,
+  hreflang : JsValue,
+) -> Unit = "webapi_HTMLAnchorElement" "set_hreflang"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLAnchorElement" "get_type"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_type_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_anchor_element_type_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_set_type_ffi(obj : JsValue, type_ : JsValue) -> Unit = "webapi_HTMLAnchorElement" "set_type"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_text_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLAnchorElement" "get_text"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_text_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_anchor_element_text_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_set_text_ffi(obj : JsValue, text : JsValue) -> Unit = "webapi_HTMLAnchorElement" "set_text"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_referrer_policy_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLAnchorElement" "get_referrerPolicy"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_referrer_policy_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_anchor_element_referrer_policy_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_set_referrer_policy_ffi(
+  obj : JsValue,
+  referrer_policy : JsValue,
+) -> Unit = "webapi_HTMLAnchorElement" "set_referrerPolicy"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_coords_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLAnchorElement" "get_coords"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_coords_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_anchor_element_coords_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_set_coords_ffi(obj : JsValue, coords : JsValue) -> Unit = "webapi_HTMLAnchorElement" "set_coords"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_charset_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLAnchorElement" "get_charset"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_charset_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_anchor_element_charset_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_set_charset_ffi(
+  obj : JsValue,
+  charset : JsValue,
+) -> Unit = "webapi_HTMLAnchorElement" "set_charset"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLAnchorElement" "get_name"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_anchor_element_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_set_name_ffi(obj : JsValue, name : JsValue) -> Unit = "webapi_HTMLAnchorElement" "set_name"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_rev_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLAnchorElement" "get_rev"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_rev_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_anchor_element_rev_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_set_rev_ffi(obj : JsValue, rev : JsValue) -> Unit = "webapi_HTMLAnchorElement" "set_rev"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_shape_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLAnchorElement" "get_shape"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_shape_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_anchor_element_shape_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_set_shape_ffi(obj : JsValue, shape : JsValue) -> Unit = "webapi_HTMLAnchorElement" "set_shape"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_href_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLAnchorElement" "get_href"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_href_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_anchor_element_href_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_set_href_ffi(obj : JsValue, href : JsValue) -> Unit = "webapi_HTMLAnchorElement" "set_href"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_origin_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLAnchorElement" "get_origin"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_origin_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_anchor_element_origin_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_protocol_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLAnchorElement" "get_protocol"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_protocol_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_anchor_element_protocol_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_set_protocol_ffi(
+  obj : JsValue,
+  protocol : JsValue,
+) -> Unit = "webapi_HTMLAnchorElement" "set_protocol"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_username_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLAnchorElement" "get_username"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_username_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_anchor_element_username_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_set_username_ffi(
+  obj : JsValue,
+  username : JsValue,
+) -> Unit = "webapi_HTMLAnchorElement" "set_username"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_password_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLAnchorElement" "get_password"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_password_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_anchor_element_password_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_set_password_ffi(
+  obj : JsValue,
+  password : JsValue,
+) -> Unit = "webapi_HTMLAnchorElement" "set_password"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_host_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLAnchorElement" "get_host"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_host_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_anchor_element_host_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_set_host_ffi(obj : JsValue, host : JsValue) -> Unit = "webapi_HTMLAnchorElement" "set_host"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_hostname_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLAnchorElement" "get_hostname"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_hostname_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_anchor_element_hostname_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_set_hostname_ffi(
+  obj : JsValue,
+  hostname : JsValue,
+) -> Unit = "webapi_HTMLAnchorElement" "set_hostname"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_port_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLAnchorElement" "get_port"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_port_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_anchor_element_port_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_set_port_ffi(obj : JsValue, port : JsValue) -> Unit = "webapi_HTMLAnchorElement" "set_port"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_pathname_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLAnchorElement" "get_pathname"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_pathname_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_anchor_element_pathname_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_set_pathname_ffi(
+  obj : JsValue,
+  pathname : JsValue,
+) -> Unit = "webapi_HTMLAnchorElement" "set_pathname"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_search_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLAnchorElement" "get_search"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_search_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_anchor_element_search_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_set_search_ffi(obj : JsValue, search : JsValue) -> Unit = "webapi_HTMLAnchorElement" "set_search"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_hash_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLAnchorElement" "get_hash"
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_hash_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_anchor_element_hash_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_anchor_element_set_hash_ffi(obj : JsValue, hash : JsValue) -> Unit = "webapi_HTMLAnchorElement" "set_hash"

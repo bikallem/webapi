@@ -125,3 +125,133 @@ impl TSVGAngle with convert_to_specified_units(self : Self, unit_type : UInt) ->
     TJsValue::to_js(unit_type),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn svg_angle_unit_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.unitType"
+
+///|
+#cfg(target="js")
+fn svg_angle_unit_type_ffi(obj : JsValue) -> UInt {
+  svg_angle_unit_type_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_angle_value_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.value"
+
+///|
+#cfg(target="js")
+fn svg_angle_value_ffi(obj : JsValue) -> Float {
+  svg_angle_value_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_angle_set_value_ffi(obj : JsValue, value : JsValue) -> Unit = "(obj, value) => { obj.value = value; }"
+
+///|
+#cfg(target="js")
+extern "js" fn svg_angle_value_in_specified_units_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.valueInSpecifiedUnits"
+
+///|
+#cfg(target="js")
+fn svg_angle_value_in_specified_units_ffi(obj : JsValue) -> Float {
+  svg_angle_value_in_specified_units_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_angle_set_value_in_specified_units_ffi(
+  obj : JsValue,
+  value_in_specified_units : JsValue,
+) -> Unit = "(obj, valueInSpecifiedUnits) => { obj.valueInSpecifiedUnits = valueInSpecifiedUnits; }"
+
+///|
+#cfg(target="js")
+extern "js" fn svg_angle_value_as_string_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.valueAsString"
+
+///|
+#cfg(target="js")
+fn svg_angle_value_as_string_ffi(obj : JsValue) -> String {
+  svg_angle_value_as_string_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_angle_set_value_as_string_ffi(
+  obj : JsValue,
+  value_as_string : JsValue,
+) -> Unit = "(obj, valueAsString) => { obj.valueAsString = valueAsString; }"
+
+///|
+#cfg(target="js")
+extern "js" fn svg_angle_new_value_specified_units_ffi(
+  obj : JsValue,
+  unit_type : JsValue,
+  value_in_specified_units : JsValue,
+) -> Unit = "(obj, unit_type, value_in_specified_units) => obj.newValueSpecifiedUnits(unit_type, value_in_specified_units)"
+
+///|
+#cfg(target="js")
+extern "js" fn svg_angle_convert_to_specified_units_ffi(
+  obj : JsValue,
+  unit_type : JsValue,
+) -> Unit = "(obj, unit_type) => obj.convertToSpecifiedUnits(unit_type)"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_angle_unit_type_ffi(obj : JsValue) -> UInt = "webapi_SVGAngle" "get_unitType"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_angle_value_ffi(obj : JsValue) -> Float = "webapi_SVGAngle" "get_value"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_angle_set_value_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_SVGAngle" "set_value"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_angle_value_in_specified_units_ffi(obj : JsValue) -> Float = "webapi_SVGAngle" "get_valueInSpecifiedUnits"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_angle_set_value_in_specified_units_ffi(
+  obj : JsValue,
+  value_in_specified_units : JsValue,
+) -> Unit = "webapi_SVGAngle" "set_valueInSpecifiedUnits"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_angle_value_as_string_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGAngle" "get_valueAsString"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_angle_value_as_string_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(svg_angle_value_as_string_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svg_angle_set_value_as_string_ffi(
+  obj : JsValue,
+  value_as_string : JsValue,
+) -> Unit = "webapi_SVGAngle" "set_valueAsString"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_angle_new_value_specified_units_ffi(
+  obj : JsValue,
+  unit_type : JsValue,
+  value_in_specified_units : JsValue,
+) -> Unit = "webapi_SVGAngle" "newValueSpecifiedUnits"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_angle_convert_to_specified_units_ffi(
+  obj : JsValue,
+  unit_type : JsValue,
+) -> Unit = "webapi_SVGAngle" "convertToSpecifiedUnits"

@@ -29,3 +29,34 @@ pub fn AssignedNodesOptions::empty() -> AssignedNodesOptions {
 pub fn AssignedNodesOptions::flatten(self : AssignedNodesOptions) -> Bool? {
   assigned_nodes_options_get_flatten_ffi(TJsValue::to_js(self)).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn assigned_nodes_options_ffi(
+  flatten : JsValue,
+) -> AssignedNodesOptions =
+  #|(flatten) => {
+  #|  const obj = {};
+  #|  if (flatten !== undefined) obj.flatten = flatten;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn assigned_nodes_options_empty_ffi() -> AssignedNodesOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn assigned_nodes_options_get_flatten_ffi(obj : JsValue) -> JsValue = "(obj) => obj.flatten"
+
+///|
+#cfg(target="wasm-gc")
+fn assigned_nodes_options_ffi(flatten : JsValue) -> AssignedNodesOptions = "webapi_AssignedNodesOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn assigned_nodes_options_empty_ffi() -> AssignedNodesOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn assigned_nodes_options_get_flatten_ffi(obj : JsValue) -> JsValue = "webapi_AssignedNodesOptions" "get_flatten"

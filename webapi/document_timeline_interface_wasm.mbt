@@ -1,2 +1,0 @@
-///|
-fn document_timeline_new_ffi(options : JsValue) -> DocumentTimeline = "webapi_DocumentTimeline" "new"

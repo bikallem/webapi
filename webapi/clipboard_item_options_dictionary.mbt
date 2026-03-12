@@ -33,3 +33,38 @@ pub fn ClipboardItemOptions::presentation_style(
 ) -> PresentationStyle? {
   clipboard_item_options_get_presentation_style_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn clipboard_item_options_ffi(
+  presentation_style : JsValue,
+) -> ClipboardItemOptions =
+  #|(presentationStyle) => {
+  #|  const obj = {};
+  #|  if (presentationStyle !== undefined) obj.presentationStyle = presentationStyle;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn clipboard_item_options_empty_ffi() -> ClipboardItemOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn clipboard_item_options_get_presentation_style_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.presentationStyle"
+
+///|
+#cfg(target="wasm-gc")
+fn clipboard_item_options_ffi(
+  presentation_style : JsValue,
+) -> ClipboardItemOptions = "webapi_ClipboardItemOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn clipboard_item_options_empty_ffi() -> ClipboardItemOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn clipboard_item_options_get_presentation_style_ffi(obj : JsValue) -> JsValue = "webapi_ClipboardItemOptions" "get_presentationStyle"

@@ -132,3 +132,188 @@ impl TTextTrackCue with set_onexit(self : Self, onexit : (Event) -> JsValue) -> 
     TJsValue::to_js(event_handler_non_null_ffi(onexit)),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn text_track_cue_track_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.track"
+
+///|
+#cfg(target="js")
+fn text_track_cue_track_ffi(obj : JsValue) -> TextTrack {
+  text_track_cue_track_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_track_cue_id_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.id"
+
+///|
+#cfg(target="js")
+fn text_track_cue_id_ffi(obj : JsValue) -> String {
+  text_track_cue_id_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_track_cue_set_id_ffi(obj : JsValue, id : JsValue) -> Unit = "(obj, id) => { obj.id = id; }"
+
+///|
+#cfg(target="js")
+extern "js" fn text_track_cue_start_time_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.startTime"
+
+///|
+#cfg(target="js")
+fn text_track_cue_start_time_ffi(obj : JsValue) -> Double {
+  text_track_cue_start_time_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_track_cue_set_start_time_ffi(
+  obj : JsValue,
+  start_time : JsValue,
+) -> Unit = "(obj, startTime) => { obj.startTime = startTime; }"
+
+///|
+#cfg(target="js")
+extern "js" fn text_track_cue_end_time_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.endTime"
+
+///|
+#cfg(target="js")
+fn text_track_cue_end_time_ffi(obj : JsValue) -> Double {
+  text_track_cue_end_time_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_track_cue_set_end_time_ffi(
+  obj : JsValue,
+  end_time : JsValue,
+) -> Unit = "(obj, endTime) => { obj.endTime = endTime; }"
+
+///|
+#cfg(target="js")
+extern "js" fn text_track_cue_pause_on_exit_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.pauseOnExit"
+
+///|
+#cfg(target="js")
+fn text_track_cue_pause_on_exit_ffi(obj : JsValue) -> Bool {
+  text_track_cue_pause_on_exit_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_track_cue_set_pause_on_exit_ffi(
+  obj : JsValue,
+  pause_on_exit : JsValue,
+) -> Unit = "(obj, pauseOnExit) => { obj.pauseOnExit = pauseOnExit; }"
+
+///|
+#cfg(target="js")
+extern "js" fn text_track_cue_onenter_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onenter"
+
+///|
+#cfg(target="js")
+fn text_track_cue_onenter_ffi(obj : JsValue) -> EventHandler {
+  text_track_cue_onenter_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_track_cue_set_onenter_ffi(
+  obj : JsValue,
+  onenter : JsValue,
+) -> Unit = "(obj, onenter) => { obj.onenter = onenter; }"
+
+///|
+#cfg(target="js")
+extern "js" fn text_track_cue_onexit_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onexit"
+
+///|
+#cfg(target="js")
+fn text_track_cue_onexit_ffi(obj : JsValue) -> EventHandler {
+  text_track_cue_onexit_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_track_cue_set_onexit_ffi(
+  obj : JsValue,
+  onexit : JsValue,
+) -> Unit = "(obj, onexit) => { obj.onexit = onexit; }"
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_cue_track_ffi(obj : JsValue) -> TextTrack = "webapi_TextTrackCue" "get_track"
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_cue_id_ffi_wasm(obj : JsValue) -> JsValue = "webapi_TextTrackCue" "get_id"
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_cue_id_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(text_track_cue_id_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_cue_set_id_ffi(obj : JsValue, id : JsValue) -> Unit = "webapi_TextTrackCue" "set_id"
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_cue_start_time_ffi(obj : JsValue) -> Double = "webapi_TextTrackCue" "get_startTime"
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_cue_set_start_time_ffi(
+  obj : JsValue,
+  start_time : JsValue,
+) -> Unit = "webapi_TextTrackCue" "set_startTime"
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_cue_end_time_ffi(obj : JsValue) -> Double = "webapi_TextTrackCue" "get_endTime"
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_cue_set_end_time_ffi(obj : JsValue, end_time : JsValue) -> Unit = "webapi_TextTrackCue" "set_endTime"
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_cue_pause_on_exit_ffi(obj : JsValue) -> Bool = "webapi_TextTrackCue" "get_pauseOnExit"
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_cue_set_pause_on_exit_ffi(
+  obj : JsValue,
+  pause_on_exit : JsValue,
+) -> Unit = "webapi_TextTrackCue" "set_pauseOnExit"
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_cue_onenter_ffi_wasm(obj : JsValue) -> JsValue = "webapi_TextTrackCue" "get_onenter"
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_cue_onenter_ffi(obj : JsValue) -> EventHandler {
+  text_track_cue_onenter_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_cue_set_onenter_ffi(obj : JsValue, onenter : JsValue) -> Unit = "webapi_TextTrackCue" "set_onenter"
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_cue_onexit_ffi_wasm(obj : JsValue) -> JsValue = "webapi_TextTrackCue" "get_onexit"
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_cue_onexit_ffi(obj : JsValue) -> EventHandler {
+  text_track_cue_onexit_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_cue_set_onexit_ffi(obj : JsValue, onexit : JsValue) -> Unit = "webapi_TextTrackCue" "set_onexit"

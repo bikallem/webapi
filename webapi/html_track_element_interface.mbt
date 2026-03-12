@@ -147,3 +147,188 @@ impl THTMLTrackElement with ready_state(self : Self) -> UInt {
 impl THTMLTrackElement with track(self : Self) -> TextTrack {
   html_track_element_track_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_track_element_new_ffi() -> HTMLTrackElement = "() => new HTMLTrackElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_track_element_kind_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.kind"
+
+///|
+#cfg(target="js")
+fn html_track_element_kind_ffi(obj : JsValue) -> String {
+  html_track_element_kind_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_track_element_set_kind_ffi(
+  obj : JsValue,
+  kind : JsValue,
+) -> Unit = "(obj, kind) => { obj.kind = kind; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_track_element_src_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.src"
+
+///|
+#cfg(target="js")
+fn html_track_element_src_ffi(obj : JsValue) -> String {
+  html_track_element_src_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_track_element_set_src_ffi(
+  obj : JsValue,
+  src : JsValue,
+) -> Unit = "(obj, src) => { obj.src = src; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_track_element_srclang_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.srclang"
+
+///|
+#cfg(target="js")
+fn html_track_element_srclang_ffi(obj : JsValue) -> String {
+  html_track_element_srclang_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_track_element_set_srclang_ffi(
+  obj : JsValue,
+  srclang : JsValue,
+) -> Unit = "(obj, srclang) => { obj.srclang = srclang; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_track_element_label_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.label"
+
+///|
+#cfg(target="js")
+fn html_track_element_label_ffi(obj : JsValue) -> String {
+  html_track_element_label_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_track_element_set_label_ffi(
+  obj : JsValue,
+  label : JsValue,
+) -> Unit = "(obj, label) => { obj.label = label; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_track_element_default_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.default"
+
+///|
+#cfg(target="js")
+fn html_track_element_default_ffi(obj : JsValue) -> Bool {
+  html_track_element_default_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_track_element_set_default_ffi(
+  obj : JsValue,
+  default : JsValue,
+) -> Unit = "(obj, _default) => { obj.default = _default; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_track_element_ready_state_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.readyState"
+
+///|
+#cfg(target="js")
+fn html_track_element_ready_state_ffi(obj : JsValue) -> UInt {
+  html_track_element_ready_state_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_track_element_track_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.track"
+
+///|
+#cfg(target="js")
+fn html_track_element_track_ffi(obj : JsValue) -> TextTrack {
+  html_track_element_track_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_track_element_new_ffi() -> HTMLTrackElement = "webapi_HTMLTrackElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_track_element_kind_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLTrackElement" "get_kind"
+
+///|
+#cfg(target="wasm-gc")
+fn html_track_element_kind_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_track_element_kind_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_track_element_set_kind_ffi(obj : JsValue, kind : JsValue) -> Unit = "webapi_HTMLTrackElement" "set_kind"
+
+///|
+#cfg(target="wasm-gc")
+fn html_track_element_src_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLTrackElement" "get_src"
+
+///|
+#cfg(target="wasm-gc")
+fn html_track_element_src_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_track_element_src_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_track_element_set_src_ffi(obj : JsValue, src : JsValue) -> Unit = "webapi_HTMLTrackElement" "set_src"
+
+///|
+#cfg(target="wasm-gc")
+fn html_track_element_srclang_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLTrackElement" "get_srclang"
+
+///|
+#cfg(target="wasm-gc")
+fn html_track_element_srclang_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_track_element_srclang_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_track_element_set_srclang_ffi(obj : JsValue, srclang : JsValue) -> Unit = "webapi_HTMLTrackElement" "set_srclang"
+
+///|
+#cfg(target="wasm-gc")
+fn html_track_element_label_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLTrackElement" "get_label"
+
+///|
+#cfg(target="wasm-gc")
+fn html_track_element_label_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_track_element_label_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_track_element_set_label_ffi(obj : JsValue, label : JsValue) -> Unit = "webapi_HTMLTrackElement" "set_label"
+
+///|
+#cfg(target="wasm-gc")
+fn html_track_element_default_ffi(obj : JsValue) -> Bool = "webapi_HTMLTrackElement" "get_default"
+
+///|
+#cfg(target="wasm-gc")
+fn html_track_element_set_default_ffi(obj : JsValue, default : JsValue) -> Unit = "webapi_HTMLTrackElement" "set_default"
+
+///|
+#cfg(target="wasm-gc")
+fn html_track_element_ready_state_ffi(obj : JsValue) -> UInt = "webapi_HTMLTrackElement" "get_readyState"
+
+///|
+#cfg(target="wasm-gc")
+fn html_track_element_track_ffi(obj : JsValue) -> TextTrack = "webapi_HTMLTrackElement" "get_track"

@@ -47,3 +47,28 @@ pub trait TDragEvent: TMouseEvent {
 impl TDragEvent with data_transfer(self : Self) -> DataTransfer {
   drag_event_data_transfer_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn drag_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> DragEvent = "(type_, event_init_dict) => new DragEvent(type_, event_init_dict)"
+
+///|
+#cfg(target="js")
+extern "js" fn drag_event_data_transfer_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.dataTransfer"
+
+///|
+#cfg(target="js")
+fn drag_event_data_transfer_ffi(obj : JsValue) -> DataTransfer {
+  drag_event_data_transfer_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn drag_event_new_ffi(type_ : JsValue, event_init_dict : JsValue) -> DragEvent = "webapi_DragEvent" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn drag_event_data_transfer_ffi(obj : JsValue) -> DataTransfer = "webapi_DragEvent" "get_dataTransfer"

@@ -95,3 +95,183 @@ impl TWritableStreamDefaultWriter with write(self : Self, chunk? : JsValue) -> J
     opt_to_js(chunk),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn writable_stream_default_writer_new_ffi(
+  stream : JsValue,
+) -> WritableStreamDefaultWriter = "(stream) => new WritableStreamDefaultWriter(stream)"
+
+///|
+#cfg(target="js")
+extern "js" fn writable_stream_default_writer_closed_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.closed"
+
+///|
+#cfg(target="js")
+fn writable_stream_default_writer_closed_ffi(
+  obj : JsValue,
+) -> JsPromise[JsValue] {
+  writable_stream_default_writer_closed_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn writable_stream_default_writer_desired_size_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.desiredSize"
+
+///|
+#cfg(target="js")
+fn writable_stream_default_writer_desired_size_ffi(obj : JsValue) -> Double {
+  writable_stream_default_writer_desired_size_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn writable_stream_default_writer_ready_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.ready"
+
+///|
+#cfg(target="js")
+fn writable_stream_default_writer_ready_ffi(
+  obj : JsValue,
+) -> JsPromise[JsValue] {
+  writable_stream_default_writer_ready_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn writable_stream_default_writer_abort_ffi_js(
+  obj : JsValue,
+  reason : JsValue,
+) -> JsValue = "(obj, reason) => obj.abort(reason)"
+
+///|
+#cfg(target="js")
+fn writable_stream_default_writer_abort_ffi(
+  obj : JsValue,
+  reason : JsValue,
+) -> JsPromise[JsValue] {
+  writable_stream_default_writer_abort_ffi_js(obj, reason).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn writable_stream_default_writer_close_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.close()"
+
+///|
+#cfg(target="js")
+fn writable_stream_default_writer_close_ffi(
+  obj : JsValue,
+) -> JsPromise[JsValue] {
+  writable_stream_default_writer_close_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn writable_stream_default_writer_release_lock_ffi(
+  obj : JsValue,
+) -> Unit = "(obj) => obj.releaseLock()"
+
+///|
+#cfg(target="js")
+extern "js" fn writable_stream_default_writer_write_ffi_js(
+  obj : JsValue,
+  chunk : JsValue,
+) -> JsValue = "(obj, chunk) => obj.write(chunk)"
+
+///|
+#cfg(target="js")
+fn writable_stream_default_writer_write_ffi(
+  obj : JsValue,
+  chunk : JsValue,
+) -> JsPromise[JsValue] {
+  writable_stream_default_writer_write_ffi_js(obj, chunk).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn writable_stream_default_writer_new_ffi(
+  stream : JsValue,
+) -> WritableStreamDefaultWriter = "webapi_WritableStreamDefaultWriter" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn writable_stream_default_writer_closed_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WritableStreamDefaultWriter" "get_closed"
+
+///|
+#cfg(target="wasm-gc")
+fn writable_stream_default_writer_closed_ffi(
+  obj : JsValue,
+) -> JsPromise[JsValue] {
+  writable_stream_default_writer_closed_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn writable_stream_default_writer_desired_size_ffi(obj : JsValue) -> Double = "webapi_WritableStreamDefaultWriter" "get_desiredSize"
+
+///|
+#cfg(target="wasm-gc")
+fn writable_stream_default_writer_ready_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WritableStreamDefaultWriter" "get_ready"
+
+///|
+#cfg(target="wasm-gc")
+fn writable_stream_default_writer_ready_ffi(
+  obj : JsValue,
+) -> JsPromise[JsValue] {
+  writable_stream_default_writer_ready_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn writable_stream_default_writer_abort_ffi_wasm(
+  obj : JsValue,
+  reason : JsValue,
+) -> JsValue = "webapi_WritableStreamDefaultWriter" "abort"
+
+///|
+#cfg(target="wasm-gc")
+fn writable_stream_default_writer_abort_ffi(
+  obj : JsValue,
+  reason : JsValue,
+) -> JsPromise[JsValue] {
+  writable_stream_default_writer_abort_ffi_wasm(obj, reason).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn writable_stream_default_writer_close_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WritableStreamDefaultWriter" "close"
+
+///|
+#cfg(target="wasm-gc")
+fn writable_stream_default_writer_close_ffi(
+  obj : JsValue,
+) -> JsPromise[JsValue] {
+  writable_stream_default_writer_close_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn writable_stream_default_writer_release_lock_ffi(obj : JsValue) -> Unit = "webapi_WritableStreamDefaultWriter" "releaseLock"
+
+///|
+#cfg(target="wasm-gc")
+fn writable_stream_default_writer_write_ffi_wasm(
+  obj : JsValue,
+  chunk : JsValue,
+) -> JsValue = "webapi_WritableStreamDefaultWriter" "write"
+
+///|
+#cfg(target="wasm-gc")
+fn writable_stream_default_writer_write_ffi(
+  obj : JsValue,
+  chunk : JsValue,
+) -> JsPromise[JsValue] {
+  writable_stream_default_writer_write_ffi_wasm(obj, chunk).unsafe_cast()
+}

@@ -74,3 +74,93 @@ impl TDataTransferItem with get_as_file_system_handle(self : Self) -> JsPromise[
 impl TDataTransferItem with get_as_file(self : Self) -> File {
   self.get_as_file_opt().unwrap()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn data_transfer_item_kind_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.kind"
+
+///|
+#cfg(target="js")
+fn data_transfer_item_kind_ffi(obj : JsValue) -> String {
+  data_transfer_item_kind_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn data_transfer_item_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.type"
+
+///|
+#cfg(target="js")
+fn data_transfer_item_type_ffi(obj : JsValue) -> String {
+  data_transfer_item_type_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn data_transfer_item_get_as_string_ffi(
+  obj : JsValue,
+  _callback : JsValue,
+) -> Unit = "(obj, _callback) => obj.getAsString(_callback)"
+
+///|
+#cfg(target="js")
+extern "js" fn data_transfer_item_get_as_file_ffi(obj : JsValue) -> JsValue = "(obj) => obj.getAsFile()"
+
+///|
+#cfg(target="js")
+extern "js" fn data_transfer_item_get_as_file_system_handle_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.getAsFileSystemHandle()"
+
+///|
+#cfg(target="js")
+fn data_transfer_item_get_as_file_system_handle_ffi(
+  obj : JsValue,
+) -> JsPromise[FileSystemHandle] {
+  data_transfer_item_get_as_file_system_handle_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn data_transfer_item_kind_ffi_wasm(obj : JsValue) -> JsValue = "webapi_DataTransferItem" "get_kind"
+
+///|
+#cfg(target="wasm-gc")
+fn data_transfer_item_kind_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(data_transfer_item_kind_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn data_transfer_item_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_DataTransferItem" "get_type"
+
+///|
+#cfg(target="wasm-gc")
+fn data_transfer_item_type_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(data_transfer_item_type_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn data_transfer_item_get_as_string_ffi(
+  obj : JsValue,
+  _callback : JsValue,
+) -> Unit = "webapi_DataTransferItem" "getAsString"
+
+///|
+#cfg(target="wasm-gc")
+fn data_transfer_item_get_as_file_ffi(obj : JsValue) -> JsValue = "webapi_DataTransferItem" "getAsFile"
+
+///|
+#cfg(target="wasm-gc")
+fn data_transfer_item_get_as_file_system_handle_ffi_wasm(
+  obj : JsValue,
+) -> JsValue = "webapi_DataTransferItem" "getAsFileSystemHandle"
+
+///|
+#cfg(target="wasm-gc")
+fn data_transfer_item_get_as_file_system_handle_ffi(
+  obj : JsValue,
+) -> JsPromise[FileSystemHandle] {
+  data_transfer_item_get_as_file_system_handle_ffi_wasm(obj).unsafe_cast()
+}

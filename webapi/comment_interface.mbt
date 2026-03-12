@@ -36,3 +36,11 @@ pub fn Comment::new(data? : String) -> Comment {
 ///|
 /// [Comment](https://developer.mozilla.org/en-US/docs/Web/API/Comment) interface.
 pub trait TComment: TCharacterData {}
+
+///|
+#cfg(target="js")
+extern "js" fn comment_new_ffi(data : JsValue) -> Comment = "(data) => new Comment(data)"
+
+///|
+#cfg(target="wasm-gc")
+fn comment_new_ffi(data : JsValue) -> Comment = "webapi_Comment" "new"

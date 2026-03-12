@@ -61,3 +61,42 @@ impl TTextTrackCueList with get(self : Self, index : UInt) -> TextTrackCue {
 impl TTextTrackCueList with get_cue_by_id(self : Self, id : String) -> TextTrackCue {
   self.get_cue_by_id_opt(id).unwrap()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn text_track_cue_list_length_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.length"
+
+///|
+#cfg(target="js")
+fn text_track_cue_list_length_ffi(obj : JsValue) -> UInt {
+  text_track_cue_list_length_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_track_cue_list_get_ffi(
+  obj : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, index) => obj[index]"
+
+///|
+#cfg(target="js")
+extern "js" fn text_track_cue_list_get_cue_by_id_ffi(
+  obj : JsValue,
+  id : JsValue,
+) -> JsValue = "(obj, id) => obj.getCueById(id)"
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_cue_list_length_ffi(obj : JsValue) -> UInt = "webapi_TextTrackCueList" "get_length"
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_cue_list_get_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_TextTrackCueList" "get"
+
+///|
+#cfg(target="wasm-gc")
+fn text_track_cue_list_get_cue_by_id_ffi(
+  obj : JsValue,
+  id : JsValue,
+) -> JsValue = "webapi_TextTrackCueList" "getCueById"

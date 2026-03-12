@@ -73,3 +73,73 @@ impl THTMLLabelElement with set_html_for(self : Self, html_for : String) -> Unit
 impl THTMLLabelElement with control(self : Self) -> HTMLElement {
   html_label_element_control_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_label_element_new_ffi() -> HTMLLabelElement = "() => new HTMLLabelElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_label_element_form_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.form"
+
+///|
+#cfg(target="js")
+fn html_label_element_form_ffi(obj : JsValue) -> HTMLFormElement {
+  html_label_element_form_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_label_element_html_for_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.htmlFor"
+
+///|
+#cfg(target="js")
+fn html_label_element_html_for_ffi(obj : JsValue) -> String {
+  html_label_element_html_for_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_label_element_set_html_for_ffi(
+  obj : JsValue,
+  html_for : JsValue,
+) -> Unit = "(obj, htmlFor) => { obj.htmlFor = htmlFor; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_label_element_control_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.control"
+
+///|
+#cfg(target="js")
+fn html_label_element_control_ffi(obj : JsValue) -> HTMLElement {
+  html_label_element_control_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_label_element_new_ffi() -> HTMLLabelElement = "webapi_HTMLLabelElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_label_element_form_ffi(obj : JsValue) -> HTMLFormElement = "webapi_HTMLLabelElement" "get_form"
+
+///|
+#cfg(target="wasm-gc")
+fn html_label_element_html_for_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLLabelElement" "get_htmlFor"
+
+///|
+#cfg(target="wasm-gc")
+fn html_label_element_html_for_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_label_element_html_for_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_label_element_set_html_for_ffi(
+  obj : JsValue,
+  html_for : JsValue,
+) -> Unit = "webapi_HTMLLabelElement" "set_htmlFor"
+
+///|
+#cfg(target="wasm-gc")
+fn html_label_element_control_ffi(obj : JsValue) -> HTMLElement = "webapi_HTMLLabelElement" "get_control"

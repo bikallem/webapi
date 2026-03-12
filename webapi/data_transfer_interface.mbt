@@ -125,3 +125,195 @@ impl TDataTransfer with clear_data(self : Self, format? : String) -> Unit {
 impl TDataTransfer with files(self : Self) -> FileList {
   data_transfer_files_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn data_transfer_new_ffi() -> DataTransfer = "() => new DataTransfer()"
+
+///|
+#cfg(target="js")
+extern "js" fn data_transfer_drop_effect_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.dropEffect"
+
+///|
+#cfg(target="js")
+fn data_transfer_drop_effect_ffi(obj : JsValue) -> String {
+  data_transfer_drop_effect_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn data_transfer_set_drop_effect_ffi(
+  obj : JsValue,
+  drop_effect : JsValue,
+) -> Unit = "(obj, dropEffect) => { obj.dropEffect = dropEffect; }"
+
+///|
+#cfg(target="js")
+extern "js" fn data_transfer_effect_allowed_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.effectAllowed"
+
+///|
+#cfg(target="js")
+fn data_transfer_effect_allowed_ffi(obj : JsValue) -> String {
+  data_transfer_effect_allowed_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn data_transfer_set_effect_allowed_ffi(
+  obj : JsValue,
+  effect_allowed : JsValue,
+) -> Unit = "(obj, effectAllowed) => { obj.effectAllowed = effectAllowed; }"
+
+///|
+#cfg(target="js")
+extern "js" fn data_transfer_items_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.items"
+
+///|
+#cfg(target="js")
+fn data_transfer_items_ffi(obj : JsValue) -> DataTransferItemList {
+  data_transfer_items_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn data_transfer_set_drag_image_ffi(
+  obj : JsValue,
+  image : JsValue,
+  x : JsValue,
+  y : JsValue,
+) -> Unit = "(obj, image, x, y) => obj.setDragImage(image, x, y)"
+
+///|
+#cfg(target="js")
+extern "js" fn data_transfer_types_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.types"
+
+///|
+#cfg(target="js")
+fn data_transfer_types_ffi(obj : JsValue) -> Array[String] {
+  data_transfer_types_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn data_transfer_get_data_ffi_js(
+  obj : JsValue,
+  format : JsValue,
+) -> JsValue = "(obj, format) => obj.getData(format)"
+
+///|
+#cfg(target="js")
+fn data_transfer_get_data_ffi(obj : JsValue, format : JsValue) -> String {
+  data_transfer_get_data_ffi_js(obj, format).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn data_transfer_set_data_ffi(
+  obj : JsValue,
+  format : JsValue,
+  data : JsValue,
+) -> Unit = "(obj, format, data) => obj.setData(format, data)"
+
+///|
+#cfg(target="js")
+extern "js" fn data_transfer_clear_data_ffi(
+  obj : JsValue,
+  format : JsValue,
+) -> Unit = "(obj, format) => obj.clearData(format)"
+
+///|
+#cfg(target="js")
+extern "js" fn data_transfer_files_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.files"
+
+///|
+#cfg(target="js")
+fn data_transfer_files_ffi(obj : JsValue) -> FileList {
+  data_transfer_files_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn data_transfer_new_ffi() -> DataTransfer = "webapi_DataTransfer" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn data_transfer_drop_effect_ffi_wasm(obj : JsValue) -> JsValue = "webapi_DataTransfer" "get_dropEffect"
+
+///|
+#cfg(target="wasm-gc")
+fn data_transfer_drop_effect_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(data_transfer_drop_effect_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn data_transfer_set_drop_effect_ffi(
+  obj : JsValue,
+  drop_effect : JsValue,
+) -> Unit = "webapi_DataTransfer" "set_dropEffect"
+
+///|
+#cfg(target="wasm-gc")
+fn data_transfer_effect_allowed_ffi_wasm(obj : JsValue) -> JsValue = "webapi_DataTransfer" "get_effectAllowed"
+
+///|
+#cfg(target="wasm-gc")
+fn data_transfer_effect_allowed_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(data_transfer_effect_allowed_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn data_transfer_set_effect_allowed_ffi(
+  obj : JsValue,
+  effect_allowed : JsValue,
+) -> Unit = "webapi_DataTransfer" "set_effectAllowed"
+
+///|
+#cfg(target="wasm-gc")
+fn data_transfer_items_ffi(obj : JsValue) -> DataTransferItemList = "webapi_DataTransfer" "get_items"
+
+///|
+#cfg(target="wasm-gc")
+fn data_transfer_set_drag_image_ffi(
+  obj : JsValue,
+  image : JsValue,
+  x : JsValue,
+  y : JsValue,
+) -> Unit = "webapi_DataTransfer" "setDragImage"
+
+///|
+#cfg(target="wasm-gc")
+fn data_transfer_types_ffi_wasm(obj : JsValue) -> JsArray = "webapi_DataTransfer" "get_types"
+
+///|
+#cfg(target="wasm-gc")
+fn data_transfer_types_ffi(obj : JsValue) -> Array[String] {
+  data_transfer_types_ffi_wasm(obj).to_string_array()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn data_transfer_get_data_ffi_wasm(obj : JsValue, format : JsValue) -> JsValue = "webapi_DataTransfer" "getData"
+
+///|
+#cfg(target="wasm-gc")
+fn data_transfer_get_data_ffi(obj : JsValue, format : JsValue) -> String {
+  jsvalue_to_string(data_transfer_get_data_ffi_wasm(obj, format))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn data_transfer_set_data_ffi(
+  obj : JsValue,
+  format : JsValue,
+  data : JsValue,
+) -> Unit = "webapi_DataTransfer" "setData"
+
+///|
+#cfg(target="wasm-gc")
+fn data_transfer_clear_data_ffi(obj : JsValue, format : JsValue) -> Unit = "webapi_DataTransfer" "clearData"
+
+///|
+#cfg(target="wasm-gc")
+fn data_transfer_files_ffi(obj : JsValue) -> FileList = "webapi_DataTransfer" "get_files"

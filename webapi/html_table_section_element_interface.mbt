@@ -139,3 +139,201 @@ impl THTMLTableSectionElement with set_v_align(self : Self, v_align : String) ->
     TJsValue::to_js(v_align),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_section_element_new_ffi() -> HTMLTableSectionElement = "() => new HTMLTableSectionElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_section_element_rows_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.rows"
+
+///|
+#cfg(target="js")
+fn html_table_section_element_rows_ffi(obj : JsValue) -> HTMLCollection {
+  html_table_section_element_rows_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_section_element_insert_row_ffi_js(
+  obj : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, index) => obj.insertRow(index)"
+
+///|
+#cfg(target="js")
+fn html_table_section_element_insert_row_ffi(
+  obj : JsValue,
+  index : JsValue,
+) -> HTMLTableRowElement {
+  html_table_section_element_insert_row_ffi_js(obj, index).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_section_element_delete_row_ffi(
+  obj : JsValue,
+  index : JsValue,
+) -> Unit = "(obj, index) => obj.deleteRow(index)"
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_section_element_align_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.align"
+
+///|
+#cfg(target="js")
+fn html_table_section_element_align_ffi(obj : JsValue) -> String {
+  html_table_section_element_align_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_section_element_set_align_ffi(
+  obj : JsValue,
+  align : JsValue,
+) -> Unit = "(obj, align) => { obj.align = align; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_section_element_ch_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ch"
+
+///|
+#cfg(target="js")
+fn html_table_section_element_ch_ffi(obj : JsValue) -> String {
+  html_table_section_element_ch_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_section_element_set_ch_ffi(
+  obj : JsValue,
+  ch : JsValue,
+) -> Unit = "(obj, ch) => { obj.ch = ch; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_section_element_ch_off_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.chOff"
+
+///|
+#cfg(target="js")
+fn html_table_section_element_ch_off_ffi(obj : JsValue) -> String {
+  html_table_section_element_ch_off_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_section_element_set_ch_off_ffi(
+  obj : JsValue,
+  ch_off : JsValue,
+) -> Unit = "(obj, chOff) => { obj.chOff = chOff; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_section_element_v_align_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.vAlign"
+
+///|
+#cfg(target="js")
+fn html_table_section_element_v_align_ffi(obj : JsValue) -> String {
+  html_table_section_element_v_align_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_table_section_element_set_v_align_ffi(
+  obj : JsValue,
+  v_align : JsValue,
+) -> Unit = "(obj, vAlign) => { obj.vAlign = vAlign; }"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_section_element_new_ffi() -> HTMLTableSectionElement = "webapi_HTMLTableSectionElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_section_element_rows_ffi(obj : JsValue) -> HTMLCollection = "webapi_HTMLTableSectionElement" "get_rows"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_section_element_insert_row_ffi(
+  obj : JsValue,
+  index : JsValue,
+) -> HTMLTableRowElement = "webapi_HTMLTableSectionElement" "insertRow"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_section_element_delete_row_ffi(
+  obj : JsValue,
+  index : JsValue,
+) -> Unit = "webapi_HTMLTableSectionElement" "deleteRow"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_section_element_align_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLTableSectionElement" "get_align"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_section_element_align_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_table_section_element_align_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_section_element_set_align_ffi(
+  obj : JsValue,
+  align : JsValue,
+) -> Unit = "webapi_HTMLTableSectionElement" "set_align"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_section_element_ch_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLTableSectionElement" "get_ch"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_section_element_ch_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_table_section_element_ch_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_section_element_set_ch_ffi(obj : JsValue, ch : JsValue) -> Unit = "webapi_HTMLTableSectionElement" "set_ch"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_section_element_ch_off_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLTableSectionElement" "get_chOff"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_section_element_ch_off_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_table_section_element_ch_off_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_section_element_set_ch_off_ffi(
+  obj : JsValue,
+  ch_off : JsValue,
+) -> Unit = "webapi_HTMLTableSectionElement" "set_chOff"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_section_element_v_align_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLTableSectionElement" "get_vAlign"
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_section_element_v_align_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_table_section_element_v_align_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_table_section_element_set_v_align_ffi(
+  obj : JsValue,
+  v_align : JsValue,
+) -> Unit = "webapi_HTMLTableSectionElement" "set_vAlign"

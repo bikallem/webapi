@@ -19,3 +19,15 @@ pub fn IdleRequestCallback::new(
 ) -> IdleRequestCallback {
   idle_request_callback_ffi(callback)
 }
+
+///|
+#cfg(target="js")
+extern "js" fn idle_request_callback_ffi(
+  callback : (IdleDeadline) -> Unit,
+) -> IdleRequestCallback = "(callback) => callback"
+
+///|
+#cfg(target="wasm-gc")
+fn idle_request_callback_ffi(
+  callback : (IdleDeadline) -> Unit,
+) -> IdleRequestCallback = "webapi_IdleRequestCallback" "new"

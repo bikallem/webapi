@@ -58,3 +58,54 @@ impl TCSSGroupingRule with delete_rule(self : Self, index : UInt) -> Unit {
     TJsValue::to_js(index),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn css_grouping_rule_css_rules_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.cssRules"
+
+///|
+#cfg(target="js")
+fn css_grouping_rule_css_rules_ffi(obj : JsValue) -> CSSRuleList {
+  css_grouping_rule_css_rules_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn css_grouping_rule_insert_rule_ffi_js(
+  obj : JsValue,
+  rule : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, rule, index) => obj.insertRule(rule, index)"
+
+///|
+#cfg(target="js")
+fn css_grouping_rule_insert_rule_ffi(
+  obj : JsValue,
+  rule : JsValue,
+  index : JsValue,
+) -> UInt {
+  css_grouping_rule_insert_rule_ffi_js(obj, rule, index).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn css_grouping_rule_delete_rule_ffi(
+  obj : JsValue,
+  index : JsValue,
+) -> Unit = "(obj, index) => obj.deleteRule(index)"
+
+///|
+#cfg(target="wasm-gc")
+fn css_grouping_rule_css_rules_ffi(obj : JsValue) -> CSSRuleList = "webapi_CSSGroupingRule" "get_cssRules"
+
+///|
+#cfg(target="wasm-gc")
+fn css_grouping_rule_insert_rule_ffi(
+  obj : JsValue,
+  rule : JsValue,
+  index : JsValue,
+) -> UInt = "webapi_CSSGroupingRule" "insertRule"
+
+///|
+#cfg(target="wasm-gc")
+fn css_grouping_rule_delete_rule_ffi(obj : JsValue, index : JsValue) -> Unit = "webapi_CSSGroupingRule" "deleteRule"

@@ -19,3 +19,15 @@ pub fn QueuingStrategySize::new(
 ) -> QueuingStrategySize {
   queuing_strategy_size_ffi(callback)
 }
+
+///|
+#cfg(target="js")
+extern "js" fn queuing_strategy_size_ffi(
+  callback : (JsValue) -> Double,
+) -> QueuingStrategySize = "(callback) => callback"
+
+///|
+#cfg(target="wasm-gc")
+fn queuing_strategy_size_ffi(
+  callback : (JsValue) -> Double,
+) -> QueuingStrategySize = "webapi_QueuingStrategySize" "new"

@@ -158,3 +158,216 @@ impl THTMLSourceElement with set_height(self : Self, height : UInt) -> Unit {
     TJsValue::to_js(height),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_source_element_new_ffi() -> HTMLSourceElement = "() => new HTMLSourceElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_source_element_src_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.src"
+
+///|
+#cfg(target="js")
+fn html_source_element_src_ffi(obj : JsValue) -> String {
+  html_source_element_src_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_source_element_set_src_ffi(
+  obj : JsValue,
+  src : JsValue,
+) -> Unit = "(obj, src) => { obj.src = src; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_source_element_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.type"
+
+///|
+#cfg(target="js")
+fn html_source_element_type_ffi(obj : JsValue) -> String {
+  html_source_element_type_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_source_element_set_type_ffi(
+  obj : JsValue,
+  type_ : JsValue,
+) -> Unit = "(obj, type) => { obj.type = type; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_source_element_srcset_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.srcset"
+
+///|
+#cfg(target="js")
+fn html_source_element_srcset_ffi(obj : JsValue) -> String {
+  html_source_element_srcset_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_source_element_set_srcset_ffi(
+  obj : JsValue,
+  srcset : JsValue,
+) -> Unit = "(obj, srcset) => { obj.srcset = srcset; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_source_element_sizes_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.sizes"
+
+///|
+#cfg(target="js")
+fn html_source_element_sizes_ffi(obj : JsValue) -> String {
+  html_source_element_sizes_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_source_element_set_sizes_ffi(
+  obj : JsValue,
+  sizes : JsValue,
+) -> Unit = "(obj, sizes) => { obj.sizes = sizes; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_source_element_media_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.media"
+
+///|
+#cfg(target="js")
+fn html_source_element_media_ffi(obj : JsValue) -> String {
+  html_source_element_media_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_source_element_set_media_ffi(
+  obj : JsValue,
+  media : JsValue,
+) -> Unit = "(obj, media) => { obj.media = media; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_source_element_width_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.width"
+
+///|
+#cfg(target="js")
+fn html_source_element_width_ffi(obj : JsValue) -> UInt {
+  html_source_element_width_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_source_element_set_width_ffi(
+  obj : JsValue,
+  width : JsValue,
+) -> Unit = "(obj, width) => { obj.width = width; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_source_element_height_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.height"
+
+///|
+#cfg(target="js")
+fn html_source_element_height_ffi(obj : JsValue) -> UInt {
+  html_source_element_height_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_source_element_set_height_ffi(
+  obj : JsValue,
+  height : JsValue,
+) -> Unit = "(obj, height) => { obj.height = height; }"
+
+///|
+#cfg(target="wasm-gc")
+fn html_source_element_new_ffi() -> HTMLSourceElement = "webapi_HTMLSourceElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_source_element_src_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLSourceElement" "get_src"
+
+///|
+#cfg(target="wasm-gc")
+fn html_source_element_src_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_source_element_src_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_source_element_set_src_ffi(obj : JsValue, src : JsValue) -> Unit = "webapi_HTMLSourceElement" "set_src"
+
+///|
+#cfg(target="wasm-gc")
+fn html_source_element_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLSourceElement" "get_type"
+
+///|
+#cfg(target="wasm-gc")
+fn html_source_element_type_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_source_element_type_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_source_element_set_type_ffi(obj : JsValue, type_ : JsValue) -> Unit = "webapi_HTMLSourceElement" "set_type"
+
+///|
+#cfg(target="wasm-gc")
+fn html_source_element_srcset_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLSourceElement" "get_srcset"
+
+///|
+#cfg(target="wasm-gc")
+fn html_source_element_srcset_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_source_element_srcset_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_source_element_set_srcset_ffi(obj : JsValue, srcset : JsValue) -> Unit = "webapi_HTMLSourceElement" "set_srcset"
+
+///|
+#cfg(target="wasm-gc")
+fn html_source_element_sizes_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLSourceElement" "get_sizes"
+
+///|
+#cfg(target="wasm-gc")
+fn html_source_element_sizes_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_source_element_sizes_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_source_element_set_sizes_ffi(obj : JsValue, sizes : JsValue) -> Unit = "webapi_HTMLSourceElement" "set_sizes"
+
+///|
+#cfg(target="wasm-gc")
+fn html_source_element_media_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLSourceElement" "get_media"
+
+///|
+#cfg(target="wasm-gc")
+fn html_source_element_media_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_source_element_media_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_source_element_set_media_ffi(obj : JsValue, media : JsValue) -> Unit = "webapi_HTMLSourceElement" "set_media"
+
+///|
+#cfg(target="wasm-gc")
+fn html_source_element_width_ffi(obj : JsValue) -> UInt = "webapi_HTMLSourceElement" "get_width"
+
+///|
+#cfg(target="wasm-gc")
+fn html_source_element_set_width_ffi(obj : JsValue, width : JsValue) -> Unit = "webapi_HTMLSourceElement" "set_width"
+
+///|
+#cfg(target="wasm-gc")
+fn html_source_element_height_ffi(obj : JsValue) -> UInt = "webapi_HTMLSourceElement" "get_height"
+
+///|
+#cfg(target="wasm-gc")
+fn html_source_element_set_height_ffi(obj : JsValue, height : JsValue) -> Unit = "webapi_HTMLSourceElement" "set_height"

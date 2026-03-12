@@ -69,3 +69,59 @@ impl TSVGLineElement with x2(self : Self) -> SVGAnimatedLength {
 impl TSVGLineElement with y2(self : Self) -> SVGAnimatedLength {
   svg_line_element_y2_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn svg_line_element_x1_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.x1"
+
+///|
+#cfg(target="js")
+fn svg_line_element_x1_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_line_element_x1_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_line_element_y1_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.y1"
+
+///|
+#cfg(target="js")
+fn svg_line_element_y1_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_line_element_y1_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_line_element_x2_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.x2"
+
+///|
+#cfg(target="js")
+fn svg_line_element_x2_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_line_element_x2_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_line_element_y2_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.y2"
+
+///|
+#cfg(target="js")
+fn svg_line_element_y2_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_line_element_y2_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svg_line_element_x1_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGLineElement" "get_x1"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_line_element_y1_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGLineElement" "get_y1"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_line_element_x2_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGLineElement" "get_x2"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_line_element_y2_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGLineElement" "get_y2"

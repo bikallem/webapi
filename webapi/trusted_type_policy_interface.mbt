@@ -77,3 +77,101 @@ impl TTrustedTypePolicy with create_script_url(
     TJsValue::to_js(arguments.map(fn(v : &TJsValue) -> JsValue { v.to_js() })),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn trusted_type_policy_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.name"
+
+///|
+#cfg(target="js")
+fn trusted_type_policy_name_ffi(obj : JsValue) -> String {
+  trusted_type_policy_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn trusted_type_policy_create_html_ffi_js(
+  obj : JsValue,
+  input : JsValue,
+  arguments : JsValue,
+) -> JsValue = "(obj, input, _arguments) => obj.createHTML(input, ..._arguments)"
+
+///|
+#cfg(target="js")
+fn trusted_type_policy_create_html_ffi(
+  obj : JsValue,
+  input : JsValue,
+  arguments : JsValue,
+) -> TrustedHTML {
+  trusted_type_policy_create_html_ffi_js(obj, input, arguments).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn trusted_type_policy_create_script_ffi_js(
+  obj : JsValue,
+  input : JsValue,
+  arguments : JsValue,
+) -> JsValue = "(obj, input, _arguments) => obj.createScript(input, ..._arguments)"
+
+///|
+#cfg(target="js")
+fn trusted_type_policy_create_script_ffi(
+  obj : JsValue,
+  input : JsValue,
+  arguments : JsValue,
+) -> TrustedScript {
+  trusted_type_policy_create_script_ffi_js(obj, input, arguments).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn trusted_type_policy_create_script_url_ffi_js(
+  obj : JsValue,
+  input : JsValue,
+  arguments : JsValue,
+) -> JsValue = "(obj, input, _arguments) => obj.createScriptURL(input, ..._arguments)"
+
+///|
+#cfg(target="js")
+fn trusted_type_policy_create_script_url_ffi(
+  obj : JsValue,
+  input : JsValue,
+  arguments : JsValue,
+) -> TrustedScriptURL {
+  trusted_type_policy_create_script_url_ffi_js(obj, input, arguments).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn trusted_type_policy_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_TrustedTypePolicy" "get_name"
+
+///|
+#cfg(target="wasm-gc")
+fn trusted_type_policy_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(trusted_type_policy_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn trusted_type_policy_create_html_ffi(
+  obj : JsValue,
+  input : JsValue,
+  arguments : JsValue,
+) -> TrustedHTML = "webapi_TrustedTypePolicy" "createHTML"
+
+///|
+#cfg(target="wasm-gc")
+fn trusted_type_policy_create_script_ffi(
+  obj : JsValue,
+  input : JsValue,
+  arguments : JsValue,
+) -> TrustedScript = "webapi_TrustedTypePolicy" "createScript"
+
+///|
+#cfg(target="wasm-gc")
+fn trusted_type_policy_create_script_url_ffi(
+  obj : JsValue,
+  input : JsValue,
+  arguments : JsValue,
+) -> TrustedScriptURL = "webapi_TrustedTypePolicy" "createScriptURL"

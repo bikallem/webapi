@@ -238,3 +238,385 @@ impl TAnimation with persist(self : Self) -> Unit {
 impl TAnimation with commit_styles(self : Self) -> Unit {
   animation_commit_styles_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn animation_new_ffi(
+  effect : JsValue,
+  timeline : JsValue,
+) -> Animation = "(effect, timeline) => new Animation(effect, timeline)"
+
+///|
+#cfg(target="js")
+extern "js" fn animation_id_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.id"
+
+///|
+#cfg(target="js")
+fn animation_id_ffi(obj : JsValue) -> String {
+  animation_id_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn animation_set_id_ffi(obj : JsValue, id : JsValue) -> Unit = "(obj, id) => { obj.id = id; }"
+
+///|
+#cfg(target="js")
+extern "js" fn animation_effect_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.effect"
+
+///|
+#cfg(target="js")
+fn animation_effect_ffi(obj : JsValue) -> AnimationEffect {
+  animation_effect_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn animation_set_effect_ffi(
+  obj : JsValue,
+  effect : JsValue,
+) -> Unit = "(obj, effect) => { obj.effect = effect; }"
+
+///|
+#cfg(target="js")
+extern "js" fn animation_timeline_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.timeline"
+
+///|
+#cfg(target="js")
+fn animation_timeline_ffi(obj : JsValue) -> AnimationTimeline {
+  animation_timeline_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn animation_set_timeline_ffi(
+  obj : JsValue,
+  timeline : JsValue,
+) -> Unit = "(obj, timeline) => { obj.timeline = timeline; }"
+
+///|
+#cfg(target="js")
+extern "js" fn animation_playback_rate_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.playbackRate"
+
+///|
+#cfg(target="js")
+fn animation_playback_rate_ffi(obj : JsValue) -> Double {
+  animation_playback_rate_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn animation_set_playback_rate_ffi(
+  obj : JsValue,
+  playback_rate : JsValue,
+) -> Unit = "(obj, playbackRate) => { obj.playbackRate = playbackRate; }"
+
+///|
+#cfg(target="js")
+extern "js" fn animation_play_state_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.playState"
+
+///|
+#cfg(target="js")
+fn animation_play_state_ffi(obj : JsValue) -> AnimationPlayState {
+  AnimationPlayState::from_unchecked(
+    animation_play_state_ffi_js(obj).unsafe_cast(),
+  )
+}
+
+///|
+#cfg(target="js")
+extern "js" fn animation_replace_state_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.replaceState"
+
+///|
+#cfg(target="js")
+fn animation_replace_state_ffi(obj : JsValue) -> AnimationReplaceState {
+  AnimationReplaceState::from_unchecked(
+    animation_replace_state_ffi_js(obj).unsafe_cast(),
+  )
+}
+
+///|
+#cfg(target="js")
+extern "js" fn animation_pending_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.pending"
+
+///|
+#cfg(target="js")
+fn animation_pending_ffi(obj : JsValue) -> Bool {
+  animation_pending_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn animation_ready_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ready"
+
+///|
+#cfg(target="js")
+fn animation_ready_ffi(obj : JsValue) -> JsPromise[Animation] {
+  animation_ready_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn animation_finished_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.finished"
+
+///|
+#cfg(target="js")
+fn animation_finished_ffi(obj : JsValue) -> JsPromise[Animation] {
+  animation_finished_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn animation_onfinish_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onfinish"
+
+///|
+#cfg(target="js")
+fn animation_onfinish_ffi(obj : JsValue) -> EventHandler {
+  animation_onfinish_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn animation_set_onfinish_ffi(
+  obj : JsValue,
+  onfinish : JsValue,
+) -> Unit = "(obj, onfinish) => { obj.onfinish = onfinish; }"
+
+///|
+#cfg(target="js")
+extern "js" fn animation_oncancel_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oncancel"
+
+///|
+#cfg(target="js")
+fn animation_oncancel_ffi(obj : JsValue) -> EventHandler {
+  animation_oncancel_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn animation_set_oncancel_ffi(
+  obj : JsValue,
+  oncancel : JsValue,
+) -> Unit = "(obj, oncancel) => { obj.oncancel = oncancel; }"
+
+///|
+#cfg(target="js")
+extern "js" fn animation_onremove_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onremove"
+
+///|
+#cfg(target="js")
+fn animation_onremove_ffi(obj : JsValue) -> EventHandler {
+  animation_onremove_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn animation_set_onremove_ffi(
+  obj : JsValue,
+  onremove : JsValue,
+) -> Unit = "(obj, onremove) => { obj.onremove = onremove; }"
+
+///|
+#cfg(target="js")
+extern "js" fn animation_cancel_ffi(obj : JsValue) -> Unit = "(obj) => obj.cancel()"
+
+///|
+#cfg(target="js")
+extern "js" fn animation_finish_ffi(obj : JsValue) -> Unit = "(obj) => obj.finish()"
+
+///|
+#cfg(target="js")
+extern "js" fn animation_play_ffi(obj : JsValue) -> Unit = "(obj) => obj.play()"
+
+///|
+#cfg(target="js")
+extern "js" fn animation_pause_ffi(obj : JsValue) -> Unit = "(obj) => obj.pause()"
+
+///|
+#cfg(target="js")
+extern "js" fn animation_update_playback_rate_ffi(
+  obj : JsValue,
+  playback_rate : JsValue,
+) -> Unit = "(obj, playback_rate) => obj.updatePlaybackRate(playback_rate)"
+
+///|
+#cfg(target="js")
+extern "js" fn animation_reverse_ffi(obj : JsValue) -> Unit = "(obj) => obj.reverse()"
+
+///|
+#cfg(target="js")
+extern "js" fn animation_persist_ffi(obj : JsValue) -> Unit = "(obj) => obj.persist()"
+
+///|
+#cfg(target="js")
+extern "js" fn animation_commit_styles_ffi(obj : JsValue) -> Unit = "(obj) => obj.commitStyles()"
+
+///|
+#cfg(target="wasm-gc")
+fn animation_new_ffi(effect : JsValue, timeline : JsValue) -> Animation = "webapi_Animation" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn animation_id_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Animation" "get_id"
+
+///|
+#cfg(target="wasm-gc")
+fn animation_id_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(animation_id_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn animation_set_id_ffi(obj : JsValue, id : JsValue) -> Unit = "webapi_Animation" "set_id"
+
+///|
+#cfg(target="wasm-gc")
+fn animation_effect_ffi(obj : JsValue) -> AnimationEffect = "webapi_Animation" "get_effect"
+
+///|
+#cfg(target="wasm-gc")
+fn animation_set_effect_ffi(obj : JsValue, effect : JsValue) -> Unit = "webapi_Animation" "set_effect"
+
+///|
+#cfg(target="wasm-gc")
+fn animation_timeline_ffi(obj : JsValue) -> AnimationTimeline = "webapi_Animation" "get_timeline"
+
+///|
+#cfg(target="wasm-gc")
+fn animation_set_timeline_ffi(obj : JsValue, timeline : JsValue) -> Unit = "webapi_Animation" "set_timeline"
+
+///|
+#cfg(target="wasm-gc")
+fn animation_playback_rate_ffi(obj : JsValue) -> Double = "webapi_Animation" "get_playbackRate"
+
+///|
+#cfg(target="wasm-gc")
+fn animation_set_playback_rate_ffi(
+  obj : JsValue,
+  playback_rate : JsValue,
+) -> Unit = "webapi_Animation" "set_playbackRate"
+
+///|
+#cfg(target="wasm-gc")
+fn animation_play_state_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Animation" "get_playState"
+
+///|
+#cfg(target="wasm-gc")
+fn animation_play_state_ffi(obj : JsValue) -> AnimationPlayState {
+  AnimationPlayState::from_unchecked(
+    jsvalue_to_string(animation_play_state_ffi_wasm(obj)),
+  )
+}
+
+///|
+#cfg(target="wasm-gc")
+fn animation_replace_state_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Animation" "get_replaceState"
+
+///|
+#cfg(target="wasm-gc")
+fn animation_replace_state_ffi(obj : JsValue) -> AnimationReplaceState {
+  AnimationReplaceState::from_unchecked(
+    jsvalue_to_string(animation_replace_state_ffi_wasm(obj)),
+  )
+}
+
+///|
+#cfg(target="wasm-gc")
+fn animation_pending_ffi(obj : JsValue) -> Bool = "webapi_Animation" "get_pending"
+
+///|
+#cfg(target="wasm-gc")
+fn animation_ready_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Animation" "get_ready"
+
+///|
+#cfg(target="wasm-gc")
+fn animation_ready_ffi(obj : JsValue) -> JsPromise[Animation] {
+  animation_ready_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn animation_finished_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Animation" "get_finished"
+
+///|
+#cfg(target="wasm-gc")
+fn animation_finished_ffi(obj : JsValue) -> JsPromise[Animation] {
+  animation_finished_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn animation_onfinish_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Animation" "get_onfinish"
+
+///|
+#cfg(target="wasm-gc")
+fn animation_onfinish_ffi(obj : JsValue) -> EventHandler {
+  animation_onfinish_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn animation_set_onfinish_ffi(obj : JsValue, onfinish : JsValue) -> Unit = "webapi_Animation" "set_onfinish"
+
+///|
+#cfg(target="wasm-gc")
+fn animation_oncancel_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Animation" "get_oncancel"
+
+///|
+#cfg(target="wasm-gc")
+fn animation_oncancel_ffi(obj : JsValue) -> EventHandler {
+  animation_oncancel_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn animation_set_oncancel_ffi(obj : JsValue, oncancel : JsValue) -> Unit = "webapi_Animation" "set_oncancel"
+
+///|
+#cfg(target="wasm-gc")
+fn animation_onremove_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Animation" "get_onremove"
+
+///|
+#cfg(target="wasm-gc")
+fn animation_onremove_ffi(obj : JsValue) -> EventHandler {
+  animation_onremove_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn animation_set_onremove_ffi(obj : JsValue, onremove : JsValue) -> Unit = "webapi_Animation" "set_onremove"
+
+///|
+#cfg(target="wasm-gc")
+fn animation_cancel_ffi(obj : JsValue) -> Unit = "webapi_Animation" "cancel"
+
+///|
+#cfg(target="wasm-gc")
+fn animation_finish_ffi(obj : JsValue) -> Unit = "webapi_Animation" "finish"
+
+///|
+#cfg(target="wasm-gc")
+fn animation_play_ffi(obj : JsValue) -> Unit = "webapi_Animation" "play"
+
+///|
+#cfg(target="wasm-gc")
+fn animation_pause_ffi(obj : JsValue) -> Unit = "webapi_Animation" "pause"
+
+///|
+#cfg(target="wasm-gc")
+fn animation_update_playback_rate_ffi(
+  obj : JsValue,
+  playback_rate : JsValue,
+) -> Unit = "webapi_Animation" "updatePlaybackRate"
+
+///|
+#cfg(target="wasm-gc")
+fn animation_reverse_ffi(obj : JsValue) -> Unit = "webapi_Animation" "reverse"
+
+///|
+#cfg(target="wasm-gc")
+fn animation_persist_ffi(obj : JsValue) -> Unit = "webapi_Animation" "persist"
+
+///|
+#cfg(target="wasm-gc")
+fn animation_commit_styles_ffi(obj : JsValue) -> Unit = "webapi_Animation" "commitStyles"

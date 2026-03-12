@@ -42,3 +42,17 @@ pub trait TSVGStopElement: TSVGElement {
 impl TSVGStopElement with offset(self : Self) -> SVGAnimatedNumber {
   svg_stop_element_offset_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn svg_stop_element_offset_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.offset"
+
+///|
+#cfg(target="js")
+fn svg_stop_element_offset_ffi(obj : JsValue) -> SVGAnimatedNumber {
+  svg_stop_element_offset_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svg_stop_element_offset_ffi(obj : JsValue) -> SVGAnimatedNumber = "webapi_SVGStopElement" "get_offset"

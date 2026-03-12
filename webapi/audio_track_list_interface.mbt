@@ -122,3 +122,138 @@ impl TAudioTrackList with get(self : Self, index : UInt) -> AudioTrack {
 impl TAudioTrackList with get_track_by_id(self : Self, id : String) -> AudioTrack {
   self.get_track_by_id_opt(id).unwrap()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn audio_track_list_length_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.length"
+
+///|
+#cfg(target="js")
+fn audio_track_list_length_ffi(obj : JsValue) -> UInt {
+  audio_track_list_length_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn audio_track_list_get_ffi(
+  obj : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, index) => obj[index]"
+
+///|
+#cfg(target="js")
+extern "js" fn audio_track_list_get_track_by_id_ffi(
+  obj : JsValue,
+  id : JsValue,
+) -> JsValue = "(obj, id) => obj.getTrackById(id)"
+
+///|
+#cfg(target="js")
+extern "js" fn audio_track_list_onchange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onchange"
+
+///|
+#cfg(target="js")
+fn audio_track_list_onchange_ffi(obj : JsValue) -> EventHandler {
+  audio_track_list_onchange_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn audio_track_list_set_onchange_ffi(
+  obj : JsValue,
+  onchange : JsValue,
+) -> Unit = "(obj, onchange) => { obj.onchange = onchange; }"
+
+///|
+#cfg(target="js")
+extern "js" fn audio_track_list_onaddtrack_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onaddtrack"
+
+///|
+#cfg(target="js")
+fn audio_track_list_onaddtrack_ffi(obj : JsValue) -> EventHandler {
+  audio_track_list_onaddtrack_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn audio_track_list_set_onaddtrack_ffi(
+  obj : JsValue,
+  onaddtrack : JsValue,
+) -> Unit = "(obj, onaddtrack) => { obj.onaddtrack = onaddtrack; }"
+
+///|
+#cfg(target="js")
+extern "js" fn audio_track_list_onremovetrack_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onremovetrack"
+
+///|
+#cfg(target="js")
+fn audio_track_list_onremovetrack_ffi(obj : JsValue) -> EventHandler {
+  audio_track_list_onremovetrack_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn audio_track_list_set_onremovetrack_ffi(
+  obj : JsValue,
+  onremovetrack : JsValue,
+) -> Unit = "(obj, onremovetrack) => { obj.onremovetrack = onremovetrack; }"
+
+///|
+#cfg(target="wasm-gc")
+fn audio_track_list_length_ffi(obj : JsValue) -> UInt = "webapi_AudioTrackList" "get_length"
+
+///|
+#cfg(target="wasm-gc")
+fn audio_track_list_get_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_AudioTrackList" "get"
+
+///|
+#cfg(target="wasm-gc")
+fn audio_track_list_get_track_by_id_ffi(obj : JsValue, id : JsValue) -> JsValue = "webapi_AudioTrackList" "getTrackById"
+
+///|
+#cfg(target="wasm-gc")
+fn audio_track_list_onchange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_AudioTrackList" "get_onchange"
+
+///|
+#cfg(target="wasm-gc")
+fn audio_track_list_onchange_ffi(obj : JsValue) -> EventHandler {
+  audio_track_list_onchange_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn audio_track_list_set_onchange_ffi(obj : JsValue, onchange : JsValue) -> Unit = "webapi_AudioTrackList" "set_onchange"
+
+///|
+#cfg(target="wasm-gc")
+fn audio_track_list_onaddtrack_ffi_wasm(obj : JsValue) -> JsValue = "webapi_AudioTrackList" "get_onaddtrack"
+
+///|
+#cfg(target="wasm-gc")
+fn audio_track_list_onaddtrack_ffi(obj : JsValue) -> EventHandler {
+  audio_track_list_onaddtrack_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn audio_track_list_set_onaddtrack_ffi(
+  obj : JsValue,
+  onaddtrack : JsValue,
+) -> Unit = "webapi_AudioTrackList" "set_onaddtrack"
+
+///|
+#cfg(target="wasm-gc")
+fn audio_track_list_onremovetrack_ffi_wasm(obj : JsValue) -> JsValue = "webapi_AudioTrackList" "get_onremovetrack"
+
+///|
+#cfg(target="wasm-gc")
+fn audio_track_list_onremovetrack_ffi(obj : JsValue) -> EventHandler {
+  audio_track_list_onremovetrack_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn audio_track_list_set_onremovetrack_ffi(
+  obj : JsValue,
+  onremovetrack : JsValue,
+) -> Unit = "webapi_AudioTrackList" "set_onremovetrack"

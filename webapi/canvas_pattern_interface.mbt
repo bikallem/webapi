@@ -33,3 +33,14 @@ impl TCanvasPattern with set_transform(
 ) -> Unit {
   canvas_pattern_set_transform_ffi(TJsValue::to_js(self), opt_to_js(transform))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn canvas_pattern_set_transform_ffi(
+  obj : JsValue,
+  transform : JsValue,
+) -> Unit = "(obj, transform) => obj.setTransform(transform)"
+
+///|
+#cfg(target="wasm-gc")
+fn canvas_pattern_set_transform_ffi(obj : JsValue, transform : JsValue) -> Unit = "webapi_CanvasPattern" "setTransform"

@@ -328,3 +328,455 @@ impl THTMLFormElement with report_validity(self : Self) -> Bool {
 impl THTMLFormElement with get(self : Self, index : UInt) -> Element {
   self.get_opt(index).unwrap()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_form_element_new_ffi() -> HTMLFormElement = "() => new HTMLFormElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_form_element_accept_charset_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.acceptCharset"
+
+///|
+#cfg(target="js")
+fn html_form_element_accept_charset_ffi(obj : JsValue) -> String {
+  html_form_element_accept_charset_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_form_element_set_accept_charset_ffi(
+  obj : JsValue,
+  accept_charset : JsValue,
+) -> Unit = "(obj, acceptCharset) => { obj.acceptCharset = acceptCharset; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_form_element_action_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.action"
+
+///|
+#cfg(target="js")
+fn html_form_element_action_ffi(obj : JsValue) -> String {
+  html_form_element_action_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_form_element_set_action_ffi(
+  obj : JsValue,
+  action : JsValue,
+) -> Unit = "(obj, action) => { obj.action = action; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_form_element_autocomplete_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.autocomplete"
+
+///|
+#cfg(target="js")
+fn html_form_element_autocomplete_ffi(obj : JsValue) -> String {
+  html_form_element_autocomplete_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_form_element_set_autocomplete_ffi(
+  obj : JsValue,
+  autocomplete : JsValue,
+) -> Unit = "(obj, autocomplete) => { obj.autocomplete = autocomplete; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_form_element_enctype_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.enctype"
+
+///|
+#cfg(target="js")
+fn html_form_element_enctype_ffi(obj : JsValue) -> String {
+  html_form_element_enctype_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_form_element_set_enctype_ffi(
+  obj : JsValue,
+  enctype : JsValue,
+) -> Unit = "(obj, enctype) => { obj.enctype = enctype; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_form_element_encoding_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.encoding"
+
+///|
+#cfg(target="js")
+fn html_form_element_encoding_ffi(obj : JsValue) -> String {
+  html_form_element_encoding_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_form_element_set_encoding_ffi(
+  obj : JsValue,
+  encoding : JsValue,
+) -> Unit = "(obj, encoding) => { obj.encoding = encoding; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_form_element_method_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.method"
+
+///|
+#cfg(target="js")
+fn html_form_element_method_ffi(obj : JsValue) -> String {
+  html_form_element_method_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_form_element_set_method_ffi(
+  obj : JsValue,
+  method_ : JsValue,
+) -> Unit = "(obj, method) => { obj.method = method; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_form_element_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.name"
+
+///|
+#cfg(target="js")
+fn html_form_element_name_ffi(obj : JsValue) -> String {
+  html_form_element_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_form_element_set_name_ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> Unit = "(obj, name) => { obj.name = name; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_form_element_no_validate_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.noValidate"
+
+///|
+#cfg(target="js")
+fn html_form_element_no_validate_ffi(obj : JsValue) -> Bool {
+  html_form_element_no_validate_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_form_element_set_no_validate_ffi(
+  obj : JsValue,
+  no_validate : JsValue,
+) -> Unit = "(obj, noValidate) => { obj.noValidate = noValidate; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_form_element_target_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.target"
+
+///|
+#cfg(target="js")
+fn html_form_element_target_ffi(obj : JsValue) -> String {
+  html_form_element_target_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_form_element_set_target_ffi(
+  obj : JsValue,
+  target : JsValue,
+) -> Unit = "(obj, target) => { obj.target = target; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_form_element_rel_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.rel"
+
+///|
+#cfg(target="js")
+fn html_form_element_rel_ffi(obj : JsValue) -> String {
+  html_form_element_rel_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_form_element_set_rel_ffi(
+  obj : JsValue,
+  rel : JsValue,
+) -> Unit = "(obj, rel) => { obj.rel = rel; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_form_element_rel_list_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.relList"
+
+///|
+#cfg(target="js")
+fn html_form_element_rel_list_ffi(obj : JsValue) -> DOMTokenList {
+  html_form_element_rel_list_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_form_element_elements_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.elements"
+
+///|
+#cfg(target="js")
+fn html_form_element_elements_ffi(obj : JsValue) -> HTMLFormControlsCollection {
+  html_form_element_elements_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_form_element_length_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.length"
+
+///|
+#cfg(target="js")
+fn html_form_element_length_ffi(obj : JsValue) -> UInt {
+  html_form_element_length_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_form_element_get_ffi(
+  obj : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, index) => obj[index]"
+
+///|
+#cfg(target="js")
+extern "js" fn html_form_element_get_by_name_ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> JsValue = "(obj, name) => obj[name]"
+
+///|
+#cfg(target="js")
+extern "js" fn html_form_element_submit_ffi(obj : JsValue) -> Unit = "(obj) => obj.submit()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_form_element_request_submit_ffi(
+  obj : JsValue,
+  submitter : JsValue,
+) -> Unit = "(obj, submitter) => obj.requestSubmit(submitter)"
+
+///|
+#cfg(target="js")
+extern "js" fn html_form_element_reset_ffi(obj : JsValue) -> Unit = "(obj) => obj.reset()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_form_element_check_validity_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.checkValidity()"
+
+///|
+#cfg(target="js")
+fn html_form_element_check_validity_ffi(obj : JsValue) -> Bool {
+  html_form_element_check_validity_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_form_element_report_validity_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.reportValidity()"
+
+///|
+#cfg(target="js")
+fn html_form_element_report_validity_ffi(obj : JsValue) -> Bool {
+  html_form_element_report_validity_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_new_ffi() -> HTMLFormElement = "webapi_HTMLFormElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_accept_charset_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLFormElement" "get_acceptCharset"
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_accept_charset_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_form_element_accept_charset_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_set_accept_charset_ffi(
+  obj : JsValue,
+  accept_charset : JsValue,
+) -> Unit = "webapi_HTMLFormElement" "set_acceptCharset"
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_action_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLFormElement" "get_action"
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_action_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_form_element_action_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_set_action_ffi(obj : JsValue, action : JsValue) -> Unit = "webapi_HTMLFormElement" "set_action"
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_autocomplete_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLFormElement" "get_autocomplete"
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_autocomplete_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_form_element_autocomplete_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_set_autocomplete_ffi(
+  obj : JsValue,
+  autocomplete : JsValue,
+) -> Unit = "webapi_HTMLFormElement" "set_autocomplete"
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_enctype_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLFormElement" "get_enctype"
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_enctype_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_form_element_enctype_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_set_enctype_ffi(obj : JsValue, enctype : JsValue) -> Unit = "webapi_HTMLFormElement" "set_enctype"
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_encoding_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLFormElement" "get_encoding"
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_encoding_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_form_element_encoding_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_set_encoding_ffi(
+  obj : JsValue,
+  encoding : JsValue,
+) -> Unit = "webapi_HTMLFormElement" "set_encoding"
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_method_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLFormElement" "get_method"
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_method_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_form_element_method_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_set_method_ffi(obj : JsValue, method_ : JsValue) -> Unit = "webapi_HTMLFormElement" "set_method"
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLFormElement" "get_name"
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_form_element_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_set_name_ffi(obj : JsValue, name : JsValue) -> Unit = "webapi_HTMLFormElement" "set_name"
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_no_validate_ffi(obj : JsValue) -> Bool = "webapi_HTMLFormElement" "get_noValidate"
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_set_no_validate_ffi(
+  obj : JsValue,
+  no_validate : JsValue,
+) -> Unit = "webapi_HTMLFormElement" "set_noValidate"
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_target_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLFormElement" "get_target"
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_target_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_form_element_target_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_set_target_ffi(obj : JsValue, target : JsValue) -> Unit = "webapi_HTMLFormElement" "set_target"
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_rel_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLFormElement" "get_rel"
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_rel_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_form_element_rel_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_set_rel_ffi(obj : JsValue, rel : JsValue) -> Unit = "webapi_HTMLFormElement" "set_rel"
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_rel_list_ffi(obj : JsValue) -> DOMTokenList = "webapi_HTMLFormElement" "get_relList"
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_elements_ffi(obj : JsValue) -> HTMLFormControlsCollection = "webapi_HTMLFormElement" "get_elements"
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_length_ffi(obj : JsValue) -> UInt = "webapi_HTMLFormElement" "get_length"
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_get_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_HTMLFormElement" "get"
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_get_by_name_ffi(obj : JsValue, name : JsValue) -> JsValue = "webapi_HTMLFormElement" "get_by_name"
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_submit_ffi(obj : JsValue) -> Unit = "webapi_HTMLFormElement" "submit"
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_request_submit_ffi(
+  obj : JsValue,
+  submitter : JsValue,
+) -> Unit = "webapi_HTMLFormElement" "requestSubmit"
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_reset_ffi(obj : JsValue) -> Unit = "webapi_HTMLFormElement" "reset"
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_check_validity_ffi(obj : JsValue) -> Bool = "webapi_HTMLFormElement" "checkValidity"
+
+///|
+#cfg(target="wasm-gc")
+fn html_form_element_report_validity_ffi(obj : JsValue) -> Bool = "webapi_HTMLFormElement" "reportValidity"

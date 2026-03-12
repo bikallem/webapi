@@ -41,3 +41,49 @@ pub fn NavigationReloadOptions::state(
 ) -> JsValue? {
   navigation_reload_options_get_state_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_reload_options_ffi(
+  info : JsValue,
+  state : JsValue,
+) -> NavigationReloadOptions =
+  #|(info, state) => {
+  #|  const obj = {};
+  #|  if (info !== undefined) obj.info = info;
+  #|  if (state !== undefined) obj.state = state;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_reload_options_empty_ffi() -> NavigationReloadOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_reload_options_get_info_ffi(obj : JsValue) -> JsValue = "(obj) => obj.info"
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_reload_options_get_state_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.state"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_reload_options_ffi(
+  info : JsValue,
+  state : JsValue,
+) -> NavigationReloadOptions = "webapi_NavigationReloadOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_reload_options_empty_ffi() -> NavigationReloadOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_reload_options_get_info_ffi(obj : JsValue) -> JsValue = "webapi_NavigationReloadOptions" "get_info"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_reload_options_get_state_ffi(obj : JsValue) -> JsValue = "webapi_NavigationReloadOptions" "get_state"

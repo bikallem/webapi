@@ -128,3 +128,128 @@ impl TXPathResult with iterate_next(self : Self) -> Node {
 impl TXPathResult with snapshot_item(self : Self, index : UInt) -> Node {
   self.snapshot_item_opt(index).unwrap()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn x_path_result_result_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.resultType"
+
+///|
+#cfg(target="js")
+fn x_path_result_result_type_ffi(obj : JsValue) -> UInt {
+  x_path_result_result_type_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn x_path_result_number_value_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.numberValue"
+
+///|
+#cfg(target="js")
+fn x_path_result_number_value_ffi(obj : JsValue) -> Double {
+  x_path_result_number_value_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn x_path_result_string_value_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.stringValue"
+
+///|
+#cfg(target="js")
+fn x_path_result_string_value_ffi(obj : JsValue) -> String {
+  x_path_result_string_value_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn x_path_result_boolean_value_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.booleanValue"
+
+///|
+#cfg(target="js")
+fn x_path_result_boolean_value_ffi(obj : JsValue) -> Bool {
+  x_path_result_boolean_value_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn x_path_result_single_node_value_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.singleNodeValue"
+
+///|
+#cfg(target="js")
+fn x_path_result_single_node_value_ffi(obj : JsValue) -> Node {
+  x_path_result_single_node_value_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn x_path_result_invalid_iterator_state_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.invalidIteratorState"
+
+///|
+#cfg(target="js")
+fn x_path_result_invalid_iterator_state_ffi(obj : JsValue) -> Bool {
+  x_path_result_invalid_iterator_state_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn x_path_result_snapshot_length_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.snapshotLength"
+
+///|
+#cfg(target="js")
+fn x_path_result_snapshot_length_ffi(obj : JsValue) -> UInt {
+  x_path_result_snapshot_length_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn x_path_result_iterate_next_ffi(obj : JsValue) -> JsValue = "(obj) => obj.iterateNext()"
+
+///|
+#cfg(target="js")
+extern "js" fn x_path_result_snapshot_item_ffi(
+  obj : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, index) => obj.snapshotItem(index)"
+
+///|
+#cfg(target="wasm-gc")
+fn x_path_result_result_type_ffi(obj : JsValue) -> UInt = "webapi_XPathResult" "get_resultType"
+
+///|
+#cfg(target="wasm-gc")
+fn x_path_result_number_value_ffi(obj : JsValue) -> Double = "webapi_XPathResult" "get_numberValue"
+
+///|
+#cfg(target="wasm-gc")
+fn x_path_result_string_value_ffi_wasm(obj : JsValue) -> JsValue = "webapi_XPathResult" "get_stringValue"
+
+///|
+#cfg(target="wasm-gc")
+fn x_path_result_string_value_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(x_path_result_string_value_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn x_path_result_boolean_value_ffi(obj : JsValue) -> Bool = "webapi_XPathResult" "get_booleanValue"
+
+///|
+#cfg(target="wasm-gc")
+fn x_path_result_single_node_value_ffi(obj : JsValue) -> Node = "webapi_XPathResult" "get_singleNodeValue"
+
+///|
+#cfg(target="wasm-gc")
+fn x_path_result_invalid_iterator_state_ffi(obj : JsValue) -> Bool = "webapi_XPathResult" "get_invalidIteratorState"
+
+///|
+#cfg(target="wasm-gc")
+fn x_path_result_snapshot_length_ffi(obj : JsValue) -> UInt = "webapi_XPathResult" "get_snapshotLength"
+
+///|
+#cfg(target="wasm-gc")
+fn x_path_result_iterate_next_ffi(obj : JsValue) -> JsValue = "webapi_XPathResult" "iterateNext"
+
+///|
+#cfg(target="wasm-gc")
+fn x_path_result_snapshot_item_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_XPathResult" "snapshotItem"

@@ -66,3 +66,101 @@ impl TClients with open_window(self : Self, url : String) -> JsPromise[
 impl TClients with claim(self : Self) -> JsPromise[JsValue] {
   clients_claim_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn clients_get_ffi_js(obj : JsValue, id : JsValue) -> JsValue = "(obj, id) => obj.get(id)"
+
+///|
+#cfg(target="js")
+fn clients_get_ffi(obj : JsValue, id : JsValue) -> JsPromise[&TClientsGet] {
+  clients_get_ffi_js(obj, id).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn clients_match_all_ffi_js(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, options) => obj.matchAll(options)"
+
+///|
+#cfg(target="js")
+fn clients_match_all_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> JsPromise[Array[Client]] {
+  clients_match_all_ffi_js(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn clients_open_window_ffi_js(
+  obj : JsValue,
+  url : JsValue,
+) -> JsValue = "(obj, url) => obj.openWindow(url)"
+
+///|
+#cfg(target="js")
+fn clients_open_window_ffi(
+  obj : JsValue,
+  url : JsValue,
+) -> JsPromise[WindowClient] {
+  clients_open_window_ffi_js(obj, url).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn clients_claim_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.claim()"
+
+///|
+#cfg(target="js")
+fn clients_claim_ffi(obj : JsValue) -> JsPromise[JsValue] {
+  clients_claim_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn clients_get_ffi_wasm(obj : JsValue, id : JsValue) -> JsValue = "webapi_Clients" "get"
+
+///|
+#cfg(target="wasm-gc")
+fn clients_get_ffi(obj : JsValue, id : JsValue) -> JsPromise[&TClientsGet] {
+  clients_get_ffi_wasm(obj, id).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn clients_match_all_ffi_wasm(obj : JsValue, options : JsValue) -> JsValue = "webapi_Clients" "matchAll"
+
+///|
+#cfg(target="wasm-gc")
+fn clients_match_all_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> JsPromise[Array[Client]] {
+  clients_match_all_ffi_wasm(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn clients_open_window_ffi_wasm(obj : JsValue, url : JsValue) -> JsValue = "webapi_Clients" "openWindow"
+
+///|
+#cfg(target="wasm-gc")
+fn clients_open_window_ffi(
+  obj : JsValue,
+  url : JsValue,
+) -> JsPromise[WindowClient] {
+  clients_open_window_ffi_wasm(obj, url).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn clients_claim_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Clients" "claim"
+
+///|
+#cfg(target="wasm-gc")
+fn clients_claim_ffi(obj : JsValue) -> JsPromise[JsValue] {
+  clients_claim_ffi_wasm(obj).unsafe_cast()
+}

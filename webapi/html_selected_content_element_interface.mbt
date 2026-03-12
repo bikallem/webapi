@@ -45,3 +45,11 @@ pub fn HTMLSelectedContentElement::new() -> HTMLSelectedContentElement {
 ///|
 /// [HTMLSelectedContentElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectedContentElement) interface.
 pub trait THTMLSelectedContentElement: THTMLElement {}
+
+///|
+#cfg(target="js")
+extern "js" fn html_selected_content_element_new_ffi() -> HTMLSelectedContentElement = "() => new HTMLSelectedContentElement()"
+
+///|
+#cfg(target="wasm-gc")
+fn html_selected_content_element_new_ffi() -> HTMLSelectedContentElement = "webapi_HTMLSelectedContentElement" "new"

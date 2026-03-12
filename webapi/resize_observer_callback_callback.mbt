@@ -21,3 +21,28 @@ pub fn ResizeObserverCallback::new(
 ) -> ResizeObserverCallback {
   resize_observer_callback_ffi(callback)
 }
+
+///|
+#cfg(target="js")
+extern "js" fn resize_observer_callback_ffi(
+  callback : (Array[ResizeObserverEntry], ResizeObserver) -> Unit,
+) -> ResizeObserverCallback = "(callback) => callback"
+
+///|
+#cfg(target="wasm-gc")
+fn resize_observer_callback_ffi_raw(
+  callback : (JsArray, ResizeObserver) -> Unit,
+) -> ResizeObserverCallback = "webapi_ResizeObserverCallback" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn resize_observer_callback_ffi(
+  callback : (Array[ResizeObserverEntry], ResizeObserver) -> Unit,
+) -> ResizeObserverCallback {
+  resize_observer_callback_ffi_raw(fn(
+    entries : JsArray,
+    observer : ResizeObserver,
+  ) -> Unit {
+    callback(entries.to_array(), observer)
+  })
+}

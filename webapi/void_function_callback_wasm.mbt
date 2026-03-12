@@ -1,2 +1,0 @@
-///|
-fn void_function_ffi(callback : () -> Unit) -> VoidFunction = "webapi_VoidFunction" "new"

@@ -37,3 +37,31 @@ impl TUserActivation with has_been_active(self : Self) -> Bool {
 impl TUserActivation with is_active(self : Self) -> Bool {
   user_activation_is_active_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn user_activation_has_been_active_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.hasBeenActive"
+
+///|
+#cfg(target="js")
+fn user_activation_has_been_active_ffi(obj : JsValue) -> Bool {
+  user_activation_has_been_active_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn user_activation_is_active_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.isActive"
+
+///|
+#cfg(target="js")
+fn user_activation_is_active_ffi(obj : JsValue) -> Bool {
+  user_activation_is_active_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn user_activation_has_been_active_ffi(obj : JsValue) -> Bool = "webapi_UserActivation" "get_hasBeenActive"
+
+///|
+#cfg(target="wasm-gc")
+fn user_activation_is_active_ffi(obj : JsValue) -> Bool = "webapi_UserActivation" "get_isActive"

@@ -23,3 +23,15 @@ pub fn UnderlyingSourceCancelCallback::new(
 ) -> UnderlyingSourceCancelCallback {
   underlying_source_cancel_callback_ffi(callback)
 }
+
+///|
+#cfg(target="js")
+extern "js" fn underlying_source_cancel_callback_ffi(
+  callback : (JsValue) -> JsPromise[JsValue],
+) -> UnderlyingSourceCancelCallback = "(callback) => callback"
+
+///|
+#cfg(target="wasm-gc")
+fn underlying_source_cancel_callback_ffi(
+  callback : (JsValue) -> JsPromise[JsValue],
+) -> UnderlyingSourceCancelCallback = "webapi_UnderlyingSourceCancelCallback" "new"

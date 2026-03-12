@@ -48,3 +48,49 @@ impl TCountQueuingStrategy with high_water_mark(self : Self) -> Double {
 impl TCountQueuingStrategy with size(self : Self) -> Function {
   count_queuing_strategy_size_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn count_queuing_strategy_new_ffi(
+  init : JsValue,
+) -> CountQueuingStrategy = "(init) => new CountQueuingStrategy(init)"
+
+///|
+#cfg(target="js")
+extern "js" fn count_queuing_strategy_high_water_mark_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.highWaterMark"
+
+///|
+#cfg(target="js")
+fn count_queuing_strategy_high_water_mark_ffi(obj : JsValue) -> Double {
+  count_queuing_strategy_high_water_mark_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn count_queuing_strategy_size_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.size"
+
+///|
+#cfg(target="js")
+fn count_queuing_strategy_size_ffi(obj : JsValue) -> Function {
+  count_queuing_strategy_size_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn count_queuing_strategy_new_ffi(init : JsValue) -> CountQueuingStrategy = "webapi_CountQueuingStrategy" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn count_queuing_strategy_high_water_mark_ffi(obj : JsValue) -> Double = "webapi_CountQueuingStrategy" "get_highWaterMark"
+
+///|
+#cfg(target="wasm-gc")
+fn count_queuing_strategy_size_ffi_wasm(obj : JsValue) -> JsValue = "webapi_CountQueuingStrategy" "get_size"
+
+///|
+#cfg(target="wasm-gc")
+fn count_queuing_strategy_size_ffi(obj : JsValue) -> Function {
+  count_queuing_strategy_size_ffi_wasm(obj).unsafe_cast()
+}

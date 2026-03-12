@@ -29,3 +29,46 @@ pub fn PermissionDescriptor::empty() -> PermissionDescriptor {
 pub fn PermissionDescriptor::name(self : PermissionDescriptor) -> String {
   permission_descriptor_get_name_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn permission_descriptor_ffi(
+  name : JsValue,
+) -> PermissionDescriptor =
+  #|(name) => {
+  #|  const obj = {};
+  #|  if (name !== undefined) obj.name = name;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn permission_descriptor_empty_ffi() -> PermissionDescriptor = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn permission_descriptor_get_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.name"
+
+///|
+#cfg(target="js")
+fn permission_descriptor_get_name_ffi(obj : JsValue) -> String {
+  permission_descriptor_get_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn permission_descriptor_ffi(name : JsValue) -> PermissionDescriptor = "webapi_PermissionDescriptor" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn permission_descriptor_empty_ffi() -> PermissionDescriptor = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn permission_descriptor_get_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_PermissionDescriptor" "get_name"
+
+///|
+#cfg(target="wasm-gc")
+fn permission_descriptor_get_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(permission_descriptor_get_name_ffi_wasm(obj))
+}

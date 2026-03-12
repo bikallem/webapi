@@ -138,3 +138,147 @@ impl TWorker with set_onmessageerror(
     TJsValue::to_js(event_handler_non_null_ffi(onmessageerror)),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn worker_new_ffi(
+  script_url : JsValue,
+  options : JsValue,
+) -> Worker = "(script_url, options) => new Worker(script_url, options)"
+
+///|
+#cfg(target="js")
+extern "js" fn worker_terminate_ffi(obj : JsValue) -> Unit = "(obj) => obj.terminate()"
+
+///|
+#cfg(target="js")
+extern "js" fn worker_post_message_ffi(
+  obj : JsValue,
+  message : JsValue,
+  transfer : JsValue,
+) -> Unit = "(obj, message, transfer) => obj.postMessage(message, transfer)"
+
+///|
+#cfg(target="js")
+extern "js" fn worker_post_message_with_options_ffi(
+  obj : JsValue,
+  message : JsValue,
+  options : JsValue,
+) -> Unit = "(obj, message, options) => obj.postMessage(message, options)"
+
+///|
+#cfg(target="js")
+extern "js" fn worker_onerror_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onerror"
+
+///|
+#cfg(target="js")
+fn worker_onerror_ffi(obj : JsValue) -> EventHandler {
+  worker_onerror_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_set_onerror_ffi(obj : JsValue, onerror : JsValue) -> Unit = "(obj, onerror) => { obj.onerror = onerror; }"
+
+///|
+#cfg(target="js")
+extern "js" fn worker_onmessage_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onmessage"
+
+///|
+#cfg(target="js")
+fn worker_onmessage_ffi(obj : JsValue) -> EventHandler {
+  worker_onmessage_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_set_onmessage_ffi(
+  obj : JsValue,
+  onmessage : JsValue,
+) -> Unit = "(obj, onmessage) => { obj.onmessage = onmessage; }"
+
+///|
+#cfg(target="js")
+extern "js" fn worker_onmessageerror_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onmessageerror"
+
+///|
+#cfg(target="js")
+fn worker_onmessageerror_ffi(obj : JsValue) -> EventHandler {
+  worker_onmessageerror_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_set_onmessageerror_ffi(
+  obj : JsValue,
+  onmessageerror : JsValue,
+) -> Unit = "(obj, onmessageerror) => { obj.onmessageerror = onmessageerror; }"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_new_ffi(script_url : JsValue, options : JsValue) -> Worker = "webapi_Worker" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_terminate_ffi(obj : JsValue) -> Unit = "webapi_Worker" "terminate"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_post_message_ffi(
+  obj : JsValue,
+  message : JsValue,
+  transfer : JsValue,
+) -> Unit = "webapi_Worker" "postMessage"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_post_message_with_options_ffi(
+  obj : JsValue,
+  message : JsValue,
+  options : JsValue,
+) -> Unit = "webapi_Worker" "post_message_with_options"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_onerror_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Worker" "get_onerror"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_onerror_ffi(obj : JsValue) -> EventHandler {
+  worker_onerror_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_set_onerror_ffi(obj : JsValue, onerror : JsValue) -> Unit = "webapi_Worker" "set_onerror"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_onmessage_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Worker" "get_onmessage"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_onmessage_ffi(obj : JsValue) -> EventHandler {
+  worker_onmessage_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_set_onmessage_ffi(obj : JsValue, onmessage : JsValue) -> Unit = "webapi_Worker" "set_onmessage"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_onmessageerror_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Worker" "get_onmessageerror"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_onmessageerror_ffi(obj : JsValue) -> EventHandler {
+  worker_onmessageerror_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_set_onmessageerror_ffi(
+  obj : JsValue,
+  onmessageerror : JsValue,
+) -> Unit = "webapi_Worker" "set_onmessageerror"

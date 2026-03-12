@@ -129,3 +129,152 @@ impl TVideoTrackList with get(self : Self, index : UInt) -> VideoTrack {
 impl TVideoTrackList with get_track_by_id(self : Self, id : String) -> VideoTrack {
   self.get_track_by_id_opt(id).unwrap()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn video_track_list_length_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.length"
+
+///|
+#cfg(target="js")
+fn video_track_list_length_ffi(obj : JsValue) -> UInt {
+  video_track_list_length_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn video_track_list_get_ffi(
+  obj : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, index) => obj[index]"
+
+///|
+#cfg(target="js")
+extern "js" fn video_track_list_get_track_by_id_ffi(
+  obj : JsValue,
+  id : JsValue,
+) -> JsValue = "(obj, id) => obj.getTrackById(id)"
+
+///|
+#cfg(target="js")
+extern "js" fn video_track_list_selected_index_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.selectedIndex"
+
+///|
+#cfg(target="js")
+fn video_track_list_selected_index_ffi(obj : JsValue) -> Int {
+  video_track_list_selected_index_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn video_track_list_onchange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onchange"
+
+///|
+#cfg(target="js")
+fn video_track_list_onchange_ffi(obj : JsValue) -> EventHandler {
+  video_track_list_onchange_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn video_track_list_set_onchange_ffi(
+  obj : JsValue,
+  onchange : JsValue,
+) -> Unit = "(obj, onchange) => { obj.onchange = onchange; }"
+
+///|
+#cfg(target="js")
+extern "js" fn video_track_list_onaddtrack_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onaddtrack"
+
+///|
+#cfg(target="js")
+fn video_track_list_onaddtrack_ffi(obj : JsValue) -> EventHandler {
+  video_track_list_onaddtrack_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn video_track_list_set_onaddtrack_ffi(
+  obj : JsValue,
+  onaddtrack : JsValue,
+) -> Unit = "(obj, onaddtrack) => { obj.onaddtrack = onaddtrack; }"
+
+///|
+#cfg(target="js")
+extern "js" fn video_track_list_onremovetrack_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onremovetrack"
+
+///|
+#cfg(target="js")
+fn video_track_list_onremovetrack_ffi(obj : JsValue) -> EventHandler {
+  video_track_list_onremovetrack_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn video_track_list_set_onremovetrack_ffi(
+  obj : JsValue,
+  onremovetrack : JsValue,
+) -> Unit = "(obj, onremovetrack) => { obj.onremovetrack = onremovetrack; }"
+
+///|
+#cfg(target="wasm-gc")
+fn video_track_list_length_ffi(obj : JsValue) -> UInt = "webapi_VideoTrackList" "get_length"
+
+///|
+#cfg(target="wasm-gc")
+fn video_track_list_get_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_VideoTrackList" "get"
+
+///|
+#cfg(target="wasm-gc")
+fn video_track_list_get_track_by_id_ffi(obj : JsValue, id : JsValue) -> JsValue = "webapi_VideoTrackList" "getTrackById"
+
+///|
+#cfg(target="wasm-gc")
+fn video_track_list_selected_index_ffi(obj : JsValue) -> Int = "webapi_VideoTrackList" "get_selectedIndex"
+
+///|
+#cfg(target="wasm-gc")
+fn video_track_list_onchange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_VideoTrackList" "get_onchange"
+
+///|
+#cfg(target="wasm-gc")
+fn video_track_list_onchange_ffi(obj : JsValue) -> EventHandler {
+  video_track_list_onchange_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn video_track_list_set_onchange_ffi(obj : JsValue, onchange : JsValue) -> Unit = "webapi_VideoTrackList" "set_onchange"
+
+///|
+#cfg(target="wasm-gc")
+fn video_track_list_onaddtrack_ffi_wasm(obj : JsValue) -> JsValue = "webapi_VideoTrackList" "get_onaddtrack"
+
+///|
+#cfg(target="wasm-gc")
+fn video_track_list_onaddtrack_ffi(obj : JsValue) -> EventHandler {
+  video_track_list_onaddtrack_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn video_track_list_set_onaddtrack_ffi(
+  obj : JsValue,
+  onaddtrack : JsValue,
+) -> Unit = "webapi_VideoTrackList" "set_onaddtrack"
+
+///|
+#cfg(target="wasm-gc")
+fn video_track_list_onremovetrack_ffi_wasm(obj : JsValue) -> JsValue = "webapi_VideoTrackList" "get_onremovetrack"
+
+///|
+#cfg(target="wasm-gc")
+fn video_track_list_onremovetrack_ffi(obj : JsValue) -> EventHandler {
+  video_track_list_onremovetrack_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn video_track_list_set_onremovetrack_ffi(
+  obj : JsValue,
+  onremovetrack : JsValue,
+) -> Unit = "webapi_VideoTrackList" "set_onremovetrack"

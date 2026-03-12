@@ -43,3 +43,58 @@ pub fn BaseKeyframe::composite(
 ) -> CompositeOperationOrAuto? {
   base_keyframe_get_composite_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn base_keyframe_ffi(
+  offset : JsValue,
+  easing : JsValue,
+  composite : JsValue,
+) -> BaseKeyframe =
+  #|(offset, easing, composite) => {
+  #|  const obj = {};
+  #|  if (offset !== undefined) obj.offset = offset;
+  #|  if (easing !== undefined) obj.easing = easing;
+  #|  if (composite !== undefined) obj.composite = composite;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn base_keyframe_empty_ffi() -> BaseKeyframe = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn base_keyframe_get_offset_ffi(obj : JsValue) -> JsValue = "(obj) => obj.offset"
+
+///|
+#cfg(target="js")
+extern "js" fn base_keyframe_get_easing_ffi(obj : JsValue) -> JsValue = "(obj) => obj.easing"
+
+///|
+#cfg(target="js")
+extern "js" fn base_keyframe_get_composite_ffi(obj : JsValue) -> JsValue = "(obj) => obj.composite"
+
+///|
+#cfg(target="wasm-gc")
+fn base_keyframe_ffi(
+  offset : JsValue,
+  easing : JsValue,
+  composite : JsValue,
+) -> BaseKeyframe = "webapi_BaseKeyframe" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn base_keyframe_empty_ffi() -> BaseKeyframe = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn base_keyframe_get_offset_ffi(obj : JsValue) -> JsValue = "webapi_BaseKeyframe" "get_offset"
+
+///|
+#cfg(target="wasm-gc")
+fn base_keyframe_get_easing_ffi(obj : JsValue) -> JsValue = "webapi_BaseKeyframe" "get_easing"
+
+///|
+#cfg(target="wasm-gc")
+fn base_keyframe_get_composite_ffi(obj : JsValue) -> JsValue = "webapi_BaseKeyframe" "get_composite"

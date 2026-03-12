@@ -29,3 +29,34 @@ pub fn GetNotificationOptions::empty() -> GetNotificationOptions {
 pub fn GetNotificationOptions::tag(self : GetNotificationOptions) -> String? {
   get_notification_options_get_tag_ffi(TJsValue::to_js(self)).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn get_notification_options_ffi(
+  tag : JsValue,
+) -> GetNotificationOptions =
+  #|(tag) => {
+  #|  const obj = {};
+  #|  if (tag !== undefined) obj.tag = tag;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn get_notification_options_empty_ffi() -> GetNotificationOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn get_notification_options_get_tag_ffi(obj : JsValue) -> JsValue = "(obj) => obj.tag"
+
+///|
+#cfg(target="wasm-gc")
+fn get_notification_options_ffi(tag : JsValue) -> GetNotificationOptions = "webapi_GetNotificationOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn get_notification_options_empty_ffi() -> GetNotificationOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn get_notification_options_get_tag_ffi(obj : JsValue) -> JsValue = "webapi_GetNotificationOptions" "get_tag"

@@ -42,3 +42,39 @@ impl TMessageChannel with port1(self : Self) -> MessagePort {
 impl TMessageChannel with port2(self : Self) -> MessagePort {
   message_channel_port2_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn message_channel_new_ffi() -> MessageChannel = "() => new MessageChannel()"
+
+///|
+#cfg(target="js")
+extern "js" fn message_channel_port1_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.port1"
+
+///|
+#cfg(target="js")
+fn message_channel_port1_ffi(obj : JsValue) -> MessagePort {
+  message_channel_port1_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn message_channel_port2_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.port2"
+
+///|
+#cfg(target="js")
+fn message_channel_port2_ffi(obj : JsValue) -> MessagePort {
+  message_channel_port2_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn message_channel_new_ffi() -> MessageChannel = "webapi_MessageChannel" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn message_channel_port1_ffi(obj : JsValue) -> MessagePort = "webapi_MessageChannel" "get_port1"
+
+///|
+#cfg(target="wasm-gc")
+fn message_channel_port2_ffi(obj : JsValue) -> MessagePort = "webapi_MessageChannel" "get_port2"

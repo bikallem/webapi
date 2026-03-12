@@ -37,3 +37,25 @@ impl TSVGNumber with value(self : Self) -> Float {
 impl TSVGNumber with set_value(self : Self, value : Float) -> Unit {
   svg_number_set_value_ffi(TJsValue::to_js(self), TJsValue::to_js(value))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn svg_number_value_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.value"
+
+///|
+#cfg(target="js")
+fn svg_number_value_ffi(obj : JsValue) -> Float {
+  svg_number_value_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_number_set_value_ffi(obj : JsValue, value : JsValue) -> Unit = "(obj, value) => { obj.value = value; }"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_number_value_ffi(obj : JsValue) -> Float = "webapi_SVGNumber" "get_value"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_number_set_value_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_SVGNumber" "set_value"

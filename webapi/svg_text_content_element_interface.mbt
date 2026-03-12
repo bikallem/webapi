@@ -171,3 +171,232 @@ impl TSVGTextContentElement with select_sub_string(
     TJsValue::to_js(nchars),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn svg_text_content_element_text_length_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.textLength"
+
+///|
+#cfg(target="js")
+fn svg_text_content_element_text_length_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_text_content_element_text_length_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_text_content_element_length_adjust_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.lengthAdjust"
+
+///|
+#cfg(target="js")
+fn svg_text_content_element_length_adjust_ffi(
+  obj : JsValue,
+) -> SVGAnimatedEnumeration {
+  svg_text_content_element_length_adjust_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_text_content_element_get_number_of_chars_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.getNumberOfChars()"
+
+///|
+#cfg(target="js")
+fn svg_text_content_element_get_number_of_chars_ffi(obj : JsValue) -> Int {
+  svg_text_content_element_get_number_of_chars_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_text_content_element_get_computed_text_length_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.getComputedTextLength()"
+
+///|
+#cfg(target="js")
+fn svg_text_content_element_get_computed_text_length_ffi(
+  obj : JsValue,
+) -> Float {
+  svg_text_content_element_get_computed_text_length_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_text_content_element_get_sub_string_length_ffi_js(
+  obj : JsValue,
+  charnum : JsValue,
+  nchars : JsValue,
+) -> JsValue = "(obj, charnum, nchars) => obj.getSubStringLength(charnum, nchars)"
+
+///|
+#cfg(target="js")
+fn svg_text_content_element_get_sub_string_length_ffi(
+  obj : JsValue,
+  charnum : JsValue,
+  nchars : JsValue,
+) -> Float {
+  svg_text_content_element_get_sub_string_length_ffi_js(obj, charnum, nchars).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_text_content_element_get_start_position_of_char_ffi_js(
+  obj : JsValue,
+  charnum : JsValue,
+) -> JsValue = "(obj, charnum) => obj.getStartPositionOfChar(charnum)"
+
+///|
+#cfg(target="js")
+fn svg_text_content_element_get_start_position_of_char_ffi(
+  obj : JsValue,
+  charnum : JsValue,
+) -> DOMPoint {
+  svg_text_content_element_get_start_position_of_char_ffi_js(obj, charnum).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_text_content_element_get_end_position_of_char_ffi_js(
+  obj : JsValue,
+  charnum : JsValue,
+) -> JsValue = "(obj, charnum) => obj.getEndPositionOfChar(charnum)"
+
+///|
+#cfg(target="js")
+fn svg_text_content_element_get_end_position_of_char_ffi(
+  obj : JsValue,
+  charnum : JsValue,
+) -> DOMPoint {
+  svg_text_content_element_get_end_position_of_char_ffi_js(obj, charnum).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_text_content_element_get_extent_of_char_ffi_js(
+  obj : JsValue,
+  charnum : JsValue,
+) -> JsValue = "(obj, charnum) => obj.getExtentOfChar(charnum)"
+
+///|
+#cfg(target="js")
+fn svg_text_content_element_get_extent_of_char_ffi(
+  obj : JsValue,
+  charnum : JsValue,
+) -> DOMRect {
+  svg_text_content_element_get_extent_of_char_ffi_js(obj, charnum).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_text_content_element_get_rotation_of_char_ffi_js(
+  obj : JsValue,
+  charnum : JsValue,
+) -> JsValue = "(obj, charnum) => obj.getRotationOfChar(charnum)"
+
+///|
+#cfg(target="js")
+fn svg_text_content_element_get_rotation_of_char_ffi(
+  obj : JsValue,
+  charnum : JsValue,
+) -> Float {
+  svg_text_content_element_get_rotation_of_char_ffi_js(obj, charnum).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_text_content_element_get_char_num_at_position_ffi_js(
+  obj : JsValue,
+  point : JsValue,
+) -> JsValue = "(obj, point) => obj.getCharNumAtPosition(point)"
+
+///|
+#cfg(target="js")
+fn svg_text_content_element_get_char_num_at_position_ffi(
+  obj : JsValue,
+  point : JsValue,
+) -> Int {
+  svg_text_content_element_get_char_num_at_position_ffi_js(obj, point).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_text_content_element_select_sub_string_ffi(
+  obj : JsValue,
+  charnum : JsValue,
+  nchars : JsValue,
+) -> Unit = "(obj, charnum, nchars) => obj.selectSubString(charnum, nchars)"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_text_content_element_text_length_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGTextContentElement" "get_textLength"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_text_content_element_length_adjust_ffi(
+  obj : JsValue,
+) -> SVGAnimatedEnumeration = "webapi_SVGTextContentElement" "get_lengthAdjust"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_text_content_element_get_number_of_chars_ffi(obj : JsValue) -> Int = "webapi_SVGTextContentElement" "getNumberOfChars"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_text_content_element_get_computed_text_length_ffi(
+  obj : JsValue,
+) -> Float = "webapi_SVGTextContentElement" "getComputedTextLength"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_text_content_element_get_sub_string_length_ffi(
+  obj : JsValue,
+  charnum : JsValue,
+  nchars : JsValue,
+) -> Float = "webapi_SVGTextContentElement" "getSubStringLength"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_text_content_element_get_start_position_of_char_ffi(
+  obj : JsValue,
+  charnum : JsValue,
+) -> DOMPoint = "webapi_SVGTextContentElement" "getStartPositionOfChar"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_text_content_element_get_end_position_of_char_ffi(
+  obj : JsValue,
+  charnum : JsValue,
+) -> DOMPoint = "webapi_SVGTextContentElement" "getEndPositionOfChar"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_text_content_element_get_extent_of_char_ffi(
+  obj : JsValue,
+  charnum : JsValue,
+) -> DOMRect = "webapi_SVGTextContentElement" "getExtentOfChar"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_text_content_element_get_rotation_of_char_ffi(
+  obj : JsValue,
+  charnum : JsValue,
+) -> Float = "webapi_SVGTextContentElement" "getRotationOfChar"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_text_content_element_get_char_num_at_position_ffi(
+  obj : JsValue,
+  point : JsValue,
+) -> Int = "webapi_SVGTextContentElement" "getCharNumAtPosition"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_text_content_element_select_sub_string_ffi(
+  obj : JsValue,
+  charnum : JsValue,
+  nchars : JsValue,
+) -> Unit = "webapi_SVGTextContentElement" "selectSubString"

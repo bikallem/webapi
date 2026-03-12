@@ -83,3 +83,85 @@ impl THeaders with set(self : Self, name : String, value : String) -> Unit {
     TJsValue::to_js(value),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn headers_new_ffi(init : JsValue) -> Headers = "(init) => new Headers(init)"
+
+///|
+#cfg(target="js")
+extern "js" fn headers_append_ffi(
+  obj : JsValue,
+  name : JsValue,
+  value : JsValue,
+) -> Unit = "(obj, name, value) => obj.append(name, value)"
+
+///|
+#cfg(target="js")
+extern "js" fn headers_delete_ffi(obj : JsValue, name : JsValue) -> Unit = "(obj, name) => obj.delete(name)"
+
+///|
+#cfg(target="js")
+extern "js" fn headers_get_ffi(obj : JsValue, name : JsValue) -> JsValue = "(obj, name) => obj.get(name)"
+
+///|
+#cfg(target="js")
+extern "js" fn headers_get_set_cookie_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.getSetCookie()"
+
+///|
+#cfg(target="js")
+fn headers_get_set_cookie_ffi(obj : JsValue) -> Array[String] {
+  headers_get_set_cookie_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn headers_has_ffi_js(obj : JsValue, name : JsValue) -> JsValue = "(obj, name) => obj.has(name)"
+
+///|
+#cfg(target="js")
+fn headers_has_ffi(obj : JsValue, name : JsValue) -> Bool {
+  headers_has_ffi_js(obj, name).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn headers_set_ffi(
+  obj : JsValue,
+  name : JsValue,
+  value : JsValue,
+) -> Unit = "(obj, name, value) => obj.set(name, value)"
+
+///|
+#cfg(target="wasm-gc")
+fn headers_new_ffi(init : JsValue) -> Headers = "webapi_Headers" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn headers_append_ffi(obj : JsValue, name : JsValue, value : JsValue) -> Unit = "webapi_Headers" "append"
+
+///|
+#cfg(target="wasm-gc")
+fn headers_delete_ffi(obj : JsValue, name : JsValue) -> Unit = "webapi_Headers" "delete"
+
+///|
+#cfg(target="wasm-gc")
+fn headers_get_ffi(obj : JsValue, name : JsValue) -> JsValue = "webapi_Headers" "get"
+
+///|
+#cfg(target="wasm-gc")
+fn headers_get_set_cookie_ffi_wasm(obj : JsValue) -> JsArray = "webapi_Headers" "getSetCookie"
+
+///|
+#cfg(target="wasm-gc")
+fn headers_get_set_cookie_ffi(obj : JsValue) -> Array[String] {
+  headers_get_set_cookie_ffi_wasm(obj).to_string_array()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn headers_has_ffi(obj : JsValue, name : JsValue) -> Bool = "webapi_Headers" "has"
+
+///|
+#cfg(target="wasm-gc")
+fn headers_set_ffi(obj : JsValue, name : JsValue, value : JsValue) -> Unit = "webapi_Headers" "set"

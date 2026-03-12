@@ -624,6 +624,77 @@ pub(all) struct MultiTargetCode {
 }
 
 ///|
+fn is_comment_line(line : String) -> Bool {
+  let trimmed = line.trim()
+  trimmed.has_prefix("//")
+}
+
+///|
+fn is_comment_only_block(block : String) -> Bool {
+  block
+  .split("\n")
+  .all(fn(line) {
+    let trimmed = line.trim().to_string()
+    trimmed.length() == 0 || is_comment_line(trimmed)
+  })
+}
+
+///|
+fn cfg_wrap_block(block : String, cfg : String) -> String {
+  if is_comment_only_block(block) {
+    return block
+  }
+  let lines = block.split("\n")
+  let prefix : Array[String] = []
+  let body : Array[String] = []
+  let mut seen_code = false
+  for line in lines {
+    let line = line.to_string()
+    let trimmed = line.trim().to_string()
+    if !seen_code && (trimmed.length() == 0 || is_comment_line(trimmed)) {
+      prefix.push(line)
+    } else {
+      seen_code = true
+      body.push(line)
+    }
+  }
+  let cfg_line = "#cfg(\{cfg})"
+  let body_join = body.join("\n")
+  if prefix.is_empty() {
+    "\{cfg_line}\n\{body_join}"
+  } else {
+    let prefix_join = prefix.join("\n")
+    "\{prefix_join}\n\{cfg_line}\n\{body_join}"
+  }
+}
+
+///|
+fn cfg_wrap_blocks(code : String, cfg : String) -> String {
+  code
+  .split("\n\n")
+  .filter(block => block.trim().length() > 0)
+  .map(block => cfg_wrap_block(block.to_string(), cfg))
+  .join("\n\n")
+}
+
+///|
+pub fn merge_multi_target_code(multi : MultiTargetCode) -> String {
+  let sections : Array[String] = []
+  if multi.shared.trim().length() > 0 {
+    sections.push(multi.shared)
+  }
+  let js_code = cfg_wrap_blocks(multi.js_ffi, "target=\"js\"")
+  if js_code.length() > 0 {
+    sections.push(js_code)
+  }
+  let wasm_code = cfg_wrap_blocks(multi.wasm_ffi, "target=\"wasm-gc\"")
+  if wasm_code.length() > 0 {
+    sections.push(wasm_code)
+  }
+  sections.join("\n\n")
+}
+
+///|
 /// Generate multi-target MoonBit code from Emit array
 pub fn mbt_code_gen_multi(emits : Array[Emit]) -> MultiTargetCode {
   let shared_buf = StringBuilder::new()

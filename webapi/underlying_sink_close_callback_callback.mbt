@@ -23,3 +23,15 @@ pub fn UnderlyingSinkCloseCallback::new(
 ) -> UnderlyingSinkCloseCallback {
   underlying_sink_close_callback_ffi(callback)
 }
+
+///|
+#cfg(target="js")
+extern "js" fn underlying_sink_close_callback_ffi(
+  callback : () -> JsPromise[JsValue],
+) -> UnderlyingSinkCloseCallback = "(callback) => callback"
+
+///|
+#cfg(target="wasm-gc")
+fn underlying_sink_close_callback_ffi(
+  callback : () -> JsPromise[JsValue],
+) -> UnderlyingSinkCloseCallback = "webapi_UnderlyingSinkCloseCallback" "new"

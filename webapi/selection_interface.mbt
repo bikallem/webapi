@@ -252,3 +252,358 @@ impl TSelection with contains_node(
     opt_to_js(allow_partial_containment),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn selection_anchor_node_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.anchorNode"
+
+///|
+#cfg(target="js")
+fn selection_anchor_node_ffi(obj : JsValue) -> Node {
+  selection_anchor_node_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn selection_anchor_offset_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.anchorOffset"
+
+///|
+#cfg(target="js")
+fn selection_anchor_offset_ffi(obj : JsValue) -> UInt {
+  selection_anchor_offset_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn selection_focus_node_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.focusNode"
+
+///|
+#cfg(target="js")
+fn selection_focus_node_ffi(obj : JsValue) -> Node {
+  selection_focus_node_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn selection_focus_offset_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.focusOffset"
+
+///|
+#cfg(target="js")
+fn selection_focus_offset_ffi(obj : JsValue) -> UInt {
+  selection_focus_offset_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn selection_is_collapsed_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.isCollapsed"
+
+///|
+#cfg(target="js")
+fn selection_is_collapsed_ffi(obj : JsValue) -> Bool {
+  selection_is_collapsed_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn selection_range_count_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.rangeCount"
+
+///|
+#cfg(target="js")
+fn selection_range_count_ffi(obj : JsValue) -> UInt {
+  selection_range_count_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn selection_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.type"
+
+///|
+#cfg(target="js")
+fn selection_type_ffi(obj : JsValue) -> String {
+  selection_type_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn selection_direction_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.direction"
+
+///|
+#cfg(target="js")
+fn selection_direction_ffi(obj : JsValue) -> String {
+  selection_direction_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn selection_get_range_at_ffi_js(
+  obj : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, index) => obj.getRangeAt(index)"
+
+///|
+#cfg(target="js")
+fn selection_get_range_at_ffi(obj : JsValue, index : JsValue) -> Range {
+  selection_get_range_at_ffi_js(obj, index).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn selection_add_range_ffi(obj : JsValue, range : JsValue) -> Unit = "(obj, range) => obj.addRange(range)"
+
+///|
+#cfg(target="js")
+extern "js" fn selection_remove_range_ffi(
+  obj : JsValue,
+  range : JsValue,
+) -> Unit = "(obj, range) => obj.removeRange(range)"
+
+///|
+#cfg(target="js")
+extern "js" fn selection_remove_all_ranges_ffi(obj : JsValue) -> Unit = "(obj) => obj.removeAllRanges()"
+
+///|
+#cfg(target="js")
+extern "js" fn selection_empty_ffi(obj : JsValue) -> Unit = "(obj) => obj.empty()"
+
+///|
+#cfg(target="js")
+extern "js" fn selection_get_composed_ranges_ffi_js(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, options) => obj.getComposedRanges(options)"
+
+///|
+#cfg(target="js")
+fn selection_get_composed_ranges_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> Array[StaticRange] {
+  selection_get_composed_ranges_ffi_js(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn selection_collapse_ffi(
+  obj : JsValue,
+  node : JsValue,
+  offset : JsValue,
+) -> Unit = "(obj, node, offset) => obj.collapse(node, offset)"
+
+///|
+#cfg(target="js")
+extern "js" fn selection_set_position_ffi(
+  obj : JsValue,
+  node : JsValue,
+  offset : JsValue,
+) -> Unit = "(obj, node, offset) => obj.setPosition(node, offset)"
+
+///|
+#cfg(target="js")
+extern "js" fn selection_collapse_to_start_ffi(obj : JsValue) -> Unit = "(obj) => obj.collapseToStart()"
+
+///|
+#cfg(target="js")
+extern "js" fn selection_collapse_to_end_ffi(obj : JsValue) -> Unit = "(obj) => obj.collapseToEnd()"
+
+///|
+#cfg(target="js")
+extern "js" fn selection_extend_ffi(
+  obj : JsValue,
+  node : JsValue,
+  offset : JsValue,
+) -> Unit = "(obj, node, offset) => obj.extend(node, offset)"
+
+///|
+#cfg(target="js")
+extern "js" fn selection_set_base_and_extent_ffi(
+  obj : JsValue,
+  anchor_node : JsValue,
+  anchor_offset : JsValue,
+  focus_node : JsValue,
+  focus_offset : JsValue,
+) -> Unit = "(obj, anchor_node, anchor_offset, focus_node, focus_offset) => obj.setBaseAndExtent(anchor_node, anchor_offset, focus_node, focus_offset)"
+
+///|
+#cfg(target="js")
+extern "js" fn selection_select_all_children_ffi(
+  obj : JsValue,
+  node : JsValue,
+) -> Unit = "(obj, node) => obj.selectAllChildren(node)"
+
+///|
+#cfg(target="js")
+extern "js" fn selection_modify_ffi(
+  obj : JsValue,
+  alter : JsValue,
+  direction : JsValue,
+  granularity : JsValue,
+) -> Unit = "(obj, alter, direction, granularity) => obj.modify(alter, direction, granularity)"
+
+///|
+#cfg(target="js")
+extern "js" fn selection_delete_from_document_ffi(obj : JsValue) -> Unit = "(obj) => obj.deleteFromDocument()"
+
+///|
+#cfg(target="js")
+extern "js" fn selection_contains_node_ffi_js(
+  obj : JsValue,
+  node : JsValue,
+  allow_partial_containment : JsValue,
+) -> JsValue = "(obj, node, allow_partial_containment) => obj.containsNode(node, allow_partial_containment)"
+
+///|
+#cfg(target="js")
+fn selection_contains_node_ffi(
+  obj : JsValue,
+  node : JsValue,
+  allow_partial_containment : JsValue,
+) -> Bool {
+  selection_contains_node_ffi_js(obj, node, allow_partial_containment).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn selection_anchor_node_ffi(obj : JsValue) -> Node = "webapi_Selection" "get_anchorNode"
+
+///|
+#cfg(target="wasm-gc")
+fn selection_anchor_offset_ffi(obj : JsValue) -> UInt = "webapi_Selection" "get_anchorOffset"
+
+///|
+#cfg(target="wasm-gc")
+fn selection_focus_node_ffi(obj : JsValue) -> Node = "webapi_Selection" "get_focusNode"
+
+///|
+#cfg(target="wasm-gc")
+fn selection_focus_offset_ffi(obj : JsValue) -> UInt = "webapi_Selection" "get_focusOffset"
+
+///|
+#cfg(target="wasm-gc")
+fn selection_is_collapsed_ffi(obj : JsValue) -> Bool = "webapi_Selection" "get_isCollapsed"
+
+///|
+#cfg(target="wasm-gc")
+fn selection_range_count_ffi(obj : JsValue) -> UInt = "webapi_Selection" "get_rangeCount"
+
+///|
+#cfg(target="wasm-gc")
+fn selection_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Selection" "get_type"
+
+///|
+#cfg(target="wasm-gc")
+fn selection_type_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(selection_type_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn selection_direction_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Selection" "get_direction"
+
+///|
+#cfg(target="wasm-gc")
+fn selection_direction_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(selection_direction_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn selection_get_range_at_ffi(obj : JsValue, index : JsValue) -> Range = "webapi_Selection" "getRangeAt"
+
+///|
+#cfg(target="wasm-gc")
+fn selection_add_range_ffi(obj : JsValue, range : JsValue) -> Unit = "webapi_Selection" "addRange"
+
+///|
+#cfg(target="wasm-gc")
+fn selection_remove_range_ffi(obj : JsValue, range : JsValue) -> Unit = "webapi_Selection" "removeRange"
+
+///|
+#cfg(target="wasm-gc")
+fn selection_remove_all_ranges_ffi(obj : JsValue) -> Unit = "webapi_Selection" "removeAllRanges"
+
+///|
+#cfg(target="wasm-gc")
+fn selection_empty_ffi(obj : JsValue) -> Unit = "webapi_Selection" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn selection_get_composed_ranges_ffi_wasm(
+  obj : JsValue,
+  options : JsValue,
+) -> JsArray = "webapi_Selection" "getComposedRanges"
+
+///|
+#cfg(target="wasm-gc")
+fn selection_get_composed_ranges_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> Array[StaticRange] {
+  selection_get_composed_ranges_ffi_wasm(obj, options).to_array()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn selection_collapse_ffi(
+  obj : JsValue,
+  node : JsValue,
+  offset : JsValue,
+) -> Unit = "webapi_Selection" "collapse"
+
+///|
+#cfg(target="wasm-gc")
+fn selection_set_position_ffi(
+  obj : JsValue,
+  node : JsValue,
+  offset : JsValue,
+) -> Unit = "webapi_Selection" "setPosition"
+
+///|
+#cfg(target="wasm-gc")
+fn selection_collapse_to_start_ffi(obj : JsValue) -> Unit = "webapi_Selection" "collapseToStart"
+
+///|
+#cfg(target="wasm-gc")
+fn selection_collapse_to_end_ffi(obj : JsValue) -> Unit = "webapi_Selection" "collapseToEnd"
+
+///|
+#cfg(target="wasm-gc")
+fn selection_extend_ffi(
+  obj : JsValue,
+  node : JsValue,
+  offset : JsValue,
+) -> Unit = "webapi_Selection" "extend"
+
+///|
+#cfg(target="wasm-gc")
+fn selection_set_base_and_extent_ffi(
+  obj : JsValue,
+  anchor_node : JsValue,
+  anchor_offset : JsValue,
+  focus_node : JsValue,
+  focus_offset : JsValue,
+) -> Unit = "webapi_Selection" "setBaseAndExtent"
+
+///|
+#cfg(target="wasm-gc")
+fn selection_select_all_children_ffi(obj : JsValue, node : JsValue) -> Unit = "webapi_Selection" "selectAllChildren"
+
+///|
+#cfg(target="wasm-gc")
+fn selection_modify_ffi(
+  obj : JsValue,
+  alter : JsValue,
+  direction : JsValue,
+  granularity : JsValue,
+) -> Unit = "webapi_Selection" "modify"
+
+///|
+#cfg(target="wasm-gc")
+fn selection_delete_from_document_ffi(obj : JsValue) -> Unit = "webapi_Selection" "deleteFromDocument"
+
+///|
+#cfg(target="wasm-gc")
+fn selection_contains_node_ffi(
+  obj : JsValue,
+  node : JsValue,
+  allow_partial_containment : JsValue,
+) -> Bool = "webapi_Selection" "containsNode"

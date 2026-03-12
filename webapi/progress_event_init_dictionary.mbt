@@ -66,3 +66,93 @@ pub fn ProgressEventInit::loaded(self : ProgressEventInit) -> Double? {
 pub fn ProgressEventInit::total(self : ProgressEventInit) -> Double? {
   progress_event_init_get_total_ffi(TJsValue::to_js(self)).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn progress_event_init_ffi(
+  bubbles : JsValue,
+  cancelable : JsValue,
+  composed : JsValue,
+  length_computable : JsValue,
+  loaded : JsValue,
+  total : JsValue,
+) -> ProgressEventInit =
+  #|(bubbles, cancelable, composed, lengthComputable, loaded, total) => {
+  #|  const obj = {};
+  #|  if (bubbles !== undefined) obj.bubbles = bubbles;
+  #|  if (cancelable !== undefined) obj.cancelable = cancelable;
+  #|  if (composed !== undefined) obj.composed = composed;
+  #|  if (lengthComputable !== undefined) obj.lengthComputable = lengthComputable;
+  #|  if (loaded !== undefined) obj.loaded = loaded;
+  #|  if (total !== undefined) obj.total = total;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn progress_event_init_empty_ffi() -> ProgressEventInit = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn progress_event_init_get_bubbles_ffi(obj : JsValue) -> JsValue = "(obj) => obj.bubbles"
+
+///|
+#cfg(target="js")
+extern "js" fn progress_event_init_get_cancelable_ffi(obj : JsValue) -> JsValue = "(obj) => obj.cancelable"
+
+///|
+#cfg(target="js")
+extern "js" fn progress_event_init_get_composed_ffi(obj : JsValue) -> JsValue = "(obj) => obj.composed"
+
+///|
+#cfg(target="js")
+extern "js" fn progress_event_init_get_length_computable_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.lengthComputable"
+
+///|
+#cfg(target="js")
+extern "js" fn progress_event_init_get_loaded_ffi(obj : JsValue) -> JsValue = "(obj) => obj.loaded"
+
+///|
+#cfg(target="js")
+extern "js" fn progress_event_init_get_total_ffi(obj : JsValue) -> JsValue = "(obj) => obj.total"
+
+///|
+#cfg(target="wasm-gc")
+fn progress_event_init_ffi(
+  bubbles : JsValue,
+  cancelable : JsValue,
+  composed : JsValue,
+  length_computable : JsValue,
+  loaded : JsValue,
+  total : JsValue,
+) -> ProgressEventInit = "webapi_ProgressEventInit" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn progress_event_init_empty_ffi() -> ProgressEventInit = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn progress_event_init_get_bubbles_ffi(obj : JsValue) -> JsValue = "webapi_ProgressEventInit" "get_bubbles"
+
+///|
+#cfg(target="wasm-gc")
+fn progress_event_init_get_cancelable_ffi(obj : JsValue) -> JsValue = "webapi_ProgressEventInit" "get_cancelable"
+
+///|
+#cfg(target="wasm-gc")
+fn progress_event_init_get_composed_ffi(obj : JsValue) -> JsValue = "webapi_ProgressEventInit" "get_composed"
+
+///|
+#cfg(target="wasm-gc")
+fn progress_event_init_get_length_computable_ffi(obj : JsValue) -> JsValue = "webapi_ProgressEventInit" "get_lengthComputable"
+
+///|
+#cfg(target="wasm-gc")
+fn progress_event_init_get_loaded_ffi(obj : JsValue) -> JsValue = "webapi_ProgressEventInit" "get_loaded"
+
+///|
+#cfg(target="wasm-gc")
+fn progress_event_init_get_total_ffi(obj : JsValue) -> JsValue = "webapi_ProgressEventInit" "get_total"

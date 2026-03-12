@@ -61,3 +61,94 @@ impl TWritableStream with close(self : Self) -> JsPromise[JsValue] {
 impl TWritableStream with get_writer(self : Self) -> WritableStreamDefaultWriter {
   writable_stream_get_writer_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn writable_stream_new_ffi(
+  underlying_sink : JsValue,
+  strategy : JsValue,
+) -> WritableStream = "(underlying_sink, strategy) => new WritableStream(underlying_sink, strategy)"
+
+///|
+#cfg(target="js")
+extern "js" fn writable_stream_locked_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.locked"
+
+///|
+#cfg(target="js")
+fn writable_stream_locked_ffi(obj : JsValue) -> Bool {
+  writable_stream_locked_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn writable_stream_abort_ffi_js(
+  obj : JsValue,
+  reason : JsValue,
+) -> JsValue = "(obj, reason) => obj.abort(reason)"
+
+///|
+#cfg(target="js")
+fn writable_stream_abort_ffi(
+  obj : JsValue,
+  reason : JsValue,
+) -> JsPromise[JsValue] {
+  writable_stream_abort_ffi_js(obj, reason).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn writable_stream_close_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.close()"
+
+///|
+#cfg(target="js")
+fn writable_stream_close_ffi(obj : JsValue) -> JsPromise[JsValue] {
+  writable_stream_close_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn writable_stream_get_writer_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.getWriter()"
+
+///|
+#cfg(target="js")
+fn writable_stream_get_writer_ffi(obj : JsValue) -> WritableStreamDefaultWriter {
+  writable_stream_get_writer_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn writable_stream_new_ffi(
+  underlying_sink : JsValue,
+  strategy : JsValue,
+) -> WritableStream = "webapi_WritableStream" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn writable_stream_locked_ffi(obj : JsValue) -> Bool = "webapi_WritableStream" "get_locked"
+
+///|
+#cfg(target="wasm-gc")
+fn writable_stream_abort_ffi_wasm(obj : JsValue, reason : JsValue) -> JsValue = "webapi_WritableStream" "abort"
+
+///|
+#cfg(target="wasm-gc")
+fn writable_stream_abort_ffi(
+  obj : JsValue,
+  reason : JsValue,
+) -> JsPromise[JsValue] {
+  writable_stream_abort_ffi_wasm(obj, reason).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn writable_stream_close_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WritableStream" "close"
+
+///|
+#cfg(target="wasm-gc")
+fn writable_stream_close_ffi(obj : JsValue) -> JsPromise[JsValue] {
+  writable_stream_close_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn writable_stream_get_writer_ffi(obj : JsValue) -> WritableStreamDefaultWriter = "webapi_WritableStream" "getWriter"

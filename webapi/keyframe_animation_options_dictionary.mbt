@@ -182,3 +182,179 @@ pub fn KeyframeAnimationOptions::timeline(
 ) -> AnimationTimeline? {
   keyframe_animation_options_get_timeline_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn keyframe_animation_options_ffi(
+  fill : JsValue,
+  iteration_start : JsValue,
+  iterations : JsValue,
+  direction : JsValue,
+  easing : JsValue,
+  delay : JsValue,
+  end_delay : JsValue,
+  duration : JsValue,
+  composite : JsValue,
+  pseudo_element : JsValue,
+  id : JsValue,
+  timeline : JsValue,
+) -> KeyframeAnimationOptions =
+  #|(fill, iterationStart, iterations, direction, easing, delay, endDelay, duration, composite, pseudoElement, id, timeline) => {
+  #|  const obj = {};
+  #|  if (fill !== undefined) obj.fill = fill;
+  #|  if (iterationStart !== undefined) obj.iterationStart = iterationStart;
+  #|  if (iterations !== undefined) obj.iterations = iterations;
+  #|  if (direction !== undefined) obj.direction = direction;
+  #|  if (easing !== undefined) obj.easing = easing;
+  #|  if (delay !== undefined) obj.delay = delay;
+  #|  if (endDelay !== undefined) obj.endDelay = endDelay;
+  #|  if (duration !== undefined) obj.duration = duration;
+  #|  if (composite !== undefined) obj.composite = composite;
+  #|  if (pseudoElement !== undefined) obj.pseudoElement = pseudoElement;
+  #|  if (id !== undefined) obj.id = id;
+  #|  if (timeline !== undefined) obj.timeline = timeline;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn keyframe_animation_options_empty_ffi() -> KeyframeAnimationOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn keyframe_animation_options_get_fill_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.fill"
+
+///|
+#cfg(target="js")
+extern "js" fn keyframe_animation_options_get_iteration_start_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.iterationStart"
+
+///|
+#cfg(target="js")
+extern "js" fn keyframe_animation_options_get_iterations_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.iterations"
+
+///|
+#cfg(target="js")
+extern "js" fn keyframe_animation_options_get_direction_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.direction"
+
+///|
+#cfg(target="js")
+extern "js" fn keyframe_animation_options_get_easing_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.easing"
+
+///|
+#cfg(target="js")
+extern "js" fn keyframe_animation_options_get_delay_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.delay"
+
+///|
+#cfg(target="js")
+extern "js" fn keyframe_animation_options_get_end_delay_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.endDelay"
+
+///|
+#cfg(target="js")
+extern "js" fn keyframe_animation_options_get_duration_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.duration"
+
+///|
+#cfg(target="js")
+extern "js" fn keyframe_animation_options_get_composite_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.composite"
+
+///|
+#cfg(target="js")
+extern "js" fn keyframe_animation_options_get_pseudo_element_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.pseudoElement"
+
+///|
+#cfg(target="js")
+extern "js" fn keyframe_animation_options_get_id_ffi(obj : JsValue) -> JsValue = "(obj) => obj.id"
+
+///|
+#cfg(target="js")
+extern "js" fn keyframe_animation_options_get_timeline_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.timeline"
+
+///|
+#cfg(target="wasm-gc")
+fn keyframe_animation_options_ffi(
+  fill : JsValue,
+  iteration_start : JsValue,
+  iterations : JsValue,
+  direction : JsValue,
+  easing : JsValue,
+  delay : JsValue,
+  end_delay : JsValue,
+  duration : JsValue,
+  composite : JsValue,
+  pseudo_element : JsValue,
+  id : JsValue,
+  timeline : JsValue,
+) -> KeyframeAnimationOptions = "webapi_KeyframeAnimationOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn keyframe_animation_options_empty_ffi() -> KeyframeAnimationOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn keyframe_animation_options_get_fill_ffi(obj : JsValue) -> JsValue = "webapi_KeyframeAnimationOptions" "get_fill"
+
+///|
+#cfg(target="wasm-gc")
+fn keyframe_animation_options_get_iteration_start_ffi(obj : JsValue) -> JsValue = "webapi_KeyframeAnimationOptions" "get_iterationStart"
+
+///|
+#cfg(target="wasm-gc")
+fn keyframe_animation_options_get_iterations_ffi(obj : JsValue) -> JsValue = "webapi_KeyframeAnimationOptions" "get_iterations"
+
+///|
+#cfg(target="wasm-gc")
+fn keyframe_animation_options_get_direction_ffi(obj : JsValue) -> JsValue = "webapi_KeyframeAnimationOptions" "get_direction"
+
+///|
+#cfg(target="wasm-gc")
+fn keyframe_animation_options_get_easing_ffi(obj : JsValue) -> JsValue = "webapi_KeyframeAnimationOptions" "get_easing"
+
+///|
+#cfg(target="wasm-gc")
+fn keyframe_animation_options_get_delay_ffi(obj : JsValue) -> JsValue = "webapi_KeyframeAnimationOptions" "get_delay"
+
+///|
+#cfg(target="wasm-gc")
+fn keyframe_animation_options_get_end_delay_ffi(obj : JsValue) -> JsValue = "webapi_KeyframeAnimationOptions" "get_endDelay"
+
+///|
+#cfg(target="wasm-gc")
+fn keyframe_animation_options_get_duration_ffi(obj : JsValue) -> JsValue = "webapi_KeyframeAnimationOptions" "get_duration"
+
+///|
+#cfg(target="wasm-gc")
+fn keyframe_animation_options_get_composite_ffi(obj : JsValue) -> JsValue = "webapi_KeyframeAnimationOptions" "get_composite"
+
+///|
+#cfg(target="wasm-gc")
+fn keyframe_animation_options_get_pseudo_element_ffi(obj : JsValue) -> JsValue = "webapi_KeyframeAnimationOptions" "get_pseudoElement"
+
+///|
+#cfg(target="wasm-gc")
+fn keyframe_animation_options_get_id_ffi(obj : JsValue) -> JsValue = "webapi_KeyframeAnimationOptions" "get_id"
+
+///|
+#cfg(target="wasm-gc")
+fn keyframe_animation_options_get_timeline_ffi(obj : JsValue) -> JsValue = "webapi_KeyframeAnimationOptions" "get_timeline"

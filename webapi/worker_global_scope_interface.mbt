@@ -431,3 +431,688 @@ impl TWorkerGlobalScope with trusted_types(self : Self) -> TrustedTypePolicyFact
 impl TWorkerGlobalScope with caches(self : Self) -> CacheStorage {
   worker_global_scope_caches_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn worker_global_scope_self_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.self"
+
+///|
+#cfg(target="js")
+fn worker_global_scope_self_ffi(obj : JsValue) -> WorkerGlobalScope {
+  worker_global_scope_self_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_global_scope_location_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.location"
+
+///|
+#cfg(target="js")
+fn worker_global_scope_location_ffi(obj : JsValue) -> WorkerLocation {
+  worker_global_scope_location_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_global_scope_navigator_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.navigator"
+
+///|
+#cfg(target="js")
+fn worker_global_scope_navigator_ffi(obj : JsValue) -> WorkerNavigator {
+  worker_global_scope_navigator_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_global_scope_import_scripts_ffi(
+  obj : JsValue,
+  urls : JsValue,
+) -> Unit = "(obj, urls) => obj.importScripts(...urls)"
+
+///|
+#cfg(target="js")
+extern "js" fn worker_global_scope_onerror_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onerror"
+
+///|
+#cfg(target="js")
+fn worker_global_scope_onerror_ffi(obj : JsValue) -> OnErrorEventHandler {
+  worker_global_scope_onerror_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_global_scope_set_onerror_ffi(
+  obj : JsValue,
+  onerror : JsValue,
+) -> Unit = "(obj, onerror) => { obj.onerror = onerror; }"
+
+///|
+#cfg(target="js")
+extern "js" fn worker_global_scope_onlanguagechange_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.onlanguagechange"
+
+///|
+#cfg(target="js")
+fn worker_global_scope_onlanguagechange_ffi(obj : JsValue) -> EventHandler {
+  worker_global_scope_onlanguagechange_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_global_scope_set_onlanguagechange_ffi(
+  obj : JsValue,
+  onlanguagechange : JsValue,
+) -> Unit = "(obj, onlanguagechange) => { obj.onlanguagechange = onlanguagechange; }"
+
+///|
+#cfg(target="js")
+extern "js" fn worker_global_scope_onoffline_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onoffline"
+
+///|
+#cfg(target="js")
+fn worker_global_scope_onoffline_ffi(obj : JsValue) -> EventHandler {
+  worker_global_scope_onoffline_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_global_scope_set_onoffline_ffi(
+  obj : JsValue,
+  onoffline : JsValue,
+) -> Unit = "(obj, onoffline) => { obj.onoffline = onoffline; }"
+
+///|
+#cfg(target="js")
+extern "js" fn worker_global_scope_ononline_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ononline"
+
+///|
+#cfg(target="js")
+fn worker_global_scope_ononline_ffi(obj : JsValue) -> EventHandler {
+  worker_global_scope_ononline_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_global_scope_set_ononline_ffi(
+  obj : JsValue,
+  ononline : JsValue,
+) -> Unit = "(obj, ononline) => { obj.ononline = ononline; }"
+
+///|
+#cfg(target="js")
+extern "js" fn worker_global_scope_onrejectionhandled_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.onrejectionhandled"
+
+///|
+#cfg(target="js")
+fn worker_global_scope_onrejectionhandled_ffi(obj : JsValue) -> EventHandler {
+  worker_global_scope_onrejectionhandled_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_global_scope_set_onrejectionhandled_ffi(
+  obj : JsValue,
+  onrejectionhandled : JsValue,
+) -> Unit = "(obj, onrejectionhandled) => { obj.onrejectionhandled = onrejectionhandled; }"
+
+///|
+#cfg(target="js")
+extern "js" fn worker_global_scope_onunhandledrejection_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.onunhandledrejection"
+
+///|
+#cfg(target="js")
+fn worker_global_scope_onunhandledrejection_ffi(obj : JsValue) -> EventHandler {
+  worker_global_scope_onunhandledrejection_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_global_scope_set_onunhandledrejection_ffi(
+  obj : JsValue,
+  onunhandledrejection : JsValue,
+) -> Unit = "(obj, onunhandledrejection) => { obj.onunhandledrejection = onunhandledrejection; }"
+
+///|
+#cfg(target="js")
+extern "js" fn worker_global_scope_origin_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.origin"
+
+///|
+#cfg(target="js")
+fn worker_global_scope_origin_ffi(obj : JsValue) -> String {
+  worker_global_scope_origin_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_global_scope_is_secure_context_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.isSecureContext"
+
+///|
+#cfg(target="js")
+fn worker_global_scope_is_secure_context_ffi(obj : JsValue) -> Bool {
+  worker_global_scope_is_secure_context_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_global_scope_cross_origin_isolated_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.crossOriginIsolated"
+
+///|
+#cfg(target="js")
+fn worker_global_scope_cross_origin_isolated_ffi(obj : JsValue) -> Bool {
+  worker_global_scope_cross_origin_isolated_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_global_scope_report_error_ffi(
+  obj : JsValue,
+  e : JsValue,
+) -> Unit = "(obj, e) => obj.reportError(e)"
+
+///|
+#cfg(target="js")
+extern "js" fn worker_global_scope_btoa_ffi_js(
+  obj : JsValue,
+  data : JsValue,
+) -> JsValue = "(obj, data) => obj.btoa(data)"
+
+///|
+#cfg(target="js")
+fn worker_global_scope_btoa_ffi(obj : JsValue, data : JsValue) -> String {
+  worker_global_scope_btoa_ffi_js(obj, data).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_global_scope_atob_ffi_js(
+  obj : JsValue,
+  data : JsValue,
+) -> JsValue = "(obj, data) => obj.atob(data)"
+
+///|
+#cfg(target="js")
+fn worker_global_scope_atob_ffi(obj : JsValue, data : JsValue) -> String {
+  worker_global_scope_atob_ffi_js(obj, data).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_global_scope_set_timeout_ffi_js(
+  obj : JsValue,
+  handler : JsValue,
+  timeout : JsValue,
+  arguments : JsValue,
+) -> JsValue = "(obj, handler, timeout, _arguments) => obj.setTimeout(handler, timeout, ..._arguments)"
+
+///|
+#cfg(target="js")
+fn worker_global_scope_set_timeout_ffi(
+  obj : JsValue,
+  handler : JsValue,
+  timeout : JsValue,
+  arguments : JsValue,
+) -> Int {
+  worker_global_scope_set_timeout_ffi_js(obj, handler, timeout, arguments).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_global_scope_clear_timeout_ffi(
+  obj : JsValue,
+  id : JsValue,
+) -> Unit = "(obj, id) => obj.clearTimeout(id)"
+
+///|
+#cfg(target="js")
+extern "js" fn worker_global_scope_set_interval_ffi_js(
+  obj : JsValue,
+  handler : JsValue,
+  timeout : JsValue,
+  arguments : JsValue,
+) -> JsValue = "(obj, handler, timeout, _arguments) => obj.setInterval(handler, timeout, ..._arguments)"
+
+///|
+#cfg(target="js")
+fn worker_global_scope_set_interval_ffi(
+  obj : JsValue,
+  handler : JsValue,
+  timeout : JsValue,
+  arguments : JsValue,
+) -> Int {
+  worker_global_scope_set_interval_ffi_js(obj, handler, timeout, arguments).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_global_scope_clear_interval_ffi(
+  obj : JsValue,
+  id : JsValue,
+) -> Unit = "(obj, id) => obj.clearInterval(id)"
+
+///|
+#cfg(target="js")
+extern "js" fn worker_global_scope_queue_microtask_ffi(
+  obj : JsValue,
+  callback : JsValue,
+) -> Unit = "(obj, callback) => obj.queueMicrotask(callback)"
+
+///|
+#cfg(target="js")
+extern "js" fn worker_global_scope_create_image_bitmap_ffi_js(
+  obj : JsValue,
+  image : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, image, options) => obj.createImageBitmap(image, options)"
+
+///|
+#cfg(target="js")
+fn worker_global_scope_create_image_bitmap_ffi(
+  obj : JsValue,
+  image : JsValue,
+  options : JsValue,
+) -> JsPromise[ImageBitmap] {
+  worker_global_scope_create_image_bitmap_ffi_js(obj, image, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_global_scope_create_image_bitmap_cropped_ffi_js(
+  obj : JsValue,
+  image : JsValue,
+  sx : JsValue,
+  sy : JsValue,
+  sw : JsValue,
+  sh : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, image, sx, sy, sw, sh, options) => obj.createImageBitmap(image, sx, sy, sw, sh, options)"
+
+///|
+#cfg(target="js")
+fn worker_global_scope_create_image_bitmap_cropped_ffi(
+  obj : JsValue,
+  image : JsValue,
+  sx : JsValue,
+  sy : JsValue,
+  sw : JsValue,
+  sh : JsValue,
+  options : JsValue,
+) -> JsPromise[ImageBitmap] {
+  worker_global_scope_create_image_bitmap_cropped_ffi_js(
+    obj, image, sx, sy, sw, sh, options,
+  ).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_global_scope_structured_clone_ffi_js(
+  obj : JsValue,
+  value : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, value, options) => obj.structuredClone(value, options)"
+
+///|
+#cfg(target="js")
+fn worker_global_scope_structured_clone_ffi(
+  obj : JsValue,
+  value : JsValue,
+  options : JsValue,
+) -> JsValue {
+  worker_global_scope_structured_clone_ffi_js(obj, value, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_global_scope_fetch_ffi_js(
+  obj : JsValue,
+  input : JsValue,
+  init : JsValue,
+) -> JsValue = "(obj, input, init) => obj.fetch(input, init)"
+
+///|
+#cfg(target="js")
+fn worker_global_scope_fetch_ffi(
+  obj : JsValue,
+  input : JsValue,
+  init : JsValue,
+) -> JsPromise[Response] {
+  worker_global_scope_fetch_ffi_js(obj, input, init).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_global_scope_performance_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.performance"
+
+///|
+#cfg(target="js")
+fn worker_global_scope_performance_ffi(obj : JsValue) -> Performance {
+  worker_global_scope_performance_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_global_scope_indexed_db_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.indexedDB"
+
+///|
+#cfg(target="js")
+fn worker_global_scope_indexed_db_ffi(obj : JsValue) -> IDBFactory {
+  worker_global_scope_indexed_db_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_global_scope_trusted_types_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.trustedTypes"
+
+///|
+#cfg(target="js")
+fn worker_global_scope_trusted_types_ffi(
+  obj : JsValue,
+) -> TrustedTypePolicyFactory {
+  worker_global_scope_trusted_types_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn worker_global_scope_caches_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.caches"
+
+///|
+#cfg(target="js")
+fn worker_global_scope_caches_ffi(obj : JsValue) -> CacheStorage {
+  worker_global_scope_caches_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_self_ffi(obj : JsValue) -> WorkerGlobalScope = "webapi_WorkerGlobalScope" "get_self"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_location_ffi(obj : JsValue) -> WorkerLocation = "webapi_WorkerGlobalScope" "get_location"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_navigator_ffi(obj : JsValue) -> WorkerNavigator = "webapi_WorkerGlobalScope" "get_navigator"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_import_scripts_ffi(
+  obj : JsValue,
+  urls : JsValue,
+) -> Unit = "webapi_WorkerGlobalScope" "importScripts"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_onerror_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WorkerGlobalScope" "get_onerror"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_onerror_ffi(obj : JsValue) -> OnErrorEventHandler {
+  worker_global_scope_onerror_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_set_onerror_ffi(
+  obj : JsValue,
+  onerror : JsValue,
+) -> Unit = "webapi_WorkerGlobalScope" "set_onerror"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_onlanguagechange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WorkerGlobalScope" "get_onlanguagechange"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_onlanguagechange_ffi(obj : JsValue) -> EventHandler {
+  worker_global_scope_onlanguagechange_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_set_onlanguagechange_ffi(
+  obj : JsValue,
+  onlanguagechange : JsValue,
+) -> Unit = "webapi_WorkerGlobalScope" "set_onlanguagechange"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_onoffline_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WorkerGlobalScope" "get_onoffline"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_onoffline_ffi(obj : JsValue) -> EventHandler {
+  worker_global_scope_onoffline_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_set_onoffline_ffi(
+  obj : JsValue,
+  onoffline : JsValue,
+) -> Unit = "webapi_WorkerGlobalScope" "set_onoffline"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_ononline_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WorkerGlobalScope" "get_ononline"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_ononline_ffi(obj : JsValue) -> EventHandler {
+  worker_global_scope_ononline_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_set_ononline_ffi(
+  obj : JsValue,
+  ononline : JsValue,
+) -> Unit = "webapi_WorkerGlobalScope" "set_ononline"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_onrejectionhandled_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WorkerGlobalScope" "get_onrejectionhandled"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_onrejectionhandled_ffi(obj : JsValue) -> EventHandler {
+  worker_global_scope_onrejectionhandled_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_set_onrejectionhandled_ffi(
+  obj : JsValue,
+  onrejectionhandled : JsValue,
+) -> Unit = "webapi_WorkerGlobalScope" "set_onrejectionhandled"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_onunhandledrejection_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WorkerGlobalScope" "get_onunhandledrejection"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_onunhandledrejection_ffi(obj : JsValue) -> EventHandler {
+  worker_global_scope_onunhandledrejection_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_set_onunhandledrejection_ffi(
+  obj : JsValue,
+  onunhandledrejection : JsValue,
+) -> Unit = "webapi_WorkerGlobalScope" "set_onunhandledrejection"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_origin_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WorkerGlobalScope" "get_origin"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_origin_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(worker_global_scope_origin_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_is_secure_context_ffi(obj : JsValue) -> Bool = "webapi_WorkerGlobalScope" "get_isSecureContext"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_cross_origin_isolated_ffi(obj : JsValue) -> Bool = "webapi_WorkerGlobalScope" "get_crossOriginIsolated"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_report_error_ffi(obj : JsValue, e : JsValue) -> Unit = "webapi_WorkerGlobalScope" "reportError"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_btoa_ffi_wasm(obj : JsValue, data : JsValue) -> JsValue = "webapi_WorkerGlobalScope" "btoa"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_btoa_ffi(obj : JsValue, data : JsValue) -> String {
+  jsvalue_to_string(worker_global_scope_btoa_ffi_wasm(obj, data))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_atob_ffi_wasm(obj : JsValue, data : JsValue) -> JsValue = "webapi_WorkerGlobalScope" "atob"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_atob_ffi(obj : JsValue, data : JsValue) -> String {
+  jsvalue_to_string(worker_global_scope_atob_ffi_wasm(obj, data))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_set_timeout_ffi(
+  obj : JsValue,
+  handler : JsValue,
+  timeout : JsValue,
+  arguments : JsValue,
+) -> Int = "webapi_WorkerGlobalScope" "setTimeout"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_clear_timeout_ffi(obj : JsValue, id : JsValue) -> Unit = "webapi_WorkerGlobalScope" "clearTimeout"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_set_interval_ffi(
+  obj : JsValue,
+  handler : JsValue,
+  timeout : JsValue,
+  arguments : JsValue,
+) -> Int = "webapi_WorkerGlobalScope" "setInterval"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_clear_interval_ffi(obj : JsValue, id : JsValue) -> Unit = "webapi_WorkerGlobalScope" "clearInterval"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_queue_microtask_ffi(
+  obj : JsValue,
+  callback : JsValue,
+) -> Unit = "webapi_WorkerGlobalScope" "queueMicrotask"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_create_image_bitmap_ffi_wasm(
+  obj : JsValue,
+  image : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_WorkerGlobalScope" "createImageBitmap"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_create_image_bitmap_ffi(
+  obj : JsValue,
+  image : JsValue,
+  options : JsValue,
+) -> JsPromise[ImageBitmap] {
+  worker_global_scope_create_image_bitmap_ffi_wasm(obj, image, options).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_create_image_bitmap_cropped_ffi_wasm(
+  obj : JsValue,
+  image : JsValue,
+  sx : JsValue,
+  sy : JsValue,
+  sw : JsValue,
+  sh : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_WorkerGlobalScope" "create_image_bitmap_cropped"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_create_image_bitmap_cropped_ffi(
+  obj : JsValue,
+  image : JsValue,
+  sx : JsValue,
+  sy : JsValue,
+  sw : JsValue,
+  sh : JsValue,
+  options : JsValue,
+) -> JsPromise[ImageBitmap] {
+  worker_global_scope_create_image_bitmap_cropped_ffi_wasm(
+    obj, image, sx, sy, sw, sh, options,
+  ).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_structured_clone_ffi(
+  obj : JsValue,
+  value : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_WorkerGlobalScope" "structuredClone"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_fetch_ffi_wasm(
+  obj : JsValue,
+  input : JsValue,
+  init : JsValue,
+) -> JsValue = "webapi_WorkerGlobalScope" "fetch"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_fetch_ffi(
+  obj : JsValue,
+  input : JsValue,
+  init : JsValue,
+) -> JsPromise[Response] {
+  worker_global_scope_fetch_ffi_wasm(obj, input, init).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_performance_ffi(obj : JsValue) -> Performance = "webapi_WorkerGlobalScope" "get_performance"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_indexed_db_ffi(obj : JsValue) -> IDBFactory = "webapi_WorkerGlobalScope" "get_indexedDB"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_trusted_types_ffi(
+  obj : JsValue,
+) -> TrustedTypePolicyFactory = "webapi_WorkerGlobalScope" "get_trustedTypes"
+
+///|
+#cfg(target="wasm-gc")
+fn worker_global_scope_caches_ffi(obj : JsValue) -> CacheStorage = "webapi_WorkerGlobalScope" "get_caches"

@@ -35,3 +35,40 @@ pub fn ImageBitmapRenderingContextSettings::alpha(
 ) -> Bool? {
   image_bitmap_rendering_context_settings_get_alpha_ffi(TJsValue::to_js(self)).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn image_bitmap_rendering_context_settings_ffi(
+  alpha : JsValue,
+) -> ImageBitmapRenderingContextSettings =
+  #|(alpha) => {
+  #|  const obj = {};
+  #|  if (alpha !== undefined) obj.alpha = alpha;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn image_bitmap_rendering_context_settings_empty_ffi() -> ImageBitmapRenderingContextSettings = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn image_bitmap_rendering_context_settings_get_alpha_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.alpha"
+
+///|
+#cfg(target="wasm-gc")
+fn image_bitmap_rendering_context_settings_ffi(
+  alpha : JsValue,
+) -> ImageBitmapRenderingContextSettings = "webapi_ImageBitmapRenderingContextSettings" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn image_bitmap_rendering_context_settings_empty_ffi() -> ImageBitmapRenderingContextSettings = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn image_bitmap_rendering_context_settings_get_alpha_ffi(
+  obj : JsValue,
+) -> JsValue = "webapi_ImageBitmapRenderingContextSettings" "get_alpha"

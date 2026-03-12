@@ -51,3 +51,59 @@ impl TTextEncoderStream with readable(self : Self) -> ReadableStream {
 impl TTextEncoderStream with writable(self : Self) -> WritableStream {
   text_encoder_stream_writable_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn text_encoder_stream_new_ffi() -> TextEncoderStream = "() => new TextEncoderStream()"
+
+///|
+#cfg(target="js")
+extern "js" fn text_encoder_stream_encoding_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.encoding"
+
+///|
+#cfg(target="js")
+fn text_encoder_stream_encoding_ffi(obj : JsValue) -> String {
+  text_encoder_stream_encoding_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_encoder_stream_readable_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.readable"
+
+///|
+#cfg(target="js")
+fn text_encoder_stream_readable_ffi(obj : JsValue) -> ReadableStream {
+  text_encoder_stream_readable_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_encoder_stream_writable_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.writable"
+
+///|
+#cfg(target="js")
+fn text_encoder_stream_writable_ffi(obj : JsValue) -> WritableStream {
+  text_encoder_stream_writable_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn text_encoder_stream_new_ffi() -> TextEncoderStream = "webapi_TextEncoderStream" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn text_encoder_stream_encoding_ffi_wasm(obj : JsValue) -> JsValue = "webapi_TextEncoderStream" "get_encoding"
+
+///|
+#cfg(target="wasm-gc")
+fn text_encoder_stream_encoding_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(text_encoder_stream_encoding_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn text_encoder_stream_readable_ffi(obj : JsValue) -> ReadableStream = "webapi_TextEncoderStream" "get_readable"
+
+///|
+#cfg(target="wasm-gc")
+fn text_encoder_stream_writable_ffi(obj : JsValue) -> WritableStream = "webapi_TextEncoderStream" "get_writable"

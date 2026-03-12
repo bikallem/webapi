@@ -64,3 +64,45 @@ impl TSVGCircleElement with cy(self : Self) -> SVGAnimatedLength {
 impl TSVGCircleElement with r(self : Self) -> SVGAnimatedLength {
   svg_circle_element_r_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn svg_circle_element_cx_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.cx"
+
+///|
+#cfg(target="js")
+fn svg_circle_element_cx_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_circle_element_cx_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_circle_element_cy_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.cy"
+
+///|
+#cfg(target="js")
+fn svg_circle_element_cy_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_circle_element_cy_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_circle_element_r_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.r"
+
+///|
+#cfg(target="js")
+fn svg_circle_element_r_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_circle_element_r_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svg_circle_element_cx_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGCircleElement" "get_cx"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_circle_element_cy_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGCircleElement" "get_cy"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_circle_element_r_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGCircleElement" "get_r"

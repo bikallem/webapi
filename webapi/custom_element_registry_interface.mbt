@@ -151,3 +151,144 @@ impl TCustomElementRegistry with initialize(self : Self, root : &TNode) -> Unit 
     TJsValue::to_js(root),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn custom_element_registry_new_ffi() -> CustomElementRegistry = "() => new CustomElementRegistry()"
+
+///|
+#cfg(target="js")
+extern "js" fn custom_element_registry_get_is_undefined_ffi(
+  obj : CustomElementRegistryGet,
+) -> Bool = "(obj) => obj === undefined"
+
+///|
+#cfg(target="js")
+extern "js" fn custom_element_registry_define_ffi(
+  obj : JsValue,
+  name : JsValue,
+  constructor_ : JsValue,
+  options : JsValue,
+) -> Unit = "(obj, name, constructor_, options) => obj.define(name, constructor_, options)"
+
+///|
+#cfg(target="js")
+extern "js" fn custom_element_registry_get_ffi_js(
+  obj : JsValue,
+  name : JsValue,
+) -> JsValue = "(obj, name) => obj.get(name)"
+
+///|
+#cfg(target="js")
+fn custom_element_registry_get_ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> CustomElementRegistryGet {
+  custom_element_registry_get_ffi_js(obj, name).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn custom_element_registry_get_name_ffi(
+  obj : JsValue,
+  constructor_ : JsValue,
+) -> JsValue = "(obj, constructor_) => obj.getName(constructor_)"
+
+///|
+#cfg(target="js")
+extern "js" fn custom_element_registry_when_defined_ffi_js(
+  obj : JsValue,
+  name : JsValue,
+) -> JsValue = "(obj, name) => obj.whenDefined(name)"
+
+///|
+#cfg(target="js")
+fn custom_element_registry_when_defined_ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> JsPromise[CustomElementConstructor] {
+  custom_element_registry_when_defined_ffi_js(obj, name).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn custom_element_registry_upgrade_ffi(
+  obj : JsValue,
+  root : JsValue,
+) -> Unit = "(obj, root) => obj.upgrade(root)"
+
+///|
+#cfg(target="js")
+extern "js" fn custom_element_registry_initialize_ffi(
+  obj : JsValue,
+  root : JsValue,
+) -> Unit = "(obj, root) => obj.initialize(root)"
+
+///|
+#cfg(target="wasm-gc")
+fn custom_element_registry_new_ffi() -> CustomElementRegistry = "webapi_CustomElementRegistry" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn custom_element_registry_get_is_undefined_ffi(
+  obj : CustomElementRegistryGet,
+) -> Bool = "JsValue" "isUndefined"
+
+///|
+#cfg(target="wasm-gc")
+fn custom_element_registry_define_ffi(
+  obj : JsValue,
+  name : JsValue,
+  constructor_ : JsValue,
+  options : JsValue,
+) -> Unit = "webapi_CustomElementRegistry" "define"
+
+///|
+#cfg(target="wasm-gc")
+fn custom_element_registry_get_ffi_wasm(
+  obj : JsValue,
+  name : JsValue,
+) -> JsValue = "webapi_CustomElementRegistry" "get"
+
+///|
+#cfg(target="wasm-gc")
+fn custom_element_registry_get_ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> CustomElementRegistryGet {
+  custom_element_registry_get_ffi_wasm(obj, name).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn custom_element_registry_get_name_ffi(
+  obj : JsValue,
+  constructor_ : JsValue,
+) -> JsValue = "webapi_CustomElementRegistry" "getName"
+
+///|
+#cfg(target="wasm-gc")
+fn custom_element_registry_when_defined_ffi_wasm(
+  obj : JsValue,
+  name : JsValue,
+) -> JsValue = "webapi_CustomElementRegistry" "whenDefined"
+
+///|
+#cfg(target="wasm-gc")
+fn custom_element_registry_when_defined_ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> JsPromise[CustomElementConstructor] {
+  custom_element_registry_when_defined_ffi_wasm(obj, name).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn custom_element_registry_upgrade_ffi(obj : JsValue, root : JsValue) -> Unit = "webapi_CustomElementRegistry" "upgrade"
+
+///|
+#cfg(target="wasm-gc")
+fn custom_element_registry_initialize_ffi(
+  obj : JsValue,
+  root : JsValue,
+) -> Unit = "webapi_CustomElementRegistry" "initialize"

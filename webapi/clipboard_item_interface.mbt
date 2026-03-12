@@ -60,3 +60,103 @@ impl TClipboardItem with get_type(self : Self, type_ : String) -> JsPromise[
 pub fn ClipboardItem::supports(type_ : String) -> Bool {
   clipboard_item_supports_ffi(TJsValue::to_js(type_))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn clipboard_item_new_ffi(
+  items : JsValue,
+  options : JsValue,
+) -> ClipboardItem = "(items, options) => new ClipboardItem(items, options)"
+
+///|
+#cfg(target="js")
+extern "js" fn clipboard_item_presentation_style_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.presentationStyle"
+
+///|
+#cfg(target="js")
+fn clipboard_item_presentation_style_ffi(obj : JsValue) -> PresentationStyle {
+  PresentationStyle::from_unchecked(
+    clipboard_item_presentation_style_ffi_js(obj).unsafe_cast(),
+  )
+}
+
+///|
+#cfg(target="js")
+extern "js" fn clipboard_item_types_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.types"
+
+///|
+#cfg(target="js")
+fn clipboard_item_types_ffi(obj : JsValue) -> Array[String] {
+  clipboard_item_types_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn clipboard_item_get_type_ffi_js(
+  obj : JsValue,
+  type_ : JsValue,
+) -> JsValue = "(obj, type_) => obj.getType(type_)"
+
+///|
+#cfg(target="js")
+fn clipboard_item_get_type_ffi(
+  obj : JsValue,
+  type_ : JsValue,
+) -> JsPromise[Blob] {
+  clipboard_item_get_type_ffi_js(obj, type_).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn clipboard_item_supports_ffi_js(type_ : JsValue) -> JsValue = "(type_) => ClipboardItem.supports(type_)"
+
+///|
+#cfg(target="js")
+fn clipboard_item_supports_ffi(type_ : JsValue) -> Bool {
+  clipboard_item_supports_ffi_js(type_).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn clipboard_item_new_ffi(items : JsValue, options : JsValue) -> ClipboardItem = "webapi_ClipboardItem" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn clipboard_item_presentation_style_ffi_wasm(obj : JsValue) -> JsValue = "webapi_ClipboardItem" "get_presentationStyle"
+
+///|
+#cfg(target="wasm-gc")
+fn clipboard_item_presentation_style_ffi(obj : JsValue) -> PresentationStyle {
+  PresentationStyle::from_unchecked(
+    jsvalue_to_string(clipboard_item_presentation_style_ffi_wasm(obj)),
+  )
+}
+
+///|
+#cfg(target="wasm-gc")
+fn clipboard_item_types_ffi_wasm(obj : JsValue) -> JsArray = "webapi_ClipboardItem" "get_types"
+
+///|
+#cfg(target="wasm-gc")
+fn clipboard_item_types_ffi(obj : JsValue) -> Array[String] {
+  clipboard_item_types_ffi_wasm(obj).to_string_array()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn clipboard_item_get_type_ffi_wasm(obj : JsValue, type_ : JsValue) -> JsValue = "webapi_ClipboardItem" "getType"
+
+///|
+#cfg(target="wasm-gc")
+fn clipboard_item_get_type_ffi(
+  obj : JsValue,
+  type_ : JsValue,
+) -> JsPromise[Blob] {
+  clipboard_item_get_type_ffi_wasm(obj, type_).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn clipboard_item_supports_ffi(type_ : JsValue) -> Bool = "webapi_ClipboardItem" "supports"

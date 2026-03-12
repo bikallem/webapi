@@ -29,3 +29,32 @@ pub fn WorkletOptions::credentials(
 ) -> RequestCredentials? {
   worklet_options_get_credentials_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn worklet_options_ffi(credentials : JsValue) -> WorkletOptions =
+  #|(credentials) => {
+  #|  const obj = {};
+  #|  if (credentials !== undefined) obj.credentials = credentials;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn worklet_options_empty_ffi() -> WorkletOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn worklet_options_get_credentials_ffi(obj : JsValue) -> JsValue = "(obj) => obj.credentials"
+
+///|
+#cfg(target="wasm-gc")
+fn worklet_options_ffi(credentials : JsValue) -> WorkletOptions = "webapi_WorkletOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn worklet_options_empty_ffi() -> WorkletOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn worklet_options_get_credentials_ffi(obj : JsValue) -> JsValue = "webapi_WorkletOptions" "get_credentials"

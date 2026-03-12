@@ -23,3 +23,15 @@ pub fn NavigationInterceptHandler::new(
 ) -> NavigationInterceptHandler {
   navigation_intercept_handler_ffi(callback)
 }
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_intercept_handler_ffi(
+  callback : () -> JsPromise[JsValue],
+) -> NavigationInterceptHandler = "(callback) => callback"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_intercept_handler_ffi(
+  callback : () -> JsPromise[JsValue],
+) -> NavigationInterceptHandler = "webapi_NavigationInterceptHandler" "new"

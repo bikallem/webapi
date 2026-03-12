@@ -201,3 +201,176 @@ impl TDocumentFragment with get_element_by_id(self : Self, element_id : String) 
 impl TDocumentFragment with query_selector(self : Self, selectors : String) -> Element {
   self.query_selector_opt(selectors).unwrap()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn document_fragment_new_ffi() -> DocumentFragment = "() => new DocumentFragment()"
+
+///|
+#cfg(target="js")
+extern "js" fn document_fragment_get_element_by_id_ffi(
+  obj : JsValue,
+  element_id : JsValue,
+) -> JsValue = "(obj, element_id) => obj.getElementById(element_id)"
+
+///|
+#cfg(target="js")
+extern "js" fn document_fragment_children_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.children"
+
+///|
+#cfg(target="js")
+fn document_fragment_children_ffi(obj : JsValue) -> HTMLCollection {
+  document_fragment_children_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn document_fragment_first_element_child_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.firstElementChild"
+
+///|
+#cfg(target="js")
+fn document_fragment_first_element_child_ffi(obj : JsValue) -> Element {
+  document_fragment_first_element_child_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn document_fragment_last_element_child_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.lastElementChild"
+
+///|
+#cfg(target="js")
+fn document_fragment_last_element_child_ffi(obj : JsValue) -> Element {
+  document_fragment_last_element_child_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn document_fragment_child_element_count_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.childElementCount"
+
+///|
+#cfg(target="js")
+fn document_fragment_child_element_count_ffi(obj : JsValue) -> UInt {
+  document_fragment_child_element_count_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn document_fragment_prepend_ffi(
+  obj : JsValue,
+  nodes : JsValue,
+) -> Unit = "(obj, nodes) => obj.prepend(...nodes)"
+
+///|
+#cfg(target="js")
+extern "js" fn document_fragment_append_ffi(
+  obj : JsValue,
+  nodes : JsValue,
+) -> Unit = "(obj, nodes) => obj.append(...nodes)"
+
+///|
+#cfg(target="js")
+extern "js" fn document_fragment_replace_children_ffi(
+  obj : JsValue,
+  nodes : JsValue,
+) -> Unit = "(obj, nodes) => obj.replaceChildren(...nodes)"
+
+///|
+#cfg(target="js")
+extern "js" fn document_fragment_move_before_ffi(
+  obj : JsValue,
+  node : JsValue,
+  child : JsValue,
+) -> Unit = "(obj, node, child) => obj.moveBefore(node, child)"
+
+///|
+#cfg(target="js")
+extern "js" fn document_fragment_query_selector_ffi(
+  obj : JsValue,
+  selectors : JsValue,
+) -> JsValue = "(obj, selectors) => obj.querySelector(selectors)"
+
+///|
+#cfg(target="js")
+extern "js" fn document_fragment_query_selector_all_ffi_js(
+  obj : JsValue,
+  selectors : JsValue,
+) -> JsValue = "(obj, selectors) => obj.querySelectorAll(selectors)"
+
+///|
+#cfg(target="js")
+fn document_fragment_query_selector_all_ffi(
+  obj : JsValue,
+  selectors : JsValue,
+) -> NodeList {
+  document_fragment_query_selector_all_ffi_js(obj, selectors).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn document_fragment_new_ffi() -> DocumentFragment = "webapi_DocumentFragment" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn document_fragment_get_element_by_id_ffi(
+  obj : JsValue,
+  element_id : JsValue,
+) -> JsValue = "webapi_DocumentFragment" "getElementById"
+
+///|
+#cfg(target="wasm-gc")
+fn document_fragment_children_ffi(obj : JsValue) -> HTMLCollection = "webapi_DocumentFragment" "get_children"
+
+///|
+#cfg(target="wasm-gc")
+fn document_fragment_first_element_child_ffi(obj : JsValue) -> Element = "webapi_DocumentFragment" "get_firstElementChild"
+
+///|
+#cfg(target="wasm-gc")
+fn document_fragment_last_element_child_ffi(obj : JsValue) -> Element = "webapi_DocumentFragment" "get_lastElementChild"
+
+///|
+#cfg(target="wasm-gc")
+fn document_fragment_child_element_count_ffi(obj : JsValue) -> UInt = "webapi_DocumentFragment" "get_childElementCount"
+
+///|
+#cfg(target="wasm-gc")
+fn document_fragment_prepend_ffi(obj : JsValue, nodes : JsValue) -> Unit = "webapi_DocumentFragment" "prepend"
+
+///|
+#cfg(target="wasm-gc")
+fn document_fragment_append_ffi(obj : JsValue, nodes : JsValue) -> Unit = "webapi_DocumentFragment" "append"
+
+///|
+#cfg(target="wasm-gc")
+fn document_fragment_replace_children_ffi(
+  obj : JsValue,
+  nodes : JsValue,
+) -> Unit = "webapi_DocumentFragment" "replaceChildren"
+
+///|
+#cfg(target="wasm-gc")
+fn document_fragment_move_before_ffi(
+  obj : JsValue,
+  node : JsValue,
+  child : JsValue,
+) -> Unit = "webapi_DocumentFragment" "moveBefore"
+
+///|
+#cfg(target="wasm-gc")
+fn document_fragment_query_selector_ffi(
+  obj : JsValue,
+  selectors : JsValue,
+) -> JsValue = "webapi_DocumentFragment" "querySelector"
+
+///|
+#cfg(target="wasm-gc")
+fn document_fragment_query_selector_all_ffi(
+  obj : JsValue,
+  selectors : JsValue,
+) -> NodeList = "webapi_DocumentFragment" "querySelectorAll"

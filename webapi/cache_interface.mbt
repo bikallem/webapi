@@ -131,3 +131,226 @@ impl TCache with keys(
     opt_to_js(options),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn cache_match_ffi_js(
+  obj : JsValue,
+  request : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, request, options) => obj.match(request, options)"
+
+///|
+#cfg(target="js")
+fn cache_match_ffi(
+  obj : JsValue,
+  request : JsValue,
+  options : JsValue,
+) -> JsPromise[&TCacheMatch] {
+  cache_match_ffi_js(obj, request, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn cache_match_all_ffi_js(
+  obj : JsValue,
+  request : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, request, options) => obj.matchAll(request, options)"
+
+///|
+#cfg(target="js")
+fn cache_match_all_ffi(
+  obj : JsValue,
+  request : JsValue,
+  options : JsValue,
+) -> JsPromise[Array[Response]] {
+  cache_match_all_ffi_js(obj, request, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn cache_add_ffi_js(obj : JsValue, request : JsValue) -> JsValue = "(obj, request) => obj.add(request)"
+
+///|
+#cfg(target="js")
+fn cache_add_ffi(obj : JsValue, request : JsValue) -> JsPromise[JsValue] {
+  cache_add_ffi_js(obj, request).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn cache_add_all_ffi_js(
+  obj : JsValue,
+  requests : JsValue,
+) -> JsValue = "(obj, requests) => obj.addAll(requests)"
+
+///|
+#cfg(target="js")
+fn cache_add_all_ffi(obj : JsValue, requests : JsValue) -> JsPromise[JsValue] {
+  cache_add_all_ffi_js(obj, requests).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn cache_put_ffi_js(
+  obj : JsValue,
+  request : JsValue,
+  response : JsValue,
+) -> JsValue = "(obj, request, response) => obj.put(request, response)"
+
+///|
+#cfg(target="js")
+fn cache_put_ffi(
+  obj : JsValue,
+  request : JsValue,
+  response : JsValue,
+) -> JsPromise[JsValue] {
+  cache_put_ffi_js(obj, request, response).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn cache_delete_ffi_js(
+  obj : JsValue,
+  request : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, request, options) => obj.delete(request, options)"
+
+///|
+#cfg(target="js")
+fn cache_delete_ffi(
+  obj : JsValue,
+  request : JsValue,
+  options : JsValue,
+) -> JsPromise[Bool] {
+  cache_delete_ffi_js(obj, request, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn cache_keys_ffi_js(
+  obj : JsValue,
+  request : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, request, options) => obj.keys(request, options)"
+
+///|
+#cfg(target="js")
+fn cache_keys_ffi(
+  obj : JsValue,
+  request : JsValue,
+  options : JsValue,
+) -> JsPromise[Array[Request]] {
+  cache_keys_ffi_js(obj, request, options).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn cache_match_ffi_wasm(
+  obj : JsValue,
+  request : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Cache" "match"
+
+///|
+#cfg(target="wasm-gc")
+fn cache_match_ffi(
+  obj : JsValue,
+  request : JsValue,
+  options : JsValue,
+) -> JsPromise[&TCacheMatch] {
+  cache_match_ffi_wasm(obj, request, options).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn cache_match_all_ffi_wasm(
+  obj : JsValue,
+  request : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Cache" "matchAll"
+
+///|
+#cfg(target="wasm-gc")
+fn cache_match_all_ffi(
+  obj : JsValue,
+  request : JsValue,
+  options : JsValue,
+) -> JsPromise[Array[Response]] {
+  cache_match_all_ffi_wasm(obj, request, options).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn cache_add_ffi_wasm(obj : JsValue, request : JsValue) -> JsValue = "webapi_Cache" "add"
+
+///|
+#cfg(target="wasm-gc")
+fn cache_add_ffi(obj : JsValue, request : JsValue) -> JsPromise[JsValue] {
+  cache_add_ffi_wasm(obj, request).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn cache_add_all_ffi_wasm(obj : JsValue, requests : JsValue) -> JsValue = "webapi_Cache" "addAll"
+
+///|
+#cfg(target="wasm-gc")
+fn cache_add_all_ffi(obj : JsValue, requests : JsValue) -> JsPromise[JsValue] {
+  cache_add_all_ffi_wasm(obj, requests).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn cache_put_ffi_wasm(
+  obj : JsValue,
+  request : JsValue,
+  response : JsValue,
+) -> JsValue = "webapi_Cache" "put"
+
+///|
+#cfg(target="wasm-gc")
+fn cache_put_ffi(
+  obj : JsValue,
+  request : JsValue,
+  response : JsValue,
+) -> JsPromise[JsValue] {
+  cache_put_ffi_wasm(obj, request, response).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn cache_delete_ffi_wasm(
+  obj : JsValue,
+  request : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Cache" "delete"
+
+///|
+#cfg(target="wasm-gc")
+fn cache_delete_ffi(
+  obj : JsValue,
+  request : JsValue,
+  options : JsValue,
+) -> JsPromise[Bool] {
+  cache_delete_ffi_wasm(obj, request, options).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn cache_keys_ffi_wasm(
+  obj : JsValue,
+  request : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Cache" "keys"
+
+///|
+#cfg(target="wasm-gc")
+fn cache_keys_ffi(
+  obj : JsValue,
+  request : JsValue,
+  options : JsValue,
+) -> JsPromise[Array[Request]] {
+  cache_keys_ffi_wasm(obj, request, options).unsafe_cast()
+}

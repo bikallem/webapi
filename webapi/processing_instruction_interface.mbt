@@ -50,3 +50,37 @@ impl TProcessingInstruction with target(self : Self) -> String {
 impl TProcessingInstruction with sheet(self : Self) -> CSSStyleSheet {
   processing_instruction_sheet_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn processing_instruction_target_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.target"
+
+///|
+#cfg(target="js")
+fn processing_instruction_target_ffi(obj : JsValue) -> String {
+  processing_instruction_target_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn processing_instruction_sheet_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.sheet"
+
+///|
+#cfg(target="js")
+fn processing_instruction_sheet_ffi(obj : JsValue) -> CSSStyleSheet {
+  processing_instruction_sheet_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn processing_instruction_target_ffi_wasm(obj : JsValue) -> JsValue = "webapi_ProcessingInstruction" "get_target"
+
+///|
+#cfg(target="wasm-gc")
+fn processing_instruction_target_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(processing_instruction_target_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn processing_instruction_sheet_ffi(obj : JsValue) -> CSSStyleSheet = "webapi_ProcessingInstruction" "get_sheet"

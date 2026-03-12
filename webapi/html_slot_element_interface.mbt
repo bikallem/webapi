@@ -106,3 +106,117 @@ impl THTMLSlotElement with assign(
     ),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_slot_element_new_ffi() -> HTMLSlotElement = "() => new HTMLSlotElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_slot_element_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.name"
+
+///|
+#cfg(target="js")
+fn html_slot_element_name_ffi(obj : JsValue) -> String {
+  html_slot_element_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_slot_element_set_name_ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> Unit = "(obj, name) => { obj.name = name; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_slot_element_assigned_nodes_ffi_js(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, options) => obj.assignedNodes(options)"
+
+///|
+#cfg(target="js")
+fn html_slot_element_assigned_nodes_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> Array[Node] {
+  html_slot_element_assigned_nodes_ffi_js(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_slot_element_assigned_elements_ffi_js(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, options) => obj.assignedElements(options)"
+
+///|
+#cfg(target="js")
+fn html_slot_element_assigned_elements_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> Array[Element] {
+  html_slot_element_assigned_elements_ffi_js(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_slot_element_assign_ffi(
+  obj : JsValue,
+  nodes : JsValue,
+) -> Unit = "(obj, nodes) => obj.assign(...nodes)"
+
+///|
+#cfg(target="wasm-gc")
+fn html_slot_element_new_ffi() -> HTMLSlotElement = "webapi_HTMLSlotElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_slot_element_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLSlotElement" "get_name"
+
+///|
+#cfg(target="wasm-gc")
+fn html_slot_element_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_slot_element_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_slot_element_set_name_ffi(obj : JsValue, name : JsValue) -> Unit = "webapi_HTMLSlotElement" "set_name"
+
+///|
+#cfg(target="wasm-gc")
+fn html_slot_element_assigned_nodes_ffi_wasm(
+  obj : JsValue,
+  options : JsValue,
+) -> JsArray = "webapi_HTMLSlotElement" "assignedNodes"
+
+///|
+#cfg(target="wasm-gc")
+fn html_slot_element_assigned_nodes_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> Array[Node] {
+  html_slot_element_assigned_nodes_ffi_wasm(obj, options).to_array()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_slot_element_assigned_elements_ffi_wasm(
+  obj : JsValue,
+  options : JsValue,
+) -> JsArray = "webapi_HTMLSlotElement" "assignedElements"
+
+///|
+#cfg(target="wasm-gc")
+fn html_slot_element_assigned_elements_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> Array[Element] {
+  html_slot_element_assigned_elements_ffi_wasm(obj, options).to_array()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_slot_element_assign_ffi(obj : JsValue, nodes : JsValue) -> Unit = "webapi_HTMLSlotElement" "assign"

@@ -63,3 +63,110 @@ impl TWindowClient with navigate(self : Self, url : String) -> JsPromise[
 ] {
   window_client_navigate_ffi(TJsValue::to_js(self), TJsValue::to_js(url))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn window_client_visibility_state_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.visibilityState"
+
+///|
+#cfg(target="js")
+fn window_client_visibility_state_ffi(obj : JsValue) -> DocumentVisibilityState {
+  DocumentVisibilityState::from_unchecked(
+    window_client_visibility_state_ffi_js(obj).unsafe_cast(),
+  )
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_client_focused_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.focused"
+
+///|
+#cfg(target="js")
+fn window_client_focused_ffi(obj : JsValue) -> Bool {
+  window_client_focused_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_client_ancestor_origins_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ancestorOrigins"
+
+///|
+#cfg(target="js")
+fn window_client_ancestor_origins_ffi(obj : JsValue) -> Array[String] {
+  window_client_ancestor_origins_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_client_focus_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.focus()"
+
+///|
+#cfg(target="js")
+fn window_client_focus_ffi(obj : JsValue) -> JsPromise[WindowClient] {
+  window_client_focus_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_client_navigate_ffi_js(
+  obj : JsValue,
+  url : JsValue,
+) -> JsValue = "(obj, url) => obj.navigate(url)"
+
+///|
+#cfg(target="js")
+fn window_client_navigate_ffi(
+  obj : JsValue,
+  url : JsValue,
+) -> JsPromise[WindowClient] {
+  window_client_navigate_ffi_js(obj, url).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_client_visibility_state_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WindowClient" "get_visibilityState"
+
+///|
+#cfg(target="wasm-gc")
+fn window_client_visibility_state_ffi(obj : JsValue) -> DocumentVisibilityState {
+  DocumentVisibilityState::from_unchecked(
+    jsvalue_to_string(window_client_visibility_state_ffi_wasm(obj)),
+  )
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_client_focused_ffi(obj : JsValue) -> Bool = "webapi_WindowClient" "get_focused"
+
+///|
+#cfg(target="wasm-gc")
+fn window_client_ancestor_origins_ffi_wasm(obj : JsValue) -> JsArray = "webapi_WindowClient" "get_ancestorOrigins"
+
+///|
+#cfg(target="wasm-gc")
+fn window_client_ancestor_origins_ffi(obj : JsValue) -> Array[String] {
+  window_client_ancestor_origins_ffi_wasm(obj).to_string_array()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_client_focus_ffi_wasm(obj : JsValue) -> JsValue = "webapi_WindowClient" "focus"
+
+///|
+#cfg(target="wasm-gc")
+fn window_client_focus_ffi(obj : JsValue) -> JsPromise[WindowClient] {
+  window_client_focus_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_client_navigate_ffi_wasm(obj : JsValue, url : JsValue) -> JsValue = "webapi_WindowClient" "navigate"
+
+///|
+#cfg(target="wasm-gc")
+fn window_client_navigate_ffi(
+  obj : JsValue,
+  url : JsValue,
+) -> JsPromise[WindowClient] {
+  window_client_navigate_ffi_wasm(obj, url).unsafe_cast()
+}

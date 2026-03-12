@@ -63,3 +63,105 @@ impl TNavigationPreloadManager with get_state(self : Self) -> JsPromise[
 ] {
   navigation_preload_manager_get_state_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_preload_manager_enable_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.enable()"
+
+///|
+#cfg(target="js")
+fn navigation_preload_manager_enable_ffi(obj : JsValue) -> JsPromise[JsValue] {
+  navigation_preload_manager_enable_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_preload_manager_disable_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.disable()"
+
+///|
+#cfg(target="js")
+fn navigation_preload_manager_disable_ffi(obj : JsValue) -> JsPromise[JsValue] {
+  navigation_preload_manager_disable_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_preload_manager_set_header_value_ffi_js(
+  obj : JsValue,
+  value : JsValue,
+) -> JsValue = "(obj, value) => obj.setHeaderValue(value)"
+
+///|
+#cfg(target="js")
+fn navigation_preload_manager_set_header_value_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> JsPromise[JsValue] {
+  navigation_preload_manager_set_header_value_ffi_js(obj, value).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_preload_manager_get_state_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.getState()"
+
+///|
+#cfg(target="js")
+fn navigation_preload_manager_get_state_ffi(
+  obj : JsValue,
+) -> JsPromise[NavigationPreloadState] {
+  navigation_preload_manager_get_state_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_preload_manager_enable_ffi_wasm(obj : JsValue) -> JsValue = "webapi_NavigationPreloadManager" "enable"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_preload_manager_enable_ffi(obj : JsValue) -> JsPromise[JsValue] {
+  navigation_preload_manager_enable_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_preload_manager_disable_ffi_wasm(obj : JsValue) -> JsValue = "webapi_NavigationPreloadManager" "disable"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_preload_manager_disable_ffi(obj : JsValue) -> JsPromise[JsValue] {
+  navigation_preload_manager_disable_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_preload_manager_set_header_value_ffi_wasm(
+  obj : JsValue,
+  value : JsValue,
+) -> JsValue = "webapi_NavigationPreloadManager" "setHeaderValue"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_preload_manager_set_header_value_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> JsPromise[JsValue] {
+  navigation_preload_manager_set_header_value_ffi_wasm(obj, value).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_preload_manager_get_state_ffi_wasm(obj : JsValue) -> JsValue = "webapi_NavigationPreloadManager" "getState"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_preload_manager_get_state_ffi(
+  obj : JsValue,
+) -> JsPromise[NavigationPreloadState] {
+  navigation_preload_manager_get_state_ffi_wasm(obj).unsafe_cast()
+}

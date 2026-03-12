@@ -456,3 +456,789 @@ impl TDOMMatrixReadOnly with to_float64array(self : Self) -> Float64Array {
 impl TDOMMatrixReadOnly with to_json(self : Self) -> JsValue {
   dom_matrix_read_only_to_json_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_new_ffi(
+  init : JsValue,
+) -> DOMMatrixReadOnly = "(init) => new DOMMatrixReadOnly(init)"
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_from_matrix_ffi_js(
+  other : JsValue,
+) -> JsValue = "(other) => DOMMatrixReadOnly.fromMatrix(other)"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_from_matrix_ffi(other : JsValue) -> DOMMatrixReadOnly {
+  dom_matrix_read_only_from_matrix_ffi_js(other).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_from_float32array_ffi_js(
+  array32 : JsValue,
+) -> JsValue = "(array32) => DOMMatrixReadOnly.fromFloat32Array(array32)"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_from_float32array_ffi(
+  array32 : JsValue,
+) -> DOMMatrixReadOnly {
+  dom_matrix_read_only_from_float32array_ffi_js(array32).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_from_float64array_ffi_js(
+  array64 : JsValue,
+) -> JsValue = "(array64) => DOMMatrixReadOnly.fromFloat64Array(array64)"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_from_float64array_ffi(
+  array64 : JsValue,
+) -> DOMMatrixReadOnly {
+  dom_matrix_read_only_from_float64array_ffi_js(array64).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_a_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.a"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_a_ffi(obj : JsValue) -> Double {
+  dom_matrix_read_only_a_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_b_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.b"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_b_ffi(obj : JsValue) -> Double {
+  dom_matrix_read_only_b_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_c_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.c"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_c_ffi(obj : JsValue) -> Double {
+  dom_matrix_read_only_c_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_d_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.d"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_d_ffi(obj : JsValue) -> Double {
+  dom_matrix_read_only_d_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_e_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.e"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_e_ffi(obj : JsValue) -> Double {
+  dom_matrix_read_only_e_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_f_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.f"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_f_ffi(obj : JsValue) -> Double {
+  dom_matrix_read_only_f_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_m11_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.m11"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_m11_ffi(obj : JsValue) -> Double {
+  dom_matrix_read_only_m11_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_m12_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.m12"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_m12_ffi(obj : JsValue) -> Double {
+  dom_matrix_read_only_m12_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_m13_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.m13"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_m13_ffi(obj : JsValue) -> Double {
+  dom_matrix_read_only_m13_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_m14_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.m14"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_m14_ffi(obj : JsValue) -> Double {
+  dom_matrix_read_only_m14_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_m21_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.m21"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_m21_ffi(obj : JsValue) -> Double {
+  dom_matrix_read_only_m21_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_m22_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.m22"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_m22_ffi(obj : JsValue) -> Double {
+  dom_matrix_read_only_m22_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_m23_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.m23"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_m23_ffi(obj : JsValue) -> Double {
+  dom_matrix_read_only_m23_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_m24_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.m24"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_m24_ffi(obj : JsValue) -> Double {
+  dom_matrix_read_only_m24_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_m31_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.m31"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_m31_ffi(obj : JsValue) -> Double {
+  dom_matrix_read_only_m31_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_m32_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.m32"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_m32_ffi(obj : JsValue) -> Double {
+  dom_matrix_read_only_m32_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_m33_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.m33"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_m33_ffi(obj : JsValue) -> Double {
+  dom_matrix_read_only_m33_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_m34_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.m34"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_m34_ffi(obj : JsValue) -> Double {
+  dom_matrix_read_only_m34_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_m41_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.m41"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_m41_ffi(obj : JsValue) -> Double {
+  dom_matrix_read_only_m41_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_m42_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.m42"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_m42_ffi(obj : JsValue) -> Double {
+  dom_matrix_read_only_m42_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_m43_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.m43"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_m43_ffi(obj : JsValue) -> Double {
+  dom_matrix_read_only_m43_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_m44_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.m44"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_m44_ffi(obj : JsValue) -> Double {
+  dom_matrix_read_only_m44_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_is2d_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.is2D"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_is2d_ffi(obj : JsValue) -> Bool {
+  dom_matrix_read_only_is2d_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_is_identity_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.isIdentity"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_is_identity_ffi(obj : JsValue) -> Bool {
+  dom_matrix_read_only_is_identity_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_translate_ffi_js(
+  obj : JsValue,
+  tx : JsValue,
+  ty : JsValue,
+  tz : JsValue,
+) -> JsValue = "(obj, tx, ty, tz) => obj.translate(tx, ty, tz)"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_translate_ffi(
+  obj : JsValue,
+  tx : JsValue,
+  ty : JsValue,
+  tz : JsValue,
+) -> DOMMatrix {
+  dom_matrix_read_only_translate_ffi_js(obj, tx, ty, tz).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_scale_ffi_js(
+  obj : JsValue,
+  scale_x : JsValue,
+  scale_y : JsValue,
+  scale_z : JsValue,
+  origin_x : JsValue,
+  origin_y : JsValue,
+  origin_z : JsValue,
+) -> JsValue = "(obj, scale_x, scale_y, scale_z, origin_x, origin_y, origin_z) => obj.scale(scale_x, scale_y, scale_z, origin_x, origin_y, origin_z)"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_scale_ffi(
+  obj : JsValue,
+  scale_x : JsValue,
+  scale_y : JsValue,
+  scale_z : JsValue,
+  origin_x : JsValue,
+  origin_y : JsValue,
+  origin_z : JsValue,
+) -> DOMMatrix {
+  dom_matrix_read_only_scale_ffi_js(
+    obj, scale_x, scale_y, scale_z, origin_x, origin_y, origin_z,
+  ).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_scale_non_uniform_ffi_js(
+  obj : JsValue,
+  scale_x : JsValue,
+  scale_y : JsValue,
+) -> JsValue = "(obj, scale_x, scale_y) => obj.scaleNonUniform(scale_x, scale_y)"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_scale_non_uniform_ffi(
+  obj : JsValue,
+  scale_x : JsValue,
+  scale_y : JsValue,
+) -> DOMMatrix {
+  dom_matrix_read_only_scale_non_uniform_ffi_js(obj, scale_x, scale_y).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_scale3d_ffi_js(
+  obj : JsValue,
+  scale : JsValue,
+  origin_x : JsValue,
+  origin_y : JsValue,
+  origin_z : JsValue,
+) -> JsValue = "(obj, scale, origin_x, origin_y, origin_z) => obj.scale3d(scale, origin_x, origin_y, origin_z)"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_scale3d_ffi(
+  obj : JsValue,
+  scale : JsValue,
+  origin_x : JsValue,
+  origin_y : JsValue,
+  origin_z : JsValue,
+) -> DOMMatrix {
+  dom_matrix_read_only_scale3d_ffi_js(obj, scale, origin_x, origin_y, origin_z).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_rotate_ffi_js(
+  obj : JsValue,
+  rot_x : JsValue,
+  rot_y : JsValue,
+  rot_z : JsValue,
+) -> JsValue = "(obj, rot_x, rot_y, rot_z) => obj.rotate(rot_x, rot_y, rot_z)"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_rotate_ffi(
+  obj : JsValue,
+  rot_x : JsValue,
+  rot_y : JsValue,
+  rot_z : JsValue,
+) -> DOMMatrix {
+  dom_matrix_read_only_rotate_ffi_js(obj, rot_x, rot_y, rot_z).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_rotate_from_vector_ffi_js(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+) -> JsValue = "(obj, x, y) => obj.rotateFromVector(x, y)"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_rotate_from_vector_ffi(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+) -> DOMMatrix {
+  dom_matrix_read_only_rotate_from_vector_ffi_js(obj, x, y).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_rotate_axis_angle_ffi_js(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+  z : JsValue,
+  angle : JsValue,
+) -> JsValue = "(obj, x, y, z, angle) => obj.rotateAxisAngle(x, y, z, angle)"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_rotate_axis_angle_ffi(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+  z : JsValue,
+  angle : JsValue,
+) -> DOMMatrix {
+  dom_matrix_read_only_rotate_axis_angle_ffi_js(obj, x, y, z, angle).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_skew_x_ffi_js(
+  obj : JsValue,
+  sx : JsValue,
+) -> JsValue = "(obj, sx) => obj.skewX(sx)"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_skew_x_ffi(obj : JsValue, sx : JsValue) -> DOMMatrix {
+  dom_matrix_read_only_skew_x_ffi_js(obj, sx).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_skew_y_ffi_js(
+  obj : JsValue,
+  sy : JsValue,
+) -> JsValue = "(obj, sy) => obj.skewY(sy)"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_skew_y_ffi(obj : JsValue, sy : JsValue) -> DOMMatrix {
+  dom_matrix_read_only_skew_y_ffi_js(obj, sy).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_multiply_ffi_js(
+  obj : JsValue,
+  other : JsValue,
+) -> JsValue = "(obj, other) => obj.multiply(other)"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_multiply_ffi(
+  obj : JsValue,
+  other : JsValue,
+) -> DOMMatrix {
+  dom_matrix_read_only_multiply_ffi_js(obj, other).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_flip_x_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.flipX()"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_flip_x_ffi(obj : JsValue) -> DOMMatrix {
+  dom_matrix_read_only_flip_x_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_flip_y_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.flipY()"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_flip_y_ffi(obj : JsValue) -> DOMMatrix {
+  dom_matrix_read_only_flip_y_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_inverse_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.inverse()"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_inverse_ffi(obj : JsValue) -> DOMMatrix {
+  dom_matrix_read_only_inverse_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_transform_point_ffi_js(
+  obj : JsValue,
+  point : JsValue,
+) -> JsValue = "(obj, point) => obj.transformPoint(point)"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_transform_point_ffi(
+  obj : JsValue,
+  point : JsValue,
+) -> DOMPoint {
+  dom_matrix_read_only_transform_point_ffi_js(obj, point).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_to_float32array_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.toFloat32Array()"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_to_float32array_ffi(obj : JsValue) -> Float32Array {
+  dom_matrix_read_only_to_float32array_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_to_float64array_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.toFloat64Array()"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_to_float64array_ffi(obj : JsValue) -> Float64Array {
+  dom_matrix_read_only_to_float64array_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_matrix_read_only_to_json_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.toJSON()"
+
+///|
+#cfg(target="js")
+fn dom_matrix_read_only_to_json_ffi(obj : JsValue) -> JsValue {
+  dom_matrix_read_only_to_json_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_new_ffi(init : JsValue) -> DOMMatrixReadOnly = "webapi_DOMMatrixReadOnly" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_from_matrix_ffi(other : JsValue) -> DOMMatrixReadOnly = "webapi_DOMMatrixReadOnly" "fromMatrix"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_from_float32array_ffi(
+  array32 : JsValue,
+) -> DOMMatrixReadOnly = "webapi_DOMMatrixReadOnly" "fromFloat32Array"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_from_float64array_ffi(
+  array64 : JsValue,
+) -> DOMMatrixReadOnly = "webapi_DOMMatrixReadOnly" "fromFloat64Array"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_a_ffi(obj : JsValue) -> Double = "webapi_DOMMatrixReadOnly" "get_a"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_b_ffi(obj : JsValue) -> Double = "webapi_DOMMatrixReadOnly" "get_b"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_c_ffi(obj : JsValue) -> Double = "webapi_DOMMatrixReadOnly" "get_c"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_d_ffi(obj : JsValue) -> Double = "webapi_DOMMatrixReadOnly" "get_d"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_e_ffi(obj : JsValue) -> Double = "webapi_DOMMatrixReadOnly" "get_e"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_f_ffi(obj : JsValue) -> Double = "webapi_DOMMatrixReadOnly" "get_f"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_m11_ffi(obj : JsValue) -> Double = "webapi_DOMMatrixReadOnly" "get_m11"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_m12_ffi(obj : JsValue) -> Double = "webapi_DOMMatrixReadOnly" "get_m12"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_m13_ffi(obj : JsValue) -> Double = "webapi_DOMMatrixReadOnly" "get_m13"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_m14_ffi(obj : JsValue) -> Double = "webapi_DOMMatrixReadOnly" "get_m14"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_m21_ffi(obj : JsValue) -> Double = "webapi_DOMMatrixReadOnly" "get_m21"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_m22_ffi(obj : JsValue) -> Double = "webapi_DOMMatrixReadOnly" "get_m22"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_m23_ffi(obj : JsValue) -> Double = "webapi_DOMMatrixReadOnly" "get_m23"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_m24_ffi(obj : JsValue) -> Double = "webapi_DOMMatrixReadOnly" "get_m24"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_m31_ffi(obj : JsValue) -> Double = "webapi_DOMMatrixReadOnly" "get_m31"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_m32_ffi(obj : JsValue) -> Double = "webapi_DOMMatrixReadOnly" "get_m32"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_m33_ffi(obj : JsValue) -> Double = "webapi_DOMMatrixReadOnly" "get_m33"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_m34_ffi(obj : JsValue) -> Double = "webapi_DOMMatrixReadOnly" "get_m34"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_m41_ffi(obj : JsValue) -> Double = "webapi_DOMMatrixReadOnly" "get_m41"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_m42_ffi(obj : JsValue) -> Double = "webapi_DOMMatrixReadOnly" "get_m42"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_m43_ffi(obj : JsValue) -> Double = "webapi_DOMMatrixReadOnly" "get_m43"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_m44_ffi(obj : JsValue) -> Double = "webapi_DOMMatrixReadOnly" "get_m44"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_is2d_ffi(obj : JsValue) -> Bool = "webapi_DOMMatrixReadOnly" "get_is2D"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_is_identity_ffi(obj : JsValue) -> Bool = "webapi_DOMMatrixReadOnly" "get_isIdentity"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_translate_ffi(
+  obj : JsValue,
+  tx : JsValue,
+  ty : JsValue,
+  tz : JsValue,
+) -> DOMMatrix = "webapi_DOMMatrixReadOnly" "translate"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_scale_ffi(
+  obj : JsValue,
+  scale_x : JsValue,
+  scale_y : JsValue,
+  scale_z : JsValue,
+  origin_x : JsValue,
+  origin_y : JsValue,
+  origin_z : JsValue,
+) -> DOMMatrix = "webapi_DOMMatrixReadOnly" "scale"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_scale_non_uniform_ffi(
+  obj : JsValue,
+  scale_x : JsValue,
+  scale_y : JsValue,
+) -> DOMMatrix = "webapi_DOMMatrixReadOnly" "scaleNonUniform"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_scale3d_ffi(
+  obj : JsValue,
+  scale : JsValue,
+  origin_x : JsValue,
+  origin_y : JsValue,
+  origin_z : JsValue,
+) -> DOMMatrix = "webapi_DOMMatrixReadOnly" "scale3d"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_rotate_ffi(
+  obj : JsValue,
+  rot_x : JsValue,
+  rot_y : JsValue,
+  rot_z : JsValue,
+) -> DOMMatrix = "webapi_DOMMatrixReadOnly" "rotate"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_rotate_from_vector_ffi(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+) -> DOMMatrix = "webapi_DOMMatrixReadOnly" "rotateFromVector"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_rotate_axis_angle_ffi(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+  z : JsValue,
+  angle : JsValue,
+) -> DOMMatrix = "webapi_DOMMatrixReadOnly" "rotateAxisAngle"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_skew_x_ffi(obj : JsValue, sx : JsValue) -> DOMMatrix = "webapi_DOMMatrixReadOnly" "skewX"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_skew_y_ffi(obj : JsValue, sy : JsValue) -> DOMMatrix = "webapi_DOMMatrixReadOnly" "skewY"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_multiply_ffi(
+  obj : JsValue,
+  other : JsValue,
+) -> DOMMatrix = "webapi_DOMMatrixReadOnly" "multiply"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_flip_x_ffi(obj : JsValue) -> DOMMatrix = "webapi_DOMMatrixReadOnly" "flipX"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_flip_y_ffi(obj : JsValue) -> DOMMatrix = "webapi_DOMMatrixReadOnly" "flipY"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_inverse_ffi(obj : JsValue) -> DOMMatrix = "webapi_DOMMatrixReadOnly" "inverse"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_transform_point_ffi(
+  obj : JsValue,
+  point : JsValue,
+) -> DOMPoint = "webapi_DOMMatrixReadOnly" "transformPoint"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_to_float32array_ffi(obj : JsValue) -> Float32Array = "webapi_DOMMatrixReadOnly" "toFloat32Array"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_to_float64array_ffi(obj : JsValue) -> Float64Array = "webapi_DOMMatrixReadOnly" "toFloat64Array"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_matrix_read_only_to_json_ffi(obj : JsValue) -> JsValue = "webapi_DOMMatrixReadOnly" "toJSON"

@@ -106,3 +106,139 @@ impl TStorageEvent with init_storage_event(
     opt_to_js(storage_area),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn storage_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> StorageEvent = "(type_, event_init_dict) => new StorageEvent(type_, event_init_dict)"
+
+///|
+#cfg(target="js")
+extern "js" fn storage_event_key_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.key"
+
+///|
+#cfg(target="js")
+fn storage_event_key_ffi(obj : JsValue) -> String {
+  storage_event_key_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn storage_event_old_value_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oldValue"
+
+///|
+#cfg(target="js")
+fn storage_event_old_value_ffi(obj : JsValue) -> String {
+  storage_event_old_value_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn storage_event_new_value_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.newValue"
+
+///|
+#cfg(target="js")
+fn storage_event_new_value_ffi(obj : JsValue) -> String {
+  storage_event_new_value_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn storage_event_url_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.url"
+
+///|
+#cfg(target="js")
+fn storage_event_url_ffi(obj : JsValue) -> String {
+  storage_event_url_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn storage_event_storage_area_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.storageArea"
+
+///|
+#cfg(target="js")
+fn storage_event_storage_area_ffi(obj : JsValue) -> Storage {
+  storage_event_storage_area_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn storage_event_init_storage_event_ffi(
+  obj : JsValue,
+  type_ : JsValue,
+  bubbles : JsValue,
+  cancelable : JsValue,
+  key : JsValue,
+  old_value : JsValue,
+  new_value : JsValue,
+  url : JsValue,
+  storage_area : JsValue,
+) -> Unit = "(obj, type_, bubbles, cancelable, key, old_value, new_value, url, storage_area) => obj.initStorageEvent(type_, bubbles, cancelable, key, old_value, new_value, url, storage_area)"
+
+///|
+#cfg(target="wasm-gc")
+fn storage_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> StorageEvent = "webapi_StorageEvent" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn storage_event_key_ffi_wasm(obj : JsValue) -> JsValue = "webapi_StorageEvent" "get_key"
+
+///|
+#cfg(target="wasm-gc")
+fn storage_event_key_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(storage_event_key_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn storage_event_old_value_ffi_wasm(obj : JsValue) -> JsValue = "webapi_StorageEvent" "get_oldValue"
+
+///|
+#cfg(target="wasm-gc")
+fn storage_event_old_value_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(storage_event_old_value_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn storage_event_new_value_ffi_wasm(obj : JsValue) -> JsValue = "webapi_StorageEvent" "get_newValue"
+
+///|
+#cfg(target="wasm-gc")
+fn storage_event_new_value_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(storage_event_new_value_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn storage_event_url_ffi_wasm(obj : JsValue) -> JsValue = "webapi_StorageEvent" "get_url"
+
+///|
+#cfg(target="wasm-gc")
+fn storage_event_url_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(storage_event_url_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn storage_event_storage_area_ffi(obj : JsValue) -> Storage = "webapi_StorageEvent" "get_storageArea"
+
+///|
+#cfg(target="wasm-gc")
+fn storage_event_init_storage_event_ffi(
+  obj : JsValue,
+  type_ : JsValue,
+  bubbles : JsValue,
+  cancelable : JsValue,
+  key : JsValue,
+  old_value : JsValue,
+  new_value : JsValue,
+  url : JsValue,
+  storage_area : JsValue,
+) -> Unit = "webapi_StorageEvent" "initStorageEvent"

@@ -23,3 +23,15 @@ pub fn UnderlyingSinkStartCallback::new(
 ) -> UnderlyingSinkStartCallback {
   underlying_sink_start_callback_ffi(callback)
 }
+
+///|
+#cfg(target="js")
+extern "js" fn underlying_sink_start_callback_ffi(
+  callback : (WritableStreamDefaultController) -> JsValue,
+) -> UnderlyingSinkStartCallback = "(callback) => callback"
+
+///|
+#cfg(target="wasm-gc")
+fn underlying_sink_start_callback_ffi(
+  callback : (WritableStreamDefaultController) -> JsValue,
+) -> UnderlyingSinkStartCallback = "webapi_UnderlyingSinkStartCallback" "new"

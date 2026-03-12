@@ -158,3 +158,218 @@ impl THTMLOptionElement with set_text(self : Self, text : String) -> Unit {
 impl THTMLOptionElement with index(self : Self) -> Int {
   html_option_element_index_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_option_element_new_ffi() -> HTMLOptionElement = "() => new HTMLOptionElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_option_element_disabled_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.disabled"
+
+///|
+#cfg(target="js")
+fn html_option_element_disabled_ffi(obj : JsValue) -> Bool {
+  html_option_element_disabled_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_option_element_set_disabled_ffi(
+  obj : JsValue,
+  disabled : JsValue,
+) -> Unit = "(obj, disabled) => { obj.disabled = disabled; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_option_element_form_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.form"
+
+///|
+#cfg(target="js")
+fn html_option_element_form_ffi(obj : JsValue) -> HTMLFormElement {
+  html_option_element_form_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_option_element_label_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.label"
+
+///|
+#cfg(target="js")
+fn html_option_element_label_ffi(obj : JsValue) -> String {
+  html_option_element_label_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_option_element_set_label_ffi(
+  obj : JsValue,
+  label : JsValue,
+) -> Unit = "(obj, label) => { obj.label = label; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_option_element_default_selected_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.defaultSelected"
+
+///|
+#cfg(target="js")
+fn html_option_element_default_selected_ffi(obj : JsValue) -> Bool {
+  html_option_element_default_selected_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_option_element_set_default_selected_ffi(
+  obj : JsValue,
+  default_selected : JsValue,
+) -> Unit = "(obj, defaultSelected) => { obj.defaultSelected = defaultSelected; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_option_element_selected_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.selected"
+
+///|
+#cfg(target="js")
+fn html_option_element_selected_ffi(obj : JsValue) -> Bool {
+  html_option_element_selected_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_option_element_set_selected_ffi(
+  obj : JsValue,
+  selected : JsValue,
+) -> Unit = "(obj, selected) => { obj.selected = selected; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_option_element_value_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.value"
+
+///|
+#cfg(target="js")
+fn html_option_element_value_ffi(obj : JsValue) -> String {
+  html_option_element_value_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_option_element_set_value_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "(obj, value) => { obj.value = value; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_option_element_text_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.text"
+
+///|
+#cfg(target="js")
+fn html_option_element_text_ffi(obj : JsValue) -> String {
+  html_option_element_text_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_option_element_set_text_ffi(
+  obj : JsValue,
+  text : JsValue,
+) -> Unit = "(obj, text) => { obj.text = text; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_option_element_index_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.index"
+
+///|
+#cfg(target="js")
+fn html_option_element_index_ffi(obj : JsValue) -> Int {
+  html_option_element_index_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_option_element_new_ffi() -> HTMLOptionElement = "webapi_HTMLOptionElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_option_element_disabled_ffi(obj : JsValue) -> Bool = "webapi_HTMLOptionElement" "get_disabled"
+
+///|
+#cfg(target="wasm-gc")
+fn html_option_element_set_disabled_ffi(
+  obj : JsValue,
+  disabled : JsValue,
+) -> Unit = "webapi_HTMLOptionElement" "set_disabled"
+
+///|
+#cfg(target="wasm-gc")
+fn html_option_element_form_ffi(obj : JsValue) -> HTMLFormElement = "webapi_HTMLOptionElement" "get_form"
+
+///|
+#cfg(target="wasm-gc")
+fn html_option_element_label_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLOptionElement" "get_label"
+
+///|
+#cfg(target="wasm-gc")
+fn html_option_element_label_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_option_element_label_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_option_element_set_label_ffi(obj : JsValue, label : JsValue) -> Unit = "webapi_HTMLOptionElement" "set_label"
+
+///|
+#cfg(target="wasm-gc")
+fn html_option_element_default_selected_ffi(obj : JsValue) -> Bool = "webapi_HTMLOptionElement" "get_defaultSelected"
+
+///|
+#cfg(target="wasm-gc")
+fn html_option_element_set_default_selected_ffi(
+  obj : JsValue,
+  default_selected : JsValue,
+) -> Unit = "webapi_HTMLOptionElement" "set_defaultSelected"
+
+///|
+#cfg(target="wasm-gc")
+fn html_option_element_selected_ffi(obj : JsValue) -> Bool = "webapi_HTMLOptionElement" "get_selected"
+
+///|
+#cfg(target="wasm-gc")
+fn html_option_element_set_selected_ffi(
+  obj : JsValue,
+  selected : JsValue,
+) -> Unit = "webapi_HTMLOptionElement" "set_selected"
+
+///|
+#cfg(target="wasm-gc")
+fn html_option_element_value_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLOptionElement" "get_value"
+
+///|
+#cfg(target="wasm-gc")
+fn html_option_element_value_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_option_element_value_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_option_element_set_value_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLOptionElement" "set_value"
+
+///|
+#cfg(target="wasm-gc")
+fn html_option_element_text_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLOptionElement" "get_text"
+
+///|
+#cfg(target="wasm-gc")
+fn html_option_element_text_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_option_element_text_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_option_element_set_text_ffi(obj : JsValue, text : JsValue) -> Unit = "webapi_HTMLOptionElement" "set_text"
+
+///|
+#cfg(target="wasm-gc")
+fn html_option_element_index_ffi(obj : JsValue) -> Int = "webapi_HTMLOptionElement" "get_index"

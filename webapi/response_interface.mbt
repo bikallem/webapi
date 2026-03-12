@@ -164,3 +164,334 @@ impl TResponse with json_body(self : Self) -> JsPromise[JsValue] {
 impl TResponse with text(self : Self) -> JsPromise[String] {
   response_text_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn response_new_ffi(body : JsValue, init : JsValue) -> Response = "(body, init) => new Response(body, init)"
+
+///|
+#cfg(target="js")
+extern "js" fn response_error_ffi_js() -> JsValue = "() => Response.error()"
+
+///|
+#cfg(target="js")
+fn response_error_ffi() -> Response {
+  response_error_ffi_js().unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn response_redirect_ffi_js(
+  url : JsValue,
+  status : JsValue,
+) -> JsValue = "(url, status) => Response.redirect(url, status)"
+
+///|
+#cfg(target="js")
+fn response_redirect_ffi(url : JsValue, status : JsValue) -> Response {
+  response_redirect_ffi_js(url, status).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn response_json_ffi_js(data : JsValue, init : JsValue) -> JsValue = "(data, init) => Response.json(data, init)"
+
+///|
+#cfg(target="js")
+fn response_json_ffi(data : JsValue, init : JsValue) -> Response {
+  response_json_ffi_js(data, init).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn response_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.type"
+
+///|
+#cfg(target="js")
+fn response_type_ffi(obj : JsValue) -> ResponseType {
+  ResponseType::from_unchecked(response_type_ffi_js(obj).unsafe_cast())
+}
+
+///|
+#cfg(target="js")
+extern "js" fn response_url_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.url"
+
+///|
+#cfg(target="js")
+fn response_url_ffi(obj : JsValue) -> String {
+  response_url_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn response_redirected_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.redirected"
+
+///|
+#cfg(target="js")
+fn response_redirected_ffi(obj : JsValue) -> Bool {
+  response_redirected_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn response_status_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.status"
+
+///|
+#cfg(target="js")
+fn response_status_ffi(obj : JsValue) -> UInt {
+  response_status_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn response_ok_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ok"
+
+///|
+#cfg(target="js")
+fn response_ok_ffi(obj : JsValue) -> Bool {
+  response_ok_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn response_status_text_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.statusText"
+
+///|
+#cfg(target="js")
+fn response_status_text_ffi(obj : JsValue) -> String {
+  response_status_text_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn response_headers_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.headers"
+
+///|
+#cfg(target="js")
+fn response_headers_ffi(obj : JsValue) -> Headers {
+  response_headers_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn response_clone_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.clone()"
+
+///|
+#cfg(target="js")
+fn response_clone_ffi(obj : JsValue) -> Response {
+  response_clone_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn response_body_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.body"
+
+///|
+#cfg(target="js")
+fn response_body_ffi(obj : JsValue) -> ReadableStream {
+  response_body_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn response_body_used_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.bodyUsed"
+
+///|
+#cfg(target="js")
+fn response_body_used_ffi(obj : JsValue) -> Bool {
+  response_body_used_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn response_array_buffer_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.arrayBuffer()"
+
+///|
+#cfg(target="js")
+fn response_array_buffer_ffi(obj : JsValue) -> JsPromise[ArrayBuffer] {
+  response_array_buffer_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn response_blob_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.blob()"
+
+///|
+#cfg(target="js")
+fn response_blob_ffi(obj : JsValue) -> JsPromise[Blob] {
+  response_blob_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn response_bytes_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.bytes()"
+
+///|
+#cfg(target="js")
+fn response_bytes_ffi(obj : JsValue) -> JsPromise[Uint8Array] {
+  response_bytes_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn response_form_data_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.formData()"
+
+///|
+#cfg(target="js")
+fn response_form_data_ffi(obj : JsValue) -> JsPromise[FormData] {
+  response_form_data_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn response_json_body_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.json()"
+
+///|
+#cfg(target="js")
+fn response_json_body_ffi(obj : JsValue) -> JsPromise[JsValue] {
+  response_json_body_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn response_text_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.text()"
+
+///|
+#cfg(target="js")
+fn response_text_ffi(obj : JsValue) -> JsPromise[String] {
+  response_text_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn response_new_ffi(body : JsValue, init : JsValue) -> Response = "webapi_Response" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn response_error_ffi() -> Response = "webapi_Response" "error"
+
+///|
+#cfg(target="wasm-gc")
+fn response_redirect_ffi(url : JsValue, status : JsValue) -> Response = "webapi_Response" "redirect"
+
+///|
+#cfg(target="wasm-gc")
+fn response_json_ffi(data : JsValue, init : JsValue) -> Response = "webapi_Response" "json"
+
+///|
+#cfg(target="wasm-gc")
+fn response_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Response" "get_type"
+
+///|
+#cfg(target="wasm-gc")
+fn response_type_ffi(obj : JsValue) -> ResponseType {
+  ResponseType::from_unchecked(jsvalue_to_string(response_type_ffi_wasm(obj)))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn response_url_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Response" "get_url"
+
+///|
+#cfg(target="wasm-gc")
+fn response_url_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(response_url_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn response_redirected_ffi(obj : JsValue) -> Bool = "webapi_Response" "get_redirected"
+
+///|
+#cfg(target="wasm-gc")
+fn response_status_ffi(obj : JsValue) -> UInt = "webapi_Response" "get_status"
+
+///|
+#cfg(target="wasm-gc")
+fn response_ok_ffi(obj : JsValue) -> Bool = "webapi_Response" "get_ok"
+
+///|
+#cfg(target="wasm-gc")
+fn response_status_text_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Response" "get_statusText"
+
+///|
+#cfg(target="wasm-gc")
+fn response_status_text_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(response_status_text_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn response_headers_ffi(obj : JsValue) -> Headers = "webapi_Response" "get_headers"
+
+///|
+#cfg(target="wasm-gc")
+fn response_clone_ffi(obj : JsValue) -> Response = "webapi_Response" "clone"
+
+///|
+#cfg(target="wasm-gc")
+fn response_body_ffi(obj : JsValue) -> ReadableStream = "webapi_Response" "get_body"
+
+///|
+#cfg(target="wasm-gc")
+fn response_body_used_ffi(obj : JsValue) -> Bool = "webapi_Response" "get_bodyUsed"
+
+///|
+#cfg(target="wasm-gc")
+fn response_array_buffer_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Response" "arrayBuffer"
+
+///|
+#cfg(target="wasm-gc")
+fn response_array_buffer_ffi(obj : JsValue) -> JsPromise[ArrayBuffer] {
+  response_array_buffer_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn response_blob_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Response" "blob"
+
+///|
+#cfg(target="wasm-gc")
+fn response_blob_ffi(obj : JsValue) -> JsPromise[Blob] {
+  response_blob_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn response_bytes_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Response" "bytes"
+
+///|
+#cfg(target="wasm-gc")
+fn response_bytes_ffi(obj : JsValue) -> JsPromise[Uint8Array] {
+  response_bytes_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn response_form_data_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Response" "formData"
+
+///|
+#cfg(target="wasm-gc")
+fn response_form_data_ffi(obj : JsValue) -> JsPromise[FormData] {
+  response_form_data_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn response_json_body_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Response" "json_body"
+
+///|
+#cfg(target="wasm-gc")
+fn response_json_body_ffi(obj : JsValue) -> JsPromise[JsValue] {
+  response_json_body_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn response_text_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Response" "text"
+
+///|
+#cfg(target="wasm-gc")
+fn response_text_ffi(obj : JsValue) -> JsPromise[String] {
+  response_text_ffi_wasm(obj).unsafe_cast()
+}

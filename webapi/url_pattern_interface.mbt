@@ -149,3 +149,246 @@ impl TURLPattern with hash(self : Self) -> String {
 impl TURLPattern with has_reg_exp_groups(self : Self) -> Bool {
   url_pattern_has_reg_exp_groups_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn url_pattern_new_ffi(
+  input : JsValue,
+  base_url : JsValue,
+  options : JsValue,
+) -> URLPattern = "(input, base_url, options) => new URLPattern(input, base_url, options)"
+
+///|
+#cfg(target="js")
+extern "js" fn url_pattern_new_2_ffi(
+  input : JsValue,
+  options : JsValue,
+) -> URLPattern = "(input, options) => new URLPattern(input, options)"
+
+///|
+#cfg(target="js")
+extern "js" fn url_pattern_test_ffi_js(
+  obj : JsValue,
+  input : JsValue,
+  base_url : JsValue,
+) -> JsValue = "(obj, input, base_url) => obj.test(input, base_url)"
+
+///|
+#cfg(target="js")
+fn url_pattern_test_ffi(
+  obj : JsValue,
+  input : JsValue,
+  base_url : JsValue,
+) -> Bool {
+  url_pattern_test_ffi_js(obj, input, base_url).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn url_pattern_exec_ffi(
+  obj : JsValue,
+  input : JsValue,
+  base_url : JsValue,
+) -> JsValue = "(obj, input, base_url) => obj.exec(input, base_url)"
+
+///|
+#cfg(target="js")
+extern "js" fn url_pattern_protocol_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.protocol"
+
+///|
+#cfg(target="js")
+fn url_pattern_protocol_ffi(obj : JsValue) -> String {
+  url_pattern_protocol_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn url_pattern_username_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.username"
+
+///|
+#cfg(target="js")
+fn url_pattern_username_ffi(obj : JsValue) -> String {
+  url_pattern_username_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn url_pattern_password_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.password"
+
+///|
+#cfg(target="js")
+fn url_pattern_password_ffi(obj : JsValue) -> String {
+  url_pattern_password_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn url_pattern_hostname_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.hostname"
+
+///|
+#cfg(target="js")
+fn url_pattern_hostname_ffi(obj : JsValue) -> String {
+  url_pattern_hostname_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn url_pattern_port_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.port"
+
+///|
+#cfg(target="js")
+fn url_pattern_port_ffi(obj : JsValue) -> String {
+  url_pattern_port_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn url_pattern_pathname_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.pathname"
+
+///|
+#cfg(target="js")
+fn url_pattern_pathname_ffi(obj : JsValue) -> String {
+  url_pattern_pathname_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn url_pattern_search_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.search"
+
+///|
+#cfg(target="js")
+fn url_pattern_search_ffi(obj : JsValue) -> String {
+  url_pattern_search_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn url_pattern_hash_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.hash"
+
+///|
+#cfg(target="js")
+fn url_pattern_hash_ffi(obj : JsValue) -> String {
+  url_pattern_hash_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn url_pattern_has_reg_exp_groups_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.hasRegExpGroups"
+
+///|
+#cfg(target="js")
+fn url_pattern_has_reg_exp_groups_ffi(obj : JsValue) -> Bool {
+  url_pattern_has_reg_exp_groups_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn url_pattern_new_ffi(
+  input : JsValue,
+  base_url : JsValue,
+  options : JsValue,
+) -> URLPattern = "webapi_URLPattern" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn url_pattern_new_2_ffi(input : JsValue, options : JsValue) -> URLPattern = "webapi_URLPattern" "new_2"
+
+///|
+#cfg(target="wasm-gc")
+fn url_pattern_test_ffi(
+  obj : JsValue,
+  input : JsValue,
+  base_url : JsValue,
+) -> Bool = "webapi_URLPattern" "test"
+
+///|
+#cfg(target="wasm-gc")
+fn url_pattern_exec_ffi(
+  obj : JsValue,
+  input : JsValue,
+  base_url : JsValue,
+) -> JsValue = "webapi_URLPattern" "exec"
+
+///|
+#cfg(target="wasm-gc")
+fn url_pattern_protocol_ffi_wasm(obj : JsValue) -> JsValue = "webapi_URLPattern" "get_protocol"
+
+///|
+#cfg(target="wasm-gc")
+fn url_pattern_protocol_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(url_pattern_protocol_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn url_pattern_username_ffi_wasm(obj : JsValue) -> JsValue = "webapi_URLPattern" "get_username"
+
+///|
+#cfg(target="wasm-gc")
+fn url_pattern_username_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(url_pattern_username_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn url_pattern_password_ffi_wasm(obj : JsValue) -> JsValue = "webapi_URLPattern" "get_password"
+
+///|
+#cfg(target="wasm-gc")
+fn url_pattern_password_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(url_pattern_password_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn url_pattern_hostname_ffi_wasm(obj : JsValue) -> JsValue = "webapi_URLPattern" "get_hostname"
+
+///|
+#cfg(target="wasm-gc")
+fn url_pattern_hostname_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(url_pattern_hostname_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn url_pattern_port_ffi_wasm(obj : JsValue) -> JsValue = "webapi_URLPattern" "get_port"
+
+///|
+#cfg(target="wasm-gc")
+fn url_pattern_port_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(url_pattern_port_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn url_pattern_pathname_ffi_wasm(obj : JsValue) -> JsValue = "webapi_URLPattern" "get_pathname"
+
+///|
+#cfg(target="wasm-gc")
+fn url_pattern_pathname_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(url_pattern_pathname_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn url_pattern_search_ffi_wasm(obj : JsValue) -> JsValue = "webapi_URLPattern" "get_search"
+
+///|
+#cfg(target="wasm-gc")
+fn url_pattern_search_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(url_pattern_search_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn url_pattern_hash_ffi_wasm(obj : JsValue) -> JsValue = "webapi_URLPattern" "get_hash"
+
+///|
+#cfg(target="wasm-gc")
+fn url_pattern_hash_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(url_pattern_hash_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn url_pattern_has_reg_exp_groups_ffi(obj : JsValue) -> Bool = "webapi_URLPattern" "get_hasRegExpGroups"

@@ -32,3 +32,35 @@ impl TPermissions with query(self : Self, permission_desc : JsValue) -> JsPromis
 ] {
   permissions_query_ffi(TJsValue::to_js(self), TJsValue::to_js(permission_desc))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn permissions_query_ffi_js(
+  obj : JsValue,
+  permission_desc : JsValue,
+) -> JsValue = "(obj, permission_desc) => obj.query(permission_desc)"
+
+///|
+#cfg(target="js")
+fn permissions_query_ffi(
+  obj : JsValue,
+  permission_desc : JsValue,
+) -> JsPromise[PermissionStatus] {
+  permissions_query_ffi_js(obj, permission_desc).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn permissions_query_ffi_wasm(
+  obj : JsValue,
+  permission_desc : JsValue,
+) -> JsValue = "webapi_Permissions" "query"
+
+///|
+#cfg(target="wasm-gc")
+fn permissions_query_ffi(
+  obj : JsValue,
+  permission_desc : JsValue,
+) -> JsPromise[PermissionStatus] {
+  permissions_query_ffi_wasm(obj, permission_desc).unsafe_cast()
+}

@@ -127,3 +127,148 @@ impl THTMLVideoElement with set_plays_inline(self : Self, plays_inline : Bool) -
     TJsValue::to_js(plays_inline),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_video_element_new_ffi() -> HTMLVideoElement = "() => new HTMLVideoElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_video_element_width_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.width"
+
+///|
+#cfg(target="js")
+fn html_video_element_width_ffi(obj : JsValue) -> UInt {
+  html_video_element_width_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_video_element_set_width_ffi(
+  obj : JsValue,
+  width : JsValue,
+) -> Unit = "(obj, width) => { obj.width = width; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_video_element_height_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.height"
+
+///|
+#cfg(target="js")
+fn html_video_element_height_ffi(obj : JsValue) -> UInt {
+  html_video_element_height_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_video_element_set_height_ffi(
+  obj : JsValue,
+  height : JsValue,
+) -> Unit = "(obj, height) => { obj.height = height; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_video_element_video_width_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.videoWidth"
+
+///|
+#cfg(target="js")
+fn html_video_element_video_width_ffi(obj : JsValue) -> UInt {
+  html_video_element_video_width_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_video_element_video_height_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.videoHeight"
+
+///|
+#cfg(target="js")
+fn html_video_element_video_height_ffi(obj : JsValue) -> UInt {
+  html_video_element_video_height_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_video_element_poster_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.poster"
+
+///|
+#cfg(target="js")
+fn html_video_element_poster_ffi(obj : JsValue) -> String {
+  html_video_element_poster_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_video_element_set_poster_ffi(
+  obj : JsValue,
+  poster : JsValue,
+) -> Unit = "(obj, poster) => { obj.poster = poster; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_video_element_plays_inline_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.playsInline"
+
+///|
+#cfg(target="js")
+fn html_video_element_plays_inline_ffi(obj : JsValue) -> Bool {
+  html_video_element_plays_inline_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_video_element_set_plays_inline_ffi(
+  obj : JsValue,
+  plays_inline : JsValue,
+) -> Unit = "(obj, playsInline) => { obj.playsInline = playsInline; }"
+
+///|
+#cfg(target="wasm-gc")
+fn html_video_element_new_ffi() -> HTMLVideoElement = "webapi_HTMLVideoElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_video_element_width_ffi(obj : JsValue) -> UInt = "webapi_HTMLVideoElement" "get_width"
+
+///|
+#cfg(target="wasm-gc")
+fn html_video_element_set_width_ffi(obj : JsValue, width : JsValue) -> Unit = "webapi_HTMLVideoElement" "set_width"
+
+///|
+#cfg(target="wasm-gc")
+fn html_video_element_height_ffi(obj : JsValue) -> UInt = "webapi_HTMLVideoElement" "get_height"
+
+///|
+#cfg(target="wasm-gc")
+fn html_video_element_set_height_ffi(obj : JsValue, height : JsValue) -> Unit = "webapi_HTMLVideoElement" "set_height"
+
+///|
+#cfg(target="wasm-gc")
+fn html_video_element_video_width_ffi(obj : JsValue) -> UInt = "webapi_HTMLVideoElement" "get_videoWidth"
+
+///|
+#cfg(target="wasm-gc")
+fn html_video_element_video_height_ffi(obj : JsValue) -> UInt = "webapi_HTMLVideoElement" "get_videoHeight"
+
+///|
+#cfg(target="wasm-gc")
+fn html_video_element_poster_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLVideoElement" "get_poster"
+
+///|
+#cfg(target="wasm-gc")
+fn html_video_element_poster_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_video_element_poster_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_video_element_set_poster_ffi(obj : JsValue, poster : JsValue) -> Unit = "webapi_HTMLVideoElement" "set_poster"
+
+///|
+#cfg(target="wasm-gc")
+fn html_video_element_plays_inline_ffi(obj : JsValue) -> Bool = "webapi_HTMLVideoElement" "get_playsInline"
+
+///|
+#cfg(target="wasm-gc")
+fn html_video_element_set_plays_inline_ffi(
+  obj : JsValue,
+  plays_inline : JsValue,
+) -> Unit = "webapi_HTMLVideoElement" "set_playsInline"

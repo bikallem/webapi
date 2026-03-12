@@ -86,3 +86,97 @@ impl TCloseWatcher with set_onclose(self : Self, onclose : (Event) -> JsValue) -
     TJsValue::to_js(event_handler_non_null_ffi(onclose)),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn close_watcher_new_ffi(options : JsValue) -> CloseWatcher = "(options) => new CloseWatcher(options)"
+
+///|
+#cfg(target="js")
+extern "js" fn close_watcher_request_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.requestClose()"
+
+///|
+#cfg(target="js")
+extern "js" fn close_watcher_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.close()"
+
+///|
+#cfg(target="js")
+extern "js" fn close_watcher_destroy_ffi(obj : JsValue) -> Unit = "(obj) => obj.destroy()"
+
+///|
+#cfg(target="js")
+extern "js" fn close_watcher_oncancel_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oncancel"
+
+///|
+#cfg(target="js")
+fn close_watcher_oncancel_ffi(obj : JsValue) -> EventHandler {
+  close_watcher_oncancel_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn close_watcher_set_oncancel_ffi(
+  obj : JsValue,
+  oncancel : JsValue,
+) -> Unit = "(obj, oncancel) => { obj.oncancel = oncancel; }"
+
+///|
+#cfg(target="js")
+extern "js" fn close_watcher_onclose_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onclose"
+
+///|
+#cfg(target="js")
+fn close_watcher_onclose_ffi(obj : JsValue) -> EventHandler {
+  close_watcher_onclose_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn close_watcher_set_onclose_ffi(
+  obj : JsValue,
+  onclose : JsValue,
+) -> Unit = "(obj, onclose) => { obj.onclose = onclose; }"
+
+///|
+#cfg(target="wasm-gc")
+fn close_watcher_new_ffi(options : JsValue) -> CloseWatcher = "webapi_CloseWatcher" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn close_watcher_request_close_ffi(obj : JsValue) -> Unit = "webapi_CloseWatcher" "requestClose"
+
+///|
+#cfg(target="wasm-gc")
+fn close_watcher_close_ffi(obj : JsValue) -> Unit = "webapi_CloseWatcher" "close"
+
+///|
+#cfg(target="wasm-gc")
+fn close_watcher_destroy_ffi(obj : JsValue) -> Unit = "webapi_CloseWatcher" "destroy"
+
+///|
+#cfg(target="wasm-gc")
+fn close_watcher_oncancel_ffi_wasm(obj : JsValue) -> JsValue = "webapi_CloseWatcher" "get_oncancel"
+
+///|
+#cfg(target="wasm-gc")
+fn close_watcher_oncancel_ffi(obj : JsValue) -> EventHandler {
+  close_watcher_oncancel_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn close_watcher_set_oncancel_ffi(obj : JsValue, oncancel : JsValue) -> Unit = "webapi_CloseWatcher" "set_oncancel"
+
+///|
+#cfg(target="wasm-gc")
+fn close_watcher_onclose_ffi_wasm(obj : JsValue) -> JsValue = "webapi_CloseWatcher" "get_onclose"
+
+///|
+#cfg(target="wasm-gc")
+fn close_watcher_onclose_ffi(obj : JsValue) -> EventHandler {
+  close_watcher_onclose_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn close_watcher_set_onclose_ffi(obj : JsValue, onclose : JsValue) -> Unit = "webapi_CloseWatcher" "set_onclose"

@@ -42,3 +42,36 @@ impl TAbortController with signal(self : Self) -> AbortSignal {
 impl TAbortController with abort(self : Self, reason? : JsValue) -> Unit {
   abort_controller_abort_ffi(TJsValue::to_js(self), opt_to_js(reason))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn abort_controller_new_ffi() -> AbortController = "() => new AbortController()"
+
+///|
+#cfg(target="js")
+extern "js" fn abort_controller_signal_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.signal"
+
+///|
+#cfg(target="js")
+fn abort_controller_signal_ffi(obj : JsValue) -> AbortSignal {
+  abort_controller_signal_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn abort_controller_abort_ffi(
+  obj : JsValue,
+  reason : JsValue,
+) -> Unit = "(obj, reason) => obj.abort(reason)"
+
+///|
+#cfg(target="wasm-gc")
+fn abort_controller_new_ffi() -> AbortController = "webapi_AbortController" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn abort_controller_signal_ffi(obj : JsValue) -> AbortSignal = "webapi_AbortController" "get_signal"
+
+///|
+#cfg(target="wasm-gc")
+fn abort_controller_abort_ffi(obj : JsValue, reason : JsValue) -> Unit = "webapi_AbortController" "abort"

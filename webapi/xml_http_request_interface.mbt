@@ -292,3 +292,394 @@ impl TXMLHttpRequest with response_text(self : Self) -> String {
 impl TXMLHttpRequest with response_xml(self : Self) -> Document {
   xml_http_request_response_xml_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_new_ffi() -> XMLHttpRequest = "() => new XMLHttpRequest()"
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_onreadystatechange_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.onreadystatechange"
+
+///|
+#cfg(target="js")
+fn xml_http_request_onreadystatechange_ffi(obj : JsValue) -> EventHandler {
+  xml_http_request_onreadystatechange_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_set_onreadystatechange_ffi(
+  obj : JsValue,
+  onreadystatechange : JsValue,
+) -> Unit = "(obj, onreadystatechange) => { obj.onreadystatechange = onreadystatechange; }"
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_ready_state_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.readyState"
+
+///|
+#cfg(target="js")
+fn xml_http_request_ready_state_ffi(obj : JsValue) -> UInt {
+  xml_http_request_ready_state_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_open_ffi(
+  obj : JsValue,
+  method_ : JsValue,
+  url : JsValue,
+) -> Unit = "(obj, method_, url) => obj.open(method_, url)"
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_open_with_credentials_ffi(
+  obj : JsValue,
+  method_ : JsValue,
+  url : JsValue,
+  async_ : JsValue,
+  username : JsValue,
+  password : JsValue,
+) -> Unit = "(obj, method_, url, async_, username, password) => obj.open(method_, url, async_, username, password)"
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_set_request_header_ffi(
+  obj : JsValue,
+  name : JsValue,
+  value : JsValue,
+) -> Unit = "(obj, name, value) => obj.setRequestHeader(name, value)"
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_timeout_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.timeout"
+
+///|
+#cfg(target="js")
+fn xml_http_request_timeout_ffi(obj : JsValue) -> UInt {
+  xml_http_request_timeout_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_set_timeout_ffi(
+  obj : JsValue,
+  timeout : JsValue,
+) -> Unit = "(obj, timeout) => { obj.timeout = timeout; }"
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_with_credentials_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.withCredentials"
+
+///|
+#cfg(target="js")
+fn xml_http_request_with_credentials_ffi(obj : JsValue) -> Bool {
+  xml_http_request_with_credentials_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_set_with_credentials_ffi(
+  obj : JsValue,
+  with_credentials : JsValue,
+) -> Unit = "(obj, withCredentials) => { obj.withCredentials = withCredentials; }"
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_upload_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.upload"
+
+///|
+#cfg(target="js")
+fn xml_http_request_upload_ffi(obj : JsValue) -> XMLHttpRequestUpload {
+  xml_http_request_upload_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_send_ffi(obj : JsValue, body : JsValue) -> Unit = "(obj, body) => obj.send(body)"
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_abort_ffi(obj : JsValue) -> Unit = "(obj) => obj.abort()"
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_response_url_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.responseURL"
+
+///|
+#cfg(target="js")
+fn xml_http_request_response_url_ffi(obj : JsValue) -> String {
+  xml_http_request_response_url_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_status_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.status"
+
+///|
+#cfg(target="js")
+fn xml_http_request_status_ffi(obj : JsValue) -> UInt {
+  xml_http_request_status_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_status_text_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.statusText"
+
+///|
+#cfg(target="js")
+fn xml_http_request_status_text_ffi(obj : JsValue) -> String {
+  xml_http_request_status_text_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_get_response_header_ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> JsValue = "(obj, name) => obj.getResponseHeader(name)"
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_get_all_response_headers_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.getAllResponseHeaders()"
+
+///|
+#cfg(target="js")
+fn xml_http_request_get_all_response_headers_ffi(obj : JsValue) -> String {
+  xml_http_request_get_all_response_headers_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_override_mime_type_ffi(
+  obj : JsValue,
+  mime : JsValue,
+) -> Unit = "(obj, mime) => obj.overrideMimeType(mime)"
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_response_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.responseType"
+
+///|
+#cfg(target="js")
+fn xml_http_request_response_type_ffi(
+  obj : JsValue,
+) -> XMLHttpRequestResponseType {
+  XMLHttpRequestResponseType::from_unchecked(
+    xml_http_request_response_type_ffi_js(obj).unsafe_cast(),
+  )
+}
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_set_response_type_ffi(
+  obj : JsValue,
+  response_type : JsValue,
+) -> Unit = "(obj, responseType) => { obj.responseType = responseType; }"
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_response_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.response"
+
+///|
+#cfg(target="js")
+fn xml_http_request_response_ffi(obj : JsValue) -> JsValue {
+  xml_http_request_response_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_response_text_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.responseText"
+
+///|
+#cfg(target="js")
+fn xml_http_request_response_text_ffi(obj : JsValue) -> String {
+  xml_http_request_response_text_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn xml_http_request_response_xml_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.responseXML"
+
+///|
+#cfg(target="js")
+fn xml_http_request_response_xml_ffi(obj : JsValue) -> Document {
+  xml_http_request_response_xml_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_new_ffi() -> XMLHttpRequest = "webapi_XMLHttpRequest" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_onreadystatechange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_XMLHttpRequest" "get_onreadystatechange"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_onreadystatechange_ffi(obj : JsValue) -> EventHandler {
+  xml_http_request_onreadystatechange_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_set_onreadystatechange_ffi(
+  obj : JsValue,
+  onreadystatechange : JsValue,
+) -> Unit = "webapi_XMLHttpRequest" "set_onreadystatechange"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_ready_state_ffi(obj : JsValue) -> UInt = "webapi_XMLHttpRequest" "get_readyState"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_open_ffi(
+  obj : JsValue,
+  method_ : JsValue,
+  url : JsValue,
+) -> Unit = "webapi_XMLHttpRequest" "open"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_open_with_credentials_ffi(
+  obj : JsValue,
+  method_ : JsValue,
+  url : JsValue,
+  async_ : JsValue,
+  username : JsValue,
+  password : JsValue,
+) -> Unit = "webapi_XMLHttpRequest" "open_with_credentials"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_set_request_header_ffi(
+  obj : JsValue,
+  name : JsValue,
+  value : JsValue,
+) -> Unit = "webapi_XMLHttpRequest" "setRequestHeader"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_timeout_ffi(obj : JsValue) -> UInt = "webapi_XMLHttpRequest" "get_timeout"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_set_timeout_ffi(obj : JsValue, timeout : JsValue) -> Unit = "webapi_XMLHttpRequest" "set_timeout"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_with_credentials_ffi(obj : JsValue) -> Bool = "webapi_XMLHttpRequest" "get_withCredentials"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_set_with_credentials_ffi(
+  obj : JsValue,
+  with_credentials : JsValue,
+) -> Unit = "webapi_XMLHttpRequest" "set_withCredentials"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_upload_ffi(obj : JsValue) -> XMLHttpRequestUpload = "webapi_XMLHttpRequest" "get_upload"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_send_ffi(obj : JsValue, body : JsValue) -> Unit = "webapi_XMLHttpRequest" "send"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_abort_ffi(obj : JsValue) -> Unit = "webapi_XMLHttpRequest" "abort"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_response_url_ffi_wasm(obj : JsValue) -> JsValue = "webapi_XMLHttpRequest" "get_responseURL"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_response_url_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(xml_http_request_response_url_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_status_ffi(obj : JsValue) -> UInt = "webapi_XMLHttpRequest" "get_status"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_status_text_ffi_wasm(obj : JsValue) -> JsValue = "webapi_XMLHttpRequest" "get_statusText"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_status_text_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(xml_http_request_status_text_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_get_response_header_ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> JsValue = "webapi_XMLHttpRequest" "getResponseHeader"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_get_all_response_headers_ffi_wasm(obj : JsValue) -> JsValue = "webapi_XMLHttpRequest" "getAllResponseHeaders"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_get_all_response_headers_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(xml_http_request_get_all_response_headers_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_override_mime_type_ffi(
+  obj : JsValue,
+  mime : JsValue,
+) -> Unit = "webapi_XMLHttpRequest" "overrideMimeType"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_response_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_XMLHttpRequest" "get_responseType"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_response_type_ffi(
+  obj : JsValue,
+) -> XMLHttpRequestResponseType {
+  XMLHttpRequestResponseType::from_unchecked(
+    jsvalue_to_string(xml_http_request_response_type_ffi_wasm(obj)),
+  )
+}
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_set_response_type_ffi(
+  obj : JsValue,
+  response_type : JsValue,
+) -> Unit = "webapi_XMLHttpRequest" "set_responseType"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_response_ffi(obj : JsValue) -> JsValue = "webapi_XMLHttpRequest" "get_response"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_response_text_ffi_wasm(obj : JsValue) -> JsValue = "webapi_XMLHttpRequest" "get_responseText"
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_response_text_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(xml_http_request_response_text_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn xml_http_request_response_xml_ffi(obj : JsValue) -> Document = "webapi_XMLHttpRequest" "get_responseXML"

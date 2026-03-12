@@ -54,3 +54,75 @@ pub fn SVGBoundingBoxOptions::markers(self : SVGBoundingBoxOptions) -> Bool? {
 pub fn SVGBoundingBoxOptions::clipped(self : SVGBoundingBoxOptions) -> Bool? {
   svg_bounding_box_options_get_clipped_ffi(TJsValue::to_js(self)).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn svg_bounding_box_options_ffi(
+  fill : JsValue,
+  stroke : JsValue,
+  markers : JsValue,
+  clipped : JsValue,
+) -> SVGBoundingBoxOptions =
+  #|(fill, stroke, markers, clipped) => {
+  #|  const obj = {};
+  #|  if (fill !== undefined) obj.fill = fill;
+  #|  if (stroke !== undefined) obj.stroke = stroke;
+  #|  if (markers !== undefined) obj.markers = markers;
+  #|  if (clipped !== undefined) obj.clipped = clipped;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_bounding_box_options_empty_ffi() -> SVGBoundingBoxOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn svg_bounding_box_options_get_fill_ffi(obj : JsValue) -> JsValue = "(obj) => obj.fill"
+
+///|
+#cfg(target="js")
+extern "js" fn svg_bounding_box_options_get_stroke_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.stroke"
+
+///|
+#cfg(target="js")
+extern "js" fn svg_bounding_box_options_get_markers_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.markers"
+
+///|
+#cfg(target="js")
+extern "js" fn svg_bounding_box_options_get_clipped_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.clipped"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_bounding_box_options_ffi(
+  fill : JsValue,
+  stroke : JsValue,
+  markers : JsValue,
+  clipped : JsValue,
+) -> SVGBoundingBoxOptions = "webapi_SVGBoundingBoxOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_bounding_box_options_empty_ffi() -> SVGBoundingBoxOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_bounding_box_options_get_fill_ffi(obj : JsValue) -> JsValue = "webapi_SVGBoundingBoxOptions" "get_fill"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_bounding_box_options_get_stroke_ffi(obj : JsValue) -> JsValue = "webapi_SVGBoundingBoxOptions" "get_stroke"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_bounding_box_options_get_markers_ffi(obj : JsValue) -> JsValue = "webapi_SVGBoundingBoxOptions" "get_markers"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_bounding_box_options_get_clipped_ffi(obj : JsValue) -> JsValue = "webapi_SVGBoundingBoxOptions" "get_clipped"

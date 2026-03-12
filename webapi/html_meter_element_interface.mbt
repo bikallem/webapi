@@ -139,3 +139,175 @@ impl THTMLMeterElement with set_optimum(self : Self, optimum : Double) -> Unit {
 impl THTMLMeterElement with labels(self : Self) -> NodeList {
   html_meter_element_labels_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_meter_element_new_ffi() -> HTMLMeterElement = "() => new HTMLMeterElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_meter_element_value_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.value"
+
+///|
+#cfg(target="js")
+fn html_meter_element_value_ffi(obj : JsValue) -> Double {
+  html_meter_element_value_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_meter_element_set_value_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "(obj, value) => { obj.value = value; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_meter_element_min_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.min"
+
+///|
+#cfg(target="js")
+fn html_meter_element_min_ffi(obj : JsValue) -> Double {
+  html_meter_element_min_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_meter_element_set_min_ffi(
+  obj : JsValue,
+  min : JsValue,
+) -> Unit = "(obj, min) => { obj.min = min; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_meter_element_max_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.max"
+
+///|
+#cfg(target="js")
+fn html_meter_element_max_ffi(obj : JsValue) -> Double {
+  html_meter_element_max_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_meter_element_set_max_ffi(
+  obj : JsValue,
+  max : JsValue,
+) -> Unit = "(obj, max) => { obj.max = max; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_meter_element_low_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.low"
+
+///|
+#cfg(target="js")
+fn html_meter_element_low_ffi(obj : JsValue) -> Double {
+  html_meter_element_low_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_meter_element_set_low_ffi(
+  obj : JsValue,
+  low : JsValue,
+) -> Unit = "(obj, low) => { obj.low = low; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_meter_element_high_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.high"
+
+///|
+#cfg(target="js")
+fn html_meter_element_high_ffi(obj : JsValue) -> Double {
+  html_meter_element_high_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_meter_element_set_high_ffi(
+  obj : JsValue,
+  high : JsValue,
+) -> Unit = "(obj, high) => { obj.high = high; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_meter_element_optimum_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.optimum"
+
+///|
+#cfg(target="js")
+fn html_meter_element_optimum_ffi(obj : JsValue) -> Double {
+  html_meter_element_optimum_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_meter_element_set_optimum_ffi(
+  obj : JsValue,
+  optimum : JsValue,
+) -> Unit = "(obj, optimum) => { obj.optimum = optimum; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_meter_element_labels_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.labels"
+
+///|
+#cfg(target="js")
+fn html_meter_element_labels_ffi(obj : JsValue) -> NodeList {
+  html_meter_element_labels_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_meter_element_new_ffi() -> HTMLMeterElement = "webapi_HTMLMeterElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_meter_element_value_ffi(obj : JsValue) -> Double = "webapi_HTMLMeterElement" "get_value"
+
+///|
+#cfg(target="wasm-gc")
+fn html_meter_element_set_value_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLMeterElement" "set_value"
+
+///|
+#cfg(target="wasm-gc")
+fn html_meter_element_min_ffi(obj : JsValue) -> Double = "webapi_HTMLMeterElement" "get_min"
+
+///|
+#cfg(target="wasm-gc")
+fn html_meter_element_set_min_ffi(obj : JsValue, min : JsValue) -> Unit = "webapi_HTMLMeterElement" "set_min"
+
+///|
+#cfg(target="wasm-gc")
+fn html_meter_element_max_ffi(obj : JsValue) -> Double = "webapi_HTMLMeterElement" "get_max"
+
+///|
+#cfg(target="wasm-gc")
+fn html_meter_element_set_max_ffi(obj : JsValue, max : JsValue) -> Unit = "webapi_HTMLMeterElement" "set_max"
+
+///|
+#cfg(target="wasm-gc")
+fn html_meter_element_low_ffi(obj : JsValue) -> Double = "webapi_HTMLMeterElement" "get_low"
+
+///|
+#cfg(target="wasm-gc")
+fn html_meter_element_set_low_ffi(obj : JsValue, low : JsValue) -> Unit = "webapi_HTMLMeterElement" "set_low"
+
+///|
+#cfg(target="wasm-gc")
+fn html_meter_element_high_ffi(obj : JsValue) -> Double = "webapi_HTMLMeterElement" "get_high"
+
+///|
+#cfg(target="wasm-gc")
+fn html_meter_element_set_high_ffi(obj : JsValue, high : JsValue) -> Unit = "webapi_HTMLMeterElement" "set_high"
+
+///|
+#cfg(target="wasm-gc")
+fn html_meter_element_optimum_ffi(obj : JsValue) -> Double = "webapi_HTMLMeterElement" "get_optimum"
+
+///|
+#cfg(target="wasm-gc")
+fn html_meter_element_set_optimum_ffi(obj : JsValue, optimum : JsValue) -> Unit = "webapi_HTMLMeterElement" "set_optimum"
+
+///|
+#cfg(target="wasm-gc")
+fn html_meter_element_labels_ffi(obj : JsValue) -> NodeList = "webapi_HTMLMeterElement" "get_labels"

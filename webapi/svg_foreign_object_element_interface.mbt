@@ -70,3 +70,63 @@ impl TSVGForeignObjectElement with width(self : Self) -> SVGAnimatedLength {
 impl TSVGForeignObjectElement with height(self : Self) -> SVGAnimatedLength {
   svg_foreign_object_element_height_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn svg_foreign_object_element_x_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.x"
+
+///|
+#cfg(target="js")
+fn svg_foreign_object_element_x_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_foreign_object_element_x_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_foreign_object_element_y_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.y"
+
+///|
+#cfg(target="js")
+fn svg_foreign_object_element_y_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_foreign_object_element_y_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_foreign_object_element_width_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.width"
+
+///|
+#cfg(target="js")
+fn svg_foreign_object_element_width_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_foreign_object_element_width_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_foreign_object_element_height_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.height"
+
+///|
+#cfg(target="js")
+fn svg_foreign_object_element_height_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_foreign_object_element_height_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svg_foreign_object_element_x_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGForeignObjectElement" "get_x"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_foreign_object_element_y_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGForeignObjectElement" "get_y"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_foreign_object_element_width_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGForeignObjectElement" "get_width"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_foreign_object_element_height_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGForeignObjectElement" "get_height"

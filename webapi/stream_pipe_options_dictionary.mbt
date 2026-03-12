@@ -52,3 +52,75 @@ pub fn StreamPipeOptions::prevent_cancel(self : StreamPipeOptions) -> Bool? {
 pub fn StreamPipeOptions::signal(self : StreamPipeOptions) -> AbortSignal? {
   stream_pipe_options_get_signal_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn stream_pipe_options_ffi(
+  prevent_close : JsValue,
+  prevent_abort : JsValue,
+  prevent_cancel : JsValue,
+  signal : JsValue,
+) -> StreamPipeOptions =
+  #|(preventClose, preventAbort, preventCancel, signal) => {
+  #|  const obj = {};
+  #|  if (preventClose !== undefined) obj.preventClose = preventClose;
+  #|  if (preventAbort !== undefined) obj.preventAbort = preventAbort;
+  #|  if (preventCancel !== undefined) obj.preventCancel = preventCancel;
+  #|  if (signal !== undefined) obj.signal = signal;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn stream_pipe_options_empty_ffi() -> StreamPipeOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn stream_pipe_options_get_prevent_close_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.preventClose"
+
+///|
+#cfg(target="js")
+extern "js" fn stream_pipe_options_get_prevent_abort_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.preventAbort"
+
+///|
+#cfg(target="js")
+extern "js" fn stream_pipe_options_get_prevent_cancel_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.preventCancel"
+
+///|
+#cfg(target="js")
+extern "js" fn stream_pipe_options_get_signal_ffi(obj : JsValue) -> JsValue = "(obj) => obj.signal"
+
+///|
+#cfg(target="wasm-gc")
+fn stream_pipe_options_ffi(
+  prevent_close : JsValue,
+  prevent_abort : JsValue,
+  prevent_cancel : JsValue,
+  signal : JsValue,
+) -> StreamPipeOptions = "webapi_StreamPipeOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn stream_pipe_options_empty_ffi() -> StreamPipeOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn stream_pipe_options_get_prevent_close_ffi(obj : JsValue) -> JsValue = "webapi_StreamPipeOptions" "get_preventClose"
+
+///|
+#cfg(target="wasm-gc")
+fn stream_pipe_options_get_prevent_abort_ffi(obj : JsValue) -> JsValue = "webapi_StreamPipeOptions" "get_preventAbort"
+
+///|
+#cfg(target="wasm-gc")
+fn stream_pipe_options_get_prevent_cancel_ffi(obj : JsValue) -> JsValue = "webapi_StreamPipeOptions" "get_preventCancel"
+
+///|
+#cfg(target="wasm-gc")
+fn stream_pipe_options_get_signal_ffi(obj : JsValue) -> JsValue = "webapi_StreamPipeOptions" "get_signal"

@@ -84,3 +84,87 @@ impl TSVGRadialGradientElement with fy(self : Self) -> SVGAnimatedLength {
 impl TSVGRadialGradientElement with fr(self : Self) -> SVGAnimatedLength {
   svg_radial_gradient_element_fr_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn svg_radial_gradient_element_cx_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.cx"
+
+///|
+#cfg(target="js")
+fn svg_radial_gradient_element_cx_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_radial_gradient_element_cx_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_radial_gradient_element_cy_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.cy"
+
+///|
+#cfg(target="js")
+fn svg_radial_gradient_element_cy_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_radial_gradient_element_cy_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_radial_gradient_element_r_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.r"
+
+///|
+#cfg(target="js")
+fn svg_radial_gradient_element_r_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_radial_gradient_element_r_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_radial_gradient_element_fx_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.fx"
+
+///|
+#cfg(target="js")
+fn svg_radial_gradient_element_fx_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_radial_gradient_element_fx_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_radial_gradient_element_fy_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.fy"
+
+///|
+#cfg(target="js")
+fn svg_radial_gradient_element_fy_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_radial_gradient_element_fy_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_radial_gradient_element_fr_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.fr"
+
+///|
+#cfg(target="js")
+fn svg_radial_gradient_element_fr_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_radial_gradient_element_fr_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svg_radial_gradient_element_cx_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGRadialGradientElement" "get_cx"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_radial_gradient_element_cy_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGRadialGradientElement" "get_cy"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_radial_gradient_element_r_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGRadialGradientElement" "get_r"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_radial_gradient_element_fx_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGRadialGradientElement" "get_fx"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_radial_gradient_element_fy_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGRadialGradientElement" "get_fy"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_radial_gradient_element_fr_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGRadialGradientElement" "get_fr"

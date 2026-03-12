@@ -44,3 +44,31 @@ pub trait TFocusEvent: TUIEvent {
 impl TFocusEvent with related_target(self : Self) -> EventTarget {
   focus_event_related_target_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn focus_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> FocusEvent = "(type_, event_init_dict) => new FocusEvent(type_, event_init_dict)"
+
+///|
+#cfg(target="js")
+extern "js" fn focus_event_related_target_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.relatedTarget"
+
+///|
+#cfg(target="js")
+fn focus_event_related_target_ffi(obj : JsValue) -> EventTarget {
+  focus_event_related_target_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn focus_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> FocusEvent = "webapi_FocusEvent" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn focus_event_related_target_ffi(obj : JsValue) -> EventTarget = "webapi_FocusEvent" "get_relatedTarget"

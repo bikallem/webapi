@@ -17,3 +17,11 @@ pub impl FromJsAny for VoidFunction with from_js_any(value : JsAny) -> VoidFunct
 pub fn VoidFunction::new(callback : () -> Unit) -> VoidFunction {
   void_function_ffi(callback)
 }
+
+///|
+#cfg(target="js")
+extern "js" fn void_function_ffi(callback : () -> Unit) -> VoidFunction = "(callback) => callback"
+
+///|
+#cfg(target="wasm-gc")
+fn void_function_ffi(callback : () -> Unit) -> VoidFunction = "webapi_VoidFunction" "new"

@@ -39,3 +39,11 @@ pub fn HTMLHeadElement::new() -> HTMLHeadElement {
 ///|
 /// [HTMLHeadElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLHeadElement) interface.
 pub trait THTMLHeadElement: THTMLElement {}
+
+///|
+#cfg(target="js")
+extern "js" fn html_head_element_new_ffi() -> HTMLHeadElement = "() => new HTMLHeadElement()"
+
+///|
+#cfg(target="wasm-gc")
+fn html_head_element_new_ffi() -> HTMLHeadElement = "webapi_HTMLHeadElement" "new"

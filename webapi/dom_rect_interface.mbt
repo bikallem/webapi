@@ -103,3 +103,123 @@ impl TDOMRect with height(self : Self) -> Double {
 impl TDOMRect with set_height(self : Self, height : Double) -> Unit {
   dom_rect_set_height_ffi(TJsValue::to_js(self), TJsValue::to_js(height))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn dom_rect_new_ffi(
+  x : JsValue,
+  y : JsValue,
+  width : JsValue,
+  height : JsValue,
+) -> DOMRect = "(x, y, width, height) => new DOMRect(x, y, width, height)"
+
+///|
+#cfg(target="js")
+extern "js" fn dom_rect_from_rect_ffi_js(other : JsValue) -> JsValue = "(other) => DOMRect.fromRect(other)"
+
+///|
+#cfg(target="js")
+fn dom_rect_from_rect_ffi(other : JsValue) -> DOMRect {
+  dom_rect_from_rect_ffi_js(other).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_rect_x_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.x"
+
+///|
+#cfg(target="js")
+fn dom_rect_x_ffi(obj : JsValue) -> Double {
+  dom_rect_x_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_rect_set_x_ffi(obj : JsValue, x : JsValue) -> Unit = "(obj, x) => { obj.x = x; }"
+
+///|
+#cfg(target="js")
+extern "js" fn dom_rect_y_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.y"
+
+///|
+#cfg(target="js")
+fn dom_rect_y_ffi(obj : JsValue) -> Double {
+  dom_rect_y_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_rect_set_y_ffi(obj : JsValue, y : JsValue) -> Unit = "(obj, y) => { obj.y = y; }"
+
+///|
+#cfg(target="js")
+extern "js" fn dom_rect_width_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.width"
+
+///|
+#cfg(target="js")
+fn dom_rect_width_ffi(obj : JsValue) -> Double {
+  dom_rect_width_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_rect_set_width_ffi(obj : JsValue, width : JsValue) -> Unit = "(obj, width) => { obj.width = width; }"
+
+///|
+#cfg(target="js")
+extern "js" fn dom_rect_height_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.height"
+
+///|
+#cfg(target="js")
+fn dom_rect_height_ffi(obj : JsValue) -> Double {
+  dom_rect_height_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_rect_set_height_ffi(obj : JsValue, height : JsValue) -> Unit = "(obj, height) => { obj.height = height; }"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_rect_new_ffi(
+  x : JsValue,
+  y : JsValue,
+  width : JsValue,
+  height : JsValue,
+) -> DOMRect = "webapi_DOMRect" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_rect_from_rect_ffi(other : JsValue) -> DOMRect = "webapi_DOMRect" "fromRect"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_rect_x_ffi(obj : JsValue) -> Double = "webapi_DOMRect" "get_x"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_rect_set_x_ffi(obj : JsValue, x : JsValue) -> Unit = "webapi_DOMRect" "set_x"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_rect_y_ffi(obj : JsValue) -> Double = "webapi_DOMRect" "get_y"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_rect_set_y_ffi(obj : JsValue, y : JsValue) -> Unit = "webapi_DOMRect" "set_y"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_rect_width_ffi(obj : JsValue) -> Double = "webapi_DOMRect" "get_width"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_rect_set_width_ffi(obj : JsValue, width : JsValue) -> Unit = "webapi_DOMRect" "set_width"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_rect_height_ffi(obj : JsValue) -> Double = "webapi_DOMRect" "get_height"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_rect_set_height_ffi(obj : JsValue, height : JsValue) -> Unit = "webapi_DOMRect" "set_height"

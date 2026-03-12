@@ -94,3 +94,94 @@ impl TSVGGraphicsElement with get_ctm(self : Self) -> DOMMatrix {
 impl TSVGGraphicsElement with get_screen_ctm(self : Self) -> DOMMatrix {
   self.get_screen_ctm_opt().unwrap()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn svg_graphics_element_transform_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.transform"
+
+///|
+#cfg(target="js")
+fn svg_graphics_element_transform_ffi(
+  obj : JsValue,
+) -> SVGAnimatedTransformList {
+  svg_graphics_element_transform_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_graphics_element_get_b_box_ffi_js(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, options) => obj.getBBox(options)"
+
+///|
+#cfg(target="js")
+fn svg_graphics_element_get_b_box_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> DOMRect {
+  svg_graphics_element_get_b_box_ffi_js(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_graphics_element_get_ctm_ffi(obj : JsValue) -> JsValue = "(obj) => obj.getCTM()"
+
+///|
+#cfg(target="js")
+extern "js" fn svg_graphics_element_get_screen_ctm_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.getScreenCTM()"
+
+///|
+#cfg(target="js")
+extern "js" fn svg_graphics_element_required_extensions_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.requiredExtensions"
+
+///|
+#cfg(target="js")
+fn svg_graphics_element_required_extensions_ffi(obj : JsValue) -> SVGStringList {
+  svg_graphics_element_required_extensions_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_graphics_element_system_language_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.systemLanguage"
+
+///|
+#cfg(target="js")
+fn svg_graphics_element_system_language_ffi(obj : JsValue) -> SVGStringList {
+  svg_graphics_element_system_language_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svg_graphics_element_transform_ffi(
+  obj : JsValue,
+) -> SVGAnimatedTransformList = "webapi_SVGGraphicsElement" "get_transform"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_graphics_element_get_b_box_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> DOMRect = "webapi_SVGGraphicsElement" "getBBox"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_graphics_element_get_ctm_ffi(obj : JsValue) -> JsValue = "webapi_SVGGraphicsElement" "getCTM"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_graphics_element_get_screen_ctm_ffi(obj : JsValue) -> JsValue = "webapi_SVGGraphicsElement" "getScreenCTM"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_graphics_element_required_extensions_ffi(obj : JsValue) -> SVGStringList = "webapi_SVGGraphicsElement" "get_requiredExtensions"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_graphics_element_system_language_ffi(obj : JsValue) -> SVGStringList = "webapi_SVGGraphicsElement" "get_systemLanguage"

@@ -80,3 +80,79 @@ impl TSVGTextPositioningElement with dy(self : Self) -> SVGAnimatedLengthList {
 impl TSVGTextPositioningElement with rotate(self : Self) -> SVGAnimatedNumberList {
   svg_text_positioning_element_rotate_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn svg_text_positioning_element_x_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.x"
+
+///|
+#cfg(target="js")
+fn svg_text_positioning_element_x_ffi(obj : JsValue) -> SVGAnimatedLengthList {
+  svg_text_positioning_element_x_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_text_positioning_element_y_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.y"
+
+///|
+#cfg(target="js")
+fn svg_text_positioning_element_y_ffi(obj : JsValue) -> SVGAnimatedLengthList {
+  svg_text_positioning_element_y_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_text_positioning_element_dx_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.dx"
+
+///|
+#cfg(target="js")
+fn svg_text_positioning_element_dx_ffi(obj : JsValue) -> SVGAnimatedLengthList {
+  svg_text_positioning_element_dx_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_text_positioning_element_dy_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.dy"
+
+///|
+#cfg(target="js")
+fn svg_text_positioning_element_dy_ffi(obj : JsValue) -> SVGAnimatedLengthList {
+  svg_text_positioning_element_dy_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_text_positioning_element_rotate_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.rotate"
+
+///|
+#cfg(target="js")
+fn svg_text_positioning_element_rotate_ffi(
+  obj : JsValue,
+) -> SVGAnimatedNumberList {
+  svg_text_positioning_element_rotate_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svg_text_positioning_element_x_ffi(obj : JsValue) -> SVGAnimatedLengthList = "webapi_SVGTextPositioningElement" "get_x"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_text_positioning_element_y_ffi(obj : JsValue) -> SVGAnimatedLengthList = "webapi_SVGTextPositioningElement" "get_y"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_text_positioning_element_dx_ffi(obj : JsValue) -> SVGAnimatedLengthList = "webapi_SVGTextPositioningElement" "get_dx"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_text_positioning_element_dy_ffi(obj : JsValue) -> SVGAnimatedLengthList = "webapi_SVGTextPositioningElement" "get_dy"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_text_positioning_element_rotate_ffi(
+  obj : JsValue,
+) -> SVGAnimatedNumberList = "webapi_SVGTextPositioningElement" "get_rotate"

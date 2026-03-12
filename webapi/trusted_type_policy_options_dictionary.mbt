@@ -62,3 +62,66 @@ pub fn TrustedTypePolicyOptions::create_script_url(
 ) -> CreateScriptURLCallback? {
   trusted_type_policy_options_get_create_script_url_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn trusted_type_policy_options_ffi(
+  create_html : JsValue,
+  create_script : JsValue,
+  create_script_url : JsValue,
+) -> TrustedTypePolicyOptions =
+  #|(createHTML, createScript, createScriptURL) => {
+  #|  const obj = {};
+  #|  if (createHTML !== undefined) obj.createHTML = createHTML;
+  #|  if (createScript !== undefined) obj.createScript = createScript;
+  #|  if (createScriptURL !== undefined) obj.createScriptURL = createScriptURL;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn trusted_type_policy_options_empty_ffi() -> TrustedTypePolicyOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn trusted_type_policy_options_get_create_html_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.createHTML"
+
+///|
+#cfg(target="js")
+extern "js" fn trusted_type_policy_options_get_create_script_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.createScript"
+
+///|
+#cfg(target="js")
+extern "js" fn trusted_type_policy_options_get_create_script_url_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.createScriptURL"
+
+///|
+#cfg(target="wasm-gc")
+fn trusted_type_policy_options_ffi(
+  create_html : JsValue,
+  create_script : JsValue,
+  create_script_url : JsValue,
+) -> TrustedTypePolicyOptions = "webapi_TrustedTypePolicyOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn trusted_type_policy_options_empty_ffi() -> TrustedTypePolicyOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn trusted_type_policy_options_get_create_html_ffi(obj : JsValue) -> JsValue = "webapi_TrustedTypePolicyOptions" "get_createHTML"
+
+///|
+#cfg(target="wasm-gc")
+fn trusted_type_policy_options_get_create_script_ffi(obj : JsValue) -> JsValue = "webapi_TrustedTypePolicyOptions" "get_createScript"
+
+///|
+#cfg(target="wasm-gc")
+fn trusted_type_policy_options_get_create_script_url_ffi(
+  obj : JsValue,
+) -> JsValue = "webapi_TrustedTypePolicyOptions" "get_createScriptURL"

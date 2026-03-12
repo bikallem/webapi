@@ -70,3 +70,113 @@ pub fn ShadowRootInit::custom_element_registry(
 ) -> CustomElementRegistry? {
   shadow_root_init_get_custom_element_registry_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn shadow_root_init_ffi(
+  mode : JsValue,
+  delegates_focus : JsValue,
+  slot_assignment : JsValue,
+  clonable : JsValue,
+  serializable : JsValue,
+  custom_element_registry : JsValue,
+) -> ShadowRootInit =
+  #|(mode, delegatesFocus, slotAssignment, clonable, serializable, customElementRegistry) => {
+  #|  const obj = {};
+  #|  if (mode !== undefined) obj.mode = mode;
+  #|  if (delegatesFocus !== undefined) obj.delegatesFocus = delegatesFocus;
+  #|  if (slotAssignment !== undefined) obj.slotAssignment = slotAssignment;
+  #|  if (clonable !== undefined) obj.clonable = clonable;
+  #|  if (serializable !== undefined) obj.serializable = serializable;
+  #|  if (customElementRegistry !== undefined) obj.customElementRegistry = customElementRegistry;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn shadow_root_init_empty_ffi() -> ShadowRootInit = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn shadow_root_init_get_mode_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.mode"
+
+///|
+#cfg(target="js")
+fn shadow_root_init_get_mode_ffi(obj : JsValue) -> ShadowRootMode {
+  ShadowRootMode::from_unchecked(
+    shadow_root_init_get_mode_ffi_js(obj).unsafe_cast(),
+  )
+}
+
+///|
+#cfg(target="js")
+extern "js" fn shadow_root_init_get_delegates_focus_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.delegatesFocus"
+
+///|
+#cfg(target="js")
+extern "js" fn shadow_root_init_get_slot_assignment_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.slotAssignment"
+
+///|
+#cfg(target="js")
+extern "js" fn shadow_root_init_get_clonable_ffi(obj : JsValue) -> JsValue = "(obj) => obj.clonable"
+
+///|
+#cfg(target="js")
+extern "js" fn shadow_root_init_get_serializable_ffi(obj : JsValue) -> JsValue = "(obj) => obj.serializable"
+
+///|
+#cfg(target="js")
+extern "js" fn shadow_root_init_get_custom_element_registry_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.customElementRegistry"
+
+///|
+#cfg(target="wasm-gc")
+fn shadow_root_init_ffi(
+  mode : JsValue,
+  delegates_focus : JsValue,
+  slot_assignment : JsValue,
+  clonable : JsValue,
+  serializable : JsValue,
+  custom_element_registry : JsValue,
+) -> ShadowRootInit = "webapi_ShadowRootInit" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn shadow_root_init_empty_ffi() -> ShadowRootInit = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn shadow_root_init_get_mode_ffi_wasm(obj : JsValue) -> JsValue = "webapi_ShadowRootInit" "get_mode"
+
+///|
+#cfg(target="wasm-gc")
+fn shadow_root_init_get_mode_ffi(obj : JsValue) -> ShadowRootMode {
+  ShadowRootMode::from_unchecked(
+    jsvalue_to_string(shadow_root_init_get_mode_ffi_wasm(obj)),
+  )
+}
+
+///|
+#cfg(target="wasm-gc")
+fn shadow_root_init_get_delegates_focus_ffi(obj : JsValue) -> JsValue = "webapi_ShadowRootInit" "get_delegatesFocus"
+
+///|
+#cfg(target="wasm-gc")
+fn shadow_root_init_get_slot_assignment_ffi(obj : JsValue) -> JsValue = "webapi_ShadowRootInit" "get_slotAssignment"
+
+///|
+#cfg(target="wasm-gc")
+fn shadow_root_init_get_clonable_ffi(obj : JsValue) -> JsValue = "webapi_ShadowRootInit" "get_clonable"
+
+///|
+#cfg(target="wasm-gc")
+fn shadow_root_init_get_serializable_ffi(obj : JsValue) -> JsValue = "webapi_ShadowRootInit" "get_serializable"
+
+///|
+#cfg(target="wasm-gc")
+fn shadow_root_init_get_custom_element_registry_ffi(obj : JsValue) -> JsValue = "webapi_ShadowRootInit" "get_customElementRegistry"

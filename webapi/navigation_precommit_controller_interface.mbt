@@ -57,3 +57,33 @@ impl TNavigationPrecommitController with add_handler(
     TJsValue::to_js(navigation_intercept_handler_ffi(handler)),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_precommit_controller_redirect_ffi(
+  obj : JsValue,
+  url : JsValue,
+  options : JsValue,
+) -> Unit = "(obj, url, options) => obj.redirect(url, options)"
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_precommit_controller_add_handler_ffi(
+  obj : JsValue,
+  handler : JsValue,
+) -> Unit = "(obj, handler) => obj.addHandler(handler)"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_precommit_controller_redirect_ffi(
+  obj : JsValue,
+  url : JsValue,
+  options : JsValue,
+) -> Unit = "webapi_NavigationPrecommitController" "redirect"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_precommit_controller_add_handler_ffi(
+  obj : JsValue,
+  handler : JsValue,
+) -> Unit = "webapi_NavigationPrecommitController" "addHandler"

@@ -247,3 +247,408 @@ impl TIDBObjectStore with delete_index(self : Self, name : String) -> Unit {
     TJsValue::to_js(name),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn idb_object_store_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.name"
+
+///|
+#cfg(target="js")
+fn idb_object_store_name_ffi(obj : JsValue) -> String {
+  idb_object_store_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_object_store_set_name_ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> Unit = "(obj, name) => { obj.name = name; }"
+
+///|
+#cfg(target="js")
+extern "js" fn idb_object_store_key_path_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.keyPath"
+
+///|
+#cfg(target="js")
+fn idb_object_store_key_path_ffi(obj : JsValue) -> JsValue {
+  idb_object_store_key_path_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_object_store_index_names_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.indexNames"
+
+///|
+#cfg(target="js")
+fn idb_object_store_index_names_ffi(obj : JsValue) -> DOMStringList {
+  idb_object_store_index_names_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_object_store_transaction_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.transaction"
+
+///|
+#cfg(target="js")
+fn idb_object_store_transaction_ffi(obj : JsValue) -> IDBTransaction {
+  idb_object_store_transaction_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_object_store_auto_increment_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.autoIncrement"
+
+///|
+#cfg(target="js")
+fn idb_object_store_auto_increment_ffi(obj : JsValue) -> Bool {
+  idb_object_store_auto_increment_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_object_store_put_ffi_js(
+  obj : JsValue,
+  value : JsValue,
+  key : JsValue,
+) -> JsValue = "(obj, value, key) => obj.put(value, key)"
+
+///|
+#cfg(target="js")
+fn idb_object_store_put_ffi(
+  obj : JsValue,
+  value : JsValue,
+  key : JsValue,
+) -> IDBRequest {
+  idb_object_store_put_ffi_js(obj, value, key).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_object_store_add_ffi_js(
+  obj : JsValue,
+  value : JsValue,
+  key : JsValue,
+) -> JsValue = "(obj, value, key) => obj.add(value, key)"
+
+///|
+#cfg(target="js")
+fn idb_object_store_add_ffi(
+  obj : JsValue,
+  value : JsValue,
+  key : JsValue,
+) -> IDBRequest {
+  idb_object_store_add_ffi_js(obj, value, key).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_object_store_delete_ffi_js(
+  obj : JsValue,
+  query : JsValue,
+) -> JsValue = "(obj, query) => obj.delete(query)"
+
+///|
+#cfg(target="js")
+fn idb_object_store_delete_ffi(obj : JsValue, query : JsValue) -> IDBRequest {
+  idb_object_store_delete_ffi_js(obj, query).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_object_store_clear_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.clear()"
+
+///|
+#cfg(target="js")
+fn idb_object_store_clear_ffi(obj : JsValue) -> IDBRequest {
+  idb_object_store_clear_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_object_store_get_ffi_js(
+  obj : JsValue,
+  query : JsValue,
+) -> JsValue = "(obj, query) => obj.get(query)"
+
+///|
+#cfg(target="js")
+fn idb_object_store_get_ffi(obj : JsValue, query : JsValue) -> IDBRequest {
+  idb_object_store_get_ffi_js(obj, query).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_object_store_get_key_ffi_js(
+  obj : JsValue,
+  query : JsValue,
+) -> JsValue = "(obj, query) => obj.getKey(query)"
+
+///|
+#cfg(target="js")
+fn idb_object_store_get_key_ffi(obj : JsValue, query : JsValue) -> IDBRequest {
+  idb_object_store_get_key_ffi_js(obj, query).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_object_store_get_all_ffi_js(
+  obj : JsValue,
+  query_or_options : JsValue,
+  count : JsValue,
+) -> JsValue = "(obj, query_or_options, count) => obj.getAll(query_or_options, count)"
+
+///|
+#cfg(target="js")
+fn idb_object_store_get_all_ffi(
+  obj : JsValue,
+  query_or_options : JsValue,
+  count : JsValue,
+) -> IDBRequest {
+  idb_object_store_get_all_ffi_js(obj, query_or_options, count).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_object_store_get_all_keys_ffi_js(
+  obj : JsValue,
+  query_or_options : JsValue,
+  count : JsValue,
+) -> JsValue = "(obj, query_or_options, count) => obj.getAllKeys(query_or_options, count)"
+
+///|
+#cfg(target="js")
+fn idb_object_store_get_all_keys_ffi(
+  obj : JsValue,
+  query_or_options : JsValue,
+  count : JsValue,
+) -> IDBRequest {
+  idb_object_store_get_all_keys_ffi_js(obj, query_or_options, count).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_object_store_get_all_records_ffi_js(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, options) => obj.getAllRecords(options)"
+
+///|
+#cfg(target="js")
+fn idb_object_store_get_all_records_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> IDBRequest {
+  idb_object_store_get_all_records_ffi_js(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_object_store_count_ffi_js(
+  obj : JsValue,
+  query : JsValue,
+) -> JsValue = "(obj, query) => obj.count(query)"
+
+///|
+#cfg(target="js")
+fn idb_object_store_count_ffi(obj : JsValue, query : JsValue) -> IDBRequest {
+  idb_object_store_count_ffi_js(obj, query).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_object_store_open_cursor_ffi_js(
+  obj : JsValue,
+  query : JsValue,
+  direction : JsValue,
+) -> JsValue = "(obj, query, direction) => obj.openCursor(query, direction)"
+
+///|
+#cfg(target="js")
+fn idb_object_store_open_cursor_ffi(
+  obj : JsValue,
+  query : JsValue,
+  direction : JsValue,
+) -> IDBRequest {
+  idb_object_store_open_cursor_ffi_js(obj, query, direction).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_object_store_open_key_cursor_ffi_js(
+  obj : JsValue,
+  query : JsValue,
+  direction : JsValue,
+) -> JsValue = "(obj, query, direction) => obj.openKeyCursor(query, direction)"
+
+///|
+#cfg(target="js")
+fn idb_object_store_open_key_cursor_ffi(
+  obj : JsValue,
+  query : JsValue,
+  direction : JsValue,
+) -> IDBRequest {
+  idb_object_store_open_key_cursor_ffi_js(obj, query, direction).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_object_store_index_ffi_js(
+  obj : JsValue,
+  name : JsValue,
+) -> JsValue = "(obj, name) => obj.index(name)"
+
+///|
+#cfg(target="js")
+fn idb_object_store_index_ffi(obj : JsValue, name : JsValue) -> IDBIndex {
+  idb_object_store_index_ffi_js(obj, name).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_object_store_create_index_ffi_js(
+  obj : JsValue,
+  name : JsValue,
+  key_path : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, name, key_path, options) => obj.createIndex(name, key_path, options)"
+
+///|
+#cfg(target="js")
+fn idb_object_store_create_index_ffi(
+  obj : JsValue,
+  name : JsValue,
+  key_path : JsValue,
+  options : JsValue,
+) -> IDBIndex {
+  idb_object_store_create_index_ffi_js(obj, name, key_path, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_object_store_delete_index_ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> Unit = "(obj, name) => obj.deleteIndex(name)"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_object_store_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_IDBObjectStore" "get_name"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_object_store_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(idb_object_store_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn idb_object_store_set_name_ffi(obj : JsValue, name : JsValue) -> Unit = "webapi_IDBObjectStore" "set_name"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_object_store_key_path_ffi(obj : JsValue) -> JsValue = "webapi_IDBObjectStore" "get_keyPath"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_object_store_index_names_ffi(obj : JsValue) -> DOMStringList = "webapi_IDBObjectStore" "get_indexNames"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_object_store_transaction_ffi(obj : JsValue) -> IDBTransaction = "webapi_IDBObjectStore" "get_transaction"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_object_store_auto_increment_ffi(obj : JsValue) -> Bool = "webapi_IDBObjectStore" "get_autoIncrement"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_object_store_put_ffi(
+  obj : JsValue,
+  value : JsValue,
+  key : JsValue,
+) -> IDBRequest = "webapi_IDBObjectStore" "put"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_object_store_add_ffi(
+  obj : JsValue,
+  value : JsValue,
+  key : JsValue,
+) -> IDBRequest = "webapi_IDBObjectStore" "add"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_object_store_delete_ffi(obj : JsValue, query : JsValue) -> IDBRequest = "webapi_IDBObjectStore" "delete"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_object_store_clear_ffi(obj : JsValue) -> IDBRequest = "webapi_IDBObjectStore" "clear"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_object_store_get_ffi(obj : JsValue, query : JsValue) -> IDBRequest = "webapi_IDBObjectStore" "get"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_object_store_get_key_ffi(obj : JsValue, query : JsValue) -> IDBRequest = "webapi_IDBObjectStore" "getKey"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_object_store_get_all_ffi(
+  obj : JsValue,
+  query_or_options : JsValue,
+  count : JsValue,
+) -> IDBRequest = "webapi_IDBObjectStore" "getAll"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_object_store_get_all_keys_ffi(
+  obj : JsValue,
+  query_or_options : JsValue,
+  count : JsValue,
+) -> IDBRequest = "webapi_IDBObjectStore" "getAllKeys"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_object_store_get_all_records_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> IDBRequest = "webapi_IDBObjectStore" "getAllRecords"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_object_store_count_ffi(obj : JsValue, query : JsValue) -> IDBRequest = "webapi_IDBObjectStore" "count"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_object_store_open_cursor_ffi(
+  obj : JsValue,
+  query : JsValue,
+  direction : JsValue,
+) -> IDBRequest = "webapi_IDBObjectStore" "openCursor"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_object_store_open_key_cursor_ffi(
+  obj : JsValue,
+  query : JsValue,
+  direction : JsValue,
+) -> IDBRequest = "webapi_IDBObjectStore" "openKeyCursor"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_object_store_index_ffi(obj : JsValue, name : JsValue) -> IDBIndex = "webapi_IDBObjectStore" "index"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_object_store_create_index_ffi(
+  obj : JsValue,
+  name : JsValue,
+  key_path : JsValue,
+  options : JsValue,
+) -> IDBIndex = "webapi_IDBObjectStore" "createIndex"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_object_store_delete_index_ffi(obj : JsValue, name : JsValue) -> Unit = "webapi_IDBObjectStore" "deleteIndex"

@@ -59,3 +59,71 @@ impl TNavigationCurrentEntryChangeEvent with navigation_type(self : Self) -> Nav
 impl TNavigationCurrentEntryChangeEvent with from(self : Self) -> NavigationHistoryEntry {
   navigation_current_entry_change_event_from_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_current_entry_change_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> NavigationCurrentEntryChangeEvent = "(type_, event_init_dict) => new NavigationCurrentEntryChangeEvent(type_, event_init_dict)"
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_current_entry_change_event_navigation_type_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.navigationType"
+
+///|
+#cfg(target="js")
+fn navigation_current_entry_change_event_navigation_type_ffi(
+  obj : JsValue,
+) -> NavigationType {
+  NavigationType::from_unchecked(
+    navigation_current_entry_change_event_navigation_type_ffi_js(obj).unsafe_cast(),
+  )
+}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_current_entry_change_event_from_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.from"
+
+///|
+#cfg(target="js")
+fn navigation_current_entry_change_event_from_ffi(
+  obj : JsValue,
+) -> NavigationHistoryEntry {
+  navigation_current_entry_change_event_from_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_current_entry_change_event_new_ffi(
+  type_ : JsValue,
+  event_init_dict : JsValue,
+) -> NavigationCurrentEntryChangeEvent = "webapi_NavigationCurrentEntryChangeEvent" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_current_entry_change_event_navigation_type_ffi_wasm(
+  obj : JsValue,
+) -> JsValue = "webapi_NavigationCurrentEntryChangeEvent" "get_navigationType"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_current_entry_change_event_navigation_type_ffi(
+  obj : JsValue,
+) -> NavigationType {
+  NavigationType::from_unchecked(
+    jsvalue_to_string(
+      navigation_current_entry_change_event_navigation_type_ffi_wasm(obj),
+    ),
+  )
+}
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_current_entry_change_event_from_ffi(
+  obj : JsValue,
+) -> NavigationHistoryEntry = "webapi_NavigationCurrentEntryChangeEvent" "get_from"

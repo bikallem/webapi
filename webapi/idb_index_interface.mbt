@@ -157,3 +157,262 @@ impl TIDBIndex with open_key_cursor(
     opt_to_js(direction),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn idb_index_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.name"
+
+///|
+#cfg(target="js")
+fn idb_index_name_ffi(obj : JsValue) -> String {
+  idb_index_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_index_set_name_ffi(obj : JsValue, name : JsValue) -> Unit = "(obj, name) => { obj.name = name; }"
+
+///|
+#cfg(target="js")
+extern "js" fn idb_index_object_store_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.objectStore"
+
+///|
+#cfg(target="js")
+fn idb_index_object_store_ffi(obj : JsValue) -> IDBObjectStore {
+  idb_index_object_store_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_index_key_path_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.keyPath"
+
+///|
+#cfg(target="js")
+fn idb_index_key_path_ffi(obj : JsValue) -> JsValue {
+  idb_index_key_path_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_index_multi_entry_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.multiEntry"
+
+///|
+#cfg(target="js")
+fn idb_index_multi_entry_ffi(obj : JsValue) -> Bool {
+  idb_index_multi_entry_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_index_unique_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.unique"
+
+///|
+#cfg(target="js")
+fn idb_index_unique_ffi(obj : JsValue) -> Bool {
+  idb_index_unique_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_index_get_ffi_js(obj : JsValue, query : JsValue) -> JsValue = "(obj, query) => obj.get(query)"
+
+///|
+#cfg(target="js")
+fn idb_index_get_ffi(obj : JsValue, query : JsValue) -> IDBRequest {
+  idb_index_get_ffi_js(obj, query).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_index_get_key_ffi_js(
+  obj : JsValue,
+  query : JsValue,
+) -> JsValue = "(obj, query) => obj.getKey(query)"
+
+///|
+#cfg(target="js")
+fn idb_index_get_key_ffi(obj : JsValue, query : JsValue) -> IDBRequest {
+  idb_index_get_key_ffi_js(obj, query).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_index_get_all_ffi_js(
+  obj : JsValue,
+  query_or_options : JsValue,
+  count : JsValue,
+) -> JsValue = "(obj, query_or_options, count) => obj.getAll(query_or_options, count)"
+
+///|
+#cfg(target="js")
+fn idb_index_get_all_ffi(
+  obj : JsValue,
+  query_or_options : JsValue,
+  count : JsValue,
+) -> IDBRequest {
+  idb_index_get_all_ffi_js(obj, query_or_options, count).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_index_get_all_keys_ffi_js(
+  obj : JsValue,
+  query_or_options : JsValue,
+  count : JsValue,
+) -> JsValue = "(obj, query_or_options, count) => obj.getAllKeys(query_or_options, count)"
+
+///|
+#cfg(target="js")
+fn idb_index_get_all_keys_ffi(
+  obj : JsValue,
+  query_or_options : JsValue,
+  count : JsValue,
+) -> IDBRequest {
+  idb_index_get_all_keys_ffi_js(obj, query_or_options, count).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_index_get_all_records_ffi_js(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, options) => obj.getAllRecords(options)"
+
+///|
+#cfg(target="js")
+fn idb_index_get_all_records_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> IDBRequest {
+  idb_index_get_all_records_ffi_js(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_index_count_ffi_js(
+  obj : JsValue,
+  query : JsValue,
+) -> JsValue = "(obj, query) => obj.count(query)"
+
+///|
+#cfg(target="js")
+fn idb_index_count_ffi(obj : JsValue, query : JsValue) -> IDBRequest {
+  idb_index_count_ffi_js(obj, query).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_index_open_cursor_ffi_js(
+  obj : JsValue,
+  query : JsValue,
+  direction : JsValue,
+) -> JsValue = "(obj, query, direction) => obj.openCursor(query, direction)"
+
+///|
+#cfg(target="js")
+fn idb_index_open_cursor_ffi(
+  obj : JsValue,
+  query : JsValue,
+  direction : JsValue,
+) -> IDBRequest {
+  idb_index_open_cursor_ffi_js(obj, query, direction).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_index_open_key_cursor_ffi_js(
+  obj : JsValue,
+  query : JsValue,
+  direction : JsValue,
+) -> JsValue = "(obj, query, direction) => obj.openKeyCursor(query, direction)"
+
+///|
+#cfg(target="js")
+fn idb_index_open_key_cursor_ffi(
+  obj : JsValue,
+  query : JsValue,
+  direction : JsValue,
+) -> IDBRequest {
+  idb_index_open_key_cursor_ffi_js(obj, query, direction).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn idb_index_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_IDBIndex" "get_name"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_index_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(idb_index_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn idb_index_set_name_ffi(obj : JsValue, name : JsValue) -> Unit = "webapi_IDBIndex" "set_name"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_index_object_store_ffi(obj : JsValue) -> IDBObjectStore = "webapi_IDBIndex" "get_objectStore"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_index_key_path_ffi(obj : JsValue) -> JsValue = "webapi_IDBIndex" "get_keyPath"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_index_multi_entry_ffi(obj : JsValue) -> Bool = "webapi_IDBIndex" "get_multiEntry"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_index_unique_ffi(obj : JsValue) -> Bool = "webapi_IDBIndex" "get_unique"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_index_get_ffi(obj : JsValue, query : JsValue) -> IDBRequest = "webapi_IDBIndex" "get"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_index_get_key_ffi(obj : JsValue, query : JsValue) -> IDBRequest = "webapi_IDBIndex" "getKey"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_index_get_all_ffi(
+  obj : JsValue,
+  query_or_options : JsValue,
+  count : JsValue,
+) -> IDBRequest = "webapi_IDBIndex" "getAll"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_index_get_all_keys_ffi(
+  obj : JsValue,
+  query_or_options : JsValue,
+  count : JsValue,
+) -> IDBRequest = "webapi_IDBIndex" "getAllKeys"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_index_get_all_records_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> IDBRequest = "webapi_IDBIndex" "getAllRecords"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_index_count_ffi(obj : JsValue, query : JsValue) -> IDBRequest = "webapi_IDBIndex" "count"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_index_open_cursor_ffi(
+  obj : JsValue,
+  query : JsValue,
+  direction : JsValue,
+) -> IDBRequest = "webapi_IDBIndex" "openCursor"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_index_open_key_cursor_ffi(
+  obj : JsValue,
+  query : JsValue,
+  direction : JsValue,
+) -> IDBRequest = "webapi_IDBIndex" "openKeyCursor"

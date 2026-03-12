@@ -37,3 +37,31 @@ impl TSVGAnimatedRect with base_val(self : Self) -> DOMRect {
 impl TSVGAnimatedRect with anim_val(self : Self) -> DOMRectReadOnly {
   svg_animated_rect_anim_val_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn svg_animated_rect_base_val_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.baseVal"
+
+///|
+#cfg(target="js")
+fn svg_animated_rect_base_val_ffi(obj : JsValue) -> DOMRect {
+  svg_animated_rect_base_val_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_animated_rect_anim_val_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.animVal"
+
+///|
+#cfg(target="js")
+fn svg_animated_rect_anim_val_ffi(obj : JsValue) -> DOMRectReadOnly {
+  svg_animated_rect_anim_val_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svg_animated_rect_base_val_ffi(obj : JsValue) -> DOMRect = "webapi_SVGAnimatedRect" "get_baseVal"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_animated_rect_anim_val_ffi(obj : JsValue) -> DOMRectReadOnly = "webapi_SVGAnimatedRect" "get_animVal"

@@ -69,3 +69,61 @@ impl TTransformStreamDefaultController with error(
 impl TTransformStreamDefaultController with terminate(self : Self) -> Unit {
   transform_stream_default_controller_terminate_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn transform_stream_default_controller_desired_size_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.desiredSize"
+
+///|
+#cfg(target="js")
+fn transform_stream_default_controller_desired_size_ffi(
+  obj : JsValue,
+) -> Double {
+  transform_stream_default_controller_desired_size_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn transform_stream_default_controller_enqueue_ffi(
+  obj : JsValue,
+  chunk : JsValue,
+) -> Unit = "(obj, chunk) => obj.enqueue(chunk)"
+
+///|
+#cfg(target="js")
+extern "js" fn transform_stream_default_controller_error_ffi(
+  obj : JsValue,
+  reason : JsValue,
+) -> Unit = "(obj, reason) => obj.error(reason)"
+
+///|
+#cfg(target="js")
+extern "js" fn transform_stream_default_controller_terminate_ffi(
+  obj : JsValue,
+) -> Unit = "(obj) => obj.terminate()"
+
+///|
+#cfg(target="wasm-gc")
+fn transform_stream_default_controller_desired_size_ffi(
+  obj : JsValue,
+) -> Double = "webapi_TransformStreamDefaultController" "get_desiredSize"
+
+///|
+#cfg(target="wasm-gc")
+fn transform_stream_default_controller_enqueue_ffi(
+  obj : JsValue,
+  chunk : JsValue,
+) -> Unit = "webapi_TransformStreamDefaultController" "enqueue"
+
+///|
+#cfg(target="wasm-gc")
+fn transform_stream_default_controller_error_ffi(
+  obj : JsValue,
+  reason : JsValue,
+) -> Unit = "webapi_TransformStreamDefaultController" "error"
+
+///|
+#cfg(target="wasm-gc")
+fn transform_stream_default_controller_terminate_ffi(obj : JsValue) -> Unit = "webapi_TransformStreamDefaultController" "terminate"

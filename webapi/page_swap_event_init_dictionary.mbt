@@ -63,3 +63,86 @@ pub fn PageSwapEventInit::view_transition(
 ) -> ViewTransition? {
   page_swap_event_init_get_view_transition_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn page_swap_event_init_ffi(
+  bubbles : JsValue,
+  cancelable : JsValue,
+  composed : JsValue,
+  activation : JsValue,
+  view_transition : JsValue,
+) -> PageSwapEventInit =
+  #|(bubbles, cancelable, composed, activation, viewTransition) => {
+  #|  const obj = {};
+  #|  if (bubbles !== undefined) obj.bubbles = bubbles;
+  #|  if (cancelable !== undefined) obj.cancelable = cancelable;
+  #|  if (composed !== undefined) obj.composed = composed;
+  #|  if (activation !== undefined) obj.activation = activation;
+  #|  if (viewTransition !== undefined) obj.viewTransition = viewTransition;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn page_swap_event_init_empty_ffi() -> PageSwapEventInit = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn page_swap_event_init_get_bubbles_ffi(obj : JsValue) -> JsValue = "(obj) => obj.bubbles"
+
+///|
+#cfg(target="js")
+extern "js" fn page_swap_event_init_get_cancelable_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.cancelable"
+
+///|
+#cfg(target="js")
+extern "js" fn page_swap_event_init_get_composed_ffi(obj : JsValue) -> JsValue = "(obj) => obj.composed"
+
+///|
+#cfg(target="js")
+extern "js" fn page_swap_event_init_get_activation_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.activation"
+
+///|
+#cfg(target="js")
+extern "js" fn page_swap_event_init_get_view_transition_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.viewTransition"
+
+///|
+#cfg(target="wasm-gc")
+fn page_swap_event_init_ffi(
+  bubbles : JsValue,
+  cancelable : JsValue,
+  composed : JsValue,
+  activation : JsValue,
+  view_transition : JsValue,
+) -> PageSwapEventInit = "webapi_PageSwapEventInit" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn page_swap_event_init_empty_ffi() -> PageSwapEventInit = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn page_swap_event_init_get_bubbles_ffi(obj : JsValue) -> JsValue = "webapi_PageSwapEventInit" "get_bubbles"
+
+///|
+#cfg(target="wasm-gc")
+fn page_swap_event_init_get_cancelable_ffi(obj : JsValue) -> JsValue = "webapi_PageSwapEventInit" "get_cancelable"
+
+///|
+#cfg(target="wasm-gc")
+fn page_swap_event_init_get_composed_ffi(obj : JsValue) -> JsValue = "webapi_PageSwapEventInit" "get_composed"
+
+///|
+#cfg(target="wasm-gc")
+fn page_swap_event_init_get_activation_ffi(obj : JsValue) -> JsValue = "webapi_PageSwapEventInit" "get_activation"
+
+///|
+#cfg(target="wasm-gc")
+fn page_swap_event_init_get_view_transition_ffi(obj : JsValue) -> JsValue = "webapi_PageSwapEventInit" "get_viewTransition"

@@ -95,3 +95,58 @@ pub fn CSSStyleSheetInit::media(
 pub fn CSSStyleSheetInit::disabled(self : CSSStyleSheetInit) -> Bool? {
   css_style_sheet_init_get_disabled_ffi(TJsValue::to_js(self)).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn css_style_sheet_init_ffi(
+  base_url : JsValue,
+  media : JsValue,
+  disabled : JsValue,
+) -> CSSStyleSheetInit =
+  #|(baseURL, media, disabled) => {
+  #|  const obj = {};
+  #|  if (baseURL !== undefined) obj.baseURL = baseURL;
+  #|  if (media !== undefined) obj.media = media;
+  #|  if (disabled !== undefined) obj.disabled = disabled;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn css_style_sheet_init_empty_ffi() -> CSSStyleSheetInit = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn css_style_sheet_init_get_base_url_ffi(obj : JsValue) -> JsValue = "(obj) => obj.baseURL"
+
+///|
+#cfg(target="js")
+extern "js" fn css_style_sheet_init_get_media_ffi(obj : JsValue) -> JsValue = "(obj) => obj.media"
+
+///|
+#cfg(target="js")
+extern "js" fn css_style_sheet_init_get_disabled_ffi(obj : JsValue) -> JsValue = "(obj) => obj.disabled"
+
+///|
+#cfg(target="wasm-gc")
+fn css_style_sheet_init_ffi(
+  base_url : JsValue,
+  media : JsValue,
+  disabled : JsValue,
+) -> CSSStyleSheetInit = "webapi_CSSStyleSheetInit" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn css_style_sheet_init_empty_ffi() -> CSSStyleSheetInit = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn css_style_sheet_init_get_base_url_ffi(obj : JsValue) -> JsValue = "webapi_CSSStyleSheetInit" "get_baseURL"
+
+///|
+#cfg(target="wasm-gc")
+fn css_style_sheet_init_get_media_ffi(obj : JsValue) -> JsValue = "webapi_CSSStyleSheetInit" "get_media"
+
+///|
+#cfg(target="wasm-gc")
+fn css_style_sheet_init_get_disabled_ffi(obj : JsValue) -> JsValue = "webapi_CSSStyleSheetInit" "get_disabled"

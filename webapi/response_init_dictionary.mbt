@@ -48,3 +48,58 @@ pub fn ResponseInit::status_text(self : ResponseInit) -> String? {
 pub fn ResponseInit::headers(self : ResponseInit) -> HeadersInit? {
   response_init_get_headers_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn response_init_ffi(
+  status : JsValue,
+  status_text : JsValue,
+  headers : JsValue,
+) -> ResponseInit =
+  #|(status, statusText, headers) => {
+  #|  const obj = {};
+  #|  if (status !== undefined) obj.status = status;
+  #|  if (statusText !== undefined) obj.statusText = statusText;
+  #|  if (headers !== undefined) obj.headers = headers;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn response_init_empty_ffi() -> ResponseInit = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn response_init_get_status_ffi(obj : JsValue) -> JsValue = "(obj) => obj.status"
+
+///|
+#cfg(target="js")
+extern "js" fn response_init_get_status_text_ffi(obj : JsValue) -> JsValue = "(obj) => obj.statusText"
+
+///|
+#cfg(target="js")
+extern "js" fn response_init_get_headers_ffi(obj : JsValue) -> JsValue = "(obj) => obj.headers"
+
+///|
+#cfg(target="wasm-gc")
+fn response_init_ffi(
+  status : JsValue,
+  status_text : JsValue,
+  headers : JsValue,
+) -> ResponseInit = "webapi_ResponseInit" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn response_init_empty_ffi() -> ResponseInit = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn response_init_get_status_ffi(obj : JsValue) -> JsValue = "webapi_ResponseInit" "get_status"
+
+///|
+#cfg(target="wasm-gc")
+fn response_init_get_status_text_ffi(obj : JsValue) -> JsValue = "webapi_ResponseInit" "get_statusText"
+
+///|
+#cfg(target="wasm-gc")
+fn response_init_get_headers_ffi(obj : JsValue) -> JsValue = "webapi_ResponseInit" "get_headers"

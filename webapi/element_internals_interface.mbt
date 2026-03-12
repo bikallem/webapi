@@ -156,3 +156,175 @@ impl TElementInternals with labels(self : Self) -> NodeList {
 impl TElementInternals with states(self : Self) -> CustomStateSet {
   element_internals_states_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn element_internals_shadow_root_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.shadowRoot"
+
+///|
+#cfg(target="js")
+fn element_internals_shadow_root_ffi(obj : JsValue) -> ShadowRoot {
+  element_internals_shadow_root_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_internals_set_form_value_ffi(
+  obj : JsValue,
+  value : JsValue,
+  state : JsValue,
+) -> Unit = "(obj, value, state) => obj.setFormValue(value, state)"
+
+///|
+#cfg(target="js")
+extern "js" fn element_internals_form_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.form"
+
+///|
+#cfg(target="js")
+fn element_internals_form_ffi(obj : JsValue) -> HTMLFormElement {
+  element_internals_form_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_internals_set_validity_ffi(
+  obj : JsValue,
+  flags : JsValue,
+  message : JsValue,
+  anchor : JsValue,
+) -> Unit = "(obj, flags, message, anchor) => obj.setValidity(flags, message, anchor)"
+
+///|
+#cfg(target="js")
+extern "js" fn element_internals_will_validate_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.willValidate"
+
+///|
+#cfg(target="js")
+fn element_internals_will_validate_ffi(obj : JsValue) -> Bool {
+  element_internals_will_validate_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_internals_validity_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.validity"
+
+///|
+#cfg(target="js")
+fn element_internals_validity_ffi(obj : JsValue) -> ValidityState {
+  element_internals_validity_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_internals_validation_message_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.validationMessage"
+
+///|
+#cfg(target="js")
+fn element_internals_validation_message_ffi(obj : JsValue) -> String {
+  element_internals_validation_message_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_internals_check_validity_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.checkValidity()"
+
+///|
+#cfg(target="js")
+fn element_internals_check_validity_ffi(obj : JsValue) -> Bool {
+  element_internals_check_validity_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_internals_report_validity_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.reportValidity()"
+
+///|
+#cfg(target="js")
+fn element_internals_report_validity_ffi(obj : JsValue) -> Bool {
+  element_internals_report_validity_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_internals_labels_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.labels"
+
+///|
+#cfg(target="js")
+fn element_internals_labels_ffi(obj : JsValue) -> NodeList {
+  element_internals_labels_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn element_internals_states_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.states"
+
+///|
+#cfg(target="js")
+fn element_internals_states_ffi(obj : JsValue) -> CustomStateSet {
+  element_internals_states_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn element_internals_shadow_root_ffi(obj : JsValue) -> ShadowRoot = "webapi_ElementInternals" "get_shadowRoot"
+
+///|
+#cfg(target="wasm-gc")
+fn element_internals_set_form_value_ffi(
+  obj : JsValue,
+  value : JsValue,
+  state : JsValue,
+) -> Unit = "webapi_ElementInternals" "setFormValue"
+
+///|
+#cfg(target="wasm-gc")
+fn element_internals_form_ffi(obj : JsValue) -> HTMLFormElement = "webapi_ElementInternals" "get_form"
+
+///|
+#cfg(target="wasm-gc")
+fn element_internals_set_validity_ffi(
+  obj : JsValue,
+  flags : JsValue,
+  message : JsValue,
+  anchor : JsValue,
+) -> Unit = "webapi_ElementInternals" "setValidity"
+
+///|
+#cfg(target="wasm-gc")
+fn element_internals_will_validate_ffi(obj : JsValue) -> Bool = "webapi_ElementInternals" "get_willValidate"
+
+///|
+#cfg(target="wasm-gc")
+fn element_internals_validity_ffi(obj : JsValue) -> ValidityState = "webapi_ElementInternals" "get_validity"
+
+///|
+#cfg(target="wasm-gc")
+fn element_internals_validation_message_ffi_wasm(obj : JsValue) -> JsValue = "webapi_ElementInternals" "get_validationMessage"
+
+///|
+#cfg(target="wasm-gc")
+fn element_internals_validation_message_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(element_internals_validation_message_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn element_internals_check_validity_ffi(obj : JsValue) -> Bool = "webapi_ElementInternals" "checkValidity"
+
+///|
+#cfg(target="wasm-gc")
+fn element_internals_report_validity_ffi(obj : JsValue) -> Bool = "webapi_ElementInternals" "reportValidity"
+
+///|
+#cfg(target="wasm-gc")
+fn element_internals_labels_ffi(obj : JsValue) -> NodeList = "webapi_ElementInternals" "get_labels"
+
+///|
+#cfg(target="wasm-gc")
+fn element_internals_states_ffi(obj : JsValue) -> CustomStateSet = "webapi_ElementInternals" "get_states"

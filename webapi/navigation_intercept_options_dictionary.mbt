@@ -70,3 +70,79 @@ pub fn NavigationInterceptOptions::scroll(
 ) -> NavigationScrollBehavior? {
   navigation_intercept_options_get_scroll_ffi(TJsValue::to_js(self)).to_option()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_intercept_options_ffi(
+  precommit_handler : JsValue,
+  handler : JsValue,
+  focus_reset : JsValue,
+  scroll : JsValue,
+) -> NavigationInterceptOptions =
+  #|(precommitHandler, handler, focusReset, scroll) => {
+  #|  const obj = {};
+  #|  if (precommitHandler !== undefined) obj.precommitHandler = precommitHandler;
+  #|  if (handler !== undefined) obj.handler = handler;
+  #|  if (focusReset !== undefined) obj.focusReset = focusReset;
+  #|  if (scroll !== undefined) obj.scroll = scroll;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_intercept_options_empty_ffi() -> NavigationInterceptOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_intercept_options_get_precommit_handler_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.precommitHandler"
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_intercept_options_get_handler_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.handler"
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_intercept_options_get_focus_reset_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.focusReset"
+
+///|
+#cfg(target="js")
+extern "js" fn navigation_intercept_options_get_scroll_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.scroll"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_intercept_options_ffi(
+  precommit_handler : JsValue,
+  handler : JsValue,
+  focus_reset : JsValue,
+  scroll : JsValue,
+) -> NavigationInterceptOptions = "webapi_NavigationInterceptOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_intercept_options_empty_ffi() -> NavigationInterceptOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_intercept_options_get_precommit_handler_ffi(
+  obj : JsValue,
+) -> JsValue = "webapi_NavigationInterceptOptions" "get_precommitHandler"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_intercept_options_get_handler_ffi(obj : JsValue) -> JsValue = "webapi_NavigationInterceptOptions" "get_handler"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_intercept_options_get_focus_reset_ffi(obj : JsValue) -> JsValue = "webapi_NavigationInterceptOptions" "get_focusReset"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_intercept_options_get_scroll_ffi(obj : JsValue) -> JsValue = "webapi_NavigationInterceptOptions" "get_scroll"

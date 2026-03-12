@@ -112,3 +112,129 @@ impl THistory with replace_state(
     opt_to_js(url),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn history_length_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.length"
+
+///|
+#cfg(target="js")
+fn history_length_ffi(obj : JsValue) -> UInt {
+  history_length_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn history_scroll_restoration_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.scrollRestoration"
+
+///|
+#cfg(target="js")
+fn history_scroll_restoration_ffi(obj : JsValue) -> ScrollRestoration {
+  ScrollRestoration::from_unchecked(
+    history_scroll_restoration_ffi_js(obj).unsafe_cast(),
+  )
+}
+
+///|
+#cfg(target="js")
+extern "js" fn history_set_scroll_restoration_ffi(
+  obj : JsValue,
+  scroll_restoration : JsValue,
+) -> Unit = "(obj, scrollRestoration) => { obj.scrollRestoration = scrollRestoration; }"
+
+///|
+#cfg(target="js")
+extern "js" fn history_state_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.state"
+
+///|
+#cfg(target="js")
+fn history_state_ffi(obj : JsValue) -> JsValue {
+  history_state_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn history_go_ffi(obj : JsValue, delta : JsValue) -> Unit = "(obj, delta) => obj.go(delta)"
+
+///|
+#cfg(target="js")
+extern "js" fn history_back_ffi(obj : JsValue) -> Unit = "(obj) => obj.back()"
+
+///|
+#cfg(target="js")
+extern "js" fn history_forward_ffi(obj : JsValue) -> Unit = "(obj) => obj.forward()"
+
+///|
+#cfg(target="js")
+extern "js" fn history_push_state_ffi(
+  obj : JsValue,
+  data : JsValue,
+  unused : JsValue,
+  url : JsValue,
+) -> Unit = "(obj, data, unused, url) => obj.pushState(data, unused, url)"
+
+///|
+#cfg(target="js")
+extern "js" fn history_replace_state_ffi(
+  obj : JsValue,
+  data : JsValue,
+  unused : JsValue,
+  url : JsValue,
+) -> Unit = "(obj, data, unused, url) => obj.replaceState(data, unused, url)"
+
+///|
+#cfg(target="wasm-gc")
+fn history_length_ffi(obj : JsValue) -> UInt = "webapi_History" "get_length"
+
+///|
+#cfg(target="wasm-gc")
+fn history_scroll_restoration_ffi_wasm(obj : JsValue) -> JsValue = "webapi_History" "get_scrollRestoration"
+
+///|
+#cfg(target="wasm-gc")
+fn history_scroll_restoration_ffi(obj : JsValue) -> ScrollRestoration {
+  ScrollRestoration::from_unchecked(
+    jsvalue_to_string(history_scroll_restoration_ffi_wasm(obj)),
+  )
+}
+
+///|
+#cfg(target="wasm-gc")
+fn history_set_scroll_restoration_ffi(
+  obj : JsValue,
+  scroll_restoration : JsValue,
+) -> Unit = "webapi_History" "set_scrollRestoration"
+
+///|
+#cfg(target="wasm-gc")
+fn history_state_ffi(obj : JsValue) -> JsValue = "webapi_History" "get_state"
+
+///|
+#cfg(target="wasm-gc")
+fn history_go_ffi(obj : JsValue, delta : JsValue) -> Unit = "webapi_History" "go"
+
+///|
+#cfg(target="wasm-gc")
+fn history_back_ffi(obj : JsValue) -> Unit = "webapi_History" "back"
+
+///|
+#cfg(target="wasm-gc")
+fn history_forward_ffi(obj : JsValue) -> Unit = "webapi_History" "forward"
+
+///|
+#cfg(target="wasm-gc")
+fn history_push_state_ffi(
+  obj : JsValue,
+  data : JsValue,
+  unused : JsValue,
+  url : JsValue,
+) -> Unit = "webapi_History" "pushState"
+
+///|
+#cfg(target="wasm-gc")
+fn history_replace_state_ffi(
+  obj : JsValue,
+  data : JsValue,
+  unused : JsValue,
+  url : JsValue,
+) -> Unit = "webapi_History" "replaceState"

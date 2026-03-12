@@ -42,3 +42,45 @@ impl TCSSNamespaceRule with namespace_uri(self : Self) -> CSSOMString {
 impl TCSSNamespaceRule with prefix(self : Self) -> CSSOMString {
   css_namespace_rule_prefix_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn css_namespace_rule_namespace_uri_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.namespaceURI"
+
+///|
+#cfg(target="js")
+fn css_namespace_rule_namespace_uri_ffi(obj : JsValue) -> CSSOMString {
+  css_namespace_rule_namespace_uri_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn css_namespace_rule_prefix_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.prefix"
+
+///|
+#cfg(target="js")
+fn css_namespace_rule_prefix_ffi(obj : JsValue) -> CSSOMString {
+  css_namespace_rule_prefix_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn css_namespace_rule_namespace_uri_ffi_wasm(obj : JsValue) -> JsValue = "webapi_CSSNamespaceRule" "get_namespaceURI"
+
+///|
+#cfg(target="wasm-gc")
+fn css_namespace_rule_namespace_uri_ffi(obj : JsValue) -> CSSOMString {
+  css_namespace_rule_namespace_uri_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn css_namespace_rule_prefix_ffi_wasm(obj : JsValue) -> JsValue = "webapi_CSSNamespaceRule" "get_prefix"
+
+///|
+#cfg(target="wasm-gc")
+fn css_namespace_rule_prefix_ffi(obj : JsValue) -> CSSOMString {
+  css_namespace_rule_prefix_ffi_wasm(obj).unsafe_cast()
+}

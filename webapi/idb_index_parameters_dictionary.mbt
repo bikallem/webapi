@@ -35,3 +35,49 @@ pub fn IDBIndexParameters::unique(self : IDBIndexParameters) -> Bool? {
 pub fn IDBIndexParameters::multi_entry(self : IDBIndexParameters) -> Bool? {
   idb_index_parameters_get_multi_entry_ffi(TJsValue::to_js(self)).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn idb_index_parameters_ffi(
+  unique : JsValue,
+  multi_entry : JsValue,
+) -> IDBIndexParameters =
+  #|(unique, multiEntry) => {
+  #|  const obj = {};
+  #|  if (unique !== undefined) obj.unique = unique;
+  #|  if (multiEntry !== undefined) obj.multiEntry = multiEntry;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_index_parameters_empty_ffi() -> IDBIndexParameters = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn idb_index_parameters_get_unique_ffi(obj : JsValue) -> JsValue = "(obj) => obj.unique"
+
+///|
+#cfg(target="js")
+extern "js" fn idb_index_parameters_get_multi_entry_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.multiEntry"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_index_parameters_ffi(
+  unique : JsValue,
+  multi_entry : JsValue,
+) -> IDBIndexParameters = "webapi_IDBIndexParameters" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_index_parameters_empty_ffi() -> IDBIndexParameters = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_index_parameters_get_unique_ffi(obj : JsValue) -> JsValue = "webapi_IDBIndexParameters" "get_unique"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_index_parameters_get_multi_entry_ffi(obj : JsValue) -> JsValue = "webapi_IDBIndexParameters" "get_multiEntry"

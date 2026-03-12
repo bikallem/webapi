@@ -21,3 +21,15 @@ pub fn CustomElementConstructor::new(
 ) -> CustomElementConstructor {
   custom_element_constructor_ffi(callback)
 }
+
+///|
+#cfg(target="js")
+extern "js" fn custom_element_constructor_ffi(
+  callback : () -> HTMLElement,
+) -> CustomElementConstructor = "(callback) => callback"
+
+///|
+#cfg(target="wasm-gc")
+fn custom_element_constructor_ffi(
+  callback : () -> HTMLElement,
+) -> CustomElementConstructor = "webapi_CustomElementConstructor" "new"

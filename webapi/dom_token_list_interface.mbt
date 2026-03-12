@@ -107,3 +107,164 @@ impl TDOMTokenList with value(self : Self) -> String {
 impl TDOMTokenList with set_value(self : Self, value : String) -> Unit {
   dom_token_list_set_value_ffi(TJsValue::to_js(self), TJsValue::to_js(value))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn dom_token_list_length_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.length"
+
+///|
+#cfg(target="js")
+fn dom_token_list_length_ffi(obj : JsValue) -> UInt {
+  dom_token_list_length_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_token_list_item_ffi(
+  obj : JsValue,
+  index : JsValue,
+) -> JsValue = "(obj, index) => obj.item(index)"
+
+///|
+#cfg(target="js")
+extern "js" fn dom_token_list_contains_ffi_js(
+  obj : JsValue,
+  token : JsValue,
+) -> JsValue = "(obj, token) => obj.contains(token)"
+
+///|
+#cfg(target="js")
+fn dom_token_list_contains_ffi(obj : JsValue, token : JsValue) -> Bool {
+  dom_token_list_contains_ffi_js(obj, token).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_token_list_add_ffi(obj : JsValue, tokens : JsValue) -> Unit = "(obj, tokens) => obj.add(...tokens)"
+
+///|
+#cfg(target="js")
+extern "js" fn dom_token_list_remove_ffi(
+  obj : JsValue,
+  tokens : JsValue,
+) -> Unit = "(obj, tokens) => obj.remove(...tokens)"
+
+///|
+#cfg(target="js")
+extern "js" fn dom_token_list_toggle_ffi_js(
+  obj : JsValue,
+  token : JsValue,
+  force : JsValue,
+) -> JsValue = "(obj, token, force) => obj.toggle(token, force)"
+
+///|
+#cfg(target="js")
+fn dom_token_list_toggle_ffi(
+  obj : JsValue,
+  token : JsValue,
+  force : JsValue,
+) -> Bool {
+  dom_token_list_toggle_ffi_js(obj, token, force).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_token_list_replace_ffi_js(
+  obj : JsValue,
+  token : JsValue,
+  new_token : JsValue,
+) -> JsValue = "(obj, token, new_token) => obj.replace(token, new_token)"
+
+///|
+#cfg(target="js")
+fn dom_token_list_replace_ffi(
+  obj : JsValue,
+  token : JsValue,
+  new_token : JsValue,
+) -> Bool {
+  dom_token_list_replace_ffi_js(obj, token, new_token).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_token_list_supports_ffi_js(
+  obj : JsValue,
+  token : JsValue,
+) -> JsValue = "(obj, token) => obj.supports(token)"
+
+///|
+#cfg(target="js")
+fn dom_token_list_supports_ffi(obj : JsValue, token : JsValue) -> Bool {
+  dom_token_list_supports_ffi_js(obj, token).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_token_list_value_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.value"
+
+///|
+#cfg(target="js")
+fn dom_token_list_value_ffi(obj : JsValue) -> String {
+  dom_token_list_value_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn dom_token_list_set_value_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "(obj, value) => { obj.value = value; }"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_token_list_length_ffi(obj : JsValue) -> UInt = "webapi_DOMTokenList" "get_length"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_token_list_item_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_DOMTokenList" "item"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_token_list_contains_ffi(obj : JsValue, token : JsValue) -> Bool = "webapi_DOMTokenList" "contains"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_token_list_add_ffi(obj : JsValue, tokens : JsValue) -> Unit = "webapi_DOMTokenList" "add"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_token_list_remove_ffi(obj : JsValue, tokens : JsValue) -> Unit = "webapi_DOMTokenList" "remove"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_token_list_toggle_ffi(
+  obj : JsValue,
+  token : JsValue,
+  force : JsValue,
+) -> Bool = "webapi_DOMTokenList" "toggle"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_token_list_replace_ffi(
+  obj : JsValue,
+  token : JsValue,
+  new_token : JsValue,
+) -> Bool = "webapi_DOMTokenList" "replace"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_token_list_supports_ffi(obj : JsValue, token : JsValue) -> Bool = "webapi_DOMTokenList" "supports"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_token_list_value_ffi_wasm(obj : JsValue) -> JsValue = "webapi_DOMTokenList" "get_value"
+
+///|
+#cfg(target="wasm-gc")
+fn dom_token_list_value_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(dom_token_list_value_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn dom_token_list_set_value_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_DOMTokenList" "set_value"

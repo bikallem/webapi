@@ -1,2 +1,0 @@
-///|
-fn function_ffi(callback : (JsValue) -> JsValue) -> Function = "webapi_Function" "new"

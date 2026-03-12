@@ -131,3 +131,147 @@ impl TMessagePort with set_onmessageerror(
     TJsValue::to_js(event_handler_non_null_ffi(onmessageerror)),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn message_port_post_message_ffi(
+  obj : JsValue,
+  message : JsValue,
+  transfer : JsValue,
+) -> Unit = "(obj, message, transfer) => obj.postMessage(message, transfer)"
+
+///|
+#cfg(target="js")
+extern "js" fn message_port_post_message_with_options_ffi(
+  obj : JsValue,
+  message : JsValue,
+  options : JsValue,
+) -> Unit = "(obj, message, options) => obj.postMessage(message, options)"
+
+///|
+#cfg(target="js")
+extern "js" fn message_port_start_ffi(obj : JsValue) -> Unit = "(obj) => obj.start()"
+
+///|
+#cfg(target="js")
+extern "js" fn message_port_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.close()"
+
+///|
+#cfg(target="js")
+extern "js" fn message_port_onclose_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onclose"
+
+///|
+#cfg(target="js")
+fn message_port_onclose_ffi(obj : JsValue) -> EventHandler {
+  message_port_onclose_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn message_port_set_onclose_ffi(
+  obj : JsValue,
+  onclose : JsValue,
+) -> Unit = "(obj, onclose) => { obj.onclose = onclose; }"
+
+///|
+#cfg(target="js")
+extern "js" fn message_port_onmessage_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onmessage"
+
+///|
+#cfg(target="js")
+fn message_port_onmessage_ffi(obj : JsValue) -> EventHandler {
+  message_port_onmessage_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn message_port_set_onmessage_ffi(
+  obj : JsValue,
+  onmessage : JsValue,
+) -> Unit = "(obj, onmessage) => { obj.onmessage = onmessage; }"
+
+///|
+#cfg(target="js")
+extern "js" fn message_port_onmessageerror_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onmessageerror"
+
+///|
+#cfg(target="js")
+fn message_port_onmessageerror_ffi(obj : JsValue) -> EventHandler {
+  message_port_onmessageerror_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn message_port_set_onmessageerror_ffi(
+  obj : JsValue,
+  onmessageerror : JsValue,
+) -> Unit = "(obj, onmessageerror) => { obj.onmessageerror = onmessageerror; }"
+
+///|
+#cfg(target="wasm-gc")
+fn message_port_post_message_ffi(
+  obj : JsValue,
+  message : JsValue,
+  transfer : JsValue,
+) -> Unit = "webapi_MessagePort" "postMessage"
+
+///|
+#cfg(target="wasm-gc")
+fn message_port_post_message_with_options_ffi(
+  obj : JsValue,
+  message : JsValue,
+  options : JsValue,
+) -> Unit = "webapi_MessagePort" "post_message_with_options"
+
+///|
+#cfg(target="wasm-gc")
+fn message_port_start_ffi(obj : JsValue) -> Unit = "webapi_MessagePort" "start"
+
+///|
+#cfg(target="wasm-gc")
+fn message_port_close_ffi(obj : JsValue) -> Unit = "webapi_MessagePort" "close"
+
+///|
+#cfg(target="wasm-gc")
+fn message_port_onclose_ffi_wasm(obj : JsValue) -> JsValue = "webapi_MessagePort" "get_onclose"
+
+///|
+#cfg(target="wasm-gc")
+fn message_port_onclose_ffi(obj : JsValue) -> EventHandler {
+  message_port_onclose_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn message_port_set_onclose_ffi(obj : JsValue, onclose : JsValue) -> Unit = "webapi_MessagePort" "set_onclose"
+
+///|
+#cfg(target="wasm-gc")
+fn message_port_onmessage_ffi_wasm(obj : JsValue) -> JsValue = "webapi_MessagePort" "get_onmessage"
+
+///|
+#cfg(target="wasm-gc")
+fn message_port_onmessage_ffi(obj : JsValue) -> EventHandler {
+  message_port_onmessage_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn message_port_set_onmessage_ffi(obj : JsValue, onmessage : JsValue) -> Unit = "webapi_MessagePort" "set_onmessage"
+
+///|
+#cfg(target="wasm-gc")
+fn message_port_onmessageerror_ffi_wasm(obj : JsValue) -> JsValue = "webapi_MessagePort" "get_onmessageerror"
+
+///|
+#cfg(target="wasm-gc")
+fn message_port_onmessageerror_ffi(obj : JsValue) -> EventHandler {
+  message_port_onmessageerror_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn message_port_set_onmessageerror_ffi(
+  obj : JsValue,
+  onmessageerror : JsValue,
+) -> Unit = "webapi_MessagePort" "set_onmessageerror"

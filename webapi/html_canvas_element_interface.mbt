@@ -135,3 +135,153 @@ impl THTMLCanvasElement with to_blob(
 impl THTMLCanvasElement with transfer_control_to_offscreen(self : Self) -> OffscreenCanvas {
   html_canvas_element_transfer_control_to_offscreen_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_canvas_element_new_ffi() -> HTMLCanvasElement = "() => new HTMLCanvasElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_canvas_element_width_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.width"
+
+///|
+#cfg(target="js")
+fn html_canvas_element_width_ffi(obj : JsValue) -> UInt {
+  html_canvas_element_width_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_canvas_element_set_width_ffi(
+  obj : JsValue,
+  width : JsValue,
+) -> Unit = "(obj, width) => { obj.width = width; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_canvas_element_height_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.height"
+
+///|
+#cfg(target="js")
+fn html_canvas_element_height_ffi(obj : JsValue) -> UInt {
+  html_canvas_element_height_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_canvas_element_set_height_ffi(
+  obj : JsValue,
+  height : JsValue,
+) -> Unit = "(obj, height) => { obj.height = height; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_canvas_element_get_context_ffi(
+  obj : JsValue,
+  context_id : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, context_id, options) => obj.getContext(context_id, options)"
+
+///|
+#cfg(target="js")
+extern "js" fn html_canvas_element_to_data_url_ffi_js(
+  obj : JsValue,
+  type_ : JsValue,
+  quality : JsValue,
+) -> JsValue = "(obj, type_, quality) => obj.toDataURL(type_, quality)"
+
+///|
+#cfg(target="js")
+fn html_canvas_element_to_data_url_ffi(
+  obj : JsValue,
+  type_ : JsValue,
+  quality : JsValue,
+) -> String {
+  html_canvas_element_to_data_url_ffi_js(obj, type_, quality).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_canvas_element_to_blob_ffi(
+  obj : JsValue,
+  _callback : JsValue,
+  type_ : JsValue,
+  quality : JsValue,
+) -> Unit = "(obj, _callback, type_, quality) => obj.toBlob(_callback, type_, quality)"
+
+///|
+#cfg(target="js")
+extern "js" fn html_canvas_element_transfer_control_to_offscreen_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.transferControlToOffscreen()"
+
+///|
+#cfg(target="js")
+fn html_canvas_element_transfer_control_to_offscreen_ffi(
+  obj : JsValue,
+) -> OffscreenCanvas {
+  html_canvas_element_transfer_control_to_offscreen_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_canvas_element_new_ffi() -> HTMLCanvasElement = "webapi_HTMLCanvasElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_canvas_element_width_ffi(obj : JsValue) -> UInt = "webapi_HTMLCanvasElement" "get_width"
+
+///|
+#cfg(target="wasm-gc")
+fn html_canvas_element_set_width_ffi(obj : JsValue, width : JsValue) -> Unit = "webapi_HTMLCanvasElement" "set_width"
+
+///|
+#cfg(target="wasm-gc")
+fn html_canvas_element_height_ffi(obj : JsValue) -> UInt = "webapi_HTMLCanvasElement" "get_height"
+
+///|
+#cfg(target="wasm-gc")
+fn html_canvas_element_set_height_ffi(obj : JsValue, height : JsValue) -> Unit = "webapi_HTMLCanvasElement" "set_height"
+
+///|
+#cfg(target="wasm-gc")
+fn html_canvas_element_get_context_ffi(
+  obj : JsValue,
+  context_id : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_HTMLCanvasElement" "getContext"
+
+///|
+#cfg(target="wasm-gc")
+fn html_canvas_element_to_data_url_ffi_wasm(
+  obj : JsValue,
+  type_ : JsValue,
+  quality : JsValue,
+) -> JsValue = "webapi_HTMLCanvasElement" "toDataURL"
+
+///|
+#cfg(target="wasm-gc")
+fn html_canvas_element_to_data_url_ffi(
+  obj : JsValue,
+  type_ : JsValue,
+  quality : JsValue,
+) -> String {
+  jsvalue_to_string(
+    html_canvas_element_to_data_url_ffi_wasm(obj, type_, quality),
+  )
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_canvas_element_to_blob_ffi(
+  obj : JsValue,
+  _callback : JsValue,
+  type_ : JsValue,
+  quality : JsValue,
+) -> Unit = "webapi_HTMLCanvasElement" "toBlob"
+
+///|
+#cfg(target="wasm-gc")
+fn html_canvas_element_transfer_control_to_offscreen_ffi(
+  obj : JsValue,
+) -> OffscreenCanvas = "webapi_HTMLCanvasElement" "transferControlToOffscreen"

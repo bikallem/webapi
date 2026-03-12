@@ -64,3 +64,45 @@ impl TTextEvent with init_text_event(
     opt_to_js(data),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn text_event_data_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.data"
+
+///|
+#cfg(target="js")
+fn text_event_data_ffi(obj : JsValue) -> String {
+  text_event_data_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn text_event_init_text_event_ffi(
+  obj : JsValue,
+  type_ : JsValue,
+  bubbles : JsValue,
+  cancelable : JsValue,
+  view : JsValue,
+  data : JsValue,
+) -> Unit = "(obj, type_, bubbles, cancelable, view, data) => obj.initTextEvent(type_, bubbles, cancelable, view, data)"
+
+///|
+#cfg(target="wasm-gc")
+fn text_event_data_ffi_wasm(obj : JsValue) -> JsValue = "webapi_TextEvent" "get_data"
+
+///|
+#cfg(target="wasm-gc")
+fn text_event_data_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(text_event_data_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn text_event_init_text_event_ffi(
+  obj : JsValue,
+  type_ : JsValue,
+  bubbles : JsValue,
+  cancelable : JsValue,
+  view : JsValue,
+  data : JsValue,
+) -> Unit = "webapi_TextEvent" "initTextEvent"

@@ -23,3 +23,15 @@ pub fn OnErrorEventHandlerNonNull::new(
 ) -> OnErrorEventHandlerNonNull {
   on_error_event_handler_non_null_ffi(callback)
 }
+
+///|
+#cfg(target="js")
+extern "js" fn on_error_event_handler_non_null_ffi(
+  callback : (OnErrorEventHandlerNonNullEvent, String, UInt, UInt, JsValue) -> JsValue,
+) -> OnErrorEventHandlerNonNull = "(callback) => callback"
+
+///|
+#cfg(target="wasm-gc")
+fn on_error_event_handler_non_null_ffi(
+  callback : (OnErrorEventHandlerNonNullEvent, String, UInt, UInt, JsValue) -> JsValue,
+) -> OnErrorEventHandlerNonNull = "webapi_OnErrorEventHandlerNonNull" "new"

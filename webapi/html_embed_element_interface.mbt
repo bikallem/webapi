@@ -148,3 +148,207 @@ impl THTMLEmbedElement with set_name(self : Self, name : String) -> Unit {
 impl THTMLEmbedElement with get_svg_document(self : Self) -> Document {
   self.get_svg_document_opt().unwrap()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_embed_element_new_ffi() -> HTMLEmbedElement = "() => new HTMLEmbedElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_embed_element_src_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.src"
+
+///|
+#cfg(target="js")
+fn html_embed_element_src_ffi(obj : JsValue) -> String {
+  html_embed_element_src_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_embed_element_set_src_ffi(
+  obj : JsValue,
+  src : JsValue,
+) -> Unit = "(obj, src) => { obj.src = src; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_embed_element_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.type"
+
+///|
+#cfg(target="js")
+fn html_embed_element_type_ffi(obj : JsValue) -> String {
+  html_embed_element_type_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_embed_element_set_type_ffi(
+  obj : JsValue,
+  type_ : JsValue,
+) -> Unit = "(obj, type) => { obj.type = type; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_embed_element_width_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.width"
+
+///|
+#cfg(target="js")
+fn html_embed_element_width_ffi(obj : JsValue) -> String {
+  html_embed_element_width_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_embed_element_set_width_ffi(
+  obj : JsValue,
+  width : JsValue,
+) -> Unit = "(obj, width) => { obj.width = width; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_embed_element_height_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.height"
+
+///|
+#cfg(target="js")
+fn html_embed_element_height_ffi(obj : JsValue) -> String {
+  html_embed_element_height_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_embed_element_set_height_ffi(
+  obj : JsValue,
+  height : JsValue,
+) -> Unit = "(obj, height) => { obj.height = height; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_embed_element_get_svg_document_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.getSVGDocument()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_embed_element_align_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.align"
+
+///|
+#cfg(target="js")
+fn html_embed_element_align_ffi(obj : JsValue) -> String {
+  html_embed_element_align_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_embed_element_set_align_ffi(
+  obj : JsValue,
+  align : JsValue,
+) -> Unit = "(obj, align) => { obj.align = align; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_embed_element_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.name"
+
+///|
+#cfg(target="js")
+fn html_embed_element_name_ffi(obj : JsValue) -> String {
+  html_embed_element_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_embed_element_set_name_ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> Unit = "(obj, name) => { obj.name = name; }"
+
+///|
+#cfg(target="wasm-gc")
+fn html_embed_element_new_ffi() -> HTMLEmbedElement = "webapi_HTMLEmbedElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_embed_element_src_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLEmbedElement" "get_src"
+
+///|
+#cfg(target="wasm-gc")
+fn html_embed_element_src_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_embed_element_src_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_embed_element_set_src_ffi(obj : JsValue, src : JsValue) -> Unit = "webapi_HTMLEmbedElement" "set_src"
+
+///|
+#cfg(target="wasm-gc")
+fn html_embed_element_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLEmbedElement" "get_type"
+
+///|
+#cfg(target="wasm-gc")
+fn html_embed_element_type_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_embed_element_type_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_embed_element_set_type_ffi(obj : JsValue, type_ : JsValue) -> Unit = "webapi_HTMLEmbedElement" "set_type"
+
+///|
+#cfg(target="wasm-gc")
+fn html_embed_element_width_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLEmbedElement" "get_width"
+
+///|
+#cfg(target="wasm-gc")
+fn html_embed_element_width_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_embed_element_width_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_embed_element_set_width_ffi(obj : JsValue, width : JsValue) -> Unit = "webapi_HTMLEmbedElement" "set_width"
+
+///|
+#cfg(target="wasm-gc")
+fn html_embed_element_height_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLEmbedElement" "get_height"
+
+///|
+#cfg(target="wasm-gc")
+fn html_embed_element_height_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_embed_element_height_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_embed_element_set_height_ffi(obj : JsValue, height : JsValue) -> Unit = "webapi_HTMLEmbedElement" "set_height"
+
+///|
+#cfg(target="wasm-gc")
+fn html_embed_element_get_svg_document_ffi(obj : JsValue) -> JsValue = "webapi_HTMLEmbedElement" "getSVGDocument"
+
+///|
+#cfg(target="wasm-gc")
+fn html_embed_element_align_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLEmbedElement" "get_align"
+
+///|
+#cfg(target="wasm-gc")
+fn html_embed_element_align_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_embed_element_align_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_embed_element_set_align_ffi(obj : JsValue, align : JsValue) -> Unit = "webapi_HTMLEmbedElement" "set_align"
+
+///|
+#cfg(target="wasm-gc")
+fn html_embed_element_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLEmbedElement" "get_name"
+
+///|
+#cfg(target="wasm-gc")
+fn html_embed_element_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_embed_element_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_embed_element_set_name_ffi(obj : JsValue, name : JsValue) -> Unit = "webapi_HTMLEmbedElement" "set_name"

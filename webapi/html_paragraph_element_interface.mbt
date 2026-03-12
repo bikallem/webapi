@@ -61,3 +61,42 @@ impl THTMLParagraphElement with set_align(self : Self, align : String) -> Unit {
     TJsValue::to_js(align),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_paragraph_element_new_ffi() -> HTMLParagraphElement = "() => new HTMLParagraphElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_paragraph_element_align_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.align"
+
+///|
+#cfg(target="js")
+fn html_paragraph_element_align_ffi(obj : JsValue) -> String {
+  html_paragraph_element_align_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_paragraph_element_set_align_ffi(
+  obj : JsValue,
+  align : JsValue,
+) -> Unit = "(obj, align) => { obj.align = align; }"
+
+///|
+#cfg(target="wasm-gc")
+fn html_paragraph_element_new_ffi() -> HTMLParagraphElement = "webapi_HTMLParagraphElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_paragraph_element_align_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLParagraphElement" "get_align"
+
+///|
+#cfg(target="wasm-gc")
+fn html_paragraph_element_align_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_paragraph_element_align_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_paragraph_element_set_align_ffi(obj : JsValue, align : JsValue) -> Unit = "webapi_HTMLParagraphElement" "set_align"

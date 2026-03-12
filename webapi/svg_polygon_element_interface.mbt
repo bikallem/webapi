@@ -57,3 +57,33 @@ impl TSVGPolygonElement with points(self : Self) -> SVGPointList {
 impl TSVGPolygonElement with animated_points(self : Self) -> SVGPointList {
   svg_polygon_element_animated_points_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn svg_polygon_element_points_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.points"
+
+///|
+#cfg(target="js")
+fn svg_polygon_element_points_ffi(obj : JsValue) -> SVGPointList {
+  svg_polygon_element_points_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_polygon_element_animated_points_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.animatedPoints"
+
+///|
+#cfg(target="js")
+fn svg_polygon_element_animated_points_ffi(obj : JsValue) -> SVGPointList {
+  svg_polygon_element_animated_points_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svg_polygon_element_points_ffi(obj : JsValue) -> SVGPointList = "webapi_SVGPolygonElement" "get_points"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_polygon_element_animated_points_ffi(obj : JsValue) -> SVGPointList = "webapi_SVGPolygonElement" "get_animatedPoints"

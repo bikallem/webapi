@@ -61,3 +61,94 @@ impl TIDBFactory with cmp(self : Self, first : JsValue, second : JsValue) -> Int
     TJsValue::to_js(second),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn idb_factory_open_ffi_js(
+  obj : JsValue,
+  name : JsValue,
+  version : JsValue,
+) -> JsValue = "(obj, name, version) => obj.open(name, version)"
+
+///|
+#cfg(target="js")
+fn idb_factory_open_ffi(
+  obj : JsValue,
+  name : JsValue,
+  version : JsValue,
+) -> IDBOpenDBRequest {
+  idb_factory_open_ffi_js(obj, name, version).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_factory_delete_database_ffi_js(
+  obj : JsValue,
+  name : JsValue,
+) -> JsValue = "(obj, name) => obj.deleteDatabase(name)"
+
+///|
+#cfg(target="js")
+fn idb_factory_delete_database_ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> IDBOpenDBRequest {
+  idb_factory_delete_database_ffi_js(obj, name).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_factory_databases_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.databases()"
+
+///|
+#cfg(target="js")
+fn idb_factory_databases_ffi(
+  obj : JsValue,
+) -> JsPromise[Array[IDBDatabaseInfo]] {
+  idb_factory_databases_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn idb_factory_cmp_ffi_js(
+  obj : JsValue,
+  first : JsValue,
+  second : JsValue,
+) -> JsValue = "(obj, first, second) => obj.cmp(first, second)"
+
+///|
+#cfg(target="js")
+fn idb_factory_cmp_ffi(obj : JsValue, first : JsValue, second : JsValue) -> Int {
+  idb_factory_cmp_ffi_js(obj, first, second).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn idb_factory_open_ffi(
+  obj : JsValue,
+  name : JsValue,
+  version : JsValue,
+) -> IDBOpenDBRequest = "webapi_IDBFactory" "open"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_factory_delete_database_ffi(
+  obj : JsValue,
+  name : JsValue,
+) -> IDBOpenDBRequest = "webapi_IDBFactory" "deleteDatabase"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_factory_databases_ffi_wasm(obj : JsValue) -> JsValue = "webapi_IDBFactory" "databases"
+
+///|
+#cfg(target="wasm-gc")
+fn idb_factory_databases_ffi(
+  obj : JsValue,
+) -> JsPromise[Array[IDBDatabaseInfo]] {
+  idb_factory_databases_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn idb_factory_cmp_ffi(obj : JsValue, first : JsValue, second : JsValue) -> Int = "webapi_IDBFactory" "cmp"

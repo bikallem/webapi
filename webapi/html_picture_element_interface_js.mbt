@@ -1,2 +1,0 @@
-///|
-extern "js" fn html_picture_element_new_ffi() -> HTMLPictureElement = "() => new HTMLPictureElement()"

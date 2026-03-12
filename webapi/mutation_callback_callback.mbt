@@ -19,3 +19,28 @@ pub fn MutationCallback::new(
 ) -> MutationCallback {
   mutation_callback_ffi(callback)
 }
+
+///|
+#cfg(target="js")
+extern "js" fn mutation_callback_ffi(
+  callback : (Array[MutationRecord], MutationObserver) -> Unit,
+) -> MutationCallback = "(callback) => callback"
+
+///|
+#cfg(target="wasm-gc")
+fn mutation_callback_ffi_raw(
+  callback : (JsArray, MutationObserver) -> Unit,
+) -> MutationCallback = "webapi_MutationCallback" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn mutation_callback_ffi(
+  callback : (Array[MutationRecord], MutationObserver) -> Unit,
+) -> MutationCallback {
+  mutation_callback_ffi_raw(fn(
+    mutations : JsArray,
+    observer : MutationObserver,
+  ) -> Unit {
+    callback(mutations.to_array(), observer)
+  })
+}

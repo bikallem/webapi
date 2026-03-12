@@ -82,3 +82,115 @@ impl TScreenOrientation with set_onchange(
     TJsValue::to_js(event_handler_non_null_ffi(onchange)),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn screen_orientation_lock_ffi_js(
+  obj : JsValue,
+  orientation : JsValue,
+) -> JsValue = "(obj, orientation) => obj.lock(orientation)"
+
+///|
+#cfg(target="js")
+fn screen_orientation_lock_ffi(
+  obj : JsValue,
+  orientation : JsValue,
+) -> JsPromise[JsValue] {
+  screen_orientation_lock_ffi_js(obj, orientation).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn screen_orientation_unlock_ffi(obj : JsValue) -> Unit = "(obj) => obj.unlock()"
+
+///|
+#cfg(target="js")
+extern "js" fn screen_orientation_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.type"
+
+///|
+#cfg(target="js")
+fn screen_orientation_type_ffi(obj : JsValue) -> OrientationType {
+  OrientationType::from_unchecked(
+    screen_orientation_type_ffi_js(obj).unsafe_cast(),
+  )
+}
+
+///|
+#cfg(target="js")
+extern "js" fn screen_orientation_angle_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.angle"
+
+///|
+#cfg(target="js")
+fn screen_orientation_angle_ffi(obj : JsValue) -> UInt {
+  screen_orientation_angle_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn screen_orientation_onchange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onchange"
+
+///|
+#cfg(target="js")
+fn screen_orientation_onchange_ffi(obj : JsValue) -> EventHandler {
+  screen_orientation_onchange_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn screen_orientation_set_onchange_ffi(
+  obj : JsValue,
+  onchange : JsValue,
+) -> Unit = "(obj, onchange) => { obj.onchange = onchange; }"
+
+///|
+#cfg(target="wasm-gc")
+fn screen_orientation_lock_ffi_wasm(
+  obj : JsValue,
+  orientation : JsValue,
+) -> JsValue = "webapi_ScreenOrientation" "lock"
+
+///|
+#cfg(target="wasm-gc")
+fn screen_orientation_lock_ffi(
+  obj : JsValue,
+  orientation : JsValue,
+) -> JsPromise[JsValue] {
+  screen_orientation_lock_ffi_wasm(obj, orientation).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn screen_orientation_unlock_ffi(obj : JsValue) -> Unit = "webapi_ScreenOrientation" "unlock"
+
+///|
+#cfg(target="wasm-gc")
+fn screen_orientation_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_ScreenOrientation" "get_type"
+
+///|
+#cfg(target="wasm-gc")
+fn screen_orientation_type_ffi(obj : JsValue) -> OrientationType {
+  OrientationType::from_unchecked(
+    jsvalue_to_string(screen_orientation_type_ffi_wasm(obj)),
+  )
+}
+
+///|
+#cfg(target="wasm-gc")
+fn screen_orientation_angle_ffi(obj : JsValue) -> UInt = "webapi_ScreenOrientation" "get_angle"
+
+///|
+#cfg(target="wasm-gc")
+fn screen_orientation_onchange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_ScreenOrientation" "get_onchange"
+
+///|
+#cfg(target="wasm-gc")
+fn screen_orientation_onchange_ffi(obj : JsValue) -> EventHandler {
+  screen_orientation_onchange_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn screen_orientation_set_onchange_ffi(
+  obj : JsValue,
+  onchange : JsValue,
+) -> Unit = "webapi_ScreenOrientation" "set_onchange"

@@ -107,3 +107,167 @@ impl TSVGPatternElement with preserve_aspect_ratio(self : Self) -> SVGAnimatedPr
 impl TSVGPatternElement with href(self : Self) -> SVGAnimatedString {
   svg_pattern_element_href_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn svg_pattern_element_pattern_units_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.patternUnits"
+
+///|
+#cfg(target="js")
+fn svg_pattern_element_pattern_units_ffi(
+  obj : JsValue,
+) -> SVGAnimatedEnumeration {
+  svg_pattern_element_pattern_units_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_pattern_element_pattern_content_units_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.patternContentUnits"
+
+///|
+#cfg(target="js")
+fn svg_pattern_element_pattern_content_units_ffi(
+  obj : JsValue,
+) -> SVGAnimatedEnumeration {
+  svg_pattern_element_pattern_content_units_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_pattern_element_pattern_transform_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.patternTransform"
+
+///|
+#cfg(target="js")
+fn svg_pattern_element_pattern_transform_ffi(
+  obj : JsValue,
+) -> SVGAnimatedTransformList {
+  svg_pattern_element_pattern_transform_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_pattern_element_x_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.x"
+
+///|
+#cfg(target="js")
+fn svg_pattern_element_x_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_pattern_element_x_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_pattern_element_y_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.y"
+
+///|
+#cfg(target="js")
+fn svg_pattern_element_y_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_pattern_element_y_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_pattern_element_width_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.width"
+
+///|
+#cfg(target="js")
+fn svg_pattern_element_width_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_pattern_element_width_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_pattern_element_height_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.height"
+
+///|
+#cfg(target="js")
+fn svg_pattern_element_height_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_pattern_element_height_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_pattern_element_view_box_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.viewBox"
+
+///|
+#cfg(target="js")
+fn svg_pattern_element_view_box_ffi(obj : JsValue) -> SVGAnimatedRect {
+  svg_pattern_element_view_box_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_pattern_element_preserve_aspect_ratio_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.preserveAspectRatio"
+
+///|
+#cfg(target="js")
+fn svg_pattern_element_preserve_aspect_ratio_ffi(
+  obj : JsValue,
+) -> SVGAnimatedPreserveAspectRatio {
+  svg_pattern_element_preserve_aspect_ratio_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_pattern_element_href_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.href"
+
+///|
+#cfg(target="js")
+fn svg_pattern_element_href_ffi(obj : JsValue) -> SVGAnimatedString {
+  svg_pattern_element_href_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svg_pattern_element_pattern_units_ffi(
+  obj : JsValue,
+) -> SVGAnimatedEnumeration = "webapi_SVGPatternElement" "get_patternUnits"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_pattern_element_pattern_content_units_ffi(
+  obj : JsValue,
+) -> SVGAnimatedEnumeration = "webapi_SVGPatternElement" "get_patternContentUnits"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_pattern_element_pattern_transform_ffi(
+  obj : JsValue,
+) -> SVGAnimatedTransformList = "webapi_SVGPatternElement" "get_patternTransform"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_pattern_element_x_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGPatternElement" "get_x"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_pattern_element_y_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGPatternElement" "get_y"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_pattern_element_width_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGPatternElement" "get_width"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_pattern_element_height_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGPatternElement" "get_height"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_pattern_element_view_box_ffi(obj : JsValue) -> SVGAnimatedRect = "webapi_SVGPatternElement" "get_viewBox"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_pattern_element_preserve_aspect_ratio_ffi(
+  obj : JsValue,
+) -> SVGAnimatedPreserveAspectRatio = "webapi_SVGPatternElement" "get_preserveAspectRatio"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_pattern_element_href_ffi(obj : JsValue) -> SVGAnimatedString = "webapi_SVGPatternElement" "get_href"

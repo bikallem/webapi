@@ -56,3 +56,51 @@ impl TCSSPageRule with set_selector_text(
 impl TCSSPageRule with style(self : Self) -> CSSPageDescriptors {
   css_page_rule_style_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn css_page_rule_selector_text_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.selectorText"
+
+///|
+#cfg(target="js")
+fn css_page_rule_selector_text_ffi(obj : JsValue) -> CSSOMString {
+  css_page_rule_selector_text_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn css_page_rule_set_selector_text_ffi(
+  obj : JsValue,
+  selector_text : JsValue,
+) -> Unit = "(obj, selectorText) => { obj.selectorText = selectorText; }"
+
+///|
+#cfg(target="js")
+extern "js" fn css_page_rule_style_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.style"
+
+///|
+#cfg(target="js")
+fn css_page_rule_style_ffi(obj : JsValue) -> CSSPageDescriptors {
+  css_page_rule_style_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn css_page_rule_selector_text_ffi_wasm(obj : JsValue) -> JsValue = "webapi_CSSPageRule" "get_selectorText"
+
+///|
+#cfg(target="wasm-gc")
+fn css_page_rule_selector_text_ffi(obj : JsValue) -> CSSOMString {
+  css_page_rule_selector_text_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn css_page_rule_set_selector_text_ffi(
+  obj : JsValue,
+  selector_text : JsValue,
+) -> Unit = "webapi_CSSPageRule" "set_selectorText"
+
+///|
+#cfg(target="wasm-gc")
+fn css_page_rule_style_ffi(obj : JsValue) -> CSSPageDescriptors = "webapi_CSSPageRule" "get_style"

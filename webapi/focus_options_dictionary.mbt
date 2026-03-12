@@ -35,3 +35,47 @@ pub fn FocusOptions::prevent_scroll(self : FocusOptions) -> Bool? {
 pub fn FocusOptions::focus_visible(self : FocusOptions) -> Bool? {
   focus_options_get_focus_visible_ffi(TJsValue::to_js(self)).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn focus_options_ffi(
+  prevent_scroll : JsValue,
+  focus_visible : JsValue,
+) -> FocusOptions =
+  #|(preventScroll, focusVisible) => {
+  #|  const obj = {};
+  #|  if (preventScroll !== undefined) obj.preventScroll = preventScroll;
+  #|  if (focusVisible !== undefined) obj.focusVisible = focusVisible;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn focus_options_empty_ffi() -> FocusOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn focus_options_get_prevent_scroll_ffi(obj : JsValue) -> JsValue = "(obj) => obj.preventScroll"
+
+///|
+#cfg(target="js")
+extern "js" fn focus_options_get_focus_visible_ffi(obj : JsValue) -> JsValue = "(obj) => obj.focusVisible"
+
+///|
+#cfg(target="wasm-gc")
+fn focus_options_ffi(
+  prevent_scroll : JsValue,
+  focus_visible : JsValue,
+) -> FocusOptions = "webapi_FocusOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn focus_options_empty_ffi() -> FocusOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn focus_options_get_prevent_scroll_ffi(obj : JsValue) -> JsValue = "webapi_FocusOptions" "get_preventScroll"
+
+///|
+#cfg(target="wasm-gc")
+fn focus_options_get_focus_visible_ffi(obj : JsValue) -> JsValue = "webapi_FocusOptions" "get_focusVisible"

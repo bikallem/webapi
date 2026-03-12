@@ -37,3 +37,40 @@ pub fn PerformanceObserverCallbackOptions::dropped_entries_count(
     TJsValue::to_js(self),
   ).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn performance_observer_callback_options_ffi(
+  dropped_entries_count : JsValue,
+) -> PerformanceObserverCallbackOptions =
+  #|(droppedEntriesCount) => {
+  #|  const obj = {};
+  #|  if (droppedEntriesCount !== undefined) obj.droppedEntriesCount = droppedEntriesCount;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn performance_observer_callback_options_empty_ffi() -> PerformanceObserverCallbackOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn performance_observer_callback_options_get_dropped_entries_count_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.droppedEntriesCount"
+
+///|
+#cfg(target="wasm-gc")
+fn performance_observer_callback_options_ffi(
+  dropped_entries_count : JsValue,
+) -> PerformanceObserverCallbackOptions = "webapi_PerformanceObserverCallbackOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn performance_observer_callback_options_empty_ffi() -> PerformanceObserverCallbackOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn performance_observer_callback_options_get_dropped_entries_count_ffi(
+  obj : JsValue,
+) -> JsValue = "webapi_PerformanceObserverCallbackOptions" "get_droppedEntriesCount"

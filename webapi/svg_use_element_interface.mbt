@@ -87,3 +87,103 @@ impl TSVGUseElement with animated_instance_root(self : Self) -> SVGElement {
 impl TSVGUseElement with href(self : Self) -> SVGAnimatedString {
   svg_use_element_href_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn svg_use_element_x_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.x"
+
+///|
+#cfg(target="js")
+fn svg_use_element_x_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_use_element_x_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_use_element_y_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.y"
+
+///|
+#cfg(target="js")
+fn svg_use_element_y_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_use_element_y_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_use_element_width_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.width"
+
+///|
+#cfg(target="js")
+fn svg_use_element_width_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_use_element_width_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_use_element_height_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.height"
+
+///|
+#cfg(target="js")
+fn svg_use_element_height_ffi(obj : JsValue) -> SVGAnimatedLength {
+  svg_use_element_height_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_use_element_instance_root_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.instanceRoot"
+
+///|
+#cfg(target="js")
+fn svg_use_element_instance_root_ffi(obj : JsValue) -> SVGElement {
+  svg_use_element_instance_root_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_use_element_animated_instance_root_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.animatedInstanceRoot"
+
+///|
+#cfg(target="js")
+fn svg_use_element_animated_instance_root_ffi(obj : JsValue) -> SVGElement {
+  svg_use_element_animated_instance_root_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_use_element_href_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.href"
+
+///|
+#cfg(target="js")
+fn svg_use_element_href_ffi(obj : JsValue) -> SVGAnimatedString {
+  svg_use_element_href_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svg_use_element_x_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGUseElement" "get_x"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_use_element_y_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGUseElement" "get_y"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_use_element_width_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGUseElement" "get_width"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_use_element_height_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGUseElement" "get_height"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_use_element_instance_root_ffi(obj : JsValue) -> SVGElement = "webapi_SVGUseElement" "get_instanceRoot"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_use_element_animated_instance_root_ffi(obj : JsValue) -> SVGElement = "webapi_SVGUseElement" "get_animatedInstanceRoot"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_use_element_href_ffi(obj : JsValue) -> SVGAnimatedString = "webapi_SVGUseElement" "get_href"

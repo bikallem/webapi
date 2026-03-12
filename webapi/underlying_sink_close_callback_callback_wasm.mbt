@@ -1,4 +1,0 @@
-///|
-fn underlying_sink_close_callback_ffi(
-  callback : () -> JsPromise[JsValue],
-) -> UnderlyingSinkCloseCallback = "webapi_UnderlyingSinkCloseCallback" "new"

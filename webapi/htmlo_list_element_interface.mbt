@@ -107,3 +107,120 @@ impl THTMLOListElement with set_compact(self : Self, compact : Bool) -> Unit {
     TJsValue::to_js(compact),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn htmlo_list_element_new_ffi() -> HTMLOListElement = "() => new HTMLOListElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn htmlo_list_element_reversed_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.reversed"
+
+///|
+#cfg(target="js")
+fn htmlo_list_element_reversed_ffi(obj : JsValue) -> Bool {
+  htmlo_list_element_reversed_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn htmlo_list_element_set_reversed_ffi(
+  obj : JsValue,
+  reversed : JsValue,
+) -> Unit = "(obj, reversed) => { obj.reversed = reversed; }"
+
+///|
+#cfg(target="js")
+extern "js" fn htmlo_list_element_start_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.start"
+
+///|
+#cfg(target="js")
+fn htmlo_list_element_start_ffi(obj : JsValue) -> Int {
+  htmlo_list_element_start_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn htmlo_list_element_set_start_ffi(
+  obj : JsValue,
+  start : JsValue,
+) -> Unit = "(obj, start) => { obj.start = start; }"
+
+///|
+#cfg(target="js")
+extern "js" fn htmlo_list_element_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.type"
+
+///|
+#cfg(target="js")
+fn htmlo_list_element_type_ffi(obj : JsValue) -> String {
+  htmlo_list_element_type_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn htmlo_list_element_set_type_ffi(
+  obj : JsValue,
+  type_ : JsValue,
+) -> Unit = "(obj, type) => { obj.type = type; }"
+
+///|
+#cfg(target="js")
+extern "js" fn htmlo_list_element_compact_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.compact"
+
+///|
+#cfg(target="js")
+fn htmlo_list_element_compact_ffi(obj : JsValue) -> Bool {
+  htmlo_list_element_compact_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn htmlo_list_element_set_compact_ffi(
+  obj : JsValue,
+  compact : JsValue,
+) -> Unit = "(obj, compact) => { obj.compact = compact; }"
+
+///|
+#cfg(target="wasm-gc")
+fn htmlo_list_element_new_ffi() -> HTMLOListElement = "webapi_HTMLOListElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn htmlo_list_element_reversed_ffi(obj : JsValue) -> Bool = "webapi_HTMLOListElement" "get_reversed"
+
+///|
+#cfg(target="wasm-gc")
+fn htmlo_list_element_set_reversed_ffi(
+  obj : JsValue,
+  reversed : JsValue,
+) -> Unit = "webapi_HTMLOListElement" "set_reversed"
+
+///|
+#cfg(target="wasm-gc")
+fn htmlo_list_element_start_ffi(obj : JsValue) -> Int = "webapi_HTMLOListElement" "get_start"
+
+///|
+#cfg(target="wasm-gc")
+fn htmlo_list_element_set_start_ffi(obj : JsValue, start : JsValue) -> Unit = "webapi_HTMLOListElement" "set_start"
+
+///|
+#cfg(target="wasm-gc")
+fn htmlo_list_element_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLOListElement" "get_type"
+
+///|
+#cfg(target="wasm-gc")
+fn htmlo_list_element_type_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(htmlo_list_element_type_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn htmlo_list_element_set_type_ffi(obj : JsValue, type_ : JsValue) -> Unit = "webapi_HTMLOListElement" "set_type"
+
+///|
+#cfg(target="wasm-gc")
+fn htmlo_list_element_compact_ffi(obj : JsValue) -> Bool = "webapi_HTMLOListElement" "get_compact"
+
+///|
+#cfg(target="wasm-gc")
+fn htmlo_list_element_set_compact_ffi(obj : JsValue, compact : JsValue) -> Unit = "webapi_HTMLOListElement" "set_compact"

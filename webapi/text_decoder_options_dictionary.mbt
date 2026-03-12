@@ -35,3 +35,49 @@ pub fn TextDecoderOptions::fatal(self : TextDecoderOptions) -> Bool? {
 pub fn TextDecoderOptions::ignore_bom(self : TextDecoderOptions) -> Bool? {
   text_decoder_options_get_ignore_bom_ffi(TJsValue::to_js(self)).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn text_decoder_options_ffi(
+  fatal : JsValue,
+  ignore_bom : JsValue,
+) -> TextDecoderOptions =
+  #|(fatal, ignoreBOM) => {
+  #|  const obj = {};
+  #|  if (fatal !== undefined) obj.fatal = fatal;
+  #|  if (ignoreBOM !== undefined) obj.ignoreBOM = ignoreBOM;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn text_decoder_options_empty_ffi() -> TextDecoderOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn text_decoder_options_get_fatal_ffi(obj : JsValue) -> JsValue = "(obj) => obj.fatal"
+
+///|
+#cfg(target="js")
+extern "js" fn text_decoder_options_get_ignore_bom_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.ignoreBOM"
+
+///|
+#cfg(target="wasm-gc")
+fn text_decoder_options_ffi(
+  fatal : JsValue,
+  ignore_bom : JsValue,
+) -> TextDecoderOptions = "webapi_TextDecoderOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn text_decoder_options_empty_ffi() -> TextDecoderOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn text_decoder_options_get_fatal_ffi(obj : JsValue) -> JsValue = "webapi_TextDecoderOptions" "get_fatal"
+
+///|
+#cfg(target="wasm-gc")
+fn text_decoder_options_get_ignore_bom_ffi(obj : JsValue) -> JsValue = "webapi_TextDecoderOptions" "get_ignoreBOM"

@@ -74,3 +74,88 @@ pub fn SaveFilePickerOptions::suggested_name(
 ) -> String? {
   save_file_picker_options_get_suggested_name_ffi(TJsValue::to_js(self)).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn save_file_picker_options_ffi(
+  types : JsValue,
+  exclude_accept_all_option : JsValue,
+  id : JsValue,
+  start_in : JsValue,
+  suggested_name : JsValue,
+) -> SaveFilePickerOptions =
+  #|(types, excludeAcceptAllOption, id, startIn, suggestedName) => {
+  #|  const obj = {};
+  #|  if (types !== undefined) obj.types = types;
+  #|  if (excludeAcceptAllOption !== undefined) obj.excludeAcceptAllOption = excludeAcceptAllOption;
+  #|  if (id !== undefined) obj.id = id;
+  #|  if (startIn !== undefined) obj.startIn = startIn;
+  #|  if (suggestedName !== undefined) obj.suggestedName = suggestedName;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn save_file_picker_options_empty_ffi() -> SaveFilePickerOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn save_file_picker_options_get_types_ffi(obj : JsValue) -> JsValue = "(obj) => obj.types"
+
+///|
+#cfg(target="js")
+extern "js" fn save_file_picker_options_get_exclude_accept_all_option_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.excludeAcceptAllOption"
+
+///|
+#cfg(target="js")
+extern "js" fn save_file_picker_options_get_id_ffi(obj : JsValue) -> JsValue = "(obj) => obj.id"
+
+///|
+#cfg(target="js")
+extern "js" fn save_file_picker_options_get_start_in_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.startIn"
+
+///|
+#cfg(target="js")
+extern "js" fn save_file_picker_options_get_suggested_name_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.suggestedName"
+
+///|
+#cfg(target="wasm-gc")
+fn save_file_picker_options_ffi(
+  types : JsValue,
+  exclude_accept_all_option : JsValue,
+  id : JsValue,
+  start_in : JsValue,
+  suggested_name : JsValue,
+) -> SaveFilePickerOptions = "webapi_SaveFilePickerOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn save_file_picker_options_empty_ffi() -> SaveFilePickerOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn save_file_picker_options_get_types_ffi(obj : JsValue) -> JsValue = "webapi_SaveFilePickerOptions" "get_types"
+
+///|
+#cfg(target="wasm-gc")
+fn save_file_picker_options_get_exclude_accept_all_option_ffi(
+  obj : JsValue,
+) -> JsValue = "webapi_SaveFilePickerOptions" "get_excludeAcceptAllOption"
+
+///|
+#cfg(target="wasm-gc")
+fn save_file_picker_options_get_id_ffi(obj : JsValue) -> JsValue = "webapi_SaveFilePickerOptions" "get_id"
+
+///|
+#cfg(target="wasm-gc")
+fn save_file_picker_options_get_start_in_ffi(obj : JsValue) -> JsValue = "webapi_SaveFilePickerOptions" "get_startIn"
+
+///|
+#cfg(target="wasm-gc")
+fn save_file_picker_options_get_suggested_name_ffi(obj : JsValue) -> JsValue = "webapi_SaveFilePickerOptions" "get_suggestedName"

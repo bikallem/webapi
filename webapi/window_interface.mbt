@@ -3044,3 +3044,5186 @@ impl TWindow with local_storage(self : Self) -> Storage {
 impl TWindow with get_selection(self : Self) -> Selection {
   self.get_selection_opt().unwrap()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn window_event_is_undefined_ffi(obj : WindowEvent) -> Bool = "(obj) => obj === undefined"
+
+///|
+#cfg(target="js")
+extern "js" fn window_event_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.event"
+
+///|
+#cfg(target="js")
+fn window_event_ffi(obj : JsValue) -> WindowEvent {
+  window_event_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_window_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.window"
+
+///|
+#cfg(target="js")
+fn window_window_ffi(obj : JsValue) -> WindowProxy {
+  window_window_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_self_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.self"
+
+///|
+#cfg(target="js")
+fn window_self_ffi(obj : JsValue) -> WindowProxy {
+  window_self_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_document_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.document"
+
+///|
+#cfg(target="js")
+fn window_document_ffi(obj : JsValue) -> Document {
+  window_document_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.name"
+
+///|
+#cfg(target="js")
+fn window_name_ffi(obj : JsValue) -> String {
+  window_name_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_name_ffi(obj : JsValue, name : JsValue) -> Unit = "(obj, name) => { obj.name = name; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_location_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.location"
+
+///|
+#cfg(target="js")
+fn window_location_ffi(obj : JsValue) -> Location {
+  window_location_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_history_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.history"
+
+///|
+#cfg(target="js")
+fn window_history_ffi(obj : JsValue) -> History {
+  window_history_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_navigation_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.navigation"
+
+///|
+#cfg(target="js")
+fn window_navigation_ffi(obj : JsValue) -> Navigation {
+  window_navigation_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_custom_elements_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.customElements"
+
+///|
+#cfg(target="js")
+fn window_custom_elements_ffi(obj : JsValue) -> CustomElementRegistry {
+  window_custom_elements_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_locationbar_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.locationbar"
+
+///|
+#cfg(target="js")
+fn window_locationbar_ffi(obj : JsValue) -> BarProp {
+  window_locationbar_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_menubar_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.menubar"
+
+///|
+#cfg(target="js")
+fn window_menubar_ffi(obj : JsValue) -> BarProp {
+  window_menubar_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_personalbar_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.personalbar"
+
+///|
+#cfg(target="js")
+fn window_personalbar_ffi(obj : JsValue) -> BarProp {
+  window_personalbar_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_scrollbars_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.scrollbars"
+
+///|
+#cfg(target="js")
+fn window_scrollbars_ffi(obj : JsValue) -> BarProp {
+  window_scrollbars_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_statusbar_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.statusbar"
+
+///|
+#cfg(target="js")
+fn window_statusbar_ffi(obj : JsValue) -> BarProp {
+  window_statusbar_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_toolbar_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.toolbar"
+
+///|
+#cfg(target="js")
+fn window_toolbar_ffi(obj : JsValue) -> BarProp {
+  window_toolbar_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_status_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.status"
+
+///|
+#cfg(target="js")
+fn window_status_ffi(obj : JsValue) -> String {
+  window_status_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_status_ffi(obj : JsValue, status : JsValue) -> Unit = "(obj, status) => { obj.status = status; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.close()"
+
+///|
+#cfg(target="js")
+extern "js" fn window_closed_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.closed"
+
+///|
+#cfg(target="js")
+fn window_closed_ffi(obj : JsValue) -> Bool {
+  window_closed_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_stop_ffi(obj : JsValue) -> Unit = "(obj) => obj.stop()"
+
+///|
+#cfg(target="js")
+extern "js" fn window_focus_ffi(obj : JsValue) -> Unit = "(obj) => obj.focus()"
+
+///|
+#cfg(target="js")
+extern "js" fn window_blur_ffi(obj : JsValue) -> Unit = "(obj) => obj.blur()"
+
+///|
+#cfg(target="js")
+extern "js" fn window_frames_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.frames"
+
+///|
+#cfg(target="js")
+fn window_frames_ffi(obj : JsValue) -> WindowProxy {
+  window_frames_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_length_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.length"
+
+///|
+#cfg(target="js")
+fn window_length_ffi(obj : JsValue) -> UInt {
+  window_length_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_top_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.top"
+
+///|
+#cfg(target="js")
+fn window_top_ffi(obj : JsValue) -> WindowProxy {
+  window_top_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_opener_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.opener"
+
+///|
+#cfg(target="js")
+fn window_opener_ffi(obj : JsValue) -> JsValue {
+  window_opener_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_opener_ffi(obj : JsValue, opener : JsValue) -> Unit = "(obj, opener) => { obj.opener = opener; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_parent_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.parent"
+
+///|
+#cfg(target="js")
+fn window_parent_ffi(obj : JsValue) -> WindowProxy {
+  window_parent_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_frame_element_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.frameElement"
+
+///|
+#cfg(target="js")
+fn window_frame_element_ffi(obj : JsValue) -> Element {
+  window_frame_element_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_open_ffi(
+  obj : JsValue,
+  url : JsValue,
+  target : JsValue,
+  features : JsValue,
+) -> JsValue = "(obj, url, target, features) => obj.open(url, target, features)"
+
+///|
+#cfg(target="js")
+extern "js" fn window_get_ffi(obj : JsValue, name : JsValue) -> JsValue = "(obj, name) => obj[name]"
+
+///|
+#cfg(target="js")
+extern "js" fn window_navigator_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.navigator"
+
+///|
+#cfg(target="js")
+fn window_navigator_ffi(obj : JsValue) -> Navigator {
+  window_navigator_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_client_information_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.clientInformation"
+
+///|
+#cfg(target="js")
+fn window_client_information_ffi(obj : JsValue) -> Navigator {
+  window_client_information_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_origin_agent_cluster_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.originAgentCluster"
+
+///|
+#cfg(target="js")
+fn window_origin_agent_cluster_ffi(obj : JsValue) -> Bool {
+  window_origin_agent_cluster_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_alert_ffi(obj : JsValue) -> Unit = "(obj) => obj.alert()"
+
+///|
+#cfg(target="js")
+extern "js" fn window_alert_with_message_ffi(
+  obj : JsValue,
+  message : JsValue,
+) -> Unit = "(obj, message) => obj.alert(message)"
+
+///|
+#cfg(target="js")
+extern "js" fn window_confirm_ffi_js(
+  obj : JsValue,
+  message : JsValue,
+) -> JsValue = "(obj, message) => obj.confirm(message)"
+
+///|
+#cfg(target="js")
+fn window_confirm_ffi(obj : JsValue, message : JsValue) -> Bool {
+  window_confirm_ffi_js(obj, message).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_prompt_ffi(
+  obj : JsValue,
+  message : JsValue,
+  default : JsValue,
+) -> JsValue = "(obj, message, _default) => obj.prompt(message, _default)"
+
+///|
+#cfg(target="js")
+extern "js" fn window_print_ffi(obj : JsValue) -> Unit = "(obj) => obj.print()"
+
+///|
+#cfg(target="js")
+extern "js" fn window_post_message_ffi(
+  obj : JsValue,
+  message : JsValue,
+  target_origin : JsValue,
+  transfer : JsValue,
+) -> Unit = "(obj, message, target_origin, transfer) => obj.postMessage(message, target_origin, transfer)"
+
+///|
+#cfg(target="js")
+extern "js" fn window_post_message_with_options_ffi(
+  obj : JsValue,
+  message : JsValue,
+  options : JsValue,
+) -> Unit = "(obj, message, options) => obj.postMessage(message, options)"
+
+///|
+#cfg(target="js")
+extern "js" fn window_capture_events_ffi(obj : JsValue) -> Unit = "(obj) => obj.captureEvents()"
+
+///|
+#cfg(target="js")
+extern "js" fn window_release_events_ffi(obj : JsValue) -> Unit = "(obj) => obj.releaseEvents()"
+
+///|
+#cfg(target="js")
+extern "js" fn window_external_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.external"
+
+///|
+#cfg(target="js")
+fn window_external_ffi(obj : JsValue) -> External {
+  window_external_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_get_computed_style_ffi_js(
+  obj : JsValue,
+  elt : JsValue,
+  pseudo_elt : JsValue,
+) -> JsValue = "(obj, elt, pseudo_elt) => obj.getComputedStyle(elt, pseudo_elt)"
+
+///|
+#cfg(target="js")
+fn window_get_computed_style_ffi(
+  obj : JsValue,
+  elt : JsValue,
+  pseudo_elt : JsValue,
+) -> CSSStyleProperties {
+  window_get_computed_style_ffi_js(obj, elt, pseudo_elt).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_fetch_later_ffi_js(
+  obj : JsValue,
+  input : JsValue,
+  init : JsValue,
+) -> JsValue = "(obj, input, init) => obj.fetchLater(input, init)"
+
+///|
+#cfg(target="js")
+fn window_fetch_later_ffi(
+  obj : JsValue,
+  input : JsValue,
+  init : JsValue,
+) -> FetchLaterResult {
+  window_fetch_later_ffi_js(obj, input, init).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_match_media_ffi_js(
+  obj : JsValue,
+  query : JsValue,
+) -> JsValue = "(obj, query) => obj.matchMedia(query)"
+
+///|
+#cfg(target="js")
+fn window_match_media_ffi(obj : JsValue, query : JsValue) -> MediaQueryList {
+  window_match_media_ffi_js(obj, query).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_screen_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.screen"
+
+///|
+#cfg(target="js")
+fn window_screen_ffi(obj : JsValue) -> Screen {
+  window_screen_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_visual_viewport_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.visualViewport"
+
+///|
+#cfg(target="js")
+fn window_visual_viewport_ffi(obj : JsValue) -> VisualViewport {
+  window_visual_viewport_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_move_to_ffi(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+) -> Unit = "(obj, x, y) => obj.moveTo(x, y)"
+
+///|
+#cfg(target="js")
+extern "js" fn window_move_by_ffi(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+) -> Unit = "(obj, x, y) => obj.moveBy(x, y)"
+
+///|
+#cfg(target="js")
+extern "js" fn window_resize_to_ffi(
+  obj : JsValue,
+  width : JsValue,
+  height : JsValue,
+) -> Unit = "(obj, width, height) => obj.resizeTo(width, height)"
+
+///|
+#cfg(target="js")
+extern "js" fn window_resize_by_ffi(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+) -> Unit = "(obj, x, y) => obj.resizeBy(x, y)"
+
+///|
+#cfg(target="js")
+extern "js" fn window_inner_width_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.innerWidth"
+
+///|
+#cfg(target="js")
+fn window_inner_width_ffi(obj : JsValue) -> Int {
+  window_inner_width_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_inner_height_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.innerHeight"
+
+///|
+#cfg(target="js")
+fn window_inner_height_ffi(obj : JsValue) -> Int {
+  window_inner_height_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_scroll_x_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.scrollX"
+
+///|
+#cfg(target="js")
+fn window_scroll_x_ffi(obj : JsValue) -> Double {
+  window_scroll_x_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_page_x_offset_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.pageXOffset"
+
+///|
+#cfg(target="js")
+fn window_page_x_offset_ffi(obj : JsValue) -> Double {
+  window_page_x_offset_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_scroll_y_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.scrollY"
+
+///|
+#cfg(target="js")
+fn window_scroll_y_ffi(obj : JsValue) -> Double {
+  window_scroll_y_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_page_y_offset_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.pageYOffset"
+
+///|
+#cfg(target="js")
+fn window_page_y_offset_ffi(obj : JsValue) -> Double {
+  window_page_y_offset_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_scroll_ffi_js(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, options) => obj.scroll(options)"
+
+///|
+#cfg(target="js")
+fn window_scroll_ffi(obj : JsValue, options : JsValue) -> JsPromise[JsValue] {
+  window_scroll_ffi_js(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_scroll_xy_ffi_js(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+) -> JsValue = "(obj, x, y) => obj.scroll(x, y)"
+
+///|
+#cfg(target="js")
+fn window_scroll_xy_ffi(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+) -> JsPromise[JsValue] {
+  window_scroll_xy_ffi_js(obj, x, y).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_scroll_to_ffi_js(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, options) => obj.scrollTo(options)"
+
+///|
+#cfg(target="js")
+fn window_scroll_to_ffi(obj : JsValue, options : JsValue) -> JsPromise[JsValue] {
+  window_scroll_to_ffi_js(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_scroll_to_xy_ffi_js(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+) -> JsValue = "(obj, x, y) => obj.scrollTo(x, y)"
+
+///|
+#cfg(target="js")
+fn window_scroll_to_xy_ffi(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+) -> JsPromise[JsValue] {
+  window_scroll_to_xy_ffi_js(obj, x, y).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_scroll_by_ffi_js(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, options) => obj.scrollBy(options)"
+
+///|
+#cfg(target="js")
+fn window_scroll_by_ffi(obj : JsValue, options : JsValue) -> JsPromise[JsValue] {
+  window_scroll_by_ffi_js(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_scroll_by_xy_ffi_js(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+) -> JsValue = "(obj, x, y) => obj.scrollBy(x, y)"
+
+///|
+#cfg(target="js")
+fn window_scroll_by_xy_ffi(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+) -> JsPromise[JsValue] {
+  window_scroll_by_xy_ffi_js(obj, x, y).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_screen_x_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.screenX"
+
+///|
+#cfg(target="js")
+fn window_screen_x_ffi(obj : JsValue) -> Int {
+  window_screen_x_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_screen_left_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.screenLeft"
+
+///|
+#cfg(target="js")
+fn window_screen_left_ffi(obj : JsValue) -> Int {
+  window_screen_left_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_screen_y_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.screenY"
+
+///|
+#cfg(target="js")
+fn window_screen_y_ffi(obj : JsValue) -> Int {
+  window_screen_y_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_screen_top_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.screenTop"
+
+///|
+#cfg(target="js")
+fn window_screen_top_ffi(obj : JsValue) -> Int {
+  window_screen_top_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_outer_width_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.outerWidth"
+
+///|
+#cfg(target="js")
+fn window_outer_width_ffi(obj : JsValue) -> Int {
+  window_outer_width_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_outer_height_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.outerHeight"
+
+///|
+#cfg(target="js")
+fn window_outer_height_ffi(obj : JsValue) -> Int {
+  window_outer_height_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_device_pixel_ratio_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.devicePixelRatio"
+
+///|
+#cfg(target="js")
+fn window_device_pixel_ratio_ffi(obj : JsValue) -> Double {
+  window_device_pixel_ratio_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_get_selection_ffi(obj : JsValue) -> JsValue = "(obj) => obj.getSelection()"
+
+///|
+#cfg(target="js")
+extern "js" fn window_show_open_file_picker_ffi_js(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, options) => obj.showOpenFilePicker(options)"
+
+///|
+#cfg(target="js")
+fn window_show_open_file_picker_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> JsPromise[Array[FileSystemFileHandle]] {
+  window_show_open_file_picker_ffi_js(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_show_save_file_picker_ffi_js(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, options) => obj.showSaveFilePicker(options)"
+
+///|
+#cfg(target="js")
+fn window_show_save_file_picker_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> JsPromise[FileSystemFileHandle] {
+  window_show_save_file_picker_ffi_js(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_show_directory_picker_ffi_js(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, options) => obj.showDirectoryPicker(options)"
+
+///|
+#cfg(target="js")
+fn window_show_directory_picker_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> JsPromise[FileSystemDirectoryHandle] {
+  window_show_directory_picker_ffi_js(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_request_idle_callback_ffi_js(
+  obj : JsValue,
+  callback : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, callback, options) => obj.requestIdleCallback(callback, options)"
+
+///|
+#cfg(target="js")
+fn window_request_idle_callback_ffi(
+  obj : JsValue,
+  callback : JsValue,
+  options : JsValue,
+) -> UInt {
+  window_request_idle_callback_ffi_js(obj, callback, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_cancel_idle_callback_ffi(
+  obj : JsValue,
+  handle : JsValue,
+) -> Unit = "(obj, handle) => obj.cancelIdleCallback(handle)"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onabort_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onabort"
+
+///|
+#cfg(target="js")
+fn window_onabort_ffi(obj : JsValue) -> EventHandler {
+  window_onabort_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onabort_ffi(obj : JsValue, onabort : JsValue) -> Unit = "(obj, onabort) => { obj.onabort = onabort; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onauxclick_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onauxclick"
+
+///|
+#cfg(target="js")
+fn window_onauxclick_ffi(obj : JsValue) -> EventHandler {
+  window_onauxclick_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onauxclick_ffi(
+  obj : JsValue,
+  onauxclick : JsValue,
+) -> Unit = "(obj, onauxclick) => { obj.onauxclick = onauxclick; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onbeforeinput_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onbeforeinput"
+
+///|
+#cfg(target="js")
+fn window_onbeforeinput_ffi(obj : JsValue) -> EventHandler {
+  window_onbeforeinput_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onbeforeinput_ffi(
+  obj : JsValue,
+  onbeforeinput : JsValue,
+) -> Unit = "(obj, onbeforeinput) => { obj.onbeforeinput = onbeforeinput; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onbeforematch_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onbeforematch"
+
+///|
+#cfg(target="js")
+fn window_onbeforematch_ffi(obj : JsValue) -> EventHandler {
+  window_onbeforematch_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onbeforematch_ffi(
+  obj : JsValue,
+  onbeforematch : JsValue,
+) -> Unit = "(obj, onbeforematch) => { obj.onbeforematch = onbeforematch; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onbeforetoggle_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onbeforetoggle"
+
+///|
+#cfg(target="js")
+fn window_onbeforetoggle_ffi(obj : JsValue) -> EventHandler {
+  window_onbeforetoggle_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onbeforetoggle_ffi(
+  obj : JsValue,
+  onbeforetoggle : JsValue,
+) -> Unit = "(obj, onbeforetoggle) => { obj.onbeforetoggle = onbeforetoggle; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onblur_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onblur"
+
+///|
+#cfg(target="js")
+fn window_onblur_ffi(obj : JsValue) -> EventHandler {
+  window_onblur_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onblur_ffi(obj : JsValue, onblur : JsValue) -> Unit = "(obj, onblur) => { obj.onblur = onblur; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_oncancel_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oncancel"
+
+///|
+#cfg(target="js")
+fn window_oncancel_ffi(obj : JsValue) -> EventHandler {
+  window_oncancel_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_oncancel_ffi(
+  obj : JsValue,
+  oncancel : JsValue,
+) -> Unit = "(obj, oncancel) => { obj.oncancel = oncancel; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_oncanplay_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oncanplay"
+
+///|
+#cfg(target="js")
+fn window_oncanplay_ffi(obj : JsValue) -> EventHandler {
+  window_oncanplay_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_oncanplay_ffi(
+  obj : JsValue,
+  oncanplay : JsValue,
+) -> Unit = "(obj, oncanplay) => { obj.oncanplay = oncanplay; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_oncanplaythrough_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oncanplaythrough"
+
+///|
+#cfg(target="js")
+fn window_oncanplaythrough_ffi(obj : JsValue) -> EventHandler {
+  window_oncanplaythrough_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_oncanplaythrough_ffi(
+  obj : JsValue,
+  oncanplaythrough : JsValue,
+) -> Unit = "(obj, oncanplaythrough) => { obj.oncanplaythrough = oncanplaythrough; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onchange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onchange"
+
+///|
+#cfg(target="js")
+fn window_onchange_ffi(obj : JsValue) -> EventHandler {
+  window_onchange_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onchange_ffi(
+  obj : JsValue,
+  onchange : JsValue,
+) -> Unit = "(obj, onchange) => { obj.onchange = onchange; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onclick_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onclick"
+
+///|
+#cfg(target="js")
+fn window_onclick_ffi(obj : JsValue) -> EventHandler {
+  window_onclick_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onclick_ffi(obj : JsValue, onclick : JsValue) -> Unit = "(obj, onclick) => { obj.onclick = onclick; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onclose_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onclose"
+
+///|
+#cfg(target="js")
+fn window_onclose_ffi(obj : JsValue) -> EventHandler {
+  window_onclose_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onclose_ffi(obj : JsValue, onclose : JsValue) -> Unit = "(obj, onclose) => { obj.onclose = onclose; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_oncommand_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oncommand"
+
+///|
+#cfg(target="js")
+fn window_oncommand_ffi(obj : JsValue) -> EventHandler {
+  window_oncommand_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_oncommand_ffi(
+  obj : JsValue,
+  oncommand : JsValue,
+) -> Unit = "(obj, oncommand) => { obj.oncommand = oncommand; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_oncontextlost_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oncontextlost"
+
+///|
+#cfg(target="js")
+fn window_oncontextlost_ffi(obj : JsValue) -> EventHandler {
+  window_oncontextlost_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_oncontextlost_ffi(
+  obj : JsValue,
+  oncontextlost : JsValue,
+) -> Unit = "(obj, oncontextlost) => { obj.oncontextlost = oncontextlost; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_oncontextmenu_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oncontextmenu"
+
+///|
+#cfg(target="js")
+fn window_oncontextmenu_ffi(obj : JsValue) -> EventHandler {
+  window_oncontextmenu_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_oncontextmenu_ffi(
+  obj : JsValue,
+  oncontextmenu : JsValue,
+) -> Unit = "(obj, oncontextmenu) => { obj.oncontextmenu = oncontextmenu; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_oncontextrestored_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oncontextrestored"
+
+///|
+#cfg(target="js")
+fn window_oncontextrestored_ffi(obj : JsValue) -> EventHandler {
+  window_oncontextrestored_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_oncontextrestored_ffi(
+  obj : JsValue,
+  oncontextrestored : JsValue,
+) -> Unit = "(obj, oncontextrestored) => { obj.oncontextrestored = oncontextrestored; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_oncopy_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oncopy"
+
+///|
+#cfg(target="js")
+fn window_oncopy_ffi(obj : JsValue) -> EventHandler {
+  window_oncopy_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_oncopy_ffi(obj : JsValue, oncopy : JsValue) -> Unit = "(obj, oncopy) => { obj.oncopy = oncopy; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_oncuechange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oncuechange"
+
+///|
+#cfg(target="js")
+fn window_oncuechange_ffi(obj : JsValue) -> EventHandler {
+  window_oncuechange_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_oncuechange_ffi(
+  obj : JsValue,
+  oncuechange : JsValue,
+) -> Unit = "(obj, oncuechange) => { obj.oncuechange = oncuechange; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_oncut_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oncut"
+
+///|
+#cfg(target="js")
+fn window_oncut_ffi(obj : JsValue) -> EventHandler {
+  window_oncut_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_oncut_ffi(obj : JsValue, oncut : JsValue) -> Unit = "(obj, oncut) => { obj.oncut = oncut; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_ondblclick_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ondblclick"
+
+///|
+#cfg(target="js")
+fn window_ondblclick_ffi(obj : JsValue) -> EventHandler {
+  window_ondblclick_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_ondblclick_ffi(
+  obj : JsValue,
+  ondblclick : JsValue,
+) -> Unit = "(obj, ondblclick) => { obj.ondblclick = ondblclick; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_ondrag_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ondrag"
+
+///|
+#cfg(target="js")
+fn window_ondrag_ffi(obj : JsValue) -> EventHandler {
+  window_ondrag_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_ondrag_ffi(obj : JsValue, ondrag : JsValue) -> Unit = "(obj, ondrag) => { obj.ondrag = ondrag; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_ondragend_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ondragend"
+
+///|
+#cfg(target="js")
+fn window_ondragend_ffi(obj : JsValue) -> EventHandler {
+  window_ondragend_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_ondragend_ffi(
+  obj : JsValue,
+  ondragend : JsValue,
+) -> Unit = "(obj, ondragend) => { obj.ondragend = ondragend; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_ondragenter_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ondragenter"
+
+///|
+#cfg(target="js")
+fn window_ondragenter_ffi(obj : JsValue) -> EventHandler {
+  window_ondragenter_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_ondragenter_ffi(
+  obj : JsValue,
+  ondragenter : JsValue,
+) -> Unit = "(obj, ondragenter) => { obj.ondragenter = ondragenter; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_ondragleave_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ondragleave"
+
+///|
+#cfg(target="js")
+fn window_ondragleave_ffi(obj : JsValue) -> EventHandler {
+  window_ondragleave_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_ondragleave_ffi(
+  obj : JsValue,
+  ondragleave : JsValue,
+) -> Unit = "(obj, ondragleave) => { obj.ondragleave = ondragleave; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_ondragover_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ondragover"
+
+///|
+#cfg(target="js")
+fn window_ondragover_ffi(obj : JsValue) -> EventHandler {
+  window_ondragover_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_ondragover_ffi(
+  obj : JsValue,
+  ondragover : JsValue,
+) -> Unit = "(obj, ondragover) => { obj.ondragover = ondragover; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_ondragstart_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ondragstart"
+
+///|
+#cfg(target="js")
+fn window_ondragstart_ffi(obj : JsValue) -> EventHandler {
+  window_ondragstart_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_ondragstart_ffi(
+  obj : JsValue,
+  ondragstart : JsValue,
+) -> Unit = "(obj, ondragstart) => { obj.ondragstart = ondragstart; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_ondrop_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ondrop"
+
+///|
+#cfg(target="js")
+fn window_ondrop_ffi(obj : JsValue) -> EventHandler {
+  window_ondrop_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_ondrop_ffi(obj : JsValue, ondrop : JsValue) -> Unit = "(obj, ondrop) => { obj.ondrop = ondrop; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_ondurationchange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ondurationchange"
+
+///|
+#cfg(target="js")
+fn window_ondurationchange_ffi(obj : JsValue) -> EventHandler {
+  window_ondurationchange_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_ondurationchange_ffi(
+  obj : JsValue,
+  ondurationchange : JsValue,
+) -> Unit = "(obj, ondurationchange) => { obj.ondurationchange = ondurationchange; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onemptied_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onemptied"
+
+///|
+#cfg(target="js")
+fn window_onemptied_ffi(obj : JsValue) -> EventHandler {
+  window_onemptied_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onemptied_ffi(
+  obj : JsValue,
+  onemptied : JsValue,
+) -> Unit = "(obj, onemptied) => { obj.onemptied = onemptied; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onended_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onended"
+
+///|
+#cfg(target="js")
+fn window_onended_ffi(obj : JsValue) -> EventHandler {
+  window_onended_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onended_ffi(obj : JsValue, onended : JsValue) -> Unit = "(obj, onended) => { obj.onended = onended; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onerror_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onerror"
+
+///|
+#cfg(target="js")
+fn window_onerror_ffi(obj : JsValue) -> OnErrorEventHandler {
+  window_onerror_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onerror_ffi(obj : JsValue, onerror : JsValue) -> Unit = "(obj, onerror) => { obj.onerror = onerror; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onfocus_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onfocus"
+
+///|
+#cfg(target="js")
+fn window_onfocus_ffi(obj : JsValue) -> EventHandler {
+  window_onfocus_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onfocus_ffi(obj : JsValue, onfocus : JsValue) -> Unit = "(obj, onfocus) => { obj.onfocus = onfocus; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onformdata_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onformdata"
+
+///|
+#cfg(target="js")
+fn window_onformdata_ffi(obj : JsValue) -> EventHandler {
+  window_onformdata_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onformdata_ffi(
+  obj : JsValue,
+  onformdata : JsValue,
+) -> Unit = "(obj, onformdata) => { obj.onformdata = onformdata; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_oninput_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oninput"
+
+///|
+#cfg(target="js")
+fn window_oninput_ffi(obj : JsValue) -> EventHandler {
+  window_oninput_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_oninput_ffi(obj : JsValue, oninput : JsValue) -> Unit = "(obj, oninput) => { obj.oninput = oninput; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_oninvalid_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oninvalid"
+
+///|
+#cfg(target="js")
+fn window_oninvalid_ffi(obj : JsValue) -> EventHandler {
+  window_oninvalid_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_oninvalid_ffi(
+  obj : JsValue,
+  oninvalid : JsValue,
+) -> Unit = "(obj, oninvalid) => { obj.oninvalid = oninvalid; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onkeydown_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onkeydown"
+
+///|
+#cfg(target="js")
+fn window_onkeydown_ffi(obj : JsValue) -> EventHandler {
+  window_onkeydown_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onkeydown_ffi(
+  obj : JsValue,
+  onkeydown : JsValue,
+) -> Unit = "(obj, onkeydown) => { obj.onkeydown = onkeydown; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onkeypress_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onkeypress"
+
+///|
+#cfg(target="js")
+fn window_onkeypress_ffi(obj : JsValue) -> EventHandler {
+  window_onkeypress_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onkeypress_ffi(
+  obj : JsValue,
+  onkeypress : JsValue,
+) -> Unit = "(obj, onkeypress) => { obj.onkeypress = onkeypress; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onkeyup_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onkeyup"
+
+///|
+#cfg(target="js")
+fn window_onkeyup_ffi(obj : JsValue) -> EventHandler {
+  window_onkeyup_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onkeyup_ffi(obj : JsValue, onkeyup : JsValue) -> Unit = "(obj, onkeyup) => { obj.onkeyup = onkeyup; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onload_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onload"
+
+///|
+#cfg(target="js")
+fn window_onload_ffi(obj : JsValue) -> EventHandler {
+  window_onload_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onload_ffi(obj : JsValue, onload : JsValue) -> Unit = "(obj, onload) => { obj.onload = onload; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onloadeddata_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onloadeddata"
+
+///|
+#cfg(target="js")
+fn window_onloadeddata_ffi(obj : JsValue) -> EventHandler {
+  window_onloadeddata_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onloadeddata_ffi(
+  obj : JsValue,
+  onloadeddata : JsValue,
+) -> Unit = "(obj, onloadeddata) => { obj.onloadeddata = onloadeddata; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onloadedmetadata_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onloadedmetadata"
+
+///|
+#cfg(target="js")
+fn window_onloadedmetadata_ffi(obj : JsValue) -> EventHandler {
+  window_onloadedmetadata_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onloadedmetadata_ffi(
+  obj : JsValue,
+  onloadedmetadata : JsValue,
+) -> Unit = "(obj, onloadedmetadata) => { obj.onloadedmetadata = onloadedmetadata; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onloadstart_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onloadstart"
+
+///|
+#cfg(target="js")
+fn window_onloadstart_ffi(obj : JsValue) -> EventHandler {
+  window_onloadstart_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onloadstart_ffi(
+  obj : JsValue,
+  onloadstart : JsValue,
+) -> Unit = "(obj, onloadstart) => { obj.onloadstart = onloadstart; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onmousedown_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onmousedown"
+
+///|
+#cfg(target="js")
+fn window_onmousedown_ffi(obj : JsValue) -> EventHandler {
+  window_onmousedown_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onmousedown_ffi(
+  obj : JsValue,
+  onmousedown : JsValue,
+) -> Unit = "(obj, onmousedown) => { obj.onmousedown = onmousedown; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onmouseenter_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onmouseenter"
+
+///|
+#cfg(target="js")
+fn window_onmouseenter_ffi(obj : JsValue) -> EventHandler {
+  window_onmouseenter_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onmouseenter_ffi(
+  obj : JsValue,
+  onmouseenter : JsValue,
+) -> Unit = "(obj, onmouseenter) => { obj.onmouseenter = onmouseenter; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onmouseleave_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onmouseleave"
+
+///|
+#cfg(target="js")
+fn window_onmouseleave_ffi(obj : JsValue) -> EventHandler {
+  window_onmouseleave_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onmouseleave_ffi(
+  obj : JsValue,
+  onmouseleave : JsValue,
+) -> Unit = "(obj, onmouseleave) => { obj.onmouseleave = onmouseleave; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onmousemove_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onmousemove"
+
+///|
+#cfg(target="js")
+fn window_onmousemove_ffi(obj : JsValue) -> EventHandler {
+  window_onmousemove_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onmousemove_ffi(
+  obj : JsValue,
+  onmousemove : JsValue,
+) -> Unit = "(obj, onmousemove) => { obj.onmousemove = onmousemove; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onmouseout_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onmouseout"
+
+///|
+#cfg(target="js")
+fn window_onmouseout_ffi(obj : JsValue) -> EventHandler {
+  window_onmouseout_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onmouseout_ffi(
+  obj : JsValue,
+  onmouseout : JsValue,
+) -> Unit = "(obj, onmouseout) => { obj.onmouseout = onmouseout; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onmouseover_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onmouseover"
+
+///|
+#cfg(target="js")
+fn window_onmouseover_ffi(obj : JsValue) -> EventHandler {
+  window_onmouseover_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onmouseover_ffi(
+  obj : JsValue,
+  onmouseover : JsValue,
+) -> Unit = "(obj, onmouseover) => { obj.onmouseover = onmouseover; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onmouseup_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onmouseup"
+
+///|
+#cfg(target="js")
+fn window_onmouseup_ffi(obj : JsValue) -> EventHandler {
+  window_onmouseup_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onmouseup_ffi(
+  obj : JsValue,
+  onmouseup : JsValue,
+) -> Unit = "(obj, onmouseup) => { obj.onmouseup = onmouseup; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onpaste_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpaste"
+
+///|
+#cfg(target="js")
+fn window_onpaste_ffi(obj : JsValue) -> EventHandler {
+  window_onpaste_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onpaste_ffi(obj : JsValue, onpaste : JsValue) -> Unit = "(obj, onpaste) => { obj.onpaste = onpaste; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onpause_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpause"
+
+///|
+#cfg(target="js")
+fn window_onpause_ffi(obj : JsValue) -> EventHandler {
+  window_onpause_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onpause_ffi(obj : JsValue, onpause : JsValue) -> Unit = "(obj, onpause) => { obj.onpause = onpause; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onplay_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onplay"
+
+///|
+#cfg(target="js")
+fn window_onplay_ffi(obj : JsValue) -> EventHandler {
+  window_onplay_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onplay_ffi(obj : JsValue, onplay : JsValue) -> Unit = "(obj, onplay) => { obj.onplay = onplay; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onplaying_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onplaying"
+
+///|
+#cfg(target="js")
+fn window_onplaying_ffi(obj : JsValue) -> EventHandler {
+  window_onplaying_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onplaying_ffi(
+  obj : JsValue,
+  onplaying : JsValue,
+) -> Unit = "(obj, onplaying) => { obj.onplaying = onplaying; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onprogress_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onprogress"
+
+///|
+#cfg(target="js")
+fn window_onprogress_ffi(obj : JsValue) -> EventHandler {
+  window_onprogress_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onprogress_ffi(
+  obj : JsValue,
+  onprogress : JsValue,
+) -> Unit = "(obj, onprogress) => { obj.onprogress = onprogress; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onratechange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onratechange"
+
+///|
+#cfg(target="js")
+fn window_onratechange_ffi(obj : JsValue) -> EventHandler {
+  window_onratechange_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onratechange_ffi(
+  obj : JsValue,
+  onratechange : JsValue,
+) -> Unit = "(obj, onratechange) => { obj.onratechange = onratechange; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onreset_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onreset"
+
+///|
+#cfg(target="js")
+fn window_onreset_ffi(obj : JsValue) -> EventHandler {
+  window_onreset_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onreset_ffi(obj : JsValue, onreset : JsValue) -> Unit = "(obj, onreset) => { obj.onreset = onreset; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onresize_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onresize"
+
+///|
+#cfg(target="js")
+fn window_onresize_ffi(obj : JsValue) -> EventHandler {
+  window_onresize_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onresize_ffi(
+  obj : JsValue,
+  onresize : JsValue,
+) -> Unit = "(obj, onresize) => { obj.onresize = onresize; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onscroll_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onscroll"
+
+///|
+#cfg(target="js")
+fn window_onscroll_ffi(obj : JsValue) -> EventHandler {
+  window_onscroll_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onscroll_ffi(
+  obj : JsValue,
+  onscroll : JsValue,
+) -> Unit = "(obj, onscroll) => { obj.onscroll = onscroll; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onscrollend_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onscrollend"
+
+///|
+#cfg(target="js")
+fn window_onscrollend_ffi(obj : JsValue) -> EventHandler {
+  window_onscrollend_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onscrollend_ffi(
+  obj : JsValue,
+  onscrollend : JsValue,
+) -> Unit = "(obj, onscrollend) => { obj.onscrollend = onscrollend; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onsecuritypolicyviolation_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.onsecuritypolicyviolation"
+
+///|
+#cfg(target="js")
+fn window_onsecuritypolicyviolation_ffi(obj : JsValue) -> EventHandler {
+  window_onsecuritypolicyviolation_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onsecuritypolicyviolation_ffi(
+  obj : JsValue,
+  onsecuritypolicyviolation : JsValue,
+) -> Unit = "(obj, onsecuritypolicyviolation) => { obj.onsecuritypolicyviolation = onsecuritypolicyviolation; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onseeked_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onseeked"
+
+///|
+#cfg(target="js")
+fn window_onseeked_ffi(obj : JsValue) -> EventHandler {
+  window_onseeked_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onseeked_ffi(
+  obj : JsValue,
+  onseeked : JsValue,
+) -> Unit = "(obj, onseeked) => { obj.onseeked = onseeked; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onseeking_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onseeking"
+
+///|
+#cfg(target="js")
+fn window_onseeking_ffi(obj : JsValue) -> EventHandler {
+  window_onseeking_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onseeking_ffi(
+  obj : JsValue,
+  onseeking : JsValue,
+) -> Unit = "(obj, onseeking) => { obj.onseeking = onseeking; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onselect_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onselect"
+
+///|
+#cfg(target="js")
+fn window_onselect_ffi(obj : JsValue) -> EventHandler {
+  window_onselect_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onselect_ffi(
+  obj : JsValue,
+  onselect : JsValue,
+) -> Unit = "(obj, onselect) => { obj.onselect = onselect; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onslotchange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onslotchange"
+
+///|
+#cfg(target="js")
+fn window_onslotchange_ffi(obj : JsValue) -> EventHandler {
+  window_onslotchange_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onslotchange_ffi(
+  obj : JsValue,
+  onslotchange : JsValue,
+) -> Unit = "(obj, onslotchange) => { obj.onslotchange = onslotchange; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onstalled_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onstalled"
+
+///|
+#cfg(target="js")
+fn window_onstalled_ffi(obj : JsValue) -> EventHandler {
+  window_onstalled_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onstalled_ffi(
+  obj : JsValue,
+  onstalled : JsValue,
+) -> Unit = "(obj, onstalled) => { obj.onstalled = onstalled; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onsubmit_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onsubmit"
+
+///|
+#cfg(target="js")
+fn window_onsubmit_ffi(obj : JsValue) -> EventHandler {
+  window_onsubmit_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onsubmit_ffi(
+  obj : JsValue,
+  onsubmit : JsValue,
+) -> Unit = "(obj, onsubmit) => { obj.onsubmit = onsubmit; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onsuspend_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onsuspend"
+
+///|
+#cfg(target="js")
+fn window_onsuspend_ffi(obj : JsValue) -> EventHandler {
+  window_onsuspend_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onsuspend_ffi(
+  obj : JsValue,
+  onsuspend : JsValue,
+) -> Unit = "(obj, onsuspend) => { obj.onsuspend = onsuspend; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_ontimeupdate_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ontimeupdate"
+
+///|
+#cfg(target="js")
+fn window_ontimeupdate_ffi(obj : JsValue) -> EventHandler {
+  window_ontimeupdate_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_ontimeupdate_ffi(
+  obj : JsValue,
+  ontimeupdate : JsValue,
+) -> Unit = "(obj, ontimeupdate) => { obj.ontimeupdate = ontimeupdate; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_ontoggle_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ontoggle"
+
+///|
+#cfg(target="js")
+fn window_ontoggle_ffi(obj : JsValue) -> EventHandler {
+  window_ontoggle_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_ontoggle_ffi(
+  obj : JsValue,
+  ontoggle : JsValue,
+) -> Unit = "(obj, ontoggle) => { obj.ontoggle = ontoggle; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onvolumechange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onvolumechange"
+
+///|
+#cfg(target="js")
+fn window_onvolumechange_ffi(obj : JsValue) -> EventHandler {
+  window_onvolumechange_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onvolumechange_ffi(
+  obj : JsValue,
+  onvolumechange : JsValue,
+) -> Unit = "(obj, onvolumechange) => { obj.onvolumechange = onvolumechange; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onwaiting_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onwaiting"
+
+///|
+#cfg(target="js")
+fn window_onwaiting_ffi(obj : JsValue) -> EventHandler {
+  window_onwaiting_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onwaiting_ffi(
+  obj : JsValue,
+  onwaiting : JsValue,
+) -> Unit = "(obj, onwaiting) => { obj.onwaiting = onwaiting; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onwebkitanimationend_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onwebkitanimationend"
+
+///|
+#cfg(target="js")
+fn window_onwebkitanimationend_ffi(obj : JsValue) -> EventHandler {
+  window_onwebkitanimationend_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onwebkitanimationend_ffi(
+  obj : JsValue,
+  onwebkitanimationend : JsValue,
+) -> Unit = "(obj, onwebkitanimationend) => { obj.onwebkitanimationend = onwebkitanimationend; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onwebkitanimationiteration_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.onwebkitanimationiteration"
+
+///|
+#cfg(target="js")
+fn window_onwebkitanimationiteration_ffi(obj : JsValue) -> EventHandler {
+  window_onwebkitanimationiteration_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onwebkitanimationiteration_ffi(
+  obj : JsValue,
+  onwebkitanimationiteration : JsValue,
+) -> Unit = "(obj, onwebkitanimationiteration) => { obj.onwebkitanimationiteration = onwebkitanimationiteration; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onwebkitanimationstart_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onwebkitanimationstart"
+
+///|
+#cfg(target="js")
+fn window_onwebkitanimationstart_ffi(obj : JsValue) -> EventHandler {
+  window_onwebkitanimationstart_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onwebkitanimationstart_ffi(
+  obj : JsValue,
+  onwebkitanimationstart : JsValue,
+) -> Unit = "(obj, onwebkitanimationstart) => { obj.onwebkitanimationstart = onwebkitanimationstart; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onwebkittransitionend_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onwebkittransitionend"
+
+///|
+#cfg(target="js")
+fn window_onwebkittransitionend_ffi(obj : JsValue) -> EventHandler {
+  window_onwebkittransitionend_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onwebkittransitionend_ffi(
+  obj : JsValue,
+  onwebkittransitionend : JsValue,
+) -> Unit = "(obj, onwebkittransitionend) => { obj.onwebkittransitionend = onwebkittransitionend; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onwheel_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onwheel"
+
+///|
+#cfg(target="js")
+fn window_onwheel_ffi(obj : JsValue) -> EventHandler {
+  window_onwheel_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onwheel_ffi(obj : JsValue, onwheel : JsValue) -> Unit = "(obj, onwheel) => { obj.onwheel = onwheel; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_ontouchstart_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ontouchstart"
+
+///|
+#cfg(target="js")
+fn window_ontouchstart_ffi(obj : JsValue) -> EventHandler {
+  window_ontouchstart_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_ontouchstart_ffi(
+  obj : JsValue,
+  ontouchstart : JsValue,
+) -> Unit = "(obj, ontouchstart) => { obj.ontouchstart = ontouchstart; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_ontouchend_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ontouchend"
+
+///|
+#cfg(target="js")
+fn window_ontouchend_ffi(obj : JsValue) -> EventHandler {
+  window_ontouchend_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_ontouchend_ffi(
+  obj : JsValue,
+  ontouchend : JsValue,
+) -> Unit = "(obj, ontouchend) => { obj.ontouchend = ontouchend; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_ontouchmove_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ontouchmove"
+
+///|
+#cfg(target="js")
+fn window_ontouchmove_ffi(obj : JsValue) -> EventHandler {
+  window_ontouchmove_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_ontouchmove_ffi(
+  obj : JsValue,
+  ontouchmove : JsValue,
+) -> Unit = "(obj, ontouchmove) => { obj.ontouchmove = ontouchmove; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_ontouchcancel_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ontouchcancel"
+
+///|
+#cfg(target="js")
+fn window_ontouchcancel_ffi(obj : JsValue) -> EventHandler {
+  window_ontouchcancel_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_ontouchcancel_ffi(
+  obj : JsValue,
+  ontouchcancel : JsValue,
+) -> Unit = "(obj, ontouchcancel) => { obj.ontouchcancel = ontouchcancel; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onpointerover_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpointerover"
+
+///|
+#cfg(target="js")
+fn window_onpointerover_ffi(obj : JsValue) -> EventHandler {
+  window_onpointerover_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onpointerover_ffi(
+  obj : JsValue,
+  onpointerover : JsValue,
+) -> Unit = "(obj, onpointerover) => { obj.onpointerover = onpointerover; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onpointerenter_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpointerenter"
+
+///|
+#cfg(target="js")
+fn window_onpointerenter_ffi(obj : JsValue) -> EventHandler {
+  window_onpointerenter_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onpointerenter_ffi(
+  obj : JsValue,
+  onpointerenter : JsValue,
+) -> Unit = "(obj, onpointerenter) => { obj.onpointerenter = onpointerenter; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onpointerdown_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpointerdown"
+
+///|
+#cfg(target="js")
+fn window_onpointerdown_ffi(obj : JsValue) -> EventHandler {
+  window_onpointerdown_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onpointerdown_ffi(
+  obj : JsValue,
+  onpointerdown : JsValue,
+) -> Unit = "(obj, onpointerdown) => { obj.onpointerdown = onpointerdown; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onpointermove_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpointermove"
+
+///|
+#cfg(target="js")
+fn window_onpointermove_ffi(obj : JsValue) -> EventHandler {
+  window_onpointermove_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onpointermove_ffi(
+  obj : JsValue,
+  onpointermove : JsValue,
+) -> Unit = "(obj, onpointermove) => { obj.onpointermove = onpointermove; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onpointerrawupdate_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpointerrawupdate"
+
+///|
+#cfg(target="js")
+fn window_onpointerrawupdate_ffi(obj : JsValue) -> EventHandler {
+  window_onpointerrawupdate_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onpointerrawupdate_ffi(
+  obj : JsValue,
+  onpointerrawupdate : JsValue,
+) -> Unit = "(obj, onpointerrawupdate) => { obj.onpointerrawupdate = onpointerrawupdate; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onpointerup_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpointerup"
+
+///|
+#cfg(target="js")
+fn window_onpointerup_ffi(obj : JsValue) -> EventHandler {
+  window_onpointerup_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onpointerup_ffi(
+  obj : JsValue,
+  onpointerup : JsValue,
+) -> Unit = "(obj, onpointerup) => { obj.onpointerup = onpointerup; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onpointercancel_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpointercancel"
+
+///|
+#cfg(target="js")
+fn window_onpointercancel_ffi(obj : JsValue) -> EventHandler {
+  window_onpointercancel_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onpointercancel_ffi(
+  obj : JsValue,
+  onpointercancel : JsValue,
+) -> Unit = "(obj, onpointercancel) => { obj.onpointercancel = onpointercancel; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onpointerout_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpointerout"
+
+///|
+#cfg(target="js")
+fn window_onpointerout_ffi(obj : JsValue) -> EventHandler {
+  window_onpointerout_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onpointerout_ffi(
+  obj : JsValue,
+  onpointerout : JsValue,
+) -> Unit = "(obj, onpointerout) => { obj.onpointerout = onpointerout; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onpointerleave_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpointerleave"
+
+///|
+#cfg(target="js")
+fn window_onpointerleave_ffi(obj : JsValue) -> EventHandler {
+  window_onpointerleave_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onpointerleave_ffi(
+  obj : JsValue,
+  onpointerleave : JsValue,
+) -> Unit = "(obj, onpointerleave) => { obj.onpointerleave = onpointerleave; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_ongotpointercapture_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ongotpointercapture"
+
+///|
+#cfg(target="js")
+fn window_ongotpointercapture_ffi(obj : JsValue) -> EventHandler {
+  window_ongotpointercapture_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_ongotpointercapture_ffi(
+  obj : JsValue,
+  ongotpointercapture : JsValue,
+) -> Unit = "(obj, ongotpointercapture) => { obj.ongotpointercapture = ongotpointercapture; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onlostpointercapture_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onlostpointercapture"
+
+///|
+#cfg(target="js")
+fn window_onlostpointercapture_ffi(obj : JsValue) -> EventHandler {
+  window_onlostpointercapture_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onlostpointercapture_ffi(
+  obj : JsValue,
+  onlostpointercapture : JsValue,
+) -> Unit = "(obj, onlostpointercapture) => { obj.onlostpointercapture = onlostpointercapture; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onselectstart_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onselectstart"
+
+///|
+#cfg(target="js")
+fn window_onselectstart_ffi(obj : JsValue) -> EventHandler {
+  window_onselectstart_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onselectstart_ffi(
+  obj : JsValue,
+  onselectstart : JsValue,
+) -> Unit = "(obj, onselectstart) => { obj.onselectstart = onselectstart; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onselectionchange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onselectionchange"
+
+///|
+#cfg(target="js")
+fn window_onselectionchange_ffi(obj : JsValue) -> EventHandler {
+  window_onselectionchange_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onselectionchange_ffi(
+  obj : JsValue,
+  onselectionchange : JsValue,
+) -> Unit = "(obj, onselectionchange) => { obj.onselectionchange = onselectionchange; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onafterprint_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onafterprint"
+
+///|
+#cfg(target="js")
+fn window_onafterprint_ffi(obj : JsValue) -> EventHandler {
+  window_onafterprint_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onafterprint_ffi(
+  obj : JsValue,
+  onafterprint : JsValue,
+) -> Unit = "(obj, onafterprint) => { obj.onafterprint = onafterprint; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onbeforeprint_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onbeforeprint"
+
+///|
+#cfg(target="js")
+fn window_onbeforeprint_ffi(obj : JsValue) -> EventHandler {
+  window_onbeforeprint_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onbeforeprint_ffi(
+  obj : JsValue,
+  onbeforeprint : JsValue,
+) -> Unit = "(obj, onbeforeprint) => { obj.onbeforeprint = onbeforeprint; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onbeforeunload_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onbeforeunload"
+
+///|
+#cfg(target="js")
+fn window_onbeforeunload_ffi(obj : JsValue) -> OnBeforeUnloadEventHandler {
+  window_onbeforeunload_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onbeforeunload_ffi(
+  obj : JsValue,
+  onbeforeunload : JsValue,
+) -> Unit = "(obj, onbeforeunload) => { obj.onbeforeunload = onbeforeunload; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onhashchange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onhashchange"
+
+///|
+#cfg(target="js")
+fn window_onhashchange_ffi(obj : JsValue) -> EventHandler {
+  window_onhashchange_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onhashchange_ffi(
+  obj : JsValue,
+  onhashchange : JsValue,
+) -> Unit = "(obj, onhashchange) => { obj.onhashchange = onhashchange; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onlanguagechange_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onlanguagechange"
+
+///|
+#cfg(target="js")
+fn window_onlanguagechange_ffi(obj : JsValue) -> EventHandler {
+  window_onlanguagechange_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onlanguagechange_ffi(
+  obj : JsValue,
+  onlanguagechange : JsValue,
+) -> Unit = "(obj, onlanguagechange) => { obj.onlanguagechange = onlanguagechange; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onmessage_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onmessage"
+
+///|
+#cfg(target="js")
+fn window_onmessage_ffi(obj : JsValue) -> EventHandler {
+  window_onmessage_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onmessage_ffi(
+  obj : JsValue,
+  onmessage : JsValue,
+) -> Unit = "(obj, onmessage) => { obj.onmessage = onmessage; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onmessageerror_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onmessageerror"
+
+///|
+#cfg(target="js")
+fn window_onmessageerror_ffi(obj : JsValue) -> EventHandler {
+  window_onmessageerror_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onmessageerror_ffi(
+  obj : JsValue,
+  onmessageerror : JsValue,
+) -> Unit = "(obj, onmessageerror) => { obj.onmessageerror = onmessageerror; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onoffline_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onoffline"
+
+///|
+#cfg(target="js")
+fn window_onoffline_ffi(obj : JsValue) -> EventHandler {
+  window_onoffline_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onoffline_ffi(
+  obj : JsValue,
+  onoffline : JsValue,
+) -> Unit = "(obj, onoffline) => { obj.onoffline = onoffline; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_ononline_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.ononline"
+
+///|
+#cfg(target="js")
+fn window_ononline_ffi(obj : JsValue) -> EventHandler {
+  window_ononline_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_ononline_ffi(
+  obj : JsValue,
+  ononline : JsValue,
+) -> Unit = "(obj, ononline) => { obj.ononline = ononline; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onpagehide_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpagehide"
+
+///|
+#cfg(target="js")
+fn window_onpagehide_ffi(obj : JsValue) -> EventHandler {
+  window_onpagehide_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onpagehide_ffi(
+  obj : JsValue,
+  onpagehide : JsValue,
+) -> Unit = "(obj, onpagehide) => { obj.onpagehide = onpagehide; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onpagereveal_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpagereveal"
+
+///|
+#cfg(target="js")
+fn window_onpagereveal_ffi(obj : JsValue) -> EventHandler {
+  window_onpagereveal_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onpagereveal_ffi(
+  obj : JsValue,
+  onpagereveal : JsValue,
+) -> Unit = "(obj, onpagereveal) => { obj.onpagereveal = onpagereveal; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onpageshow_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpageshow"
+
+///|
+#cfg(target="js")
+fn window_onpageshow_ffi(obj : JsValue) -> EventHandler {
+  window_onpageshow_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onpageshow_ffi(
+  obj : JsValue,
+  onpageshow : JsValue,
+) -> Unit = "(obj, onpageshow) => { obj.onpageshow = onpageshow; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onpageswap_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpageswap"
+
+///|
+#cfg(target="js")
+fn window_onpageswap_ffi(obj : JsValue) -> EventHandler {
+  window_onpageswap_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onpageswap_ffi(
+  obj : JsValue,
+  onpageswap : JsValue,
+) -> Unit = "(obj, onpageswap) => { obj.onpageswap = onpageswap; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onpopstate_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onpopstate"
+
+///|
+#cfg(target="js")
+fn window_onpopstate_ffi(obj : JsValue) -> EventHandler {
+  window_onpopstate_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onpopstate_ffi(
+  obj : JsValue,
+  onpopstate : JsValue,
+) -> Unit = "(obj, onpopstate) => { obj.onpopstate = onpopstate; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onrejectionhandled_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onrejectionhandled"
+
+///|
+#cfg(target="js")
+fn window_onrejectionhandled_ffi(obj : JsValue) -> EventHandler {
+  window_onrejectionhandled_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onrejectionhandled_ffi(
+  obj : JsValue,
+  onrejectionhandled : JsValue,
+) -> Unit = "(obj, onrejectionhandled) => { obj.onrejectionhandled = onrejectionhandled; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onstorage_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onstorage"
+
+///|
+#cfg(target="js")
+fn window_onstorage_ffi(obj : JsValue) -> EventHandler {
+  window_onstorage_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onstorage_ffi(
+  obj : JsValue,
+  onstorage : JsValue,
+) -> Unit = "(obj, onstorage) => { obj.onstorage = onstorage; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onunhandledrejection_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onunhandledrejection"
+
+///|
+#cfg(target="js")
+fn window_onunhandledrejection_ffi(obj : JsValue) -> EventHandler {
+  window_onunhandledrejection_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onunhandledrejection_ffi(
+  obj : JsValue,
+  onunhandledrejection : JsValue,
+) -> Unit = "(obj, onunhandledrejection) => { obj.onunhandledrejection = onunhandledrejection; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_onunload_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onunload"
+
+///|
+#cfg(target="js")
+fn window_onunload_ffi(obj : JsValue) -> EventHandler {
+  window_onunload_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_onunload_ffi(
+  obj : JsValue,
+  onunload : JsValue,
+) -> Unit = "(obj, onunload) => { obj.onunload = onunload; }"
+
+///|
+#cfg(target="js")
+extern "js" fn window_origin_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.origin"
+
+///|
+#cfg(target="js")
+fn window_origin_ffi(obj : JsValue) -> String {
+  window_origin_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_is_secure_context_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.isSecureContext"
+
+///|
+#cfg(target="js")
+fn window_is_secure_context_ffi(obj : JsValue) -> Bool {
+  window_is_secure_context_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_cross_origin_isolated_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.crossOriginIsolated"
+
+///|
+#cfg(target="js")
+fn window_cross_origin_isolated_ffi(obj : JsValue) -> Bool {
+  window_cross_origin_isolated_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_report_error_ffi(obj : JsValue, e : JsValue) -> Unit = "(obj, e) => obj.reportError(e)"
+
+///|
+#cfg(target="js")
+extern "js" fn window_btoa_ffi_js(obj : JsValue, data : JsValue) -> JsValue = "(obj, data) => obj.btoa(data)"
+
+///|
+#cfg(target="js")
+fn window_btoa_ffi(obj : JsValue, data : JsValue) -> String {
+  window_btoa_ffi_js(obj, data).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_atob_ffi_js(obj : JsValue, data : JsValue) -> JsValue = "(obj, data) => obj.atob(data)"
+
+///|
+#cfg(target="js")
+fn window_atob_ffi(obj : JsValue, data : JsValue) -> String {
+  window_atob_ffi_js(obj, data).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_timeout_ffi_js(
+  obj : JsValue,
+  handler : JsValue,
+  timeout : JsValue,
+  arguments : JsValue,
+) -> JsValue = "(obj, handler, timeout, _arguments) => obj.setTimeout(handler, timeout, ..._arguments)"
+
+///|
+#cfg(target="js")
+fn window_set_timeout_ffi(
+  obj : JsValue,
+  handler : JsValue,
+  timeout : JsValue,
+  arguments : JsValue,
+) -> Int {
+  window_set_timeout_ffi_js(obj, handler, timeout, arguments).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_clear_timeout_ffi(obj : JsValue, id : JsValue) -> Unit = "(obj, id) => obj.clearTimeout(id)"
+
+///|
+#cfg(target="js")
+extern "js" fn window_set_interval_ffi_js(
+  obj : JsValue,
+  handler : JsValue,
+  timeout : JsValue,
+  arguments : JsValue,
+) -> JsValue = "(obj, handler, timeout, _arguments) => obj.setInterval(handler, timeout, ..._arguments)"
+
+///|
+#cfg(target="js")
+fn window_set_interval_ffi(
+  obj : JsValue,
+  handler : JsValue,
+  timeout : JsValue,
+  arguments : JsValue,
+) -> Int {
+  window_set_interval_ffi_js(obj, handler, timeout, arguments).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_clear_interval_ffi(obj : JsValue, id : JsValue) -> Unit = "(obj, id) => obj.clearInterval(id)"
+
+///|
+#cfg(target="js")
+extern "js" fn window_queue_microtask_ffi(
+  obj : JsValue,
+  callback : JsValue,
+) -> Unit = "(obj, callback) => obj.queueMicrotask(callback)"
+
+///|
+#cfg(target="js")
+extern "js" fn window_create_image_bitmap_ffi_js(
+  obj : JsValue,
+  image : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, image, options) => obj.createImageBitmap(image, options)"
+
+///|
+#cfg(target="js")
+fn window_create_image_bitmap_ffi(
+  obj : JsValue,
+  image : JsValue,
+  options : JsValue,
+) -> JsPromise[ImageBitmap] {
+  window_create_image_bitmap_ffi_js(obj, image, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_create_image_bitmap_cropped_ffi_js(
+  obj : JsValue,
+  image : JsValue,
+  sx : JsValue,
+  sy : JsValue,
+  sw : JsValue,
+  sh : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, image, sx, sy, sw, sh, options) => obj.createImageBitmap(image, sx, sy, sw, sh, options)"
+
+///|
+#cfg(target="js")
+fn window_create_image_bitmap_cropped_ffi(
+  obj : JsValue,
+  image : JsValue,
+  sx : JsValue,
+  sy : JsValue,
+  sw : JsValue,
+  sh : JsValue,
+  options : JsValue,
+) -> JsPromise[ImageBitmap] {
+  window_create_image_bitmap_cropped_ffi_js(obj, image, sx, sy, sw, sh, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_structured_clone_ffi_js(
+  obj : JsValue,
+  value : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, value, options) => obj.structuredClone(value, options)"
+
+///|
+#cfg(target="js")
+fn window_structured_clone_ffi(
+  obj : JsValue,
+  value : JsValue,
+  options : JsValue,
+) -> JsValue {
+  window_structured_clone_ffi_js(obj, value, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_fetch_ffi_js(
+  obj : JsValue,
+  input : JsValue,
+  init : JsValue,
+) -> JsValue = "(obj, input, init) => obj.fetch(input, init)"
+
+///|
+#cfg(target="js")
+fn window_fetch_ffi(
+  obj : JsValue,
+  input : JsValue,
+  init : JsValue,
+) -> JsPromise[Response] {
+  window_fetch_ffi_js(obj, input, init).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_performance_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.performance"
+
+///|
+#cfg(target="js")
+fn window_performance_ffi(obj : JsValue) -> Performance {
+  window_performance_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_indexed_db_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.indexedDB"
+
+///|
+#cfg(target="js")
+fn window_indexed_db_ffi(obj : JsValue) -> IDBFactory {
+  window_indexed_db_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_trusted_types_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.trustedTypes"
+
+///|
+#cfg(target="js")
+fn window_trusted_types_ffi(obj : JsValue) -> TrustedTypePolicyFactory {
+  window_trusted_types_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_caches_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.caches"
+
+///|
+#cfg(target="js")
+fn window_caches_ffi(obj : JsValue) -> CacheStorage {
+  window_caches_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_request_animation_frame_ffi_js(
+  obj : JsValue,
+  callback : JsValue,
+) -> JsValue = "(obj, callback) => obj.requestAnimationFrame(callback)"
+
+///|
+#cfg(target="js")
+fn window_request_animation_frame_ffi(
+  obj : JsValue,
+  callback : JsValue,
+) -> UInt {
+  window_request_animation_frame_ffi_js(obj, callback).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_cancel_animation_frame_ffi(
+  obj : JsValue,
+  handle : JsValue,
+) -> Unit = "(obj, handle) => obj.cancelAnimationFrame(handle)"
+
+///|
+#cfg(target="js")
+extern "js" fn window_session_storage_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.sessionStorage"
+
+///|
+#cfg(target="js")
+fn window_session_storage_ffi(obj : JsValue) -> Storage {
+  window_session_storage_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn window_local_storage_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.localStorage"
+
+///|
+#cfg(target="js")
+fn window_local_storage_ffi(obj : JsValue) -> Storage {
+  window_local_storage_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_event_is_undefined_ffi(obj : WindowEvent) -> Bool = "JsValue" "isUndefined"
+
+///|
+#cfg(target="wasm-gc")
+fn window_event_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_event"
+
+///|
+#cfg(target="wasm-gc")
+fn window_event_ffi(obj : JsValue) -> WindowEvent {
+  window_event_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_window_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_window"
+
+///|
+#cfg(target="wasm-gc")
+fn window_window_ffi(obj : JsValue) -> WindowProxy {
+  window_window_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_self_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_self"
+
+///|
+#cfg(target="wasm-gc")
+fn window_self_ffi(obj : JsValue) -> WindowProxy {
+  window_self_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_document_ffi(obj : JsValue) -> Document = "webapi_Window" "get_document"
+
+///|
+#cfg(target="wasm-gc")
+fn window_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_name"
+
+///|
+#cfg(target="wasm-gc")
+fn window_name_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(window_name_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_name_ffi(obj : JsValue, name : JsValue) -> Unit = "webapi_Window" "set_name"
+
+///|
+#cfg(target="wasm-gc")
+fn window_location_ffi(obj : JsValue) -> Location = "webapi_Window" "get_location"
+
+///|
+#cfg(target="wasm-gc")
+fn window_history_ffi(obj : JsValue) -> History = "webapi_Window" "get_history"
+
+///|
+#cfg(target="wasm-gc")
+fn window_navigation_ffi(obj : JsValue) -> Navigation = "webapi_Window" "get_navigation"
+
+///|
+#cfg(target="wasm-gc")
+fn window_custom_elements_ffi(obj : JsValue) -> CustomElementRegistry = "webapi_Window" "get_customElements"
+
+///|
+#cfg(target="wasm-gc")
+fn window_locationbar_ffi(obj : JsValue) -> BarProp = "webapi_Window" "get_locationbar"
+
+///|
+#cfg(target="wasm-gc")
+fn window_menubar_ffi(obj : JsValue) -> BarProp = "webapi_Window" "get_menubar"
+
+///|
+#cfg(target="wasm-gc")
+fn window_personalbar_ffi(obj : JsValue) -> BarProp = "webapi_Window" "get_personalbar"
+
+///|
+#cfg(target="wasm-gc")
+fn window_scrollbars_ffi(obj : JsValue) -> BarProp = "webapi_Window" "get_scrollbars"
+
+///|
+#cfg(target="wasm-gc")
+fn window_statusbar_ffi(obj : JsValue) -> BarProp = "webapi_Window" "get_statusbar"
+
+///|
+#cfg(target="wasm-gc")
+fn window_toolbar_ffi(obj : JsValue) -> BarProp = "webapi_Window" "get_toolbar"
+
+///|
+#cfg(target="wasm-gc")
+fn window_status_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_status"
+
+///|
+#cfg(target="wasm-gc")
+fn window_status_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(window_status_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_status_ffi(obj : JsValue, status : JsValue) -> Unit = "webapi_Window" "set_status"
+
+///|
+#cfg(target="wasm-gc")
+fn window_close_ffi(obj : JsValue) -> Unit = "webapi_Window" "close"
+
+///|
+#cfg(target="wasm-gc")
+fn window_closed_ffi(obj : JsValue) -> Bool = "webapi_Window" "get_closed"
+
+///|
+#cfg(target="wasm-gc")
+fn window_stop_ffi(obj : JsValue) -> Unit = "webapi_Window" "stop"
+
+///|
+#cfg(target="wasm-gc")
+fn window_focus_ffi(obj : JsValue) -> Unit = "webapi_Window" "focus"
+
+///|
+#cfg(target="wasm-gc")
+fn window_blur_ffi(obj : JsValue) -> Unit = "webapi_Window" "blur"
+
+///|
+#cfg(target="wasm-gc")
+fn window_frames_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_frames"
+
+///|
+#cfg(target="wasm-gc")
+fn window_frames_ffi(obj : JsValue) -> WindowProxy {
+  window_frames_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_length_ffi(obj : JsValue) -> UInt = "webapi_Window" "get_length"
+
+///|
+#cfg(target="wasm-gc")
+fn window_top_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_top"
+
+///|
+#cfg(target="wasm-gc")
+fn window_top_ffi(obj : JsValue) -> WindowProxy {
+  window_top_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_opener_ffi(obj : JsValue) -> JsValue = "webapi_Window" "get_opener"
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_opener_ffi(obj : JsValue, opener : JsValue) -> Unit = "webapi_Window" "set_opener"
+
+///|
+#cfg(target="wasm-gc")
+fn window_parent_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_parent"
+
+///|
+#cfg(target="wasm-gc")
+fn window_parent_ffi(obj : JsValue) -> WindowProxy {
+  window_parent_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_frame_element_ffi(obj : JsValue) -> Element = "webapi_Window" "get_frameElement"
+
+///|
+#cfg(target="wasm-gc")
+fn window_open_ffi(
+  obj : JsValue,
+  url : JsValue,
+  target : JsValue,
+  features : JsValue,
+) -> JsValue = "webapi_Window" "open"
+
+///|
+#cfg(target="wasm-gc")
+fn window_get_ffi(obj : JsValue, name : JsValue) -> JsValue = "webapi_Window" "get"
+
+///|
+#cfg(target="wasm-gc")
+fn window_navigator_ffi(obj : JsValue) -> Navigator = "webapi_Window" "get_navigator"
+
+///|
+#cfg(target="wasm-gc")
+fn window_client_information_ffi(obj : JsValue) -> Navigator = "webapi_Window" "get_clientInformation"
+
+///|
+#cfg(target="wasm-gc")
+fn window_origin_agent_cluster_ffi(obj : JsValue) -> Bool = "webapi_Window" "get_originAgentCluster"
+
+///|
+#cfg(target="wasm-gc")
+fn window_alert_ffi(obj : JsValue) -> Unit = "webapi_Window" "alert"
+
+///|
+#cfg(target="wasm-gc")
+fn window_alert_with_message_ffi(obj : JsValue, message : JsValue) -> Unit = "webapi_Window" "alert_with_message"
+
+///|
+#cfg(target="wasm-gc")
+fn window_confirm_ffi(obj : JsValue, message : JsValue) -> Bool = "webapi_Window" "confirm"
+
+///|
+#cfg(target="wasm-gc")
+fn window_prompt_ffi(
+  obj : JsValue,
+  message : JsValue,
+  default : JsValue,
+) -> JsValue = "webapi_Window" "prompt"
+
+///|
+#cfg(target="wasm-gc")
+fn window_print_ffi(obj : JsValue) -> Unit = "webapi_Window" "print"
+
+///|
+#cfg(target="wasm-gc")
+fn window_post_message_ffi(
+  obj : JsValue,
+  message : JsValue,
+  target_origin : JsValue,
+  transfer : JsValue,
+) -> Unit = "webapi_Window" "postMessage"
+
+///|
+#cfg(target="wasm-gc")
+fn window_post_message_with_options_ffi(
+  obj : JsValue,
+  message : JsValue,
+  options : JsValue,
+) -> Unit = "webapi_Window" "post_message_with_options"
+
+///|
+#cfg(target="wasm-gc")
+fn window_capture_events_ffi(obj : JsValue) -> Unit = "webapi_Window" "captureEvents"
+
+///|
+#cfg(target="wasm-gc")
+fn window_release_events_ffi(obj : JsValue) -> Unit = "webapi_Window" "releaseEvents"
+
+///|
+#cfg(target="wasm-gc")
+fn window_external_ffi(obj : JsValue) -> External = "webapi_Window" "get_external"
+
+///|
+#cfg(target="wasm-gc")
+fn window_get_computed_style_ffi(
+  obj : JsValue,
+  elt : JsValue,
+  pseudo_elt : JsValue,
+) -> CSSStyleProperties = "webapi_Window" "getComputedStyle"
+
+///|
+#cfg(target="wasm-gc")
+fn window_fetch_later_ffi(
+  obj : JsValue,
+  input : JsValue,
+  init : JsValue,
+) -> FetchLaterResult = "webapi_Window" "fetchLater"
+
+///|
+#cfg(target="wasm-gc")
+fn window_match_media_ffi(obj : JsValue, query : JsValue) -> MediaQueryList = "webapi_Window" "matchMedia"
+
+///|
+#cfg(target="wasm-gc")
+fn window_screen_ffi(obj : JsValue) -> Screen = "webapi_Window" "get_screen"
+
+///|
+#cfg(target="wasm-gc")
+fn window_visual_viewport_ffi(obj : JsValue) -> VisualViewport = "webapi_Window" "get_visualViewport"
+
+///|
+#cfg(target="wasm-gc")
+fn window_move_to_ffi(obj : JsValue, x : JsValue, y : JsValue) -> Unit = "webapi_Window" "moveTo"
+
+///|
+#cfg(target="wasm-gc")
+fn window_move_by_ffi(obj : JsValue, x : JsValue, y : JsValue) -> Unit = "webapi_Window" "moveBy"
+
+///|
+#cfg(target="wasm-gc")
+fn window_resize_to_ffi(
+  obj : JsValue,
+  width : JsValue,
+  height : JsValue,
+) -> Unit = "webapi_Window" "resizeTo"
+
+///|
+#cfg(target="wasm-gc")
+fn window_resize_by_ffi(obj : JsValue, x : JsValue, y : JsValue) -> Unit = "webapi_Window" "resizeBy"
+
+///|
+#cfg(target="wasm-gc")
+fn window_inner_width_ffi(obj : JsValue) -> Int = "webapi_Window" "get_innerWidth"
+
+///|
+#cfg(target="wasm-gc")
+fn window_inner_height_ffi(obj : JsValue) -> Int = "webapi_Window" "get_innerHeight"
+
+///|
+#cfg(target="wasm-gc")
+fn window_scroll_x_ffi(obj : JsValue) -> Double = "webapi_Window" "get_scrollX"
+
+///|
+#cfg(target="wasm-gc")
+fn window_page_x_offset_ffi(obj : JsValue) -> Double = "webapi_Window" "get_pageXOffset"
+
+///|
+#cfg(target="wasm-gc")
+fn window_scroll_y_ffi(obj : JsValue) -> Double = "webapi_Window" "get_scrollY"
+
+///|
+#cfg(target="wasm-gc")
+fn window_page_y_offset_ffi(obj : JsValue) -> Double = "webapi_Window" "get_pageYOffset"
+
+///|
+#cfg(target="wasm-gc")
+fn window_scroll_ffi_wasm(obj : JsValue, options : JsValue) -> JsValue = "webapi_Window" "scroll"
+
+///|
+#cfg(target="wasm-gc")
+fn window_scroll_ffi(obj : JsValue, options : JsValue) -> JsPromise[JsValue] {
+  window_scroll_ffi_wasm(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_scroll_xy_ffi_wasm(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+) -> JsValue = "webapi_Window" "scroll_xy"
+
+///|
+#cfg(target="wasm-gc")
+fn window_scroll_xy_ffi(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+) -> JsPromise[JsValue] {
+  window_scroll_xy_ffi_wasm(obj, x, y).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_scroll_to_ffi_wasm(obj : JsValue, options : JsValue) -> JsValue = "webapi_Window" "scrollTo"
+
+///|
+#cfg(target="wasm-gc")
+fn window_scroll_to_ffi(obj : JsValue, options : JsValue) -> JsPromise[JsValue] {
+  window_scroll_to_ffi_wasm(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_scroll_to_xy_ffi_wasm(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+) -> JsValue = "webapi_Window" "scroll_to_xy"
+
+///|
+#cfg(target="wasm-gc")
+fn window_scroll_to_xy_ffi(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+) -> JsPromise[JsValue] {
+  window_scroll_to_xy_ffi_wasm(obj, x, y).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_scroll_by_ffi_wasm(obj : JsValue, options : JsValue) -> JsValue = "webapi_Window" "scrollBy"
+
+///|
+#cfg(target="wasm-gc")
+fn window_scroll_by_ffi(obj : JsValue, options : JsValue) -> JsPromise[JsValue] {
+  window_scroll_by_ffi_wasm(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_scroll_by_xy_ffi_wasm(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+) -> JsValue = "webapi_Window" "scroll_by_xy"
+
+///|
+#cfg(target="wasm-gc")
+fn window_scroll_by_xy_ffi(
+  obj : JsValue,
+  x : JsValue,
+  y : JsValue,
+) -> JsPromise[JsValue] {
+  window_scroll_by_xy_ffi_wasm(obj, x, y).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_screen_x_ffi(obj : JsValue) -> Int = "webapi_Window" "get_screenX"
+
+///|
+#cfg(target="wasm-gc")
+fn window_screen_left_ffi(obj : JsValue) -> Int = "webapi_Window" "get_screenLeft"
+
+///|
+#cfg(target="wasm-gc")
+fn window_screen_y_ffi(obj : JsValue) -> Int = "webapi_Window" "get_screenY"
+
+///|
+#cfg(target="wasm-gc")
+fn window_screen_top_ffi(obj : JsValue) -> Int = "webapi_Window" "get_screenTop"
+
+///|
+#cfg(target="wasm-gc")
+fn window_outer_width_ffi(obj : JsValue) -> Int = "webapi_Window" "get_outerWidth"
+
+///|
+#cfg(target="wasm-gc")
+fn window_outer_height_ffi(obj : JsValue) -> Int = "webapi_Window" "get_outerHeight"
+
+///|
+#cfg(target="wasm-gc")
+fn window_device_pixel_ratio_ffi(obj : JsValue) -> Double = "webapi_Window" "get_devicePixelRatio"
+
+///|
+#cfg(target="wasm-gc")
+fn window_get_selection_ffi(obj : JsValue) -> JsValue = "webapi_Window" "getSelection"
+
+///|
+#cfg(target="wasm-gc")
+fn window_show_open_file_picker_ffi_wasm(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Window" "showOpenFilePicker"
+
+///|
+#cfg(target="wasm-gc")
+fn window_show_open_file_picker_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> JsPromise[Array[FileSystemFileHandle]] {
+  window_show_open_file_picker_ffi_wasm(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_show_save_file_picker_ffi_wasm(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Window" "showSaveFilePicker"
+
+///|
+#cfg(target="wasm-gc")
+fn window_show_save_file_picker_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> JsPromise[FileSystemFileHandle] {
+  window_show_save_file_picker_ffi_wasm(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_show_directory_picker_ffi_wasm(
+  obj : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Window" "showDirectoryPicker"
+
+///|
+#cfg(target="wasm-gc")
+fn window_show_directory_picker_ffi(
+  obj : JsValue,
+  options : JsValue,
+) -> JsPromise[FileSystemDirectoryHandle] {
+  window_show_directory_picker_ffi_wasm(obj, options).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_request_idle_callback_ffi(
+  obj : JsValue,
+  callback : JsValue,
+  options : JsValue,
+) -> UInt = "webapi_Window" "requestIdleCallback"
+
+///|
+#cfg(target="wasm-gc")
+fn window_cancel_idle_callback_ffi(obj : JsValue, handle : JsValue) -> Unit = "webapi_Window" "cancelIdleCallback"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onabort_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onabort"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onabort_ffi(obj : JsValue) -> EventHandler {
+  window_onabort_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onabort_ffi(obj : JsValue, onabort : JsValue) -> Unit = "webapi_Window" "set_onabort"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onauxclick_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onauxclick"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onauxclick_ffi(obj : JsValue) -> EventHandler {
+  window_onauxclick_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onauxclick_ffi(obj : JsValue, onauxclick : JsValue) -> Unit = "webapi_Window" "set_onauxclick"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onbeforeinput_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onbeforeinput"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onbeforeinput_ffi(obj : JsValue) -> EventHandler {
+  window_onbeforeinput_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onbeforeinput_ffi(obj : JsValue, onbeforeinput : JsValue) -> Unit = "webapi_Window" "set_onbeforeinput"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onbeforematch_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onbeforematch"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onbeforematch_ffi(obj : JsValue) -> EventHandler {
+  window_onbeforematch_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onbeforematch_ffi(obj : JsValue, onbeforematch : JsValue) -> Unit = "webapi_Window" "set_onbeforematch"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onbeforetoggle_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onbeforetoggle"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onbeforetoggle_ffi(obj : JsValue) -> EventHandler {
+  window_onbeforetoggle_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onbeforetoggle_ffi(
+  obj : JsValue,
+  onbeforetoggle : JsValue,
+) -> Unit = "webapi_Window" "set_onbeforetoggle"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onblur_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onblur"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onblur_ffi(obj : JsValue) -> EventHandler {
+  window_onblur_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onblur_ffi(obj : JsValue, onblur : JsValue) -> Unit = "webapi_Window" "set_onblur"
+
+///|
+#cfg(target="wasm-gc")
+fn window_oncancel_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_oncancel"
+
+///|
+#cfg(target="wasm-gc")
+fn window_oncancel_ffi(obj : JsValue) -> EventHandler {
+  window_oncancel_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_oncancel_ffi(obj : JsValue, oncancel : JsValue) -> Unit = "webapi_Window" "set_oncancel"
+
+///|
+#cfg(target="wasm-gc")
+fn window_oncanplay_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_oncanplay"
+
+///|
+#cfg(target="wasm-gc")
+fn window_oncanplay_ffi(obj : JsValue) -> EventHandler {
+  window_oncanplay_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_oncanplay_ffi(obj : JsValue, oncanplay : JsValue) -> Unit = "webapi_Window" "set_oncanplay"
+
+///|
+#cfg(target="wasm-gc")
+fn window_oncanplaythrough_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_oncanplaythrough"
+
+///|
+#cfg(target="wasm-gc")
+fn window_oncanplaythrough_ffi(obj : JsValue) -> EventHandler {
+  window_oncanplaythrough_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_oncanplaythrough_ffi(
+  obj : JsValue,
+  oncanplaythrough : JsValue,
+) -> Unit = "webapi_Window" "set_oncanplaythrough"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onchange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onchange"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onchange_ffi(obj : JsValue) -> EventHandler {
+  window_onchange_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onchange_ffi(obj : JsValue, onchange : JsValue) -> Unit = "webapi_Window" "set_onchange"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onclick_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onclick"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onclick_ffi(obj : JsValue) -> EventHandler {
+  window_onclick_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onclick_ffi(obj : JsValue, onclick : JsValue) -> Unit = "webapi_Window" "set_onclick"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onclose_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onclose"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onclose_ffi(obj : JsValue) -> EventHandler {
+  window_onclose_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onclose_ffi(obj : JsValue, onclose : JsValue) -> Unit = "webapi_Window" "set_onclose"
+
+///|
+#cfg(target="wasm-gc")
+fn window_oncommand_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_oncommand"
+
+///|
+#cfg(target="wasm-gc")
+fn window_oncommand_ffi(obj : JsValue) -> EventHandler {
+  window_oncommand_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_oncommand_ffi(obj : JsValue, oncommand : JsValue) -> Unit = "webapi_Window" "set_oncommand"
+
+///|
+#cfg(target="wasm-gc")
+fn window_oncontextlost_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_oncontextlost"
+
+///|
+#cfg(target="wasm-gc")
+fn window_oncontextlost_ffi(obj : JsValue) -> EventHandler {
+  window_oncontextlost_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_oncontextlost_ffi(obj : JsValue, oncontextlost : JsValue) -> Unit = "webapi_Window" "set_oncontextlost"
+
+///|
+#cfg(target="wasm-gc")
+fn window_oncontextmenu_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_oncontextmenu"
+
+///|
+#cfg(target="wasm-gc")
+fn window_oncontextmenu_ffi(obj : JsValue) -> EventHandler {
+  window_oncontextmenu_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_oncontextmenu_ffi(obj : JsValue, oncontextmenu : JsValue) -> Unit = "webapi_Window" "set_oncontextmenu"
+
+///|
+#cfg(target="wasm-gc")
+fn window_oncontextrestored_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_oncontextrestored"
+
+///|
+#cfg(target="wasm-gc")
+fn window_oncontextrestored_ffi(obj : JsValue) -> EventHandler {
+  window_oncontextrestored_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_oncontextrestored_ffi(
+  obj : JsValue,
+  oncontextrestored : JsValue,
+) -> Unit = "webapi_Window" "set_oncontextrestored"
+
+///|
+#cfg(target="wasm-gc")
+fn window_oncopy_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_oncopy"
+
+///|
+#cfg(target="wasm-gc")
+fn window_oncopy_ffi(obj : JsValue) -> EventHandler {
+  window_oncopy_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_oncopy_ffi(obj : JsValue, oncopy : JsValue) -> Unit = "webapi_Window" "set_oncopy"
+
+///|
+#cfg(target="wasm-gc")
+fn window_oncuechange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_oncuechange"
+
+///|
+#cfg(target="wasm-gc")
+fn window_oncuechange_ffi(obj : JsValue) -> EventHandler {
+  window_oncuechange_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_oncuechange_ffi(obj : JsValue, oncuechange : JsValue) -> Unit = "webapi_Window" "set_oncuechange"
+
+///|
+#cfg(target="wasm-gc")
+fn window_oncut_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_oncut"
+
+///|
+#cfg(target="wasm-gc")
+fn window_oncut_ffi(obj : JsValue) -> EventHandler {
+  window_oncut_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_oncut_ffi(obj : JsValue, oncut : JsValue) -> Unit = "webapi_Window" "set_oncut"
+
+///|
+#cfg(target="wasm-gc")
+fn window_ondblclick_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_ondblclick"
+
+///|
+#cfg(target="wasm-gc")
+fn window_ondblclick_ffi(obj : JsValue) -> EventHandler {
+  window_ondblclick_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_ondblclick_ffi(obj : JsValue, ondblclick : JsValue) -> Unit = "webapi_Window" "set_ondblclick"
+
+///|
+#cfg(target="wasm-gc")
+fn window_ondrag_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_ondrag"
+
+///|
+#cfg(target="wasm-gc")
+fn window_ondrag_ffi(obj : JsValue) -> EventHandler {
+  window_ondrag_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_ondrag_ffi(obj : JsValue, ondrag : JsValue) -> Unit = "webapi_Window" "set_ondrag"
+
+///|
+#cfg(target="wasm-gc")
+fn window_ondragend_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_ondragend"
+
+///|
+#cfg(target="wasm-gc")
+fn window_ondragend_ffi(obj : JsValue) -> EventHandler {
+  window_ondragend_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_ondragend_ffi(obj : JsValue, ondragend : JsValue) -> Unit = "webapi_Window" "set_ondragend"
+
+///|
+#cfg(target="wasm-gc")
+fn window_ondragenter_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_ondragenter"
+
+///|
+#cfg(target="wasm-gc")
+fn window_ondragenter_ffi(obj : JsValue) -> EventHandler {
+  window_ondragenter_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_ondragenter_ffi(obj : JsValue, ondragenter : JsValue) -> Unit = "webapi_Window" "set_ondragenter"
+
+///|
+#cfg(target="wasm-gc")
+fn window_ondragleave_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_ondragleave"
+
+///|
+#cfg(target="wasm-gc")
+fn window_ondragleave_ffi(obj : JsValue) -> EventHandler {
+  window_ondragleave_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_ondragleave_ffi(obj : JsValue, ondragleave : JsValue) -> Unit = "webapi_Window" "set_ondragleave"
+
+///|
+#cfg(target="wasm-gc")
+fn window_ondragover_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_ondragover"
+
+///|
+#cfg(target="wasm-gc")
+fn window_ondragover_ffi(obj : JsValue) -> EventHandler {
+  window_ondragover_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_ondragover_ffi(obj : JsValue, ondragover : JsValue) -> Unit = "webapi_Window" "set_ondragover"
+
+///|
+#cfg(target="wasm-gc")
+fn window_ondragstart_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_ondragstart"
+
+///|
+#cfg(target="wasm-gc")
+fn window_ondragstart_ffi(obj : JsValue) -> EventHandler {
+  window_ondragstart_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_ondragstart_ffi(obj : JsValue, ondragstart : JsValue) -> Unit = "webapi_Window" "set_ondragstart"
+
+///|
+#cfg(target="wasm-gc")
+fn window_ondrop_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_ondrop"
+
+///|
+#cfg(target="wasm-gc")
+fn window_ondrop_ffi(obj : JsValue) -> EventHandler {
+  window_ondrop_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_ondrop_ffi(obj : JsValue, ondrop : JsValue) -> Unit = "webapi_Window" "set_ondrop"
+
+///|
+#cfg(target="wasm-gc")
+fn window_ondurationchange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_ondurationchange"
+
+///|
+#cfg(target="wasm-gc")
+fn window_ondurationchange_ffi(obj : JsValue) -> EventHandler {
+  window_ondurationchange_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_ondurationchange_ffi(
+  obj : JsValue,
+  ondurationchange : JsValue,
+) -> Unit = "webapi_Window" "set_ondurationchange"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onemptied_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onemptied"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onemptied_ffi(obj : JsValue) -> EventHandler {
+  window_onemptied_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onemptied_ffi(obj : JsValue, onemptied : JsValue) -> Unit = "webapi_Window" "set_onemptied"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onended_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onended"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onended_ffi(obj : JsValue) -> EventHandler {
+  window_onended_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onended_ffi(obj : JsValue, onended : JsValue) -> Unit = "webapi_Window" "set_onended"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onerror_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onerror"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onerror_ffi(obj : JsValue) -> OnErrorEventHandler {
+  window_onerror_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onerror_ffi(obj : JsValue, onerror : JsValue) -> Unit = "webapi_Window" "set_onerror"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onfocus_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onfocus"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onfocus_ffi(obj : JsValue) -> EventHandler {
+  window_onfocus_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onfocus_ffi(obj : JsValue, onfocus : JsValue) -> Unit = "webapi_Window" "set_onfocus"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onformdata_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onformdata"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onformdata_ffi(obj : JsValue) -> EventHandler {
+  window_onformdata_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onformdata_ffi(obj : JsValue, onformdata : JsValue) -> Unit = "webapi_Window" "set_onformdata"
+
+///|
+#cfg(target="wasm-gc")
+fn window_oninput_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_oninput"
+
+///|
+#cfg(target="wasm-gc")
+fn window_oninput_ffi(obj : JsValue) -> EventHandler {
+  window_oninput_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_oninput_ffi(obj : JsValue, oninput : JsValue) -> Unit = "webapi_Window" "set_oninput"
+
+///|
+#cfg(target="wasm-gc")
+fn window_oninvalid_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_oninvalid"
+
+///|
+#cfg(target="wasm-gc")
+fn window_oninvalid_ffi(obj : JsValue) -> EventHandler {
+  window_oninvalid_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_oninvalid_ffi(obj : JsValue, oninvalid : JsValue) -> Unit = "webapi_Window" "set_oninvalid"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onkeydown_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onkeydown"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onkeydown_ffi(obj : JsValue) -> EventHandler {
+  window_onkeydown_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onkeydown_ffi(obj : JsValue, onkeydown : JsValue) -> Unit = "webapi_Window" "set_onkeydown"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onkeypress_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onkeypress"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onkeypress_ffi(obj : JsValue) -> EventHandler {
+  window_onkeypress_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onkeypress_ffi(obj : JsValue, onkeypress : JsValue) -> Unit = "webapi_Window" "set_onkeypress"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onkeyup_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onkeyup"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onkeyup_ffi(obj : JsValue) -> EventHandler {
+  window_onkeyup_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onkeyup_ffi(obj : JsValue, onkeyup : JsValue) -> Unit = "webapi_Window" "set_onkeyup"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onload_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onload"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onload_ffi(obj : JsValue) -> EventHandler {
+  window_onload_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onload_ffi(obj : JsValue, onload : JsValue) -> Unit = "webapi_Window" "set_onload"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onloadeddata_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onloadeddata"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onloadeddata_ffi(obj : JsValue) -> EventHandler {
+  window_onloadeddata_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onloadeddata_ffi(obj : JsValue, onloadeddata : JsValue) -> Unit = "webapi_Window" "set_onloadeddata"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onloadedmetadata_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onloadedmetadata"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onloadedmetadata_ffi(obj : JsValue) -> EventHandler {
+  window_onloadedmetadata_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onloadedmetadata_ffi(
+  obj : JsValue,
+  onloadedmetadata : JsValue,
+) -> Unit = "webapi_Window" "set_onloadedmetadata"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onloadstart_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onloadstart"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onloadstart_ffi(obj : JsValue) -> EventHandler {
+  window_onloadstart_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onloadstart_ffi(obj : JsValue, onloadstart : JsValue) -> Unit = "webapi_Window" "set_onloadstart"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onmousedown_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onmousedown"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onmousedown_ffi(obj : JsValue) -> EventHandler {
+  window_onmousedown_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onmousedown_ffi(obj : JsValue, onmousedown : JsValue) -> Unit = "webapi_Window" "set_onmousedown"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onmouseenter_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onmouseenter"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onmouseenter_ffi(obj : JsValue) -> EventHandler {
+  window_onmouseenter_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onmouseenter_ffi(obj : JsValue, onmouseenter : JsValue) -> Unit = "webapi_Window" "set_onmouseenter"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onmouseleave_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onmouseleave"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onmouseleave_ffi(obj : JsValue) -> EventHandler {
+  window_onmouseleave_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onmouseleave_ffi(obj : JsValue, onmouseleave : JsValue) -> Unit = "webapi_Window" "set_onmouseleave"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onmousemove_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onmousemove"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onmousemove_ffi(obj : JsValue) -> EventHandler {
+  window_onmousemove_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onmousemove_ffi(obj : JsValue, onmousemove : JsValue) -> Unit = "webapi_Window" "set_onmousemove"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onmouseout_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onmouseout"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onmouseout_ffi(obj : JsValue) -> EventHandler {
+  window_onmouseout_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onmouseout_ffi(obj : JsValue, onmouseout : JsValue) -> Unit = "webapi_Window" "set_onmouseout"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onmouseover_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onmouseover"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onmouseover_ffi(obj : JsValue) -> EventHandler {
+  window_onmouseover_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onmouseover_ffi(obj : JsValue, onmouseover : JsValue) -> Unit = "webapi_Window" "set_onmouseover"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onmouseup_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onmouseup"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onmouseup_ffi(obj : JsValue) -> EventHandler {
+  window_onmouseup_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onmouseup_ffi(obj : JsValue, onmouseup : JsValue) -> Unit = "webapi_Window" "set_onmouseup"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onpaste_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onpaste"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onpaste_ffi(obj : JsValue) -> EventHandler {
+  window_onpaste_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onpaste_ffi(obj : JsValue, onpaste : JsValue) -> Unit = "webapi_Window" "set_onpaste"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onpause_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onpause"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onpause_ffi(obj : JsValue) -> EventHandler {
+  window_onpause_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onpause_ffi(obj : JsValue, onpause : JsValue) -> Unit = "webapi_Window" "set_onpause"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onplay_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onplay"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onplay_ffi(obj : JsValue) -> EventHandler {
+  window_onplay_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onplay_ffi(obj : JsValue, onplay : JsValue) -> Unit = "webapi_Window" "set_onplay"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onplaying_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onplaying"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onplaying_ffi(obj : JsValue) -> EventHandler {
+  window_onplaying_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onplaying_ffi(obj : JsValue, onplaying : JsValue) -> Unit = "webapi_Window" "set_onplaying"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onprogress_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onprogress"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onprogress_ffi(obj : JsValue) -> EventHandler {
+  window_onprogress_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onprogress_ffi(obj : JsValue, onprogress : JsValue) -> Unit = "webapi_Window" "set_onprogress"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onratechange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onratechange"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onratechange_ffi(obj : JsValue) -> EventHandler {
+  window_onratechange_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onratechange_ffi(obj : JsValue, onratechange : JsValue) -> Unit = "webapi_Window" "set_onratechange"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onreset_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onreset"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onreset_ffi(obj : JsValue) -> EventHandler {
+  window_onreset_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onreset_ffi(obj : JsValue, onreset : JsValue) -> Unit = "webapi_Window" "set_onreset"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onresize_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onresize"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onresize_ffi(obj : JsValue) -> EventHandler {
+  window_onresize_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onresize_ffi(obj : JsValue, onresize : JsValue) -> Unit = "webapi_Window" "set_onresize"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onscroll_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onscroll"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onscroll_ffi(obj : JsValue) -> EventHandler {
+  window_onscroll_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onscroll_ffi(obj : JsValue, onscroll : JsValue) -> Unit = "webapi_Window" "set_onscroll"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onscrollend_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onscrollend"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onscrollend_ffi(obj : JsValue) -> EventHandler {
+  window_onscrollend_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onscrollend_ffi(obj : JsValue, onscrollend : JsValue) -> Unit = "webapi_Window" "set_onscrollend"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onsecuritypolicyviolation_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onsecuritypolicyviolation"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onsecuritypolicyviolation_ffi(obj : JsValue) -> EventHandler {
+  window_onsecuritypolicyviolation_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onsecuritypolicyviolation_ffi(
+  obj : JsValue,
+  onsecuritypolicyviolation : JsValue,
+) -> Unit = "webapi_Window" "set_onsecuritypolicyviolation"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onseeked_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onseeked"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onseeked_ffi(obj : JsValue) -> EventHandler {
+  window_onseeked_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onseeked_ffi(obj : JsValue, onseeked : JsValue) -> Unit = "webapi_Window" "set_onseeked"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onseeking_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onseeking"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onseeking_ffi(obj : JsValue) -> EventHandler {
+  window_onseeking_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onseeking_ffi(obj : JsValue, onseeking : JsValue) -> Unit = "webapi_Window" "set_onseeking"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onselect_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onselect"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onselect_ffi(obj : JsValue) -> EventHandler {
+  window_onselect_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onselect_ffi(obj : JsValue, onselect : JsValue) -> Unit = "webapi_Window" "set_onselect"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onslotchange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onslotchange"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onslotchange_ffi(obj : JsValue) -> EventHandler {
+  window_onslotchange_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onslotchange_ffi(obj : JsValue, onslotchange : JsValue) -> Unit = "webapi_Window" "set_onslotchange"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onstalled_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onstalled"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onstalled_ffi(obj : JsValue) -> EventHandler {
+  window_onstalled_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onstalled_ffi(obj : JsValue, onstalled : JsValue) -> Unit = "webapi_Window" "set_onstalled"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onsubmit_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onsubmit"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onsubmit_ffi(obj : JsValue) -> EventHandler {
+  window_onsubmit_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onsubmit_ffi(obj : JsValue, onsubmit : JsValue) -> Unit = "webapi_Window" "set_onsubmit"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onsuspend_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onsuspend"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onsuspend_ffi(obj : JsValue) -> EventHandler {
+  window_onsuspend_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onsuspend_ffi(obj : JsValue, onsuspend : JsValue) -> Unit = "webapi_Window" "set_onsuspend"
+
+///|
+#cfg(target="wasm-gc")
+fn window_ontimeupdate_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_ontimeupdate"
+
+///|
+#cfg(target="wasm-gc")
+fn window_ontimeupdate_ffi(obj : JsValue) -> EventHandler {
+  window_ontimeupdate_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_ontimeupdate_ffi(obj : JsValue, ontimeupdate : JsValue) -> Unit = "webapi_Window" "set_ontimeupdate"
+
+///|
+#cfg(target="wasm-gc")
+fn window_ontoggle_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_ontoggle"
+
+///|
+#cfg(target="wasm-gc")
+fn window_ontoggle_ffi(obj : JsValue) -> EventHandler {
+  window_ontoggle_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_ontoggle_ffi(obj : JsValue, ontoggle : JsValue) -> Unit = "webapi_Window" "set_ontoggle"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onvolumechange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onvolumechange"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onvolumechange_ffi(obj : JsValue) -> EventHandler {
+  window_onvolumechange_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onvolumechange_ffi(
+  obj : JsValue,
+  onvolumechange : JsValue,
+) -> Unit = "webapi_Window" "set_onvolumechange"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onwaiting_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onwaiting"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onwaiting_ffi(obj : JsValue) -> EventHandler {
+  window_onwaiting_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onwaiting_ffi(obj : JsValue, onwaiting : JsValue) -> Unit = "webapi_Window" "set_onwaiting"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onwebkitanimationend_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onwebkitanimationend"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onwebkitanimationend_ffi(obj : JsValue) -> EventHandler {
+  window_onwebkitanimationend_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onwebkitanimationend_ffi(
+  obj : JsValue,
+  onwebkitanimationend : JsValue,
+) -> Unit = "webapi_Window" "set_onwebkitanimationend"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onwebkitanimationiteration_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onwebkitanimationiteration"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onwebkitanimationiteration_ffi(obj : JsValue) -> EventHandler {
+  window_onwebkitanimationiteration_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onwebkitanimationiteration_ffi(
+  obj : JsValue,
+  onwebkitanimationiteration : JsValue,
+) -> Unit = "webapi_Window" "set_onwebkitanimationiteration"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onwebkitanimationstart_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onwebkitanimationstart"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onwebkitanimationstart_ffi(obj : JsValue) -> EventHandler {
+  window_onwebkitanimationstart_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onwebkitanimationstart_ffi(
+  obj : JsValue,
+  onwebkitanimationstart : JsValue,
+) -> Unit = "webapi_Window" "set_onwebkitanimationstart"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onwebkittransitionend_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onwebkittransitionend"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onwebkittransitionend_ffi(obj : JsValue) -> EventHandler {
+  window_onwebkittransitionend_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onwebkittransitionend_ffi(
+  obj : JsValue,
+  onwebkittransitionend : JsValue,
+) -> Unit = "webapi_Window" "set_onwebkittransitionend"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onwheel_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onwheel"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onwheel_ffi(obj : JsValue) -> EventHandler {
+  window_onwheel_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onwheel_ffi(obj : JsValue, onwheel : JsValue) -> Unit = "webapi_Window" "set_onwheel"
+
+///|
+#cfg(target="wasm-gc")
+fn window_ontouchstart_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_ontouchstart"
+
+///|
+#cfg(target="wasm-gc")
+fn window_ontouchstart_ffi(obj : JsValue) -> EventHandler {
+  window_ontouchstart_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_ontouchstart_ffi(obj : JsValue, ontouchstart : JsValue) -> Unit = "webapi_Window" "set_ontouchstart"
+
+///|
+#cfg(target="wasm-gc")
+fn window_ontouchend_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_ontouchend"
+
+///|
+#cfg(target="wasm-gc")
+fn window_ontouchend_ffi(obj : JsValue) -> EventHandler {
+  window_ontouchend_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_ontouchend_ffi(obj : JsValue, ontouchend : JsValue) -> Unit = "webapi_Window" "set_ontouchend"
+
+///|
+#cfg(target="wasm-gc")
+fn window_ontouchmove_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_ontouchmove"
+
+///|
+#cfg(target="wasm-gc")
+fn window_ontouchmove_ffi(obj : JsValue) -> EventHandler {
+  window_ontouchmove_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_ontouchmove_ffi(obj : JsValue, ontouchmove : JsValue) -> Unit = "webapi_Window" "set_ontouchmove"
+
+///|
+#cfg(target="wasm-gc")
+fn window_ontouchcancel_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_ontouchcancel"
+
+///|
+#cfg(target="wasm-gc")
+fn window_ontouchcancel_ffi(obj : JsValue) -> EventHandler {
+  window_ontouchcancel_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_ontouchcancel_ffi(obj : JsValue, ontouchcancel : JsValue) -> Unit = "webapi_Window" "set_ontouchcancel"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onpointerover_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onpointerover"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onpointerover_ffi(obj : JsValue) -> EventHandler {
+  window_onpointerover_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onpointerover_ffi(obj : JsValue, onpointerover : JsValue) -> Unit = "webapi_Window" "set_onpointerover"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onpointerenter_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onpointerenter"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onpointerenter_ffi(obj : JsValue) -> EventHandler {
+  window_onpointerenter_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onpointerenter_ffi(
+  obj : JsValue,
+  onpointerenter : JsValue,
+) -> Unit = "webapi_Window" "set_onpointerenter"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onpointerdown_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onpointerdown"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onpointerdown_ffi(obj : JsValue) -> EventHandler {
+  window_onpointerdown_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onpointerdown_ffi(obj : JsValue, onpointerdown : JsValue) -> Unit = "webapi_Window" "set_onpointerdown"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onpointermove_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onpointermove"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onpointermove_ffi(obj : JsValue) -> EventHandler {
+  window_onpointermove_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onpointermove_ffi(obj : JsValue, onpointermove : JsValue) -> Unit = "webapi_Window" "set_onpointermove"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onpointerrawupdate_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onpointerrawupdate"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onpointerrawupdate_ffi(obj : JsValue) -> EventHandler {
+  window_onpointerrawupdate_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onpointerrawupdate_ffi(
+  obj : JsValue,
+  onpointerrawupdate : JsValue,
+) -> Unit = "webapi_Window" "set_onpointerrawupdate"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onpointerup_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onpointerup"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onpointerup_ffi(obj : JsValue) -> EventHandler {
+  window_onpointerup_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onpointerup_ffi(obj : JsValue, onpointerup : JsValue) -> Unit = "webapi_Window" "set_onpointerup"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onpointercancel_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onpointercancel"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onpointercancel_ffi(obj : JsValue) -> EventHandler {
+  window_onpointercancel_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onpointercancel_ffi(
+  obj : JsValue,
+  onpointercancel : JsValue,
+) -> Unit = "webapi_Window" "set_onpointercancel"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onpointerout_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onpointerout"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onpointerout_ffi(obj : JsValue) -> EventHandler {
+  window_onpointerout_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onpointerout_ffi(obj : JsValue, onpointerout : JsValue) -> Unit = "webapi_Window" "set_onpointerout"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onpointerleave_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onpointerleave"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onpointerleave_ffi(obj : JsValue) -> EventHandler {
+  window_onpointerleave_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onpointerleave_ffi(
+  obj : JsValue,
+  onpointerleave : JsValue,
+) -> Unit = "webapi_Window" "set_onpointerleave"
+
+///|
+#cfg(target="wasm-gc")
+fn window_ongotpointercapture_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_ongotpointercapture"
+
+///|
+#cfg(target="wasm-gc")
+fn window_ongotpointercapture_ffi(obj : JsValue) -> EventHandler {
+  window_ongotpointercapture_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_ongotpointercapture_ffi(
+  obj : JsValue,
+  ongotpointercapture : JsValue,
+) -> Unit = "webapi_Window" "set_ongotpointercapture"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onlostpointercapture_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onlostpointercapture"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onlostpointercapture_ffi(obj : JsValue) -> EventHandler {
+  window_onlostpointercapture_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onlostpointercapture_ffi(
+  obj : JsValue,
+  onlostpointercapture : JsValue,
+) -> Unit = "webapi_Window" "set_onlostpointercapture"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onselectstart_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onselectstart"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onselectstart_ffi(obj : JsValue) -> EventHandler {
+  window_onselectstart_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onselectstart_ffi(obj : JsValue, onselectstart : JsValue) -> Unit = "webapi_Window" "set_onselectstart"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onselectionchange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onselectionchange"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onselectionchange_ffi(obj : JsValue) -> EventHandler {
+  window_onselectionchange_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onselectionchange_ffi(
+  obj : JsValue,
+  onselectionchange : JsValue,
+) -> Unit = "webapi_Window" "set_onselectionchange"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onafterprint_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onafterprint"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onafterprint_ffi(obj : JsValue) -> EventHandler {
+  window_onafterprint_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onafterprint_ffi(obj : JsValue, onafterprint : JsValue) -> Unit = "webapi_Window" "set_onafterprint"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onbeforeprint_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onbeforeprint"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onbeforeprint_ffi(obj : JsValue) -> EventHandler {
+  window_onbeforeprint_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onbeforeprint_ffi(obj : JsValue, onbeforeprint : JsValue) -> Unit = "webapi_Window" "set_onbeforeprint"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onbeforeunload_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onbeforeunload"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onbeforeunload_ffi(obj : JsValue) -> OnBeforeUnloadEventHandler {
+  window_onbeforeunload_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onbeforeunload_ffi(
+  obj : JsValue,
+  onbeforeunload : JsValue,
+) -> Unit = "webapi_Window" "set_onbeforeunload"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onhashchange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onhashchange"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onhashchange_ffi(obj : JsValue) -> EventHandler {
+  window_onhashchange_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onhashchange_ffi(obj : JsValue, onhashchange : JsValue) -> Unit = "webapi_Window" "set_onhashchange"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onlanguagechange_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onlanguagechange"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onlanguagechange_ffi(obj : JsValue) -> EventHandler {
+  window_onlanguagechange_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onlanguagechange_ffi(
+  obj : JsValue,
+  onlanguagechange : JsValue,
+) -> Unit = "webapi_Window" "set_onlanguagechange"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onmessage_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onmessage"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onmessage_ffi(obj : JsValue) -> EventHandler {
+  window_onmessage_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onmessage_ffi(obj : JsValue, onmessage : JsValue) -> Unit = "webapi_Window" "set_onmessage"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onmessageerror_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onmessageerror"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onmessageerror_ffi(obj : JsValue) -> EventHandler {
+  window_onmessageerror_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onmessageerror_ffi(
+  obj : JsValue,
+  onmessageerror : JsValue,
+) -> Unit = "webapi_Window" "set_onmessageerror"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onoffline_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onoffline"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onoffline_ffi(obj : JsValue) -> EventHandler {
+  window_onoffline_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onoffline_ffi(obj : JsValue, onoffline : JsValue) -> Unit = "webapi_Window" "set_onoffline"
+
+///|
+#cfg(target="wasm-gc")
+fn window_ononline_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_ononline"
+
+///|
+#cfg(target="wasm-gc")
+fn window_ononline_ffi(obj : JsValue) -> EventHandler {
+  window_ononline_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_ononline_ffi(obj : JsValue, ononline : JsValue) -> Unit = "webapi_Window" "set_ononline"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onpagehide_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onpagehide"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onpagehide_ffi(obj : JsValue) -> EventHandler {
+  window_onpagehide_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onpagehide_ffi(obj : JsValue, onpagehide : JsValue) -> Unit = "webapi_Window" "set_onpagehide"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onpagereveal_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onpagereveal"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onpagereveal_ffi(obj : JsValue) -> EventHandler {
+  window_onpagereveal_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onpagereveal_ffi(obj : JsValue, onpagereveal : JsValue) -> Unit = "webapi_Window" "set_onpagereveal"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onpageshow_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onpageshow"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onpageshow_ffi(obj : JsValue) -> EventHandler {
+  window_onpageshow_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onpageshow_ffi(obj : JsValue, onpageshow : JsValue) -> Unit = "webapi_Window" "set_onpageshow"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onpageswap_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onpageswap"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onpageswap_ffi(obj : JsValue) -> EventHandler {
+  window_onpageswap_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onpageswap_ffi(obj : JsValue, onpageswap : JsValue) -> Unit = "webapi_Window" "set_onpageswap"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onpopstate_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onpopstate"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onpopstate_ffi(obj : JsValue) -> EventHandler {
+  window_onpopstate_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onpopstate_ffi(obj : JsValue, onpopstate : JsValue) -> Unit = "webapi_Window" "set_onpopstate"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onrejectionhandled_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onrejectionhandled"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onrejectionhandled_ffi(obj : JsValue) -> EventHandler {
+  window_onrejectionhandled_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onrejectionhandled_ffi(
+  obj : JsValue,
+  onrejectionhandled : JsValue,
+) -> Unit = "webapi_Window" "set_onrejectionhandled"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onstorage_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onstorage"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onstorage_ffi(obj : JsValue) -> EventHandler {
+  window_onstorage_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onstorage_ffi(obj : JsValue, onstorage : JsValue) -> Unit = "webapi_Window" "set_onstorage"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onunhandledrejection_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onunhandledrejection"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onunhandledrejection_ffi(obj : JsValue) -> EventHandler {
+  window_onunhandledrejection_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onunhandledrejection_ffi(
+  obj : JsValue,
+  onunhandledrejection : JsValue,
+) -> Unit = "webapi_Window" "set_onunhandledrejection"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onunload_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_onunload"
+
+///|
+#cfg(target="wasm-gc")
+fn window_onunload_ffi(obj : JsValue) -> EventHandler {
+  window_onunload_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_onunload_ffi(obj : JsValue, onunload : JsValue) -> Unit = "webapi_Window" "set_onunload"
+
+///|
+#cfg(target="wasm-gc")
+fn window_origin_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Window" "get_origin"
+
+///|
+#cfg(target="wasm-gc")
+fn window_origin_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(window_origin_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_is_secure_context_ffi(obj : JsValue) -> Bool = "webapi_Window" "get_isSecureContext"
+
+///|
+#cfg(target="wasm-gc")
+fn window_cross_origin_isolated_ffi(obj : JsValue) -> Bool = "webapi_Window" "get_crossOriginIsolated"
+
+///|
+#cfg(target="wasm-gc")
+fn window_report_error_ffi(obj : JsValue, e : JsValue) -> Unit = "webapi_Window" "reportError"
+
+///|
+#cfg(target="wasm-gc")
+fn window_btoa_ffi_wasm(obj : JsValue, data : JsValue) -> JsValue = "webapi_Window" "btoa"
+
+///|
+#cfg(target="wasm-gc")
+fn window_btoa_ffi(obj : JsValue, data : JsValue) -> String {
+  jsvalue_to_string(window_btoa_ffi_wasm(obj, data))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_atob_ffi_wasm(obj : JsValue, data : JsValue) -> JsValue = "webapi_Window" "atob"
+
+///|
+#cfg(target="wasm-gc")
+fn window_atob_ffi(obj : JsValue, data : JsValue) -> String {
+  jsvalue_to_string(window_atob_ffi_wasm(obj, data))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_timeout_ffi(
+  obj : JsValue,
+  handler : JsValue,
+  timeout : JsValue,
+  arguments : JsValue,
+) -> Int = "webapi_Window" "setTimeout"
+
+///|
+#cfg(target="wasm-gc")
+fn window_clear_timeout_ffi(obj : JsValue, id : JsValue) -> Unit = "webapi_Window" "clearTimeout"
+
+///|
+#cfg(target="wasm-gc")
+fn window_set_interval_ffi(
+  obj : JsValue,
+  handler : JsValue,
+  timeout : JsValue,
+  arguments : JsValue,
+) -> Int = "webapi_Window" "setInterval"
+
+///|
+#cfg(target="wasm-gc")
+fn window_clear_interval_ffi(obj : JsValue, id : JsValue) -> Unit = "webapi_Window" "clearInterval"
+
+///|
+#cfg(target="wasm-gc")
+fn window_queue_microtask_ffi(obj : JsValue, callback : JsValue) -> Unit = "webapi_Window" "queueMicrotask"
+
+///|
+#cfg(target="wasm-gc")
+fn window_create_image_bitmap_ffi_wasm(
+  obj : JsValue,
+  image : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Window" "createImageBitmap"
+
+///|
+#cfg(target="wasm-gc")
+fn window_create_image_bitmap_ffi(
+  obj : JsValue,
+  image : JsValue,
+  options : JsValue,
+) -> JsPromise[ImageBitmap] {
+  window_create_image_bitmap_ffi_wasm(obj, image, options).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_create_image_bitmap_cropped_ffi_wasm(
+  obj : JsValue,
+  image : JsValue,
+  sx : JsValue,
+  sy : JsValue,
+  sw : JsValue,
+  sh : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Window" "create_image_bitmap_cropped"
+
+///|
+#cfg(target="wasm-gc")
+fn window_create_image_bitmap_cropped_ffi(
+  obj : JsValue,
+  image : JsValue,
+  sx : JsValue,
+  sy : JsValue,
+  sw : JsValue,
+  sh : JsValue,
+  options : JsValue,
+) -> JsPromise[ImageBitmap] {
+  window_create_image_bitmap_cropped_ffi_wasm(
+    obj, image, sx, sy, sw, sh, options,
+  ).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_structured_clone_ffi(
+  obj : JsValue,
+  value : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_Window" "structuredClone"
+
+///|
+#cfg(target="wasm-gc")
+fn window_fetch_ffi_wasm(
+  obj : JsValue,
+  input : JsValue,
+  init : JsValue,
+) -> JsValue = "webapi_Window" "fetch"
+
+///|
+#cfg(target="wasm-gc")
+fn window_fetch_ffi(
+  obj : JsValue,
+  input : JsValue,
+  init : JsValue,
+) -> JsPromise[Response] {
+  window_fetch_ffi_wasm(obj, input, init).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn window_performance_ffi(obj : JsValue) -> Performance = "webapi_Window" "get_performance"
+
+///|
+#cfg(target="wasm-gc")
+fn window_indexed_db_ffi(obj : JsValue) -> IDBFactory = "webapi_Window" "get_indexedDB"
+
+///|
+#cfg(target="wasm-gc")
+fn window_trusted_types_ffi(obj : JsValue) -> TrustedTypePolicyFactory = "webapi_Window" "get_trustedTypes"
+
+///|
+#cfg(target="wasm-gc")
+fn window_caches_ffi(obj : JsValue) -> CacheStorage = "webapi_Window" "get_caches"
+
+///|
+#cfg(target="wasm-gc")
+fn window_request_animation_frame_ffi(
+  obj : JsValue,
+  callback : JsValue,
+) -> UInt = "webapi_Window" "requestAnimationFrame"
+
+///|
+#cfg(target="wasm-gc")
+fn window_cancel_animation_frame_ffi(obj : JsValue, handle : JsValue) -> Unit = "webapi_Window" "cancelAnimationFrame"
+
+///|
+#cfg(target="wasm-gc")
+fn window_session_storage_ffi(obj : JsValue) -> Storage = "webapi_Window" "get_sessionStorage"
+
+///|
+#cfg(target="wasm-gc")
+fn window_local_storage_ffi(obj : JsValue) -> Storage = "webapi_Window" "get_localStorage"

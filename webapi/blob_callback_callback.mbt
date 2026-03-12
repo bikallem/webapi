@@ -17,3 +17,11 @@ pub impl FromJsAny for BlobCallback with from_js_any(value : JsAny) -> BlobCallb
 pub fn BlobCallback::new(callback : (Blob) -> Unit) -> BlobCallback {
   blob_callback_ffi(callback)
 }
+
+///|
+#cfg(target="js")
+extern "js" fn blob_callback_ffi(callback : (Blob) -> Unit) -> BlobCallback = "(callback) => callback"
+
+///|
+#cfg(target="wasm-gc")
+fn blob_callback_ffi(callback : (Blob) -> Unit) -> BlobCallback = "webapi_BlobCallback" "new"

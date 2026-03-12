@@ -23,3 +23,15 @@ pub fn OnBeforeUnloadEventHandlerNonNull::new(
 ) -> OnBeforeUnloadEventHandlerNonNull {
   on_before_unload_event_handler_non_null_ffi(callback)
 }
+
+///|
+#cfg(target="js")
+extern "js" fn on_before_unload_event_handler_non_null_ffi(
+  callback : (Event) -> String,
+) -> OnBeforeUnloadEventHandlerNonNull = "(callback) => callback"
+
+///|
+#cfg(target="wasm-gc")
+fn on_before_unload_event_handler_non_null_ffi(
+  callback : (Event) -> String,
+) -> OnBeforeUnloadEventHandlerNonNull = "webapi_OnBeforeUnloadEventHandlerNonNull" "new"

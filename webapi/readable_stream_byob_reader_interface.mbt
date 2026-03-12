@@ -79,3 +79,115 @@ impl TReadableStreamBYOBReader with cancel(self : Self, reason? : JsValue) -> Js
     opt_to_js(reason),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn readable_stream_byob_reader_new_ffi(
+  stream : JsValue,
+) -> ReadableStreamBYOBReader = "(stream) => new ReadableStreamBYOBReader(stream)"
+
+///|
+#cfg(target="js")
+extern "js" fn readable_stream_byob_reader_read_ffi_js(
+  obj : JsValue,
+  view : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, view, options) => obj.read(view, options)"
+
+///|
+#cfg(target="js")
+fn readable_stream_byob_reader_read_ffi(
+  obj : JsValue,
+  view : JsValue,
+  options : JsValue,
+) -> JsPromise[ReadableStreamReadResult] {
+  readable_stream_byob_reader_read_ffi_js(obj, view, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn readable_stream_byob_reader_release_lock_ffi(
+  obj : JsValue,
+) -> Unit = "(obj) => obj.releaseLock()"
+
+///|
+#cfg(target="js")
+extern "js" fn readable_stream_byob_reader_closed_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.closed"
+
+///|
+#cfg(target="js")
+fn readable_stream_byob_reader_closed_ffi(obj : JsValue) -> JsPromise[JsValue] {
+  readable_stream_byob_reader_closed_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn readable_stream_byob_reader_cancel_ffi_js(
+  obj : JsValue,
+  reason : JsValue,
+) -> JsValue = "(obj, reason) => obj.cancel(reason)"
+
+///|
+#cfg(target="js")
+fn readable_stream_byob_reader_cancel_ffi(
+  obj : JsValue,
+  reason : JsValue,
+) -> JsPromise[JsValue] {
+  readable_stream_byob_reader_cancel_ffi_js(obj, reason).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn readable_stream_byob_reader_new_ffi(
+  stream : JsValue,
+) -> ReadableStreamBYOBReader = "webapi_ReadableStreamBYOBReader" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn readable_stream_byob_reader_read_ffi_wasm(
+  obj : JsValue,
+  view : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_ReadableStreamBYOBReader" "read"
+
+///|
+#cfg(target="wasm-gc")
+fn readable_stream_byob_reader_read_ffi(
+  obj : JsValue,
+  view : JsValue,
+  options : JsValue,
+) -> JsPromise[ReadableStreamReadResult] {
+  readable_stream_byob_reader_read_ffi_wasm(obj, view, options).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn readable_stream_byob_reader_release_lock_ffi(obj : JsValue) -> Unit = "webapi_ReadableStreamBYOBReader" "releaseLock"
+
+///|
+#cfg(target="wasm-gc")
+fn readable_stream_byob_reader_closed_ffi_wasm(obj : JsValue) -> JsValue = "webapi_ReadableStreamBYOBReader" "get_closed"
+
+///|
+#cfg(target="wasm-gc")
+fn readable_stream_byob_reader_closed_ffi(obj : JsValue) -> JsPromise[JsValue] {
+  readable_stream_byob_reader_closed_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn readable_stream_byob_reader_cancel_ffi_wasm(
+  obj : JsValue,
+  reason : JsValue,
+) -> JsValue = "webapi_ReadableStreamBYOBReader" "cancel"
+
+///|
+#cfg(target="wasm-gc")
+fn readable_stream_byob_reader_cancel_ffi(
+  obj : JsValue,
+  reason : JsValue,
+) -> JsPromise[JsValue] {
+  readable_stream_byob_reader_cancel_ffi_wasm(obj, reason).unsafe_cast()
+}

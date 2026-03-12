@@ -39,3 +39,11 @@ pub fn HTMLSpanElement::new() -> HTMLSpanElement {
 ///|
 /// [HTMLSpanElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSpanElement) interface.
 pub trait THTMLSpanElement: THTMLElement {}
+
+///|
+#cfg(target="js")
+extern "js" fn html_span_element_new_ffi() -> HTMLSpanElement = "() => new HTMLSpanElement()"
+
+///|
+#cfg(target="wasm-gc")
+fn html_span_element_new_ffi() -> HTMLSpanElement = "webapi_HTMLSpanElement" "new"

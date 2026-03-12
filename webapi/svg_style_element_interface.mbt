@@ -101,3 +101,138 @@ impl TSVGStyleElement with set_disabled(self : Self, disabled : Bool) -> Unit {
 impl TSVGStyleElement with sheet(self : Self) -> CSSStyleSheet {
   svg_style_element_sheet_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn svg_style_element_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.type"
+
+///|
+#cfg(target="js")
+fn svg_style_element_type_ffi(obj : JsValue) -> String {
+  svg_style_element_type_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_style_element_set_type_ffi(
+  obj : JsValue,
+  type_ : JsValue,
+) -> Unit = "(obj, type) => { obj.type = type; }"
+
+///|
+#cfg(target="js")
+extern "js" fn svg_style_element_media_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.media"
+
+///|
+#cfg(target="js")
+fn svg_style_element_media_ffi(obj : JsValue) -> String {
+  svg_style_element_media_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_style_element_set_media_ffi(
+  obj : JsValue,
+  media : JsValue,
+) -> Unit = "(obj, media) => { obj.media = media; }"
+
+///|
+#cfg(target="js")
+extern "js" fn svg_style_element_title_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.title"
+
+///|
+#cfg(target="js")
+fn svg_style_element_title_ffi(obj : JsValue) -> String {
+  svg_style_element_title_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_style_element_set_title_ffi(
+  obj : JsValue,
+  title : JsValue,
+) -> Unit = "(obj, title) => { obj.title = title; }"
+
+///|
+#cfg(target="js")
+extern "js" fn svg_style_element_disabled_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.disabled"
+
+///|
+#cfg(target="js")
+fn svg_style_element_disabled_ffi(obj : JsValue) -> Bool {
+  svg_style_element_disabled_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn svg_style_element_set_disabled_ffi(
+  obj : JsValue,
+  disabled : JsValue,
+) -> Unit = "(obj, disabled) => { obj.disabled = disabled; }"
+
+///|
+#cfg(target="js")
+extern "js" fn svg_style_element_sheet_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.sheet"
+
+///|
+#cfg(target="js")
+fn svg_style_element_sheet_ffi(obj : JsValue) -> CSSStyleSheet {
+  svg_style_element_sheet_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svg_style_element_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGStyleElement" "get_type"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_style_element_type_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(svg_style_element_type_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svg_style_element_set_type_ffi(obj : JsValue, type_ : JsValue) -> Unit = "webapi_SVGStyleElement" "set_type"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_style_element_media_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGStyleElement" "get_media"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_style_element_media_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(svg_style_element_media_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svg_style_element_set_media_ffi(obj : JsValue, media : JsValue) -> Unit = "webapi_SVGStyleElement" "set_media"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_style_element_title_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGStyleElement" "get_title"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_style_element_title_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(svg_style_element_title_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn svg_style_element_set_title_ffi(obj : JsValue, title : JsValue) -> Unit = "webapi_SVGStyleElement" "set_title"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_style_element_disabled_ffi(obj : JsValue) -> Bool = "webapi_SVGStyleElement" "get_disabled"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_style_element_set_disabled_ffi(
+  obj : JsValue,
+  disabled : JsValue,
+) -> Unit = "webapi_SVGStyleElement" "set_disabled"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_style_element_sheet_ffi(obj : JsValue) -> CSSStyleSheet = "webapi_SVGStyleElement" "get_sheet"

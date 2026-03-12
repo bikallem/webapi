@@ -1,4 +1,0 @@
-///|
-fn queuing_strategy_size_ffi(
-  callback : (JsValue) -> Double,
-) -> QueuingStrategySize = "webapi_QueuingStrategySize" "new"

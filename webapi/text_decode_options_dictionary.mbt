@@ -27,3 +27,32 @@ pub fn TextDecodeOptions::empty() -> TextDecodeOptions {
 pub fn TextDecodeOptions::stream(self : TextDecodeOptions) -> Bool? {
   text_decode_options_get_stream_ffi(TJsValue::to_js(self)).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn text_decode_options_ffi(stream : JsValue) -> TextDecodeOptions =
+  #|(stream) => {
+  #|  const obj = {};
+  #|  if (stream !== undefined) obj.stream = stream;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn text_decode_options_empty_ffi() -> TextDecodeOptions = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn text_decode_options_get_stream_ffi(obj : JsValue) -> JsValue = "(obj) => obj.stream"
+
+///|
+#cfg(target="wasm-gc")
+fn text_decode_options_ffi(stream : JsValue) -> TextDecodeOptions = "webapi_TextDecodeOptions" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn text_decode_options_empty_ffi() -> TextDecodeOptions = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn text_decode_options_get_stream_ffi(obj : JsValue) -> JsValue = "webapi_TextDecodeOptions" "get_stream"

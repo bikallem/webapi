@@ -83,3 +83,149 @@ impl TCacheStorage with delete(self : Self, cache_name : String) -> JsPromise[
 impl TCacheStorage with keys(self : Self) -> JsPromise[Array[String]] {
   cache_storage_keys_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn cache_storage_match_ffi_js(
+  obj : JsValue,
+  request : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, request, options) => obj.match(request, options)"
+
+///|
+#cfg(target="js")
+fn cache_storage_match_ffi(
+  obj : JsValue,
+  request : JsValue,
+  options : JsValue,
+) -> JsPromise[&TCacheStorageMatch] {
+  cache_storage_match_ffi_js(obj, request, options).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn cache_storage_has_ffi_js(
+  obj : JsValue,
+  cache_name : JsValue,
+) -> JsValue = "(obj, cache_name) => obj.has(cache_name)"
+
+///|
+#cfg(target="js")
+fn cache_storage_has_ffi(
+  obj : JsValue,
+  cache_name : JsValue,
+) -> JsPromise[Bool] {
+  cache_storage_has_ffi_js(obj, cache_name).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn cache_storage_open_ffi_js(
+  obj : JsValue,
+  cache_name : JsValue,
+) -> JsValue = "(obj, cache_name) => obj.open(cache_name)"
+
+///|
+#cfg(target="js")
+fn cache_storage_open_ffi(
+  obj : JsValue,
+  cache_name : JsValue,
+) -> JsPromise[Cache] {
+  cache_storage_open_ffi_js(obj, cache_name).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn cache_storage_delete_ffi_js(
+  obj : JsValue,
+  cache_name : JsValue,
+) -> JsValue = "(obj, cache_name) => obj.delete(cache_name)"
+
+///|
+#cfg(target="js")
+fn cache_storage_delete_ffi(
+  obj : JsValue,
+  cache_name : JsValue,
+) -> JsPromise[Bool] {
+  cache_storage_delete_ffi_js(obj, cache_name).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn cache_storage_keys_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.keys()"
+
+///|
+#cfg(target="js")
+fn cache_storage_keys_ffi(obj : JsValue) -> JsPromise[Array[String]] {
+  cache_storage_keys_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn cache_storage_match_ffi_wasm(
+  obj : JsValue,
+  request : JsValue,
+  options : JsValue,
+) -> JsValue = "webapi_CacheStorage" "match"
+
+///|
+#cfg(target="wasm-gc")
+fn cache_storage_match_ffi(
+  obj : JsValue,
+  request : JsValue,
+  options : JsValue,
+) -> JsPromise[&TCacheStorageMatch] {
+  cache_storage_match_ffi_wasm(obj, request, options).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn cache_storage_has_ffi_wasm(obj : JsValue, cache_name : JsValue) -> JsValue = "webapi_CacheStorage" "has"
+
+///|
+#cfg(target="wasm-gc")
+fn cache_storage_has_ffi(
+  obj : JsValue,
+  cache_name : JsValue,
+) -> JsPromise[Bool] {
+  cache_storage_has_ffi_wasm(obj, cache_name).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn cache_storage_open_ffi_wasm(obj : JsValue, cache_name : JsValue) -> JsValue = "webapi_CacheStorage" "open"
+
+///|
+#cfg(target="wasm-gc")
+fn cache_storage_open_ffi(
+  obj : JsValue,
+  cache_name : JsValue,
+) -> JsPromise[Cache] {
+  cache_storage_open_ffi_wasm(obj, cache_name).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn cache_storage_delete_ffi_wasm(
+  obj : JsValue,
+  cache_name : JsValue,
+) -> JsValue = "webapi_CacheStorage" "delete"
+
+///|
+#cfg(target="wasm-gc")
+fn cache_storage_delete_ffi(
+  obj : JsValue,
+  cache_name : JsValue,
+) -> JsPromise[Bool] {
+  cache_storage_delete_ffi_wasm(obj, cache_name).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn cache_storage_keys_ffi_wasm(obj : JsValue) -> JsValue = "webapi_CacheStorage" "keys"
+
+///|
+#cfg(target="wasm-gc")
+fn cache_storage_keys_ffi(obj : JsValue) -> JsPromise[Array[String]] {
+  cache_storage_keys_ffi_wasm(obj).unsafe_cast()
+}

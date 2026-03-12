@@ -90,3 +90,148 @@ impl TBlob with array_buffer(self : Self) -> JsPromise[ArrayBuffer] {
 impl TBlob with bytes(self : Self) -> JsPromise[Uint8Array] {
   blob_bytes_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn blob_new_ffi(blob_parts : JsValue, options : JsValue) -> Blob = "(blob_parts, options) => new Blob(blob_parts, options)"
+
+///|
+#cfg(target="js")
+extern "js" fn blob_size_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.size"
+
+///|
+#cfg(target="js")
+fn blob_size_ffi(obj : JsValue) -> UInt64 {
+  blob_size_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn blob_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.type"
+
+///|
+#cfg(target="js")
+fn blob_type_ffi(obj : JsValue) -> String {
+  blob_type_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn blob_slice_ffi_js(
+  obj : JsValue,
+  start : JsValue,
+  end : JsValue,
+  content_type : JsValue,
+) -> JsValue = "(obj, start, end, content_type) => obj.slice(start, end, content_type)"
+
+///|
+#cfg(target="js")
+fn blob_slice_ffi(
+  obj : JsValue,
+  start : JsValue,
+  end : JsValue,
+  content_type : JsValue,
+) -> Blob {
+  blob_slice_ffi_js(obj, start, end, content_type).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn blob_stream_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.stream()"
+
+///|
+#cfg(target="js")
+fn blob_stream_ffi(obj : JsValue) -> ReadableStream {
+  blob_stream_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn blob_text_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.text()"
+
+///|
+#cfg(target="js")
+fn blob_text_ffi(obj : JsValue) -> JsPromise[String] {
+  blob_text_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn blob_array_buffer_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.arrayBuffer()"
+
+///|
+#cfg(target="js")
+fn blob_array_buffer_ffi(obj : JsValue) -> JsPromise[ArrayBuffer] {
+  blob_array_buffer_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn blob_bytes_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.bytes()"
+
+///|
+#cfg(target="js")
+fn blob_bytes_ffi(obj : JsValue) -> JsPromise[Uint8Array] {
+  blob_bytes_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn blob_new_ffi(blob_parts : JsValue, options : JsValue) -> Blob = "webapi_Blob" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn blob_size_ffi(obj : JsValue) -> UInt64 = "webapi_Blob" "get_size"
+
+///|
+#cfg(target="wasm-gc")
+fn blob_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Blob" "get_type"
+
+///|
+#cfg(target="wasm-gc")
+fn blob_type_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(blob_type_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn blob_slice_ffi(
+  obj : JsValue,
+  start : JsValue,
+  end : JsValue,
+  content_type : JsValue,
+) -> Blob = "webapi_Blob" "slice"
+
+///|
+#cfg(target="wasm-gc")
+fn blob_stream_ffi(obj : JsValue) -> ReadableStream = "webapi_Blob" "stream"
+
+///|
+#cfg(target="wasm-gc")
+fn blob_text_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Blob" "text"
+
+///|
+#cfg(target="wasm-gc")
+fn blob_text_ffi(obj : JsValue) -> JsPromise[String] {
+  blob_text_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn blob_array_buffer_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Blob" "arrayBuffer"
+
+///|
+#cfg(target="wasm-gc")
+fn blob_array_buffer_ffi(obj : JsValue) -> JsPromise[ArrayBuffer] {
+  blob_array_buffer_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn blob_bytes_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Blob" "bytes"
+
+///|
+#cfg(target="wasm-gc")
+fn blob_bytes_ffi(obj : JsValue) -> JsPromise[Uint8Array] {
+  blob_bytes_ffi_wasm(obj).unsafe_cast()
+}

@@ -203,3 +203,477 @@ impl TRequest with json(self : Self) -> JsPromise[JsValue] {
 impl TRequest with text(self : Self) -> JsPromise[String] {
   request_text_ffi(TJsValue::to_js(self))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn request_new_ffi(input : JsValue, init : JsValue) -> Request = "(input, init) => new Request(input, init)"
+
+///|
+#cfg(target="js")
+extern "js" fn request_method_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.method"
+
+///|
+#cfg(target="js")
+fn request_method_ffi(obj : JsValue) -> String {
+  request_method_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn request_url_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.url"
+
+///|
+#cfg(target="js")
+fn request_url_ffi(obj : JsValue) -> String {
+  request_url_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn request_headers_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.headers"
+
+///|
+#cfg(target="js")
+fn request_headers_ffi(obj : JsValue) -> Headers {
+  request_headers_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn request_destination_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.destination"
+
+///|
+#cfg(target="js")
+fn request_destination_ffi(obj : JsValue) -> RequestDestination {
+  RequestDestination::from_unchecked(
+    request_destination_ffi_js(obj).unsafe_cast(),
+  )
+}
+
+///|
+#cfg(target="js")
+extern "js" fn request_referrer_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.referrer"
+
+///|
+#cfg(target="js")
+fn request_referrer_ffi(obj : JsValue) -> String {
+  request_referrer_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn request_referrer_policy_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.referrerPolicy"
+
+///|
+#cfg(target="js")
+fn request_referrer_policy_ffi(obj : JsValue) -> ReferrerPolicy {
+  ReferrerPolicy::from_unchecked(
+    request_referrer_policy_ffi_js(obj).unsafe_cast(),
+  )
+}
+
+///|
+#cfg(target="js")
+extern "js" fn request_mode_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.mode"
+
+///|
+#cfg(target="js")
+fn request_mode_ffi(obj : JsValue) -> RequestMode {
+  RequestMode::from_unchecked(request_mode_ffi_js(obj).unsafe_cast())
+}
+
+///|
+#cfg(target="js")
+extern "js" fn request_credentials_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.credentials"
+
+///|
+#cfg(target="js")
+fn request_credentials_ffi(obj : JsValue) -> RequestCredentials {
+  RequestCredentials::from_unchecked(
+    request_credentials_ffi_js(obj).unsafe_cast(),
+  )
+}
+
+///|
+#cfg(target="js")
+extern "js" fn request_cache_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.cache"
+
+///|
+#cfg(target="js")
+fn request_cache_ffi(obj : JsValue) -> RequestCache {
+  RequestCache::from_unchecked(request_cache_ffi_js(obj).unsafe_cast())
+}
+
+///|
+#cfg(target="js")
+extern "js" fn request_redirect_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.redirect"
+
+///|
+#cfg(target="js")
+fn request_redirect_ffi(obj : JsValue) -> RequestRedirect {
+  RequestRedirect::from_unchecked(request_redirect_ffi_js(obj).unsafe_cast())
+}
+
+///|
+#cfg(target="js")
+extern "js" fn request_integrity_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.integrity"
+
+///|
+#cfg(target="js")
+fn request_integrity_ffi(obj : JsValue) -> String {
+  request_integrity_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn request_keepalive_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.keepalive"
+
+///|
+#cfg(target="js")
+fn request_keepalive_ffi(obj : JsValue) -> Bool {
+  request_keepalive_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn request_is_reload_navigation_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.isReloadNavigation"
+
+///|
+#cfg(target="js")
+fn request_is_reload_navigation_ffi(obj : JsValue) -> Bool {
+  request_is_reload_navigation_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn request_is_history_navigation_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.isHistoryNavigation"
+
+///|
+#cfg(target="js")
+fn request_is_history_navigation_ffi(obj : JsValue) -> Bool {
+  request_is_history_navigation_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn request_signal_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.signal"
+
+///|
+#cfg(target="js")
+fn request_signal_ffi(obj : JsValue) -> AbortSignal {
+  request_signal_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn request_duplex_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.duplex"
+
+///|
+#cfg(target="js")
+fn request_duplex_ffi(obj : JsValue) -> RequestDuplex {
+  RequestDuplex::from_unchecked(request_duplex_ffi_js(obj).unsafe_cast())
+}
+
+///|
+#cfg(target="js")
+extern "js" fn request_clone_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.clone()"
+
+///|
+#cfg(target="js")
+fn request_clone_ffi(obj : JsValue) -> Request {
+  request_clone_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn request_body_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.body"
+
+///|
+#cfg(target="js")
+fn request_body_ffi(obj : JsValue) -> ReadableStream {
+  request_body_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn request_body_used_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.bodyUsed"
+
+///|
+#cfg(target="js")
+fn request_body_used_ffi(obj : JsValue) -> Bool {
+  request_body_used_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn request_array_buffer_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.arrayBuffer()"
+
+///|
+#cfg(target="js")
+fn request_array_buffer_ffi(obj : JsValue) -> JsPromise[ArrayBuffer] {
+  request_array_buffer_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn request_blob_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.blob()"
+
+///|
+#cfg(target="js")
+fn request_blob_ffi(obj : JsValue) -> JsPromise[Blob] {
+  request_blob_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn request_bytes_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.bytes()"
+
+///|
+#cfg(target="js")
+fn request_bytes_ffi(obj : JsValue) -> JsPromise[Uint8Array] {
+  request_bytes_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn request_form_data_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.formData()"
+
+///|
+#cfg(target="js")
+fn request_form_data_ffi(obj : JsValue) -> JsPromise[FormData] {
+  request_form_data_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn request_json_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.json()"
+
+///|
+#cfg(target="js")
+fn request_json_ffi(obj : JsValue) -> JsPromise[JsValue] {
+  request_json_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn request_text_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.text()"
+
+///|
+#cfg(target="js")
+fn request_text_ffi(obj : JsValue) -> JsPromise[String] {
+  request_text_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn request_new_ffi(input : JsValue, init : JsValue) -> Request = "webapi_Request" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn request_method_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Request" "get_method"
+
+///|
+#cfg(target="wasm-gc")
+fn request_method_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(request_method_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn request_url_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Request" "get_url"
+
+///|
+#cfg(target="wasm-gc")
+fn request_url_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(request_url_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn request_headers_ffi(obj : JsValue) -> Headers = "webapi_Request" "get_headers"
+
+///|
+#cfg(target="wasm-gc")
+fn request_destination_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Request" "get_destination"
+
+///|
+#cfg(target="wasm-gc")
+fn request_destination_ffi(obj : JsValue) -> RequestDestination {
+  RequestDestination::from_unchecked(
+    jsvalue_to_string(request_destination_ffi_wasm(obj)),
+  )
+}
+
+///|
+#cfg(target="wasm-gc")
+fn request_referrer_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Request" "get_referrer"
+
+///|
+#cfg(target="wasm-gc")
+fn request_referrer_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(request_referrer_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn request_referrer_policy_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Request" "get_referrerPolicy"
+
+///|
+#cfg(target="wasm-gc")
+fn request_referrer_policy_ffi(obj : JsValue) -> ReferrerPolicy {
+  ReferrerPolicy::from_unchecked(
+    jsvalue_to_string(request_referrer_policy_ffi_wasm(obj)),
+  )
+}
+
+///|
+#cfg(target="wasm-gc")
+fn request_mode_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Request" "get_mode"
+
+///|
+#cfg(target="wasm-gc")
+fn request_mode_ffi(obj : JsValue) -> RequestMode {
+  RequestMode::from_unchecked(jsvalue_to_string(request_mode_ffi_wasm(obj)))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn request_credentials_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Request" "get_credentials"
+
+///|
+#cfg(target="wasm-gc")
+fn request_credentials_ffi(obj : JsValue) -> RequestCredentials {
+  RequestCredentials::from_unchecked(
+    jsvalue_to_string(request_credentials_ffi_wasm(obj)),
+  )
+}
+
+///|
+#cfg(target="wasm-gc")
+fn request_cache_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Request" "get_cache"
+
+///|
+#cfg(target="wasm-gc")
+fn request_cache_ffi(obj : JsValue) -> RequestCache {
+  RequestCache::from_unchecked(jsvalue_to_string(request_cache_ffi_wasm(obj)))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn request_redirect_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Request" "get_redirect"
+
+///|
+#cfg(target="wasm-gc")
+fn request_redirect_ffi(obj : JsValue) -> RequestRedirect {
+  RequestRedirect::from_unchecked(
+    jsvalue_to_string(request_redirect_ffi_wasm(obj)),
+  )
+}
+
+///|
+#cfg(target="wasm-gc")
+fn request_integrity_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Request" "get_integrity"
+
+///|
+#cfg(target="wasm-gc")
+fn request_integrity_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(request_integrity_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn request_keepalive_ffi(obj : JsValue) -> Bool = "webapi_Request" "get_keepalive"
+
+///|
+#cfg(target="wasm-gc")
+fn request_is_reload_navigation_ffi(obj : JsValue) -> Bool = "webapi_Request" "get_isReloadNavigation"
+
+///|
+#cfg(target="wasm-gc")
+fn request_is_history_navigation_ffi(obj : JsValue) -> Bool = "webapi_Request" "get_isHistoryNavigation"
+
+///|
+#cfg(target="wasm-gc")
+fn request_signal_ffi(obj : JsValue) -> AbortSignal = "webapi_Request" "get_signal"
+
+///|
+#cfg(target="wasm-gc")
+fn request_duplex_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Request" "get_duplex"
+
+///|
+#cfg(target="wasm-gc")
+fn request_duplex_ffi(obj : JsValue) -> RequestDuplex {
+  RequestDuplex::from_unchecked(jsvalue_to_string(request_duplex_ffi_wasm(obj)))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn request_clone_ffi(obj : JsValue) -> Request = "webapi_Request" "clone"
+
+///|
+#cfg(target="wasm-gc")
+fn request_body_ffi(obj : JsValue) -> ReadableStream = "webapi_Request" "get_body"
+
+///|
+#cfg(target="wasm-gc")
+fn request_body_used_ffi(obj : JsValue) -> Bool = "webapi_Request" "get_bodyUsed"
+
+///|
+#cfg(target="wasm-gc")
+fn request_array_buffer_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Request" "arrayBuffer"
+
+///|
+#cfg(target="wasm-gc")
+fn request_array_buffer_ffi(obj : JsValue) -> JsPromise[ArrayBuffer] {
+  request_array_buffer_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn request_blob_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Request" "blob"
+
+///|
+#cfg(target="wasm-gc")
+fn request_blob_ffi(obj : JsValue) -> JsPromise[Blob] {
+  request_blob_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn request_bytes_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Request" "bytes"
+
+///|
+#cfg(target="wasm-gc")
+fn request_bytes_ffi(obj : JsValue) -> JsPromise[Uint8Array] {
+  request_bytes_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn request_form_data_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Request" "formData"
+
+///|
+#cfg(target="wasm-gc")
+fn request_form_data_ffi(obj : JsValue) -> JsPromise[FormData] {
+  request_form_data_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn request_json_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Request" "json"
+
+///|
+#cfg(target="wasm-gc")
+fn request_json_ffi(obj : JsValue) -> JsPromise[JsValue] {
+  request_json_ffi_wasm(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="wasm-gc")
+fn request_text_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Request" "text"
+
+///|
+#cfg(target="wasm-gc")
+fn request_text_ffi(obj : JsValue) -> JsPromise[String] {
+  request_text_ffi_wasm(obj).unsafe_cast()
+}

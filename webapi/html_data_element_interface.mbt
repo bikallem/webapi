@@ -54,3 +54,42 @@ impl THTMLDataElement with value(self : Self) -> String {
 impl THTMLDataElement with set_value(self : Self, value : String) -> Unit {
   html_data_element_set_value_ffi(TJsValue::to_js(self), TJsValue::to_js(value))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_data_element_new_ffi() -> HTMLDataElement = "() => new HTMLDataElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_data_element_value_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.value"
+
+///|
+#cfg(target="js")
+fn html_data_element_value_ffi(obj : JsValue) -> String {
+  html_data_element_value_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_data_element_set_value_ffi(
+  obj : JsValue,
+  value : JsValue,
+) -> Unit = "(obj, value) => { obj.value = value; }"
+
+///|
+#cfg(target="wasm-gc")
+fn html_data_element_new_ffi() -> HTMLDataElement = "webapi_HTMLDataElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_data_element_value_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLDataElement" "get_value"
+
+///|
+#cfg(target="wasm-gc")
+fn html_data_element_value_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_data_element_value_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_data_element_set_value_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLDataElement" "set_value"

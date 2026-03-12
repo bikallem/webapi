@@ -57,3 +57,45 @@ impl THTMLTimeElement with set_date_time(self : Self, date_time : String) -> Uni
     TJsValue::to_js(date_time),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_time_element_new_ffi() -> HTMLTimeElement = "() => new HTMLTimeElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_time_element_date_time_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.dateTime"
+
+///|
+#cfg(target="js")
+fn html_time_element_date_time_ffi(obj : JsValue) -> String {
+  html_time_element_date_time_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_time_element_set_date_time_ffi(
+  obj : JsValue,
+  date_time : JsValue,
+) -> Unit = "(obj, dateTime) => { obj.dateTime = dateTime; }"
+
+///|
+#cfg(target="wasm-gc")
+fn html_time_element_new_ffi() -> HTMLTimeElement = "webapi_HTMLTimeElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_time_element_date_time_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLTimeElement" "get_dateTime"
+
+///|
+#cfg(target="wasm-gc")
+fn html_time_element_date_time_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_time_element_date_time_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_time_element_set_date_time_ffi(
+  obj : JsValue,
+  date_time : JsValue,
+) -> Unit = "webapi_HTMLTimeElement" "set_dateTime"

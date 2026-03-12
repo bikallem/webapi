@@ -45,3 +45,60 @@ pub fn FilePropertyBag::endings(self : FilePropertyBag) -> EndingType? {
 pub fn FilePropertyBag::last_modified(self : FilePropertyBag) -> Int64? {
   file_property_bag_get_last_modified_ffi(TJsValue::to_js(self)).to_option_prim()
 }
+
+///|
+#cfg(target="js")
+extern "js" fn file_property_bag_ffi(
+  type_ : JsValue,
+  endings : JsValue,
+  last_modified : JsValue,
+) -> FilePropertyBag =
+  #|(type, endings, lastModified) => {
+  #|  const obj = {};
+  #|  if (type !== undefined) obj.type = type;
+  #|  if (endings !== undefined) obj.endings = endings;
+  #|  if (lastModified !== undefined) obj.lastModified = lastModified;
+  #|  return obj;
+  #|}
+
+///|
+#cfg(target="js")
+extern "js" fn file_property_bag_empty_ffi() -> FilePropertyBag = "() => {}"
+
+///|
+#cfg(target="js")
+extern "js" fn file_property_bag_get_type_ffi(obj : JsValue) -> JsValue = "(obj) => obj.type"
+
+///|
+#cfg(target="js")
+extern "js" fn file_property_bag_get_endings_ffi(obj : JsValue) -> JsValue = "(obj) => obj.endings"
+
+///|
+#cfg(target="js")
+extern "js" fn file_property_bag_get_last_modified_ffi(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.lastModified"
+
+///|
+#cfg(target="wasm-gc")
+fn file_property_bag_ffi(
+  type_ : JsValue,
+  endings : JsValue,
+  last_modified : JsValue,
+) -> FilePropertyBag = "webapi_FilePropertyBag" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn file_property_bag_empty_ffi() -> FilePropertyBag = "webapi_Dictionary" "empty"
+
+///|
+#cfg(target="wasm-gc")
+fn file_property_bag_get_type_ffi(obj : JsValue) -> JsValue = "webapi_FilePropertyBag" "get_type"
+
+///|
+#cfg(target="wasm-gc")
+fn file_property_bag_get_endings_ffi(obj : JsValue) -> JsValue = "webapi_FilePropertyBag" "get_endings"
+
+///|
+#cfg(target="wasm-gc")
+fn file_property_bag_get_last_modified_ffi(obj : JsValue) -> JsValue = "webapi_FilePropertyBag" "get_lastModified"

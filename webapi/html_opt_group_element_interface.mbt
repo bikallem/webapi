@@ -76,3 +76,70 @@ impl THTMLOptGroupElement with set_label(self : Self, label : String) -> Unit {
     TJsValue::to_js(label),
   )
 }
+
+///|
+#cfg(target="js")
+extern "js" fn html_opt_group_element_new_ffi() -> HTMLOptGroupElement = "() => new HTMLOptGroupElement()"
+
+///|
+#cfg(target="js")
+extern "js" fn html_opt_group_element_disabled_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.disabled"
+
+///|
+#cfg(target="js")
+fn html_opt_group_element_disabled_ffi(obj : JsValue) -> Bool {
+  html_opt_group_element_disabled_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_opt_group_element_set_disabled_ffi(
+  obj : JsValue,
+  disabled : JsValue,
+) -> Unit = "(obj, disabled) => { obj.disabled = disabled; }"
+
+///|
+#cfg(target="js")
+extern "js" fn html_opt_group_element_label_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.label"
+
+///|
+#cfg(target="js")
+fn html_opt_group_element_label_ffi(obj : JsValue) -> String {
+  html_opt_group_element_label_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn html_opt_group_element_set_label_ffi(
+  obj : JsValue,
+  label : JsValue,
+) -> Unit = "(obj, label) => { obj.label = label; }"
+
+///|
+#cfg(target="wasm-gc")
+fn html_opt_group_element_new_ffi() -> HTMLOptGroupElement = "webapi_HTMLOptGroupElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_opt_group_element_disabled_ffi(obj : JsValue) -> Bool = "webapi_HTMLOptGroupElement" "get_disabled"
+
+///|
+#cfg(target="wasm-gc")
+fn html_opt_group_element_set_disabled_ffi(
+  obj : JsValue,
+  disabled : JsValue,
+) -> Unit = "webapi_HTMLOptGroupElement" "set_disabled"
+
+///|
+#cfg(target="wasm-gc")
+fn html_opt_group_element_label_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLOptGroupElement" "get_label"
+
+///|
+#cfg(target="wasm-gc")
+fn html_opt_group_element_label_ffi(obj : JsValue) -> String {
+  jsvalue_to_string(html_opt_group_element_label_ffi_wasm(obj))
+}
+
+///|
+#cfg(target="wasm-gc")
+fn html_opt_group_element_set_label_ffi(obj : JsValue, label : JsValue) -> Unit = "webapi_HTMLOptGroupElement" "set_label"

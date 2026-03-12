@@ -47,3 +47,48 @@ impl TAnimationEffect with update_timing(
 ) -> Unit {
   animation_effect_update_timing_ffi(TJsValue::to_js(self), opt_to_js(timing))
 }
+
+///|
+#cfg(target="js")
+extern "js" fn animation_effect_get_timing_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.getTiming()"
+
+///|
+#cfg(target="js")
+fn animation_effect_get_timing_ffi(obj : JsValue) -> EffectTiming {
+  animation_effect_get_timing_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn animation_effect_get_computed_timing_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.getComputedTiming()"
+
+///|
+#cfg(target="js")
+fn animation_effect_get_computed_timing_ffi(
+  obj : JsValue,
+) -> ComputedEffectTiming {
+  animation_effect_get_computed_timing_ffi_js(obj).unsafe_cast()
+}
+
+///|
+#cfg(target="js")
+extern "js" fn animation_effect_update_timing_ffi(
+  obj : JsValue,
+  timing : JsValue,
+) -> Unit = "(obj, timing) => obj.updateTiming(timing)"
+
+///|
+#cfg(target="wasm-gc")
+fn animation_effect_get_timing_ffi(obj : JsValue) -> EffectTiming = "webapi_AnimationEffect" "getTiming"
+
+///|
+#cfg(target="wasm-gc")
+fn animation_effect_get_computed_timing_ffi(
+  obj : JsValue,
+) -> ComputedEffectTiming = "webapi_AnimationEffect" "getComputedTiming"
+
+///|
+#cfg(target="wasm-gc")
+fn animation_effect_update_timing_ffi(obj : JsValue, timing : JsValue) -> Unit = "webapi_AnimationEffect" "updateTiming"
