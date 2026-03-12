@@ -339,15 +339,13 @@ fn main {
     // Copy base template files (returns target-specific filenames)
     let expected_files : @hashset.HashSet[String] = @hashset.new()
     let (js_files, wasm_files) = copy_templates(
-      templates_dir,
-      output_dir,
-      expected_files,
+      templates_dir, output_dir, expected_files,
     )
 
     // Write skipped log
     if skipped_logs.length() > 0 {
       let content = skipped_logs.join("\n")
-      try write_output_file(output_dir, "skipped.log", content, expected_files) catch {
+      write_output_file(output_dir, "skipped.log", content, expected_files) catch {
         e => println("Warning: failed to write skipped.log: \{e}")
       }
     }

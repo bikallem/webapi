@@ -1,4 +1,19 @@
 ///|
+fn clear_test_dir(path : String) -> Unit raise {
+  if @fs.path_exists(path) {
+    for entry in @fs.read_dir(path) {
+      let entry_path = "\{path}/\{entry}"
+      if @fs.is_file(entry_path) {
+        @fs.remove_file(entry_path)
+      } else if @fs.is_dir(entry_path) {
+        @fs.remove_dir(entry_path)
+      }
+    }
+    @fs.remove_dir(path)
+  }
+}
+
+///|
 test "filter_idl with empty config returns all types" {
   let widl : String =
     #|interface Element {};
@@ -209,4 +224,62 @@ test "filter_idl plus flatten skips dictionaries whose filtered parent is missin
     content="true",
   )
   inspect(logs.join("\n").contains("ElementBase"), content="true")
+}
+
+///|
+test "reconcile_output_dir removes stale generated files and keeps unrelated files" {
+  let output_dir = "./cmd/main/.wbtest_reconcile_output_dir"
+  try clear_test_dir(output_dir) catch {
+    e => fail("failed to clear stale test directory before setup: \{e}")
+  } noraise {
+    _ => ()
+  }
+  @fs.create_dir(output_dir) catch {
+    e => fail("failed to create test output directory: \{e}")
+  }
+
+  let files = [
+    "keep_template.mbt", "keep_js.mbt", "stale_shared.mbt", "webapi.mjs", "moon.pkg",
+    "moon.pkg.json", "skipped.log", "README.md",
+  ]
+  for filename in files {
+    @fs.write_string_to_file("\{output_dir}/\{filename}", filename) catch {
+      e => fail("failed to seed test file \{filename}: \{e}")
+    }
+  }
+
+  let expected_files : @hashset.HashSet[String] = @hashset.from_array([
+    "keep_template.mbt", "keep_js.mbt", "webapi.mjs", "moon.pkg",
+  ])
+
+  try {
+    reconcile_output_dir(output_dir, expected_files)
+    inspect(@fs.path_exists("\{output_dir}/keep_template.mbt"), content="true")
+    inspect(@fs.path_exists("\{output_dir}/keep_js.mbt"), content="true")
+    inspect(@fs.path_exists("\{output_dir}/webapi.mjs"), content="true")
+    inspect(@fs.path_exists("\{output_dir}/moon.pkg"), content="true")
+    inspect(@fs.path_exists("\{output_dir}/stale_shared.mbt"), content="false")
+    inspect(@fs.path_exists("\{output_dir}/moon.pkg.json"), content="false")
+    inspect(@fs.path_exists("\{output_dir}/skipped.log"), content="false")
+    inspect(@fs.path_exists("\{output_dir}/README.md"), content="true")
+  } catch {
+    e => {
+      try clear_test_dir(output_dir) catch {
+        cleanup_error =>
+          fail(
+            "reconcile_output_dir test cleanup failed after error: \{cleanup_error}",
+          )
+      } noraise {
+        _ => ()
+      }
+      fail("reconcile_output_dir raised unexpectedly: \{e}")
+    }
+  } noraise {
+    _ =>
+      try clear_test_dir(output_dir) catch {
+        e => fail("failed to clean up test output directory: \{e}")
+      } noraise {
+        _ => ()
+      }
+  }
 }
