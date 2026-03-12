@@ -1,6 +1,7 @@
 import {
   "bikallem/webapi_gen/parser",
   "bikallem/webapi_gen/partial_merged",
+  "moonbitlang/core/argparse",
   "moonbitlang/x/sys",
   "moonbitlang/x/fs",
   "bikallem/webapi_gen/config",

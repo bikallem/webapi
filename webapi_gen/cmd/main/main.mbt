@@ -3,6 +3,65 @@
 let default_config_file : String = "config.toml"
 
 ///|
+let usage_exit_code : Int = 2
+
+///|
+let failure_exit_code : Int = 1
+
+///|
+priv struct GeneratorCliOptions {
+  config_file : String
+}
+
+///|
+fn build_cli_command() -> @argparse.Command {
+  @argparse.Command(
+    "webapi_gen",
+    about="Generate MoonBit WebAPI bindings from WebIDL.",
+    positionals=[
+      PositionArg(
+        "config",
+        about="Path to the generator TOML config file.",
+        default_values=[default_config_file],
+        num_args=@argparse.ValueRange(lower=0, upper=1),
+      ),
+    ],
+  )
+}
+
+///|
+fn parse_cli_matches(matches : @argparse.Matches) -> GeneratorCliOptions {
+  let config_file = matches.values
+    .get("config")
+    .map(values => values[0])
+    .unwrap_or(default_config_file)
+  { config_file, }
+}
+
+///|
+fn parse_cli(
+  argv : ArrayView[String],
+  env? : Map[String, String] = {},
+) -> GeneratorCliOptions raise {
+  parse_cli_matches(build_cli_command().parse(argv~, env~))
+}
+
+///|
+fn runtime_argv() -> Array[String] {
+  let args = @sys.get_cli_args()
+  if args.length() > 1 {
+    args[1:].to_array()
+  } else {
+    []
+  }
+}
+
+///|
+fn parse_runtime_cli() -> GeneratorCliOptions raise {
+  parse_cli(runtime_argv())
+}
+
+///|
 priv struct GenerationSummary {
   config_file : String
   idl_dir : String
@@ -76,8 +135,9 @@ extern "c" fn runtime_native_exit(code : Int) = "exit"
 
 ///|
 #cfg(any(target="native", target="llvm"))
-fn exit_failure() -> Unit {
-  runtime_native_exit(1)
+fn[T] exit_with(code : Int) -> T {
+  runtime_native_exit(code)
+  panic()
 }
 
 ///|
@@ -93,10 +153,11 @@ extern "js" fn runtime_js_try_exit(code : Int) -> Bool =
 
 ///|
 #cfg(target="js")
-fn exit_failure() -> Unit {
-  if !runtime_js_try_exit(1) {
+fn[T] exit_with(code : Int) -> T {
+  if !runtime_js_try_exit(code) {
     panic()
   }
+  panic()
 }
 
 ///|
@@ -105,8 +166,9 @@ fn runtime_wasm_exit(code : Int) -> Unit = "__moonbit_sys_unstable" "exit"
 
 ///|
 #cfg(any(target="wasm", target="wasm-gc"))
-fn exit_failure() -> Unit {
-  runtime_wasm_exit(1)
+fn[T] exit_with(code : Int) -> T {
+  runtime_wasm_exit(code)
+  panic()
 }
 
 ///|
@@ -320,14 +382,8 @@ fn generate_moon_pkg() -> String {
 }
 
 ///|
-fn main {
-  let args = @sys.get_cli_args()
-  // Parse config file path from optional command-line args
-  let config_file = if args.length() > 1 {
-    args[1]
-  } else {
-    default_config_file
-  }
+fn run_with_options(options : GeneratorCliOptions) -> Unit {
+  let config_file = options.config_file
   try {
     // Read config
     let content = @fs.read_file_to_string(config_file) catch {
@@ -478,7 +534,18 @@ fn main {
   } catch {
     e => {
       println("Error: \{e}")
-      exit_failure()
+      exit_with(failure_exit_code)
     }
   }
+}
+
+///|
+fn main {
+  let options = parse_runtime_cli() catch {
+    err => {
+      println(err.to_string())
+      exit_with(usage_exit_code)
+    }
+  }
+  run_with_options(options)
 }
