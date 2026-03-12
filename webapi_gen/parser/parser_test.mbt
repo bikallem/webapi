@@ -718,6 +718,51 @@ test "position tracks column numbers" {
 }
 
 ///|
+test "string token positions include quotes" {
+  let tokens = @parser.tokenize("\"hi\" interface Foo { };")
+  let (string_tok, string_start, string_end) = tokens[0]
+  guard string_tok is Token::STRING(text) else { fail("expected string token") }
+  assert_eq(text, "hi")
+  assert_eq(string_start.line, 1)
+  assert_eq(string_start.column, 1)
+  assert_eq(string_end.line, 1)
+  assert_eq(string_end.column, 5)
+
+  let (tok, start, _) = tokens[1]
+  guard tok is Token::INTERFACE else { fail("expected interface token") }
+  assert_eq(start.line, 1)
+  assert_eq(start.column, 6)
+}
+
+///|
+test "multiline comment resets column after newline" {
+  let idl =
+    #|  /* first line
+    #|tail */interface Foo { };
+  let tokens = @parser.tokenize(idl)
+  let (tok, start, _) = tokens[0]
+  guard tok is Token::INTERFACE else { fail("expected interface token") }
+  assert_eq(start.line, 2)
+  assert_eq(start.column, 8)
+}
+
+///|
+test "parse error after multiline comment reports correct position" {
+  let idl =
+    #|  /* first line
+    #|tail */interface {
+  try @parser.parse(idl) catch {
+    Parse(UnexpectedToken(_, (start, _), _)) => {
+      assert_eq(start.line, 2)
+      assert_eq(start.column, 18)
+    }
+    _ => fail("expected parse error")
+  } noraise {
+    _ => fail("expected parse failure")
+  }
+}
+
+///|
 test "position file is set" {
   let idl = "interface Foo { };"
   // Note: tokenize doesn't take file parameter in current API
@@ -725,6 +770,27 @@ test "position file is set" {
   let tokens = @parser.tokenize(idl)
   let (_, start, _) = tokens[0]
   assert_eq(start.file, "")
+}
+
+///|
+test "string token positions include quotes" {
+  let tokens = @parser.tokenize("\"foo\";")
+  let (_, start, end) = tokens[0]
+  assert_eq(start.line, 1)
+  assert_eq(start.column, 1)
+  assert_eq(end.line, 1)
+  assert_eq(end.column, 6)
+}
+
+///|
+test "multiline comment resets column after newline" {
+  let idl =
+    #|  /* a
+    #|b */interface Foo { };
+  let tokens = @parser.tokenize(idl)
+  let (_, start, _) = tokens[0]
+  assert_eq(start.line, 2)
+  assert_eq(start.column, 5)
 }
 
 ///|

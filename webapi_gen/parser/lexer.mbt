@@ -101,11 +101,30 @@ pub fn lex(
   let mut column = 1
   let mut remain = input
   let acc : Array[(Token, Position, Position)] = []
+  fn advance_position(lexeme : StringView) -> Position {
+    for i in 0..<lexeme.length() {
+      match lexeme.code_unit_at(i) {
+        '\r' => {
+          if i + 1 < lexeme.length() && lexeme.code_unit_at(i + 1) == '\n' {
+            continue
+          }
+          line += 1
+          column = 1
+        }
+        '\n' => {
+          line += 1
+          column = 1
+        }
+        _ => column += 1
+      }
+    }
+    { file, line, column }
+  }
+
   fn push(token : Token, lexeme : StringView, xs : StringView) {
     let start = { file, line, column }
-    let end = { file, line, column: column + lexeme.length() }
+    let end = advance_position(lexeme)
     acc.push((token, start, end))
-    column += lexeme.length()
     remain = xs
   }
 
@@ -124,27 +143,30 @@ pub fn lex(
         }
         push(tok, s, xs)
       }
-      ("\"" ("[^\"]*" as s) "\"", xs) => push(STRING(s.to_string()), s, xs)
-      ("(\r\n)|\n|\r", xs) => {
-        line += 1
-        column = 1
+      ("\"[^\"]*\"" as s, xs) =>
+        push(
+          STRING(s.view(start_offset=1, end_offset=s.length() - 1).to_string()),
+          s,
+          xs,
+        )
+      ("(\r\n)|\n|\r" as s, xs) => {
+        advance_position(s) |> ignore
         remain = xs
       }
       ("[\t ]+" as s, xs) => {
-        column += s.length()
+        advance_position(s) |> ignore
         remain = xs
       }
-      ("//[^\n]*\n", xs) => { // Single line comment
-        line += 1
-        column = 1
+      ("//[^\n]*\n" as s, xs) => { // Single line comment
+        advance_position(s) |> ignore
         remain = xs
       }
-      ("//[^\n]*$", xs) => // Single line comment at EOF
+      ("//[^\n]*$" as s, xs) => { // Single line comment at EOF
+        advance_position(s) |> ignore
         remain = xs
+      }
       ("/\*([^*]|\*+[^*/])*\*+/" as s, xs) => { // Multi-line comment
-        let strs = s.split("\n").collect()
-        line += strs.length() - 1
-        column += strs.last().unwrap_or("").length()
+        advance_position(s) |> ignore
         remain = xs
       }
       ("\.\.\." as s, xs) => push(ELLIPSIS, s, xs)
