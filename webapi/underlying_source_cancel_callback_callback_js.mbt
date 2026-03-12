@@ -1,1 +1,4 @@
-extern "js" fn underlying_source_cancel_callback_ffi(callback : (JsValue) -> JsPromise[JsValue]) -> UnderlyingSourceCancelCallback = "(callback) => callback"
+///|
+extern "js" fn underlying_source_cancel_callback_ffi(
+  callback : (JsValue) -> JsPromise[JsValue],
+) -> UnderlyingSourceCancelCallback = "(callback) => callback"

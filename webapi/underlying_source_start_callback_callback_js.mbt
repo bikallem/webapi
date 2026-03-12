@@ -1,1 +1,4 @@
-extern "js" fn underlying_source_start_callback_ffi(callback : (ReadableStreamController) -> JsValue) -> UnderlyingSourceStartCallback = "(callback) => callback"
+///|
+extern "js" fn underlying_source_start_callback_ffi(
+  callback : (ReadableStreamController) -> JsValue,
+) -> UnderlyingSourceStartCallback = "(callback) => callback"

@@ -2,6 +2,7 @@
 // MoonBit type: ScrollLogicalPosition
 // Specifications: cssom-view.idl
 
+///|
 pub(all) enum ScrollLogicalPosition {
   Start
   Center
@@ -9,7 +10,11 @@ pub(all) enum ScrollLogicalPosition {
   Nearest
 } derive(Eq)
 
-pub impl Show for ScrollLogicalPosition with output(self : ScrollLogicalPosition, logger : &Logger) -> Unit {
+///|
+pub impl Show for ScrollLogicalPosition with output(
+  self : ScrollLogicalPosition,
+  logger : &Logger,
+) -> Unit {
   match self {
     ScrollLogicalPosition::Start => logger.write_string("Start")
     ScrollLogicalPosition::Center => logger.write_string("Center")
@@ -18,7 +23,10 @@ pub impl Show for ScrollLogicalPosition with output(self : ScrollLogicalPosition
   }
 }
 
-pub impl TJsValue for ScrollLogicalPosition with to_js(self: ScrollLogicalPosition) -> JsValue {
+///|
+pub impl TJsValue for ScrollLogicalPosition with to_js(
+  self : ScrollLogicalPosition,
+) -> JsValue {
   match self {
     ScrollLogicalPosition::Start => TJsValue::to_js("start")
     ScrollLogicalPosition::Center => TJsValue::to_js("center")
@@ -27,7 +35,8 @@ pub impl TJsValue for ScrollLogicalPosition with to_js(self: ScrollLogicalPositi
   }
 }
 
-pub fn ScrollLogicalPosition::from(value: String) -> ScrollLogicalPosition? {
+///|
+pub fn ScrollLogicalPosition::from(value : String) -> ScrollLogicalPosition? {
   match value {
     "start" => Some(ScrollLogicalPosition::Start)
     "center" => Some(ScrollLogicalPosition::Center)
@@ -37,7 +46,10 @@ pub fn ScrollLogicalPosition::from(value: String) -> ScrollLogicalPosition? {
   }
 }
 
-fn ScrollLogicalPosition::from_unchecked(value: String) -> ScrollLogicalPosition {
+///|
+fn ScrollLogicalPosition::from_unchecked(
+  value : String,
+) -> ScrollLogicalPosition {
   match value {
     "start" => ScrollLogicalPosition::Start
     "center" => ScrollLogicalPosition::Center
@@ -47,7 +59,8 @@ fn ScrollLogicalPosition::from_unchecked(value: String) -> ScrollLogicalPosition
   }
 }
 
-pub fn ScrollLogicalPosition::value(self: ScrollLogicalPosition) -> String {
+///|
+pub fn ScrollLogicalPosition::value(self : ScrollLogicalPosition) -> String {
   match self {
     ScrollLogicalPosition::Start => "start"
     ScrollLogicalPosition::Center => "center"
@@ -56,6 +69,7 @@ pub fn ScrollLogicalPosition::value(self: ScrollLogicalPosition) -> String {
   }
 }
 
+///|
 pub impl FromJsAny for ScrollLogicalPosition with from_js_any(value : JsAny) -> ScrollLogicalPosition {
   ScrollLogicalPosition::from_unchecked(value)
 }

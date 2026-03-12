@@ -2,120 +2,210 @@
 // MoonBit type: BasePropertyIndexedKeyframe
 // Specifications: web-animations.idl
 
+///|
 /// [BasePropertyIndexedKeyframe](https://developer.mozilla.org/en-US/docs/Web/API/BasePropertyIndexedKeyframe)
 #external
 pub type BasePropertyIndexedKeyframe
 
-pub impl TJsValue for BasePropertyIndexedKeyframe with to_js(self: BasePropertyIndexedKeyframe) -> JsValue = "%identity"
+///|
+pub impl TJsValue for BasePropertyIndexedKeyframe with to_js(
+  self : BasePropertyIndexedKeyframe,
+) -> JsValue = "%identity"
 
-pub impl FromJsAny for BasePropertyIndexedKeyframe with from_js_any(value : JsAny) -> BasePropertyIndexedKeyframe = "%identity"
+///|
+pub impl FromJsAny for BasePropertyIndexedKeyframe with from_js_any(
+  value : JsAny,
+) -> BasePropertyIndexedKeyframe = "%identity"
 
-pub(open) trait TBasePropertyIndexedKeyframeNewOffset : TJsValue {}
+///|
+pub(open) trait TBasePropertyIndexedKeyframeNewOffset: TJsValue {}
 
+///|
 pub impl TBasePropertyIndexedKeyframeNewOffset for Double
 
+///|
 pub impl TBasePropertyIndexedKeyframeNewOffset for Array[Double]
 
-pub(open) trait TBasePropertyIndexedKeyframeNewEasing : TJsValue {}
+///|
+pub(open) trait TBasePropertyIndexedKeyframeNewEasing: TJsValue {}
 
+///|
 pub impl TBasePropertyIndexedKeyframeNewEasing for String
 
+///|
 pub impl TBasePropertyIndexedKeyframeNewEasing for Array[String]
 
-pub(open) trait TBasePropertyIndexedKeyframeNewComposite : TJsValue {}
+///|
+pub(open) trait TBasePropertyIndexedKeyframeNewComposite: TJsValue {}
 
+///|
 pub impl TBasePropertyIndexedKeyframeNewComposite for CompositeOperationOrAuto
 
-pub impl TBasePropertyIndexedKeyframeNewComposite for Array[CompositeOperationOrAuto]
+///|
+pub impl TBasePropertyIndexedKeyframeNewComposite for Array[
+  CompositeOperationOrAuto,
+]
 
-pub fn BasePropertyIndexedKeyframe::new(offset? : &TBasePropertyIndexedKeyframeNewOffset, 
-easing? : &TBasePropertyIndexedKeyframeNewEasing, 
-composite? : &TBasePropertyIndexedKeyframeNewComposite) -> BasePropertyIndexedKeyframe {
-  base_property_indexed_keyframe_ffi(match offset {
-Some(v) => v.to_js()
-None => JsValue::undefined()
-}, match easing {
-Some(v) => v.to_js()
-None => JsValue::undefined()
-}, match composite {
-Some(v) => v.to_js()
-None => JsValue::undefined()
-})
+///|
+pub fn BasePropertyIndexedKeyframe::new(
+  offset? : &TBasePropertyIndexedKeyframeNewOffset,
+  easing? : &TBasePropertyIndexedKeyframeNewEasing,
+  composite? : &TBasePropertyIndexedKeyframeNewComposite,
+) -> BasePropertyIndexedKeyframe {
+  base_property_indexed_keyframe_ffi(
+    match offset {
+      Some(v) => v.to_js()
+      None => JsValue::undefined()
+    },
+    match easing {
+      Some(v) => v.to_js()
+      None => JsValue::undefined()
+    },
+    match composite {
+      Some(v) => v.to_js()
+      None => JsValue::undefined()
+    },
+  )
 }
 
-pub fn BasePropertyIndexedKeyframe::empty() -> BasePropertyIndexedKeyframe { base_property_indexed_keyframe_empty_ffi() }
+///|
+pub fn BasePropertyIndexedKeyframe::empty() -> BasePropertyIndexedKeyframe {
+  base_property_indexed_keyframe_empty_ffi()
+}
 
-pub(open) trait TBasePropertyIndexedKeyframeGetOffset : TJsValue {}
+///|
+pub(open) trait TBasePropertyIndexedKeyframeGetOffset: TJsValue {}
 
+///|
 pub impl TBasePropertyIndexedKeyframeGetOffset for Double
 
+///|
 pub impl TBasePropertyIndexedKeyframeGetOffset for Array[Double]
 
+///|
 #external
 pub type BasePropertyIndexedKeyframeGetOffset
 
-pub impl TJsValue for BasePropertyIndexedKeyframeGetOffset with to_js(self: BasePropertyIndexedKeyframeGetOffset) -> JsValue = "%identity"
+///|
+pub impl TJsValue for BasePropertyIndexedKeyframeGetOffset with to_js(
+  self : BasePropertyIndexedKeyframeGetOffset,
+) -> JsValue = "%identity"
 
-pub impl FromJsAny for BasePropertyIndexedKeyframeGetOffset with from_js_any(value : JsAny) -> BasePropertyIndexedKeyframeGetOffset = "%identity"
+///|
+pub impl FromJsAny for BasePropertyIndexedKeyframeGetOffset with from_js_any(
+  value : JsAny,
+) -> BasePropertyIndexedKeyframeGetOffset = "%identity"
 
-pub fn[T : TBasePropertyIndexedKeyframeGetOffset + FromJsAny] BasePropertyIndexedKeyframeGetOffset::into(self : BasePropertyIndexedKeyframeGetOffset) -> T {
+///|
+pub fn[T : TBasePropertyIndexedKeyframeGetOffset + FromJsAny] BasePropertyIndexedKeyframeGetOffset::into(
+  self : BasePropertyIndexedKeyframeGetOffset,
+) -> T {
   FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
 }
 
-pub fn[T : TBasePropertyIndexedKeyframeGetOffset] BasePropertyIndexedKeyframeGetOffset::from(value : T) -> BasePropertyIndexedKeyframeGetOffset = "%identity"
+///|
+pub fn[T : TBasePropertyIndexedKeyframeGetOffset] BasePropertyIndexedKeyframeGetOffset::from(
+  value : T,
+) -> BasePropertyIndexedKeyframeGetOffset = "%identity"
 
+///|
 pub impl TBasePropertyIndexedKeyframeGetOffset for BasePropertyIndexedKeyframeGetOffset
 
-pub(open) trait TBasePropertyIndexedKeyframeGetEasing : TJsValue {}
+///|
+pub(open) trait TBasePropertyIndexedKeyframeGetEasing: TJsValue {}
 
+///|
 pub impl TBasePropertyIndexedKeyframeGetEasing for String
 
+///|
 pub impl TBasePropertyIndexedKeyframeGetEasing for Array[String]
 
+///|
 #external
 pub type BasePropertyIndexedKeyframeGetEasing
 
-pub impl TJsValue for BasePropertyIndexedKeyframeGetEasing with to_js(self: BasePropertyIndexedKeyframeGetEasing) -> JsValue = "%identity"
+///|
+pub impl TJsValue for BasePropertyIndexedKeyframeGetEasing with to_js(
+  self : BasePropertyIndexedKeyframeGetEasing,
+) -> JsValue = "%identity"
 
-pub impl FromJsAny for BasePropertyIndexedKeyframeGetEasing with from_js_any(value : JsAny) -> BasePropertyIndexedKeyframeGetEasing = "%identity"
+///|
+pub impl FromJsAny for BasePropertyIndexedKeyframeGetEasing with from_js_any(
+  value : JsAny,
+) -> BasePropertyIndexedKeyframeGetEasing = "%identity"
 
-pub fn[T : TBasePropertyIndexedKeyframeGetEasing + FromJsAny] BasePropertyIndexedKeyframeGetEasing::into(self : BasePropertyIndexedKeyframeGetEasing) -> T {
+///|
+pub fn[T : TBasePropertyIndexedKeyframeGetEasing + FromJsAny] BasePropertyIndexedKeyframeGetEasing::into(
+  self : BasePropertyIndexedKeyframeGetEasing,
+) -> T {
   FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
 }
 
-pub fn[T : TBasePropertyIndexedKeyframeGetEasing] BasePropertyIndexedKeyframeGetEasing::from(value : T) -> BasePropertyIndexedKeyframeGetEasing = "%identity"
+///|
+pub fn[T : TBasePropertyIndexedKeyframeGetEasing] BasePropertyIndexedKeyframeGetEasing::from(
+  value : T,
+) -> BasePropertyIndexedKeyframeGetEasing = "%identity"
 
+///|
 pub impl TBasePropertyIndexedKeyframeGetEasing for BasePropertyIndexedKeyframeGetEasing
 
-pub(open) trait TBasePropertyIndexedKeyframeGetComposite : TJsValue {}
+///|
+pub(open) trait TBasePropertyIndexedKeyframeGetComposite: TJsValue {}
 
+///|
 pub impl TBasePropertyIndexedKeyframeGetComposite for CompositeOperationOrAuto
 
-pub impl TBasePropertyIndexedKeyframeGetComposite for Array[CompositeOperationOrAuto]
+///|
+pub impl TBasePropertyIndexedKeyframeGetComposite for Array[
+  CompositeOperationOrAuto,
+]
 
+///|
 #external
 pub type BasePropertyIndexedKeyframeGetComposite
 
-pub impl TJsValue for BasePropertyIndexedKeyframeGetComposite with to_js(self: BasePropertyIndexedKeyframeGetComposite) -> JsValue = "%identity"
+///|
+pub impl TJsValue for BasePropertyIndexedKeyframeGetComposite with to_js(
+  self : BasePropertyIndexedKeyframeGetComposite,
+) -> JsValue = "%identity"
 
-pub impl FromJsAny for BasePropertyIndexedKeyframeGetComposite with from_js_any(value : JsAny) -> BasePropertyIndexedKeyframeGetComposite = "%identity"
+///|
+pub impl FromJsAny for BasePropertyIndexedKeyframeGetComposite with from_js_any(
+  value : JsAny,
+) -> BasePropertyIndexedKeyframeGetComposite = "%identity"
 
-pub fn[T : TBasePropertyIndexedKeyframeGetComposite + FromJsAny] BasePropertyIndexedKeyframeGetComposite::into(self : BasePropertyIndexedKeyframeGetComposite) -> T {
+///|
+pub fn[T : TBasePropertyIndexedKeyframeGetComposite + FromJsAny] BasePropertyIndexedKeyframeGetComposite::into(
+  self : BasePropertyIndexedKeyframeGetComposite,
+) -> T {
   FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
 }
 
-pub fn[T : TBasePropertyIndexedKeyframeGetComposite] BasePropertyIndexedKeyframeGetComposite::from(value : T) -> BasePropertyIndexedKeyframeGetComposite = "%identity"
+///|
+pub fn[T : TBasePropertyIndexedKeyframeGetComposite] BasePropertyIndexedKeyframeGetComposite::from(
+  value : T,
+) -> BasePropertyIndexedKeyframeGetComposite = "%identity"
 
+///|
 pub impl TBasePropertyIndexedKeyframeGetComposite for BasePropertyIndexedKeyframeGetComposite
 
-pub fn BasePropertyIndexedKeyframe::offset(self : BasePropertyIndexedKeyframe) -> BasePropertyIndexedKeyframeGetOffset? {
+///|
+pub fn BasePropertyIndexedKeyframe::offset(
+  self : BasePropertyIndexedKeyframe,
+) -> BasePropertyIndexedKeyframeGetOffset? {
   base_property_indexed_keyframe_get_offset_ffi(TJsValue::to_js(self)).to_option()
 }
 
-pub fn BasePropertyIndexedKeyframe::easing(self : BasePropertyIndexedKeyframe) -> BasePropertyIndexedKeyframeGetEasing? {
+///|
+pub fn BasePropertyIndexedKeyframe::easing(
+  self : BasePropertyIndexedKeyframe,
+) -> BasePropertyIndexedKeyframeGetEasing? {
   base_property_indexed_keyframe_get_easing_ffi(TJsValue::to_js(self)).to_option()
 }
 
-pub fn BasePropertyIndexedKeyframe::composite(self : BasePropertyIndexedKeyframe) -> BasePropertyIndexedKeyframeGetComposite? {
+///|
+pub fn BasePropertyIndexedKeyframe::composite(
+  self : BasePropertyIndexedKeyframe,
+) -> BasePropertyIndexedKeyframeGetComposite? {
   base_property_indexed_keyframe_get_composite_ffi(TJsValue::to_js(self)).to_option()
 }

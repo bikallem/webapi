@@ -2,6 +2,7 @@
 // MoonBit type: ResizeQuality
 // Specifications: html.idl
 
+///|
 pub(all) enum ResizeQuality {
   Pixelated
   Low
@@ -9,7 +10,11 @@ pub(all) enum ResizeQuality {
   High
 } derive(Eq)
 
-pub impl Show for ResizeQuality with output(self : ResizeQuality, logger : &Logger) -> Unit {
+///|
+pub impl Show for ResizeQuality with output(
+  self : ResizeQuality,
+  logger : &Logger,
+) -> Unit {
   match self {
     ResizeQuality::Pixelated => logger.write_string("Pixelated")
     ResizeQuality::Low => logger.write_string("Low")
@@ -18,7 +23,8 @@ pub impl Show for ResizeQuality with output(self : ResizeQuality, logger : &Logg
   }
 }
 
-pub impl TJsValue for ResizeQuality with to_js(self: ResizeQuality) -> JsValue {
+///|
+pub impl TJsValue for ResizeQuality with to_js(self : ResizeQuality) -> JsValue {
   match self {
     ResizeQuality::Pixelated => TJsValue::to_js("pixelated")
     ResizeQuality::Low => TJsValue::to_js("low")
@@ -27,7 +33,8 @@ pub impl TJsValue for ResizeQuality with to_js(self: ResizeQuality) -> JsValue {
   }
 }
 
-pub fn ResizeQuality::from(value: String) -> ResizeQuality? {
+///|
+pub fn ResizeQuality::from(value : String) -> ResizeQuality? {
   match value {
     "pixelated" => Some(ResizeQuality::Pixelated)
     "low" => Some(ResizeQuality::Low)
@@ -37,7 +44,8 @@ pub fn ResizeQuality::from(value: String) -> ResizeQuality? {
   }
 }
 
-fn ResizeQuality::from_unchecked(value: String) -> ResizeQuality {
+///|
+fn ResizeQuality::from_unchecked(value : String) -> ResizeQuality {
   match value {
     "pixelated" => ResizeQuality::Pixelated
     "low" => ResizeQuality::Low
@@ -47,7 +55,8 @@ fn ResizeQuality::from_unchecked(value: String) -> ResizeQuality {
   }
 }
 
-pub fn ResizeQuality::value(self: ResizeQuality) -> String {
+///|
+pub fn ResizeQuality::value(self : ResizeQuality) -> String {
   match self {
     ResizeQuality::Pixelated => "pixelated"
     ResizeQuality::Low => "low"
@@ -56,6 +65,7 @@ pub fn ResizeQuality::value(self: ResizeQuality) -> String {
   }
 }
 
+///|
 pub impl FromJsAny for ResizeQuality with from_js_any(value : JsAny) -> ResizeQuality {
   ResizeQuality::from_unchecked(value)
 }

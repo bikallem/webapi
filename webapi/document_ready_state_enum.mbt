@@ -2,13 +2,18 @@
 // MoonBit type: DocumentReadyState
 // Specifications: html.idl
 
+///|
 pub(all) enum DocumentReadyState {
   Loading
   Interactive
   Complete
 } derive(Eq)
 
-pub impl Show for DocumentReadyState with output(self : DocumentReadyState, logger : &Logger) -> Unit {
+///|
+pub impl Show for DocumentReadyState with output(
+  self : DocumentReadyState,
+  logger : &Logger,
+) -> Unit {
   match self {
     DocumentReadyState::Loading => logger.write_string("Loading")
     DocumentReadyState::Interactive => logger.write_string("Interactive")
@@ -16,7 +21,8 @@ pub impl Show for DocumentReadyState with output(self : DocumentReadyState, logg
   }
 }
 
-pub impl TJsValue for DocumentReadyState with to_js(self: DocumentReadyState) -> JsValue {
+///|
+pub impl TJsValue for DocumentReadyState with to_js(self : DocumentReadyState) -> JsValue {
   match self {
     DocumentReadyState::Loading => TJsValue::to_js("loading")
     DocumentReadyState::Interactive => TJsValue::to_js("interactive")
@@ -24,7 +30,8 @@ pub impl TJsValue for DocumentReadyState with to_js(self: DocumentReadyState) ->
   }
 }
 
-pub fn DocumentReadyState::from(value: String) -> DocumentReadyState? {
+///|
+pub fn DocumentReadyState::from(value : String) -> DocumentReadyState? {
   match value {
     "loading" => Some(DocumentReadyState::Loading)
     "interactive" => Some(DocumentReadyState::Interactive)
@@ -33,7 +40,8 @@ pub fn DocumentReadyState::from(value: String) -> DocumentReadyState? {
   }
 }
 
-fn DocumentReadyState::from_unchecked(value: String) -> DocumentReadyState {
+///|
+fn DocumentReadyState::from_unchecked(value : String) -> DocumentReadyState {
   match value {
     "loading" => DocumentReadyState::Loading
     "interactive" => DocumentReadyState::Interactive
@@ -42,7 +50,8 @@ fn DocumentReadyState::from_unchecked(value: String) -> DocumentReadyState {
   }
 }
 
-pub fn DocumentReadyState::value(self: DocumentReadyState) -> String {
+///|
+pub fn DocumentReadyState::value(self : DocumentReadyState) -> String {
   match self {
     DocumentReadyState::Loading => "loading"
     DocumentReadyState::Interactive => "interactive"
@@ -50,6 +59,7 @@ pub fn DocumentReadyState::value(self: DocumentReadyState) -> String {
   }
 }
 
+///|
 pub impl FromJsAny for DocumentReadyState with from_js_any(value : JsAny) -> DocumentReadyState {
   DocumentReadyState::from_unchecked(value)
 }

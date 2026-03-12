@@ -2,13 +2,18 @@
 // MoonBit type: FullscreenNavigationUI
 // Specifications: fullscreen.idl
 
+///|
 pub(all) enum FullscreenNavigationUI {
   Auto
   Show
   Hide
 } derive(Eq)
 
-pub impl Show for FullscreenNavigationUI with output(self : FullscreenNavigationUI, logger : &Logger) -> Unit {
+///|
+pub impl Show for FullscreenNavigationUI with output(
+  self : FullscreenNavigationUI,
+  logger : &Logger,
+) -> Unit {
   match self {
     FullscreenNavigationUI::Auto => logger.write_string("Auto")
     FullscreenNavigationUI::Show => logger.write_string("Show")
@@ -16,7 +21,10 @@ pub impl Show for FullscreenNavigationUI with output(self : FullscreenNavigation
   }
 }
 
-pub impl TJsValue for FullscreenNavigationUI with to_js(self: FullscreenNavigationUI) -> JsValue {
+///|
+pub impl TJsValue for FullscreenNavigationUI with to_js(
+  self : FullscreenNavigationUI,
+) -> JsValue {
   match self {
     FullscreenNavigationUI::Auto => TJsValue::to_js("auto")
     FullscreenNavigationUI::Show => TJsValue::to_js("show")
@@ -24,7 +32,8 @@ pub impl TJsValue for FullscreenNavigationUI with to_js(self: FullscreenNavigati
   }
 }
 
-pub fn FullscreenNavigationUI::from(value: String) -> FullscreenNavigationUI? {
+///|
+pub fn FullscreenNavigationUI::from(value : String) -> FullscreenNavigationUI? {
   match value {
     "auto" => Some(FullscreenNavigationUI::Auto)
     "show" => Some(FullscreenNavigationUI::Show)
@@ -33,7 +42,10 @@ pub fn FullscreenNavigationUI::from(value: String) -> FullscreenNavigationUI? {
   }
 }
 
-fn FullscreenNavigationUI::from_unchecked(value: String) -> FullscreenNavigationUI {
+///|
+fn FullscreenNavigationUI::from_unchecked(
+  value : String,
+) -> FullscreenNavigationUI {
   match value {
     "auto" => FullscreenNavigationUI::Auto
     "show" => FullscreenNavigationUI::Show
@@ -42,7 +54,8 @@ fn FullscreenNavigationUI::from_unchecked(value: String) -> FullscreenNavigation
   }
 }
 
-pub fn FullscreenNavigationUI::value(self: FullscreenNavigationUI) -> String {
+///|
+pub fn FullscreenNavigationUI::value(self : FullscreenNavigationUI) -> String {
   match self {
     FullscreenNavigationUI::Auto => "auto"
     FullscreenNavigationUI::Show => "show"
@@ -50,6 +63,7 @@ pub fn FullscreenNavigationUI::value(self: FullscreenNavigationUI) -> String {
   }
 }
 
+///|
 pub impl FromJsAny for FullscreenNavigationUI with from_js_any(value : JsAny) -> FullscreenNavigationUI {
   FullscreenNavigationUI::from_unchecked(value)
 }

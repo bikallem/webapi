@@ -1,1 +1,2 @@
+///|
 extern "js" fn html_span_element_new_ffi() -> HTMLSpanElement = "() => new HTMLSpanElement()"

@@ -1,1 +1,4 @@
-extern "js" fn underlying_sink_abort_callback_ffi(callback : (JsValue) -> JsPromise[JsValue]) -> UnderlyingSinkAbortCallback = "(callback) => callback"
+///|
+extern "js" fn underlying_sink_abort_callback_ffi(
+  callback : (JsValue) -> JsPromise[JsValue],
+) -> UnderlyingSinkAbortCallback = "(callback) => callback"

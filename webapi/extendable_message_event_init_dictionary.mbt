@@ -2,89 +2,157 @@
 // MoonBit type: ExtendableMessageEventInit
 // Specifications: service-workers.idl, dom.idl
 
+///|
 /// [ExtendableMessageEventInit](https://developer.mozilla.org/en-US/docs/Web/API/ExtendableMessageEventInit)
 #external
 pub type ExtendableMessageEventInit
 
-pub impl TJsValue for ExtendableMessageEventInit with to_js(self: ExtendableMessageEventInit) -> JsValue = "%identity"
+///|
+pub impl TJsValue for ExtendableMessageEventInit with to_js(
+  self : ExtendableMessageEventInit,
+) -> JsValue = "%identity"
 
-pub impl FromJsAny for ExtendableMessageEventInit with from_js_any(value : JsAny) -> ExtendableMessageEventInit = "%identity"
+///|
+pub impl FromJsAny for ExtendableMessageEventInit with from_js_any(
+  value : JsAny,
+) -> ExtendableMessageEventInit = "%identity"
 
-pub(open) trait TExtendableMessageEventInitNewSource : TJsValue {}
+///|
+pub(open) trait TExtendableMessageEventInitNewSource: TJsValue {}
 
+///|
 pub impl TExtendableMessageEventInitNewSource for Client
 
+///|
 pub impl TExtendableMessageEventInitNewSource for ServiceWorker
 
+///|
 pub impl TExtendableMessageEventInitNewSource for MessagePort
 
-pub fn ExtendableMessageEventInit::new(bubbles? : Bool, 
-cancelable? : Bool, 
-composed? : Bool, 
-data? : JsValue, 
-origin? : String, 
-last_event_id? : String, 
-source? : &TExtendableMessageEventInitNewSource, 
-ports? : Array[MessagePort]) -> ExtendableMessageEventInit {
-  extendable_message_event_init_ffi(opt_to_js(bubbles), opt_to_js(cancelable), opt_to_js(composed), opt_to_js(data), opt_to_js(origin), opt_to_js(last_event_id), match source {
-Some(v) => v.to_js()
-None => JsValue::undefined()
-}, opt_to_js(ports))
+///|
+pub fn ExtendableMessageEventInit::new(
+  bubbles? : Bool,
+  cancelable? : Bool,
+  composed? : Bool,
+  data? : JsValue,
+  origin? : String,
+  last_event_id? : String,
+  source? : &TExtendableMessageEventInitNewSource,
+  ports? : Array[MessagePort],
+) -> ExtendableMessageEventInit {
+  extendable_message_event_init_ffi(
+    opt_to_js(bubbles),
+    opt_to_js(cancelable),
+    opt_to_js(composed),
+    opt_to_js(data),
+    opt_to_js(origin),
+    opt_to_js(last_event_id),
+    match source {
+      Some(v) => v.to_js()
+      None => JsValue::undefined()
+    },
+    opt_to_js(ports),
+  )
 }
 
-pub fn ExtendableMessageEventInit::empty() -> ExtendableMessageEventInit { extendable_message_event_init_empty_ffi() }
+///|
+pub fn ExtendableMessageEventInit::empty() -> ExtendableMessageEventInit {
+  extendable_message_event_init_empty_ffi()
+}
 
-pub(open) trait TExtendableMessageEventInitGetSource : TJsValue {}
+///|
+pub(open) trait TExtendableMessageEventInitGetSource: TJsValue {}
 
+///|
 pub impl TExtendableMessageEventInitGetSource for Client
 
+///|
 pub impl TExtendableMessageEventInitGetSource for ServiceWorker
 
+///|
 pub impl TExtendableMessageEventInitGetSource for MessagePort
 
+///|
 #external
 pub type ExtendableMessageEventInitGetSource
 
-pub impl TJsValue for ExtendableMessageEventInitGetSource with to_js(self: ExtendableMessageEventInitGetSource) -> JsValue = "%identity"
+///|
+pub impl TJsValue for ExtendableMessageEventInitGetSource with to_js(
+  self : ExtendableMessageEventInitGetSource,
+) -> JsValue = "%identity"
 
-pub impl FromJsAny for ExtendableMessageEventInitGetSource with from_js_any(value : JsAny) -> ExtendableMessageEventInitGetSource = "%identity"
+///|
+pub impl FromJsAny for ExtendableMessageEventInitGetSource with from_js_any(
+  value : JsAny,
+) -> ExtendableMessageEventInitGetSource = "%identity"
 
-pub fn[T : TExtendableMessageEventInitGetSource + FromJsAny] ExtendableMessageEventInitGetSource::into(self : ExtendableMessageEventInitGetSource) -> T {
+///|
+pub fn[T : TExtendableMessageEventInitGetSource + FromJsAny] ExtendableMessageEventInitGetSource::into(
+  self : ExtendableMessageEventInitGetSource,
+) -> T {
   FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
 }
 
-pub fn[T : TExtendableMessageEventInitGetSource] ExtendableMessageEventInitGetSource::from(value : T) -> ExtendableMessageEventInitGetSource = "%identity"
+///|
+pub fn[T : TExtendableMessageEventInitGetSource] ExtendableMessageEventInitGetSource::from(
+  value : T,
+) -> ExtendableMessageEventInitGetSource = "%identity"
 
+///|
 pub impl TExtendableMessageEventInitGetSource for ExtendableMessageEventInitGetSource
 
-pub fn ExtendableMessageEventInit::bubbles(self : ExtendableMessageEventInit) -> Bool? {
+///|
+pub fn ExtendableMessageEventInit::bubbles(
+  self : ExtendableMessageEventInit,
+) -> Bool? {
   extendable_message_event_init_get_bubbles_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
-pub fn ExtendableMessageEventInit::cancelable(self : ExtendableMessageEventInit) -> Bool? {
+///|
+pub fn ExtendableMessageEventInit::cancelable(
+  self : ExtendableMessageEventInit,
+) -> Bool? {
   extendable_message_event_init_get_cancelable_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
-pub fn ExtendableMessageEventInit::composed(self : ExtendableMessageEventInit) -> Bool? {
+///|
+pub fn ExtendableMessageEventInit::composed(
+  self : ExtendableMessageEventInit,
+) -> Bool? {
   extendable_message_event_init_get_composed_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
-pub fn ExtendableMessageEventInit::data(self : ExtendableMessageEventInit) -> JsValue? {
+///|
+pub fn ExtendableMessageEventInit::data(
+  self : ExtendableMessageEventInit,
+) -> JsValue? {
   extendable_message_event_init_get_data_ffi(TJsValue::to_js(self)).to_option()
 }
 
-pub fn ExtendableMessageEventInit::origin(self : ExtendableMessageEventInit) -> String? {
+///|
+pub fn ExtendableMessageEventInit::origin(
+  self : ExtendableMessageEventInit,
+) -> String? {
   extendable_message_event_init_get_origin_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
-pub fn ExtendableMessageEventInit::last_event_id(self : ExtendableMessageEventInit) -> String? {
+///|
+pub fn ExtendableMessageEventInit::last_event_id(
+  self : ExtendableMessageEventInit,
+) -> String? {
   extendable_message_event_init_get_last_event_id_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
-pub fn ExtendableMessageEventInit::source(self : ExtendableMessageEventInit) -> ExtendableMessageEventInitGetSource? {
+///|
+pub fn ExtendableMessageEventInit::source(
+  self : ExtendableMessageEventInit,
+) -> ExtendableMessageEventInitGetSource? {
   extendable_message_event_init_get_source_ffi(TJsValue::to_js(self)).to_option()
 }
 
-pub fn ExtendableMessageEventInit::ports(self : ExtendableMessageEventInit) -> Array[MessagePort]? {
+///|
+pub fn ExtendableMessageEventInit::ports(
+  self : ExtendableMessageEventInit,
+) -> Array[MessagePort]? {
   extendable_message_event_init_get_ports_ffi(TJsValue::to_js(self)).to_option()
 }

@@ -1,1 +1,4 @@
-fn navigation_precommit_handler_ffi(callback : (NavigationPrecommitController) -> JsPromise[JsValue]) -> NavigationPrecommitHandler = "webapi_NavigationPrecommitHandler" "new"
+///|
+fn navigation_precommit_handler_ffi(
+  callback : (NavigationPrecommitController) -> JsPromise[JsValue],
+) -> NavigationPrecommitHandler = "webapi_NavigationPrecommitHandler" "new"

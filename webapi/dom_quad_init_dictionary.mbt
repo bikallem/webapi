@@ -2,35 +2,48 @@
 // MoonBit type: DOMQuadInit
 // Specifications: geometry.idl
 
+///|
 /// [DOMQuadInit](https://developer.mozilla.org/en-US/docs/Web/API/DOMQuadInit)
 #external
 pub type DOMQuadInit
 
-pub impl TJsValue for DOMQuadInit with to_js(self: DOMQuadInit) -> JsValue = "%identity"
+///|
+pub impl TJsValue for DOMQuadInit with to_js(self : DOMQuadInit) -> JsValue = "%identity"
 
+///|
 pub impl FromJsAny for DOMQuadInit with from_js_any(value : JsAny) -> DOMQuadInit = "%identity"
 
-pub fn DOMQuadInit::new(p1? : DOMPointInit, 
-p2? : DOMPointInit, 
-p3? : DOMPointInit, 
-p4? : DOMPointInit) -> DOMQuadInit {
+///|
+pub fn DOMQuadInit::new(
+  p1? : DOMPointInit,
+  p2? : DOMPointInit,
+  p3? : DOMPointInit,
+  p4? : DOMPointInit,
+) -> DOMQuadInit {
   dom_quad_init_ffi(opt_to_js(p1), opt_to_js(p2), opt_to_js(p3), opt_to_js(p4))
 }
 
-pub fn DOMQuadInit::empty() -> DOMQuadInit { dom_quad_init_empty_ffi() }
+///|
+pub fn DOMQuadInit::empty() -> DOMQuadInit {
+  dom_quad_init_empty_ffi()
+}
 
+///|
 pub fn DOMQuadInit::p1(self : DOMQuadInit) -> DOMPointInit? {
   dom_quad_init_get_p1_ffi(TJsValue::to_js(self)).to_option()
 }
 
+///|
 pub fn DOMQuadInit::p2(self : DOMQuadInit) -> DOMPointInit? {
   dom_quad_init_get_p2_ffi(TJsValue::to_js(self)).to_option()
 }
 
+///|
 pub fn DOMQuadInit::p3(self : DOMQuadInit) -> DOMPointInit? {
   dom_quad_init_get_p3_ffi(TJsValue::to_js(self)).to_option()
 }
 
+///|
 pub fn DOMQuadInit::p4(self : DOMQuadInit) -> DOMPointInit? {
   dom_quad_init_get_p4_ffi(TJsValue::to_js(self)).to_option()
 }

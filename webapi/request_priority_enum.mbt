@@ -2,13 +2,18 @@
 // MoonBit type: RequestPriority
 // Specifications: fetch.idl
 
+///|
 pub(all) enum RequestPriority {
   High
   Low
   Auto
 } derive(Eq)
 
-pub impl Show for RequestPriority with output(self : RequestPriority, logger : &Logger) -> Unit {
+///|
+pub impl Show for RequestPriority with output(
+  self : RequestPriority,
+  logger : &Logger,
+) -> Unit {
   match self {
     RequestPriority::High => logger.write_string("High")
     RequestPriority::Low => logger.write_string("Low")
@@ -16,7 +21,8 @@ pub impl Show for RequestPriority with output(self : RequestPriority, logger : &
   }
 }
 
-pub impl TJsValue for RequestPriority with to_js(self: RequestPriority) -> JsValue {
+///|
+pub impl TJsValue for RequestPriority with to_js(self : RequestPriority) -> JsValue {
   match self {
     RequestPriority::High => TJsValue::to_js("high")
     RequestPriority::Low => TJsValue::to_js("low")
@@ -24,7 +30,8 @@ pub impl TJsValue for RequestPriority with to_js(self: RequestPriority) -> JsVal
   }
 }
 
-pub fn RequestPriority::from(value: String) -> RequestPriority? {
+///|
+pub fn RequestPriority::from(value : String) -> RequestPriority? {
   match value {
     "high" => Some(RequestPriority::High)
     "low" => Some(RequestPriority::Low)
@@ -33,7 +40,8 @@ pub fn RequestPriority::from(value: String) -> RequestPriority? {
   }
 }
 
-fn RequestPriority::from_unchecked(value: String) -> RequestPriority {
+///|
+fn RequestPriority::from_unchecked(value : String) -> RequestPriority {
   match value {
     "high" => RequestPriority::High
     "low" => RequestPriority::Low
@@ -42,7 +50,8 @@ fn RequestPriority::from_unchecked(value: String) -> RequestPriority {
   }
 }
 
-pub fn RequestPriority::value(self: RequestPriority) -> String {
+///|
+pub fn RequestPriority::value(self : RequestPriority) -> String {
   match self {
     RequestPriority::High => "high"
     RequestPriority::Low => "low"
@@ -50,6 +59,7 @@ pub fn RequestPriority::value(self: RequestPriority) -> String {
   }
 }
 
+///|
 pub impl FromJsAny for RequestPriority with from_js_any(value : JsAny) -> RequestPriority {
   RequestPriority::from_unchecked(value)
 }

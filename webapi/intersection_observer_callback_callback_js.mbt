@@ -1,1 +1,4 @@
-extern "js" fn intersection_observer_callback_ffi(callback : (Array[IntersectionObserverEntry], IntersectionObserver) -> Unit) -> IntersectionObserverCallback = "(callback) => callback"
+///|
+extern "js" fn intersection_observer_callback_ffi(
+  callback : (Array[IntersectionObserverEntry], IntersectionObserver) -> Unit,
+) -> IntersectionObserverCallback = "(callback) => callback"

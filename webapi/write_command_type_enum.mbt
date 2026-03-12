@@ -2,13 +2,18 @@
 // MoonBit type: WriteCommandType
 // Specifications: fs.idl
 
+///|
 pub(all) enum WriteCommandType {
   Write
   Seek
   Truncate
 } derive(Eq)
 
-pub impl Show for WriteCommandType with output(self : WriteCommandType, logger : &Logger) -> Unit {
+///|
+pub impl Show for WriteCommandType with output(
+  self : WriteCommandType,
+  logger : &Logger,
+) -> Unit {
   match self {
     WriteCommandType::Write => logger.write_string("Write")
     WriteCommandType::Seek => logger.write_string("Seek")
@@ -16,7 +21,8 @@ pub impl Show for WriteCommandType with output(self : WriteCommandType, logger :
   }
 }
 
-pub impl TJsValue for WriteCommandType with to_js(self: WriteCommandType) -> JsValue {
+///|
+pub impl TJsValue for WriteCommandType with to_js(self : WriteCommandType) -> JsValue {
   match self {
     WriteCommandType::Write => TJsValue::to_js("write")
     WriteCommandType::Seek => TJsValue::to_js("seek")
@@ -24,7 +30,8 @@ pub impl TJsValue for WriteCommandType with to_js(self: WriteCommandType) -> JsV
   }
 }
 
-pub fn WriteCommandType::from(value: String) -> WriteCommandType? {
+///|
+pub fn WriteCommandType::from(value : String) -> WriteCommandType? {
   match value {
     "write" => Some(WriteCommandType::Write)
     "seek" => Some(WriteCommandType::Seek)
@@ -33,7 +40,8 @@ pub fn WriteCommandType::from(value: String) -> WriteCommandType? {
   }
 }
 
-fn WriteCommandType::from_unchecked(value: String) -> WriteCommandType {
+///|
+fn WriteCommandType::from_unchecked(value : String) -> WriteCommandType {
   match value {
     "write" => WriteCommandType::Write
     "seek" => WriteCommandType::Seek
@@ -42,7 +50,8 @@ fn WriteCommandType::from_unchecked(value: String) -> WriteCommandType {
   }
 }
 
-pub fn WriteCommandType::value(self: WriteCommandType) -> String {
+///|
+pub fn WriteCommandType::value(self : WriteCommandType) -> String {
   match self {
     WriteCommandType::Write => "write"
     WriteCommandType::Seek => "seek"
@@ -50,6 +59,7 @@ pub fn WriteCommandType::value(self: WriteCommandType) -> String {
   }
 }
 
+///|
 pub impl FromJsAny for WriteCommandType with from_js_any(value : JsAny) -> WriteCommandType {
   WriteCommandType::from_unchecked(value)
 }

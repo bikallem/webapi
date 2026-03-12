@@ -2,44 +2,64 @@
 // MoonBit type: DocumentFragment
 // Specifications: dom.idl
 
+///|
 /// [DocumentFragment](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment)
 #external
 pub type DocumentFragment
 
-pub impl TJsValue for DocumentFragment with to_js(self: DocumentFragment) -> JsValue = "%identity"
+///|
+pub impl TJsValue for DocumentFragment with to_js(self : DocumentFragment) -> JsValue = "%identity"
 
+///|
 pub impl FromJsAny for DocumentFragment with from_js_any(value : JsAny) -> DocumentFragment = "%identity"
 
-pub fn[T: TDocumentFragment] DocumentFragment::into(self : DocumentFragment) -> T = "%identity"
+///|
+pub fn[T : TDocumentFragment] DocumentFragment::into(
+  self : DocumentFragment,
+) -> T = "%identity"
 
+///|
 pub impl TDocumentFragment for DocumentFragment
 
+///|
 pub impl TNode for DocumentFragment
 
+///|
 pub impl TEventTarget for DocumentFragment
 
+///|
 pub fn DocumentFragment::new() -> DocumentFragment {
   document_fragment_new_ffi()
 }
 
-pub(open) trait TDocumentFragmentPrependNodes : TJsValue {}
+///|
+pub(open) trait TDocumentFragmentPrependNodes: TJsValue {}
 
+///|
 pub impl TDocumentFragmentPrependNodes for Node
 
+///|
 pub impl TDocumentFragmentPrependNodes for String
 
-pub(open) trait TDocumentFragmentAppendNodes : TJsValue {}
+///|
+pub(open) trait TDocumentFragmentAppendNodes: TJsValue {}
 
+///|
 pub impl TDocumentFragmentAppendNodes for Node
 
+///|
 pub impl TDocumentFragmentAppendNodes for String
 
-pub(open) trait TDocumentFragmentReplaceChildrenNodes : TJsValue {}
+///|
+pub(open) trait TDocumentFragmentReplaceChildrenNodes: TJsValue {}
 
+///|
 pub impl TDocumentFragmentReplaceChildrenNodes for Node
 
+///|
 pub impl TDocumentFragmentReplaceChildrenNodes for String
 
+///|
 /// [DocumentFragment](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) interface.
 pub trait TDocumentFragment: TNode {
   get_element_by_id_opt(self : Self, element_id : String) -> Element? = _
@@ -49,7 +69,10 @@ pub trait TDocumentFragment: TNode {
   child_element_count(self : Self) -> UInt = _
   prepend(self : Self, nodes : Array[&TDocumentFragmentPrependNodes]) -> Unit = _
   append(self : Self, nodes : Array[&TDocumentFragmentAppendNodes]) -> Unit = _
-  replace_children(self : Self, nodes : Array[&TDocumentFragmentReplaceChildrenNodes]) -> Unit = _
+  replace_children(
+    self : Self,
+    nodes : Array[&TDocumentFragmentReplaceChildrenNodes],
+  ) -> Unit = _
   move_before(self : Self, node : &TNode, child : &TNode) -> Unit = _
   query_selector_opt(self : Self, selectors : String) -> Element? = _
   query_selector_all(self : Self, selectors : String) -> NodeList = _
@@ -57,75 +80,124 @@ pub trait TDocumentFragment: TNode {
   query_selector(self : Self, selectors : String) -> Element = _
 }
 
+///|
 /// [DocumentFragment.getElementById](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment/getElementById)
-impl TDocumentFragment with get_element_by_id_opt(self : Self, 
-element_id : String) -> Element? {
-  document_fragment_get_element_by_id_ffi(TJsValue::to_js(self), TJsValue::to_js(element_id)).to_option()
+impl TDocumentFragment with get_element_by_id_opt(
+  self : Self,
+  element_id : String,
+) -> Element? {
+  document_fragment_get_element_by_id_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(element_id),
+  ).to_option()
 }
 
+///|
 /// [DocumentFragment.children](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment/children)
 impl TDocumentFragment with children(self : Self) -> HTMLCollection {
   document_fragment_children_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [DocumentFragment.firstElementChild](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment/firstElementChild)
 impl TDocumentFragment with first_element_child(self : Self) -> Element {
   document_fragment_first_element_child_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [DocumentFragment.lastElementChild](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment/lastElementChild)
 impl TDocumentFragment with last_element_child(self : Self) -> Element {
   document_fragment_last_element_child_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [DocumentFragment.childElementCount](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment/childElementCount)
 impl TDocumentFragment with child_element_count(self : Self) -> UInt {
   document_fragment_child_element_count_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [DocumentFragment.prepend](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment/prepend)
-impl TDocumentFragment with prepend(self : Self, 
-nodes : Array[&TDocumentFragmentPrependNodes]) -> Unit {
-  document_fragment_prepend_ffi(TJsValue::to_js(self), TJsValue::to_js(nodes.map(fn(v : &TDocumentFragmentPrependNodes) -> JsValue { v.to_js() })))
+impl TDocumentFragment with prepend(
+  self : Self,
+  nodes : Array[&TDocumentFragmentPrependNodes],
+) -> Unit {
+  document_fragment_prepend_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(
+      nodes.map(fn(v : &TDocumentFragmentPrependNodes) -> JsValue { v.to_js() }),
+    ),
+  )
 }
 
+///|
 /// [DocumentFragment.append](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment/append)
-impl TDocumentFragment with append(self : Self, 
-nodes : Array[&TDocumentFragmentAppendNodes]) -> Unit {
-  document_fragment_append_ffi(TJsValue::to_js(self), TJsValue::to_js(nodes.map(fn(v : &TDocumentFragmentAppendNodes) -> JsValue { v.to_js() })))
+impl TDocumentFragment with append(
+  self : Self,
+  nodes : Array[&TDocumentFragmentAppendNodes],
+) -> Unit {
+  document_fragment_append_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(
+      nodes.map(fn(v : &TDocumentFragmentAppendNodes) -> JsValue { v.to_js() }),
+    ),
+  )
 }
 
+///|
 /// [DocumentFragment.replaceChildren](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment/replaceChildren)
-impl TDocumentFragment with replace_children(self : Self, 
-nodes : Array[&TDocumentFragmentReplaceChildrenNodes]) -> Unit {
-  document_fragment_replace_children_ffi(TJsValue::to_js(self), TJsValue::to_js(nodes.map(fn(v : &TDocumentFragmentReplaceChildrenNodes) -> JsValue { v.to_js() })))
+impl TDocumentFragment with replace_children(
+  self : Self,
+  nodes : Array[&TDocumentFragmentReplaceChildrenNodes],
+) -> Unit {
+  document_fragment_replace_children_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(
+      nodes.map(fn(v : &TDocumentFragmentReplaceChildrenNodes) -> JsValue {
+        v.to_js()
+      }),
+    ),
+  )
 }
 
+///|
 /// [DocumentFragment.moveBefore](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment/moveBefore)
-impl TDocumentFragment with move_before(self : Self, 
-node : &TNode, 
-child : &TNode) -> Unit {
-  document_fragment_move_before_ffi(TJsValue::to_js(self), TJsValue::to_js(node), TJsValue::to_js(child))
+impl TDocumentFragment with move_before(
+  self : Self,
+  node : &TNode,
+  child : &TNode,
+) -> Unit {
+  document_fragment_move_before_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(node),
+    TJsValue::to_js(child),
+  )
 }
 
+///|
 /// [DocumentFragment.querySelector](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment/querySelector)
-impl TDocumentFragment with query_selector_opt(self : Self, 
-selectors : String) -> Element? {
-  document_fragment_query_selector_ffi(TJsValue::to_js(self), TJsValue::to_js(selectors)).to_option()
+impl TDocumentFragment with query_selector_opt(self : Self, selectors : String) -> Element? {
+  document_fragment_query_selector_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(selectors),
+  ).to_option()
 }
 
+///|
 /// [DocumentFragment.querySelectorAll](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment/querySelectorAll)
-impl TDocumentFragment with query_selector_all(self : Self, 
-selectors : String) -> NodeList {
-  document_fragment_query_selector_all_ffi(TJsValue::to_js(self), TJsValue::to_js(selectors))
+impl TDocumentFragment with query_selector_all(self : Self, selectors : String) -> NodeList {
+  document_fragment_query_selector_all_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(selectors),
+  )
 }
 
-impl TDocumentFragment with get_element_by_id(self : Self, 
-element_id : String) -> Element {
+///|
+impl TDocumentFragment with get_element_by_id(self : Self, element_id : String) -> Element {
   self.get_element_by_id_opt(element_id).unwrap()
 }
 
-impl TDocumentFragment with query_selector(self : Self, 
-selectors : String) -> Element {
+///|
+impl TDocumentFragment with query_selector(self : Self, selectors : String) -> Element {
   self.query_selector_opt(selectors).unwrap()
 }

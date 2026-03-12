@@ -2,6 +2,7 @@
 // MoonBit type: XMLHttpRequestResponseType
 // Specifications: xhr.idl
 
+///|
 pub(all) enum XMLHttpRequestResponseType {
   Empty
   Arraybuffer
@@ -11,10 +12,15 @@ pub(all) enum XMLHttpRequestResponseType {
   Text
 } derive(Eq)
 
-pub impl Show for XMLHttpRequestResponseType with output(self : XMLHttpRequestResponseType, logger : &Logger) -> Unit {
+///|
+pub impl Show for XMLHttpRequestResponseType with output(
+  self : XMLHttpRequestResponseType,
+  logger : &Logger,
+) -> Unit {
   match self {
     XMLHttpRequestResponseType::Empty => logger.write_string("Empty")
-    XMLHttpRequestResponseType::Arraybuffer => logger.write_string("Arraybuffer")
+    XMLHttpRequestResponseType::Arraybuffer =>
+      logger.write_string("Arraybuffer")
     XMLHttpRequestResponseType::Blob => logger.write_string("Blob")
     XMLHttpRequestResponseType::Document => logger.write_string("Document")
     XMLHttpRequestResponseType::Json => logger.write_string("Json")
@@ -22,7 +28,10 @@ pub impl Show for XMLHttpRequestResponseType with output(self : XMLHttpRequestRe
   }
 }
 
-pub impl TJsValue for XMLHttpRequestResponseType with to_js(self: XMLHttpRequestResponseType) -> JsValue {
+///|
+pub impl TJsValue for XMLHttpRequestResponseType with to_js(
+  self : XMLHttpRequestResponseType,
+) -> JsValue {
   match self {
     XMLHttpRequestResponseType::Empty => TJsValue::to_js("")
     XMLHttpRequestResponseType::Arraybuffer => TJsValue::to_js("arraybuffer")
@@ -33,7 +42,10 @@ pub impl TJsValue for XMLHttpRequestResponseType with to_js(self: XMLHttpRequest
   }
 }
 
-pub fn XMLHttpRequestResponseType::from(value: String) -> XMLHttpRequestResponseType? {
+///|
+pub fn XMLHttpRequestResponseType::from(
+  value : String,
+) -> XMLHttpRequestResponseType? {
   match value {
     "" => Some(XMLHttpRequestResponseType::Empty)
     "arraybuffer" => Some(XMLHttpRequestResponseType::Arraybuffer)
@@ -45,7 +57,10 @@ pub fn XMLHttpRequestResponseType::from(value: String) -> XMLHttpRequestResponse
   }
 }
 
-fn XMLHttpRequestResponseType::from_unchecked(value: String) -> XMLHttpRequestResponseType {
+///|
+fn XMLHttpRequestResponseType::from_unchecked(
+  value : String,
+) -> XMLHttpRequestResponseType {
   match value {
     "" => XMLHttpRequestResponseType::Empty
     "arraybuffer" => XMLHttpRequestResponseType::Arraybuffer
@@ -57,7 +72,10 @@ fn XMLHttpRequestResponseType::from_unchecked(value: String) -> XMLHttpRequestRe
   }
 }
 
-pub fn XMLHttpRequestResponseType::value(self: XMLHttpRequestResponseType) -> String {
+///|
+pub fn XMLHttpRequestResponseType::value(
+  self : XMLHttpRequestResponseType,
+) -> String {
   match self {
     XMLHttpRequestResponseType::Empty => ""
     XMLHttpRequestResponseType::Arraybuffer => "arraybuffer"
@@ -68,6 +86,9 @@ pub fn XMLHttpRequestResponseType::value(self: XMLHttpRequestResponseType) -> St
   }
 }
 
-pub impl FromJsAny for XMLHttpRequestResponseType with from_js_any(value : JsAny) -> XMLHttpRequestResponseType {
+///|
+pub impl FromJsAny for XMLHttpRequestResponseType with from_js_any(
+  value : JsAny,
+) -> XMLHttpRequestResponseType {
   XMLHttpRequestResponseType::from_unchecked(value)
 }

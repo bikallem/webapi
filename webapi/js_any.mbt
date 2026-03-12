@@ -23,4 +23,6 @@ pub impl FromJsAny for JsValue with from_js_any(value : JsAny) -> JsValue = "%id
 pub impl FromJsAny for String with from_js_any(value : JsAny) -> String = "%identity"
 
 ///|
-pub impl[T] FromJsAny for JsPromise[T] with from_js_any(value : JsAny) -> JsPromise[T] = "%identity"
+pub impl[T] FromJsAny for JsPromise[T] with from_js_any(value : JsAny) -> JsPromise[
+  T,
+] = "%identity"

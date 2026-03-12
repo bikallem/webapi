@@ -2,25 +2,40 @@
 // MoonBit type: ReadableStreamReadResult
 // Specifications: streams.idl
 
+///|
 /// [ReadableStreamReadResult](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStreamReadResult)
 #external
 pub type ReadableStreamReadResult
 
-pub impl TJsValue for ReadableStreamReadResult with to_js(self: ReadableStreamReadResult) -> JsValue = "%identity"
+///|
+pub impl TJsValue for ReadableStreamReadResult with to_js(
+  self : ReadableStreamReadResult,
+) -> JsValue = "%identity"
 
+///|
 pub impl FromJsAny for ReadableStreamReadResult with from_js_any(value : JsAny) -> ReadableStreamReadResult = "%identity"
 
-pub fn ReadableStreamReadResult::new(value? : JsValue, 
-done? : Bool) -> ReadableStreamReadResult {
+///|
+pub fn ReadableStreamReadResult::new(
+  value? : JsValue,
+  done? : Bool,
+) -> ReadableStreamReadResult {
   readable_stream_read_result_ffi(opt_to_js(value), opt_to_js(done))
 }
 
-pub fn ReadableStreamReadResult::empty() -> ReadableStreamReadResult { readable_stream_read_result_empty_ffi() }
+///|
+pub fn ReadableStreamReadResult::empty() -> ReadableStreamReadResult {
+  readable_stream_read_result_empty_ffi()
+}
 
-pub fn ReadableStreamReadResult::value(self : ReadableStreamReadResult) -> JsValue? {
+///|
+pub fn ReadableStreamReadResult::value(
+  self : ReadableStreamReadResult,
+) -> JsValue? {
   readable_stream_read_result_get_value_ffi(TJsValue::to_js(self)).to_option()
 }
 
+///|
 pub fn ReadableStreamReadResult::done(self : ReadableStreamReadResult) -> Bool? {
   readable_stream_read_result_get_done_ffi(TJsValue::to_js(self)).to_option_prim()
 }

@@ -2,33 +2,58 @@
 // MoonBit type: NavigationPrecommitController
 // Specifications: html.idl
 
+///|
 /// [NavigationPrecommitController](https://developer.mozilla.org/en-US/docs/Web/API/NavigationPrecommitController)
 #external
 pub type NavigationPrecommitController
 
-pub impl TJsValue for NavigationPrecommitController with to_js(self: NavigationPrecommitController) -> JsValue = "%identity"
+///|
+pub impl TJsValue for NavigationPrecommitController with to_js(
+  self : NavigationPrecommitController,
+) -> JsValue = "%identity"
 
-pub impl FromJsAny for NavigationPrecommitController with from_js_any(value : JsAny) -> NavigationPrecommitController = "%identity"
+///|
+pub impl FromJsAny for NavigationPrecommitController with from_js_any(
+  value : JsAny,
+) -> NavigationPrecommitController = "%identity"
 
-pub fn[T: TNavigationPrecommitController] NavigationPrecommitController::into(self : NavigationPrecommitController) -> T = "%identity"
+///|
+pub fn[T : TNavigationPrecommitController] NavigationPrecommitController::into(
+  self : NavigationPrecommitController,
+) -> T = "%identity"
 
+///|
 pub impl TNavigationPrecommitController for NavigationPrecommitController
 
+///|
 /// [NavigationPrecommitController](https://developer.mozilla.org/en-US/docs/Web/API/NavigationPrecommitController) interface.
 pub trait TNavigationPrecommitController: TJsValue {
   redirect(self : Self, url : String, options? : NavigationNavigateOptions) -> Unit = _
   add_handler(self : Self, handler : () -> JsPromise[JsValue]) -> Unit = _
 }
 
+///|
 /// [NavigationPrecommitController.redirect](https://developer.mozilla.org/en-US/docs/Web/API/NavigationPrecommitController/redirect)
-impl TNavigationPrecommitController with redirect(self : Self, 
-url : String, 
-options? : NavigationNavigateOptions) -> Unit {
-  navigation_precommit_controller_redirect_ffi(TJsValue::to_js(self), TJsValue::to_js(url), opt_to_js(options))
+impl TNavigationPrecommitController with redirect(
+  self : Self,
+  url : String,
+  options? : NavigationNavigateOptions,
+) -> Unit {
+  navigation_precommit_controller_redirect_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(url),
+    opt_to_js(options),
+  )
 }
 
+///|
 /// [NavigationPrecommitController.addHandler](https://developer.mozilla.org/en-US/docs/Web/API/NavigationPrecommitController/addHandler)
-impl TNavigationPrecommitController with add_handler(self : Self, 
-handler : () -> JsPromise[JsValue]) -> Unit {
-  navigation_precommit_controller_add_handler_ffi(TJsValue::to_js(self), TJsValue::to_js(navigation_intercept_handler_ffi(handler)))
+impl TNavigationPrecommitController with add_handler(
+  self : Self,
+  handler : () -> JsPromise[JsValue],
+) -> Unit {
+  navigation_precommit_controller_add_handler_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(navigation_intercept_handler_ffi(handler)),
+  )
 }

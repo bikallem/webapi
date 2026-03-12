@@ -1,1 +1,4 @@
-fn create_html_callback_ffi(callback : (String, JsValue) -> String) -> CreateHTMLCallback = "webapi_CreateHTMLCallback" "new"
+///|
+fn create_html_callback_ffi(
+  callback : (String, JsValue) -> String,
+) -> CreateHTMLCallback = "webapi_CreateHTMLCallback" "new"

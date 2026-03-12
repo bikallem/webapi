@@ -1,1 +1,5 @@
-extern "js" fn canvas_pattern_set_transform_ffi(obj: JsValue, transform: JsValue) -> Unit = "(obj, transform) => obj.setTransform(transform)"
+///|
+extern "js" fn canvas_pattern_set_transform_ffi(
+  obj : JsValue,
+  transform : JsValue,
+) -> Unit = "(obj, transform) => obj.setTransform(transform)"

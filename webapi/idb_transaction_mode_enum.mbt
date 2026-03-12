@@ -2,13 +2,18 @@
 // MoonBit type: IDBTransactionMode
 // Specifications: IndexedDB.idl
 
+///|
 pub(all) enum IDBTransactionMode {
   Readonly
   Readwrite
   Versionchange
 } derive(Eq)
 
-pub impl Show for IDBTransactionMode with output(self : IDBTransactionMode, logger : &Logger) -> Unit {
+///|
+pub impl Show for IDBTransactionMode with output(
+  self : IDBTransactionMode,
+  logger : &Logger,
+) -> Unit {
   match self {
     IDBTransactionMode::Readonly => logger.write_string("Readonly")
     IDBTransactionMode::Readwrite => logger.write_string("Readwrite")
@@ -16,7 +21,8 @@ pub impl Show for IDBTransactionMode with output(self : IDBTransactionMode, logg
   }
 }
 
-pub impl TJsValue for IDBTransactionMode with to_js(self: IDBTransactionMode) -> JsValue {
+///|
+pub impl TJsValue for IDBTransactionMode with to_js(self : IDBTransactionMode) -> JsValue {
   match self {
     IDBTransactionMode::Readonly => TJsValue::to_js("readonly")
     IDBTransactionMode::Readwrite => TJsValue::to_js("readwrite")
@@ -24,7 +30,8 @@ pub impl TJsValue for IDBTransactionMode with to_js(self: IDBTransactionMode) ->
   }
 }
 
-pub fn IDBTransactionMode::from(value: String) -> IDBTransactionMode? {
+///|
+pub fn IDBTransactionMode::from(value : String) -> IDBTransactionMode? {
   match value {
     "readonly" => Some(IDBTransactionMode::Readonly)
     "readwrite" => Some(IDBTransactionMode::Readwrite)
@@ -33,7 +40,8 @@ pub fn IDBTransactionMode::from(value: String) -> IDBTransactionMode? {
   }
 }
 
-fn IDBTransactionMode::from_unchecked(value: String) -> IDBTransactionMode {
+///|
+fn IDBTransactionMode::from_unchecked(value : String) -> IDBTransactionMode {
   match value {
     "readonly" => IDBTransactionMode::Readonly
     "readwrite" => IDBTransactionMode::Readwrite
@@ -42,7 +50,8 @@ fn IDBTransactionMode::from_unchecked(value: String) -> IDBTransactionMode {
   }
 }
 
-pub fn IDBTransactionMode::value(self: IDBTransactionMode) -> String {
+///|
+pub fn IDBTransactionMode::value(self : IDBTransactionMode) -> String {
   match self {
     IDBTransactionMode::Readonly => "readonly"
     IDBTransactionMode::Readwrite => "readwrite"
@@ -50,6 +59,7 @@ pub fn IDBTransactionMode::value(self: IDBTransactionMode) -> String {
   }
 }
 
+///|
 pub impl FromJsAny for IDBTransactionMode with from_js_any(value : JsAny) -> IDBTransactionMode {
   IDBTransactionMode::from_unchecked(value)
 }

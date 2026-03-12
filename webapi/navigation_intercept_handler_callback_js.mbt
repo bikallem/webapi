@@ -1,1 +1,4 @@
-extern "js" fn navigation_intercept_handler_ffi(callback : () -> JsPromise[JsValue]) -> NavigationInterceptHandler = "(callback) => callback"
+///|
+extern "js" fn navigation_intercept_handler_ffi(
+  callback : () -> JsPromise[JsValue],
+) -> NavigationInterceptHandler = "(callback) => callback"

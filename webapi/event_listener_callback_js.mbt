@@ -1,1 +1,2 @@
+///|
 extern "js" fn event_listener_ffi(callback : (Event) -> Unit) -> EventListener = "(callback) => callback"

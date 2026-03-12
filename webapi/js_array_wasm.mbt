@@ -56,7 +56,9 @@ pub fn[T : FromJsAny] JsArray::to_value_array(self : JsArray) -> Array[T] {
   let len = js_array_length_ffi(self)
   let out : Array[T] = []
   for i in 0..<len {
-    out.push(FromJsAny::from_js_any(jsvalue_to_jsany(js_array_get_ffi(self, i))))
+    out.push(
+      FromJsAny::from_js_any(jsvalue_to_jsany(js_array_get_ffi(self, i))),
+    )
   }
   out
 }

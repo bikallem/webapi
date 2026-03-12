@@ -2,20 +2,27 @@
 // MoonBit type: TextTrackList
 // Specifications: html.idl
 
+///|
 /// [TextTrackList](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackList)
 #external
 pub type TextTrackList
 
-pub impl TJsValue for TextTrackList with to_js(self: TextTrackList) -> JsValue = "%identity"
+///|
+pub impl TJsValue for TextTrackList with to_js(self : TextTrackList) -> JsValue = "%identity"
 
+///|
 pub impl FromJsAny for TextTrackList with from_js_any(value : JsAny) -> TextTrackList = "%identity"
 
-pub fn[T: TTextTrackList] TextTrackList::into(self : TextTrackList) -> T = "%identity"
+///|
+pub fn[T : TTextTrackList] TextTrackList::into(self : TextTrackList) -> T = "%identity"
 
+///|
 pub impl TTextTrackList for TextTrackList
 
+///|
 pub impl TEventTarget for TextTrackList
 
+///|
 /// [TextTrackList](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackList) interface.
 pub trait TTextTrackList: TEventTarget {
   length(self : Self) -> UInt = _
@@ -31,62 +38,87 @@ pub trait TTextTrackList: TEventTarget {
   get_track_by_id(self : Self, id : String) -> TextTrack = _
 }
 
+///|
 /// [TextTrackList.length](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackList/length)
 impl TTextTrackList with length(self : Self) -> UInt {
   text_track_list_length_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [TextTrackList.get](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackList/get)
-impl TTextTrackList with get_opt(self : Self, 
-index : UInt) -> TextTrack? {
+impl TTextTrackList with get_opt(self : Self, index : UInt) -> TextTrack? {
   text_track_list_get_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
 }
 
+///|
 /// [TextTrackList.getTrackById](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackList/getTrackById)
-impl TTextTrackList with get_track_by_id_opt(self : Self, 
-id : String) -> TextTrack? {
-  text_track_list_get_track_by_id_ffi(TJsValue::to_js(self), TJsValue::to_js(id)).to_option()
+impl TTextTrackList with get_track_by_id_opt(self : Self, id : String) -> TextTrack? {
+  text_track_list_get_track_by_id_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(id),
+  ).to_option()
 }
 
+///|
 /// [TextTrackList.onchange](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackList/onchange)
 impl TTextTrackList with onchange(self : Self) -> EventHandler {
   text_track_list_onchange_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [TextTrackList.onchange](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackList/onchange)
-impl TTextTrackList with set_onchange(self : Self, 
-onchange : (Event) -> JsValue) -> Unit {
-  text_track_list_set_onchange_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onchange)))
+impl TTextTrackList with set_onchange(
+  self : Self,
+  onchange : (Event) -> JsValue,
+) -> Unit {
+  text_track_list_set_onchange_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onchange)),
+  )
 }
 
+///|
 /// [TextTrackList.onaddtrack](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackList/onaddtrack)
 impl TTextTrackList with onaddtrack(self : Self) -> EventHandler {
   text_track_list_onaddtrack_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [TextTrackList.onaddtrack](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackList/onaddtrack)
-impl TTextTrackList with set_onaddtrack(self : Self, 
-onaddtrack : (Event) -> JsValue) -> Unit {
-  text_track_list_set_onaddtrack_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onaddtrack)))
+impl TTextTrackList with set_onaddtrack(
+  self : Self,
+  onaddtrack : (Event) -> JsValue,
+) -> Unit {
+  text_track_list_set_onaddtrack_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onaddtrack)),
+  )
 }
 
+///|
 /// [TextTrackList.onremovetrack](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackList/onremovetrack)
 impl TTextTrackList with onremovetrack(self : Self) -> EventHandler {
   text_track_list_onremovetrack_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [TextTrackList.onremovetrack](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackList/onremovetrack)
-impl TTextTrackList with set_onremovetrack(self : Self, 
-onremovetrack : (Event) -> JsValue) -> Unit {
-  text_track_list_set_onremovetrack_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onremovetrack)))
+impl TTextTrackList with set_onremovetrack(
+  self : Self,
+  onremovetrack : (Event) -> JsValue,
+) -> Unit {
+  text_track_list_set_onremovetrack_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onremovetrack)),
+  )
 }
 
-impl TTextTrackList with get(self : Self, 
-index : UInt) -> TextTrack {
+///|
+impl TTextTrackList with get(self : Self, index : UInt) -> TextTrack {
   self.get_opt(index).unwrap()
 }
 
-impl TTextTrackList with get_track_by_id(self : Self, 
-id : String) -> TextTrack {
+///|
+impl TTextTrackList with get_track_by_id(self : Self, id : String) -> TextTrack {
   self.get_track_by_id_opt(id).unwrap()
 }

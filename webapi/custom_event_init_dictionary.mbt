@@ -2,35 +2,53 @@
 // MoonBit type: CustomEventInit
 // Specifications: dom.idl
 
+///|
 /// [CustomEventInit](https://developer.mozilla.org/en-US/docs/Web/API/CustomEventInit)
 #external
 pub type CustomEventInit
 
-pub impl TJsValue for CustomEventInit with to_js(self: CustomEventInit) -> JsValue = "%identity"
+///|
+pub impl TJsValue for CustomEventInit with to_js(self : CustomEventInit) -> JsValue = "%identity"
 
+///|
 pub impl FromJsAny for CustomEventInit with from_js_any(value : JsAny) -> CustomEventInit = "%identity"
 
-pub fn CustomEventInit::new(bubbles? : Bool, 
-cancelable? : Bool, 
-composed? : Bool, 
-detail? : JsValue) -> CustomEventInit {
-  custom_event_init_ffi(opt_to_js(bubbles), opt_to_js(cancelable), opt_to_js(composed), opt_to_js(detail))
+///|
+pub fn CustomEventInit::new(
+  bubbles? : Bool,
+  cancelable? : Bool,
+  composed? : Bool,
+  detail? : JsValue,
+) -> CustomEventInit {
+  custom_event_init_ffi(
+    opt_to_js(bubbles),
+    opt_to_js(cancelable),
+    opt_to_js(composed),
+    opt_to_js(detail),
+  )
 }
 
-pub fn CustomEventInit::empty() -> CustomEventInit { custom_event_init_empty_ffi() }
+///|
+pub fn CustomEventInit::empty() -> CustomEventInit {
+  custom_event_init_empty_ffi()
+}
 
+///|
 pub fn CustomEventInit::bubbles(self : CustomEventInit) -> Bool? {
   custom_event_init_get_bubbles_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
+///|
 pub fn CustomEventInit::cancelable(self : CustomEventInit) -> Bool? {
   custom_event_init_get_cancelable_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
+///|
 pub fn CustomEventInit::composed(self : CustomEventInit) -> Bool? {
   custom_event_init_get_composed_ffi(TJsValue::to_js(self)).to_option_prim()
 }
 
+///|
 pub fn CustomEventInit::detail(self : CustomEventInit) -> JsValue? {
   custom_event_init_get_detail_ffi(TJsValue::to_js(self)).to_option()
 }

@@ -1,1 +1,2 @@
+///|
 extern "js" fn node_filter_ffi(callback : (Node) -> UInt) -> NodeFilter = "(callback) => callback"

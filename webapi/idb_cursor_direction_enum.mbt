@@ -2,6 +2,7 @@
 // MoonBit type: IDBCursorDirection
 // Specifications: IndexedDB.idl
 
+///|
 pub(all) enum IDBCursorDirection {
   Next
   Nextunique
@@ -9,7 +10,11 @@ pub(all) enum IDBCursorDirection {
   Prevunique
 } derive(Eq)
 
-pub impl Show for IDBCursorDirection with output(self : IDBCursorDirection, logger : &Logger) -> Unit {
+///|
+pub impl Show for IDBCursorDirection with output(
+  self : IDBCursorDirection,
+  logger : &Logger,
+) -> Unit {
   match self {
     IDBCursorDirection::Next => logger.write_string("Next")
     IDBCursorDirection::Nextunique => logger.write_string("Nextunique")
@@ -18,7 +23,8 @@ pub impl Show for IDBCursorDirection with output(self : IDBCursorDirection, logg
   }
 }
 
-pub impl TJsValue for IDBCursorDirection with to_js(self: IDBCursorDirection) -> JsValue {
+///|
+pub impl TJsValue for IDBCursorDirection with to_js(self : IDBCursorDirection) -> JsValue {
   match self {
     IDBCursorDirection::Next => TJsValue::to_js("next")
     IDBCursorDirection::Nextunique => TJsValue::to_js("nextunique")
@@ -27,7 +33,8 @@ pub impl TJsValue for IDBCursorDirection with to_js(self: IDBCursorDirection) ->
   }
 }
 
-pub fn IDBCursorDirection::from(value: String) -> IDBCursorDirection? {
+///|
+pub fn IDBCursorDirection::from(value : String) -> IDBCursorDirection? {
   match value {
     "next" => Some(IDBCursorDirection::Next)
     "nextunique" => Some(IDBCursorDirection::Nextunique)
@@ -37,7 +44,8 @@ pub fn IDBCursorDirection::from(value: String) -> IDBCursorDirection? {
   }
 }
 
-fn IDBCursorDirection::from_unchecked(value: String) -> IDBCursorDirection {
+///|
+fn IDBCursorDirection::from_unchecked(value : String) -> IDBCursorDirection {
   match value {
     "next" => IDBCursorDirection::Next
     "nextunique" => IDBCursorDirection::Nextunique
@@ -47,7 +55,8 @@ fn IDBCursorDirection::from_unchecked(value: String) -> IDBCursorDirection {
   }
 }
 
-pub fn IDBCursorDirection::value(self: IDBCursorDirection) -> String {
+///|
+pub fn IDBCursorDirection::value(self : IDBCursorDirection) -> String {
   match self {
     IDBCursorDirection::Next => "next"
     IDBCursorDirection::Nextunique => "nextunique"
@@ -56,6 +65,7 @@ pub fn IDBCursorDirection::value(self: IDBCursorDirection) -> String {
   }
 }
 
+///|
 pub impl FromJsAny for IDBCursorDirection with from_js_any(value : JsAny) -> IDBCursorDirection {
   IDBCursorDirection::from_unchecked(value)
 }

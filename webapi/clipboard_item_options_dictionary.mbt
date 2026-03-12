@@ -2,20 +2,34 @@
 // MoonBit type: ClipboardItemOptions
 // Specifications: clipboard-apis.idl
 
+///|
 /// [ClipboardItemOptions](https://developer.mozilla.org/en-US/docs/Web/API/ClipboardItemOptions)
 #external
 pub type ClipboardItemOptions
 
-pub impl TJsValue for ClipboardItemOptions with to_js(self: ClipboardItemOptions) -> JsValue = "%identity"
+///|
+pub impl TJsValue for ClipboardItemOptions with to_js(
+  self : ClipboardItemOptions,
+) -> JsValue = "%identity"
 
+///|
 pub impl FromJsAny for ClipboardItemOptions with from_js_any(value : JsAny) -> ClipboardItemOptions = "%identity"
 
-pub fn ClipboardItemOptions::new(presentation_style? : PresentationStyle) -> ClipboardItemOptions {
+///|
+pub fn ClipboardItemOptions::new(
+  presentation_style? : PresentationStyle,
+) -> ClipboardItemOptions {
   clipboard_item_options_ffi(opt_to_js(presentation_style))
 }
 
-pub fn ClipboardItemOptions::empty() -> ClipboardItemOptions { clipboard_item_options_empty_ffi() }
+///|
+pub fn ClipboardItemOptions::empty() -> ClipboardItemOptions {
+  clipboard_item_options_empty_ffi()
+}
 
-pub fn ClipboardItemOptions::presentation_style(self : ClipboardItemOptions) -> PresentationStyle? {
+///|
+pub fn ClipboardItemOptions::presentation_style(
+  self : ClipboardItemOptions,
+) -> PresentationStyle? {
   clipboard_item_options_get_presentation_style_ffi(TJsValue::to_js(self)).to_option()
 }

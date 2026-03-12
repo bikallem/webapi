@@ -1,1 +1,4 @@
-extern "js" fn function_string_callback_ffi(callback : (String) -> Unit) -> FunctionStringCallback = "(callback) => callback"
+///|
+extern "js" fn function_string_callback_ffi(
+  callback : (String) -> Unit,
+) -> FunctionStringCallback = "(callback) => callback"

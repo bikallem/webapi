@@ -2,13 +2,18 @@
 // MoonBit type: TextTrackMode
 // Specifications: html.idl
 
+///|
 pub(all) enum TextTrackMode {
   Disabled
   Hidden
   Showing
 } derive(Eq)
 
-pub impl Show for TextTrackMode with output(self : TextTrackMode, logger : &Logger) -> Unit {
+///|
+pub impl Show for TextTrackMode with output(
+  self : TextTrackMode,
+  logger : &Logger,
+) -> Unit {
   match self {
     TextTrackMode::Disabled => logger.write_string("Disabled")
     TextTrackMode::Hidden => logger.write_string("Hidden")
@@ -16,7 +21,8 @@ pub impl Show for TextTrackMode with output(self : TextTrackMode, logger : &Logg
   }
 }
 
-pub impl TJsValue for TextTrackMode with to_js(self: TextTrackMode) -> JsValue {
+///|
+pub impl TJsValue for TextTrackMode with to_js(self : TextTrackMode) -> JsValue {
   match self {
     TextTrackMode::Disabled => TJsValue::to_js("disabled")
     TextTrackMode::Hidden => TJsValue::to_js("hidden")
@@ -24,7 +30,8 @@ pub impl TJsValue for TextTrackMode with to_js(self: TextTrackMode) -> JsValue {
   }
 }
 
-pub fn TextTrackMode::from(value: String) -> TextTrackMode? {
+///|
+pub fn TextTrackMode::from(value : String) -> TextTrackMode? {
   match value {
     "disabled" => Some(TextTrackMode::Disabled)
     "hidden" => Some(TextTrackMode::Hidden)
@@ -33,7 +40,8 @@ pub fn TextTrackMode::from(value: String) -> TextTrackMode? {
   }
 }
 
-fn TextTrackMode::from_unchecked(value: String) -> TextTrackMode {
+///|
+fn TextTrackMode::from_unchecked(value : String) -> TextTrackMode {
   match value {
     "disabled" => TextTrackMode::Disabled
     "hidden" => TextTrackMode::Hidden
@@ -42,7 +50,8 @@ fn TextTrackMode::from_unchecked(value: String) -> TextTrackMode {
   }
 }
 
-pub fn TextTrackMode::value(self: TextTrackMode) -> String {
+///|
+pub fn TextTrackMode::value(self : TextTrackMode) -> String {
   match self {
     TextTrackMode::Disabled => "disabled"
     TextTrackMode::Hidden => "hidden"
@@ -50,6 +59,7 @@ pub fn TextTrackMode::value(self: TextTrackMode) -> String {
   }
 }
 
+///|
 pub impl FromJsAny for TextTrackMode with from_js_any(value : JsAny) -> TextTrackMode {
   TextTrackMode::from_unchecked(value)
 }

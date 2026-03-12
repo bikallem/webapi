@@ -1,1 +1,2 @@
-extern "js" fn document_timeline_new_ffi(options: JsValue) -> DocumentTimeline = "(options) => new DocumentTimeline(options)"
+///|
+extern "js" fn document_timeline_new_ffi(options : JsValue) -> DocumentTimeline = "(options) => new DocumentTimeline(options)"

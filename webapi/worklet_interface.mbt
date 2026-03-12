@@ -2,26 +2,41 @@
 // MoonBit type: Worklet
 // Specifications: html.idl
 
+///|
 /// [Worklet](https://developer.mozilla.org/en-US/docs/Web/API/Worklet)
 #external
 pub type Worklet
 
-pub impl TJsValue for Worklet with to_js(self: Worklet) -> JsValue = "%identity"
+///|
+pub impl TJsValue for Worklet with to_js(self : Worklet) -> JsValue = "%identity"
 
+///|
 pub impl FromJsAny for Worklet with from_js_any(value : JsAny) -> Worklet = "%identity"
 
-pub fn[T: TWorklet] Worklet::into(self : Worklet) -> T = "%identity"
+///|
+pub fn[T : TWorklet] Worklet::into(self : Worklet) -> T = "%identity"
 
+///|
 pub impl TWorklet for Worklet
 
+///|
 /// [Worklet](https://developer.mozilla.org/en-US/docs/Web/API/Worklet) interface.
 pub trait TWorklet: TJsValue {
-  add_module(self : Self, module_url : String, options? : WorkletOptions) -> JsPromise[JsValue] = _
+  add_module(self : Self, module_url : String, options? : WorkletOptions) -> JsPromise[
+    JsValue,
+  ] = _
 }
 
+///|
 /// [Worklet.addModule](https://developer.mozilla.org/en-US/docs/Web/API/Worklet/addModule)
-impl TWorklet with add_module(self : Self, 
-module_url : String, 
-options? : WorkletOptions) -> JsPromise[JsValue] {
-  worklet_add_module_ffi(TJsValue::to_js(self), TJsValue::to_js(module_url), opt_to_js(options))
+impl TWorklet with add_module(
+  self : Self,
+  module_url : String,
+  options? : WorkletOptions,
+) -> JsPromise[JsValue] {
+  worklet_add_module_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(module_url),
+    opt_to_js(options),
+  )
 }

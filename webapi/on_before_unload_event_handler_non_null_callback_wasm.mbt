@@ -1,1 +1,4 @@
-fn on_before_unload_event_handler_non_null_ffi(callback : (Event) -> String) -> OnBeforeUnloadEventHandlerNonNull = "webapi_OnBeforeUnloadEventHandlerNonNull" "new"
+///|
+fn on_before_unload_event_handler_non_null_ffi(
+  callback : (Event) -> String,
+) -> OnBeforeUnloadEventHandlerNonNull = "webapi_OnBeforeUnloadEventHandlerNonNull" "new"

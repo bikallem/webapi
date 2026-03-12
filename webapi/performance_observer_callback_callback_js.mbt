@@ -1,1 +1,8 @@
-extern "js" fn performance_observer_callback_ffi(callback : (PerformanceObserverEntryList, PerformanceObserver, PerformanceObserverCallbackOptions) -> Unit) -> PerformanceObserverCallback = "(callback) => callback"
+///|
+extern "js" fn performance_observer_callback_ffi(
+  callback : (
+    PerformanceObserverEntryList,
+    PerformanceObserver,
+    PerformanceObserverCallbackOptions,
+  ) -> Unit,
+) -> PerformanceObserverCallback = "(callback) => callback"

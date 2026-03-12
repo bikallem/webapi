@@ -2,20 +2,31 @@
 // MoonBit type: XMLHttpRequestEventTarget
 // Specifications: xhr.idl
 
+///|
 /// [XMLHttpRequestEventTarget](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget)
 #external
 pub type XMLHttpRequestEventTarget
 
-pub impl TJsValue for XMLHttpRequestEventTarget with to_js(self: XMLHttpRequestEventTarget) -> JsValue = "%identity"
+///|
+pub impl TJsValue for XMLHttpRequestEventTarget with to_js(
+  self : XMLHttpRequestEventTarget,
+) -> JsValue = "%identity"
 
+///|
 pub impl FromJsAny for XMLHttpRequestEventTarget with from_js_any(value : JsAny) -> XMLHttpRequestEventTarget = "%identity"
 
-pub fn[T: TXMLHttpRequestEventTarget] XMLHttpRequestEventTarget::into(self : XMLHttpRequestEventTarget) -> T = "%identity"
+///|
+pub fn[T : TXMLHttpRequestEventTarget] XMLHttpRequestEventTarget::into(
+  self : XMLHttpRequestEventTarget,
+) -> T = "%identity"
 
+///|
 pub impl TXMLHttpRequestEventTarget for XMLHttpRequestEventTarget
 
+///|
 pub impl TEventTarget for XMLHttpRequestEventTarget
 
+///|
 /// [XMLHttpRequestEventTarget](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget) interface.
 pub trait TXMLHttpRequestEventTarget: TEventTarget {
   onloadstart(self : Self) -> EventHandler = _
@@ -34,79 +45,128 @@ pub trait TXMLHttpRequestEventTarget: TEventTarget {
   set_onloadend(self : Self, onloadend : (Event) -> JsValue) -> Unit = _
 }
 
+///|
 /// [XMLHttpRequestEventTarget.onloadstart](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/onloadstart)
 impl TXMLHttpRequestEventTarget with onloadstart(self : Self) -> EventHandler {
   xml_http_request_event_target_onloadstart_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [XMLHttpRequestEventTarget.onloadstart](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/onloadstart)
-impl TXMLHttpRequestEventTarget with set_onloadstart(self : Self, 
-onloadstart : (Event) -> JsValue) -> Unit {
-  xml_http_request_event_target_set_onloadstart_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onloadstart)))
+impl TXMLHttpRequestEventTarget with set_onloadstart(
+  self : Self,
+  onloadstart : (Event) -> JsValue,
+) -> Unit {
+  xml_http_request_event_target_set_onloadstart_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onloadstart)),
+  )
 }
 
+///|
 /// [XMLHttpRequestEventTarget.onprogress](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/onprogress)
 impl TXMLHttpRequestEventTarget with onprogress(self : Self) -> EventHandler {
   xml_http_request_event_target_onprogress_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [XMLHttpRequestEventTarget.onprogress](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/onprogress)
-impl TXMLHttpRequestEventTarget with set_onprogress(self : Self, 
-onprogress : (Event) -> JsValue) -> Unit {
-  xml_http_request_event_target_set_onprogress_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onprogress)))
+impl TXMLHttpRequestEventTarget with set_onprogress(
+  self : Self,
+  onprogress : (Event) -> JsValue,
+) -> Unit {
+  xml_http_request_event_target_set_onprogress_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onprogress)),
+  )
 }
 
+///|
 /// [XMLHttpRequestEventTarget.onabort](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/onabort)
 impl TXMLHttpRequestEventTarget with onabort(self : Self) -> EventHandler {
   xml_http_request_event_target_onabort_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [XMLHttpRequestEventTarget.onabort](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/onabort)
-impl TXMLHttpRequestEventTarget with set_onabort(self : Self, 
-onabort : (Event) -> JsValue) -> Unit {
-  xml_http_request_event_target_set_onabort_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onabort)))
+impl TXMLHttpRequestEventTarget with set_onabort(
+  self : Self,
+  onabort : (Event) -> JsValue,
+) -> Unit {
+  xml_http_request_event_target_set_onabort_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onabort)),
+  )
 }
 
+///|
 /// [XMLHttpRequestEventTarget.onerror](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/onerror)
 impl TXMLHttpRequestEventTarget with onerror(self : Self) -> EventHandler {
   xml_http_request_event_target_onerror_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [XMLHttpRequestEventTarget.onerror](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/onerror)
-impl TXMLHttpRequestEventTarget with set_onerror(self : Self, 
-onerror : (Event) -> JsValue) -> Unit {
-  xml_http_request_event_target_set_onerror_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onerror)))
+impl TXMLHttpRequestEventTarget with set_onerror(
+  self : Self,
+  onerror : (Event) -> JsValue,
+) -> Unit {
+  xml_http_request_event_target_set_onerror_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onerror)),
+  )
 }
 
+///|
 /// [XMLHttpRequestEventTarget.onload](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/onload)
 impl TXMLHttpRequestEventTarget with onload(self : Self) -> EventHandler {
   xml_http_request_event_target_onload_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [XMLHttpRequestEventTarget.onload](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/onload)
-impl TXMLHttpRequestEventTarget with set_onload(self : Self, 
-onload : (Event) -> JsValue) -> Unit {
-  xml_http_request_event_target_set_onload_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onload)))
+impl TXMLHttpRequestEventTarget with set_onload(
+  self : Self,
+  onload : (Event) -> JsValue,
+) -> Unit {
+  xml_http_request_event_target_set_onload_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onload)),
+  )
 }
 
+///|
 /// [XMLHttpRequestEventTarget.ontimeout](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/ontimeout)
 impl TXMLHttpRequestEventTarget with ontimeout(self : Self) -> EventHandler {
   xml_http_request_event_target_ontimeout_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [XMLHttpRequestEventTarget.ontimeout](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/ontimeout)
-impl TXMLHttpRequestEventTarget with set_ontimeout(self : Self, 
-ontimeout : (Event) -> JsValue) -> Unit {
-  xml_http_request_event_target_set_ontimeout_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(ontimeout)))
+impl TXMLHttpRequestEventTarget with set_ontimeout(
+  self : Self,
+  ontimeout : (Event) -> JsValue,
+) -> Unit {
+  xml_http_request_event_target_set_ontimeout_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(ontimeout)),
+  )
 }
 
+///|
 /// [XMLHttpRequestEventTarget.onloadend](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/onloadend)
 impl TXMLHttpRequestEventTarget with onloadend(self : Self) -> EventHandler {
   xml_http_request_event_target_onloadend_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [XMLHttpRequestEventTarget.onloadend](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/onloadend)
-impl TXMLHttpRequestEventTarget with set_onloadend(self : Self, 
-onloadend : (Event) -> JsValue) -> Unit {
-  xml_http_request_event_target_set_onloadend_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onloadend)))
+impl TXMLHttpRequestEventTarget with set_onloadend(
+  self : Self,
+  onloadend : (Event) -> JsValue,
+) -> Unit {
+  xml_http_request_event_target_set_onloadend_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onloadend)),
+  )
 }

@@ -2,13 +2,18 @@
 // MoonBit type: NotificationPermission
 // Specifications: notifications.idl
 
+///|
 pub(all) enum NotificationPermission {
   Default
   Denied
   Granted
 } derive(Eq)
 
-pub impl Show for NotificationPermission with output(self : NotificationPermission, logger : &Logger) -> Unit {
+///|
+pub impl Show for NotificationPermission with output(
+  self : NotificationPermission,
+  logger : &Logger,
+) -> Unit {
   match self {
     NotificationPermission::Default => logger.write_string("Default")
     NotificationPermission::Denied => logger.write_string("Denied")
@@ -16,7 +21,10 @@ pub impl Show for NotificationPermission with output(self : NotificationPermissi
   }
 }
 
-pub impl TJsValue for NotificationPermission with to_js(self: NotificationPermission) -> JsValue {
+///|
+pub impl TJsValue for NotificationPermission with to_js(
+  self : NotificationPermission,
+) -> JsValue {
   match self {
     NotificationPermission::Default => TJsValue::to_js("default")
     NotificationPermission::Denied => TJsValue::to_js("denied")
@@ -24,7 +32,8 @@ pub impl TJsValue for NotificationPermission with to_js(self: NotificationPermis
   }
 }
 
-pub fn NotificationPermission::from(value: String) -> NotificationPermission? {
+///|
+pub fn NotificationPermission::from(value : String) -> NotificationPermission? {
   match value {
     "default" => Some(NotificationPermission::Default)
     "denied" => Some(NotificationPermission::Denied)
@@ -33,7 +42,10 @@ pub fn NotificationPermission::from(value: String) -> NotificationPermission? {
   }
 }
 
-fn NotificationPermission::from_unchecked(value: String) -> NotificationPermission {
+///|
+fn NotificationPermission::from_unchecked(
+  value : String,
+) -> NotificationPermission {
   match value {
     "default" => NotificationPermission::Default
     "denied" => NotificationPermission::Denied
@@ -42,7 +54,8 @@ fn NotificationPermission::from_unchecked(value: String) -> NotificationPermissi
   }
 }
 
-pub fn NotificationPermission::value(self: NotificationPermission) -> String {
+///|
+pub fn NotificationPermission::value(self : NotificationPermission) -> String {
   match self {
     NotificationPermission::Default => "default"
     NotificationPermission::Denied => "denied"
@@ -50,6 +63,7 @@ pub fn NotificationPermission::value(self: NotificationPermission) -> String {
   }
 }
 
+///|
 pub impl FromJsAny for NotificationPermission with from_js_any(value : JsAny) -> NotificationPermission {
   NotificationPermission::from_unchecked(value)
 }

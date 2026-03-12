@@ -2,13 +2,18 @@
 // MoonBit type: CanvasLineCap
 // Specifications: html.idl
 
+///|
 pub(all) enum CanvasLineCap {
   Butt
   Round
   Square
 } derive(Eq)
 
-pub impl Show for CanvasLineCap with output(self : CanvasLineCap, logger : &Logger) -> Unit {
+///|
+pub impl Show for CanvasLineCap with output(
+  self : CanvasLineCap,
+  logger : &Logger,
+) -> Unit {
   match self {
     CanvasLineCap::Butt => logger.write_string("Butt")
     CanvasLineCap::Round => logger.write_string("Round")
@@ -16,7 +21,8 @@ pub impl Show for CanvasLineCap with output(self : CanvasLineCap, logger : &Logg
   }
 }
 
-pub impl TJsValue for CanvasLineCap with to_js(self: CanvasLineCap) -> JsValue {
+///|
+pub impl TJsValue for CanvasLineCap with to_js(self : CanvasLineCap) -> JsValue {
   match self {
     CanvasLineCap::Butt => TJsValue::to_js("butt")
     CanvasLineCap::Round => TJsValue::to_js("round")
@@ -24,7 +30,8 @@ pub impl TJsValue for CanvasLineCap with to_js(self: CanvasLineCap) -> JsValue {
   }
 }
 
-pub fn CanvasLineCap::from(value: String) -> CanvasLineCap? {
+///|
+pub fn CanvasLineCap::from(value : String) -> CanvasLineCap? {
   match value {
     "butt" => Some(CanvasLineCap::Butt)
     "round" => Some(CanvasLineCap::Round)
@@ -33,7 +40,8 @@ pub fn CanvasLineCap::from(value: String) -> CanvasLineCap? {
   }
 }
 
-fn CanvasLineCap::from_unchecked(value: String) -> CanvasLineCap {
+///|
+fn CanvasLineCap::from_unchecked(value : String) -> CanvasLineCap {
   match value {
     "butt" => CanvasLineCap::Butt
     "round" => CanvasLineCap::Round
@@ -42,7 +50,8 @@ fn CanvasLineCap::from_unchecked(value: String) -> CanvasLineCap {
   }
 }
 
-pub fn CanvasLineCap::value(self: CanvasLineCap) -> String {
+///|
+pub fn CanvasLineCap::value(self : CanvasLineCap) -> String {
   match self {
     CanvasLineCap::Butt => "butt"
     CanvasLineCap::Round => "round"
@@ -50,6 +59,7 @@ pub fn CanvasLineCap::value(self: CanvasLineCap) -> String {
   }
 }
 
+///|
 pub impl FromJsAny for CanvasLineCap with from_js_any(value : JsAny) -> CanvasLineCap {
   CanvasLineCap::from_unchecked(value)
 }

@@ -2,6 +2,7 @@
 // MoonBit type: RequestDestination
 // Specifications: fetch.idl
 
+///|
 pub(all) enum RequestDestination {
   Empty
   Audio
@@ -26,7 +27,11 @@ pub(all) enum RequestDestination {
   Xslt
 } derive(Eq)
 
-pub impl Show for RequestDestination with output(self : RequestDestination, logger : &Logger) -> Unit {
+///|
+pub impl Show for RequestDestination with output(
+  self : RequestDestination,
+  logger : &Logger,
+) -> Unit {
   match self {
     RequestDestination::Empty => logger.write_string("Empty")
     RequestDestination::Audio => logger.write_string("Audio")
@@ -52,7 +57,8 @@ pub impl Show for RequestDestination with output(self : RequestDestination, logg
   }
 }
 
-pub impl TJsValue for RequestDestination with to_js(self: RequestDestination) -> JsValue {
+///|
+pub impl TJsValue for RequestDestination with to_js(self : RequestDestination) -> JsValue {
   match self {
     RequestDestination::Empty => TJsValue::to_js("")
     RequestDestination::Audio => TJsValue::to_js("audio")
@@ -78,7 +84,8 @@ pub impl TJsValue for RequestDestination with to_js(self: RequestDestination) ->
   }
 }
 
-pub fn RequestDestination::from(value: String) -> RequestDestination? {
+///|
+pub fn RequestDestination::from(value : String) -> RequestDestination? {
   match value {
     "" => Some(RequestDestination::Empty)
     "audio" => Some(RequestDestination::Audio)
@@ -105,7 +112,8 @@ pub fn RequestDestination::from(value: String) -> RequestDestination? {
   }
 }
 
-fn RequestDestination::from_unchecked(value: String) -> RequestDestination {
+///|
+fn RequestDestination::from_unchecked(value : String) -> RequestDestination {
   match value {
     "" => RequestDestination::Empty
     "audio" => RequestDestination::Audio
@@ -132,7 +140,8 @@ fn RequestDestination::from_unchecked(value: String) -> RequestDestination {
   }
 }
 
-pub fn RequestDestination::value(self: RequestDestination) -> String {
+///|
+pub fn RequestDestination::value(self : RequestDestination) -> String {
   match self {
     RequestDestination::Empty => ""
     RequestDestination::Audio => "audio"
@@ -158,6 +167,7 @@ pub fn RequestDestination::value(self: RequestDestination) -> String {
   }
 }
 
+///|
 pub impl FromJsAny for RequestDestination with from_js_any(value : JsAny) -> RequestDestination {
   RequestDestination::from_unchecked(value)
 }
