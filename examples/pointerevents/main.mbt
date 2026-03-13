@@ -1,7 +1,7 @@
 ///|
 /// Pointer Events Demo - track pointer movement and display pointer info
 fn main {
-  let doc = @webapi.document
+  let doc = @webapi.document()
 
   let heading = doc.create_element("h1")
   heading.set_text_content("Pointer Events Demo")

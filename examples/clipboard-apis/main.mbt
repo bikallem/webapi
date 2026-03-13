@@ -2,7 +2,7 @@
 /// Clipboard API Demo - copy and paste text using navigator.clipboard
 /// Works on both JS and wasm-gc targets (no async/await required)
 fn main {
-  let doc = @webapi.document
+  let doc = @webapi.document()
 
   let heading = doc.create_element("h1")
   heading.set_text_content("Clipboard API Demo")
@@ -75,10 +75,10 @@ fn main {
 
 ///|
 fn do_copy(text : String) -> Unit {
-  let result : @webapi.Element = @webapi.document.get_element_by_id(
+  let result : @webapi.Element = @webapi.document().get_element_by_id(
     "paste-result",
   )
-  @webapi.navigator
+  @webapi.navigator()
   .clipboard()
   .write_text(text)
   .then(fn(_unit) { result.set_text_content("Copied: \"\{text}\"") })
@@ -88,10 +88,10 @@ fn do_copy(text : String) -> Unit {
 
 ///|
 fn do_paste() -> Unit {
-  let result : @webapi.Element = @webapi.document.get_element_by_id(
+  let result : @webapi.Element = @webapi.document().get_element_by_id(
     "paste-result",
   )
-  @webapi.navigator
+  @webapi.navigator()
   .clipboard()
   .read_text()
   .then(fn(text : String) { result.set_text_content("Pasted: \"\{text}\"") })

@@ -1,6 +1,6 @@
 ///|
 fn edit_word(host : @webapi.HTMLElement) -> Unit {
-  let doc = @webapi.document
+  let doc = @webapi.document()
   let shadow = host.attach_shadow(
     @webapi.ShadowRootInit::new(@webapi.ShadowRootMode::Open),
   )
@@ -62,7 +62,7 @@ fn person_details(host : @webapi.HTMLElement) -> Unit {
   let shadow = host.attach_shadow(
     @webapi.ShadowRootInit::new(@webapi.ShadowRootMode::Open),
   )
-  let tmpl : @webapi.HTMLTemplateElement = @webapi.document
+  let tmpl : @webapi.HTMLTemplateElement = @webapi.document()
     .get_element_by_id("person-template")
     .into()
   shadow.append_child(tmpl.content().clone_node(subtree=true)) |> ignore

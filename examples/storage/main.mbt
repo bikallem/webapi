@@ -4,8 +4,8 @@
 
 ///|
 fn main {
-  let doc = @webapi.document
-  let storage = @webapi.window.local_storage()
+  let doc = @webapi.document()
+  let storage = @webapi.window().local_storage()
 
   // Create heading
   let heading = doc.create_element("h1")

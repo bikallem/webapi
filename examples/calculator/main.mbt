@@ -59,7 +59,7 @@ fn map_keyboard_key(key : String) -> String? {
 
 ///|
 fn wc_calculator(host : @webapi.HTMLElement) -> Unit {
-  let doc = document
+  let doc = document()
 
   // Attach shadow DOM and clone template
   let shadow = host.attach_shadow(

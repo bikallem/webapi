@@ -1,7 +1,7 @@
 ///|
 /// Encoding API Demo - TextEncoder/TextDecoder roundtrip
 fn main {
-  let doc = @webapi.document
+  let doc = @webapi.document()
 
   let heading = doc.create_element("h1")
   heading.set_text_content("Encoding API Demo")

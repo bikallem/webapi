@@ -6,13 +6,13 @@ fn main {
   let mut count = 0
 
   // Create heading
-  let heading : @webapi.HTMLHeadingElement = @webapi.document
+  let heading : @webapi.HTMLHeadingElement = @webapi.document()
     .create_element("h1")
     .into()
   heading.set_text_content("Counter")
 
   // Create count display
-  let count_display : @webapi.HTMLDivElement = @webapi.document
+  let count_display : @webapi.HTMLDivElement = @webapi.document()
     .create_element("div")
     .into()
   count_display
@@ -26,7 +26,7 @@ fn main {
   }
 
   // Create decrement button
-  let decrement_btn : @webapi.HTMLButtonElement = @webapi.document
+  let decrement_btn : @webapi.HTMLButtonElement = @webapi.document()
     .create_element("button")
     .into()
   decrement_btn
@@ -40,7 +40,7 @@ fn main {
   })
 
   // Create increment button
-  let increment_btn : @webapi.HTMLButtonElement = @webapi.document
+  let increment_btn : @webapi.HTMLButtonElement = @webapi.document()
     .create_element("button")
     .into()
   increment_btn
@@ -54,7 +54,7 @@ fn main {
   })
 
   // Create reset button
-  let reset_btn : @webapi.HTMLButtonElement = @webapi.document
+  let reset_btn : @webapi.HTMLButtonElement = @webapi.document()
     .create_element("button")
     .into()
   reset_btn
@@ -68,8 +68,8 @@ fn main {
   })
 
   // Build the DOM tree  
-  let app : @webapi.Element = @webapi.document.get_element_by_id("app")
-  let container : @webapi.HTMLDivElement = @webapi.document
+  let app : @webapi.Element = @webapi.document().get_element_by_id("app")
+  let container : @webapi.HTMLDivElement = @webapi.document()
     .create_element("div")
     .into()
   container

@@ -6,7 +6,7 @@ fn perm_str() -> String {
 ///|
 /// Notifications API Demo - show permission status and create notifications
 fn main {
-  let doc = @webapi.document
+  let doc = @webapi.document()
 
   let heading = doc.create_element("h1")
   heading.set_text_content("Notifications Demo")

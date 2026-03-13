@@ -27,10 +27,10 @@ fn state_label(state : PermissionState) -> String {
 
 ///|
 fn query_permission(name : String) -> Unit {
-  let cell : Element = document.get_element_by_id("perm-" + name)
+  let cell : Element = document().get_element_by_id("perm-" + name)
   cell.set_text_content("querying...")
   let desc = PermissionDescriptor::new(name)
-  navigator
+  navigator()
   .permissions()
   .query(desc.to_js())
   .then(fn(status : PermissionStatus) {
@@ -42,33 +42,33 @@ fn query_permission(name : String) -> Unit {
 
 ///|
 fn main {
-  let app : Element = document.get_element_by_id("app")
-  let container : HTMLDivElement = document.create_element("div").into()
+  let app : Element = document().get_element_by_id("app")
+  let container : HTMLDivElement = document().create_element("div").into()
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )
 
-  let heading = document.create_element("h1")
+  let heading = document().create_element("h1")
   heading.set_text_content("Permissions Demo")
   container.append_child(heading) |> ignore
 
   // Table
-  let table = document.create_element("table")
+  let table = document().create_element("table")
   table.set_attribute("id", "perm-table")
   table.set_attribute(
     "style", "width: 100%; border-collapse: collapse; font-family: monospace; margin: 1em 0;",
   )
 
   // Header row
-  let thead = document.create_element("thead")
-  let hrow = document.create_element("tr")
-  let th1 = document.create_element("th")
+  let thead = document().create_element("thead")
+  let hrow = document().create_element("tr")
+  let th1 = document().create_element("th")
   th1
   ..set_text_content("Permission")
   .set_attribute(
     "style", "text-align: left; padding: 0.5em; border-bottom: 2px solid #4a90d9;",
   )
-  let th2 = document.create_element("th")
+  let th2 = document().create_element("th")
   th2
   ..set_text_content("State")
   .set_attribute(
@@ -80,15 +80,15 @@ fn main {
   table.append_child(thead) |> ignore
 
   // Body rows
-  let tbody = document.create_element("tbody")
+  let tbody = document().create_element("tbody")
   for i = 0; i < permission_names.length(); i = i + 1 {
     let name = permission_names[i]
-    let tr = document.create_element("tr")
-    let td_name = document.create_element("td")
+    let tr = document().create_element("tr")
+    let td_name = document().create_element("td")
     td_name
     ..set_text_content(name)
     .set_attribute("style", "padding: 0.5em; border-bottom: 1px solid #eee;")
-    let td_state = document.create_element("td")
+    let td_state = document().create_element("td")
     td_state
     ..set_attribute("id", "perm-" + name)
     ..set_text_content("—")
@@ -101,7 +101,7 @@ fn main {
   container.append_child(table) |> ignore
 
   // Query all button
-  let query_btn : HTMLButtonElement = document.create_element("button").into()
+  let query_btn : HTMLButtonElement = document().create_element("button").into()
   query_btn
   ..set_attribute("id", "query-btn")
   ..set_attribute(

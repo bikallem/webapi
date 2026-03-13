@@ -1,7 +1,7 @@
 ///|
 /// Trusted Types example demonstrating TrustedTypePolicyFactory and TrustedHTML.
 fn main {
-  let doc = @webapi.document
+  let doc = @webapi.document()
   let app : @webapi.Element = doc.get_element_by_id("app")
   let container : @webapi.HTMLDivElement = doc.create_element("div").into()
   container.set_attribute(
@@ -12,7 +12,7 @@ fn main {
   let heading : @webapi.HTMLHeadingElement = doc.create_element("h1").into()
   heading.set_text_content("Trusted Types API")
 
-  let tt = @webapi.window.trusted_types()
+  let tt = @webapi.window().trusted_types()
 
   // Create a policy
   let policy = tt.create_policy(

@@ -1,6 +1,6 @@
 ///|
 fn my_counter(host : @webapi.HTMLElement) -> Unit {
-  let doc = @webapi.document
+  let doc = @webapi.document()
 
   // Attach shadow DOM and clone template
   let shadow = host.attach_shadow(
@@ -51,7 +51,7 @@ fn my_counter(host : @webapi.HTMLElement) -> Unit {
 ///|
 /// WC Counter example: <my-counter> custom element with Shadow DOM
 fn main {
-  let doc = @webapi.document
+  let doc = @webapi.document()
 
   // Register the <my-counter> custom element
   @webapi.define_custom_element("my-counter", my_counter)

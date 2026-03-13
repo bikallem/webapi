@@ -3,10 +3,10 @@
 /// All DOM elements are created programmatically in MoonBit
 fn main {
   // Get app container
-  let app : @webapi.Element = @webapi.document.get_element_by_id("app")
+  let app : @webapi.Element = @webapi.document().get_element_by_id("app")
 
   // Create a container div
-  let container : @webapi.HTMLDivElement = @webapi.document
+  let container : @webapi.HTMLDivElement = @webapi.document()
     .create_element("div")
     .into()
   container.set_attribute(
@@ -14,11 +14,11 @@ fn main {
   )
 
   // Create heading
-  let heading = @webapi.document.create_element("h1")
+  let heading = @webapi.document().create_element("h1")
   heading.set_text_content("Events Demo")
 
   // Create log area
-  let log_div : @webapi.HTMLDivElement = @webapi.document
+  let log_div : @webapi.HTMLDivElement = @webapi.document()
     .create_element("div")
     .into()
   log_div
@@ -29,7 +29,7 @@ fn main {
   .set_text_content("Event log:")
 
   // Create nested div structure for bubbling demo
-  let outer : @webapi.HTMLDivElement = @webapi.document
+  let outer : @webapi.HTMLDivElement = @webapi.document()
     .create_element("div")
     .into()
   outer
@@ -38,7 +38,7 @@ fn main {
     "style", "border: 2px solid #333; padding: 2em; margin: 1em 0; background: #e0e0ff; cursor: pointer;",
   )
 
-  let inner : @webapi.HTMLDivElement = @webapi.document
+  let inner : @webapi.HTMLDivElement = @webapi.document()
     .create_element("div")
     .into()
   inner
@@ -49,7 +49,7 @@ fn main {
   inner.set_text_content("Inner (click me)")
 
   // Add label to outer
-  let outer_label = @webapi.document.create_element("div")
+  let outer_label = @webapi.document().create_element("div")
   outer_label
   ..set_attribute("style", "margin-bottom: 0.5em; font-weight: bold;")
   .set_text_content("Outer")
@@ -70,7 +70,7 @@ fn main {
   outer.append_child(inner) |> ignore
 
   // Create "Log Custom" button - demonstrates programmatic event-like patterns
-  let custom_btn : @webapi.HTMLButtonElement = @webapi.document
+  let custom_btn : @webapi.HTMLButtonElement = @webapi.document()
     .create_element("button")
     .into()
   custom_btn
@@ -86,7 +86,7 @@ fn main {
   })
 
   // Create "Click Once" button - demonstrates once-fire pattern
-  let once_btn : @webapi.HTMLButtonElement = @webapi.document
+  let once_btn : @webapi.HTMLButtonElement = @webapi.document()
     .create_element("button")
     .into()
   once_btn

@@ -4,7 +4,7 @@
 /// insertBefore, and hasAttribute using the WebAPI bindings.
 /// All DOM elements are created programmatically in MoonBit.
 fn main {
-  let document = @webapi.document
+  let document = @webapi.document()
 
   // Mutable clone counter
   let mut counter = 0

@@ -12,7 +12,7 @@ using @webapi {
 
 ///|
 fn make_button(label : String, on_click : () -> Unit) -> HTMLButtonElement {
-  let btn : HTMLButtonElement = document.create_element("button").into()
+  let btn : HTMLButtonElement = document().create_element("button").into()
   btn
   ..set_text_content(label)
   ..set_attribute(
@@ -24,21 +24,21 @@ fn make_button(label : String, on_click : () -> Unit) -> HTMLButtonElement {
 
 ///|
 fn main {
-  let app : Element = document.get_element_by_id("app")
-  let container : HTMLDivElement = document.create_element("div").into()
+  let app : Element = document().get_element_by_id("app")
+  let container : HTMLDivElement = document().create_element("div").into()
   container.set_attribute(
     "style", "max-width: 700px; margin: 2em auto; padding: 1.5em; font-family: system-ui;",
   )
 
   // Title
-  let title = document.create_element("h1")
+  let title = document().create_element("h1")
   title
   ..set_text_content("Console API Demo")
   .set_attribute("style", "color: #2c3e50; margin-bottom: 0.2em;")
   container.append_child(title) |> ignore
 
   // Subtitle
-  let subtitle = document.create_element("p")
+  let subtitle = document().create_element("p")
   subtitle
   ..set_text_content(
     "Open DevTools (F12) to see console output, then click the buttons below.",
@@ -47,7 +47,7 @@ fn main {
   container.append_child(subtitle) |> ignore
 
   // --- Logging levels ---
-  let section1 = document.create_element("h2")
+  let section1 = document().create_element("h2")
   section1
   ..set_text_content("Log Levels")
   .set_attribute(
@@ -77,7 +77,7 @@ fn main {
   |> ignore
 
   // --- Assertions ---
-  let section2 = document.create_element("h2")
+  let section2 = document().create_element("h2")
   section2
   ..set_text_content("Assertions")
   .set_attribute(
@@ -99,7 +99,7 @@ fn main {
   |> ignore
 
   // --- Grouping ---
-  let section3 = document.create_element("h2")
+  let section3 = document().create_element("h2")
   section3
   ..set_text_content("Grouping")
   .set_attribute(
@@ -126,7 +126,7 @@ fn main {
   |> ignore
 
   // --- Counting ---
-  let section4 = document.create_element("h2")
+  let section4 = document().create_element("h2")
   section4
   ..set_text_content("Counting")
   .set_attribute(
@@ -144,7 +144,7 @@ fn main {
   |> ignore
 
   // --- Timing ---
-  let section5 = document.create_element("h2")
+  let section5 = document().create_element("h2")
   section5
   ..set_text_content("Timing")
   .set_attribute(
@@ -168,7 +168,7 @@ fn main {
   |> ignore
 
   // --- Other ---
-  let section6 = document.create_element("h2")
+  let section6 = document().create_element("h2")
   section6
   ..set_text_content("Other")
   .set_attribute(

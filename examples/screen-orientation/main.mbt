@@ -1,8 +1,8 @@
 ///|
 /// Screen Orientation Demo - display current orientation type and angle
 fn main {
-  let doc = @webapi.document
-  let orientation = @webapi.window.screen().orientation()
+  let doc = @webapi.document()
+  let orientation = @webapi.window().screen().orientation()
 
   let heading = doc.create_element("h1")
   heading.set_text_content("Screen Orientation Demo")

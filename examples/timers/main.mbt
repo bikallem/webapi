@@ -8,7 +8,7 @@ fn function_to_handler(f : @webapi.Function) -> @webapi.TimerHandler = "%identit
 
 ///|
 fn main {
-  let doc = @webapi.document
+  let doc = @webapi.document()
 
   // Mutable state
   let mut interval_id : Int = 0
@@ -71,7 +71,7 @@ fn main {
           @webapi.JsValue::undefined()
         }),
       )
-      interval_id = @webapi.window.set_interval(handler, timeout=500, [])
+      interval_id = @webapi.window().set_interval(handler, timeout=500, [])
     }
   })
 
@@ -79,7 +79,7 @@ fn main {
   stop_btn.add_event_listener("click", fn(_event) {
     if running {
       running = false
-      @webapi.window.clear_interval(id=interval_id)
+      @webapi.window().clear_interval(id=interval_id)
       interval_status.set_text_content("Stopped")
     }
   })
@@ -110,7 +110,7 @@ fn main {
         @webapi.JsValue::undefined()
       }),
     )
-    @webapi.window.set_timeout(handler, timeout=1000, []) |> ignore
+    @webapi.window().set_timeout(handler, timeout=1000, []) |> ignore
   })
 
   // Build DOM

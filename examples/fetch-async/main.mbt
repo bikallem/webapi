@@ -3,7 +3,7 @@
 /// Uses @js_promise.to_async_promise() to convert JsPromise to @js_async.Promise
 /// then .wait() for async/await. JS target only.
 fn main {
-  let doc = @webapi.document
+  let doc = @webapi.document()
 
   // Create heading
   let heading = doc.create_element("h1")
@@ -78,7 +78,7 @@ fn main {
 
 ///|
 async fn do_fetch(url : String) -> Unit {
-  let doc = @webapi.document
+  let doc = @webapi.document()
   let status_el : @webapi.Element = doc.get_element_by_id("status")
   let headers_el : @webapi.Element = doc.get_element_by_id("headers")
   let body_el : @webapi.Element = doc.get_element_by_id("body")
@@ -87,7 +87,7 @@ async fn do_fetch(url : String) -> Unit {
   body_el.set_text_content("")
   try {
     let response : @webapi.Response = @js_promise.to_async_promise(
-      @webapi.window.fetch(url),
+      @webapi.window().fetch(url),
     ).wait()
     let status = response.status()
     let ok = response.ok()

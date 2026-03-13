@@ -42,7 +42,7 @@ fn create_counting_stream() -> @webapi.ReadableStream {
 
 ///|
 fn main {
-  let doc = @webapi.document
+  let doc = @webapi.document()
   let app : @webapi.Element = doc.get_element_by_id("app")
 
   // Container

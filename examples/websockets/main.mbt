@@ -1,7 +1,7 @@
 ///|
 /// WebSocket Demo - uses generated WebSocket bindings to connect, send, and receive
 fn main {
-  let doc = @webapi.document
+  let doc = @webapi.document()
 
   let heading = doc.create_element("h1")
   heading.set_text_content("WebSocket Demo")

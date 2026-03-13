@@ -1,7 +1,7 @@
 ///|
 /// Fullscreen API Demo - toggle fullscreen and show status
 fn main {
-  let doc = @webapi.document
+  let doc = @webapi.document()
 
   // Heading
   let heading = doc.create_element("h1")

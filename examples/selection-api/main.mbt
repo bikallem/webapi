@@ -1,7 +1,7 @@
 ///|
 /// Selection API Demo - select text and display selection info
 fn main {
-  let doc = @webapi.document
+  let doc = @webapi.document()
 
   let heading = doc.create_element("h1")
   heading.set_text_content("Selection API Demo")
@@ -34,7 +34,7 @@ fn main {
 
   // Update selection info
   let update_info = fn() {
-    match @webapi.window.get_selection_opt() {
+    match @webapi.window().get_selection_opt() {
       Some(sel) => {
         let sel_type = sel.type_()
         let range_count = sel.range_count()
@@ -63,7 +63,7 @@ fn main {
   doc.add_event_listener("selectionchange", fn(_event) { update_info() })
 
   select_all_btn.add_event_listener("click", fn(_event) {
-    guard @webapi.window.get_selection_opt() is Some(sel) else { () }
+    guard @webapi.window().get_selection_opt() is Some(sel) else { () }
     sel.select_all_children(text_content)
     update_info()
   })

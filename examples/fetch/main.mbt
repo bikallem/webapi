@@ -2,7 +2,7 @@
 /// Fetch API example demonstrating JsPromise::then/catch_ with @webapi
 /// Works on both JS and wasm-gc targets (no async/await required)
 fn main {
-  let doc = @webapi.document
+  let doc = @webapi.document()
 
   // Create heading
   let heading = doc.create_element("h1")
@@ -77,14 +77,14 @@ fn main {
 
 ///|
 fn do_fetch(url : String) -> Unit {
-  let doc = @webapi.document
+  let doc = @webapi.document()
   let status_el : @webapi.Element = doc.get_element_by_id("status")
   let headers_el : @webapi.Element = doc.get_element_by_id("headers")
   let body_el : @webapi.Element = doc.get_element_by_id("body")
   status_el.set_text_content("Fetching...")
   headers_el.set_text_content("")
   body_el.set_text_content("")
-  @webapi.window
+  @webapi.window()
   .fetch(url)
   .then(fn(response : @webapi.Response) {
     let status = response.status()

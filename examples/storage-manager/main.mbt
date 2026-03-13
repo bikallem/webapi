@@ -2,7 +2,7 @@
 /// Storage Manager Demo - display storage estimate (usage/quota)
 /// Works on both JS and wasm-gc targets (no async/await required)
 fn main {
-  let doc = @webapi.document
+  let doc = @webapi.document()
 
   let heading = doc.create_element("h1")
   heading.set_text_content("Storage Manager Demo")
@@ -39,11 +39,11 @@ fn main {
 
 ///|
 fn do_estimate() -> Unit {
-  let doc = @webapi.document
+  let doc = @webapi.document()
   let status_div : @webapi.Element = doc.get_element_by_id("status")
   status_div.set_text_content("Estimating...")
   // Use the generated StorageManager.estimate() binding
-  @webapi.navigator
+  @webapi.navigator()
   .storage()
   .estimate()
   .then(fn(estimate : @webapi.StorageEstimate) {

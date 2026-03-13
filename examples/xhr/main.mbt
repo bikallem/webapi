@@ -1,7 +1,7 @@
 ///|
 /// XMLHttpRequest example demonstrating XHR lifecycle and readyState transitions.
 fn main {
-  let doc = @webapi.document
+  let doc = @webapi.document()
   let app : @webapi.Element = doc.get_element_by_id("app")
   let container : @webapi.HTMLDivElement = doc.create_element("div").into()
   container.set_attribute(

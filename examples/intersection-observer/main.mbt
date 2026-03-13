@@ -1,7 +1,7 @@
 ///|
 /// Intersection Observer Demo - observe elements entering/leaving viewport
 fn main {
-  let doc = @webapi.document
+  let doc = @webapi.document()
 
   let heading = doc.create_element("h1")
   heading.set_text_content("Intersection Observer Demo")

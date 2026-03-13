@@ -1,7 +1,7 @@
 ///|
 /// Vibration API example demonstrating navigator.vibrate().
 fn main {
-  let doc = @webapi.document
+  let doc = @webapi.document()
   let app : @webapi.Element = doc.get_element_by_id("app")
   let container : @webapi.HTMLDivElement = doc.create_element("div").into()
   container.set_attribute(
@@ -31,7 +31,7 @@ fn main {
   ..set_attribute("id", "single-btn")
   .set_text_content("Single Pulse (200ms)")
   single_btn.add_event_listener("click", fn(_event) {
-    let result = @webapi.navigator.vibrate(200U)
+    let result = @webapi.navigator().vibrate(200U)
     status_div.set_text_content(
       "Single pulse: " + (if result { "OK" } else { "not supported" }),
     )
@@ -45,7 +45,7 @@ fn main {
   ..set_attribute("id", "pattern-btn")
   .set_text_content("Long Pulse (500ms)")
   pattern_btn.add_event_listener("click", fn(_event) {
-    let result = @webapi.navigator.vibrate(500U)
+    let result = @webapi.navigator().vibrate(500U)
     status_div.set_text_content(
       "Pattern: " + (if result { "OK" } else { "not supported" }),
     )
@@ -55,7 +55,7 @@ fn main {
   let stop_btn : @webapi.HTMLButtonElement = doc.create_element("button").into()
   stop_btn..set_attribute("id", "stop-btn").set_text_content("Stop")
   stop_btn.add_event_listener("click", fn(_event) {
-    let result = @webapi.navigator.vibrate(0U)
+    let result = @webapi.navigator().vibrate(0U)
     status_div.set_text_content(
       "Stop: " + (if result { "OK" } else { "not supported" }),
     )

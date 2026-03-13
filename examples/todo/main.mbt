@@ -45,8 +45,8 @@ fn todo_storage_key(host : @webapi.HTMLElement) -> String {
 
 ///|
 fn wc_todo(host : @webapi.HTMLElement) -> Unit {
-  let doc = document
-  let storage = @webapi.window.local_storage()
+  let doc = document()
+  let storage = @webapi.window().local_storage()
   let component_key = todo_storage_key(host)
 
   // Attach shadow DOM and clone template

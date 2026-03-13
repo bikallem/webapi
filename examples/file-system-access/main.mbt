@@ -10,24 +10,24 @@ using @webapi {
 
 ///|
 fn main {
-  let app : Element = document.get_element_by_id("app")
-  let container : HTMLDivElement = document.create_element("div").into()
+  let app : Element = document().get_element_by_id("app")
+  let container : HTMLDivElement = document().create_element("div").into()
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )
 
-  let heading = document.create_element("h1")
+  let heading = document().create_element("h1")
   heading.set_text_content("File System Access Demo")
   container.append_child(heading) |> ignore
 
-  let description = document.create_element("p")
+  let description = document().create_element("p")
   description
   ..set_attribute("style", "color: #555; margin-bottom: 1em;")
   .set_text_content("Pick a text file to read its name, size, and contents.")
   container.append_child(description) |> ignore
 
   // Pick file button
-  let pick_btn : HTMLButtonElement = document.create_element("button").into()
+  let pick_btn : HTMLButtonElement = document().create_element("button").into()
   pick_btn
   ..set_attribute("id", "pick-btn")
   ..set_text_content("Pick File")
@@ -37,7 +37,7 @@ fn main {
   container.append_child(pick_btn) |> ignore
 
   // File info display
-  let file_info : HTMLDivElement = document.create_element("div").into()
+  let file_info : HTMLDivElement = document().create_element("div").into()
   file_info
   ..set_attribute("id", "file-info")
   ..set_text_content("No file selected.")
@@ -47,13 +47,13 @@ fn main {
   container.append_child(file_info) |> ignore
 
   // File contents display
-  let content_label = document.create_element("div")
+  let content_label = document().create_element("div")
   content_label
   ..set_attribute("style", "font-weight: bold; margin-bottom: 0.25em;")
   .set_text_content("Contents:")
   container.append_child(content_label) |> ignore
 
-  let content_div : HTMLDivElement = document.create_element("div").into()
+  let content_div : HTMLDivElement = document().create_element("div").into()
   content_div
   ..set_attribute("id", "file-content")
   .set_attribute(

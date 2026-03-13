@@ -18,17 +18,17 @@ fn make_pathname_pattern(pathname : String) -> URLPattern {
 
 ///|
 fn create_row(label : String, id : String) -> (HTMLDivElement, HTMLDivElement) {
-  let row : HTMLDivElement = document.create_element("div").into()
+  let row : HTMLDivElement = document().create_element("div").into()
   row.set_attribute(
     "style", "display: flex; align-items: baseline; margin: 0.3em 0; font-family: monospace;",
   )
-  let lbl = document.create_element("span")
+  let lbl = document().create_element("span")
   lbl
   ..set_text_content(label)
   .set_attribute(
     "style", "font-weight: bold; min-width: 120px; color: #555; font-size: 0.9em;",
   )
-  let value : HTMLDivElement = document.create_element("div").into()
+  let value : HTMLDivElement = document().create_element("div").into()
   value
   ..set_attribute("id", id)
   .set_attribute(
@@ -41,20 +41,20 @@ fn create_row(label : String, id : String) -> (HTMLDivElement, HTMLDivElement) {
 
 ///|
 fn main {
-  let app : Element = document.get_element_by_id("app")
-  let container : HTMLDivElement = document.create_element("div").into()
+  let app : Element = document().get_element_by_id("app")
+  let container : HTMLDivElement = document().create_element("div").into()
   container.set_attribute(
     "style", "max-width: 700px; margin: 2em auto; padding: 1.5em; font-family: system-ui;",
   )
 
-  let heading = document.create_element("h1")
+  let heading = document().create_element("h1")
   heading
   ..set_text_content("URLPattern Demo")
   .set_attribute("style", "color: #2c3e50; margin-bottom: 0.5em;")
   container.append_child(heading) |> ignore
 
   // Section 1: Static pattern demo
-  let section1 = document.create_element("h2")
+  let section1 = document().create_element("h2")
   section1
   ..set_text_content("Pattern: /users/:id")
   .set_attribute(
@@ -107,7 +107,7 @@ fn main {
   container.append_child(row) |> ignore
 
   // Section 2: Interactive pattern tester
-  let section2 = document.create_element("h2")
+  let section2 = document().create_element("h2")
   section2
   ..set_text_content("Interactive Tester")
   .set_attribute(
@@ -116,7 +116,7 @@ fn main {
   container.append_child(section2) |> ignore
 
   // Pattern input
-  let pattern_label = document.create_element("label")
+  let pattern_label = document().create_element("label")
   pattern_label
   ..set_text_content("Pathname pattern:")
   .set_attribute(
@@ -124,7 +124,9 @@ fn main {
   )
   container.append_child(pattern_label) |> ignore
 
-  let pattern_input : HTMLInputElement = document.create_element("input").into()
+  let pattern_input : HTMLInputElement = document()
+    .create_element("input")
+    .into()
   pattern_input
   ..set_attribute("id", "pattern-input")
   ..set_attribute("type", "text")
@@ -135,7 +137,7 @@ fn main {
   container.append_child(pattern_input) |> ignore
 
   // URL input
-  let url_label = document.create_element("label")
+  let url_label = document().create_element("label")
   url_label
   ..set_text_content("Test URL:")
   .set_attribute(
@@ -143,7 +145,7 @@ fn main {
   )
   container.append_child(url_label) |> ignore
 
-  let url_input : HTMLInputElement = document.create_element("input").into()
+  let url_input : HTMLInputElement = document().create_element("input").into()
   url_input
   ..set_attribute("id", "url-input")
   ..set_attribute("type", "text")
@@ -154,7 +156,7 @@ fn main {
   container.append_child(url_input) |> ignore
 
   // Test button
-  let test_btn : HTMLButtonElement = document.create_element("button").into()
+  let test_btn : HTMLButtonElement = document().create_element("button").into()
   test_btn
   ..set_attribute("id", "test-btn")
   ..set_text_content("Test Pattern")
@@ -164,7 +166,7 @@ fn main {
   container.append_child(test_btn) |> ignore
 
   // Result area
-  let result_div : HTMLDivElement = document.create_element("div").into()
+  let result_div : HTMLDivElement = document().create_element("div").into()
   result_div
   ..set_attribute("id", "interactive-result")
   .set_attribute(

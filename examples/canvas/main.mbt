@@ -11,14 +11,14 @@ using @webapi {
 /// Demonstrates gradients, shapes, paths, and text using the Canvas 2D API
 fn main {
   // Create and append canvas
-  let canvas : HTMLCanvasElement = document.create_element("canvas").into()
+  let canvas : HTMLCanvasElement = document().create_element("canvas").into()
   canvas
   ..set_width(800)
   ..set_height(500)
   .set_attribute(
     "style", "border: 2px solid #333; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);",
   )
-  (document.get_element_by_id("app") : Element).append_child(canvas) |> ignore
+  (document().get_element_by_id("app") : Element).append_child(canvas) |> ignore
 
   // Get 2D context
   let ctx : CanvasRenderingContext2D = canvas.get_context("2d").unwrap().into()

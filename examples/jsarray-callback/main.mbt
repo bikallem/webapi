@@ -3,7 +3,7 @@
 /// Uses ResizeObserverCallback where callback args are Array[ResizeObserverEntry].
 /// On wasm-gc this callback path is bridged internally through JsArray.
 fn main {
-  let doc = @webapi.document
+  let doc = @webapi.document()
 
   let heading = doc.create_element("h1")
   heading.set_text_content("JsArray Callback Bridge Demo")

@@ -1,7 +1,7 @@
 ///|
 /// RequestIdleCallback Demo - schedules work during browser idle periods
 fn main {
-  let doc = @webapi.document
+  let doc = @webapi.document()
 
   // Create heading
   let heading = doc.create_element("h1")
@@ -39,7 +39,7 @@ fn main {
   schedule_btn.add_event_listener("click", fn(_event) {
     status_div.set_text_content("Scheduled...")
     time_div.set_text_content("")
-    @webapi.window.request_idle_callback(fn(deadline) {
+    @webapi.window().request_idle_callback(fn(deadline) {
       let remaining = deadline.time_remaining()
       let did_timeout = deadline.did_timeout()
       status_div.set_text_content("Callback fired!")

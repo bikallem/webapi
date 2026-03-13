@@ -1,7 +1,7 @@
 ///|
 /// Touch Events Demo - display touch information
 fn main {
-  let doc = @webapi.document
+  let doc = @webapi.document()
 
   let heading = doc.create_element("h1")
   heading.set_text_content("Touch Events Demo")

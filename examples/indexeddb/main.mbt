@@ -4,7 +4,7 @@
 
 ///|
 fn main {
-  let doc = @webapi.document
+  let doc = @webapi.document()
   let app : @webapi.Element = doc.get_element_by_id("app")
 
   // Container
@@ -95,7 +95,7 @@ fn main {
   app.append_child(container) |> ignore
 
   // Open database
-  let factory = @webapi.window.indexed_db()
+  let factory = @webapi.window().indexed_db()
   let open_request = factory.open("webapi-example-db")
 
   // Create object store on first open / version upgrade

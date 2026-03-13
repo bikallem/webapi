@@ -4,7 +4,7 @@ fn pick_and_read_file(
   info_el : @webapi.HTMLDivElement,
   content_el : @webapi.HTMLDivElement,
 ) -> Unit {
-  @webapi.window
+  @webapi.window()
   .show_open_file_picker()
   .then(fn(handles : Array[@webapi.FileSystemFileHandle]) {
     if handles.length() > 0 {

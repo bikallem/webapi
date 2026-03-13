@@ -1,7 +1,7 @@
 ///|
 /// Resize Observer Demo - observe element size changes
 fn main {
-  let doc = @webapi.document
+  let doc = @webapi.document()
 
   let heading = doc.create_element("h1")
   heading.set_text_content("Resize Observer Demo")

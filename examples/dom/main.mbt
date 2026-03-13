@@ -1,6 +1,8 @@
 ///|
 fn create_item(text : String) -> @webapi.HTMLLIElement {
-  let li : @webapi.HTMLLIElement = @webapi.document.create_element("li").into()
+  let li : @webapi.HTMLLIElement = @webapi.document()
+    .create_element("li")
+    .into()
   li.class_list().add(["item"])
   li.set_text_content(text)
   li
@@ -16,13 +18,13 @@ fn main {
   let mut item_count = 3
 
   // Create heading
-  let heading : @webapi.HTMLHeadingElement = @webapi.document
+  let heading : @webapi.HTMLHeadingElement = @webapi.document()
     .create_element("h1")
     .into()
   heading..set_attribute("id", "heading").set_text_content("DOM Example")
 
   // Create the list
-  let list : @webapi.HTMLUListElement = @webapi.document
+  let list : @webapi.HTMLUListElement = @webapi.document()
     .create_element("ul")
     .into()
   list.set_attribute("id", "item-list")
@@ -34,7 +36,7 @@ fn main {
   }
 
   // Create status display
-  let status : @webapi.HTMLDivElement = @webapi.document
+  let status : @webapi.HTMLDivElement = @webapi.document()
     .create_element("div")
     .into()
   status
@@ -44,13 +46,13 @@ fn main {
 
   // Update status helper
   let update_status = fn() {
-    let items = @webapi.document.query_selector_all("#item-list .item")
+    let items = @webapi.document().query_selector_all("#item-list .item")
     let count = items.length()
     status.set_text_content("Items: " + count.to_string())
   }
 
   // Create "Add Item" button
-  let add_btn : @webapi.HTMLButtonElement = @webapi.document
+  let add_btn : @webapi.HTMLButtonElement = @webapi.document()
     .create_element("button")
     .into()
   add_btn
@@ -65,7 +67,7 @@ fn main {
   })
 
   // Create "Remove Last" button
-  let remove_btn : @webapi.HTMLButtonElement = @webapi.document
+  let remove_btn : @webapi.HTMLButtonElement = @webapi.document()
     .create_element("button")
     .into()
   remove_btn
@@ -81,7 +83,7 @@ fn main {
   })
 
   // Create "Clone First" button
-  let clone_btn : @webapi.HTMLButtonElement = @webapi.document
+  let clone_btn : @webapi.HTMLButtonElement = @webapi.document()
     .create_element("button")
     .into()
   clone_btn
@@ -100,7 +102,7 @@ fn main {
   // Demonstrate getAttribute
   let heading_id = heading.get_attribute("id")
   guard heading_id is Some(id) else { () }
-  let info : @webapi.HTMLDivElement = @webapi.document
+  let info : @webapi.HTMLDivElement = @webapi.document()
     .create_element("div")
     .into()
   info
@@ -108,8 +110,8 @@ fn main {
   .set_text_content("Heading id attribute: " + id)
 
   // Build the DOM tree
-  let app : @webapi.Element = @webapi.document.get_element_by_id("app")
-  let container : @webapi.HTMLDivElement = @webapi.document
+  let app : @webapi.Element = @webapi.document().get_element_by_id("app")
+  let container : @webapi.HTMLDivElement = @webapi.document()
     .create_element("div")
     .into()
   container.set_attribute(

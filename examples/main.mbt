@@ -104,19 +104,19 @@ fn link_id(dir : String, target : String) -> String {
 
 ///|
 fn main {
-  let app : Element = document.get_element_by_id("app")
+  let app : Element = document().get_element_by_id("app")
 
   // Build sidebar
-  let nav = document.create_element("nav")
+  let nav = document().create_element("nav")
   nav.class_list().add(["sidebar"])
 
-  let brand = document.create_element("div")
+  let brand = document().create_element("div")
   brand.class_list().add(["brand"])
 
-  let h1 = document.create_element("h1")
+  let h1 = document().create_element("h1")
   h1.set_text_content("MoonBit")
 
-  let title = document.create_element("div")
+  let title = document().create_element("div")
   title.class_list().add(["title"])
   title.set_text_content("WebAPI Examples")
 
@@ -124,21 +124,21 @@ fn main {
   brand.append_child(title) |> ignore
   nav.append_child(brand) |> ignore
 
-  let ul = document.create_element("ul")
+  let ul = document().create_element("ul")
 
   for example in examples {
     let (display_name, dir, has_wasm) = example
-    let li = document.create_element("li")
+    let li = document().create_element("li")
 
-    let name_span = document.create_element("span")
+    let name_span = document().create_element("span")
     name_span.class_list().add(["name"])
     name_span.set_text_content(display_name)
 
-    let targets = document.create_element("span")
+    let targets = document().create_element("span")
     targets.class_list().add(["targets"])
 
     // JS link
-    let js_link = document.create_element("a")
+    let js_link = document().create_element("a")
     js_link.class_list().add(["t-js"])
     js_link.set_attribute("href", "#" + dir + ".js")
     js_link.set_attribute("id", link_id(dir, "js"))
@@ -147,7 +147,7 @@ fn main {
 
     // Wasm link (only if has_wasm)
     if has_wasm {
-      let wasm_link = document.create_element("a")
+      let wasm_link = document().create_element("a")
       wasm_link.class_list().add(["t-wasm"])
       wasm_link.set_attribute("href", "#" + dir + ".wasm")
       wasm_link.set_attribute("id", link_id(dir, "wasm"))
@@ -156,7 +156,7 @@ fn main {
     }
 
     // Source link
-    let src_link = document.create_element("a")
+    let src_link = document().create_element("a")
     src_link.class_list().add(["t-src"])
     src_link.set_attribute("href", github_base + dir)
     src_link.set_attribute("target", "_blank")
@@ -171,10 +171,10 @@ fn main {
   nav.append_child(ul) |> ignore
 
   // Build main content area
-  let main = document.create_element("main")
+  let main = document().create_element("main")
   main.class_list().add(["content"])
 
-  let iframe : HTMLIFrameElement = document.create_element("iframe").into()
+  let iframe : HTMLIFrameElement = document().create_element("iframe").into()
   iframe.set_attribute("id", "demo")
   main.append_child(iframe) |> ignore
 
@@ -186,7 +186,7 @@ fn main {
 
   // Navigate based on current hash
   let navigate = fn() {
-    let hash = @webapi.window.location().hash()
+    let hash = @webapi.window().location().hash()
     let (name, target) = parse_hash(hash)
     iframe.set_src(name + "/" + name + "." + target + ".html")
 
@@ -196,7 +196,7 @@ fn main {
     }
 
     // Add active class to current link
-    match document.get_element_by_id_opt(link_id(name, target)) {
+    match document().get_element_by_id_opt(link_id(name, target)) {
       Some(el) => {
         el.class_list().add(["active"])
         prev_active.val = Some(el)
@@ -209,5 +209,5 @@ fn main {
   navigate()
 
   // Listen for hash changes (back/forward)
-  @webapi.window.add_event_listener("hashchange", fn(_event) { navigate() })
+  @webapi.window().add_event_listener("hashchange", fn(_event) { navigate() })
 }
