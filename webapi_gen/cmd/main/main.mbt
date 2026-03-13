@@ -247,22 +247,7 @@ fn reconcile_output_dir(
 }
 
 ///|
-fn strip_template_target_suffix(filename : String) -> String {
-  if filename.has_suffix("_js.mbt") {
-    let stem = filename.strip_suffix("_js.mbt").unwrap()
-    "\{stem}.mbt"
-  } else if filename.has_suffix("_wasm.mbt") {
-    let stem = filename.strip_suffix("_wasm.mbt").unwrap()
-    "\{stem}.mbt"
-  } else {
-    filename
-  }
-}
-
-///|
 /// Copy all .mbt template files from templates_dir to output_dir.
-/// Target-specific template fragments are merged into a single output file
-/// using #cfg(target=...) guards.
 fn copy_templates(
   templates_dir : String,
   output_dir : String,
@@ -271,33 +256,20 @@ fn copy_templates(
   let template_files = @fs.read_dir(templates_dir) catch {
     e => fail("failed to read templates directory \{templates_dir}: \{e}")
   }
-  let merged_templates : Map[String, @emit.MultiTargetCode] = {}
+  let output_filenames : Array[String] = []
   for filename in template_files {
     if !filename.has_suffix(".mbt") {
       continue
     }
+    output_filenames.push(filename)
+  }
+  output_filenames.sort()
+  for filename in output_filenames {
     let src_path = "\{templates_dir}/\{filename}"
     let content = @fs.read_file_to_string(src_path) catch {
       e => fail("failed to read template \{src_path}: \{e}")
     }
-    let output_name = strip_template_target_suffix(filename)
-    let current = merged_templates
-      .get(output_name)
-      .unwrap_or(@emit.MultiTargetCode::{ shared: "", js_ffi: "", wasm_ffi: "" })
-    let updated = if filename.has_suffix("_js.mbt") {
-      { ..current, js_ffi: content }
-    } else if filename.has_suffix("_wasm.mbt") {
-      { ..current, wasm_ffi: content }
-    } else {
-      { ..current, shared: content }
-    }
-    merged_templates[output_name] = updated
-  }
-  let output_filenames = merged_templates.keys().collect()
-  output_filenames.sort()
-  for filename in output_filenames {
-    let merged = @emit.merge_multi_target_code(merged_templates[filename])
-    write_output_file(output_dir, filename, merged, expected_files)
+    write_output_file(output_dir, filename, content, expected_files)
   }
   output_filenames.length()
 }

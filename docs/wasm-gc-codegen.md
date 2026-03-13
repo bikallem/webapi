@@ -127,21 +127,24 @@ export const wasmImportObject = {
 
 ### Conditional Compilation Wiring
 
-The generated `moon.pkg` maps target-specific files:
+The generated package now relies on unified `.mbt` files plus `#cfg(...)`
+guards inside those files:
 
-```
+```moonbit
 options(
-  targets: {
-    "abort_controller_interface_js.mbt":   [ "js" ],
-    "abort_controller_interface_wasm.mbt": [ "wasm-gc" ],
-    "primitives_js.mbt":                   [ "js" ],
-    "primitives_wasm.mbt":                 [ "wasm-gc" ],
-    // ... ~600 entries
-  },
+  "supported-targets": "js+wasm-gc",
 )
 ```
 
-Files without an entry (like `abort_controller_interface.mbt`) compile for all targets.
+Target-specific declarations live next to the shared wrappers, for example:
+
+```moonbit
+#cfg(target="js")
+extern "js" fn global_window_ffi() -> Window = "() => window"
+
+#cfg(target="wasm-gc")
+fn global_window_ffi() -> Window = "webapi_Global" "window"
+```
 
 ## Three Hard Problems and Their Solutions
 
@@ -156,14 +159,15 @@ JS backend:       Bool (boxed JS value) ──%identity──▶ JsValue (JS val
 Wasm-gc backend:  Bool (i32)            ──%identity──▶ JsValue (externref)    type error
 ```
 
-**Solution**: Split `primitives.mbt` into two files:
+**Solution**: Keep `primitives.mbt` unified and gate the backend-specific parts:
 
 ```moonbit
-// primitives_js.mbt — %identity works because both are JS values
+#cfg(target="js")
 pub impl TJsValue for Bool with to_js(self) -> JsValue = "%identity"
 
-// primitives_wasm.mbt — FFI call to JS: (v) => v !== 0
+#cfg(target="wasm-gc")
 fn bool_to_js_ffi(v : Bool) -> JsValue = "webapi_Primitives" "boolToJs"
+#cfg(target="wasm-gc")
 pub impl TJsValue for Bool with to_js(self) -> JsValue { bool_to_js_ffi(self) }
 ```
 
@@ -311,20 +315,23 @@ webapi_CanvasRenderingContext2D: {
 
 Without disambiguation, duplicate JS object keys cause the last one to silently win, binding the wrong function.
 
-## Base Template File Split
+## Unified Base Templates
 
-| Old (JS-only) | New Shared | New JS | New Wasm-gc |
-|---------------|-----------|--------|-------------|
-| `js_value.mbt` | `js_value.mbt` (type, trait, `unsafe_cast`) | `js_value_js.mbt` (`extern "js"` for undefined/null/isNull, `js_of`) | `js_value_wasm.mbt` (wasm imports, `jsvalue_to_string` workaround) |
-| `primitives.mbt` | — | `primitives_js.mbt` (all `%identity`) | `primitives_wasm.mbt` (FFI calls for value types, `%identity` for String) |
-| `global.mbt` | `global.mbt` (`pub fn document()/window()/navigator()`) | `global_js.mbt` (`extern "js"` FFI) | `global_wasm.mbt` (wasm imports) |
+The foundational files under `webapi_gen/base.mbt` are now single `.mbt` files
+with backend-specific declarations guarded inline:
 
-Files that needed no splitting (already cross-target compatible):
-- `js_array.mbt` — uses `= "JsArray" "empty"` syntax
-- `js_promise.mbt` — `JsPromise[T]` type with `then`/`catch_`/`finally_` methods
-- `js_promise_js.mbt` — JS FFI for JsPromise methods
-- `js_promise_wasm.mbt` — wasm-gc FFI for JsPromise methods
-- `alias.mbt`, `typed_arrays.mbt`, `js_undefined.mbt` — only `%identity` between externref types
+| File | Shared API | Backend-specific pieces |
+|------|------------|-------------------------|
+| `js_value.mbt` | `JsValue`, `TJsValue`, helpers | `#cfg(target="js")` extern JS helpers and `#cfg(target="wasm-gc")` wasm imports/string conversion helpers |
+| `primitives.mbt` | primitive `TJsValue` impl surface | JS `%identity` impls and wasm-gc FFI-backed impls in one file |
+| `global.mbt` | `document()`, `window()`, `navigator()` wrappers | JS externs and wasm-gc imports in one file |
+| `js_array.mbt` | `JsArray` type and conversions | JS identity conversions and wasm-gc host-array helpers in one file |
+| `js_object.mbt` | `JsObject` builder API | JS object ops and wasm-gc imports in one file |
+| `js_promise.mbt` | `JsPromise[T]` wrapper API | JS Promise externs and wasm-gc conversion/import helpers in one file |
+| `web_component.mbt` | custom element registration API | JS lifecycle wiring and wasm-gc wrappers/imports in one file |
+
+Files that remain backend-agnostic:
+- `alias.mbt`, `typed_arrays.mbt`, `js_undefined.mbt`, `js_any.mbt`
 
 ## Key Learnings
 

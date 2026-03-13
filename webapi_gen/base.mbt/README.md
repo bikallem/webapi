@@ -20,13 +20,13 @@ Promise support via `moonbitlang/async`:
 ### `js_array.mbt`
 Array interop:
 - `JsArray` - Opaque type for JS arrays
-- `js_array_js.mbt` - JS backend identity conversions
-- `js_array_wasm.mbt` - wasm-gc explicit host-array conversion helpers
+- `#cfg(target="js")` / `#cfg(target="wasm-gc")` gated conversions in one file
 - `JsArray::from_array()` / `JsArray::to_array()` conversions
 
 ### `primitives.mbt`
 `TJsValue` implementations for primitive types:
 - `Bool`, `Int`, `Int64`, `Double`, `String`
+- backend-specific implementations are selected with `#cfg(...)` in the same file
 
 ### `event_listener.mbt`
 The `EventListener` callback interface:
@@ -41,3 +41,7 @@ These types are manually defined rather than auto-generated because:
 2. **Special semantics** - Types like `JsArray` require special handling
 3. **Callback interface** - `EventListener` is defined as a "callback interface" in WebIDL, requiring manual implementation for proper function wrapping
 4. **Stability** - These core APIs rarely change and benefit from careful manual design
+
+For backend-dependent behavior, the base templates use `#cfg(target="js")` and
+`#cfg(target="wasm-gc")` directly inside the shared `.mbt` files instead of
+maintaining parallel `*_js.mbt` / `*_wasm.mbt` template files.
