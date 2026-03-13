@@ -78,7 +78,7 @@ fn readme_counter() -> Unit {
   let mut count = 0
 
   // Create count display element
-  let count_display : HTMLDivElement = document.create_element("div").into()
+  let count_display : HTMLDivElement = document().create_element("div").into()
   count_display
   ..set_attribute("id", "count-display")
   .set_attribute("style", "font-size: 3em; margin: 0.5em 0;")
@@ -89,7 +89,7 @@ fn readme_counter() -> Unit {
   }
 
   // Create increment button — closures are accepted directly
-  let increment_btn = document.create_element("button")
+  let increment_btn = document().create_element("button")
   increment_btn.set_text_content("+")
   increment_btn.add_event_listener("click", fn(_event) {
     count = count + 1
@@ -97,7 +97,7 @@ fn readme_counter() -> Unit {
   })
 
   // Append to DOM
-  let app : Element = document.get_element_by_id("app")
+  let app : Element = document().get_element_by_id("app")
   app.append_child(count_display) |> ignore
   app.append_child(increment_btn) |> ignore
 }
@@ -129,10 +129,10 @@ Demonstrates the Canvas 2D API with gradients, shapes, and text:
 ```moonbit nocheck
 ///|
 fn readme_canvas() -> Unit {
-  let canvas : HTMLCanvasElement = document.create_element("canvas").into()
+  let canvas : HTMLCanvasElement = document().create_element("canvas").into()
   canvas.set_width(800)
   canvas.set_height(500)
-  let app : Element = document.get_element_by_id("app")
+  let app : Element = document().get_element_by_id("app")
   app.append_child(canvas) |> ignore
 
   // Get 2D rendering context
@@ -214,19 +214,19 @@ npx serve .
 
 ### Global Objects
 
-The library provides direct access to browser global objects:
+The library provides zero-argument accessors for browser global objects:
 
 ```moonbit nocheck
 ///|
 fn readme_globals() -> Unit {
   // Access the document object
-  let _ = document.get_element_by_id("my-id")
+  let _ = document().get_element_by_id("my-id")
 
   // Access the window object
-  let _ = window.inner_width()
+  let _ = window().inner_width()
 
   // Access the navigator object
-  let _ = navigator.user_agent()
+  let _ = navigator().user_agent()
 }
 ```
 
@@ -238,7 +238,7 @@ DOM elements are returned as generic `Element` types. Use `into()` to cast to sp
 ///|
 fn readme_casting() -> Unit {
   // Create an element and cast to specific type
-  let canvas : HTMLCanvasElement = document.create_element("canvas").into()
+  let canvas : HTMLCanvasElement = document().create_element("canvas").into()
 
   // Cast to access type-specific methods
   let _ctx : CanvasRenderingContext2D = canvas.get_context("2d").unwrap().into()
@@ -256,10 +256,10 @@ Methods that return a nullable interface type (e.g., `Element?`) have two varian
 ///|
 fn readme_opt_methods() -> Unit {
   // Convenience: returns Element directly (panics if not found)
-  let app = document.get_element_by_id("app")
+  let app = document().get_element_by_id("app")
 
   // Cast to a specific subtype with .into():
-  let canvas : HTMLCanvasElement = document
+  let canvas : HTMLCanvasElement = document()
     .get_element_by_id("my-canvas")
     .into()
 
@@ -267,7 +267,7 @@ fn readme_opt_methods() -> Unit {
   // shadow.query_selector("[data-ref=display]")
 
   // _opt variant: returns Option for null-checking
-  match document.get_element_by_id_opt("maybe-missing") {
+  match document().get_element_by_id_opt("maybe-missing") {
     Some(el) => el.set_text_content("found")
     None => ()
   }
@@ -284,7 +284,7 @@ Event listeners and handlers accept closures directly:
 ```moonbit nocheck
 ///|
 fn readme_events() -> Unit {
-  let element = document.create_element("button")
+  let element = document().create_element("button")
 
   // addEventListener with closure
   element.add_event_listener("click", fn(_event) { println("Clicked!") })
@@ -298,7 +298,7 @@ Use `JsPromise` to chain async operations like `fetch()`:
 ```moonbit nocheck
 ///|
 fn readme_promises() -> Unit {
-  window
+  window()
   .fetch("https://api.example.com/data")
   .then(fn(response : Response) {
     response.text().then(fn(text : String) { Console::log([text]) }) |> ignore
@@ -313,7 +313,7 @@ On the JS backend, the `bikallem/webapi/js_promise` subpackage bridges `JsPromis
 ```moonbit nocheck
 ///|
 async fn readme_fetch_async(url : String) -> Unit {
-  let response : Response = @js_promise.to_async_promise(window.fetch(url)).wait()
+  let response : Response = @js_promise.to_async_promise(window().fetch(url)).wait()
   let text : String = @js_promise.to_async_promise(response.text()).wait()
   Console::log([text])
 }
@@ -353,7 +353,7 @@ Most setter methods return `Unit`, enabling method chaining with `..` (use `.` f
 ```moonbit nocheck
 ///|
 fn readme_chaining() -> Unit {
-  let element = document.create_element("div")
+  let element = document().create_element("div")
   element..set_attribute("id", "my-element").set_attribute("class", "container")
   element.set_text_content("Hello!")
 }
@@ -366,10 +366,10 @@ Many methods have optional parameters using MoonBit's `?` syntax:
 ```moonbit nocheck
 fn readme_optional() -> Unit {
   // With default options
-  let _ = document.create_element("div")
+  let _ = document().create_element("div")
 
   // With explicit options
-  let _ = document.create_element(
+  let _ = document().create_element(
     "div",
     options=ElementCreationOptions::new(is="custom-div"),
   )

@@ -317,7 +317,7 @@ Without disambiguation, duplicate JS object keys cause the last one to silently 
 |---------------|-----------|--------|-------------|
 | `js_value.mbt` | `js_value.mbt` (type, trait, `unsafe_cast`) | `js_value_js.mbt` (`extern "js"` for undefined/null/isNull, `js_of`) | `js_value_wasm.mbt` (wasm imports, `jsvalue_to_string` workaround) |
 | `primitives.mbt` | — | `primitives_js.mbt` (all `%identity`) | `primitives_wasm.mbt` (FFI calls for value types, `%identity` for String) |
-| `global.mbt` | `global.mbt` (`pub let document/window/navigator`) | `global_js.mbt` (`extern "js"` FFI) | `global_wasm.mbt` (wasm imports) |
+| `global.mbt` | `global.mbt` (`pub fn document()/window()/navigator()`) | `global_js.mbt` (`extern "js"` FFI) | `global_wasm.mbt` (wasm imports) |
 
 Files that needed no splitting (already cross-target compatible):
 - `js_array.mbt` — uses `= "JsArray" "empty"` syntax
