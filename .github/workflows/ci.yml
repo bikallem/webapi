@@ -20,7 +20,7 @@ jobs:
       - name: Set up MoonBit
         run: |
           rm -rf "$HOME/.moon"
-          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash -s nightly
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
           echo "$HOME/.moon/bin" >> $GITHUB_PATH
           "$HOME/.moon/bin/moon" version --all
 
