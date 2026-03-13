@@ -2,6 +2,17 @@
 
 ## [Unreleased]
 
+## [v0.4.1] - 2026-03-13
+
+### Fixed
+
+- Updated the generated global browser accessors to use `document()`, `window()`, and `navigator()` consistently across the package and docs.
+- Fixed the example gallery and example builds after the global accessor API change so `make build-examples` passes again.
+
+### Changed
+
+- Simplified `webapi_gen/base.mbt` by merging backend-specific `*_js.mbt` and `*_wasm.mbt` template files into unified `#cfg(...)`-gated base templates.
+
 ## [v0.4.0] - 2026-03-12
 
 ### Highlights
