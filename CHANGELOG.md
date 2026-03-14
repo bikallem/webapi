@@ -12,6 +12,16 @@
 - Flattened `src/gen/cmd/main/` into `src/gen/`.
 - Unified all MoonBit packages under one module; `src/gen/` excluded from publishing.
 - Simplified Makefile and CI for single-module layout.
+- Sped up trim by building once and running via `node` instead of `moon run` per file.
+
+### Fixed
+
+- Added `wasm-tools` install step to CI for wasm-gc binary validation.
+- Fixed Playwright tests 404 by using `src/examples/` path instead of symlink.
+
+### Removed
+
+- Removed `.githooks/` and `.claude/` from version control.
 
 ## [v0.4.1] - 2026-03-13
 
