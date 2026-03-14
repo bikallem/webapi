@@ -4,8 +4,8 @@ Type-safe MoonBit bindings for Web Platform APIs, automatically generated from W
 
 ## Table of Contents
 
-- [Overview](#overview)
 - [Installation](#installation)
+- [Overview](#overview)
 - [Quick Start](#quick-start)
   - [Counter Example](#counter-example)
   - [WebSocket Example](#websocket-example)
@@ -21,7 +21,7 @@ Type-safe MoonBit bindings for Web Platform APIs, automatically generated from W
   - [Custom Elements](#custom-elements)
   - [Method Chaining](#method-chaining)
   - [Optional Parameters](#optional-parameters)
-- [Trimming webapi.mjs for Production](#trimming-webapimjs-for-production)
+- [Trimming webapi.mjs for wasm-gc Production](#trimming-webapimjs-for-wasm-gc-production)
 - [WebIDL to MoonBit Conversion](#webidl-to-moonbit-conversion)
   - [Type Mappings](#type-mappings)
   - [Interface Generation](#interface-generation)
@@ -31,6 +31,20 @@ Type-safe MoonBit bindings for Web Platform APIs, automatically generated from W
 - [Supported Specifications](#supported-specifications)
 - [Building from Source](#building-from-source)
 - [License](#license)
+
+## Installation
+
+Add this package to your MoonBit project:
+
+```bash
+moon add bikallem/webapi@0.4.2
+```
+
+To also install the `webapitrim` CLI tool (for trimming `webapi.mjs` in wasm-gc deployments):
+
+```bash
+moon add --bin bikallem/webapi
+```
 
 ## Overview
 
@@ -57,14 +71,6 @@ This library provides MoonBit FFI bindings for browser APIs including:
 - **Performance** - High-resolution timing
 
 All bindings are automatically generated from official WebIDL specifications, ensuring type safety and API completeness.
-
-## Installation
-
-Add this package to your MoonBit project:
-
-```bash
-moon add bikallem/webapi@0.4.2
-```
 
 ## Quick Start
 
@@ -376,21 +382,40 @@ fn readme_optional() -> Unit {
 }
 ```
 
-## Trimming webapi.mjs for Production
+## Trimming webapi.mjs for wasm-gc Production
 
-The full `webapi/webapi.mjs` JS runtime (~8,400 lines) contains modules for every supported Web API. For wasm-gc deployments, `webapi_trim` produces a minimal version containing only the modules your `.wasm` binary actually imports — typically 500–1,000 lines (~90% smaller).
+The full `src/webapi.mjs` JS runtime (~8,400 lines) contains modules for every supported Web API. For **wasm-gc** deployments, the `webapitrim` tool produces a minimal version containing only the modules your `.wasm` binary actually imports — typically 500–1,000 lines (~90% smaller).
+
+> **Note:** This tool is only relevant for the wasm-gc backend. The JS backend does not use `webapi.mjs`.
+
+### Installing webapitrim
+
+Install the `webapitrim` CLI via the MoonBit package manager:
+
+```bash
+moon add --bin bikallem/webapi
+```
+
+This installs the `webapitrim` binary to `~/.moon/bin/` (or your configured MoonBit bin directory).
 
 ### Usage
 
 ```bash
 # Trim for a single wasm binary (output: webapi.mjs next to the .wasm file)
-make trim WASM=examples/_build/wasm-gc/release/build/counter/counter.wasm
+webapitrim path/to/app.wasm --source path/to/webapi.mjs
 
 # Trim with explicit output path
-make trim WASM=path/to/app.wasm OUT=path/to/output.mjs
+webapitrim path/to/app.wasm --source path/to/webapi.mjs -o path/to/output.mjs
+```
 
-# Trim all built examples at once
+When building from source, you can also use the Makefile targets:
+
+```bash
+# Trim all built wasm-gc examples at once
 make trim-examples
+
+# Trim a single wasm binary
+make trim WASM=path/to/app.wasm OUT=path/to/output.mjs
 ```
 
 ### HTML Setup
@@ -399,10 +424,10 @@ Point your wasm-gc HTML page at the trimmed file instead of the full bundle:
 
 ```html
 <script type="module">
-    import { wasmImportObject } from "./_build/wasm-gc/release/build/myapp/webapi.mjs";
+    import { wasmImportObject } from "./webapi.mjs";
 
     const { instance } = await WebAssembly.instantiateStreaming(
-        fetch("./_build/wasm-gc/release/build/myapp/myapp.wasm"),
+        fetch("./myapp.wasm"),
         wasmImportObject,
         { builtins: ["js-string"], importedStringConstants: "_" }
     );
@@ -412,7 +437,7 @@ Point your wasm-gc HTML page at the trimmed file instead of the full bundle:
 
 ### How It Works
 
-`webapi_trim` parses the wasm binary's import section to find which `webapi_` JS modules are referenced, then extracts only those modules (plus the shared `wasmImportObject` export) from the full `webapi.mjs`. No runtime behavior changes — just fewer unused modules shipped to the browser.
+`webapitrim` parses the wasm binary's import section to find which `webapi_` JS modules are referenced, then extracts only those modules (plus the shared `wasmImportObject` export) from the full `webapi.mjs`. No runtime behavior changes — just fewer unused modules shipped to the browser.
 
 ## WebIDL to MoonBit Conversion
 
