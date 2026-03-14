@@ -27,3 +27,4 @@ make-all.log
 .dolt/
 *.db
 .beads
+examples/**/*.mbti
