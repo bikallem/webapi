@@ -13,7 +13,7 @@ Type-safe MoonBit bindings for Web Platform APIs, automatically generated from W
 - [Examples](#examples)
 - [API Patterns](#api-patterns)
   - [Global Objects](#global-objects)
-  - [Type Casting with `into()`](#type-casting-with-into)
+  - [Type Casting](#type-casting)
   - [Nullable Returns and `_opt` Methods](#nullable-returns-and-_opt-methods)
   - [Event Handling](#event-handling)
   - [Promises](#promises)
@@ -84,7 +84,7 @@ fn readme_counter() -> Unit {
   let mut count = 0
 
   // Create count display element
-  let count_display : HTMLDivElement = document().create_element("div").into()
+  let count_display : HTMLDivElement = document().create_element("div").unsafe_into()
   count_display
   ..set_attribute("id", "count-display")
   .set_attribute("style", "font-size: 3em; margin: 0.5em 0;")
@@ -122,7 +122,7 @@ fn readme_websocket() -> Unit {
   socket.set_onopen(fn(_e) { socket.send("Hello from MoonBit!") })
 
   socket.set_onmessage(fn(e) {
-    let data : String = e.data().into()
+    let data : String = e.data().unsafe_into()
     println("Received: " + data)
   })
 }
@@ -135,14 +135,14 @@ Demonstrates the Canvas 2D API with gradients, shapes, and text:
 ```moonbit nocheck
 ///|
 fn readme_canvas() -> Unit {
-  let canvas : HTMLCanvasElement = document().create_element("canvas").into()
+  let canvas : HTMLCanvasElement = document().create_element("canvas").unsafe_into()
   canvas.set_width(800)
   canvas.set_height(500)
   let app : Element = document().get_element_by_id("app")
   app.append_child(canvas) |> ignore
 
   // Get 2D rendering context
-  let ctx : CanvasRenderingContext2D = canvas.get_context("2d").unwrap().into()
+  let ctx : CanvasRenderingContext2D = canvas.get_context("2d").unwrap().unsafe_into()
 
   // Create gradient and draw
   let gradient = ctx.create_linear_gradient(0.0, 0.0, 0.0, 300.0)
@@ -236,20 +236,43 @@ fn readme_globals() -> Unit {
 }
 ```
 
-### Type Casting with `into()`
+### Type Casting
 
-DOM elements are returned as generic `Element` types. Use `into()` to cast to specific element types:
+DOM elements are returned as generic `Element` types. To cast to specific element types, you have two options:
+
+#### Checked downcast with `try_into()` (recommended)
+
+Returns `T?` — performs a runtime `instanceof` check. Returns `None` if the value is not of the expected type:
 
 ```moonbit nocheck
 ///|
-fn readme_casting() -> Unit {
-  // Create an element and cast to specific type
-  let canvas : HTMLCanvasElement = document().create_element("canvas").into()
+fn readme_try_into() -> Unit {
+  let element = document().create_element("canvas")
 
-  // Cast to access type-specific methods
-  let _ctx : CanvasRenderingContext2D = canvas.get_context("2d").unwrap().into()
+  // Safe: returns None if the element is not an HTMLCanvasElement
+  match element.try_into() {
+    Some(canvas : HTMLCanvasElement) => {
+      let _ctx : CanvasRenderingContext2D = canvas.get_context("2d").unwrap().unsafe_into()
+    }
+    None => println("Not a canvas element")
+  }
 }
 ```
+
+#### Unchecked downcast with `unsafe_into()`
+
+Performs no runtime type check. If the underlying JS value is not of type `T`, this silently produces a value with an incorrect type, which can lead to undefined behavior (wrong methods called, silent data corruption, or runtime crashes):
+
+```moonbit nocheck
+///|
+fn readme_unsafe_into() -> Unit {
+  // Only use when you are certain of the type (e.g., you just created the element)
+  let canvas : HTMLCanvasElement = document().create_element("canvas").unsafe_into()
+  let _ctx : CanvasRenderingContext2D = canvas.get_context("2d").unwrap().unsafe_into()
+}
+```
+
+> **Guideline:** Use `try_into()` when the type is uncertain (e.g., `querySelector` results, event targets, user-provided elements). Use `unsafe_into()` when you control the value's origin and know the exact type (e.g., immediately after `create_element`).
 
 ### Nullable Returns and `_opt` Methods
 
@@ -264,10 +287,10 @@ fn readme_opt_methods() -> Unit {
   // Convenience: returns Element directly (panics if not found)
   let app = document().get_element_by_id("app")
 
-  // Cast to a specific subtype with .into():
+  // Cast to a specific subtype with .unsafe_into():
   let canvas : HTMLCanvasElement = document()
     .get_element_by_id("my-canvas")
-    .into()
+    .unsafe_into()
 
   // Works on subtypes too (e.g., ShadowRoot inherits query_selector from trait):
   // shadow.query_selector("[data-ref=display]")

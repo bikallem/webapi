@@ -39,7 +39,12 @@ pub fn define_custom_element(
   }
   let observed_attributes_js = TJsValue::to_js(observed_attributes)
   define_custom_element_ffi(
-    tag_name, on_create_js, on_connected_js, on_disconnected_js, on_adopted_js, on_attribute_changed_js,
+    tag_name,
+    on_create_js,
+    on_connected_js,
+    on_disconnected_js,
+    on_adopted_js,
+    on_attribute_changed_js,
     observed_attributes_js,
   )
 }
@@ -81,7 +86,9 @@ extern "js" fn define_custom_element_ffi(
 
 ///|
 #cfg(target="wasm-gc")
-fn web_component_wrap_cb(f : (HTMLElement) -> Unit) -> JsValue = "webapi_WebComponent" "wrapCb"
+fn web_component_wrap_cb(
+  f : (HTMLElement) -> Unit,
+) -> JsValue = "webapi_WebComponent" "wrapCb"
 
 ///|
 #cfg(target="wasm-gc")

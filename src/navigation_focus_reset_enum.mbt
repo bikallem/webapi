@@ -2,36 +2,26 @@
 // MoonBit type: NavigationFocusReset
 // Specifications: html.idl
 
-///|
 pub(all) enum NavigationFocusReset {
   AfterTransition
   Manual
 } derive(Eq)
 
-///|
-pub impl Show for NavigationFocusReset with output(
-  self : NavigationFocusReset,
-  logger : &Logger,
-) -> Unit {
+pub impl Show for NavigationFocusReset with output(self : NavigationFocusReset, logger : &Logger) -> Unit {
   match self {
-    NavigationFocusReset::AfterTransition =>
-      logger.write_string("AfterTransition")
+    NavigationFocusReset::AfterTransition => logger.write_string("AfterTransition")
     NavigationFocusReset::Manual => logger.write_string("Manual")
   }
 }
 
-///|
-pub impl TJsValue for NavigationFocusReset with to_js(
-  self : NavigationFocusReset,
-) -> JsValue {
+pub impl TJsValue for NavigationFocusReset with to_js(self: NavigationFocusReset) -> JsValue {
   match self {
     NavigationFocusReset::AfterTransition => TJsValue::to_js("after-transition")
     NavigationFocusReset::Manual => TJsValue::to_js("manual")
   }
 }
 
-///|
-pub fn NavigationFocusReset::from(value : String) -> NavigationFocusReset? {
+pub fn NavigationFocusReset::from(value: String) -> NavigationFocusReset? {
   match value {
     "after-transition" => Some(NavigationFocusReset::AfterTransition)
     "manual" => Some(NavigationFocusReset::Manual)
@@ -39,8 +29,7 @@ pub fn NavigationFocusReset::from(value : String) -> NavigationFocusReset? {
   }
 }
 
-///|
-fn NavigationFocusReset::from_unchecked(value : String) -> NavigationFocusReset {
+fn NavigationFocusReset::from_unchecked(value: String) -> NavigationFocusReset {
   match value {
     "after-transition" => NavigationFocusReset::AfterTransition
     "manual" => NavigationFocusReset::Manual
@@ -48,15 +37,13 @@ fn NavigationFocusReset::from_unchecked(value : String) -> NavigationFocusReset 
   }
 }
 
-///|
-pub fn NavigationFocusReset::value(self : NavigationFocusReset) -> String {
+pub fn NavigationFocusReset::value(self: NavigationFocusReset) -> String {
   match self {
     NavigationFocusReset::AfterTransition => "after-transition"
     NavigationFocusReset::Manual => "manual"
   }
 }
 
-///|
 pub impl FromJsAny for NavigationFocusReset with from_js_any(value : JsAny) -> NavigationFocusReset {
   NavigationFocusReset::from_unchecked(value)
 }

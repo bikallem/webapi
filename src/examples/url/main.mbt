@@ -13,7 +13,7 @@ using @webapi {
 /// Create a labeled display row: a span with the label and a div for the value.
 /// Returns (row, value_div) so the caller can set text content directly.
 fn create_row(label : String, id : String) -> (HTMLDivElement, HTMLDivElement) {
-  let row : HTMLDivElement = document().create_element("div").into()
+  let row : HTMLDivElement = document().create_element("div").unsafe_into()
   row.set_attribute(
     "style", "display: flex; align-items: baseline; margin: 0.3em 0; font-family: monospace;",
   )
@@ -23,7 +23,7 @@ fn create_row(label : String, id : String) -> (HTMLDivElement, HTMLDivElement) {
   .set_attribute(
     "style", "font-weight: bold; min-width: 140px; color: #555; font-size: 0.9em;",
   )
-  let value : HTMLDivElement = document().create_element("div").into()
+  let value : HTMLDivElement = document().create_element("div").unsafe_into()
   value
   ..set_attribute("id", id)
   .set_attribute(
@@ -37,7 +37,7 @@ fn create_row(label : String, id : String) -> (HTMLDivElement, HTMLDivElement) {
 ///|
 /// Create a section heading
 fn create_section_heading(text : String) -> HTMLDivElement {
-  let heading : HTMLDivElement = document().create_element("div").into()
+  let heading : HTMLDivElement = document().create_element("div").unsafe_into()
   heading
   ..set_text_content(text)
   .set_attribute(
@@ -55,7 +55,7 @@ fn main {
 
   // Build app container
   let app : Element = document().get_element_by_id("app")
-  let container : HTMLDivElement = document().create_element("div").into()
+  let container : HTMLDivElement = document().create_element("div").unsafe_into()
   container.set_attribute(
     "style", "max-width: 700px; margin: 2em auto; padding: 1.5em; font-family: system-ui;",
   )
@@ -127,7 +127,7 @@ fn main {
   container.append_child(create_section_heading("Modify Search Params"))
   |> ignore
 
-  let params_display : HTMLDivElement = document().create_element("div").into()
+  let params_display : HTMLDivElement = document().create_element("div").unsafe_into()
   params_display
   ..set_attribute("id", "params-display")
   ..set_text_content(url.search())
@@ -136,7 +136,7 @@ fn main {
   )
   container.append_child(params_display) |> ignore
 
-  let add_btn : HTMLButtonElement = document().create_element("button").into()
+  let add_btn : HTMLButtonElement = document().create_element("button").unsafe_into()
   add_btn
   ..set_attribute("id", "add-param-btn")
   ..set_text_content("Add Param")
@@ -159,7 +159,7 @@ fn main {
 
   let constructed_display : HTMLDivElement = document()
     .create_element("div")
-    .into()
+    .unsafe_into()
   constructed_display
   ..set_attribute("id", "constructed-url")
   ..set_text_content(constructed.href())

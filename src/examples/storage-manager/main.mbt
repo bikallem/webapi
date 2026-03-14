@@ -17,7 +17,7 @@ fn main {
 
   let estimate_btn : @webapi.HTMLButtonElement = doc
     .create_element("button")
-    .into()
+    .unsafe_into()
   estimate_btn
   ..set_attribute("id", "estimate-btn")
   ..set_attribute("style", "padding: 0.5em 1em; font-size: 1em; margin: 1em 0;")
@@ -26,7 +26,7 @@ fn main {
   estimate_btn.add_event_listener("click", fn(_event) { do_estimate() })
 
   let app : @webapi.Element = doc.get_element_by_id("app")
-  let container : @webapi.HTMLDivElement = doc.create_element("div").into()
+  let container : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )

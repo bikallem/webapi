@@ -23,7 +23,7 @@ fn main {
   // Request permission button
   let request_btn : @webapi.HTMLButtonElement = doc
     .create_element("button")
-    .into()
+    .unsafe_into()
   request_btn
   ..set_attribute("id", "request-btn")
   ..set_attribute(
@@ -34,7 +34,7 @@ fn main {
   // Notify button
   let notify_btn : @webapi.HTMLButtonElement = doc
     .create_element("button")
-    .into()
+    .unsafe_into()
   notify_btn
   ..set_attribute("id", "notify-btn")
   ..set_attribute(
@@ -62,7 +62,7 @@ fn main {
   })
 
   let app : @webapi.Element = doc.get_element_by_id("app")
-  let container : @webapi.HTMLDivElement = doc.create_element("div").into()
+  let container : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )

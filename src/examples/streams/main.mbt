@@ -28,7 +28,7 @@ fn read_chunk(
 fn create_counting_stream() -> @webapi.ReadableStream {
   let mut i = 0
   let source = @webapi.UnderlyingSource::new(pull=fn(controller) {
-    let ctrl : @webapi.ReadableStreamDefaultController = controller.into()
+    let ctrl : @webapi.ReadableStreamDefaultController = controller.unsafe_into()
     i = i + 1
     if i <= 4 {
       ctrl.enqueue(chunk=@webapi.TJsValue::to_js("Chunk " + i.to_string()))
@@ -46,7 +46,7 @@ fn main {
   let app : @webapi.Element = doc.get_element_by_id("app")
 
   // Container
-  let container : @webapi.HTMLDivElement = doc.create_element("div").into()
+  let container : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )
@@ -69,7 +69,7 @@ fn main {
   )
 
   // Read Stream button
-  let read_btn : @webapi.HTMLButtonElement = doc.create_element("button").into()
+  let read_btn : @webapi.HTMLButtonElement = doc.create_element("button").unsafe_into()
   read_btn
   ..set_id("read-btn")
   ..set_attribute(
@@ -88,7 +88,7 @@ fn main {
     // Get a default reader (locks the stream)
     let reader : @webapi.ReadableStreamDefaultReader = stream
       .get_reader()
-      .into()
+      .unsafe_into()
     status_el.set_text_content(
       "Reading... (locked: " + stream.locked().to_string() + ")",
     )

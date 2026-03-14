@@ -7,7 +7,7 @@ fn main {
   heading.set_text_content("WebSocket Demo")
 
   // URL input
-  let url_input : @webapi.HTMLInputElement = doc.create_element("input").into()
+  let url_input : @webapi.HTMLInputElement = doc.create_element("input").unsafe_into()
   url_input
   ..set_attribute("id", "ws-url")
   ..set_attribute("type", "text")
@@ -53,7 +53,7 @@ fn main {
   // Connect button
   let connect_btn : @webapi.HTMLButtonElement = doc
     .create_element("button")
-    .into()
+    .unsafe_into()
   connect_btn
   ..set_attribute("id", "connect-btn")
   ..set_attribute(
@@ -64,7 +64,7 @@ fn main {
   // Disconnect button
   let disconnect_btn : @webapi.HTMLButtonElement = doc
     .create_element("button")
-    .into()
+    .unsafe_into()
   disconnect_btn
   ..set_attribute("id", "disconnect-btn")
   ..set_attribute(
@@ -97,13 +97,13 @@ fn main {
       @webapi.JsValue::undefined()
     })
     socket.set_onmessage(fn(e) {
-      let msg_event : @webapi.MessageEvent = e.into()
+      let msg_event : @webapi.MessageEvent = e.unsafe_into()
       let data = msg_event.data().as_string()
       log_message("Received: " + data)
       @webapi.JsValue::undefined()
     })
     socket.set_onclose(fn(e) {
-      let close_event : @webapi.CloseEvent = e.into()
+      let close_event : @webapi.CloseEvent = e.unsafe_into()
       update_status(
         "Status: Disconnected (code=" + close_event.code().to_string() + ")",
       )
@@ -135,7 +135,7 @@ fn main {
 
   // Build DOM
   let app : @webapi.Element = doc.get_element_by_id("app")
-  let container : @webapi.HTMLDivElement = doc.create_element("div").into()
+  let container : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )

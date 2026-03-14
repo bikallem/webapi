@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+set -euo pipefail
+exec /home/blem/.moon/bin/moonrun /home/blem/projects/webapi/_build/wasm-gc/release/build/gen/gen.wasm -- "$@"

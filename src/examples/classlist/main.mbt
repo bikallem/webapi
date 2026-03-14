@@ -31,7 +31,7 @@ fn main {
   app.append_child(heading) |> ignore
 
   // Create target div
-  let target : HTMLDivElement = document().create_element("div").into()
+  let target : HTMLDivElement = document().create_element("div").unsafe_into()
   target
   ..set_attribute("id", "target")
   ..set_attribute("class", "box")
@@ -39,7 +39,7 @@ fn main {
   app.append_child(target) |> ignore
 
   // Create status display
-  let status : HTMLDivElement = document().create_element("div").into()
+  let status : HTMLDivElement = document().create_element("div").unsafe_into()
   status
   ..set_attribute("id", "class-status")
   .set_attribute(
@@ -49,7 +49,7 @@ fn main {
   app.append_child(status) |> ignore
 
   // Create has-result display
-  let has_result : HTMLDivElement = document().create_element("div").into()
+  let has_result : HTMLDivElement = document().create_element("div").unsafe_into()
   has_result
   ..set_attribute("id", "has-result")
   .set_attribute(
@@ -58,12 +58,12 @@ fn main {
   app.append_child(has_result) |> ignore
 
   // Create button container
-  let btn_container : HTMLDivElement = document().create_element("div").into()
+  let btn_container : HTMLDivElement = document().create_element("div").unsafe_into()
   btn_container.set_attribute("style", "margin: 10px 0;")
   app.append_child(btn_container) |> ignore
 
   // "Add highlight" button
-  let add_btn : HTMLButtonElement = document().create_element("button").into()
+  let add_btn : HTMLButtonElement = document().create_element("button").unsafe_into()
   add_btn
   ..set_attribute("id", "add-btn")
   ..set_attribute("style", "padding: 8px 16px; margin: 4px; font-size: 1em;")
@@ -78,7 +78,7 @@ fn main {
   // "Remove highlight" button
   let remove_btn : HTMLButtonElement = document()
     .create_element("button")
-    .into()
+    .unsafe_into()
   remove_btn
   ..set_attribute("id", "remove-btn")
   ..set_attribute("style", "padding: 8px 16px; margin: 4px; font-size: 1em;")
@@ -93,7 +93,7 @@ fn main {
   // "Toggle active" button
   let toggle_btn : HTMLButtonElement = document()
     .create_element("button")
-    .into()
+    .unsafe_into()
   toggle_btn
   ..set_attribute("id", "toggle-btn")
   ..set_attribute("style", "padding: 8px 16px; margin: 4px; font-size: 1em;")
@@ -108,7 +108,7 @@ fn main {
   // "Replace box->hidden" button
   let replace_btn : HTMLButtonElement = document()
     .create_element("button")
-    .into()
+    .unsafe_into()
   replace_btn
   ..set_attribute("id", "replace-btn")
   ..set_attribute("style", "padding: 8px 16px; margin: 4px; font-size: 1em;")
@@ -121,7 +121,7 @@ fn main {
   btn_container.append_child(replace_btn) |> ignore
 
   // "Has highlight?" button
-  let has_btn : HTMLButtonElement = document().create_element("button").into()
+  let has_btn : HTMLButtonElement = document().create_element("button").unsafe_into()
   has_btn
   ..set_attribute("id", "has-btn")
   ..set_attribute("style", "padding: 8px 16px; margin: 4px; font-size: 1em;")

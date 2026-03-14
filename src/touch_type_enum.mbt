@@ -2,13 +2,11 @@
 // MoonBit type: TouchType
 // Specifications: touch-events.idl
 
-///|
 pub(all) enum TouchType {
   Direct
   Stylus
 } derive(Eq)
 
-///|
 pub impl Show for TouchType with output(self : TouchType, logger : &Logger) -> Unit {
   match self {
     TouchType::Direct => logger.write_string("Direct")
@@ -16,16 +14,14 @@ pub impl Show for TouchType with output(self : TouchType, logger : &Logger) -> U
   }
 }
 
-///|
-pub impl TJsValue for TouchType with to_js(self : TouchType) -> JsValue {
+pub impl TJsValue for TouchType with to_js(self: TouchType) -> JsValue {
   match self {
     TouchType::Direct => TJsValue::to_js("direct")
     TouchType::Stylus => TJsValue::to_js("stylus")
   }
 }
 
-///|
-pub fn TouchType::from(value : String) -> TouchType? {
+pub fn TouchType::from(value: String) -> TouchType? {
   match value {
     "direct" => Some(TouchType::Direct)
     "stylus" => Some(TouchType::Stylus)
@@ -33,8 +29,7 @@ pub fn TouchType::from(value : String) -> TouchType? {
   }
 }
 
-///|
-fn TouchType::from_unchecked(value : String) -> TouchType {
+fn TouchType::from_unchecked(value: String) -> TouchType {
   match value {
     "direct" => TouchType::Direct
     "stylus" => TouchType::Stylus
@@ -42,15 +37,13 @@ fn TouchType::from_unchecked(value : String) -> TouchType {
   }
 }
 
-///|
-pub fn TouchType::value(self : TouchType) -> String {
+pub fn TouchType::value(self: TouchType) -> String {
   match self {
     TouchType::Direct => "direct"
     TouchType::Stylus => "stylus"
   }
 }
 
-///|
 pub impl FromJsAny for TouchType with from_js_any(value : JsAny) -> TouchType {
   TouchType::from_unchecked(value)
 }

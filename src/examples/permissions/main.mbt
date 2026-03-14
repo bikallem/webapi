@@ -43,7 +43,7 @@ fn query_permission(name : String) -> Unit {
 ///|
 fn main {
   let app : Element = document().get_element_by_id("app")
-  let container : HTMLDivElement = document().create_element("div").into()
+  let container : HTMLDivElement = document().create_element("div").unsafe_into()
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )
@@ -101,7 +101,7 @@ fn main {
   container.append_child(table) |> ignore
 
   // Query all button
-  let query_btn : HTMLButtonElement = document().create_element("button").into()
+  let query_btn : HTMLButtonElement = document().create_element("button").unsafe_into()
   query_btn
   ..set_attribute("id", "query-btn")
   ..set_attribute(

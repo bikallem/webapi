@@ -48,7 +48,8 @@ fn emit_js_preamble() -> String {
     #|    null: () => null,
     #|    isNull: (value) => value === null || value === undefined,
     #|    isUndefined: (value) => value === undefined,
-    #|    toString: (v) => '' + v
+    #|    toString: (v) => '' + v,
+    #|    instanceof: (v, name) => { try { return v instanceof globalThis[name]; } catch(_) { return false; } }
     #|  },
     #|
     #|  JsNull: {

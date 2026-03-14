@@ -2,7 +2,6 @@
 // MoonBit type: WellKnownDirectory
 // Specifications: file-system-access.idl
 
-///|
 pub(all) enum WellKnownDirectory {
   Desktop
   Documents
@@ -12,11 +11,7 @@ pub(all) enum WellKnownDirectory {
   Videos
 } derive(Eq)
 
-///|
-pub impl Show for WellKnownDirectory with output(
-  self : WellKnownDirectory,
-  logger : &Logger,
-) -> Unit {
+pub impl Show for WellKnownDirectory with output(self : WellKnownDirectory, logger : &Logger) -> Unit {
   match self {
     WellKnownDirectory::Desktop => logger.write_string("Desktop")
     WellKnownDirectory::Documents => logger.write_string("Documents")
@@ -27,8 +22,7 @@ pub impl Show for WellKnownDirectory with output(
   }
 }
 
-///|
-pub impl TJsValue for WellKnownDirectory with to_js(self : WellKnownDirectory) -> JsValue {
+pub impl TJsValue for WellKnownDirectory with to_js(self: WellKnownDirectory) -> JsValue {
   match self {
     WellKnownDirectory::Desktop => TJsValue::to_js("desktop")
     WellKnownDirectory::Documents => TJsValue::to_js("documents")
@@ -39,8 +33,7 @@ pub impl TJsValue for WellKnownDirectory with to_js(self : WellKnownDirectory) -
   }
 }
 
-///|
-pub fn WellKnownDirectory::from(value : String) -> WellKnownDirectory? {
+pub fn WellKnownDirectory::from(value: String) -> WellKnownDirectory? {
   match value {
     "desktop" => Some(WellKnownDirectory::Desktop)
     "documents" => Some(WellKnownDirectory::Documents)
@@ -52,8 +45,7 @@ pub fn WellKnownDirectory::from(value : String) -> WellKnownDirectory? {
   }
 }
 
-///|
-fn WellKnownDirectory::from_unchecked(value : String) -> WellKnownDirectory {
+fn WellKnownDirectory::from_unchecked(value: String) -> WellKnownDirectory {
   match value {
     "desktop" => WellKnownDirectory::Desktop
     "documents" => WellKnownDirectory::Documents
@@ -65,8 +57,7 @@ fn WellKnownDirectory::from_unchecked(value : String) -> WellKnownDirectory {
   }
 }
 
-///|
-pub fn WellKnownDirectory::value(self : WellKnownDirectory) -> String {
+pub fn WellKnownDirectory::value(self: WellKnownDirectory) -> String {
   match self {
     WellKnownDirectory::Desktop => "desktop"
     WellKnownDirectory::Documents => "documents"
@@ -77,7 +68,6 @@ pub fn WellKnownDirectory::value(self : WellKnownDirectory) -> String {
   }
 }
 
-///|
 pub impl FromJsAny for WellKnownDirectory with from_js_any(value : JsAny) -> WellKnownDirectory {
   WellKnownDirectory::from_unchecked(value)
 }

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+set -euo pipefail
+exec /home/blem/projects/webapi/_build/native/release/build/trim/trim.exe "$@"

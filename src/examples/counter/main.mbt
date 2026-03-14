@@ -8,13 +8,13 @@ fn main {
   // Create heading
   let heading : @webapi.HTMLHeadingElement = @webapi.document()
     .create_element("h1")
-    .into()
+    .unsafe_into()
   heading.set_text_content("Counter")
 
   // Create count display
   let count_display : @webapi.HTMLDivElement = @webapi.document()
     .create_element("div")
-    .into()
+    .unsafe_into()
   count_display
   ..set_attribute("id", "count-display")
   ..set_attribute("style", "font-size: 3em; margin: 0.5em 0;")
@@ -28,7 +28,7 @@ fn main {
   // Create decrement button
   let decrement_btn : @webapi.HTMLButtonElement = @webapi.document()
     .create_element("button")
-    .into()
+    .unsafe_into()
   decrement_btn
   ..set_text_content("−")
   ..set_attribute(
@@ -42,7 +42,7 @@ fn main {
   // Create increment button
   let increment_btn : @webapi.HTMLButtonElement = @webapi.document()
     .create_element("button")
-    .into()
+    .unsafe_into()
   increment_btn
   ..set_text_content("+")
   ..set_attribute(
@@ -56,7 +56,7 @@ fn main {
   // Create reset button
   let reset_btn : @webapi.HTMLButtonElement = @webapi.document()
     .create_element("button")
-    .into()
+    .unsafe_into()
   reset_btn
   ..set_text_content("Reset")
   ..set_attribute(
@@ -71,7 +71,7 @@ fn main {
   let app : @webapi.Element = @webapi.document().get_element_by_id("app")
   let container : @webapi.HTMLDivElement = @webapi.document()
     .create_element("div")
-    .into()
+    .unsafe_into()
   container
   ..set_attribute("id", "counter-app")
   .set_attribute("style", "text-align: center; font-family: system-ui;")

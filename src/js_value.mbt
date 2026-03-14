@@ -31,7 +31,11 @@ pub fn[T] JsValue::null() -> T {
 }
 
 ///|
+#deprecated("Use unsafe_into or try_into instead")
 pub fn[T : TJsValue] JsValue::into(self : JsValue) -> T = "%identity"
+
+///|
+pub fn[T : TJsValue] JsValue::unsafe_into(self : JsValue) -> T = "%identity"
 
 ///|
 /// Unsafe cast from JsValue to any type.

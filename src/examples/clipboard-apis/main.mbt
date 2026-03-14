@@ -13,7 +13,7 @@ fn main {
   .set_text_content("Requires secure context (HTTPS or localhost).")
 
   // Input field
-  let input : @webapi.HTMLInputElement = doc.create_element("input").into()
+  let input : @webapi.HTMLInputElement = doc.create_element("input").unsafe_into()
   input
   ..set_attribute("id", "input-text")
   ..set_attribute("type", "text")
@@ -24,7 +24,7 @@ fn main {
   .set_value("Hello, Clipboard!")
 
   // Copy button
-  let copy_btn : @webapi.HTMLButtonElement = doc.create_element("button").into()
+  let copy_btn : @webapi.HTMLButtonElement = doc.create_element("button").unsafe_into()
   copy_btn
   ..set_attribute("id", "copy-btn")
   ..set_attribute(
@@ -35,7 +35,7 @@ fn main {
   // Paste button
   let paste_btn : @webapi.HTMLButtonElement = doc
     .create_element("button")
-    .into()
+    .unsafe_into()
   paste_btn
   ..set_attribute("id", "paste-btn")
   ..set_attribute(
@@ -60,7 +60,7 @@ fn main {
   paste_btn.add_event_listener("click", fn(_event) { do_paste() })
 
   let app : @webapi.Element = doc.get_element_by_id("app")
-  let container : @webapi.HTMLDivElement = doc.create_element("div").into()
+  let container : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )

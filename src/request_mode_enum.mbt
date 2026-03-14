@@ -2,7 +2,6 @@
 // MoonBit type: RequestMode
 // Specifications: fetch.idl
 
-///|
 pub(all) enum RequestMode {
   Navigate
   SameOrigin
@@ -10,7 +9,6 @@ pub(all) enum RequestMode {
   Cors
 } derive(Eq)
 
-///|
 pub impl Show for RequestMode with output(self : RequestMode, logger : &Logger) -> Unit {
   match self {
     RequestMode::Navigate => logger.write_string("Navigate")
@@ -20,8 +18,7 @@ pub impl Show for RequestMode with output(self : RequestMode, logger : &Logger) 
   }
 }
 
-///|
-pub impl TJsValue for RequestMode with to_js(self : RequestMode) -> JsValue {
+pub impl TJsValue for RequestMode with to_js(self: RequestMode) -> JsValue {
   match self {
     RequestMode::Navigate => TJsValue::to_js("navigate")
     RequestMode::SameOrigin => TJsValue::to_js("same-origin")
@@ -30,8 +27,7 @@ pub impl TJsValue for RequestMode with to_js(self : RequestMode) -> JsValue {
   }
 }
 
-///|
-pub fn RequestMode::from(value : String) -> RequestMode? {
+pub fn RequestMode::from(value: String) -> RequestMode? {
   match value {
     "navigate" => Some(RequestMode::Navigate)
     "same-origin" => Some(RequestMode::SameOrigin)
@@ -41,8 +37,7 @@ pub fn RequestMode::from(value : String) -> RequestMode? {
   }
 }
 
-///|
-fn RequestMode::from_unchecked(value : String) -> RequestMode {
+fn RequestMode::from_unchecked(value: String) -> RequestMode {
   match value {
     "navigate" => RequestMode::Navigate
     "same-origin" => RequestMode::SameOrigin
@@ -52,8 +47,7 @@ fn RequestMode::from_unchecked(value : String) -> RequestMode {
   }
 }
 
-///|
-pub fn RequestMode::value(self : RequestMode) -> String {
+pub fn RequestMode::value(self: RequestMode) -> String {
   match self {
     RequestMode::Navigate => "navigate"
     RequestMode::SameOrigin => "same-origin"
@@ -62,7 +56,6 @@ pub fn RequestMode::value(self : RequestMode) -> String {
   }
 }
 
-///|
 pub impl FromJsAny for RequestMode with from_js_any(value : JsAny) -> RequestMode {
   RequestMode::from_unchecked(value)
 }

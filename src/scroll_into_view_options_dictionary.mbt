@@ -2,135 +2,79 @@
 // MoonBit type: ScrollIntoViewOptions
 // Specifications: cssom-view.idl
 
-///|
 /// [ScrollIntoViewOptions](https://developer.mozilla.org/en-US/docs/Web/API/ScrollIntoViewOptions)
 #external
 pub type ScrollIntoViewOptions
 
-///|
-pub impl TJsValue for ScrollIntoViewOptions with to_js(
-  self : ScrollIntoViewOptions,
-) -> JsValue = "%identity"
+pub impl TJsValue for ScrollIntoViewOptions with to_js(self: ScrollIntoViewOptions) -> JsValue = "%identity"
 
-///|
 pub impl FromJsAny for ScrollIntoViewOptions with from_js_any(value : JsAny) -> ScrollIntoViewOptions = "%identity"
 
-///|
-pub fn ScrollIntoViewOptions::new(
-  behavior? : ScrollBehavior,
-  block? : ScrollLogicalPosition,
-  inline? : ScrollLogicalPosition,
-  container? : ScrollIntoViewContainer,
-) -> ScrollIntoViewOptions {
-  scroll_into_view_options_ffi(
-    opt_to_js(behavior),
-    opt_to_js(block),
-    opt_to_js(inline),
-    opt_to_js(container),
-  )
+pub fn ScrollIntoViewOptions::new(behavior? : ScrollBehavior, 
+block? : ScrollLogicalPosition, 
+inline? : ScrollLogicalPosition, 
+container? : ScrollIntoViewContainer) -> ScrollIntoViewOptions {
+  scroll_into_view_options_ffi(opt_to_js(behavior), opt_to_js(block), opt_to_js(inline), opt_to_js(container))
 }
 
-///|
-pub fn ScrollIntoViewOptions::empty() -> ScrollIntoViewOptions {
-  scroll_into_view_options_empty_ffi()
-}
+pub fn ScrollIntoViewOptions::empty() -> ScrollIntoViewOptions { scroll_into_view_options_empty_ffi() }
 
-///|
-pub fn ScrollIntoViewOptions::behavior(
-  self : ScrollIntoViewOptions,
-) -> ScrollBehavior? {
+pub fn ScrollIntoViewOptions::behavior(self : ScrollIntoViewOptions) -> ScrollBehavior? {
   scroll_into_view_options_get_behavior_ffi(TJsValue::to_js(self)).to_option()
 }
 
-///|
-pub fn ScrollIntoViewOptions::block(
-  self : ScrollIntoViewOptions,
-) -> ScrollLogicalPosition? {
+pub fn ScrollIntoViewOptions::block(self : ScrollIntoViewOptions) -> ScrollLogicalPosition? {
   scroll_into_view_options_get_block_ffi(TJsValue::to_js(self)).to_option()
 }
 
-///|
-pub fn ScrollIntoViewOptions::inline(
-  self : ScrollIntoViewOptions,
-) -> ScrollLogicalPosition? {
+pub fn ScrollIntoViewOptions::inline(self : ScrollIntoViewOptions) -> ScrollLogicalPosition? {
   scroll_into_view_options_get_inline_ffi(TJsValue::to_js(self)).to_option()
 }
 
-///|
-pub fn ScrollIntoViewOptions::container(
-  self : ScrollIntoViewOptions,
-) -> ScrollIntoViewContainer? {
+pub fn ScrollIntoViewOptions::container(self : ScrollIntoViewOptions) -> ScrollIntoViewContainer? {
   scroll_into_view_options_get_container_ffi(TJsValue::to_js(self)).to_option()
 }
 
-///|
 #cfg(target="js")
-extern "js" fn scroll_into_view_options_ffi(
-  behavior : JsValue,
-  block : JsValue,
-  inline : JsValue,
-  container : JsValue,
-) -> ScrollIntoViewOptions =
-  #|(behavior, block, inline, container) => {
-  #|  const obj = {};
-  #|  if (behavior !== undefined) obj.behavior = behavior;
-  #|  if (block !== undefined) obj.block = block;
-  #|  if (inline !== undefined) obj.inline = inline;
-  #|  if (container !== undefined) obj.container = container;
-  #|  return obj;
-  #|}
+extern "js" fn scroll_into_view_options_ffi(behavior: JsValue, block: JsValue, inline: JsValue, container: JsValue) -> ScrollIntoViewOptions = 
+#|(behavior, block, inline, container) => {
+#|  const obj = {};
+#|  if (behavior !== undefined) obj.behavior = behavior;
+#|  if (block !== undefined) obj.block = block;
+#|  if (inline !== undefined) obj.inline = inline;
+#|  if (container !== undefined) obj.container = container;
+#|  return obj;
+#|}
 
-///|
 #cfg(target="js")
 extern "js" fn scroll_into_view_options_empty_ffi() -> ScrollIntoViewOptions = "() => {}"
 
-///|
 #cfg(target="js")
-extern "js" fn scroll_into_view_options_get_behavior_ffi(
-  obj : JsValue,
-) -> JsValue = "(obj) => obj.behavior"
+extern "js" fn scroll_into_view_options_get_behavior_ffi(obj: JsValue) -> JsValue = "(obj) => obj.behavior"
 
-///|
 #cfg(target="js")
-extern "js" fn scroll_into_view_options_get_block_ffi(obj : JsValue) -> JsValue = "(obj) => obj.block"
+extern "js" fn scroll_into_view_options_get_block_ffi(obj: JsValue) -> JsValue = "(obj) => obj.block"
 
-///|
 #cfg(target="js")
-extern "js" fn scroll_into_view_options_get_inline_ffi(
-  obj : JsValue,
-) -> JsValue = "(obj) => obj.inline"
+extern "js" fn scroll_into_view_options_get_inline_ffi(obj: JsValue) -> JsValue = "(obj) => obj.inline"
 
-///|
 #cfg(target="js")
-extern "js" fn scroll_into_view_options_get_container_ffi(
-  obj : JsValue,
-) -> JsValue = "(obj) => obj.container"
+extern "js" fn scroll_into_view_options_get_container_ffi(obj: JsValue) -> JsValue = "(obj) => obj.container"
 
-///|
 #cfg(target="wasm-gc")
-fn scroll_into_view_options_ffi(
-  behavior : JsValue,
-  block : JsValue,
-  inline : JsValue,
-  container : JsValue,
-) -> ScrollIntoViewOptions = "webapi_ScrollIntoViewOptions" "new"
+fn scroll_into_view_options_ffi(behavior: JsValue, block: JsValue, inline: JsValue, container: JsValue) -> ScrollIntoViewOptions = "webapi_ScrollIntoViewOptions" "new"
 
-///|
 #cfg(target="wasm-gc")
 fn scroll_into_view_options_empty_ffi() -> ScrollIntoViewOptions = "webapi_Dictionary" "empty"
 
-///|
 #cfg(target="wasm-gc")
-fn scroll_into_view_options_get_behavior_ffi(obj : JsValue) -> JsValue = "webapi_ScrollIntoViewOptions" "get_behavior"
+fn scroll_into_view_options_get_behavior_ffi(obj: JsValue) -> JsValue = "webapi_ScrollIntoViewOptions" "get_behavior"
 
-///|
 #cfg(target="wasm-gc")
-fn scroll_into_view_options_get_block_ffi(obj : JsValue) -> JsValue = "webapi_ScrollIntoViewOptions" "get_block"
+fn scroll_into_view_options_get_block_ffi(obj: JsValue) -> JsValue = "webapi_ScrollIntoViewOptions" "get_block"
 
-///|
 #cfg(target="wasm-gc")
-fn scroll_into_view_options_get_inline_ffi(obj : JsValue) -> JsValue = "webapi_ScrollIntoViewOptions" "get_inline"
+fn scroll_into_view_options_get_inline_ffi(obj: JsValue) -> JsValue = "webapi_ScrollIntoViewOptions" "get_inline"
 
-///|
 #cfg(target="wasm-gc")
-fn scroll_into_view_options_get_container_ffi(obj : JsValue) -> JsValue = "webapi_ScrollIntoViewOptions" "get_container"
+fn scroll_into_view_options_get_container_ffi(obj: JsValue) -> JsValue = "webapi_ScrollIntoViewOptions" "get_container"

@@ -58,7 +58,12 @@ test "typedef emitter emits union typedef" {
       #|
       #|pub(open) trait TMyUnion : TJsValue {}
       #|
+      #|#deprecated("Use unsafe_into or try_into instead")
       #|pub fn[T : TMyUnion + FromJsAny] MyUnion::into(self : MyUnion) -> T {
+      #|  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+      #|}
+      #|
+      #|pub fn[T : TMyUnion + FromJsAny] MyUnion::unsafe_into(self : MyUnion) -> T {
       #|  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
       #|}
       #|
@@ -71,6 +76,7 @@ test "typedef emitter emits union typedef" {
       #|pub impl TMyUnion for Function
       #|
       #|pub impl TMyUnion for Unit
+
     ),
   )
   inspect(multi.js_ffi)
@@ -107,7 +113,12 @@ test "typedef emitter emit interface types as trait references in union typedef"
       #|
       #|pub(open) trait TMyUnion : TJsValue {}
       #|
+      #|#deprecated("Use unsafe_into or try_into instead")
       #|pub fn[T : TMyUnion + FromJsAny] MyUnion::into(self : MyUnion) -> T {
+      #|  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+      #|}
+      #|
+      #|pub fn[T : TMyUnion + FromJsAny] MyUnion::unsafe_into(self : MyUnion) -> T {
       #|  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
       #|}
       #|
@@ -118,6 +129,7 @@ test "typedef emitter emit interface types as trait references in union typedef"
       #|pub impl TMyUnion for MyInterface
       #|
       #|pub impl TMyUnion for String
+
     ),
   )
   inspect(multi.js_ffi)

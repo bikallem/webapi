@@ -21,7 +21,7 @@ fn main {
   .set_text_content("Scroll to see intersections...")
 
   // Scrollable container
-  let container : @webapi.HTMLDivElement = doc.create_element("div").into()
+  let container : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
   container
   ..set_attribute("id", "container")
   .set_attribute(
@@ -55,7 +55,7 @@ fn main {
   container.append_child(spacer_bottom) |> ignore
 
   // Set up IntersectionObserver
-  let root : @webapi.Element = @webapi.TJsValue::to_js(container).into()
+  let root : @webapi.Element = @webapi.TJsValue::to_js(container).unsafe_into()
   let options = @webapi.IntersectionObserverInit::new(root~, threshold=0.5)
   let observer = @webapi.IntersectionObserver::new(
     fn(entries, _observer) {
@@ -76,12 +76,12 @@ fn main {
   let boxes = container.query_selector_all(".box")
   for i = 0U; i < boxes.length(); i = i + 1 {
     guard boxes.item_opt(i) is Some(node) else { continue }
-    let el : @webapi.Element = @webapi.TJsValue::to_js(node).into()
+    let el : @webapi.Element = @webapi.TJsValue::to_js(node).unsafe_into()
     observer.observe(el)
   }
 
   let app : @webapi.Element = doc.get_element_by_id("app")
-  let outer : @webapi.HTMLDivElement = doc.create_element("div").into()
+  let outer : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
   outer.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )

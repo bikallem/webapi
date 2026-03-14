@@ -47,18 +47,18 @@ fn rh(r : @webapi.DOMRect) -> String {
 fn main {
   let doc = @webapi.document()
   let app : @webapi.Element = doc.get_element_by_id("app")
-  let container : @webapi.HTMLDivElement = doc.create_element("div").into()
+  let container : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )
 
   // Heading
-  let heading : @webapi.HTMLHeadingElement = doc.create_element("h1").into()
+  let heading : @webapi.HTMLHeadingElement = doc.create_element("h1").unsafe_into()
   heading.set_text_content("Geometry API")
 
   // DOMPoint
   let point = @webapi.DOMPoint::new(x=10.0, y=20.0, z=5.0, w=1.0)
-  let point_info : @webapi.HTMLDivElement = doc.create_element("div").into()
+  let point_info : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
   point_info
   ..set_attribute("id", "point-info")
   .set_text_content(
@@ -74,7 +74,7 @@ fn main {
 
   // DOMRect
   let rect = @webapi.DOMRect::new(x=50.0, y=100.0, width=200.0, height=150.0)
-  let rect_info : @webapi.HTMLDivElement = doc.create_element("div").into()
+  let rect_info : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
   rect_info
   ..set_attribute("id", "rect-info")
   .set_text_content(
@@ -107,7 +107,7 @@ fn main {
   let mf = @webapi.TDOMMatrixReadOnly::f(matrix).to_string()
   let is2d = @webapi.TDOMMatrixReadOnly::is2d(matrix).to_string()
   let is_id = @webapi.TDOMMatrixReadOnly::is_identity(matrix).to_string()
-  let matrix_info : @webapi.HTMLDivElement = doc.create_element("div").into()
+  let matrix_info : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
   matrix_info
   ..set_attribute("id", "matrix-info")
   .set_text_content(
@@ -137,7 +137,7 @@ fn main {
     p4=@webapi.DOMPointInit::new(x=0.0, y=100.0),
   )
   let bounds = quad.get_bounds()
-  let quad_info : @webapi.HTMLDivElement = doc.create_element("div").into()
+  let quad_info : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
   quad_info
   ..set_attribute("id", "quad-info")
   .set_text_content(
@@ -154,13 +154,13 @@ fn main {
   // Transform button
   let transform_btn : @webapi.HTMLButtonElement = doc
     .create_element("button")
-    .into()
+    .unsafe_into()
   transform_btn
   ..set_attribute("id", "transform-btn")
   .set_text_content("Transform Point")
   let transform_output : @webapi.HTMLDivElement = doc
     .create_element("div")
-    .into()
+    .unsafe_into()
   transform_output.set_attribute("id", "transform-output")
   transform_btn.add_event_listener("click", fn(_event) {
     let translated = point.matrix_transform(

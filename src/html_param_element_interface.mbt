@@ -2,43 +2,49 @@
 // MoonBit type: HTMLParamElement
 // Specifications: html.idl
 
-///|
 /// [HTMLParamElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLParamElement)
 #external
 pub type HTMLParamElement
 
-///|
-pub impl TJsValue for HTMLParamElement with to_js(self : HTMLParamElement) -> JsValue = "%identity"
+pub impl TJsValue for HTMLParamElement with to_js(self: HTMLParamElement) -> JsValue = "%identity"
 
-///|
 pub impl FromJsAny for HTMLParamElement with from_js_any(value : JsAny) -> HTMLParamElement = "%identity"
 
-///|
-pub fn[T : THTMLParamElement] HTMLParamElement::into(
-  self : HTMLParamElement,
-) -> T = "%identity"
+/// Unchecked downcast — no runtime type check is performed.
+/// Prefer `try_into()` for checked downcasts.
+#deprecated("Use unsafe_into or try_into instead")
+pub fn[T: THTMLParamElement] HTMLParamElement::into(self : HTMLParamElement) -> T = "%identity"
 
-///|
+/// Unchecked downcast — no runtime type check is performed.
+/// WARNING: If the underlying JS value is not of type T, this will silently
+/// produce a value with incorrect type, leading to undefined behavior.
+pub fn[T: THTMLParamElement] HTMLParamElement::unsafe_into(self : HTMLParamElement) -> T = "%identity"
+
+pub impl HasConstructor for HTMLParamElement with constructor_name() { "HTMLParamElement" }
+
+/// Checked downcast — returns None if the JS value is not an instance of T.
+pub fn[T : THTMLParamElement + HasConstructor] HTMLParamElement::try_into(self : HTMLParamElement) -> T? {
+  if js_instanceof(TJsValue::to_js(self), T::constructor_name()) {
+    Some(self.unsafe_into())
+  } else {
+    None
+  }
+}
+
 pub impl THTMLParamElement for HTMLParamElement
 
-///|
 pub impl THTMLElement for HTMLParamElement
 
-///|
 pub impl TElement for HTMLParamElement
 
-///|
 pub impl TNode for HTMLParamElement
 
-///|
 pub impl TEventTarget for HTMLParamElement
 
-///|
 pub fn HTMLParamElement::new() -> HTMLParamElement {
   html_param_element_new_ffi()
 }
 
-///|
 /// [HTMLParamElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLParamElement) interface.
 pub trait THTMLParamElement: THTMLElement {
   name(self : Self) -> String = _
@@ -51,191 +57,148 @@ pub trait THTMLParamElement: THTMLElement {
   set_value_type(self : Self, value_type : String) -> Unit = _
 }
 
-///|
 /// [HTMLParamElement.name](https://developer.mozilla.org/en-US/docs/Web/API/HTMLParamElement/name)
 impl THTMLParamElement with name(self : Self) -> String {
   html_param_element_name_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [HTMLParamElement.name](https://developer.mozilla.org/en-US/docs/Web/API/HTMLParamElement/name)
-impl THTMLParamElement with set_name(self : Self, name : String) -> Unit {
+impl THTMLParamElement with set_name(self : Self, 
+name : String) -> Unit {
   html_param_element_set_name_ffi(TJsValue::to_js(self), TJsValue::to_js(name))
 }
 
-///|
 /// [HTMLParamElement.value](https://developer.mozilla.org/en-US/docs/Web/API/HTMLParamElement/value)
 impl THTMLParamElement with value(self : Self) -> String {
   html_param_element_value_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [HTMLParamElement.value](https://developer.mozilla.org/en-US/docs/Web/API/HTMLParamElement/value)
-impl THTMLParamElement with set_value(self : Self, value : String) -> Unit {
-  html_param_element_set_value_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(value),
-  )
+impl THTMLParamElement with set_value(self : Self, 
+value : String) -> Unit {
+  html_param_element_set_value_ffi(TJsValue::to_js(self), TJsValue::to_js(value))
 }
 
-///|
 /// [HTMLParamElement.type](https://developer.mozilla.org/en-US/docs/Web/API/HTMLParamElement/type)
 impl THTMLParamElement with type_(self : Self) -> String {
   html_param_element_type_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [HTMLParamElement.type](https://developer.mozilla.org/en-US/docs/Web/API/HTMLParamElement/type)
-impl THTMLParamElement with set_type_(self : Self, type_ : String) -> Unit {
+impl THTMLParamElement with set_type_(self : Self, 
+type_ : String) -> Unit {
   html_param_element_set_type_ffi(TJsValue::to_js(self), TJsValue::to_js(type_))
 }
 
-///|
 /// [HTMLParamElement.valueType](https://developer.mozilla.org/en-US/docs/Web/API/HTMLParamElement/valueType)
 impl THTMLParamElement with value_type(self : Self) -> String {
   html_param_element_value_type_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [HTMLParamElement.valueType](https://developer.mozilla.org/en-US/docs/Web/API/HTMLParamElement/valueType)
-impl THTMLParamElement with set_value_type(self : Self, value_type : String) -> Unit {
-  html_param_element_set_value_type_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(value_type),
-  )
+impl THTMLParamElement with set_value_type(self : Self, 
+value_type : String) -> Unit {
+  html_param_element_set_value_type_ffi(TJsValue::to_js(self), TJsValue::to_js(value_type))
 }
 
-///|
 #cfg(target="js")
 extern "js" fn html_param_element_new_ffi() -> HTMLParamElement = "() => new HTMLParamElement()"
 
-///|
 #cfg(target="js")
-extern "js" fn html_param_element_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.name"
+extern "js" fn html_param_element_name_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.name"
 
 ///|
 #cfg(target="js")
-fn html_param_element_name_ffi(obj : JsValue) -> String {
+fn html_param_element_name_ffi(obj: JsValue) -> String {
   html_param_element_name_ffi_js(obj).unsafe_cast()
 }
 
-///|
 #cfg(target="js")
-extern "js" fn html_param_element_set_name_ffi(
-  obj : JsValue,
-  name : JsValue,
-) -> Unit = "(obj, name) => { obj.name = name; }"
+extern "js" fn html_param_element_set_name_ffi(obj: JsValue, name: JsValue) -> Unit = "(obj, name) => { obj.name = name; }"
+
+#cfg(target="js")
+extern "js" fn html_param_element_value_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.value"
 
 ///|
 #cfg(target="js")
-extern "js" fn html_param_element_value_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.value"
-
-///|
-#cfg(target="js")
-fn html_param_element_value_ffi(obj : JsValue) -> String {
+fn html_param_element_value_ffi(obj: JsValue) -> String {
   html_param_element_value_ffi_js(obj).unsafe_cast()
 }
 
-///|
 #cfg(target="js")
-extern "js" fn html_param_element_set_value_ffi(
-  obj : JsValue,
-  value : JsValue,
-) -> Unit = "(obj, value) => { obj.value = value; }"
+extern "js" fn html_param_element_set_value_ffi(obj: JsValue, value: JsValue) -> Unit = "(obj, value) => { obj.value = value; }"
+
+#cfg(target="js")
+extern "js" fn html_param_element_type_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.type"
 
 ///|
 #cfg(target="js")
-extern "js" fn html_param_element_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.type"
-
-///|
-#cfg(target="js")
-fn html_param_element_type_ffi(obj : JsValue) -> String {
+fn html_param_element_type_ffi(obj: JsValue) -> String {
   html_param_element_type_ffi_js(obj).unsafe_cast()
 }
 
-///|
 #cfg(target="js")
-extern "js" fn html_param_element_set_type_ffi(
-  obj : JsValue,
-  type_ : JsValue,
-) -> Unit = "(obj, type) => { obj.type = type; }"
+extern "js" fn html_param_element_set_type_ffi(obj: JsValue, type_: JsValue) -> Unit = "(obj, type) => { obj.type = type; }"
+
+#cfg(target="js")
+extern "js" fn html_param_element_value_type_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.valueType"
 
 ///|
 #cfg(target="js")
-extern "js" fn html_param_element_value_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.valueType"
-
-///|
-#cfg(target="js")
-fn html_param_element_value_type_ffi(obj : JsValue) -> String {
+fn html_param_element_value_type_ffi(obj: JsValue) -> String {
   html_param_element_value_type_ffi_js(obj).unsafe_cast()
 }
 
-///|
 #cfg(target="js")
-extern "js" fn html_param_element_set_value_type_ffi(
-  obj : JsValue,
-  value_type : JsValue,
-) -> Unit = "(obj, valueType) => { obj.valueType = valueType; }"
+extern "js" fn html_param_element_set_value_type_ffi(obj: JsValue, value_type: JsValue) -> Unit = "(obj, valueType) => { obj.valueType = valueType; }"
 
-///|
 #cfg(target="wasm-gc")
 fn html_param_element_new_ffi() -> HTMLParamElement = "webapi_HTMLParamElement" "new"
 
-///|
 #cfg(target="wasm-gc")
-fn html_param_element_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLParamElement" "get_name"
+fn html_param_element_name_ffi_wasm(obj: JsValue) -> JsValue = "webapi_HTMLParamElement" "get_name"
 
 ///|
 #cfg(target="wasm-gc")
-fn html_param_element_name_ffi(obj : JsValue) -> String {
+fn html_param_element_name_ffi(obj: JsValue) -> String {
   jsvalue_to_string(html_param_element_name_ffi_wasm(obj))
 }
 
-///|
 #cfg(target="wasm-gc")
-fn html_param_element_set_name_ffi(obj : JsValue, name : JsValue) -> Unit = "webapi_HTMLParamElement" "set_name"
+fn html_param_element_set_name_ffi(obj: JsValue, name: JsValue) -> Unit = "webapi_HTMLParamElement" "set_name"
+
+#cfg(target="wasm-gc")
+fn html_param_element_value_ffi_wasm(obj: JsValue) -> JsValue = "webapi_HTMLParamElement" "get_value"
 
 ///|
 #cfg(target="wasm-gc")
-fn html_param_element_value_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLParamElement" "get_value"
-
-///|
-#cfg(target="wasm-gc")
-fn html_param_element_value_ffi(obj : JsValue) -> String {
+fn html_param_element_value_ffi(obj: JsValue) -> String {
   jsvalue_to_string(html_param_element_value_ffi_wasm(obj))
 }
 
-///|
 #cfg(target="wasm-gc")
-fn html_param_element_set_value_ffi(obj : JsValue, value : JsValue) -> Unit = "webapi_HTMLParamElement" "set_value"
+fn html_param_element_set_value_ffi(obj: JsValue, value: JsValue) -> Unit = "webapi_HTMLParamElement" "set_value"
+
+#cfg(target="wasm-gc")
+fn html_param_element_type_ffi_wasm(obj: JsValue) -> JsValue = "webapi_HTMLParamElement" "get_type"
 
 ///|
 #cfg(target="wasm-gc")
-fn html_param_element_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLParamElement" "get_type"
-
-///|
-#cfg(target="wasm-gc")
-fn html_param_element_type_ffi(obj : JsValue) -> String {
+fn html_param_element_type_ffi(obj: JsValue) -> String {
   jsvalue_to_string(html_param_element_type_ffi_wasm(obj))
 }
 
-///|
 #cfg(target="wasm-gc")
-fn html_param_element_set_type_ffi(obj : JsValue, type_ : JsValue) -> Unit = "webapi_HTMLParamElement" "set_type"
+fn html_param_element_set_type_ffi(obj: JsValue, type_: JsValue) -> Unit = "webapi_HTMLParamElement" "set_type"
+
+#cfg(target="wasm-gc")
+fn html_param_element_value_type_ffi_wasm(obj: JsValue) -> JsValue = "webapi_HTMLParamElement" "get_valueType"
 
 ///|
 #cfg(target="wasm-gc")
-fn html_param_element_value_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLParamElement" "get_valueType"
-
-///|
-#cfg(target="wasm-gc")
-fn html_param_element_value_type_ffi(obj : JsValue) -> String {
+fn html_param_element_value_type_ffi(obj: JsValue) -> String {
   jsvalue_to_string(html_param_element_value_type_ffi_wasm(obj))
 }
 
-///|
 #cfg(target="wasm-gc")
-fn html_param_element_set_value_type_ffi(
-  obj : JsValue,
-  value_type : JsValue,
-) -> Unit = "webapi_HTMLParamElement" "set_valueType"
+fn html_param_element_set_value_type_ffi(obj: JsValue, value_type: JsValue) -> Unit = "webapi_HTMLParamElement" "set_valueType"

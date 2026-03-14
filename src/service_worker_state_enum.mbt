@@ -2,7 +2,6 @@
 // MoonBit type: ServiceWorkerState
 // Specifications: service-workers.idl
 
-///|
 pub(all) enum ServiceWorkerState {
   Parsed
   Installing
@@ -12,11 +11,7 @@ pub(all) enum ServiceWorkerState {
   Redundant
 } derive(Eq)
 
-///|
-pub impl Show for ServiceWorkerState with output(
-  self : ServiceWorkerState,
-  logger : &Logger,
-) -> Unit {
+pub impl Show for ServiceWorkerState with output(self : ServiceWorkerState, logger : &Logger) -> Unit {
   match self {
     ServiceWorkerState::Parsed => logger.write_string("Parsed")
     ServiceWorkerState::Installing => logger.write_string("Installing")
@@ -27,8 +22,7 @@ pub impl Show for ServiceWorkerState with output(
   }
 }
 
-///|
-pub impl TJsValue for ServiceWorkerState with to_js(self : ServiceWorkerState) -> JsValue {
+pub impl TJsValue for ServiceWorkerState with to_js(self: ServiceWorkerState) -> JsValue {
   match self {
     ServiceWorkerState::Parsed => TJsValue::to_js("parsed")
     ServiceWorkerState::Installing => TJsValue::to_js("installing")
@@ -39,8 +33,7 @@ pub impl TJsValue for ServiceWorkerState with to_js(self : ServiceWorkerState) -
   }
 }
 
-///|
-pub fn ServiceWorkerState::from(value : String) -> ServiceWorkerState? {
+pub fn ServiceWorkerState::from(value: String) -> ServiceWorkerState? {
   match value {
     "parsed" => Some(ServiceWorkerState::Parsed)
     "installing" => Some(ServiceWorkerState::Installing)
@@ -52,8 +45,7 @@ pub fn ServiceWorkerState::from(value : String) -> ServiceWorkerState? {
   }
 }
 
-///|
-fn ServiceWorkerState::from_unchecked(value : String) -> ServiceWorkerState {
+fn ServiceWorkerState::from_unchecked(value: String) -> ServiceWorkerState {
   match value {
     "parsed" => ServiceWorkerState::Parsed
     "installing" => ServiceWorkerState::Installing
@@ -65,8 +57,7 @@ fn ServiceWorkerState::from_unchecked(value : String) -> ServiceWorkerState {
   }
 }
 
-///|
-pub fn ServiceWorkerState::value(self : ServiceWorkerState) -> String {
+pub fn ServiceWorkerState::value(self: ServiceWorkerState) -> String {
   match self {
     ServiceWorkerState::Parsed => "parsed"
     ServiceWorkerState::Installing => "installing"
@@ -77,7 +68,6 @@ pub fn ServiceWorkerState::value(self : ServiceWorkerState) -> String {
   }
 }
 
-///|
 pub impl FromJsAny for ServiceWorkerState with from_js_any(value : JsAny) -> ServiceWorkerState {
   ServiceWorkerState::from_unchecked(value)
 }

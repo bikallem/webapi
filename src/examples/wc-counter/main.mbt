@@ -8,7 +8,7 @@ fn my_counter(host : @webapi.HTMLElement) -> Unit {
   )
   let template : @webapi.HTMLTemplateElement = doc
     .get_element_by_id("my-counter-template")
-    .into()
+    .unsafe_into()
   shadow.append_child(template.content().clone_node(subtree=true)) |> ignore
 
   // Query shadow DOM for elements
@@ -60,9 +60,9 @@ fn main {
   let app : @webapi.Element = doc.get_element_by_id("app")
   let log : @webapi.Element = doc.get_element_by_id("event-log")
   app.add_event_listener("count-changed", fn(event) {
-    let ce : @webapi.CustomEvent = event.into()
+    let ce : @webapi.CustomEvent = event.unsafe_into()
     let detail = ce.detail()
-    let target : @webapi.Element = event.target().into()
+    let target : @webapi.Element = event.target().unsafe_into()
     let id = target.id()
     log.set_text_content("Event log: " + id + " → " + detail.to_string())
   })

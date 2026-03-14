@@ -2,7 +2,7 @@
 fn create_item(text : String) -> @webapi.HTMLLIElement {
   let li : @webapi.HTMLLIElement = @webapi.document()
     .create_element("li")
-    .into()
+    .unsafe_into()
   li.class_list().add(["item"])
   li.set_text_content(text)
   li
@@ -20,13 +20,13 @@ fn main {
   // Create heading
   let heading : @webapi.HTMLHeadingElement = @webapi.document()
     .create_element("h1")
-    .into()
+    .unsafe_into()
   heading..set_attribute("id", "heading").set_text_content("DOM Example")
 
   // Create the list
   let list : @webapi.HTMLUListElement = @webapi.document()
     .create_element("ul")
-    .into()
+    .unsafe_into()
   list.set_attribute("id", "item-list")
 
   // Add 3 initial items
@@ -38,7 +38,7 @@ fn main {
   // Create status display
   let status : @webapi.HTMLDivElement = @webapi.document()
     .create_element("div")
-    .into()
+    .unsafe_into()
   status
   ..set_attribute("id", "status")
   ..set_attribute("style", "margin: 1em 0; font-weight: bold;")
@@ -54,7 +54,7 @@ fn main {
   // Create "Add Item" button
   let add_btn : @webapi.HTMLButtonElement = @webapi.document()
     .create_element("button")
-    .into()
+    .unsafe_into()
   add_btn
   ..set_attribute("id", "add-btn")
   ..set_attribute("style", "padding: 0.5em 1em; margin: 0 0.25em;")
@@ -69,7 +69,7 @@ fn main {
   // Create "Remove Last" button
   let remove_btn : @webapi.HTMLButtonElement = @webapi.document()
     .create_element("button")
-    .into()
+    .unsafe_into()
   remove_btn
   ..set_attribute("id", "remove-btn")
   ..set_attribute("style", "padding: 0.5em 1em; margin: 0 0.25em;")
@@ -85,7 +85,7 @@ fn main {
   // Create "Clone First" button
   let clone_btn : @webapi.HTMLButtonElement = @webapi.document()
     .create_element("button")
-    .into()
+    .unsafe_into()
   clone_btn
   ..set_attribute("id", "clone-btn")
   ..set_attribute("style", "padding: 0.5em 1em; margin: 0 0.25em;")
@@ -104,7 +104,7 @@ fn main {
   guard heading_id is Some(id) else { () }
   let info : @webapi.HTMLDivElement = @webapi.document()
     .create_element("div")
-    .into()
+    .unsafe_into()
   info
   ..set_attribute("style", "margin: 0.5em 0; color: gray; font-size: 0.9em;")
   .set_text_content("Heading id attribute: " + id)
@@ -113,7 +113,7 @@ fn main {
   let app : @webapi.Element = @webapi.document().get_element_by_id("app")
   let container : @webapi.HTMLDivElement = @webapi.document()
     .create_element("div")
-    .into()
+    .unsafe_into()
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )

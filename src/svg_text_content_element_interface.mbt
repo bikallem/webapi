@@ -2,52 +2,53 @@
 // MoonBit type: SVGTextContentElement
 // Specifications: SVG.idl
 
-///|
 /// [SVGTextContentElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextContentElement)
 #external
 pub type SVGTextContentElement
 
-///|
-pub impl TJsValue for SVGTextContentElement with to_js(
-  self : SVGTextContentElement,
-) -> JsValue = "%identity"
+pub impl TJsValue for SVGTextContentElement with to_js(self: SVGTextContentElement) -> JsValue = "%identity"
 
-///|
 pub impl FromJsAny for SVGTextContentElement with from_js_any(value : JsAny) -> SVGTextContentElement = "%identity"
 
-///|
-pub fn[T : TSVGTextContentElement] SVGTextContentElement::into(
-  self : SVGTextContentElement,
-) -> T = "%identity"
+/// Unchecked downcast — no runtime type check is performed.
+/// Prefer `try_into()` for checked downcasts.
+#deprecated("Use unsafe_into or try_into instead")
+pub fn[T: TSVGTextContentElement] SVGTextContentElement::into(self : SVGTextContentElement) -> T = "%identity"
 
-///|
+/// Unchecked downcast — no runtime type check is performed.
+/// WARNING: If the underlying JS value is not of type T, this will silently
+/// produce a value with incorrect type, leading to undefined behavior.
+pub fn[T: TSVGTextContentElement] SVGTextContentElement::unsafe_into(self : SVGTextContentElement) -> T = "%identity"
+
+pub impl HasConstructor for SVGTextContentElement with constructor_name() { "SVGTextContentElement" }
+
+/// Checked downcast — returns None if the JS value is not an instance of T.
+pub fn[T : TSVGTextContentElement + HasConstructor] SVGTextContentElement::try_into(self : SVGTextContentElement) -> T? {
+  if js_instanceof(TJsValue::to_js(self), T::constructor_name()) {
+    Some(self.unsafe_into())
+  } else {
+    None
+  }
+}
+
 pub impl TSVGTextContentElement for SVGTextContentElement
 
-///|
 pub impl TSVGGraphicsElement for SVGTextContentElement
 
-///|
 pub impl TSVGElement for SVGTextContentElement
 
-///|
 pub impl TElement for SVGTextContentElement
 
-///|
 pub impl TNode for SVGTextContentElement
 
-///|
 pub impl TEventTarget for SVGTextContentElement
 
-///|
-pub const SVG_TEXT_CONTENT_ELEMENT_LENGTHADJUST_UNKNOWN : UInt = 0
+pub const SVG_TEXT_CONTENT_ELEMENT_LENGTHADJUST_UNKNOWN: UInt = 0
 
-///|
-pub const SVG_TEXT_CONTENT_ELEMENT_LENGTHADJUST_SPACING : UInt = 1
+pub const SVG_TEXT_CONTENT_ELEMENT_LENGTHADJUST_SPACING: UInt = 1
 
-///|
-pub const SVG_TEXT_CONTENT_ELEMENT_LENGTHADJUST_SPACINGANDGLYPHS : UInt = 2
+pub const SVG_TEXT_CONTENT_ELEMENT_LENGTHADJUST_SPACINGANDGLYPHS: UInt = 2
 
-///|
 /// [SVGTextContentElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextContentElement) interface.
 pub trait TSVGTextContentElement: TSVGGraphicsElement {
   text_length(self : Self) -> SVGAnimatedLength = _
@@ -63,340 +64,192 @@ pub trait TSVGTextContentElement: TSVGGraphicsElement {
   select_sub_string(self : Self, charnum : UInt, nchars : UInt) -> Unit = _
 }
 
-///|
 /// [SVGTextContentElement.textLength](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextContentElement/textLength)
 impl TSVGTextContentElement with text_length(self : Self) -> SVGAnimatedLength {
   svg_text_content_element_text_length_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGTextContentElement.lengthAdjust](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextContentElement/lengthAdjust)
 impl TSVGTextContentElement with length_adjust(self : Self) -> SVGAnimatedEnumeration {
   svg_text_content_element_length_adjust_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGTextContentElement.getNumberOfChars](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextContentElement/getNumberOfChars)
 impl TSVGTextContentElement with get_number_of_chars(self : Self) -> Int {
   svg_text_content_element_get_number_of_chars_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGTextContentElement.getComputedTextLength](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextContentElement/getComputedTextLength)
 impl TSVGTextContentElement with get_computed_text_length(self : Self) -> Float {
   svg_text_content_element_get_computed_text_length_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [SVGTextContentElement.getSubStringLength](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextContentElement/getSubStringLength)
-impl TSVGTextContentElement with get_sub_string_length(
-  self : Self,
-  charnum : UInt,
-  nchars : UInt,
-) -> Float {
-  svg_text_content_element_get_sub_string_length_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(charnum),
-    TJsValue::to_js(nchars),
-  )
+impl TSVGTextContentElement with get_sub_string_length(self : Self, 
+charnum : UInt, 
+nchars : UInt) -> Float {
+  svg_text_content_element_get_sub_string_length_ffi(TJsValue::to_js(self), TJsValue::to_js(charnum), TJsValue::to_js(nchars))
 }
 
-///|
 /// [SVGTextContentElement.getStartPositionOfChar](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextContentElement/getStartPositionOfChar)
-impl TSVGTextContentElement with get_start_position_of_char(
-  self : Self,
-  charnum : UInt,
-) -> DOMPoint {
-  svg_text_content_element_get_start_position_of_char_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(charnum),
-  )
+impl TSVGTextContentElement with get_start_position_of_char(self : Self, 
+charnum : UInt) -> DOMPoint {
+  svg_text_content_element_get_start_position_of_char_ffi(TJsValue::to_js(self), TJsValue::to_js(charnum))
 }
 
-///|
 /// [SVGTextContentElement.getEndPositionOfChar](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextContentElement/getEndPositionOfChar)
-impl TSVGTextContentElement with get_end_position_of_char(
-  self : Self,
-  charnum : UInt,
-) -> DOMPoint {
-  svg_text_content_element_get_end_position_of_char_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(charnum),
-  )
+impl TSVGTextContentElement with get_end_position_of_char(self : Self, 
+charnum : UInt) -> DOMPoint {
+  svg_text_content_element_get_end_position_of_char_ffi(TJsValue::to_js(self), TJsValue::to_js(charnum))
 }
 
-///|
 /// [SVGTextContentElement.getExtentOfChar](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextContentElement/getExtentOfChar)
-impl TSVGTextContentElement with get_extent_of_char(self : Self, charnum : UInt) -> DOMRect {
-  svg_text_content_element_get_extent_of_char_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(charnum),
-  )
+impl TSVGTextContentElement with get_extent_of_char(self : Self, 
+charnum : UInt) -> DOMRect {
+  svg_text_content_element_get_extent_of_char_ffi(TJsValue::to_js(self), TJsValue::to_js(charnum))
 }
 
-///|
 /// [SVGTextContentElement.getRotationOfChar](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextContentElement/getRotationOfChar)
-impl TSVGTextContentElement with get_rotation_of_char(
-  self : Self,
-  charnum : UInt,
-) -> Float {
-  svg_text_content_element_get_rotation_of_char_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(charnum),
-  )
+impl TSVGTextContentElement with get_rotation_of_char(self : Self, 
+charnum : UInt) -> Float {
+  svg_text_content_element_get_rotation_of_char_ffi(TJsValue::to_js(self), TJsValue::to_js(charnum))
 }
 
-///|
 /// [SVGTextContentElement.getCharNumAtPosition](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextContentElement/getCharNumAtPosition)
-impl TSVGTextContentElement with get_char_num_at_position(
-  self : Self,
-  point? : DOMPointInit,
-) -> Int {
-  svg_text_content_element_get_char_num_at_position_ffi(
-    TJsValue::to_js(self),
-    opt_to_js(point),
-  )
+impl TSVGTextContentElement with get_char_num_at_position(self : Self, 
+point? : DOMPointInit) -> Int {
+  svg_text_content_element_get_char_num_at_position_ffi(TJsValue::to_js(self), opt_to_js(point))
 }
 
-///|
 /// [SVGTextContentElement.selectSubString](https://developer.mozilla.org/en-US/docs/Web/API/SVGTextContentElement/selectSubString)
-impl TSVGTextContentElement with select_sub_string(
-  self : Self,
-  charnum : UInt,
-  nchars : UInt,
-) -> Unit {
-  svg_text_content_element_select_sub_string_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(charnum),
-    TJsValue::to_js(nchars),
-  )
+impl TSVGTextContentElement with select_sub_string(self : Self, 
+charnum : UInt, 
+nchars : UInt) -> Unit {
+  svg_text_content_element_select_sub_string_ffi(TJsValue::to_js(self), TJsValue::to_js(charnum), TJsValue::to_js(nchars))
 }
 
-///|
 #cfg(target="js")
-extern "js" fn svg_text_content_element_text_length_ffi_js(
-  obj : JsValue,
-) -> JsValue = "(obj) => obj.textLength"
+extern "js" fn svg_text_content_element_text_length_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.textLength"
 
 ///|
 #cfg(target="js")
-fn svg_text_content_element_text_length_ffi(obj : JsValue) -> SVGAnimatedLength {
+fn svg_text_content_element_text_length_ffi(obj: JsValue) -> SVGAnimatedLength {
   svg_text_content_element_text_length_ffi_js(obj).unsafe_cast()
 }
 
-///|
 #cfg(target="js")
-extern "js" fn svg_text_content_element_length_adjust_ffi_js(
-  obj : JsValue,
-) -> JsValue = "(obj) => obj.lengthAdjust"
+extern "js" fn svg_text_content_element_length_adjust_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.lengthAdjust"
 
 ///|
 #cfg(target="js")
-fn svg_text_content_element_length_adjust_ffi(
-  obj : JsValue,
-) -> SVGAnimatedEnumeration {
+fn svg_text_content_element_length_adjust_ffi(obj: JsValue) -> SVGAnimatedEnumeration {
   svg_text_content_element_length_adjust_ffi_js(obj).unsafe_cast()
 }
 
-///|
 #cfg(target="js")
-extern "js" fn svg_text_content_element_get_number_of_chars_ffi_js(
-  obj : JsValue,
-) -> JsValue = "(obj) => obj.getNumberOfChars()"
+extern "js" fn svg_text_content_element_get_number_of_chars_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.getNumberOfChars()"
 
 ///|
 #cfg(target="js")
-fn svg_text_content_element_get_number_of_chars_ffi(obj : JsValue) -> Int {
+fn svg_text_content_element_get_number_of_chars_ffi(obj: JsValue) -> Int {
   svg_text_content_element_get_number_of_chars_ffi_js(obj).unsafe_cast()
 }
 
-///|
 #cfg(target="js")
-extern "js" fn svg_text_content_element_get_computed_text_length_ffi_js(
-  obj : JsValue,
-) -> JsValue = "(obj) => obj.getComputedTextLength()"
+extern "js" fn svg_text_content_element_get_computed_text_length_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.getComputedTextLength()"
 
 ///|
 #cfg(target="js")
-fn svg_text_content_element_get_computed_text_length_ffi(
-  obj : JsValue,
-) -> Float {
+fn svg_text_content_element_get_computed_text_length_ffi(obj: JsValue) -> Float {
   svg_text_content_element_get_computed_text_length_ffi_js(obj).unsafe_cast()
 }
 
-///|
 #cfg(target="js")
-extern "js" fn svg_text_content_element_get_sub_string_length_ffi_js(
-  obj : JsValue,
-  charnum : JsValue,
-  nchars : JsValue,
-) -> JsValue = "(obj, charnum, nchars) => obj.getSubStringLength(charnum, nchars)"
+extern "js" fn svg_text_content_element_get_sub_string_length_ffi_js(obj: JsValue, charnum: JsValue, nchars: JsValue) -> JsValue = "(obj, charnum, nchars) => obj.getSubStringLength(charnum, nchars)"
 
 ///|
 #cfg(target="js")
-fn svg_text_content_element_get_sub_string_length_ffi(
-  obj : JsValue,
-  charnum : JsValue,
-  nchars : JsValue,
-) -> Float {
+fn svg_text_content_element_get_sub_string_length_ffi(obj: JsValue, charnum: JsValue, nchars: JsValue) -> Float {
   svg_text_content_element_get_sub_string_length_ffi_js(obj, charnum, nchars).unsafe_cast()
 }
 
-///|
 #cfg(target="js")
-extern "js" fn svg_text_content_element_get_start_position_of_char_ffi_js(
-  obj : JsValue,
-  charnum : JsValue,
-) -> JsValue = "(obj, charnum) => obj.getStartPositionOfChar(charnum)"
+extern "js" fn svg_text_content_element_get_start_position_of_char_ffi_js(obj: JsValue, charnum: JsValue) -> JsValue = "(obj, charnum) => obj.getStartPositionOfChar(charnum)"
 
 ///|
 #cfg(target="js")
-fn svg_text_content_element_get_start_position_of_char_ffi(
-  obj : JsValue,
-  charnum : JsValue,
-) -> DOMPoint {
+fn svg_text_content_element_get_start_position_of_char_ffi(obj: JsValue, charnum: JsValue) -> DOMPoint {
   svg_text_content_element_get_start_position_of_char_ffi_js(obj, charnum).unsafe_cast()
 }
 
-///|
 #cfg(target="js")
-extern "js" fn svg_text_content_element_get_end_position_of_char_ffi_js(
-  obj : JsValue,
-  charnum : JsValue,
-) -> JsValue = "(obj, charnum) => obj.getEndPositionOfChar(charnum)"
+extern "js" fn svg_text_content_element_get_end_position_of_char_ffi_js(obj: JsValue, charnum: JsValue) -> JsValue = "(obj, charnum) => obj.getEndPositionOfChar(charnum)"
 
 ///|
 #cfg(target="js")
-fn svg_text_content_element_get_end_position_of_char_ffi(
-  obj : JsValue,
-  charnum : JsValue,
-) -> DOMPoint {
+fn svg_text_content_element_get_end_position_of_char_ffi(obj: JsValue, charnum: JsValue) -> DOMPoint {
   svg_text_content_element_get_end_position_of_char_ffi_js(obj, charnum).unsafe_cast()
 }
 
-///|
 #cfg(target="js")
-extern "js" fn svg_text_content_element_get_extent_of_char_ffi_js(
-  obj : JsValue,
-  charnum : JsValue,
-) -> JsValue = "(obj, charnum) => obj.getExtentOfChar(charnum)"
+extern "js" fn svg_text_content_element_get_extent_of_char_ffi_js(obj: JsValue, charnum: JsValue) -> JsValue = "(obj, charnum) => obj.getExtentOfChar(charnum)"
 
 ///|
 #cfg(target="js")
-fn svg_text_content_element_get_extent_of_char_ffi(
-  obj : JsValue,
-  charnum : JsValue,
-) -> DOMRect {
+fn svg_text_content_element_get_extent_of_char_ffi(obj: JsValue, charnum: JsValue) -> DOMRect {
   svg_text_content_element_get_extent_of_char_ffi_js(obj, charnum).unsafe_cast()
 }
 
-///|
 #cfg(target="js")
-extern "js" fn svg_text_content_element_get_rotation_of_char_ffi_js(
-  obj : JsValue,
-  charnum : JsValue,
-) -> JsValue = "(obj, charnum) => obj.getRotationOfChar(charnum)"
+extern "js" fn svg_text_content_element_get_rotation_of_char_ffi_js(obj: JsValue, charnum: JsValue) -> JsValue = "(obj, charnum) => obj.getRotationOfChar(charnum)"
 
 ///|
 #cfg(target="js")
-fn svg_text_content_element_get_rotation_of_char_ffi(
-  obj : JsValue,
-  charnum : JsValue,
-) -> Float {
+fn svg_text_content_element_get_rotation_of_char_ffi(obj: JsValue, charnum: JsValue) -> Float {
   svg_text_content_element_get_rotation_of_char_ffi_js(obj, charnum).unsafe_cast()
 }
 
-///|
 #cfg(target="js")
-extern "js" fn svg_text_content_element_get_char_num_at_position_ffi_js(
-  obj : JsValue,
-  point : JsValue,
-) -> JsValue = "(obj, point) => obj.getCharNumAtPosition(point)"
+extern "js" fn svg_text_content_element_get_char_num_at_position_ffi_js(obj: JsValue, point: JsValue) -> JsValue = "(obj, point) => obj.getCharNumAtPosition(point)"
 
 ///|
 #cfg(target="js")
-fn svg_text_content_element_get_char_num_at_position_ffi(
-  obj : JsValue,
-  point : JsValue,
-) -> Int {
+fn svg_text_content_element_get_char_num_at_position_ffi(obj: JsValue, point: JsValue) -> Int {
   svg_text_content_element_get_char_num_at_position_ffi_js(obj, point).unsafe_cast()
 }
 
-///|
 #cfg(target="js")
-extern "js" fn svg_text_content_element_select_sub_string_ffi(
-  obj : JsValue,
-  charnum : JsValue,
-  nchars : JsValue,
-) -> Unit = "(obj, charnum, nchars) => obj.selectSubString(charnum, nchars)"
+extern "js" fn svg_text_content_element_select_sub_string_ffi(obj: JsValue, charnum: JsValue, nchars: JsValue) -> Unit = "(obj, charnum, nchars) => obj.selectSubString(charnum, nchars)"
 
-///|
 #cfg(target="wasm-gc")
-fn svg_text_content_element_text_length_ffi(obj : JsValue) -> SVGAnimatedLength = "webapi_SVGTextContentElement" "get_textLength"
+fn svg_text_content_element_text_length_ffi(obj: JsValue) -> SVGAnimatedLength = "webapi_SVGTextContentElement" "get_textLength"
 
-///|
 #cfg(target="wasm-gc")
-fn svg_text_content_element_length_adjust_ffi(
-  obj : JsValue,
-) -> SVGAnimatedEnumeration = "webapi_SVGTextContentElement" "get_lengthAdjust"
+fn svg_text_content_element_length_adjust_ffi(obj: JsValue) -> SVGAnimatedEnumeration = "webapi_SVGTextContentElement" "get_lengthAdjust"
 
-///|
 #cfg(target="wasm-gc")
-fn svg_text_content_element_get_number_of_chars_ffi(obj : JsValue) -> Int = "webapi_SVGTextContentElement" "getNumberOfChars"
+fn svg_text_content_element_get_number_of_chars_ffi(obj: JsValue) -> Int = "webapi_SVGTextContentElement" "getNumberOfChars"
 
-///|
 #cfg(target="wasm-gc")
-fn svg_text_content_element_get_computed_text_length_ffi(
-  obj : JsValue,
-) -> Float = "webapi_SVGTextContentElement" "getComputedTextLength"
+fn svg_text_content_element_get_computed_text_length_ffi(obj: JsValue) -> Float = "webapi_SVGTextContentElement" "getComputedTextLength"
 
-///|
 #cfg(target="wasm-gc")
-fn svg_text_content_element_get_sub_string_length_ffi(
-  obj : JsValue,
-  charnum : JsValue,
-  nchars : JsValue,
-) -> Float = "webapi_SVGTextContentElement" "getSubStringLength"
+fn svg_text_content_element_get_sub_string_length_ffi(obj: JsValue, charnum: JsValue, nchars: JsValue) -> Float = "webapi_SVGTextContentElement" "getSubStringLength"
 
-///|
 #cfg(target="wasm-gc")
-fn svg_text_content_element_get_start_position_of_char_ffi(
-  obj : JsValue,
-  charnum : JsValue,
-) -> DOMPoint = "webapi_SVGTextContentElement" "getStartPositionOfChar"
+fn svg_text_content_element_get_start_position_of_char_ffi(obj: JsValue, charnum: JsValue) -> DOMPoint = "webapi_SVGTextContentElement" "getStartPositionOfChar"
 
-///|
 #cfg(target="wasm-gc")
-fn svg_text_content_element_get_end_position_of_char_ffi(
-  obj : JsValue,
-  charnum : JsValue,
-) -> DOMPoint = "webapi_SVGTextContentElement" "getEndPositionOfChar"
+fn svg_text_content_element_get_end_position_of_char_ffi(obj: JsValue, charnum: JsValue) -> DOMPoint = "webapi_SVGTextContentElement" "getEndPositionOfChar"
 
-///|
 #cfg(target="wasm-gc")
-fn svg_text_content_element_get_extent_of_char_ffi(
-  obj : JsValue,
-  charnum : JsValue,
-) -> DOMRect = "webapi_SVGTextContentElement" "getExtentOfChar"
+fn svg_text_content_element_get_extent_of_char_ffi(obj: JsValue, charnum: JsValue) -> DOMRect = "webapi_SVGTextContentElement" "getExtentOfChar"
 
-///|
 #cfg(target="wasm-gc")
-fn svg_text_content_element_get_rotation_of_char_ffi(
-  obj : JsValue,
-  charnum : JsValue,
-) -> Float = "webapi_SVGTextContentElement" "getRotationOfChar"
+fn svg_text_content_element_get_rotation_of_char_ffi(obj: JsValue, charnum: JsValue) -> Float = "webapi_SVGTextContentElement" "getRotationOfChar"
 
-///|
 #cfg(target="wasm-gc")
-fn svg_text_content_element_get_char_num_at_position_ffi(
-  obj : JsValue,
-  point : JsValue,
-) -> Int = "webapi_SVGTextContentElement" "getCharNumAtPosition"
+fn svg_text_content_element_get_char_num_at_position_ffi(obj: JsValue, point: JsValue) -> Int = "webapi_SVGTextContentElement" "getCharNumAtPosition"
 
-///|
 #cfg(target="wasm-gc")
-fn svg_text_content_element_select_sub_string_ffi(
-  obj : JsValue,
-  charnum : JsValue,
-  nchars : JsValue,
-) -> Unit = "webapi_SVGTextContentElement" "selectSubString"
+fn svg_text_content_element_select_sub_string_ffi(obj: JsValue, charnum: JsValue, nchars: JsValue) -> Unit = "webapi_SVGTextContentElement" "selectSubString"

@@ -2,18 +2,13 @@
 // MoonBit type: ImageSmoothingQuality
 // Specifications: html.idl
 
-///|
 pub(all) enum ImageSmoothingQuality {
   Low
   Medium
   High
 } derive(Eq)
 
-///|
-pub impl Show for ImageSmoothingQuality with output(
-  self : ImageSmoothingQuality,
-  logger : &Logger,
-) -> Unit {
+pub impl Show for ImageSmoothingQuality with output(self : ImageSmoothingQuality, logger : &Logger) -> Unit {
   match self {
     ImageSmoothingQuality::Low => logger.write_string("Low")
     ImageSmoothingQuality::Medium => logger.write_string("Medium")
@@ -21,10 +16,7 @@ pub impl Show for ImageSmoothingQuality with output(
   }
 }
 
-///|
-pub impl TJsValue for ImageSmoothingQuality with to_js(
-  self : ImageSmoothingQuality,
-) -> JsValue {
+pub impl TJsValue for ImageSmoothingQuality with to_js(self: ImageSmoothingQuality) -> JsValue {
   match self {
     ImageSmoothingQuality::Low => TJsValue::to_js("low")
     ImageSmoothingQuality::Medium => TJsValue::to_js("medium")
@@ -32,8 +24,7 @@ pub impl TJsValue for ImageSmoothingQuality with to_js(
   }
 }
 
-///|
-pub fn ImageSmoothingQuality::from(value : String) -> ImageSmoothingQuality? {
+pub fn ImageSmoothingQuality::from(value: String) -> ImageSmoothingQuality? {
   match value {
     "low" => Some(ImageSmoothingQuality::Low)
     "medium" => Some(ImageSmoothingQuality::Medium)
@@ -42,10 +33,7 @@ pub fn ImageSmoothingQuality::from(value : String) -> ImageSmoothingQuality? {
   }
 }
 
-///|
-fn ImageSmoothingQuality::from_unchecked(
-  value : String,
-) -> ImageSmoothingQuality {
+fn ImageSmoothingQuality::from_unchecked(value: String) -> ImageSmoothingQuality {
   match value {
     "low" => ImageSmoothingQuality::Low
     "medium" => ImageSmoothingQuality::Medium
@@ -54,8 +42,7 @@ fn ImageSmoothingQuality::from_unchecked(
   }
 }
 
-///|
-pub fn ImageSmoothingQuality::value(self : ImageSmoothingQuality) -> String {
+pub fn ImageSmoothingQuality::value(self: ImageSmoothingQuality) -> String {
   match self {
     ImageSmoothingQuality::Low => "low"
     ImageSmoothingQuality::Medium => "medium"
@@ -63,7 +50,6 @@ pub fn ImageSmoothingQuality::value(self : ImageSmoothingQuality) -> String {
   }
 }
 
-///|
 pub impl FromJsAny for ImageSmoothingQuality with from_js_any(value : JsAny) -> ImageSmoothingQuality {
   ImageSmoothingQuality::from_unchecked(value)
 }

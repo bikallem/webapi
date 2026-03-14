@@ -8,9 +8,9 @@ fn edit_word(host : @webapi.HTMLElement) -> Unit {
   let style = doc.create_element("style")
   style.set_text_content("span { background-color: #eef; padding: 0 2px }")
 
-  let form : @webapi.HTMLFormElement = doc.create_element("form").into()
-  let input : @webapi.HTMLInputElement = doc.create_element("input").into()
-  let span : @webapi.HTMLSpanElement = doc.create_element("span").into()
+  let form : @webapi.HTMLFormElement = doc.create_element("form").unsafe_into()
+  let input : @webapi.HTMLInputElement = doc.create_element("input").unsafe_into()
+  let span : @webapi.HTMLSpanElement = doc.create_element("span").unsafe_into()
 
   shadow.append_child(style) |> ignore
   shadow.append_child(form) |> ignore
@@ -64,7 +64,7 @@ fn person_details(host : @webapi.HTMLElement) -> Unit {
   )
   let tmpl : @webapi.HTMLTemplateElement = @webapi.document()
     .get_element_by_id("person-template")
-    .into()
+    .unsafe_into()
   shadow.append_child(tmpl.content().clone_node(subtree=true)) |> ignore
 }
 

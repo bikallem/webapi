@@ -88,7 +88,9 @@ pub enum Emit {
   InlineExternal(TypeName) // Synthetic inline union type (no MDN doc), eg. #external EffectTimingGetDuration
   ImplTJsValue(TypeName) // eg. pub impl TJsValue for EventTarget with to_js(self : EventTarget) -> JsValue = "%identity"
   ImplFromJsAny(TypeName) // eg. pub impl FromJsAny for EventTarget with from_js_any(value : JsAny) -> EventTarget = "%identity"
-  IntoMethod(TypeName) // eg. pub fn[T: TEventTarget] EventTarget::into(self : EventTarget) -> T = "%identity"
+  IntoMethod(TypeName) // eg. pub fn[T: TEventTarget] EventTarget::unsafe_into(self : EventTarget) -> T = "%identity"
+  ImplHasConstructor(TypeName) // eg. pub impl HasConstructor for EventTarget with constructor_name() { "EventTarget" }
+  TryIntoMethod(TypeName) // eg. pub fn[T: TEventTarget + HasConstructor] EventTarget::try_into(self : EventTarget) -> T?
   UnionIntoMethod(TypeName) // eg. pub fn[T: TBlobPart] BlobPart::into(self : BlobPart) -> T { FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self))) }
   FromMethod(TypeName) // eg. pub fn[T: TBlobPart] BlobPart::from(value : T) -> BlobPart = "%identity"
   IsUndefinedMethod(TypeName) // eg. pub fn EventTarget::is_undefined(self : EventTarget) -> Bool { ... }
@@ -749,11 +751,19 @@ pub fn mbt_code_gen_multi(emits : Array[Emit]) -> MultiTargetCode {
         )
       Emit::IntoMethod(TypeName(type_name)) =>
         append_shared(
-          "pub fn[T: T\{type_name}] \{type_name}::into(self : \{type_name}) -> T = \"%identity\"",
+          "/// Unchecked downcast — no runtime type check is performed.\n/// Prefer `try_into()` for checked downcasts.\n#deprecated(\"Use unsafe_into or try_into instead\")\npub fn[T: T\{type_name}] \{type_name}::into(self : \{type_name}) -> T = \"%identity\"\n\n/// Unchecked downcast — no runtime type check is performed.\n/// WARNING: If the underlying JS value is not of type T, this will silently\n/// produce a value with incorrect type, leading to undefined behavior.\npub fn[T: T\{type_name}] \{type_name}::unsafe_into(self : \{type_name}) -> T = \"%identity\"",
+        )
+      Emit::ImplHasConstructor(TypeName(type_name)) =>
+        append_shared(
+          "pub impl HasConstructor for \{type_name} with constructor_name() { \"\{type_name}\" }",
+        )
+      Emit::TryIntoMethod(TypeName(type_name)) =>
+        append_shared(
+          "/// Checked downcast — returns None if the JS value is not an instance of T.\npub fn[T : T\{type_name} + HasConstructor] \{type_name}::try_into(self : \{type_name}) -> T? {\n  if js_instanceof(TJsValue::to_js(self), T::constructor_name()) {\n    Some(self.unsafe_into())\n  } else {\n    None\n  }\n}",
         )
       Emit::UnionIntoMethod(TypeName(type_name)) =>
         append_shared(
-          "pub fn[T : T\{type_name} + FromJsAny] \{type_name}::into(self : \{type_name}) -> T {\n  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))\n}",
+          "#deprecated(\"Use unsafe_into or try_into instead\")\npub fn[T : T\{type_name} + FromJsAny] \{type_name}::into(self : \{type_name}) -> T {\n  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))\n}\n\npub fn[T : T\{type_name} + FromJsAny] \{type_name}::unsafe_into(self : \{type_name}) -> T {\n  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))\n}",
         )
       Emit::FromMethod(TypeName(type_name)) =>
         append_shared(

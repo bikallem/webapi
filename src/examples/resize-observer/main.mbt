@@ -12,7 +12,7 @@ fn main {
   // Resizable textarea
   let textarea : @webapi.HTMLTextAreaElement = doc
     .create_element("textarea")
-    .into()
+    .unsafe_into()
   textarea
   ..set_attribute("id", "resizable")
   ..set_attribute(
@@ -43,7 +43,7 @@ fn main {
   observer.observe(textarea)
 
   let app : @webapi.Element = doc.get_element_by_id("app")
-  let container : @webapi.HTMLDivElement = doc.create_element("div").into()
+  let container : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )

@@ -2,7 +2,6 @@
 // MoonBit type: RequestCache
 // Specifications: fetch.idl
 
-///|
 pub(all) enum RequestCache {
   Default
   NoStore
@@ -12,11 +11,7 @@ pub(all) enum RequestCache {
   OnlyIfCached
 } derive(Eq)
 
-///|
-pub impl Show for RequestCache with output(
-  self : RequestCache,
-  logger : &Logger,
-) -> Unit {
+pub impl Show for RequestCache with output(self : RequestCache, logger : &Logger) -> Unit {
   match self {
     RequestCache::Default => logger.write_string("Default")
     RequestCache::NoStore => logger.write_string("NoStore")
@@ -27,8 +22,7 @@ pub impl Show for RequestCache with output(
   }
 }
 
-///|
-pub impl TJsValue for RequestCache with to_js(self : RequestCache) -> JsValue {
+pub impl TJsValue for RequestCache with to_js(self: RequestCache) -> JsValue {
   match self {
     RequestCache::Default => TJsValue::to_js("default")
     RequestCache::NoStore => TJsValue::to_js("no-store")
@@ -39,8 +33,7 @@ pub impl TJsValue for RequestCache with to_js(self : RequestCache) -> JsValue {
   }
 }
 
-///|
-pub fn RequestCache::from(value : String) -> RequestCache? {
+pub fn RequestCache::from(value: String) -> RequestCache? {
   match value {
     "default" => Some(RequestCache::Default)
     "no-store" => Some(RequestCache::NoStore)
@@ -52,8 +45,7 @@ pub fn RequestCache::from(value : String) -> RequestCache? {
   }
 }
 
-///|
-fn RequestCache::from_unchecked(value : String) -> RequestCache {
+fn RequestCache::from_unchecked(value: String) -> RequestCache {
   match value {
     "default" => RequestCache::Default
     "no-store" => RequestCache::NoStore
@@ -65,8 +57,7 @@ fn RequestCache::from_unchecked(value : String) -> RequestCache {
   }
 }
 
-///|
-pub fn RequestCache::value(self : RequestCache) -> String {
+pub fn RequestCache::value(self: RequestCache) -> String {
   match self {
     RequestCache::Default => "default"
     RequestCache::NoStore => "no-store"
@@ -77,7 +68,6 @@ pub fn RequestCache::value(self : RequestCache) -> String {
   }
 }
 
-///|
 pub impl FromJsAny for RequestCache with from_js_any(value : JsAny) -> RequestCache {
   RequestCache::from_unchecked(value)
 }

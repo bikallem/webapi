@@ -2,33 +2,26 @@
 // MoonBit type: CanvasFillRule
 // Specifications: html.idl
 
-///|
 pub(all) enum CanvasFillRule {
   Nonzero
   Evenodd
 } derive(Eq)
 
-///|
-pub impl Show for CanvasFillRule with output(
-  self : CanvasFillRule,
-  logger : &Logger,
-) -> Unit {
+pub impl Show for CanvasFillRule with output(self : CanvasFillRule, logger : &Logger) -> Unit {
   match self {
     CanvasFillRule::Nonzero => logger.write_string("Nonzero")
     CanvasFillRule::Evenodd => logger.write_string("Evenodd")
   }
 }
 
-///|
-pub impl TJsValue for CanvasFillRule with to_js(self : CanvasFillRule) -> JsValue {
+pub impl TJsValue for CanvasFillRule with to_js(self: CanvasFillRule) -> JsValue {
   match self {
     CanvasFillRule::Nonzero => TJsValue::to_js("nonzero")
     CanvasFillRule::Evenodd => TJsValue::to_js("evenodd")
   }
 }
 
-///|
-pub fn CanvasFillRule::from(value : String) -> CanvasFillRule? {
+pub fn CanvasFillRule::from(value: String) -> CanvasFillRule? {
   match value {
     "nonzero" => Some(CanvasFillRule::Nonzero)
     "evenodd" => Some(CanvasFillRule::Evenodd)
@@ -36,8 +29,7 @@ pub fn CanvasFillRule::from(value : String) -> CanvasFillRule? {
   }
 }
 
-///|
-fn CanvasFillRule::from_unchecked(value : String) -> CanvasFillRule {
+fn CanvasFillRule::from_unchecked(value: String) -> CanvasFillRule {
   match value {
     "nonzero" => CanvasFillRule::Nonzero
     "evenodd" => CanvasFillRule::Evenodd
@@ -45,15 +37,13 @@ fn CanvasFillRule::from_unchecked(value : String) -> CanvasFillRule {
   }
 }
 
-///|
-pub fn CanvasFillRule::value(self : CanvasFillRule) -> String {
+pub fn CanvasFillRule::value(self: CanvasFillRule) -> String {
   match self {
     CanvasFillRule::Nonzero => "nonzero"
     CanvasFillRule::Evenodd => "evenodd"
   }
 }
 
-///|
 pub impl FromJsAny for CanvasFillRule with from_js_any(value : JsAny) -> CanvasFillRule {
   CanvasFillRule::from_unchecked(value)
 }

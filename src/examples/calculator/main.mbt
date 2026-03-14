@@ -67,16 +67,16 @@ fn wc_calculator(host : @webapi.HTMLElement) -> Unit {
   )
   let template : HTMLTemplateElement = doc
     .get_element_by_id("wc-calculator-template")
-    .into()
+    .unsafe_into()
   shadow.append_child(template.content().clone_node(subtree=true)) |> ignore
 
   // Query shadow DOM for display elements
   let display : HTMLDivElement = shadow
     .query_selector("[data-ref=display]")
-    .into()
+    .unsafe_into()
   let status : HTMLDivElement = shadow
     .query_selector("[data-ref=status]")
-    .into()
+    .unsafe_into()
 
   // Calculator state
   let mut state = clear_all_state()
@@ -85,7 +85,7 @@ fn wc_calculator(host : @webapi.HTMLElement) -> Unit {
   let buttons = shadow.query_selector_all("button[data-key]")
   for i in 0U..<buttons.length() {
     guard buttons.item_opt(i) is Some(node) else { continue }
-    let el : Element = node.into()
+    let el : Element = node.unsafe_into()
     guard el.get_attribute("data-key") is Some(key) else { continue }
     el.add_event_listener("click", fn(_event) {
       guard process_key(state, key) is Some(new_state) else { () }
@@ -96,7 +96,7 @@ fn wc_calculator(host : @webapi.HTMLElement) -> Unit {
 
   // Keyboard support
   doc.add_event_listener("keydown", fn(event) {
-    let kb_event : KeyboardEvent = event.into()
+    let kb_event : KeyboardEvent = event.unsafe_into()
     guard map_keyboard_key(kb_event.key()) is Some(calc_key) else { () }
     guard process_key(state, calc_key) is Some(new_state) else { () }
     state = new_state

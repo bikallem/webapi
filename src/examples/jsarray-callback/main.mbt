@@ -13,7 +13,7 @@ fn main {
     "Resize the panel with buttons. Callback batches come in as Array[ResizeObserverEntry].",
   )
 
-  let panel : @webapi.HTMLDivElement = doc.create_element("div").into()
+  let panel : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
   panel
   ..set_attribute("id", "panel")
   ..set_text_content("Observe my size")
@@ -21,24 +21,24 @@ fn main {
     "style", "width: 260px; height: 120px; border: 2px solid #4a90d9; border-radius: 8px; display: grid; place-items: center; margin: 1rem 0; background: #eef6ff;",
   )
 
-  let controls : @webapi.HTMLDivElement = doc.create_element("div").into()
+  let controls : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
   controls.set_attribute(
     "style", "display: flex; gap: 0.5rem; margin-bottom: 0.75rem;",
   )
 
-  let grow_btn : @webapi.HTMLButtonElement = doc.create_element("button").into()
+  let grow_btn : @webapi.HTMLButtonElement = doc.create_element("button").unsafe_into()
   grow_btn
   ..set_text_content("Grow")
   .set_attribute("style", "padding: 0.4rem 0.8rem; cursor: pointer;")
 
   let shrink_btn : @webapi.HTMLButtonElement = doc
     .create_element("button")
-    .into()
+    .unsafe_into()
   shrink_btn
   ..set_text_content("Shrink")
   .set_attribute("style", "padding: 0.4rem 0.8rem; cursor: pointer;")
 
-  let log : @webapi.HTMLPreElement = doc.create_element("pre").into()
+  let log : @webapi.HTMLPreElement = doc.create_element("pre").unsafe_into()
   log
   ..set_attribute("id", "log")
   .set_attribute(
@@ -85,7 +85,7 @@ fn main {
   controls.append_child(shrink_btn) |> ignore
 
   let app : @webapi.Element = doc.get_element_by_id("app")
-  let root : @webapi.HTMLDivElement = doc.create_element("div").into()
+  let root : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
   root.set_attribute(
     "style", "font-family: system-ui; max-width: 760px; margin: 2rem auto;",
   )

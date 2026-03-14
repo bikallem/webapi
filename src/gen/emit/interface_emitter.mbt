@@ -409,6 +409,8 @@ pub impl Emitter for InterfaceEmitter with emit(
   ..push(Emit::ImplTJsValue(interface.name))
   ..push(Emit::ImplFromJsAny(interface.name))
   ..push(Emit::IntoMethod(interface.name))
+  ..push(Emit::ImplHasConstructor(interface.name))
+  ..push(Emit::TryIntoMethod(interface.name))
   .push(Emit::ImplTrait(interface.name, TraitName("T" + interface.name)))
   for ancestor in ancestors {
     emits.push(Emit::ImplTrait(interface.name, TraitName("T" + ancestor)))

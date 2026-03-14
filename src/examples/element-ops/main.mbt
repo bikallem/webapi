@@ -72,7 +72,7 @@ fn main {
   ..set_text_content("Clone")
   .add_event_listener("click", fn(_event) {
     counter = counter + 1
-    let clone : @webapi.Element = template.clone_node(subtree=true).into()
+    let clone : @webapi.Element = template.clone_node(subtree=true).unsafe_into()
     clone.set_text_content("Clone " + counter.to_string())
     clone.set_attribute("data-index", counter.to_string())
     container.append_child(clone) |> ignore
@@ -149,7 +149,7 @@ fn main {
   ..set_text_content("Remove Last")
   .add_event_listener("click", fn(_event) {
     if container.has_child_nodes() {
-      let last : @webapi.Element = container.last_child().into()
+      let last : @webapi.Element = container.last_child().unsafe_into()
       last.remove()
       update_count(container, clone_count)
     }

@@ -17,7 +17,7 @@ fn main {
   let app : @webapi.Element = doc.get_element_by_id("app")
 
   // Container
-  let container : @webapi.HTMLDivElement = doc.create_element("div").into()
+  let container : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )
@@ -42,7 +42,7 @@ fn main {
   let btn_style = "padding: 0.5em 1em; margin: 0.25em; font-size: 1em;"
 
   // Play button
-  let play_btn : @webapi.HTMLButtonElement = doc.create_element("button").into()
+  let play_btn : @webapi.HTMLButtonElement = doc.create_element("button").unsafe_into()
   play_btn
   ..set_id("play-btn")
   ..set_attribute("style", btn_style)
@@ -51,7 +51,7 @@ fn main {
   // Pause button
   let pause_btn : @webapi.HTMLButtonElement = doc
     .create_element("button")
-    .into()
+    .unsafe_into()
   pause_btn
   ..set_id("pause-btn")
   ..set_attribute("style", btn_style)
@@ -60,7 +60,7 @@ fn main {
   // Reverse button
   let reverse_btn : @webapi.HTMLButtonElement = doc
     .create_element("button")
-    .into()
+    .unsafe_into()
   reverse_btn
   ..set_id("reverse-btn")
   ..set_attribute("style", btn_style)
@@ -69,7 +69,7 @@ fn main {
   // Cancel button
   let cancel_btn : @webapi.HTMLButtonElement = doc
     .create_element("button")
-    .into()
+    .unsafe_into()
   cancel_btn
   ..set_id("cancel-btn")
   ..set_attribute("style", btn_style)

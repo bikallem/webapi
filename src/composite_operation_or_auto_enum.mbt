@@ -2,7 +2,6 @@
 // MoonBit type: CompositeOperationOrAuto
 // Specifications: web-animations.idl
 
-///|
 pub(all) enum CompositeOperationOrAuto {
   Replace
   Add
@@ -10,11 +9,7 @@ pub(all) enum CompositeOperationOrAuto {
   Auto
 } derive(Eq)
 
-///|
-pub impl Show for CompositeOperationOrAuto with output(
-  self : CompositeOperationOrAuto,
-  logger : &Logger,
-) -> Unit {
+pub impl Show for CompositeOperationOrAuto with output(self : CompositeOperationOrAuto, logger : &Logger) -> Unit {
   match self {
     CompositeOperationOrAuto::Replace => logger.write_string("Replace")
     CompositeOperationOrAuto::Add => logger.write_string("Add")
@@ -23,10 +18,7 @@ pub impl Show for CompositeOperationOrAuto with output(
   }
 }
 
-///|
-pub impl TJsValue for CompositeOperationOrAuto with to_js(
-  self : CompositeOperationOrAuto,
-) -> JsValue {
+pub impl TJsValue for CompositeOperationOrAuto with to_js(self: CompositeOperationOrAuto) -> JsValue {
   match self {
     CompositeOperationOrAuto::Replace => TJsValue::to_js("replace")
     CompositeOperationOrAuto::Add => TJsValue::to_js("add")
@@ -35,10 +27,7 @@ pub impl TJsValue for CompositeOperationOrAuto with to_js(
   }
 }
 
-///|
-pub fn CompositeOperationOrAuto::from(
-  value : String,
-) -> CompositeOperationOrAuto? {
+pub fn CompositeOperationOrAuto::from(value: String) -> CompositeOperationOrAuto? {
   match value {
     "replace" => Some(CompositeOperationOrAuto::Replace)
     "add" => Some(CompositeOperationOrAuto::Add)
@@ -48,10 +37,7 @@ pub fn CompositeOperationOrAuto::from(
   }
 }
 
-///|
-fn CompositeOperationOrAuto::from_unchecked(
-  value : String,
-) -> CompositeOperationOrAuto {
+fn CompositeOperationOrAuto::from_unchecked(value: String) -> CompositeOperationOrAuto {
   match value {
     "replace" => CompositeOperationOrAuto::Replace
     "add" => CompositeOperationOrAuto::Add
@@ -61,10 +47,7 @@ fn CompositeOperationOrAuto::from_unchecked(
   }
 }
 
-///|
-pub fn CompositeOperationOrAuto::value(
-  self : CompositeOperationOrAuto,
-) -> String {
+pub fn CompositeOperationOrAuto::value(self: CompositeOperationOrAuto) -> String {
   match self {
     CompositeOperationOrAuto::Replace => "replace"
     CompositeOperationOrAuto::Add => "add"
@@ -73,7 +56,6 @@ pub fn CompositeOperationOrAuto::value(
   }
 }
 
-///|
 pub impl FromJsAny for CompositeOperationOrAuto with from_js_any(value : JsAny) -> CompositeOperationOrAuto {
   CompositeOperationOrAuto::from_unchecked(value)
 }

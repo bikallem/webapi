@@ -55,26 +55,26 @@ fn wc_todo(host : @webapi.HTMLElement) -> Unit {
   )
   let template : HTMLTemplateElement = doc
     .get_element_by_id("wc-todo-template")
-    .into()
+    .unsafe_into()
   shadow.append_child(template.content().clone_node(subtree=true)) |> ignore
 
   // Query shadow DOM for elements
   let todo_input : HTMLInputElement = shadow
     .query_selector("[data-ref=input]")
-    .into()
+    .unsafe_into()
   let add_btn : HTMLButtonElement = shadow
     .query_selector("[data-ref=add]")
-    .into()
+    .unsafe_into()
   let clear_btn : HTMLButtonElement = shadow
     .query_selector("[data-ref=clear]")
-    .into()
+    .unsafe_into()
   let status : HTMLDivElement = shadow
     .query_selector("[data-ref=status]")
-    .into()
+    .unsafe_into()
   let empty_state : HTMLDivElement = shadow
     .query_selector("[data-ref=empty]")
-    .into()
-  let list : HTMLUListElement = shadow.query_selector("[data-ref=list]").into()
+    .unsafe_into()
+  let list : HTMLUListElement = shadow.query_selector("[data-ref=list]").unsafe_into()
   let todos : Array[(Int, Bool, String)] = []
   let next_id : Ref[Int] = { val: 0 }
 
@@ -108,12 +108,12 @@ fn wc_todo(host : @webapi.HTMLElement) -> Unit {
   }
 
   fn append_todo_to_dom(todo_id : Int, done : Bool, text : String) -> Unit {
-    let item : HTMLLIElement = doc.create_element("li").into()
+    let item : HTMLLIElement = doc.create_element("li").unsafe_into()
 
-    let left : HTMLDivElement = doc.create_element("div").into()
+    let left : HTMLDivElement = doc.create_element("div").unsafe_into()
     left.class_list().add(["left"])
 
-    let checkbox : HTMLInputElement = doc.create_element("input").into()
+    let checkbox : HTMLInputElement = doc.create_element("input").unsafe_into()
     checkbox.set_type_("checkbox")
 
     let label = doc.create_element("span")
@@ -122,7 +122,7 @@ fn wc_todo(host : @webapi.HTMLElement) -> Unit {
     checkbox.set_checked(done)
     apply_done_style(done, item)
 
-    let delete_btn : HTMLButtonElement = doc.create_element("button").into()
+    let delete_btn : HTMLButtonElement = doc.create_element("button").unsafe_into()
     delete_btn..set_type_("button").set_text_content("Delete")
 
     checkbox.add_event_listener("click", fn(_event) {

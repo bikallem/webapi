@@ -2,24 +2,37 @@
 // MoonBit type: Storage
 // Specifications: html.idl
 
-///|
 /// [Storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage)
 #external
 pub type Storage
 
-///|
-pub impl TJsValue for Storage with to_js(self : Storage) -> JsValue = "%identity"
+pub impl TJsValue for Storage with to_js(self: Storage) -> JsValue = "%identity"
 
-///|
 pub impl FromJsAny for Storage with from_js_any(value : JsAny) -> Storage = "%identity"
 
-///|
-pub fn[T : TStorage] Storage::into(self : Storage) -> T = "%identity"
+/// Unchecked downcast — no runtime type check is performed.
+/// Prefer `try_into()` for checked downcasts.
+#deprecated("Use unsafe_into or try_into instead")
+pub fn[T: TStorage] Storage::into(self : Storage) -> T = "%identity"
 
-///|
+/// Unchecked downcast — no runtime type check is performed.
+/// WARNING: If the underlying JS value is not of type T, this will silently
+/// produce a value with incorrect type, leading to undefined behavior.
+pub fn[T: TStorage] Storage::unsafe_into(self : Storage) -> T = "%identity"
+
+pub impl HasConstructor for Storage with constructor_name() { "Storage" }
+
+/// Checked downcast — returns None if the JS value is not an instance of T.
+pub fn[T : TStorage + HasConstructor] Storage::try_into(self : Storage) -> T? {
+  if js_instanceof(TJsValue::to_js(self), T::constructor_name()) {
+    Some(self.unsafe_into())
+  } else {
+    None
+  }
+}
+
 pub impl TStorage for Storage
 
-///|
 /// [Storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage) interface.
 pub trait TStorage: TJsValue {
   length(self : Self) -> UInt = _
@@ -30,100 +43,79 @@ pub trait TStorage: TJsValue {
   clear(self : Self) -> Unit = _
 }
 
-///|
 /// [Storage.length](https://developer.mozilla.org/en-US/docs/Web/API/Storage/length)
 impl TStorage with length(self : Self) -> UInt {
   storage_length_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [Storage.key](https://developer.mozilla.org/en-US/docs/Web/API/Storage/key)
-impl TStorage with key(self : Self, index : UInt) -> String? {
+impl TStorage with key(self : Self, 
+index : UInt) -> String? {
   storage_key_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option_prim()
 }
 
-///|
 /// [Storage.getItem](https://developer.mozilla.org/en-US/docs/Web/API/Storage/getItem)
-impl TStorage with get_item(self : Self, key : String) -> String? {
+impl TStorage with get_item(self : Self, 
+key : String) -> String? {
   storage_get_item_ffi(TJsValue::to_js(self), TJsValue::to_js(key)).to_option_prim()
 }
 
-///|
 /// [Storage.setItem](https://developer.mozilla.org/en-US/docs/Web/API/Storage/setItem)
-impl TStorage with set_item(self : Self, key : String, value : String) -> Unit {
-  storage_set_item_ffi(
-    TJsValue::to_js(self),
-    TJsValue::to_js(key),
-    TJsValue::to_js(value),
-  )
+impl TStorage with set_item(self : Self, 
+key : String, 
+value : String) -> Unit {
+  storage_set_item_ffi(TJsValue::to_js(self), TJsValue::to_js(key), TJsValue::to_js(value))
 }
 
-///|
 /// [Storage.removeItem](https://developer.mozilla.org/en-US/docs/Web/API/Storage/removeItem)
-impl TStorage with remove_item(self : Self, key : String) -> Unit {
+impl TStorage with remove_item(self : Self, 
+key : String) -> Unit {
   storage_remove_item_ffi(TJsValue::to_js(self), TJsValue::to_js(key))
 }
 
-///|
 /// [Storage.clear](https://developer.mozilla.org/en-US/docs/Web/API/Storage/clear)
 impl TStorage with clear(self : Self) -> Unit {
   storage_clear_ffi(TJsValue::to_js(self))
 }
 
-///|
 #cfg(target="js")
-extern "js" fn storage_length_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.length"
+extern "js" fn storage_length_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.length"
 
 ///|
 #cfg(target="js")
-fn storage_length_ffi(obj : JsValue) -> UInt {
+fn storage_length_ffi(obj: JsValue) -> UInt {
   storage_length_ffi_js(obj).unsafe_cast()
 }
 
-///|
 #cfg(target="js")
-extern "js" fn storage_key_ffi(obj : JsValue, index : JsValue) -> JsValue = "(obj, index) => obj.key(index)"
+extern "js" fn storage_key_ffi(obj: JsValue, index: JsValue) -> JsValue = "(obj, index) => obj.key(index)"
 
-///|
 #cfg(target="js")
-extern "js" fn storage_get_item_ffi(obj : JsValue, key : JsValue) -> JsValue = "(obj, key) => obj.getItem(key)"
+extern "js" fn storage_get_item_ffi(obj: JsValue, key: JsValue) -> JsValue = "(obj, key) => obj.getItem(key)"
 
-///|
 #cfg(target="js")
-extern "js" fn storage_set_item_ffi(
-  obj : JsValue,
-  key : JsValue,
-  value : JsValue,
-) -> Unit = "(obj, key, value) => obj.setItem(key, value)"
+extern "js" fn storage_set_item_ffi(obj: JsValue, key: JsValue, value: JsValue) -> Unit = "(obj, key, value) => obj.setItem(key, value)"
 
-///|
 #cfg(target="js")
-extern "js" fn storage_remove_item_ffi(obj : JsValue, key : JsValue) -> Unit = "(obj, key) => obj.removeItem(key)"
+extern "js" fn storage_remove_item_ffi(obj: JsValue, key: JsValue) -> Unit = "(obj, key) => obj.removeItem(key)"
 
-///|
 #cfg(target="js")
-extern "js" fn storage_clear_ffi(obj : JsValue) -> Unit = "(obj) => obj.clear()"
+extern "js" fn storage_clear_ffi(obj: JsValue) -> Unit = "(obj) => obj.clear()"
 
-///|
 #cfg(target="wasm-gc")
-fn storage_length_ffi(obj : JsValue) -> UInt = "webapi_Storage" "get_length"
+fn storage_length_ffi(obj: JsValue) -> UInt = "webapi_Storage" "get_length"
 
-///|
 #cfg(target="wasm-gc")
-fn storage_key_ffi(obj : JsValue, index : JsValue) -> JsValue = "webapi_Storage" "key"
+fn storage_key_ffi(obj: JsValue, index: JsValue) -> JsValue = "webapi_Storage" "key"
 
-///|
 #cfg(target="wasm-gc")
-fn storage_get_item_ffi(obj : JsValue, key : JsValue) -> JsValue = "webapi_Storage" "getItem"
+fn storage_get_item_ffi(obj: JsValue, key: JsValue) -> JsValue = "webapi_Storage" "getItem"
 
-///|
 #cfg(target="wasm-gc")
-fn storage_set_item_ffi(obj : JsValue, key : JsValue, value : JsValue) -> Unit = "webapi_Storage" "setItem"
+fn storage_set_item_ffi(obj: JsValue, key: JsValue, value: JsValue) -> Unit = "webapi_Storage" "setItem"
 
-///|
 #cfg(target="wasm-gc")
-fn storage_remove_item_ffi(obj : JsValue, key : JsValue) -> Unit = "webapi_Storage" "removeItem"
+fn storage_remove_item_ffi(obj: JsValue, key: JsValue) -> Unit = "webapi_Storage" "removeItem"
 
-///|
 #cfg(target="wasm-gc")
-fn storage_clear_ffi(obj : JsValue) -> Unit = "webapi_Storage" "clear"
+fn storage_clear_ffi(obj: JsValue) -> Unit = "webapi_Storage" "clear"

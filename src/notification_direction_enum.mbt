@@ -2,18 +2,13 @@
 // MoonBit type: NotificationDirection
 // Specifications: notifications.idl
 
-///|
 pub(all) enum NotificationDirection {
   Auto
   Ltr
   Rtl
 } derive(Eq)
 
-///|
-pub impl Show for NotificationDirection with output(
-  self : NotificationDirection,
-  logger : &Logger,
-) -> Unit {
+pub impl Show for NotificationDirection with output(self : NotificationDirection, logger : &Logger) -> Unit {
   match self {
     NotificationDirection::Auto => logger.write_string("Auto")
     NotificationDirection::Ltr => logger.write_string("Ltr")
@@ -21,10 +16,7 @@ pub impl Show for NotificationDirection with output(
   }
 }
 
-///|
-pub impl TJsValue for NotificationDirection with to_js(
-  self : NotificationDirection,
-) -> JsValue {
+pub impl TJsValue for NotificationDirection with to_js(self: NotificationDirection) -> JsValue {
   match self {
     NotificationDirection::Auto => TJsValue::to_js("auto")
     NotificationDirection::Ltr => TJsValue::to_js("ltr")
@@ -32,8 +24,7 @@ pub impl TJsValue for NotificationDirection with to_js(
   }
 }
 
-///|
-pub fn NotificationDirection::from(value : String) -> NotificationDirection? {
+pub fn NotificationDirection::from(value: String) -> NotificationDirection? {
   match value {
     "auto" => Some(NotificationDirection::Auto)
     "ltr" => Some(NotificationDirection::Ltr)
@@ -42,10 +33,7 @@ pub fn NotificationDirection::from(value : String) -> NotificationDirection? {
   }
 }
 
-///|
-fn NotificationDirection::from_unchecked(
-  value : String,
-) -> NotificationDirection {
+fn NotificationDirection::from_unchecked(value: String) -> NotificationDirection {
   match value {
     "auto" => NotificationDirection::Auto
     "ltr" => NotificationDirection::Ltr
@@ -54,8 +42,7 @@ fn NotificationDirection::from_unchecked(
   }
 }
 
-///|
-pub fn NotificationDirection::value(self : NotificationDirection) -> String {
+pub fn NotificationDirection::value(self: NotificationDirection) -> String {
   match self {
     NotificationDirection::Auto => "auto"
     NotificationDirection::Ltr => "ltr"
@@ -63,7 +50,6 @@ pub fn NotificationDirection::value(self : NotificationDirection) -> String {
   }
 }
 
-///|
 pub impl FromJsAny for NotificationDirection with from_js_any(value : JsAny) -> NotificationDirection {
   NotificationDirection::from_unchecked(value)
 }

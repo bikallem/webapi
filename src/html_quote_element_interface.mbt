@@ -2,96 +2,92 @@
 // MoonBit type: HTMLQuoteElement
 // Specifications: html.idl
 
-///|
 /// [HTMLQuoteElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLQuoteElement)
 #external
 pub type HTMLQuoteElement
 
-///|
-pub impl TJsValue for HTMLQuoteElement with to_js(self : HTMLQuoteElement) -> JsValue = "%identity"
+pub impl TJsValue for HTMLQuoteElement with to_js(self: HTMLQuoteElement) -> JsValue = "%identity"
 
-///|
 pub impl FromJsAny for HTMLQuoteElement with from_js_any(value : JsAny) -> HTMLQuoteElement = "%identity"
 
-///|
-pub fn[T : THTMLQuoteElement] HTMLQuoteElement::into(
-  self : HTMLQuoteElement,
-) -> T = "%identity"
+/// Unchecked downcast — no runtime type check is performed.
+/// Prefer `try_into()` for checked downcasts.
+#deprecated("Use unsafe_into or try_into instead")
+pub fn[T: THTMLQuoteElement] HTMLQuoteElement::into(self : HTMLQuoteElement) -> T = "%identity"
 
-///|
+/// Unchecked downcast — no runtime type check is performed.
+/// WARNING: If the underlying JS value is not of type T, this will silently
+/// produce a value with incorrect type, leading to undefined behavior.
+pub fn[T: THTMLQuoteElement] HTMLQuoteElement::unsafe_into(self : HTMLQuoteElement) -> T = "%identity"
+
+pub impl HasConstructor for HTMLQuoteElement with constructor_name() { "HTMLQuoteElement" }
+
+/// Checked downcast — returns None if the JS value is not an instance of T.
+pub fn[T : THTMLQuoteElement + HasConstructor] HTMLQuoteElement::try_into(self : HTMLQuoteElement) -> T? {
+  if js_instanceof(TJsValue::to_js(self), T::constructor_name()) {
+    Some(self.unsafe_into())
+  } else {
+    None
+  }
+}
+
 pub impl THTMLQuoteElement for HTMLQuoteElement
 
-///|
 pub impl THTMLElement for HTMLQuoteElement
 
-///|
 pub impl TElement for HTMLQuoteElement
 
-///|
 pub impl TNode for HTMLQuoteElement
 
-///|
 pub impl TEventTarget for HTMLQuoteElement
 
-///|
 pub fn HTMLQuoteElement::new() -> HTMLQuoteElement {
   html_quote_element_new_ffi()
 }
 
-///|
 /// [HTMLQuoteElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLQuoteElement) interface.
 pub trait THTMLQuoteElement: THTMLElement {
   cite(self : Self) -> String = _
   set_cite(self : Self, cite : String) -> Unit = _
 }
 
-///|
 /// [HTMLQuoteElement.cite](https://developer.mozilla.org/en-US/docs/Web/API/HTMLQuoteElement/cite)
 impl THTMLQuoteElement with cite(self : Self) -> String {
   html_quote_element_cite_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [HTMLQuoteElement.cite](https://developer.mozilla.org/en-US/docs/Web/API/HTMLQuoteElement/cite)
-impl THTMLQuoteElement with set_cite(self : Self, cite : String) -> Unit {
+impl THTMLQuoteElement with set_cite(self : Self, 
+cite : String) -> Unit {
   html_quote_element_set_cite_ffi(TJsValue::to_js(self), TJsValue::to_js(cite))
 }
 
-///|
 #cfg(target="js")
 extern "js" fn html_quote_element_new_ffi() -> HTMLQuoteElement = "() => new HTMLQuoteElement()"
 
-///|
 #cfg(target="js")
-extern "js" fn html_quote_element_cite_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.cite"
+extern "js" fn html_quote_element_cite_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.cite"
 
 ///|
 #cfg(target="js")
-fn html_quote_element_cite_ffi(obj : JsValue) -> String {
+fn html_quote_element_cite_ffi(obj: JsValue) -> String {
   html_quote_element_cite_ffi_js(obj).unsafe_cast()
 }
 
-///|
 #cfg(target="js")
-extern "js" fn html_quote_element_set_cite_ffi(
-  obj : JsValue,
-  cite : JsValue,
-) -> Unit = "(obj, cite) => { obj.cite = cite; }"
+extern "js" fn html_quote_element_set_cite_ffi(obj: JsValue, cite: JsValue) -> Unit = "(obj, cite) => { obj.cite = cite; }"
 
-///|
 #cfg(target="wasm-gc")
 fn html_quote_element_new_ffi() -> HTMLQuoteElement = "webapi_HTMLQuoteElement" "new"
 
-///|
 #cfg(target="wasm-gc")
-fn html_quote_element_cite_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLQuoteElement" "get_cite"
+fn html_quote_element_cite_ffi_wasm(obj: JsValue) -> JsValue = "webapi_HTMLQuoteElement" "get_cite"
 
 ///|
 #cfg(target="wasm-gc")
-fn html_quote_element_cite_ffi(obj : JsValue) -> String {
+fn html_quote_element_cite_ffi(obj: JsValue) -> String {
   jsvalue_to_string(html_quote_element_cite_ffi_wasm(obj))
 }
 
-///|
 #cfg(target="wasm-gc")
-fn html_quote_element_set_cite_ffi(obj : JsValue, cite : JsValue) -> Unit = "webapi_HTMLQuoteElement" "set_cite"
+fn html_quote_element_set_cite_ffi(obj: JsValue, cite: JsValue) -> Unit = "webapi_HTMLQuoteElement" "set_cite"

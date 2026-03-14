@@ -2,24 +2,37 @@
 // MoonBit type: MutationRecord
 // Specifications: dom.idl
 
-///|
 /// [MutationRecord](https://developer.mozilla.org/en-US/docs/Web/API/MutationRecord)
 #external
 pub type MutationRecord
 
-///|
-pub impl TJsValue for MutationRecord with to_js(self : MutationRecord) -> JsValue = "%identity"
+pub impl TJsValue for MutationRecord with to_js(self: MutationRecord) -> JsValue = "%identity"
 
-///|
 pub impl FromJsAny for MutationRecord with from_js_any(value : JsAny) -> MutationRecord = "%identity"
 
-///|
-pub fn[T : TMutationRecord] MutationRecord::into(self : MutationRecord) -> T = "%identity"
+/// Unchecked downcast — no runtime type check is performed.
+/// Prefer `try_into()` for checked downcasts.
+#deprecated("Use unsafe_into or try_into instead")
+pub fn[T: TMutationRecord] MutationRecord::into(self : MutationRecord) -> T = "%identity"
 
-///|
+/// Unchecked downcast — no runtime type check is performed.
+/// WARNING: If the underlying JS value is not of type T, this will silently
+/// produce a value with incorrect type, leading to undefined behavior.
+pub fn[T: TMutationRecord] MutationRecord::unsafe_into(self : MutationRecord) -> T = "%identity"
+
+pub impl HasConstructor for MutationRecord with constructor_name() { "MutationRecord" }
+
+/// Checked downcast — returns None if the JS value is not an instance of T.
+pub fn[T : TMutationRecord + HasConstructor] MutationRecord::try_into(self : MutationRecord) -> T? {
+  if js_instanceof(TJsValue::to_js(self), T::constructor_name()) {
+    Some(self.unsafe_into())
+  } else {
+    None
+  }
+}
+
 pub impl TMutationRecord for MutationRecord
 
-///|
 /// [MutationRecord](https://developer.mozilla.org/en-US/docs/Web/API/MutationRecord) interface.
 pub trait TMutationRecord: TJsValue {
   type_(self : Self) -> String = _
@@ -33,210 +46,179 @@ pub trait TMutationRecord: TJsValue {
   old_value(self : Self) -> String = _
 }
 
-///|
 /// [MutationRecord.type](https://developer.mozilla.org/en-US/docs/Web/API/MutationRecord/type)
 impl TMutationRecord with type_(self : Self) -> String {
   mutation_record_type_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [MutationRecord.target](https://developer.mozilla.org/en-US/docs/Web/API/MutationRecord/target)
 impl TMutationRecord with target(self : Self) -> Node {
   mutation_record_target_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [MutationRecord.addedNodes](https://developer.mozilla.org/en-US/docs/Web/API/MutationRecord/addedNodes)
 impl TMutationRecord with added_nodes(self : Self) -> NodeList {
   mutation_record_added_nodes_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [MutationRecord.removedNodes](https://developer.mozilla.org/en-US/docs/Web/API/MutationRecord/removedNodes)
 impl TMutationRecord with removed_nodes(self : Self) -> NodeList {
   mutation_record_removed_nodes_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [MutationRecord.previousSibling](https://developer.mozilla.org/en-US/docs/Web/API/MutationRecord/previousSibling)
 impl TMutationRecord with previous_sibling(self : Self) -> Node {
   mutation_record_previous_sibling_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [MutationRecord.nextSibling](https://developer.mozilla.org/en-US/docs/Web/API/MutationRecord/nextSibling)
 impl TMutationRecord with next_sibling(self : Self) -> Node {
   mutation_record_next_sibling_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [MutationRecord.attributeName](https://developer.mozilla.org/en-US/docs/Web/API/MutationRecord/attributeName)
 impl TMutationRecord with attribute_name(self : Self) -> String {
   mutation_record_attribute_name_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [MutationRecord.attributeNamespace](https://developer.mozilla.org/en-US/docs/Web/API/MutationRecord/attributeNamespace)
 impl TMutationRecord with attribute_namespace(self : Self) -> String {
   mutation_record_attribute_namespace_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [MutationRecord.oldValue](https://developer.mozilla.org/en-US/docs/Web/API/MutationRecord/oldValue)
 impl TMutationRecord with old_value(self : Self) -> String {
   mutation_record_old_value_ffi(TJsValue::to_js(self))
 }
 
-///|
 #cfg(target="js")
-extern "js" fn mutation_record_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.type"
+extern "js" fn mutation_record_type_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.type"
 
 ///|
 #cfg(target="js")
-fn mutation_record_type_ffi(obj : JsValue) -> String {
+fn mutation_record_type_ffi(obj: JsValue) -> String {
   mutation_record_type_ffi_js(obj).unsafe_cast()
 }
 
-///|
 #cfg(target="js")
-extern "js" fn mutation_record_target_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.target"
+extern "js" fn mutation_record_target_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.target"
 
 ///|
 #cfg(target="js")
-fn mutation_record_target_ffi(obj : JsValue) -> Node {
+fn mutation_record_target_ffi(obj: JsValue) -> Node {
   mutation_record_target_ffi_js(obj).unsafe_cast()
 }
 
-///|
 #cfg(target="js")
-extern "js" fn mutation_record_added_nodes_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.addedNodes"
+extern "js" fn mutation_record_added_nodes_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.addedNodes"
 
 ///|
 #cfg(target="js")
-fn mutation_record_added_nodes_ffi(obj : JsValue) -> NodeList {
+fn mutation_record_added_nodes_ffi(obj: JsValue) -> NodeList {
   mutation_record_added_nodes_ffi_js(obj).unsafe_cast()
 }
 
-///|
 #cfg(target="js")
-extern "js" fn mutation_record_removed_nodes_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.removedNodes"
+extern "js" fn mutation_record_removed_nodes_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.removedNodes"
 
 ///|
 #cfg(target="js")
-fn mutation_record_removed_nodes_ffi(obj : JsValue) -> NodeList {
+fn mutation_record_removed_nodes_ffi(obj: JsValue) -> NodeList {
   mutation_record_removed_nodes_ffi_js(obj).unsafe_cast()
 }
 
-///|
 #cfg(target="js")
-extern "js" fn mutation_record_previous_sibling_ffi_js(
-  obj : JsValue,
-) -> JsValue = "(obj) => obj.previousSibling"
+extern "js" fn mutation_record_previous_sibling_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.previousSibling"
 
 ///|
 #cfg(target="js")
-fn mutation_record_previous_sibling_ffi(obj : JsValue) -> Node {
+fn mutation_record_previous_sibling_ffi(obj: JsValue) -> Node {
   mutation_record_previous_sibling_ffi_js(obj).unsafe_cast()
 }
 
-///|
 #cfg(target="js")
-extern "js" fn mutation_record_next_sibling_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.nextSibling"
+extern "js" fn mutation_record_next_sibling_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.nextSibling"
 
 ///|
 #cfg(target="js")
-fn mutation_record_next_sibling_ffi(obj : JsValue) -> Node {
+fn mutation_record_next_sibling_ffi(obj: JsValue) -> Node {
   mutation_record_next_sibling_ffi_js(obj).unsafe_cast()
 }
 
-///|
 #cfg(target="js")
-extern "js" fn mutation_record_attribute_name_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.attributeName"
+extern "js" fn mutation_record_attribute_name_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.attributeName"
 
 ///|
 #cfg(target="js")
-fn mutation_record_attribute_name_ffi(obj : JsValue) -> String {
+fn mutation_record_attribute_name_ffi(obj: JsValue) -> String {
   mutation_record_attribute_name_ffi_js(obj).unsafe_cast()
 }
 
-///|
 #cfg(target="js")
-extern "js" fn mutation_record_attribute_namespace_ffi_js(
-  obj : JsValue,
-) -> JsValue = "(obj) => obj.attributeNamespace"
+extern "js" fn mutation_record_attribute_namespace_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.attributeNamespace"
 
 ///|
 #cfg(target="js")
-fn mutation_record_attribute_namespace_ffi(obj : JsValue) -> String {
+fn mutation_record_attribute_namespace_ffi(obj: JsValue) -> String {
   mutation_record_attribute_namespace_ffi_js(obj).unsafe_cast()
 }
 
-///|
 #cfg(target="js")
-extern "js" fn mutation_record_old_value_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.oldValue"
+extern "js" fn mutation_record_old_value_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.oldValue"
 
 ///|
 #cfg(target="js")
-fn mutation_record_old_value_ffi(obj : JsValue) -> String {
+fn mutation_record_old_value_ffi(obj: JsValue) -> String {
   mutation_record_old_value_ffi_js(obj).unsafe_cast()
 }
 
-///|
 #cfg(target="wasm-gc")
-fn mutation_record_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_MutationRecord" "get_type"
+fn mutation_record_type_ffi_wasm(obj: JsValue) -> JsValue = "webapi_MutationRecord" "get_type"
 
 ///|
 #cfg(target="wasm-gc")
-fn mutation_record_type_ffi(obj : JsValue) -> String {
+fn mutation_record_type_ffi(obj: JsValue) -> String {
   jsvalue_to_string(mutation_record_type_ffi_wasm(obj))
 }
 
-///|
 #cfg(target="wasm-gc")
-fn mutation_record_target_ffi(obj : JsValue) -> Node = "webapi_MutationRecord" "get_target"
+fn mutation_record_target_ffi(obj: JsValue) -> Node = "webapi_MutationRecord" "get_target"
+
+#cfg(target="wasm-gc")
+fn mutation_record_added_nodes_ffi(obj: JsValue) -> NodeList = "webapi_MutationRecord" "get_addedNodes"
+
+#cfg(target="wasm-gc")
+fn mutation_record_removed_nodes_ffi(obj: JsValue) -> NodeList = "webapi_MutationRecord" "get_removedNodes"
+
+#cfg(target="wasm-gc")
+fn mutation_record_previous_sibling_ffi(obj: JsValue) -> Node = "webapi_MutationRecord" "get_previousSibling"
+
+#cfg(target="wasm-gc")
+fn mutation_record_next_sibling_ffi(obj: JsValue) -> Node = "webapi_MutationRecord" "get_nextSibling"
+
+#cfg(target="wasm-gc")
+fn mutation_record_attribute_name_ffi_wasm(obj: JsValue) -> JsValue = "webapi_MutationRecord" "get_attributeName"
 
 ///|
 #cfg(target="wasm-gc")
-fn mutation_record_added_nodes_ffi(obj : JsValue) -> NodeList = "webapi_MutationRecord" "get_addedNodes"
-
-///|
-#cfg(target="wasm-gc")
-fn mutation_record_removed_nodes_ffi(obj : JsValue) -> NodeList = "webapi_MutationRecord" "get_removedNodes"
-
-///|
-#cfg(target="wasm-gc")
-fn mutation_record_previous_sibling_ffi(obj : JsValue) -> Node = "webapi_MutationRecord" "get_previousSibling"
-
-///|
-#cfg(target="wasm-gc")
-fn mutation_record_next_sibling_ffi(obj : JsValue) -> Node = "webapi_MutationRecord" "get_nextSibling"
-
-///|
-#cfg(target="wasm-gc")
-fn mutation_record_attribute_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_MutationRecord" "get_attributeName"
-
-///|
-#cfg(target="wasm-gc")
-fn mutation_record_attribute_name_ffi(obj : JsValue) -> String {
+fn mutation_record_attribute_name_ffi(obj: JsValue) -> String {
   jsvalue_to_string(mutation_record_attribute_name_ffi_wasm(obj))
 }
 
-///|
 #cfg(target="wasm-gc")
-fn mutation_record_attribute_namespace_ffi_wasm(obj : JsValue) -> JsValue = "webapi_MutationRecord" "get_attributeNamespace"
+fn mutation_record_attribute_namespace_ffi_wasm(obj: JsValue) -> JsValue = "webapi_MutationRecord" "get_attributeNamespace"
 
 ///|
 #cfg(target="wasm-gc")
-fn mutation_record_attribute_namespace_ffi(obj : JsValue) -> String {
+fn mutation_record_attribute_namespace_ffi(obj: JsValue) -> String {
   jsvalue_to_string(mutation_record_attribute_namespace_ffi_wasm(obj))
 }
 
-///|
 #cfg(target="wasm-gc")
-fn mutation_record_old_value_ffi_wasm(obj : JsValue) -> JsValue = "webapi_MutationRecord" "get_oldValue"
+fn mutation_record_old_value_ffi_wasm(obj: JsValue) -> JsValue = "webapi_MutationRecord" "get_oldValue"
 
 ///|
 #cfg(target="wasm-gc")
-fn mutation_record_old_value_ffi(obj : JsValue) -> String {
+fn mutation_record_old_value_ffi(obj: JsValue) -> String {
   jsvalue_to_string(mutation_record_old_value_ffi_wasm(obj))
 }

@@ -2,18 +2,13 @@
 // MoonBit type: NavigationHistoryBehavior
 // Specifications: html.idl
 
-///|
 pub(all) enum NavigationHistoryBehavior {
   Auto
   Push
   Replace
 } derive(Eq)
 
-///|
-pub impl Show for NavigationHistoryBehavior with output(
-  self : NavigationHistoryBehavior,
-  logger : &Logger,
-) -> Unit {
+pub impl Show for NavigationHistoryBehavior with output(self : NavigationHistoryBehavior, logger : &Logger) -> Unit {
   match self {
     NavigationHistoryBehavior::Auto => logger.write_string("Auto")
     NavigationHistoryBehavior::Push => logger.write_string("Push")
@@ -21,10 +16,7 @@ pub impl Show for NavigationHistoryBehavior with output(
   }
 }
 
-///|
-pub impl TJsValue for NavigationHistoryBehavior with to_js(
-  self : NavigationHistoryBehavior,
-) -> JsValue {
+pub impl TJsValue for NavigationHistoryBehavior with to_js(self: NavigationHistoryBehavior) -> JsValue {
   match self {
     NavigationHistoryBehavior::Auto => TJsValue::to_js("auto")
     NavigationHistoryBehavior::Push => TJsValue::to_js("push")
@@ -32,10 +24,7 @@ pub impl TJsValue for NavigationHistoryBehavior with to_js(
   }
 }
 
-///|
-pub fn NavigationHistoryBehavior::from(
-  value : String,
-) -> NavigationHistoryBehavior? {
+pub fn NavigationHistoryBehavior::from(value: String) -> NavigationHistoryBehavior? {
   match value {
     "auto" => Some(NavigationHistoryBehavior::Auto)
     "push" => Some(NavigationHistoryBehavior::Push)
@@ -44,10 +33,7 @@ pub fn NavigationHistoryBehavior::from(
   }
 }
 
-///|
-fn NavigationHistoryBehavior::from_unchecked(
-  value : String,
-) -> NavigationHistoryBehavior {
+fn NavigationHistoryBehavior::from_unchecked(value: String) -> NavigationHistoryBehavior {
   match value {
     "auto" => NavigationHistoryBehavior::Auto
     "push" => NavigationHistoryBehavior::Push
@@ -56,10 +42,7 @@ fn NavigationHistoryBehavior::from_unchecked(
   }
 }
 
-///|
-pub fn NavigationHistoryBehavior::value(
-  self : NavigationHistoryBehavior,
-) -> String {
+pub fn NavigationHistoryBehavior::value(self: NavigationHistoryBehavior) -> String {
   match self {
     NavigationHistoryBehavior::Auto => "auto"
     NavigationHistoryBehavior::Push => "push"
@@ -67,7 +50,6 @@ pub fn NavigationHistoryBehavior::value(
   }
 }
 
-///|
 pub impl FromJsAny for NavigationHistoryBehavior with from_js_any(value : JsAny) -> NavigationHistoryBehavior {
   NavigationHistoryBehavior::from_unchecked(value)
 }

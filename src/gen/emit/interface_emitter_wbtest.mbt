@@ -81,7 +81,26 @@ test "InterfaceEmitter emits union typedef args as trait refs" {
       #|
       #|pub impl FromJsAny for Window with from_js_any(value : JsAny) -> Window = "%identity"
       #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// Prefer `try_into()` for checked downcasts.
+      #|#deprecated("Use unsafe_into or try_into instead")
       #|pub fn[T: TWindow] Window::into(self : Window) -> T = "%identity"
+      #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// WARNING: If the underlying JS value is not of type T, this will silently
+      #|/// produce a value with incorrect type, leading to undefined behavior.
+      #|pub fn[T: TWindow] Window::unsafe_into(self : Window) -> T = "%identity"
+      #|
+      #|pub impl HasConstructor for Window with constructor_name() { "Window" }
+      #|
+      #|/// Checked downcast — returns None if the JS value is not an instance of T.
+      #|pub fn[T : TWindow + HasConstructor] Window::try_into(self : Window) -> T? {
+      #|  if js_instanceof(TJsValue::to_js(self), T::constructor_name()) {
+      #|    Some(self.unsafe_into())
+      #|  } else {
+      #|    None
+      #|  }
+      #|}
       #|
       #|pub impl TWindow for Window
       #|
@@ -95,6 +114,7 @@ test "InterfaceEmitter emits union typedef args as trait refs" {
       #|input : &TRequestInfo) -> Unit {
       #|  window_fetch_ffi(TJsValue::to_js(self), input.to_js())
       #|}
+
     ),
   )
   inspect(
@@ -143,7 +163,26 @@ test "InterfaceEmitter generates MoonBit code for interface" {
       #|
       #|pub impl FromJsAny for EventTarget with from_js_any(value : JsAny) -> EventTarget = "%identity"
       #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// Prefer `try_into()` for checked downcasts.
+      #|#deprecated("Use unsafe_into or try_into instead")
       #|pub fn[T: TEventTarget] EventTarget::into(self : EventTarget) -> T = "%identity"
+      #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// WARNING: If the underlying JS value is not of type T, this will silently
+      #|/// produce a value with incorrect type, leading to undefined behavior.
+      #|pub fn[T: TEventTarget] EventTarget::unsafe_into(self : EventTarget) -> T = "%identity"
+      #|
+      #|pub impl HasConstructor for EventTarget with constructor_name() { "EventTarget" }
+      #|
+      #|/// Checked downcast — returns None if the JS value is not an instance of T.
+      #|pub fn[T : TEventTarget + HasConstructor] EventTarget::try_into(self : EventTarget) -> T? {
+      #|  if js_instanceof(TJsValue::to_js(self), T::constructor_name()) {
+      #|    Some(self.unsafe_into())
+      #|  } else {
+      #|    None
+      #|  }
+      #|}
       #|
       #|pub impl TEventTarget for EventTarget
       #|
@@ -197,6 +236,7 @@ test "InterfaceEmitter generates MoonBit code for interface" {
       #|event : Event) -> Bool {
       #|  event_target_dispatch_event_ffi(TJsValue::to_js(self), TJsValue::to_js(event))
       #|}
+
     ),
   )
   inspect(
@@ -254,7 +294,26 @@ test "InterfaceEmitter handles interface with nested union arg types" {
       #|
       #|pub impl FromJsAny for TestInterface with from_js_any(value : JsAny) -> TestInterface = "%identity"
       #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// Prefer `try_into()` for checked downcasts.
+      #|#deprecated("Use unsafe_into or try_into instead")
       #|pub fn[T: TTestInterface] TestInterface::into(self : TestInterface) -> T = "%identity"
+      #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// WARNING: If the underlying JS value is not of type T, this will silently
+      #|/// produce a value with incorrect type, leading to undefined behavior.
+      #|pub fn[T: TTestInterface] TestInterface::unsafe_into(self : TestInterface) -> T = "%identity"
+      #|
+      #|pub impl HasConstructor for TestInterface with constructor_name() { "TestInterface" }
+      #|
+      #|/// Checked downcast — returns None if the JS value is not an instance of T.
+      #|pub fn[T : TTestInterface + HasConstructor] TestInterface::try_into(self : TestInterface) -> T? {
+      #|  if js_instanceof(TJsValue::to_js(self), T::constructor_name()) {
+      #|    Some(self.unsafe_into())
+      #|  } else {
+      #|    None
+      #|  }
+      #|}
       #|
       #|pub impl TTestInterface for TestInterface
       #|
@@ -288,6 +347,7 @@ test "InterfaceEmitter handles interface with nested union arg types" {
       #|None => JsValue::undefined()
       #|})
       #|}
+
     ),
   )
   inspect(
@@ -338,7 +398,26 @@ test "InterfaceEmitter generates MoonBit code for union return type" {
       #|
       #|pub impl FromJsAny for TestInterface with from_js_any(value : JsAny) -> TestInterface = "%identity"
       #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// Prefer `try_into()` for checked downcasts.
+      #|#deprecated("Use unsafe_into or try_into instead")
       #|pub fn[T: TTestInterface] TestInterface::into(self : TestInterface) -> T = "%identity"
+      #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// WARNING: If the underlying JS value is not of type T, this will silently
+      #|/// produce a value with incorrect type, leading to undefined behavior.
+      #|pub fn[T: TTestInterface] TestInterface::unsafe_into(self : TestInterface) -> T = "%identity"
+      #|
+      #|pub impl HasConstructor for TestInterface with constructor_name() { "TestInterface" }
+      #|
+      #|/// Checked downcast — returns None if the JS value is not an instance of T.
+      #|pub fn[T : TTestInterface + HasConstructor] TestInterface::try_into(self : TestInterface) -> T? {
+      #|  if js_instanceof(TJsValue::to_js(self), T::constructor_name()) {
+      #|    Some(self.unsafe_into())
+      #|  } else {
+      #|    None
+      #|  }
+      #|}
       #|
       #|pub impl TTestInterface for TestInterface
       #|
@@ -349,7 +428,12 @@ test "InterfaceEmitter generates MoonBit code for union return type" {
       #|
       #|pub impl FromJsAny for TestInterfaceTestMethod with from_js_any(value : JsAny) -> TestInterfaceTestMethod = "%identity"
       #|
+      #|#deprecated("Use unsafe_into or try_into instead")
       #|pub fn[T : TTestInterfaceTestMethod + FromJsAny] TestInterfaceTestMethod::into(self : TestInterfaceTestMethod) -> T {
+      #|  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
+      #|}
+      #|
+      #|pub fn[T : TTestInterfaceTestMethod + FromJsAny] TestInterfaceTestMethod::unsafe_into(self : TestInterfaceTestMethod) -> T {
       #|  FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
       #|}
       #|
@@ -372,6 +456,7 @@ test "InterfaceEmitter generates MoonBit code for union return type" {
       #|impl TTestInterface with test_method(self : Self) -> TestInterfaceTestMethod {
       #|  test_interface_test_method_ffi(TJsValue::to_js(self))
       #|}
+
     ),
   )
   inspect(
@@ -423,7 +508,26 @@ test "InterfaceEmitter generates MoonBit code for constants" {
       #|
       #|pub impl FromJsAny for TestInterface with from_js_any(value : JsAny) -> TestInterface = "%identity"
       #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// Prefer `try_into()` for checked downcasts.
+      #|#deprecated("Use unsafe_into or try_into instead")
       #|pub fn[T: TTestInterface] TestInterface::into(self : TestInterface) -> T = "%identity"
+      #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// WARNING: If the underlying JS value is not of type T, this will silently
+      #|/// produce a value with incorrect type, leading to undefined behavior.
+      #|pub fn[T: TTestInterface] TestInterface::unsafe_into(self : TestInterface) -> T = "%identity"
+      #|
+      #|pub impl HasConstructor for TestInterface with constructor_name() { "TestInterface" }
+      #|
+      #|/// Checked downcast — returns None if the JS value is not an instance of T.
+      #|pub fn[T : TTestInterface + HasConstructor] TestInterface::try_into(self : TestInterface) -> T? {
+      #|  if js_instanceof(TJsValue::to_js(self), T::constructor_name()) {
+      #|    Some(self.unsafe_into())
+      #|  } else {
+      #|    None
+      #|  }
+      #|}
       #|
       #|pub impl TTestInterface for TestInterface
       #|
@@ -437,6 +541,7 @@ test "InterfaceEmitter generates MoonBit code for constants" {
       #|}
       #|
       #|
+
     ),
   )
   inspect(multi.js_ffi)
@@ -468,7 +573,26 @@ test "InterfaceEmitter generates MoonBit code for attributes" {
       #|
       #|pub impl FromJsAny for TestInterface with from_js_any(value : JsAny) -> TestInterface = "%identity"
       #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// Prefer `try_into()` for checked downcasts.
+      #|#deprecated("Use unsafe_into or try_into instead")
       #|pub fn[T: TTestInterface] TestInterface::into(self : TestInterface) -> T = "%identity"
+      #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// WARNING: If the underlying JS value is not of type T, this will silently
+      #|/// produce a value with incorrect type, leading to undefined behavior.
+      #|pub fn[T: TTestInterface] TestInterface::unsafe_into(self : TestInterface) -> T = "%identity"
+      #|
+      #|pub impl HasConstructor for TestInterface with constructor_name() { "TestInterface" }
+      #|
+      #|/// Checked downcast — returns None if the JS value is not an instance of T.
+      #|pub fn[T : TTestInterface + HasConstructor] TestInterface::try_into(self : TestInterface) -> T? {
+      #|  if js_instanceof(TJsValue::to_js(self), T::constructor_name()) {
+      #|    Some(self.unsafe_into())
+      #|  } else {
+      #|    None
+      #|  }
+      #|}
       #|
       #|pub impl TTestInterface for TestInterface
       #|
@@ -487,6 +611,7 @@ test "InterfaceEmitter generates MoonBit code for attributes" {
       #|impl TTestInterface with name(self : Self) -> String {
       #|  test_interface_name_ffi(TJsValue::to_js(self))
       #|}
+
     ),
   )
   inspect(
@@ -541,7 +666,26 @@ test "InterfaceEmitter generates MoonBit code for attribute setter" {
       #|
       #|pub impl FromJsAny for TestInterface with from_js_any(value : JsAny) -> TestInterface = "%identity"
       #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// Prefer `try_into()` for checked downcasts.
+      #|#deprecated("Use unsafe_into or try_into instead")
       #|pub fn[T: TTestInterface] TestInterface::into(self : TestInterface) -> T = "%identity"
+      #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// WARNING: If the underlying JS value is not of type T, this will silently
+      #|/// produce a value with incorrect type, leading to undefined behavior.
+      #|pub fn[T: TTestInterface] TestInterface::unsafe_into(self : TestInterface) -> T = "%identity"
+      #|
+      #|pub impl HasConstructor for TestInterface with constructor_name() { "TestInterface" }
+      #|
+      #|/// Checked downcast — returns None if the JS value is not an instance of T.
+      #|pub fn[T : TTestInterface + HasConstructor] TestInterface::try_into(self : TestInterface) -> T? {
+      #|  if js_instanceof(TJsValue::to_js(self), T::constructor_name()) {
+      #|    Some(self.unsafe_into())
+      #|  } else {
+      #|    None
+      #|  }
+      #|}
       #|
       #|pub impl TTestInterface for TestInterface
       #|
@@ -561,6 +705,7 @@ test "InterfaceEmitter generates MoonBit code for attribute setter" {
       #|last_name : String) -> Unit {
       #|  test_interface_set_last_name_ffi(TJsValue::to_js(self), TJsValue::to_js(last_name))
       #|}
+
     ),
   )
   inspect(
@@ -619,7 +764,26 @@ test "InterfaceEmitter generates MoonBit code for readonly and inherit attribute
       #|
       #|pub impl FromJsAny for ParentInterface with from_js_any(value : JsAny) -> ParentInterface = "%identity"
       #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// Prefer `try_into()` for checked downcasts.
+      #|#deprecated("Use unsafe_into or try_into instead")
       #|pub fn[T: TParentInterface] ParentInterface::into(self : ParentInterface) -> T = "%identity"
+      #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// WARNING: If the underlying JS value is not of type T, this will silently
+      #|/// produce a value with incorrect type, leading to undefined behavior.
+      #|pub fn[T: TParentInterface] ParentInterface::unsafe_into(self : ParentInterface) -> T = "%identity"
+      #|
+      #|pub impl HasConstructor for ParentInterface with constructor_name() { "ParentInterface" }
+      #|
+      #|/// Checked downcast — returns None if the JS value is not an instance of T.
+      #|pub fn[T : TParentInterface + HasConstructor] ParentInterface::try_into(self : ParentInterface) -> T? {
+      #|  if js_instanceof(TJsValue::to_js(self), T::constructor_name()) {
+      #|    Some(self.unsafe_into())
+      #|  } else {
+      #|    None
+      #|  }
+      #|}
       #|
       #|pub impl TParentInterface for ParentInterface
       #|
@@ -632,6 +796,7 @@ test "InterfaceEmitter generates MoonBit code for readonly and inherit attribute
       #|impl TParentInterface with last_name(self : Self) -> String {
       #|  parent_interface_last_name_ffi(TJsValue::to_js(self))
       #|}
+
     ),
   )
   inspect(
@@ -673,7 +838,26 @@ test "InterfaceEmitter generates MoonBit code for readonly and inherit attribute
       #|
       #|pub impl FromJsAny for ChildInterface with from_js_any(value : JsAny) -> ChildInterface = "%identity"
       #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// Prefer `try_into()` for checked downcasts.
+      #|#deprecated("Use unsafe_into or try_into instead")
       #|pub fn[T: TChildInterface] ChildInterface::into(self : ChildInterface) -> T = "%identity"
+      #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// WARNING: If the underlying JS value is not of type T, this will silently
+      #|/// produce a value with incorrect type, leading to undefined behavior.
+      #|pub fn[T: TChildInterface] ChildInterface::unsafe_into(self : ChildInterface) -> T = "%identity"
+      #|
+      #|pub impl HasConstructor for ChildInterface with constructor_name() { "ChildInterface" }
+      #|
+      #|/// Checked downcast — returns None if the JS value is not an instance of T.
+      #|pub fn[T : TChildInterface + HasConstructor] ChildInterface::try_into(self : ChildInterface) -> T? {
+      #|  if js_instanceof(TJsValue::to_js(self), T::constructor_name()) {
+      #|    Some(self.unsafe_into())
+      #|  } else {
+      #|    None
+      #|  }
+      #|}
       #|
       #|pub impl TChildInterface for ChildInterface
       #|
@@ -695,6 +879,7 @@ test "InterfaceEmitter generates MoonBit code for readonly and inherit attribute
       #|last_name : String) -> Unit {
       #|  child_interface_set_last_name_ffi(TJsValue::to_js(self), TJsValue::to_js(last_name))
       #|}
+
     ),
   )
   inspect(
@@ -749,7 +934,26 @@ test "InterfaceEmitter emits static methods" {
       #|
       #|pub impl FromJsAny for TestInterface with from_js_any(value : JsAny) -> TestInterface = "%identity"
       #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// Prefer `try_into()` for checked downcasts.
+      #|#deprecated("Use unsafe_into or try_into instead")
       #|pub fn[T: TTestInterface] TestInterface::into(self : TestInterface) -> T = "%identity"
+      #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// WARNING: If the underlying JS value is not of type T, this will silently
+      #|/// produce a value with incorrect type, leading to undefined behavior.
+      #|pub fn[T: TTestInterface] TestInterface::unsafe_into(self : TestInterface) -> T = "%identity"
+      #|
+      #|pub impl HasConstructor for TestInterface with constructor_name() { "TestInterface" }
+      #|
+      #|/// Checked downcast — returns None if the JS value is not an instance of T.
+      #|pub fn[T : TTestInterface + HasConstructor] TestInterface::try_into(self : TestInterface) -> T? {
+      #|  if js_instanceof(TJsValue::to_js(self), T::constructor_name()) {
+      #|    Some(self.unsafe_into())
+      #|  } else {
+      #|    None
+      #|  }
+      #|}
       #|
       #|pub impl TTestInterface for TestInterface
       #|
@@ -763,6 +967,7 @@ test "InterfaceEmitter emits static methods" {
       #|status? : UInt) -> Response {
       #|  test_interface_redirect_ffi(TJsValue::to_js(url), opt_to_js(status))
       #|}
+
     ),
   )
   inspect(
@@ -813,7 +1018,26 @@ test "InterfaceEmitter emits static attribute getter methods" {
       #|
       #|pub impl FromJsAny for TestInterface with from_js_any(value : JsAny) -> TestInterface = "%identity"
       #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// Prefer `try_into()` for checked downcasts.
+      #|#deprecated("Use unsafe_into or try_into instead")
       #|pub fn[T: TTestInterface] TestInterface::into(self : TestInterface) -> T = "%identity"
+      #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// WARNING: If the underlying JS value is not of type T, this will silently
+      #|/// produce a value with incorrect type, leading to undefined behavior.
+      #|pub fn[T: TTestInterface] TestInterface::unsafe_into(self : TestInterface) -> T = "%identity"
+      #|
+      #|pub impl HasConstructor for TestInterface with constructor_name() { "TestInterface" }
+      #|
+      #|/// Checked downcast — returns None if the JS value is not an instance of T.
+      #|pub fn[T : TTestInterface + HasConstructor] TestInterface::try_into(self : TestInterface) -> T? {
+      #|  if js_instanceof(TJsValue::to_js(self), T::constructor_name()) {
+      #|    Some(self.unsafe_into())
+      #|  } else {
+      #|    None
+      #|  }
+      #|}
       #|
       #|pub impl TTestInterface for TestInterface
       #|
@@ -826,6 +1050,7 @@ test "InterfaceEmitter emits static attribute getter methods" {
       #|pub fn TestInterface::app_name() -> String {
       #|  test_interface_app_name_ffi()
       #|}
+
     ),
   )
   inspect(
@@ -877,7 +1102,26 @@ test "mbt_code_gen_multi generates separate shared and FFI files for interface" 
       #|
       #|pub impl FromJsAny for TestInterface with from_js_any(value : JsAny) -> TestInterface = "%identity"
       #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// Prefer `try_into()` for checked downcasts.
+      #|#deprecated("Use unsafe_into or try_into instead")
       #|pub fn[T: TTestInterface] TestInterface::into(self : TestInterface) -> T = "%identity"
+      #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// WARNING: If the underlying JS value is not of type T, this will silently
+      #|/// produce a value with incorrect type, leading to undefined behavior.
+      #|pub fn[T: TTestInterface] TestInterface::unsafe_into(self : TestInterface) -> T = "%identity"
+      #|
+      #|pub impl HasConstructor for TestInterface with constructor_name() { "TestInterface" }
+      #|
+      #|/// Checked downcast — returns None if the JS value is not an instance of T.
+      #|pub fn[T : TTestInterface + HasConstructor] TestInterface::try_into(self : TestInterface) -> T? {
+      #|  if js_instanceof(TJsValue::to_js(self), T::constructor_name()) {
+      #|    Some(self.unsafe_into())
+      #|  } else {
+      #|    None
+      #|  }
+      #|}
       #|
       #|pub impl TTestInterface for TestInterface
       #|
@@ -896,6 +1140,7 @@ test "mbt_code_gen_multi generates separate shared and FFI files for interface" 
       #|impl TTestInterface with name(self : Self) -> String {
       #|  test_interface_name_ffi(TJsValue::to_js(self))
       #|}
+
     ),
   )
   inspect(
@@ -950,7 +1195,26 @@ test "mbt_code_gen_multi emits empty UnionArgTraitImpl inheriting TJsValue" {
       #|
       #|pub impl FromJsAny for TestInterface with from_js_any(value : JsAny) -> TestInterface = "%identity"
       #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// Prefer `try_into()` for checked downcasts.
+      #|#deprecated("Use unsafe_into or try_into instead")
       #|pub fn[T: TTestInterface] TestInterface::into(self : TestInterface) -> T = "%identity"
+      #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// WARNING: If the underlying JS value is not of type T, this will silently
+      #|/// produce a value with incorrect type, leading to undefined behavior.
+      #|pub fn[T: TTestInterface] TestInterface::unsafe_into(self : TestInterface) -> T = "%identity"
+      #|
+      #|pub impl HasConstructor for TestInterface with constructor_name() { "TestInterface" }
+      #|
+      #|/// Checked downcast — returns None if the JS value is not an instance of T.
+      #|pub fn[T : TTestInterface + HasConstructor] TestInterface::try_into(self : TestInterface) -> T? {
+      #|  if js_instanceof(TJsValue::to_js(self), T::constructor_name()) {
+      #|    Some(self.unsafe_into())
+      #|  } else {
+      #|    None
+      #|  }
+      #|}
       #|
       #|pub impl TTestInterface for TestInterface
       #|
@@ -970,6 +1234,7 @@ test "mbt_code_gen_multi emits empty UnionArgTraitImpl inheriting TJsValue" {
       #|param : &TTestInterfaceTestMethodParam) -> void {
       #|  test_interface_test_method_ffi(TJsValue::to_js(self), param.to_js())
       #|}
+
     ),
   )
   inspect(
@@ -1020,7 +1285,26 @@ test "mbt_code_gen_multi generates wasm FFI for constructor" {
       #|
       #|pub impl FromJsAny for TestInterface with from_js_any(value : JsAny) -> TestInterface = "%identity"
       #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// Prefer `try_into()` for checked downcasts.
+      #|#deprecated("Use unsafe_into or try_into instead")
       #|pub fn[T: TTestInterface] TestInterface::into(self : TestInterface) -> T = "%identity"
+      #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// WARNING: If the underlying JS value is not of type T, this will silently
+      #|/// produce a value with incorrect type, leading to undefined behavior.
+      #|pub fn[T: TTestInterface] TestInterface::unsafe_into(self : TestInterface) -> T = "%identity"
+      #|
+      #|pub impl HasConstructor for TestInterface with constructor_name() { "TestInterface" }
+      #|
+      #|/// Checked downcast — returns None if the JS value is not an instance of T.
+      #|pub fn[T : TTestInterface + HasConstructor] TestInterface::try_into(self : TestInterface) -> T? {
+      #|  if js_instanceof(TJsValue::to_js(self), T::constructor_name()) {
+      #|    Some(self.unsafe_into())
+      #|  } else {
+      #|    None
+      #|  }
+      #|}
       #|
       #|pub impl TTestInterface for TestInterface
       #|
@@ -1034,6 +1318,7 @@ test "mbt_code_gen_multi generates wasm FFI for constructor" {
       #|}
       #|
       #|
+
     ),
   )
   inspect(
@@ -1142,7 +1427,26 @@ test "mbt_code_gen_multi overloads keep WebIDL member name in JS and MDN" {
       #|
       #|pub impl FromJsAny for TestInterface with from_js_any(value : JsAny) -> TestInterface = "%identity"
       #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// Prefer `try_into()` for checked downcasts.
+      #|#deprecated("Use unsafe_into or try_into instead")
       #|pub fn[T: TTestInterface] TestInterface::into(self : TestInterface) -> T = "%identity"
+      #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// WARNING: If the underlying JS value is not of type T, this will silently
+      #|/// produce a value with incorrect type, leading to undefined behavior.
+      #|pub fn[T: TTestInterface] TestInterface::unsafe_into(self : TestInterface) -> T = "%identity"
+      #|
+      #|pub impl HasConstructor for TestInterface with constructor_name() { "TestInterface" }
+      #|
+      #|/// Checked downcast — returns None if the JS value is not an instance of T.
+      #|pub fn[T : TTestInterface + HasConstructor] TestInterface::try_into(self : TestInterface) -> T? {
+      #|  if js_instanceof(TJsValue::to_js(self), T::constructor_name()) {
+      #|    Some(self.unsafe_into())
+      #|  } else {
+      #|    None
+      #|  }
+      #|}
       #|
       #|pub impl TTestInterface for TestInterface
       #|
@@ -1164,6 +1468,7 @@ test "mbt_code_gen_multi overloads keep WebIDL member name in JS and MDN" {
       #|fill_rule : String) -> Unit {
       #|  test_interface_fill_path_ffi(TJsValue::to_js(self), TJsValue::to_js(path), TJsValue::to_js(fill_rule))
       #|}
+
     ),
   )
   inspect(
@@ -1232,7 +1537,26 @@ test "convenience method for optional interface return" {
       #|
       #|pub impl FromJsAny for Document with from_js_any(value : JsAny) -> Document = "%identity"
       #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// Prefer `try_into()` for checked downcasts.
+      #|#deprecated("Use unsafe_into or try_into instead")
       #|pub fn[T: TDocument] Document::into(self : Document) -> T = "%identity"
+      #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// WARNING: If the underlying JS value is not of type T, this will silently
+      #|/// produce a value with incorrect type, leading to undefined behavior.
+      #|pub fn[T: TDocument] Document::unsafe_into(self : Document) -> T = "%identity"
+      #|
+      #|pub impl HasConstructor for Document with constructor_name() { "Document" }
+      #|
+      #|/// Checked downcast — returns None if the JS value is not an instance of T.
+      #|pub fn[T : TDocument + HasConstructor] Document::try_into(self : Document) -> T? {
+      #|  if js_instanceof(TJsValue::to_js(self), T::constructor_name()) {
+      #|    Some(self.unsafe_into())
+      #|  } else {
+      #|    None
+      #|  }
+      #|}
       #|
       #|pub impl TDocument for Document
       #|
@@ -1261,6 +1585,7 @@ test "convenience method for optional interface return" {
       #|selectors : String) -> Element {
       #|  self.query_selector_opt(selectors).unwrap()
       #|}
+
     ),
   )
   // FFI should be unchanged (no _opt in FFI names)
@@ -1305,7 +1630,26 @@ test "convenience method with optional args" {
       #|
       #|pub impl FromJsAny for ParentNode with from_js_any(value : JsAny) -> ParentNode = "%identity"
       #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// Prefer `try_into()` for checked downcasts.
+      #|#deprecated("Use unsafe_into or try_into instead")
       #|pub fn[T: TParentNode] ParentNode::into(self : ParentNode) -> T = "%identity"
+      #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// WARNING: If the underlying JS value is not of type T, this will silently
+      #|/// produce a value with incorrect type, leading to undefined behavior.
+      #|pub fn[T: TParentNode] ParentNode::unsafe_into(self : ParentNode) -> T = "%identity"
+      #|
+      #|pub impl HasConstructor for ParentNode with constructor_name() { "ParentNode" }
+      #|
+      #|/// Checked downcast — returns None if the JS value is not an instance of T.
+      #|pub fn[T : TParentNode + HasConstructor] ParentNode::try_into(self : ParentNode) -> T? {
+      #|  if js_instanceof(TJsValue::to_js(self), T::constructor_name()) {
+      #|    Some(self.unsafe_into())
+      #|  } else {
+      #|    None
+      #|  }
+      #|}
       #|
       #|pub impl TParentNode for ParentNode
       #|
@@ -1325,6 +1669,7 @@ test "convenience method with optional args" {
       #|selectors : String) -> Element {
       #|  self.query_selector_opt(selectors).unwrap()
       #|}
+
     ),
   )
 }
@@ -1354,7 +1699,26 @@ test "no convenience method for non-interface optional return" {
       #|
       #|pub impl FromJsAny for TestInterface with from_js_any(value : JsAny) -> TestInterface = "%identity"
       #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// Prefer `try_into()` for checked downcasts.
+      #|#deprecated("Use unsafe_into or try_into instead")
       #|pub fn[T: TTestInterface] TestInterface::into(self : TestInterface) -> T = "%identity"
+      #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// WARNING: If the underlying JS value is not of type T, this will silently
+      #|/// produce a value with incorrect type, leading to undefined behavior.
+      #|pub fn[T: TTestInterface] TestInterface::unsafe_into(self : TestInterface) -> T = "%identity"
+      #|
+      #|pub impl HasConstructor for TestInterface with constructor_name() { "TestInterface" }
+      #|
+      #|/// Checked downcast — returns None if the JS value is not an instance of T.
+      #|pub fn[T : TTestInterface + HasConstructor] TestInterface::try_into(self : TestInterface) -> T? {
+      #|  if js_instanceof(TJsValue::to_js(self), T::constructor_name()) {
+      #|    Some(self.unsafe_into())
+      #|  } else {
+      #|    None
+      #|  }
+      #|}
       #|
       #|pub impl TTestInterface for TestInterface
       #|
@@ -1367,6 +1731,7 @@ test "no convenience method for non-interface optional return" {
       #|impl TTestInterface with get_name(self : Self) -> String? {
       #|  test_interface_get_name_ffi(TJsValue::to_js(self)).to_option_prim()
       #|}
+
     ),
   )
 }
@@ -1398,7 +1763,26 @@ test "InterfaceEmitter resolves typedef→callback chain in attribute setter" {
       #|
       #|pub impl FromJsAny for GlobalEventHandlers with from_js_any(value : JsAny) -> GlobalEventHandlers = "%identity"
       #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// Prefer `try_into()` for checked downcasts.
+      #|#deprecated("Use unsafe_into or try_into instead")
       #|pub fn[T: TGlobalEventHandlers] GlobalEventHandlers::into(self : GlobalEventHandlers) -> T = "%identity"
+      #|
+      #|/// Unchecked downcast — no runtime type check is performed.
+      #|/// WARNING: If the underlying JS value is not of type T, this will silently
+      #|/// produce a value with incorrect type, leading to undefined behavior.
+      #|pub fn[T: TGlobalEventHandlers] GlobalEventHandlers::unsafe_into(self : GlobalEventHandlers) -> T = "%identity"
+      #|
+      #|pub impl HasConstructor for GlobalEventHandlers with constructor_name() { "GlobalEventHandlers" }
+      #|
+      #|/// Checked downcast — returns None if the JS value is not an instance of T.
+      #|pub fn[T : TGlobalEventHandlers + HasConstructor] GlobalEventHandlers::try_into(self : GlobalEventHandlers) -> T? {
+      #|  if js_instanceof(TJsValue::to_js(self), T::constructor_name()) {
+      #|    Some(self.unsafe_into())
+      #|  } else {
+      #|    None
+      #|  }
+      #|}
       #|
       #|pub impl TGlobalEventHandlers for GlobalEventHandlers
       #|
@@ -1418,6 +1802,7 @@ test "InterfaceEmitter resolves typedef→callback chain in attribute setter" {
       #|onclick : (Event) -> JsValue) -> Unit {
       #|  global_event_handlers_set_onclick_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onclick)))
       #|}
+
     ),
   )
   inspect(

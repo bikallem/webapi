@@ -11,7 +11,7 @@ using @webapi {
 /// Demonstrates gradients, shapes, paths, and text using the Canvas 2D API
 fn main {
   // Create and append canvas
-  let canvas : HTMLCanvasElement = document().create_element("canvas").into()
+  let canvas : HTMLCanvasElement = document().create_element("canvas").unsafe_into()
   canvas
   ..set_width(800)
   ..set_height(500)
@@ -21,7 +21,7 @@ fn main {
   (document().get_element_by_id("app") : Element).append_child(canvas) |> ignore
 
   // Get 2D context
-  let ctx : CanvasRenderingContext2D = canvas.get_context("2d").unwrap().into()
+  let ctx : CanvasRenderingContext2D = canvas.get_context("2d").unwrap().unsafe_into()
 
   // Draw sky gradient
   let sky_gradient = ctx.create_linear_gradient(0.0, 0.0, 0.0, 300.0)

@@ -19,7 +19,7 @@ fn main {
   let app : Element = document().get_element_by_id("app")
 
   // Create container
-  let container : HTMLDivElement = document().create_element("div").into()
+  let container : HTMLDivElement = document().create_element("div").unsafe_into()
   container.set_attribute(
     "style", "max-width: 500px; margin: 2em auto; font-family: system-ui; padding: 1em;",
   )
@@ -29,15 +29,15 @@ fn main {
   heading.set_text_content("MoonBit Forms Demo")
 
   // Create form
-  let form : HTMLFormElement = document().create_element("form").into()
+  let form : HTMLFormElement = document().create_element("form").unsafe_into()
   form.set_attribute("id", "form")
 
   // --- Name input ---
-  let name_label : HTMLLabelElement = document().create_element("label").into()
+  let name_label : HTMLLabelElement = document().create_element("label").unsafe_into()
   name_label
   ..set_text_content("Name: ")
   .set_attribute("style", "display: block; margin-top: 1em; font-weight: bold;")
-  let name_input : HTMLInputElement = document().create_element("input").into()
+  let name_input : HTMLInputElement = document().create_element("input").unsafe_into()
   name_input
   ..set_type_("text")
   ..set_required(true)
@@ -45,11 +45,11 @@ fn main {
   .set_attribute("id", "name-input")
 
   // --- Checkbox ---
-  let agree_label : HTMLLabelElement = document().create_element("label").into()
+  let agree_label : HTMLLabelElement = document().create_element("label").unsafe_into()
   agree_label.set_attribute(
     "style", "display: block; margin-top: 1em; font-weight: bold;",
   )
-  let checkbox : HTMLInputElement = document().create_element("input").into()
+  let checkbox : HTMLInputElement = document().create_element("input").unsafe_into()
   checkbox..set_type_("checkbox").set_attribute("id", "agree-check")
   let agree_text = document().create_element("span")
   agree_text.set_text_content(" I agree to the terms")
@@ -57,18 +57,18 @@ fn main {
   agree_label.append_child(agree_text) |> ignore
 
   // --- Select dropdown ---
-  let color_label : HTMLLabelElement = document().create_element("label").into()
+  let color_label : HTMLLabelElement = document().create_element("label").unsafe_into()
   color_label
   ..set_text_content("Favorite Color: ")
   .set_attribute("style", "display: block; margin-top: 1em; font-weight: bold;")
-  let select : HTMLSelectElement = document().create_element("select").into()
+  let select : HTMLSelectElement = document().create_element("select").unsafe_into()
   select.set_attribute("id", "color-select")
 
   // Add options
   let colors = [("red", "Red"), ("green", "Green"), ("blue", "Blue")]
   for pair in colors {
     let (val, text) = pair
-    let option : HTMLOptionElement = document().create_element("option").into()
+    let option : HTMLOptionElement = document().create_element("option").unsafe_into()
     option.set_value(val)
     option.set_text(text)
     select.append_child(option) |> ignore
@@ -77,19 +77,19 @@ fn main {
   // --- Textarea ---
   let comment_label : HTMLLabelElement = document()
     .create_element("label")
-    .into()
+    .unsafe_into()
   comment_label
   ..set_text_content("Comment: ")
   .set_attribute("style", "display: block; margin-top: 1em; font-weight: bold;")
   let textarea : HTMLTextAreaElement = document()
     .create_element("textarea")
-    .into()
+    .unsafe_into()
   textarea
   ..set_placeholder("Enter a comment...")
   .set_attribute("id", "comment-area")
 
   // --- Current values display (updated on input) ---
-  let current_values : HTMLDivElement = document().create_element("div").into()
+  let current_values : HTMLDivElement = document().create_element("div").unsafe_into()
   current_values
   ..set_attribute("id", "current-values")
   ..set_attribute(
@@ -104,7 +104,7 @@ fn main {
   })
 
   // --- Validity status display ---
-  let validity_status : HTMLDivElement = document().create_element("div").into()
+  let validity_status : HTMLDivElement = document().create_element("div").unsafe_into()
   validity_status
   ..set_attribute("id", "validity-status")
   ..set_attribute(
@@ -113,7 +113,7 @@ fn main {
   .set_text_content("")
 
   // --- Output display ---
-  let output : HTMLDivElement = document().create_element("div").into()
+  let output : HTMLDivElement = document().create_element("div").unsafe_into()
   output
   ..set_attribute("id", "output")
   ..set_attribute(
@@ -122,12 +122,12 @@ fn main {
   .set_text_content("")
 
   // --- Buttons ---
-  let button_row : HTMLDivElement = document().create_element("div").into()
+  let button_row : HTMLDivElement = document().create_element("div").unsafe_into()
   button_row.set_attribute("style", "margin-top: 1.5em;")
 
   let validate_btn : HTMLButtonElement = document()
     .create_element("button")
-    .into()
+    .unsafe_into()
   validate_btn
   ..set_text_content("Check Validity")
   ..set_attribute("id", "validate-btn")
@@ -154,7 +154,7 @@ fn main {
 
   let submit_btn : HTMLButtonElement = document()
     .create_element("button")
-    .into()
+    .unsafe_into()
   submit_btn
   ..set_text_content("Submit")
   ..set_attribute("id", "submit-btn")

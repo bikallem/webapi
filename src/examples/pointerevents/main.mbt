@@ -7,7 +7,7 @@ fn main {
   heading.set_text_content("Pointer Events Demo")
 
   // Pointer tracking area
-  let pointer_area : @webapi.HTMLDivElement = doc.create_element("div").into()
+  let pointer_area : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
   pointer_area
   ..set_attribute("id", "pointer-area")
   .set_attribute(
@@ -26,7 +26,7 @@ fn main {
 
   // Listen for pointermove
   pointer_area.add_event_listener("pointermove", fn(event) {
-    let pe : @webapi.PointerEvent = event.into()
+    let pe : @webapi.PointerEvent = event.unsafe_into()
     let id = pe.pointer_id()
     let ptr_type = pe.pointer_type()
     let x = pe.client_x()
@@ -48,7 +48,7 @@ fn main {
   })
 
   let app : @webapi.Element = doc.get_element_by_id("app")
-  let container : @webapi.HTMLDivElement = doc.create_element("div").into()
+  let container : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )

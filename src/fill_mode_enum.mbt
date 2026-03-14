@@ -2,7 +2,6 @@
 // MoonBit type: FillMode
 // Specifications: web-animations.idl
 
-///|
 pub(all) enum FillMode {
   None
   Forwards
@@ -11,7 +10,6 @@ pub(all) enum FillMode {
   Auto
 } derive(Eq)
 
-///|
 pub impl Show for FillMode with output(self : FillMode, logger : &Logger) -> Unit {
   match self {
     FillMode::None => logger.write_string("None")
@@ -22,8 +20,7 @@ pub impl Show for FillMode with output(self : FillMode, logger : &Logger) -> Uni
   }
 }
 
-///|
-pub impl TJsValue for FillMode with to_js(self : FillMode) -> JsValue {
+pub impl TJsValue for FillMode with to_js(self: FillMode) -> JsValue {
   match self {
     FillMode::None => TJsValue::to_js("none")
     FillMode::Forwards => TJsValue::to_js("forwards")
@@ -33,8 +30,7 @@ pub impl TJsValue for FillMode with to_js(self : FillMode) -> JsValue {
   }
 }
 
-///|
-pub fn FillMode::from(value : String) -> FillMode? {
+pub fn FillMode::from(value: String) -> FillMode? {
   match value {
     "none" => Some(FillMode::None)
     "forwards" => Some(FillMode::Forwards)
@@ -45,8 +41,7 @@ pub fn FillMode::from(value : String) -> FillMode? {
   }
 }
 
-///|
-fn FillMode::from_unchecked(value : String) -> FillMode {
+fn FillMode::from_unchecked(value: String) -> FillMode {
   match value {
     "none" => FillMode::None
     "forwards" => FillMode::Forwards
@@ -57,8 +52,7 @@ fn FillMode::from_unchecked(value : String) -> FillMode {
   }
 }
 
-///|
-pub fn FillMode::value(self : FillMode) -> String {
+pub fn FillMode::value(self: FillMode) -> String {
   match self {
     FillMode::None => "none"
     FillMode::Forwards => "forwards"
@@ -68,7 +62,6 @@ pub fn FillMode::value(self : FillMode) -> String {
   }
 }
 
-///|
 pub impl FromJsAny for FillMode with from_js_any(value : JsAny) -> FillMode {
   FillMode::from_unchecked(value)
 }

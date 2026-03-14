@@ -2,24 +2,37 @@
 // MoonBit type: AbstractRange
 // Specifications: dom.idl
 
-///|
 /// [AbstractRange](https://developer.mozilla.org/en-US/docs/Web/API/AbstractRange)
 #external
 pub type AbstractRange
 
-///|
-pub impl TJsValue for AbstractRange with to_js(self : AbstractRange) -> JsValue = "%identity"
+pub impl TJsValue for AbstractRange with to_js(self: AbstractRange) -> JsValue = "%identity"
 
-///|
 pub impl FromJsAny for AbstractRange with from_js_any(value : JsAny) -> AbstractRange = "%identity"
 
-///|
-pub fn[T : TAbstractRange] AbstractRange::into(self : AbstractRange) -> T = "%identity"
+/// Unchecked downcast — no runtime type check is performed.
+/// Prefer `try_into()` for checked downcasts.
+#deprecated("Use unsafe_into or try_into instead")
+pub fn[T: TAbstractRange] AbstractRange::into(self : AbstractRange) -> T = "%identity"
 
-///|
+/// Unchecked downcast — no runtime type check is performed.
+/// WARNING: If the underlying JS value is not of type T, this will silently
+/// produce a value with incorrect type, leading to undefined behavior.
+pub fn[T: TAbstractRange] AbstractRange::unsafe_into(self : AbstractRange) -> T = "%identity"
+
+pub impl HasConstructor for AbstractRange with constructor_name() { "AbstractRange" }
+
+/// Checked downcast — returns None if the JS value is not an instance of T.
+pub fn[T : TAbstractRange + HasConstructor] AbstractRange::try_into(self : AbstractRange) -> T? {
+  if js_instanceof(TJsValue::to_js(self), T::constructor_name()) {
+    Some(self.unsafe_into())
+  } else {
+    None
+  }
+}
+
 pub impl TAbstractRange for AbstractRange
 
-///|
 /// [AbstractRange](https://developer.mozilla.org/en-US/docs/Web/API/AbstractRange) interface.
 pub trait TAbstractRange: TJsValue {
   start_container(self : Self) -> Node = _
@@ -29,102 +42,87 @@ pub trait TAbstractRange: TJsValue {
   collapsed(self : Self) -> Bool = _
 }
 
-///|
 /// [AbstractRange.startContainer](https://developer.mozilla.org/en-US/docs/Web/API/AbstractRange/startContainer)
 impl TAbstractRange with start_container(self : Self) -> Node {
   abstract_range_start_container_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [AbstractRange.startOffset](https://developer.mozilla.org/en-US/docs/Web/API/AbstractRange/startOffset)
 impl TAbstractRange with start_offset(self : Self) -> UInt {
   abstract_range_start_offset_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [AbstractRange.endContainer](https://developer.mozilla.org/en-US/docs/Web/API/AbstractRange/endContainer)
 impl TAbstractRange with end_container(self : Self) -> Node {
   abstract_range_end_container_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [AbstractRange.endOffset](https://developer.mozilla.org/en-US/docs/Web/API/AbstractRange/endOffset)
 impl TAbstractRange with end_offset(self : Self) -> UInt {
   abstract_range_end_offset_ffi(TJsValue::to_js(self))
 }
 
-///|
 /// [AbstractRange.collapsed](https://developer.mozilla.org/en-US/docs/Web/API/AbstractRange/collapsed)
 impl TAbstractRange with collapsed(self : Self) -> Bool {
   abstract_range_collapsed_ffi(TJsValue::to_js(self))
 }
 
-///|
 #cfg(target="js")
-extern "js" fn abstract_range_start_container_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.startContainer"
+extern "js" fn abstract_range_start_container_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.startContainer"
 
 ///|
 #cfg(target="js")
-fn abstract_range_start_container_ffi(obj : JsValue) -> Node {
+fn abstract_range_start_container_ffi(obj: JsValue) -> Node {
   abstract_range_start_container_ffi_js(obj).unsafe_cast()
 }
 
-///|
 #cfg(target="js")
-extern "js" fn abstract_range_start_offset_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.startOffset"
+extern "js" fn abstract_range_start_offset_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.startOffset"
 
 ///|
 #cfg(target="js")
-fn abstract_range_start_offset_ffi(obj : JsValue) -> UInt {
+fn abstract_range_start_offset_ffi(obj: JsValue) -> UInt {
   abstract_range_start_offset_ffi_js(obj).unsafe_cast()
 }
 
-///|
 #cfg(target="js")
-extern "js" fn abstract_range_end_container_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.endContainer"
+extern "js" fn abstract_range_end_container_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.endContainer"
 
 ///|
 #cfg(target="js")
-fn abstract_range_end_container_ffi(obj : JsValue) -> Node {
+fn abstract_range_end_container_ffi(obj: JsValue) -> Node {
   abstract_range_end_container_ffi_js(obj).unsafe_cast()
 }
 
-///|
 #cfg(target="js")
-extern "js" fn abstract_range_end_offset_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.endOffset"
+extern "js" fn abstract_range_end_offset_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.endOffset"
 
 ///|
 #cfg(target="js")
-fn abstract_range_end_offset_ffi(obj : JsValue) -> UInt {
+fn abstract_range_end_offset_ffi(obj: JsValue) -> UInt {
   abstract_range_end_offset_ffi_js(obj).unsafe_cast()
 }
 
-///|
 #cfg(target="js")
-extern "js" fn abstract_range_collapsed_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.collapsed"
+extern "js" fn abstract_range_collapsed_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.collapsed"
 
 ///|
 #cfg(target="js")
-fn abstract_range_collapsed_ffi(obj : JsValue) -> Bool {
+fn abstract_range_collapsed_ffi(obj: JsValue) -> Bool {
   abstract_range_collapsed_ffi_js(obj).unsafe_cast()
 }
 
-///|
 #cfg(target="wasm-gc")
-fn abstract_range_start_container_ffi(obj : JsValue) -> Node = "webapi_AbstractRange" "get_startContainer"
+fn abstract_range_start_container_ffi(obj: JsValue) -> Node = "webapi_AbstractRange" "get_startContainer"
 
-///|
 #cfg(target="wasm-gc")
-fn abstract_range_start_offset_ffi(obj : JsValue) -> UInt = "webapi_AbstractRange" "get_startOffset"
+fn abstract_range_start_offset_ffi(obj: JsValue) -> UInt = "webapi_AbstractRange" "get_startOffset"
 
-///|
 #cfg(target="wasm-gc")
-fn abstract_range_end_container_ffi(obj : JsValue) -> Node = "webapi_AbstractRange" "get_endContainer"
+fn abstract_range_end_container_ffi(obj: JsValue) -> Node = "webapi_AbstractRange" "get_endContainer"
 
-///|
 #cfg(target="wasm-gc")
-fn abstract_range_end_offset_ffi(obj : JsValue) -> UInt = "webapi_AbstractRange" "get_endOffset"
+fn abstract_range_end_offset_ffi(obj: JsValue) -> UInt = "webapi_AbstractRange" "get_endOffset"
 
-///|
 #cfg(target="wasm-gc")
-fn abstract_range_collapsed_ffi(obj : JsValue) -> Bool = "webapi_AbstractRange" "get_collapsed"
+fn abstract_range_collapsed_ffi(obj: JsValue) -> Bool = "webapi_AbstractRange" "get_collapsed"

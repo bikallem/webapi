@@ -7,7 +7,7 @@ fn main {
   heading.set_text_content("Touch Events Demo")
 
   // Touch tracking area
-  let touch_area : @webapi.HTMLDivElement = doc.create_element("div").into()
+  let touch_area : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
   touch_area
   ..set_attribute("id", "touch-area")
   .set_attribute(
@@ -26,7 +26,7 @@ fn main {
 
   let handle_touch = fn(event : @webapi.Event) {
     event.prevent_default()
-    let te : @webapi.TouchEvent = event.into()
+    let te : @webapi.TouchEvent = event.unsafe_into()
     let event_type = te.type_()
     let touches = te.touches()
     let count = touches.length()
@@ -58,7 +58,7 @@ fn main {
   }
 
   let app : @webapi.Element = doc.get_element_by_id("app")
-  let container : @webapi.HTMLDivElement = doc.create_element("div").into()
+  let container : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )

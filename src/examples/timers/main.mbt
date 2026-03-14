@@ -36,7 +36,7 @@ fn main {
   // Start button
   let start_btn : @webapi.HTMLButtonElement = doc
     .create_element("button")
-    .into()
+    .unsafe_into()
   start_btn
   ..set_attribute("id", "start-btn")
   ..set_attribute(
@@ -45,7 +45,7 @@ fn main {
   .set_text_content("Start")
 
   // Stop button
-  let stop_btn : @webapi.HTMLButtonElement = doc.create_element("button").into()
+  let stop_btn : @webapi.HTMLButtonElement = doc.create_element("button").unsafe_into()
   stop_btn
   ..set_attribute("id", "stop-btn")
   ..set_attribute(
@@ -90,7 +90,7 @@ fn main {
 
   let delay_btn : @webapi.HTMLButtonElement = doc
     .create_element("button")
-    .into()
+    .unsafe_into()
   delay_btn
   ..set_attribute("id", "delay-btn")
   ..set_attribute("style", "padding: 0.5em 1em; font-size: 1em;")
@@ -115,7 +115,7 @@ fn main {
 
   // Build DOM
   let app : @webapi.Element = doc.get_element_by_id("app")
-  let container : @webapi.HTMLDivElement = doc.create_element("div").into()
+  let container : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )

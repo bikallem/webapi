@@ -8,7 +8,7 @@ fn main {
   let app : @webapi.Element = doc.get_element_by_id("app")
 
   // Container
-  let container : @webapi.HTMLDivElement = doc.create_element("div").into()
+  let container : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )
@@ -18,7 +18,7 @@ fn main {
   heading.set_text_content("IndexedDB")
 
   // Key input
-  let key_input : @webapi.HTMLInputElement = doc.create_element("input").into()
+  let key_input : @webapi.HTMLInputElement = doc.create_element("input").unsafe_into()
   key_input
   ..set_attribute("id", "key-input")
   ..set_attribute("type", "text")
@@ -30,7 +30,7 @@ fn main {
   // Value input
   let value_input : @webapi.HTMLInputElement = doc
     .create_element("input")
-    .into()
+    .unsafe_into()
   value_input
   ..set_attribute("id", "value-input")
   ..set_attribute("type", "text")
@@ -43,13 +43,13 @@ fn main {
   let btn_style = "padding: 0.5em 1em; margin: 0.25em; font-size: 1em;"
 
   // Buttons
-  let put_btn : @webapi.HTMLButtonElement = doc.create_element("button").into()
+  let put_btn : @webapi.HTMLButtonElement = doc.create_element("button").unsafe_into()
   put_btn
   ..set_id("put-btn")
   ..set_attribute("style", btn_style)
   .set_text_content("Put")
 
-  let get_btn : @webapi.HTMLButtonElement = doc.create_element("button").into()
+  let get_btn : @webapi.HTMLButtonElement = doc.create_element("button").unsafe_into()
   get_btn
   ..set_id("get-btn")
   ..set_attribute("style", btn_style)
@@ -57,7 +57,7 @@ fn main {
 
   let delete_btn : @webapi.HTMLButtonElement = doc
     .create_element("button")
-    .into()
+    .unsafe_into()
   delete_btn
   ..set_id("delete-btn")
   ..set_attribute("style", btn_style)
@@ -65,7 +65,7 @@ fn main {
 
   let clear_btn : @webapi.HTMLButtonElement = doc
     .create_element("button")
-    .into()
+    .unsafe_into()
   clear_btn
   ..set_id("clear-btn")
   ..set_attribute("style", btn_style)
@@ -100,13 +100,13 @@ fn main {
 
   // Create object store on first open / version upgrade
   open_request.add_event_listener("upgradeneeded", fn(_event) {
-    let db : @webapi.IDBDatabase = open_request.result().into()
+    let db : @webapi.IDBDatabase = open_request.result().unsafe_into()
     db.create_object_store("items") |> ignore
   })
 
   // Database ready
   open_request.add_event_listener("success", fn(_event) {
-    let db : @webapi.IDBDatabase = open_request.result().into()
+    let db : @webapi.IDBDatabase = open_request.result().unsafe_into()
     let version = db.version()
     status_el.set_text_content("Database ready (v\{version})")
 

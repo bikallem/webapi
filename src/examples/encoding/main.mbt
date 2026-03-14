@@ -7,7 +7,7 @@ fn main {
   heading.set_text_content("Encoding API Demo")
 
   // Input
-  let input : @webapi.HTMLInputElement = doc.create_element("input").into()
+  let input : @webapi.HTMLInputElement = doc.create_element("input").unsafe_into()
   input
   ..set_attribute("id", "input-text")
   ..set_attribute("type", "text")
@@ -20,7 +20,7 @@ fn main {
   // Encode button
   let encode_btn : @webapi.HTMLButtonElement = doc
     .create_element("button")
-    .into()
+    .unsafe_into()
   encode_btn
   ..set_attribute("id", "encode-btn")
   ..set_attribute("style", "padding: 0.5em 1em; font-size: 1em; margin: 1em 0;")
@@ -51,14 +51,14 @@ fn main {
     let text = input.value()
     let encoded = encoder.encode(input=text)
     let len = utf8_byte_length(text)
-    let buf : @webapi.AllowSharedBufferSource = @webapi.TJsValue::to_js(encoded).into()
+    let buf : @webapi.AllowSharedBufferSource = @webapi.TJsValue::to_js(encoded).unsafe_into()
     let decoded = decoder.decode(input=buf)
     byte_length_div.set_text_content("Byte length: " + len.to_string())
     decoded_text.set_text_content("Decoded: " + decoded)
   })
 
   let app : @webapi.Element = doc.get_element_by_id("app")
-  let container : @webapi.HTMLDivElement = doc.create_element("div").into()
+  let container : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )

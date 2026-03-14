@@ -18,7 +18,7 @@ fn main {
 
   let select_all_btn : @webapi.HTMLButtonElement = doc
     .create_element("button")
-    .into()
+    .unsafe_into()
   select_all_btn
   ..set_attribute("id", "select-all-btn")
   ..set_attribute("style", "padding: 0.5em 1em; font-size: 1em; margin: 1em 0;")
@@ -69,7 +69,7 @@ fn main {
   })
 
   let app : @webapi.Element = doc.get_element_by_id("app")
-  let container : @webapi.HTMLDivElement = doc.create_element("div").into()
+  let container : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )

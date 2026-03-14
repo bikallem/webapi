@@ -8,7 +8,7 @@ fn main {
   // Create a container div
   let container : @webapi.HTMLDivElement = @webapi.document()
     .create_element("div")
-    .into()
+    .unsafe_into()
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )
@@ -20,7 +20,7 @@ fn main {
   // Create log area
   let log_div : @webapi.HTMLDivElement = @webapi.document()
     .create_element("div")
-    .into()
+    .unsafe_into()
   log_div
   ..set_attribute("id", "log")
   ..set_attribute(
@@ -31,7 +31,7 @@ fn main {
   // Create nested div structure for bubbling demo
   let outer : @webapi.HTMLDivElement = @webapi.document()
     .create_element("div")
-    .into()
+    .unsafe_into()
   outer
   ..set_attribute("id", "outer")
   .set_attribute(
@@ -40,7 +40,7 @@ fn main {
 
   let inner : @webapi.HTMLDivElement = @webapi.document()
     .create_element("div")
-    .into()
+    .unsafe_into()
   inner
   ..set_attribute("id", "inner")
   .set_attribute(
@@ -72,7 +72,7 @@ fn main {
   // Create "Log Custom" button - demonstrates programmatic event-like patterns
   let custom_btn : @webapi.HTMLButtonElement = @webapi.document()
     .create_element("button")
-    .into()
+    .unsafe_into()
   custom_btn
   ..set_attribute("id", "custom-btn")
   ..set_attribute(
@@ -88,7 +88,7 @@ fn main {
   // Create "Click Once" button - demonstrates once-fire pattern
   let once_btn : @webapi.HTMLButtonElement = @webapi.document()
     .create_element("button")
-    .into()
+    .unsafe_into()
   once_btn
   ..set_attribute("id", "once-btn")
   ..set_attribute(
