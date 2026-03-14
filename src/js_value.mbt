@@ -101,7 +101,7 @@ extern "js" fn jsvalue_to_jsany(v : JsValue) -> String = "(v) => v"
 /// Convert a JsValue containing a JavaScript string to a MoonBit String.
 #cfg(target="js")
 pub fn JsValue::as_string(self : JsValue) -> String {
-  self.into()
+  self.unsafe_into()
 }
 
 ///|
