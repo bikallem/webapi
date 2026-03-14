@@ -26,8 +26,7 @@
     "examples",
     "tests",
     "test-results",
-    "src/examples",
-    "src/gen"
+    "src/examples"
   ],
   "warn-list": "@27"
 }

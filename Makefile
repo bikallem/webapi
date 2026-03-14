@@ -21,7 +21,6 @@ check:
 
 fmt:
 	moon fmt
-	moon -C src/examples fmt
 
 test:
 	moon test
@@ -71,5 +70,4 @@ trim-test:
 	bash src/trim/tests/cli_test.sh
 
 clean:
-	moon clean
-	moon -C src/examples clean
+	moon clean	
