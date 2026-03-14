@@ -2,6 +2,17 @@
 
 ## [Unreleased]
 
+## [v0.4.2] - 2026-03-14
+
+### Changed
+
+- Restructured repository to use a single root `moon.mod.json` with `"source": "src"`.
+- Renamed `webapi/` to `src/`, `webapi_gen/` to `src/gen/`, `webapi_trim/` to `src/trim/`.
+- Moved `examples/` to `src/examples/` with a root-level symlink for navigation.
+- Flattened `src/gen/cmd/main/` into `src/gen/`.
+- Unified all MoonBit packages under one module; `src/gen/` excluded from publishing.
+- Simplified Makefile and CI for single-module layout.
+
 ## [v0.4.1] - 2026-03-13
 
 ### Fixed

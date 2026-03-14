@@ -63,7 +63,7 @@ All bindings are automatically generated from official WebIDL specifications, en
 Add this package to your MoonBit project:
 
 ```bash
-moon add bikallem/webapi@0.4.1
+moon add bikallem/webapi@0.4.2
 ```
 
 ## Quick Start
