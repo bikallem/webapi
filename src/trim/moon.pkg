@@ -1,0 +1,15 @@
+import {
+  "moonbitlang/core/encoding/utf8" @utf8,
+  "moonbitlang/x/sys",
+  "moonbitlang/x/fs",
+  "moonbitlang/x/path",
+  "moonbitlang/core/hashset",
+  "moonbitlang/core/argparse",
+}
+
+options(
+  "bin-name": "webapitrim",
+  "bin-target": "native",
+  "is-main": true,
+  link: { "js": { "format": "cjs" } },
+)

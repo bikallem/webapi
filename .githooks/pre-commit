@@ -1,3 +1,3 @@
 #!/bin/sh
 
-moon fmt && moon check && moon info --target js
+moon fmt && moon check && moon info --target js && moon -C src/examples fmt

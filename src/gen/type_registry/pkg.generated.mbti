@@ -1,0 +1,55 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bikallem/webapi/gen/type_registry"
+
+import {
+  "bikallem/webapi/gen/parser",
+  "moonbitlang/core/hashset",
+}
+
+// Values
+
+// Errors
+
+// Types and methods
+pub enum NamedTypeKind {
+  Interface
+  Dictionary
+  Enum
+  Typedef
+  UnionTypedef
+  Callback
+  Unknown
+}
+pub impl Show for NamedTypeKind
+pub impl ToJson for NamedTypeKind
+
+pub struct TypeRegistry {
+  interface_names : @hashset.HashSet[String]
+  dictionary_names : @hashset.HashSet[String]
+  enum_names : @hashset.HashSet[String]
+  typedef_names : @hashset.HashSet[String]
+  union_typedef_names : @hashset.HashSet[String]
+  callback_names : @hashset.HashSet[String]
+  mut callback_defs : Map[String, @parser.CallbackFunctionDefinition]
+  mut typedef_defs : Map[String, @parser.TypedefDefinition]
+}
+pub fn TypeRegistry::contains(Self, String) -> Bool
+pub fn TypeRegistry::get_callback_def(Self, String) -> @parser.CallbackFunctionDefinition?
+pub fn TypeRegistry::is_callback(Self, String) -> Bool
+pub fn TypeRegistry::is_dictionary(Self, String) -> Bool
+pub fn TypeRegistry::is_enum(Self, String) -> Bool
+pub fn TypeRegistry::is_interface(Self, String) -> Bool
+pub fn TypeRegistry::is_typedef(Self, String) -> Bool
+pub fn TypeRegistry::is_union_typedef(Self, String) -> Bool
+pub fn TypeRegistry::named_type_kind(Self, String) -> NamedTypeKind
+pub fn TypeRegistry::new(Array[@parser.DefinitionExtendedAttributes]) -> Self
+pub fn TypeRegistry::resolve_typedef_to_callback(Self, String) -> (String, @parser.CallbackFunctionDefinition)?
+pub fn TypeRegistry::set_callback_defs(Self, Map[String, @parser.CallbackFunctionDefinition]) -> Unit
+pub fn TypeRegistry::set_typedef_defs(Self, Map[String, @parser.TypedefDefinition]) -> Unit
+pub impl Show for TypeRegistry
+pub impl ToJson for TypeRegistry
+
+// Type aliases
+
+// Traits
+

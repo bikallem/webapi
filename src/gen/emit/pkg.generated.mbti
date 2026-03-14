@@ -1,0 +1,201 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bikallem/webapi/gen/emit"
+
+import {
+  "bikallem/webapi/gen/flattened_idl",
+  "bikallem/webapi/gen/type_mapping",
+  "bikallem/webapi/gen/type_registry",
+}
+
+// Values
+pub fn[E : Emitter] emit_all_multi(E, Iter[String]) -> Map[Filename, Code]
+
+pub fn emit_js_runtime(@flattened_idl.FlattenedIdl) -> String
+
+pub fn mbt_code_gen_multi(Array[Emit]) -> MultiTargetCode
+
+pub fn mdn_interface_url(String) -> String
+
+pub fn mdn_member_url(String, String) -> String
+
+pub fn merge_multi_target_code(MultiTargetCode) -> String
+
+// Errors
+
+// Types and methods
+type AttributeGetMethodEmit
+pub impl Show for AttributeGetMethodEmit
+pub impl ToJson for AttributeGetMethodEmit
+
+type AttributeSetMethodEmit
+pub impl Show for AttributeSetMethodEmit
+pub impl ToJson for AttributeSetMethodEmit
+
+pub(all) struct CallbackArgEmit {
+  name : String
+  mbt_type : String
+}
+pub impl Show for CallbackArgEmit
+pub impl ToJson for CallbackArgEmit
+
+pub(all) struct CallbackEmitter {
+  idl : @flattened_idl.FlattenedIdl
+  type_registry : @type_registry.TypeRegistry
+}
+pub impl Emitter for CallbackEmitter
+
+pub(all) struct Code(String)
+#deprecated
+pub fn Code::inner(Self) -> String
+pub impl Show for Code
+pub impl ToJson for Code
+
+type ConstName
+pub impl Show for ConstName
+pub impl ToJson for ConstName
+
+type ConstructorName
+pub impl Show for ConstructorName
+pub impl ToJson for ConstructorName
+
+pub(all) struct DictionaryEmitter {
+  idl : @flattened_idl.FlattenedIdl
+  type_registry : @type_registry.TypeRegistry
+}
+pub impl Emitter for DictionaryEmitter
+
+pub(all) struct DictionaryGetterArg {
+  original_name : String
+  return_type : String
+  is_optional : Bool
+  is_enum_type : Bool
+  is_valid_wasm_stub : Bool
+  is_primitive : Bool
+}
+pub impl Show for DictionaryGetterArg
+pub impl ToJson for DictionaryGetterArg
+
+pub enum Emit {
+  External(TypeName)
+  InlineExternal(TypeName)
+  ImplTJsValue(TypeName)
+  ImplFromJsAny(TypeName)
+  IntoMethod(TypeName)
+  UnionIntoMethod(TypeName)
+  FromMethod(TypeName)
+  IsUndefinedMethod(TypeName)
+  EmptyMethod(TypeName)
+  ImplTrait(TypeName, TraitName)
+  InterfaceDefinition(InterfaceDef)
+  NamespaceDefinition(NamespaceDef)
+  UnionArgTrait(TraitName)
+  UnionArgTraitImpl(TypeName, TraitName)
+  DictionaryCreate(TypeName, Array[@type_mapping.MethodArg])
+  DictionaryGetter(TypeName, Array[DictionaryGetterArg])
+  ConstructorMethod(ConstructorName, TypeName, Array[@type_mapping.MethodArg])
+  Enum(TypeName, Array[EnumVariantEmit])
+  TypedefAlias(TypeName, String)
+  Callback(TypeName, Array[CallbackArgEmit], TypeName)
+  Const(ConstName, TypeName, String)
+  FileHeader(TypeName, Specs)
+}
+pub impl Show for Emit
+pub impl ToJson for Emit
+
+pub(all) struct EnumEmitter {
+  idl : @flattened_idl.FlattenedIdl
+}
+pub impl Emitter for EnumEmitter
+
+pub struct EnumVariantEmit {
+  variant_name : String
+  original_value : String
+}
+pub impl Show for EnumVariantEmit
+pub impl ToJson for EnumVariantEmit
+
+pub(all) struct Filename(String)
+#deprecated
+pub fn Filename::inner(Self) -> String
+pub impl Eq for Filename
+pub impl Hash for Filename
+pub impl Show for Filename
+pub impl ToJson for Filename
+
+pub struct InterfaceDef {
+  trait_name : String
+  parent_trait : String
+  methods : Array[&InterfaceMethodEmit]
+}
+pub impl Show for InterfaceDef
+pub impl ToJson for InterfaceDef
+
+pub(all) struct InterfaceEmitter {
+  idl : @flattened_idl.FlattenedIdl
+  type_registry : @type_registry.TypeRegistry
+  log_skipped : (String) -> Unit
+}
+pub impl Emitter for InterfaceEmitter
+
+pub(all) struct MultiTargetCode {
+  shared : String
+  js_ffi : String
+  wasm_ffi : String
+}
+
+pub struct NamespaceDef {
+  name : String
+  methods : Array[&InterfaceMethodEmit]
+}
+pub impl Show for NamespaceDef
+pub impl ToJson for NamespaceDef
+
+pub(all) struct NamespaceEmitter {
+  idl : @flattened_idl.FlattenedIdl
+  type_registry : @type_registry.TypeRegistry
+}
+pub impl Emitter for NamespaceEmitter
+
+type RegularMethodEmit
+pub impl Show for RegularMethodEmit
+pub impl ToJson for RegularMethodEmit
+
+type SpecialOperationMethodEmit
+pub impl Show for SpecialOperationMethodEmit
+pub impl ToJson for SpecialOperationMethodEmit
+
+type Specs
+pub impl Show for Specs
+pub impl ToJson for Specs
+
+type StaticAttributeGetMethodEmit
+pub impl Show for StaticAttributeGetMethodEmit
+pub impl ToJson for StaticAttributeGetMethodEmit
+
+type StaticMethodEmit
+pub impl Show for StaticMethodEmit
+pub impl ToJson for StaticMethodEmit
+
+type TraitName
+pub impl Show for TraitName
+pub impl ToJson for TraitName
+
+type TypeName
+pub impl Show for TypeName
+pub impl ToJson for TypeName
+
+pub(all) struct TypedefEmitter {
+  idl : @flattened_idl.FlattenedIdl
+  type_registry : @type_registry.TypeRegistry
+}
+pub impl Emitter for TypedefEmitter
+
+// Type aliases
+
+// Traits
+pub(open) trait Emitter {
+  emit(Self, String) -> (Filename, Array[Emit])
+}
+
+trait InterfaceMethodEmit : ToJson + Show
+

@@ -1,0 +1,707 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bikallem/webapi/gen/parser"
+
+// Values
+pub fn definitions(Array[(Token, Position, Position)], initial_pos? : Position) -> Array[DefinitionExtendedAttributes] raise ParseError
+
+pub fn lex(StringView, file? : String) -> Array[(Token, Position, Position)] raise LexError
+
+pub fn parse(String) -> Array[DefinitionExtendedAttributes] raise WebIdlError
+
+pub fn parse_file(String) -> Array[DefinitionExtendedAttributes] raise WebIdlError
+
+pub fn tokenize(String) -> Array[(Token, Position, Position)] raise LexError
+
+// Errors
+pub suberror LexError {
+  LexFailed(StringView)
+}
+pub impl Show for LexError
+
+pub suberror ParseError {
+  UnexpectedToken(Token, (Position, Position), Array[TokenKind])
+  UnexpectedEndOfInput(Position, Array[TokenKind])
+}
+pub impl Show for ParseError
+
+pub suberror WebIdlError {
+  Lex(LexError)
+  Parse(ParseError)
+}
+pub impl Show for WebIdlError
+
+// Types and methods
+pub(all) struct Argument {
+  extended_attributes : Array[ExtendedAttribute]
+  type_ : TypeWithExtendedAttributes
+  name : String
+  optional : Bool
+  variadic : Bool
+  default_value : DefaultValue?
+}
+pub impl Eq for Argument
+pub impl Hash for Argument
+pub impl Show for Argument
+pub impl ToJson for Argument
+
+pub(all) struct AsyncIterableMember {
+  key_type : Type?
+  value_type : Type
+  arguments : Array[Argument]
+}
+pub impl Eq for AsyncIterableMember
+pub impl Hash for AsyncIterableMember
+pub impl Show for AsyncIterableMember
+pub impl ToJson for AsyncIterableMember
+
+pub(all) struct AttributeMember {
+  type_ : Type
+  name : String
+  is_readonly : Bool
+  static_ : Bool
+  is_inherit : Bool
+}
+pub impl Eq for AttributeMember
+pub impl Hash for AttributeMember
+pub impl Show for AttributeMember
+pub impl ToJson for AttributeMember
+
+pub(all) struct CallbackFunctionDefinition {
+  name : String
+  return_type : Type
+  arguments : Array[Argument]
+  mut spec : String?
+}
+pub impl Eq for CallbackFunctionDefinition
+pub impl Hash for CallbackFunctionDefinition
+pub impl Show for CallbackFunctionDefinition
+pub impl ToJson for CallbackFunctionDefinition
+
+pub(all) struct CallbackInterfaceDefinition {
+  name : String
+  members : Array[CallbackInterfaceMemberExtendedAttributes]
+  mut spec : String?
+}
+pub impl Eq for CallbackInterfaceDefinition
+pub impl Hash for CallbackInterfaceDefinition
+pub impl Show for CallbackInterfaceDefinition
+pub impl ToJson for CallbackInterfaceDefinition
+
+pub(all) enum CallbackInterfaceMember {
+  Operation(RegularOperationMember)
+  Const(ConstMember)
+}
+pub impl Eq for CallbackInterfaceMember
+pub impl Hash for CallbackInterfaceMember
+pub impl Show for CallbackInterfaceMember
+pub impl ToJson for CallbackInterfaceMember
+
+pub(all) struct CallbackInterfaceMemberExtendedAttributes {
+  extended_attributes : Array[ExtendedAttribute]
+  callback_interface_member : CallbackInterfaceMember
+}
+pub impl Eq for CallbackInterfaceMemberExtendedAttributes
+pub impl Hash for CallbackInterfaceMemberExtendedAttributes
+pub impl Show for CallbackInterfaceMemberExtendedAttributes
+pub impl ToJson for CallbackInterfaceMemberExtendedAttributes
+
+pub(all) enum Const {
+  Boolean(String)
+  Integer(String)
+  Float(FloatLiteral)
+}
+pub impl Eq for Const
+pub impl Hash for Const
+pub impl Show for Const
+pub impl ToJson for Const
+
+pub(all) struct ConstMember {
+  type_ : Type
+  name : String
+  value : Const
+}
+pub impl Eq for ConstMember
+pub impl Hash for ConstMember
+pub impl Show for ConstMember
+pub impl ToJson for ConstMember
+
+pub(all) struct ConstructorMember {
+  arguments : Array[Argument]
+}
+pub impl Eq for ConstructorMember
+pub impl Hash for ConstructorMember
+pub impl Show for ConstructorMember
+pub impl ToJson for ConstructorMember
+
+pub(all) enum DefaultValue {
+  ConstValue(Const)
+  String(String)
+  EmptySequence
+  EmptyObject
+  Null
+  Undefined
+}
+pub impl Eq for DefaultValue
+pub impl Hash for DefaultValue
+pub impl Show for DefaultValue
+pub impl ToJson for DefaultValue
+
+pub(all) enum Definition {
+  Interface(InterfaceDefinition)
+  PartialInterface(PartialInterfaceDefinition)
+  Mixin(MixinDefinition)
+  PartialMixin(PartialMixinDefinition)
+  Namespace(NamespaceDefinition)
+  PartialNamespace(PartialNamespaceDefinition)
+  Dictionary(DictionaryDefinition)
+  PartialDictionary(PartialDictionaryDefinition)
+  Enum(EnumDefinition)
+  Typedef(TypedefDefinition)
+  CallbackFunction(CallbackFunctionDefinition)
+  CallbackInterface(CallbackInterfaceDefinition)
+  Includes(IncludesStatement)
+}
+pub impl Eq for Definition
+pub impl Hash for Definition
+pub impl Show for Definition
+pub impl ToJson for Definition
+
+pub(all) struct DefinitionExtendedAttributes {
+  extended_attributes : Array[ExtendedAttribute]
+  definition : Definition
+  mut spec : String?
+}
+pub impl Eq for DefinitionExtendedAttributes
+pub impl Hash for DefinitionExtendedAttributes
+pub impl Show for DefinitionExtendedAttributes
+pub impl ToJson for DefinitionExtendedAttributes
+
+pub(all) struct DictionaryDefinition {
+  name : String
+  inheritance : String?
+  members : Array[DictionaryMember]
+}
+pub impl Eq for DictionaryDefinition
+pub impl Hash for DictionaryDefinition
+pub impl Show for DictionaryDefinition
+pub impl ToJson for DictionaryDefinition
+
+pub(all) struct DictionaryMember {
+  extended_attributes : Array[ExtendedAttribute]
+  type_ : Type
+  name : String
+  required : Bool
+  default_value : DefaultValue?
+}
+pub impl Eq for DictionaryMember
+pub impl Hash for DictionaryMember
+pub impl Show for DictionaryMember
+pub impl ToJson for DictionaryMember
+
+pub(all) struct EnumDefinition {
+  name : String
+  values : Array[String]
+  mut spec : String?
+}
+pub impl Eq for EnumDefinition
+pub impl Hash for EnumDefinition
+pub impl Show for EnumDefinition
+pub impl ToJson for EnumDefinition
+
+pub(all) enum ExtendedAttribute {
+  NoArgs(String)
+  Ident(String, String)
+  IdentList(String, Array[String])
+  IntValue(String, String)
+  FloatValue(String, String)
+  IntPair(String, String, String)
+  Wildcard(String)
+  ArgList(String, Array[Argument])
+  NamedArgList(String, String, Array[Argument])
+}
+pub impl Eq for ExtendedAttribute
+pub impl Hash for ExtendedAttribute
+pub impl Show for ExtendedAttribute
+pub impl ToJson for ExtendedAttribute
+
+pub(all) enum FloatLiteral {
+  Float(String)
+  Infinity
+  NegInfinity
+  NaN
+}
+pub impl Eq for FloatLiteral
+pub impl Hash for FloatLiteral
+pub impl Show for FloatLiteral
+pub impl ToJson for FloatLiteral
+
+pub(all) struct IncludesStatement {
+  interface_name : String
+  mixin_name : String
+}
+pub impl Eq for IncludesStatement
+pub impl Hash for IncludesStatement
+pub impl Show for IncludesStatement
+pub impl ToJson for IncludesStatement
+
+pub(all) struct InterfaceDefinition {
+  name : String
+  inheritance : String?
+  members : Array[InterfaceMemberExtendedAttributes]
+}
+pub impl Eq for InterfaceDefinition
+pub impl Hash for InterfaceDefinition
+pub impl Show for InterfaceDefinition
+pub impl ToJson for InterfaceDefinition
+
+pub(all) enum InterfaceMember {
+  Const(ConstMember)
+  Attribute(AttributeMember)
+  RegularOperation(RegularOperationMember)
+  SpecialOperation(SpecialOperationMember)
+  Constructor(ConstructorMember)
+  Iterable(IterableMember)
+  AsyncIterable(AsyncIterableMember)
+  Maplike(MaplikeMember)
+  Setlike(SetlikeMember)
+  Stringifier(StringifierMember)
+}
+pub impl Eq for InterfaceMember
+pub impl Hash for InterfaceMember
+pub impl Show for InterfaceMember
+pub impl ToJson for InterfaceMember
+
+pub(all) struct InterfaceMemberExtendedAttributes {
+  extended_attributes : Array[ExtendedAttribute]
+  interface_member : InterfaceMember
+}
+pub impl Eq for InterfaceMemberExtendedAttributes
+pub impl Hash for InterfaceMemberExtendedAttributes
+pub impl Show for InterfaceMemberExtendedAttributes
+pub impl ToJson for InterfaceMemberExtendedAttributes
+
+pub(all) struct IterableMember {
+  key_type : Type?
+  value_type : Type
+}
+pub impl Eq for IterableMember
+pub impl Hash for IterableMember
+pub impl Show for IterableMember
+pub impl ToJson for IterableMember
+
+pub(all) struct MaplikeMember {
+  key_type : Type
+  value_type : Type
+  is_readonly : Bool
+}
+pub impl Eq for MaplikeMember
+pub impl Hash for MaplikeMember
+pub impl Show for MaplikeMember
+pub impl ToJson for MaplikeMember
+
+pub(all) struct MixinDefinition {
+  name : String
+  members : Array[InterfaceMemberExtendedAttributes]
+}
+pub impl Eq for MixinDefinition
+pub impl Hash for MixinDefinition
+pub impl Show for MixinDefinition
+pub impl ToJson for MixinDefinition
+
+pub(all) struct NamespaceDefinition {
+  name : String
+  members : Array[NamespaceMemberExtendedAttributes]
+}
+pub impl Eq for NamespaceDefinition
+pub impl Hash for NamespaceDefinition
+pub impl Show for NamespaceDefinition
+pub impl ToJson for NamespaceDefinition
+
+pub(all) enum NamespaceMember {
+  Operation(RegularOperationMember)
+  Attribute(AttributeMember)
+  Const(ConstMember)
+}
+pub impl Eq for NamespaceMember
+pub impl Hash for NamespaceMember
+pub impl Show for NamespaceMember
+pub impl ToJson for NamespaceMember
+
+pub(all) struct NamespaceMemberExtendedAttributes {
+  extended_attributes : Array[ExtendedAttribute]
+  namespace_member : NamespaceMember
+}
+pub impl Eq for NamespaceMemberExtendedAttributes
+pub impl Hash for NamespaceMemberExtendedAttributes
+pub impl Show for NamespaceMemberExtendedAttributes
+pub impl ToJson for NamespaceMemberExtendedAttributes
+
+pub(all) struct PartialDictionaryDefinition {
+  name : String
+  members : Array[DictionaryMember]
+}
+pub impl Eq for PartialDictionaryDefinition
+pub impl Hash for PartialDictionaryDefinition
+pub impl Show for PartialDictionaryDefinition
+pub impl ToJson for PartialDictionaryDefinition
+
+pub(all) struct PartialInterfaceDefinition {
+  name : String
+  members : Array[InterfaceMemberExtendedAttributes]
+}
+pub impl Eq for PartialInterfaceDefinition
+pub impl Hash for PartialInterfaceDefinition
+pub impl Show for PartialInterfaceDefinition
+pub impl ToJson for PartialInterfaceDefinition
+
+pub(all) struct PartialMixinDefinition {
+  name : String
+  members : Array[InterfaceMemberExtendedAttributes]
+}
+pub impl Eq for PartialMixinDefinition
+pub impl Hash for PartialMixinDefinition
+pub impl Show for PartialMixinDefinition
+pub impl ToJson for PartialMixinDefinition
+
+pub(all) struct PartialNamespaceDefinition {
+  name : String
+  members : Array[NamespaceMemberExtendedAttributes]
+}
+pub impl Eq for PartialNamespaceDefinition
+pub impl Hash for PartialNamespaceDefinition
+pub impl Show for PartialNamespaceDefinition
+pub impl ToJson for PartialNamespaceDefinition
+
+pub struct Position {
+  file : String
+  line : Int
+  column : Int
+}
+pub impl Show for Position
+
+pub(all) struct RegularOperationMember {
+  return_type : Type
+  name : String
+  arguments : Array[Argument]
+  static_ : Bool
+}
+pub impl Eq for RegularOperationMember
+pub impl Hash for RegularOperationMember
+pub impl Show for RegularOperationMember
+pub impl ToJson for RegularOperationMember
+
+pub(all) struct SetlikeMember {
+  value_type : Type
+  is_readonly : Bool
+}
+pub impl Eq for SetlikeMember
+pub impl Hash for SetlikeMember
+pub impl Show for SetlikeMember
+pub impl ToJson for SetlikeMember
+
+pub(all) enum Special {
+  Getter
+  Setter
+  Deleter
+}
+pub fn Special::base_name(Self) -> String
+pub impl Eq for Special
+pub impl Hash for Special
+pub impl Show for Special
+pub impl ToJson for Special
+
+pub(all) struct SpecialOperationMember {
+  return_type : Type
+  name : String?
+  arguments : Array[Argument]
+  special : Special
+}
+pub impl Eq for SpecialOperationMember
+pub impl Hash for SpecialOperationMember
+pub impl Show for SpecialOperationMember
+pub impl ToJson for SpecialOperationMember
+
+pub(all) enum StringType {
+  DOMString
+  ByteString
+  USVString
+}
+pub impl Eq for StringType
+pub impl Hash for StringType
+pub impl Show for StringType
+pub impl ToJson for StringType
+
+pub(all) enum StringifierMember {
+  Bare
+}
+pub impl Eq for StringifierMember
+pub impl Hash for StringifierMember
+pub impl Show for StringifierMember
+pub impl ToJson for StringifierMember
+
+pub(all) enum Token {
+  EOF
+  INTEGER(String)
+  FLOAT(String)
+  STRING(String)
+  IDENTIFIER(String)
+  INTERFACE
+  PARTIAL
+  MIXIN
+  DICTIONARY
+  ENUM
+  TYPEDEF
+  CALLBACK
+  NAMESPACE
+  INCLUDES
+  ATTRIBUTE
+  CONST
+  READONLY
+  INHERIT
+  STATIC
+  STRINGIFIER
+  GETTER
+  SETTER
+  DELETER
+  CONSTRUCTOR
+  ITERABLE
+  ASYNC_ITERABLE
+  ASYNC_SEQUENCE
+  MAPLIKE
+  SETLIKE
+  REQUIRED
+  OPTIONAL
+  UNDEFINED
+  BOOLEAN
+  BYTE
+  OCTET
+  SHORT
+  LONG
+  UNSIGNED
+  FLOAT_KW
+  DOUBLE
+  UNRESTRICTED
+  BIGINT
+  DOMSTRING
+  BYTESTRING
+  USVSTRING
+  ANY
+  OBJECT
+  SYMBOL
+  SEQUENCE
+  PROMISE
+  FROZENARRAY
+  OBSERVABLEARRAY
+  RECORD
+  OR
+  ARRAYBUFFER
+  SHAREDARRAYBUFFER
+  DATAVIEW
+  INT8ARRAY
+  INT16ARRAY
+  INT32ARRAY
+  UINT8ARRAY
+  UINT16ARRAY
+  UINT32ARRAY
+  UINT8CLAMPEDARRAY
+  BIGINT64ARRAY
+  BIGUINT64ARRAY
+  FLOAT16ARRAY
+  FLOAT32ARRAY
+  FLOAT64ARRAY
+  TRUE
+  FALSE
+  NULL
+  INFINITY
+  NEG_INFINITY
+  NAN
+  LBRACE
+  RBRACE
+  LPAREN
+  RPAREN
+  LBRACKET
+  RBRACKET
+  LANGLE
+  RANGLE
+  COMMA
+  SEMICOLON
+  COLON
+  EQUALS
+  QUESTION
+  ELLIPSIS
+  STAR
+}
+pub fn Token::kind(Self) -> TokenKind
+pub impl Show for Token
+pub impl ToJson for Token
+
+pub(all) enum TokenKind {
+  TK_EOF
+  TK_INTEGER
+  TK_FLOAT
+  TK_STRING
+  TK_IDENTIFIER
+  TK_INTERFACE
+  TK_PARTIAL
+  TK_MIXIN
+  TK_DICTIONARY
+  TK_ENUM
+  TK_TYPEDEF
+  TK_CALLBACK
+  TK_NAMESPACE
+  TK_INCLUDES
+  TK_ATTRIBUTE
+  TK_CONST
+  TK_READONLY
+  TK_INHERIT
+  TK_STATIC
+  TK_STRINGIFIER
+  TK_GETTER
+  TK_SETTER
+  TK_DELETER
+  TK_CONSTRUCTOR
+  TK_ITERABLE
+  TK_ASYNC_ITERABLE
+  TK_ASYNC_SEQUENCE
+  TK_MAPLIKE
+  TK_SETLIKE
+  TK_REQUIRED
+  TK_OPTIONAL
+  TK_UNDEFINED
+  TK_BOOLEAN
+  TK_BYTE
+  TK_OCTET
+  TK_SHORT
+  TK_LONG
+  TK_UNSIGNED
+  TK_FLOAT_KW
+  TK_DOUBLE
+  TK_UNRESTRICTED
+  TK_BIGINT
+  TK_DOMSTRING
+  TK_BYTESTRING
+  TK_USVSTRING
+  TK_ANY
+  TK_OBJECT
+  TK_SYMBOL
+  TK_SEQUENCE
+  TK_PROMISE
+  TK_FROZENARRAY
+  TK_OBSERVABLEARRAY
+  TK_RECORD
+  TK_OR
+  TK_ARRAYBUFFER
+  TK_SHAREDARRAYBUFFER
+  TK_DATAVIEW
+  TK_INT8ARRAY
+  TK_INT16ARRAY
+  TK_INT32ARRAY
+  TK_UINT8ARRAY
+  TK_UINT16ARRAY
+  TK_UINT32ARRAY
+  TK_UINT8CLAMPEDARRAY
+  TK_BIGINT64ARRAY
+  TK_BIGUINT64ARRAY
+  TK_FLOAT16ARRAY
+  TK_FLOAT32ARRAY
+  TK_FLOAT64ARRAY
+  TK_TRUE
+  TK_FALSE
+  TK_NULL
+  TK_INFINITY
+  TK_NEG_INFINITY
+  TK_NAN
+  TK_LBRACE
+  TK_RBRACE
+  TK_LPAREN
+  TK_RPAREN
+  TK_LBRACKET
+  TK_RBRACKET
+  TK_LANGLE
+  TK_RANGLE
+  TK_COMMA
+  TK_SEMICOLON
+  TK_COLON
+  TK_EQUALS
+  TK_QUESTION
+  TK_ELLIPSIS
+  TK_STAR
+}
+pub impl Eq for TokenKind
+pub impl Show for TokenKind
+
+pub(all) enum Type {
+  Undefined
+  Boolean
+  Byte
+  Octet
+  Short
+  UnsignedShort
+  Long
+  UnsignedLong
+  LongLong
+  UnsignedLongLong
+  Float
+  UnrestrictedFloat
+  Double
+  UnrestrictedDouble
+  Bigint
+  DOMString
+  ByteString
+  USVString
+  Any
+  Object
+  Symbol
+  ArrayBuffer
+  SharedArrayBuffer
+  DataView
+  Int8Array
+  Int16Array
+  Int32Array
+  Uint8Array
+  Uint16Array
+  Uint32Array
+  Uint8ClampedArray
+  BigInt64Array
+  BigUint64Array
+  Float16Array
+  Float32Array
+  Float64Array
+  Identifier(String)
+  Sequence(Type)
+  AsyncSequence(TypeWithExtendedAttributes)
+  FrozenArray(TypeWithExtendedAttributes)
+  ObservableArray(TypeWithExtendedAttributes)
+  Promise(Type)
+  Record(StringType, TypeWithExtendedAttributes)
+  Union(Array[TypeWithExtendedAttributes])
+  Nullable(Type)
+}
+pub impl Eq for Type
+pub impl Hash for Type
+pub impl Show for Type
+pub impl ToJson for Type
+
+pub(all) struct TypeWithExtendedAttributes {
+  extended_attributes : Array[ExtendedAttribute]
+  type_ : Type
+}
+pub impl Eq for TypeWithExtendedAttributes
+pub impl Hash for TypeWithExtendedAttributes
+pub impl Show for TypeWithExtendedAttributes
+pub impl ToJson for TypeWithExtendedAttributes
+
+pub(all) struct TypedefDefinition {
+  type_ : Type
+  name : String
+  mut spec : String?
+}
+pub impl Eq for TypedefDefinition
+pub impl Hash for TypedefDefinition
+pub impl Show for TypedefDefinition
+pub impl ToJson for TypedefDefinition
+
+// Type aliases
+
+// Traits
+

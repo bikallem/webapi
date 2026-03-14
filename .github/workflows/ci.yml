@@ -30,11 +30,11 @@ jobs:
           node-version: 22
           cache: 'npm'
           cache-dependency-path: |
-            webapi_gen/package-lock.json
+            src/gen/package-lock.json
             tests/package-lock.json
 
       - name: Install npm dependencies
-        working-directory: webapi_gen
+        working-directory: src/gen
         run: npm ci
 
       - name: Get MoonBit version
@@ -45,11 +45,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
-            webapi/.mooncakes
-            webapi_gen/.mooncakes
-            webapi_trim/.mooncakes
-            examples/.mooncakes
-          key: mooncakes-${{ runner.os }}-${{ steps.moonbit-version.outputs.version }}-${{ hashFiles('webapi/moon.mod.json', 'webapi_gen/moon.mod.json', 'webapi_trim/moon.mod.json', 'examples/moon.mod.json') }}
+            .mooncakes
+            src/examples/.mooncakes
+          key: mooncakes-${{ runner.os }}-${{ steps.moonbit-version.outputs.version }}-${{ hashFiles('moon.mod.json', 'src/examples/moon.mod.json') }}
 
       - name: Install MoonBit dependencies
         run: |
@@ -57,29 +55,45 @@ jobs:
           moon update
 
       - name: Check (JS target)
-        working-directory: webapi
         run: moon check --target js
 
+      - name: Check (wasm-gc target)
+        run: moon check --target wasm-gc
+
       - name: Run tests
-        working-directory: webapi_gen
         run: moon test
 
       - name: Build examples (JS)
-        working-directory: examples
+        working-directory: src/examples
         run: moon build --target js --release
 
       - name: Build examples (wasm-gc)
-        working-directory: examples
+        working-directory: src/examples
         run: moon build --target wasm-gc --release
 
       - name: Trim webapi.mjs for wasm-gc examples
         run: |
-          for wasm in examples/_build/wasm-gc/release/build/*/*.wasm; do
-            moon -C webapi_trim run . -- "../$wasm" --source ../webapi/webapi.mjs
+          for wasm in src/examples/_build/wasm-gc/release/build/*/*.wasm; do
+            moon run src/trim -- "$(pwd)/$wasm" --source "$(pwd)/src/webapi.mjs"
           done
 
-      - name: Run webapi_trim tests
-        run: make trim-test
+      - name: Validate wasm-gc binaries
+        run: |
+          fails=0
+          for wasm in src/examples/_build/wasm-gc/release/build/*/*.wasm; do
+            name=$(basename $(dirname $wasm))
+            if wasm-tools validate "$wasm" 2>/dev/null; then
+              echo "  OK: $name"
+            else
+              echo "  FAIL: $name"
+              fails=$((fails + 1))
+            fi
+          done
+          if [ $fails -gt 0 ]; then echo "$fails wasm binary(ies) failed validation"; exit 1; fi
+          echo "All wasm binaries valid"
+
+      - name: Run trim CLI tests
+        run: bash src/trim/tests/cli_test.sh
 
       - name: Cache Playwright browsers
         id: cache-playwright
@@ -102,12 +116,12 @@ jobs:
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
           mkdir -p _site
-          cp -r examples _site/examples
+          cp -r src/examples _site/examples
           rm -rf _site/examples/.mooncakes _site/examples/_build
           mkdir -p _site/examples/_build/js/release
-          cp -rL examples/_build/js/release/build _site/examples/_build/js/release/
+          cp -rL src/examples/_build/js/release/build _site/examples/_build/js/release/
           mkdir -p _site/examples/_build/wasm-gc/release
-          cp -rL examples/_build/wasm-gc/release/build _site/examples/_build/wasm-gc/release/
+          cp -rL src/examples/_build/wasm-gc/release/build _site/examples/_build/wasm-gc/release/
           echo '<meta http-equiv="refresh" content="0; url=examples/">' > _site/index.html
 
       - name: Upload site artifact

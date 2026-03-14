@@ -1,0 +1,60 @@
+# WebAPI Generator Configuration
+
+idl_dir = "src/gen/node_modules/@webref/idl"
+output_dir = "src"
+templates_dir = "src/gen/base.mbt"
+
+core_specs = [
+    "console",
+    "cssom",
+    "cssom-view",
+    "dom",
+    "fetch",
+    "html",
+    "hr-time",
+    "geometry",
+    "FileAPI",
+    "performance-timeline",
+    "referrer-policy",
+    "SVG",
+    "trusted-types",
+    "uievents",
+    "url",
+    "webidl",
+    "xhr",
+    "requestidlecallback",
+    "fullscreen",
+    "screen-orientation",
+    "storage",
+    "resize-observer",
+    "selection-api",
+    "intersection-observer",
+    "pointerevents",
+    "touch-events",
+    "clipboard-apis",
+    "websockets",
+    "encoding",
+    "notifications",
+    "vibration",
+    "streams",
+    "web-animations",
+    "IndexedDB",
+    "permissions",
+    "service-workers",
+    "urlpattern",
+    "fs",
+    "file-system-access",
+]
+
+excluded_interfaces = []
+
+excluded_callbacks = []
+
+excluded_typedefs = []
+
+excluded_dictionary_prefixes = []
+
+# Inject members from source dictionary into target dictionary.
+# Members already present in the target are skipped.
+[dictionary_member_injection]
+EffectTiming = "OptionalEffectTiming"

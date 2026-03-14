@@ -1,0 +1,95 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bikallem/webapi/gen/type_mapping"
+
+import {
+  "bikallem/webapi/gen/parser",
+  "bikallem/webapi/gen/type_registry",
+  "moonbitlang/core/hashset",
+}
+
+// Values
+pub fn arg_mbt_type(@parser.Type, String, String, String, @type_registry.TypeRegistry, call_depth? : Int) -> (ArgMbtType, Array[EmitAux])
+
+pub fn const_value(@parser.Const) -> String
+
+pub let keywords : @hashset.HashSet[String]
+
+pub fn pascal_case(String) -> String
+
+pub fn safe_identifier(String) -> String
+
+pub fn snake_case(String) -> String
+
+// Errors
+
+// Types and methods
+pub(all) enum ArgMbtType {
+  Self
+  Other(String)
+  Primitive(String)
+  Union(UnionType)
+  Interface(String)
+  Enum(String)
+  Dictionary(String)
+  Callback(CallbackArgInfo)
+}
+pub fn ArgMbtType::is_dictionary(Self) -> Bool
+pub fn ArgMbtType::is_enum(Self) -> Bool
+pub fn ArgMbtType::is_string(Self) -> Bool
+pub fn ArgMbtType::name(Self) -> String
+pub impl Eq for ArgMbtType
+pub impl Hash for ArgMbtType
+pub impl Show for ArgMbtType
+pub impl ToJson for ArgMbtType
+
+pub(all) struct CallbackArgInfo {
+  name : String
+  closure_type : String
+  ffi_name : String
+}
+pub impl Eq for CallbackArgInfo
+pub impl Hash for CallbackArgInfo
+pub impl Show for CallbackArgInfo
+pub impl ToJson for CallbackArgInfo
+
+pub enum EmitAux {
+  UnionArgTrait(String)
+  UnionArgTraitImpl(String, String)
+  InlineExternal(String)
+}
+pub impl Show for EmitAux
+pub impl ToJson for EmitAux
+
+pub(all) struct MethodArg {
+  name : String
+  original_name : String
+  type_ : ArgMbtType
+  optional : Bool
+  variadic : Bool
+}
+pub impl Show for MethodArg
+pub impl ToJson for MethodArg
+
+pub(all) struct MethodReturn {
+  type_ : ArgMbtType
+  optional : Bool
+}
+pub fn MethodReturn::is_void(Self) -> Bool
+pub fn MethodReturn::type_name(Self) -> String
+pub impl Show for MethodReturn
+pub impl ToJson for MethodReturn
+
+pub(all) struct UnionType {
+  name : String
+  has_undefined : Bool
+  options : Array[ArgMbtType]
+}
+pub impl Eq for UnionType
+pub impl Hash for UnionType
+pub impl Show for UnionType
+pub impl ToJson for UnionType
+
+// Type aliases
+
+// Traits
+

@@ -1,0 +1,67 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bikallem/webapi/gen/partial_merged"
+
+import {
+  "bikallem/webapi/gen/parser",
+  "moonbitlang/core/hashset",
+}
+
+// Values
+pub fn merge_partials(Array[@parser.DefinitionExtendedAttributes]) -> PartialMerged
+
+// Errors
+
+// Types and methods
+pub struct PartialMerged {
+  interfaces : Map[String, PartialMergedInterface]
+  mixins : Map[String, PartialMergedMixin]
+  dictionaries : Map[String, PartialMergedDictionary]
+  namespaces : Map[String, PartialMergedNamespace]
+  enums : Map[String, @parser.EnumDefinition]
+  typedefs : Map[String, @parser.TypedefDefinition]
+  callback_functions : Map[String, @parser.CallbackFunctionDefinition]
+  callback_interfaces : Map[String, @parser.CallbackInterfaceDefinition]
+  include_statements : Array[@parser.IncludesStatement]
+}
+pub impl Show for PartialMerged
+pub impl ToJson for PartialMerged
+
+pub struct PartialMergedDictionary {
+  name : String
+  members : Array[@parser.DictionaryMember]
+  inheritance : String?
+  specs : @hashset.HashSet[String]
+}
+pub impl Show for PartialMergedDictionary
+pub impl ToJson for PartialMergedDictionary
+
+pub struct PartialMergedInterface {
+  name : String
+  members : Array[@parser.InterfaceMemberExtendedAttributes]
+  inheritance : String?
+  specs : @hashset.HashSet[String]
+}
+pub fn PartialMergedInterface::merge(Self, Array[@parser.InterfaceMemberExtendedAttributes], String?, @hashset.HashSet[String]) -> Self
+pub impl Show for PartialMergedInterface
+pub impl ToJson for PartialMergedInterface
+
+pub struct PartialMergedMixin {
+  name : String
+  members : Array[@parser.InterfaceMemberExtendedAttributes]
+  specs : @hashset.HashSet[String]
+}
+pub impl Show for PartialMergedMixin
+pub impl ToJson for PartialMergedMixin
+
+pub(all) struct PartialMergedNamespace {
+  name : String
+  members : Array[@parser.NamespaceMemberExtendedAttributes]
+  specs : @hashset.HashSet[String]
+}
+pub impl Show for PartialMergedNamespace
+pub impl ToJson for PartialMergedNamespace
+
+// Type aliases
+
+// Traits
+

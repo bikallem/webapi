@@ -18,7 +18,7 @@ target
 test-results/
 playwright-report/
 
-webapi_gen/tmp
+src/gen/tmp
 .claude
 docs/plans/
 make-all.log
