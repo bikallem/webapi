@@ -2,6 +2,7 @@
 // MoonBit type: PlaybackDirection
 // Specifications: web-animations.idl
 
+///|
 pub(all) enum PlaybackDirection {
   Normal
   Reverse
@@ -9,16 +10,22 @@ pub(all) enum PlaybackDirection {
   AlternateReverse
 } derive(Eq)
 
-pub impl Show for PlaybackDirection with output(self : PlaybackDirection, logger : &Logger) -> Unit {
+///|
+pub impl Show for PlaybackDirection with output(
+  self : PlaybackDirection,
+  logger : &Logger,
+) -> Unit {
   match self {
     PlaybackDirection::Normal => logger.write_string("Normal")
     PlaybackDirection::Reverse => logger.write_string("Reverse")
     PlaybackDirection::Alternate => logger.write_string("Alternate")
-    PlaybackDirection::AlternateReverse => logger.write_string("AlternateReverse")
+    PlaybackDirection::AlternateReverse =>
+      logger.write_string("AlternateReverse")
   }
 }
 
-pub impl TJsValue for PlaybackDirection with to_js(self: PlaybackDirection) -> JsValue {
+///|
+pub impl TJsValue for PlaybackDirection with to_js(self : PlaybackDirection) -> JsValue {
   match self {
     PlaybackDirection::Normal => TJsValue::to_js("normal")
     PlaybackDirection::Reverse => TJsValue::to_js("reverse")
@@ -27,7 +34,8 @@ pub impl TJsValue for PlaybackDirection with to_js(self: PlaybackDirection) -> J
   }
 }
 
-pub fn PlaybackDirection::from(value: String) -> PlaybackDirection? {
+///|
+pub fn PlaybackDirection::from(value : String) -> PlaybackDirection? {
   match value {
     "normal" => Some(PlaybackDirection::Normal)
     "reverse" => Some(PlaybackDirection::Reverse)
@@ -37,7 +45,8 @@ pub fn PlaybackDirection::from(value: String) -> PlaybackDirection? {
   }
 }
 
-fn PlaybackDirection::from_unchecked(value: String) -> PlaybackDirection {
+///|
+fn PlaybackDirection::from_unchecked(value : String) -> PlaybackDirection {
   match value {
     "normal" => PlaybackDirection::Normal
     "reverse" => PlaybackDirection::Reverse
@@ -47,7 +56,8 @@ fn PlaybackDirection::from_unchecked(value: String) -> PlaybackDirection {
   }
 }
 
-pub fn PlaybackDirection::value(self: PlaybackDirection) -> String {
+///|
+pub fn PlaybackDirection::value(self : PlaybackDirection) -> String {
   match self {
     PlaybackDirection::Normal => "normal"
     PlaybackDirection::Reverse => "reverse"
@@ -56,6 +66,7 @@ pub fn PlaybackDirection::value(self: PlaybackDirection) -> String {
   }
 }
 
+///|
 pub impl FromJsAny for PlaybackDirection with from_js_any(value : JsAny) -> PlaybackDirection {
   PlaybackDirection::from_unchecked(value)
 }

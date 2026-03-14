@@ -2,28 +2,43 @@
 // MoonBit type: SVGScriptElement
 // Specifications: SVG.idl
 
+///|
 /// [SVGScriptElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGScriptElement)
 #external
 pub type SVGScriptElement
 
-pub impl TJsValue for SVGScriptElement with to_js(self: SVGScriptElement) -> JsValue = "%identity"
+///|
+pub impl TJsValue for SVGScriptElement with to_js(self : SVGScriptElement) -> JsValue = "%identity"
 
+///|
 pub impl FromJsAny for SVGScriptElement with from_js_any(value : JsAny) -> SVGScriptElement = "%identity"
 
+///|
 /// Unchecked downcast — no runtime type check is performed.
 /// Prefer `try_into()` for checked downcasts.
 #deprecated("Use unsafe_into or try_into instead")
-pub fn[T: TSVGScriptElement] SVGScriptElement::into(self : SVGScriptElement) -> T = "%identity"
+pub fn[T : TSVGScriptElement] SVGScriptElement::into(
+  self : SVGScriptElement,
+) -> T = "%identity"
 
+///|
 /// Unchecked downcast — no runtime type check is performed.
 /// WARNING: If the underlying JS value is not of type T, this will silently
 /// produce a value with incorrect type, leading to undefined behavior.
-pub fn[T: TSVGScriptElement] SVGScriptElement::unsafe_into(self : SVGScriptElement) -> T = "%identity"
+pub fn[T : TSVGScriptElement] SVGScriptElement::unsafe_into(
+  self : SVGScriptElement,
+) -> T = "%identity"
 
-pub impl HasConstructor for SVGScriptElement with constructor_name() { "SVGScriptElement" }
+///|
+pub impl HasConstructor for SVGScriptElement with constructor_name() {
+  "SVGScriptElement"
+}
 
+///|
 /// Checked downcast — returns None if the JS value is not an instance of T.
-pub fn[T : TSVGScriptElement + HasConstructor] SVGScriptElement::try_into(self : SVGScriptElement) -> T? {
+pub fn[T : TSVGScriptElement + HasConstructor] SVGScriptElement::try_into(
+  self : SVGScriptElement,
+) -> T? {
   if js_instanceof(TJsValue::to_js(self), T::constructor_name()) {
     Some(self.unsafe_into())
   } else {
@@ -31,16 +46,22 @@ pub fn[T : TSVGScriptElement + HasConstructor] SVGScriptElement::try_into(self :
   }
 }
 
+///|
 pub impl TSVGScriptElement for SVGScriptElement
 
+///|
 pub impl TSVGElement for SVGScriptElement
 
+///|
 pub impl TElement for SVGScriptElement
 
+///|
 pub impl TNode for SVGScriptElement
 
+///|
 pub impl TEventTarget for SVGScriptElement
 
+///|
 /// [SVGScriptElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGScriptElement) interface.
 pub trait TSVGScriptElement: TSVGElement {
   type_(self : Self) -> String = _
@@ -50,89 +71,114 @@ pub trait TSVGScriptElement: TSVGElement {
   href(self : Self) -> SVGAnimatedString = _
 }
 
+///|
 /// [SVGScriptElement.type](https://developer.mozilla.org/en-US/docs/Web/API/SVGScriptElement/type)
 impl TSVGScriptElement with type_(self : Self) -> String {
   svg_script_element_type_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [SVGScriptElement.type](https://developer.mozilla.org/en-US/docs/Web/API/SVGScriptElement/type)
-impl TSVGScriptElement with set_type_(self : Self, 
-type_ : String) -> Unit {
+impl TSVGScriptElement with set_type_(self : Self, type_ : String) -> Unit {
   svg_script_element_set_type_ffi(TJsValue::to_js(self), TJsValue::to_js(type_))
 }
 
+///|
 /// [SVGScriptElement.crossOrigin](https://developer.mozilla.org/en-US/docs/Web/API/SVGScriptElement/crossOrigin)
 impl TSVGScriptElement with cross_origin(self : Self) -> String {
   svg_script_element_cross_origin_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [SVGScriptElement.crossOrigin](https://developer.mozilla.org/en-US/docs/Web/API/SVGScriptElement/crossOrigin)
-impl TSVGScriptElement with set_cross_origin(self : Self, 
-cross_origin : String) -> Unit {
-  svg_script_element_set_cross_origin_ffi(TJsValue::to_js(self), TJsValue::to_js(cross_origin))
+impl TSVGScriptElement with set_cross_origin(self : Self, cross_origin : String) -> Unit {
+  svg_script_element_set_cross_origin_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(cross_origin),
+  )
 }
 
+///|
 /// [SVGScriptElement.href](https://developer.mozilla.org/en-US/docs/Web/API/SVGScriptElement/href)
 impl TSVGScriptElement with href(self : Self) -> SVGAnimatedString {
   svg_script_element_href_ffi(TJsValue::to_js(self))
 }
 
+///|
 #cfg(target="js")
-extern "js" fn svg_script_element_type_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.type"
+extern "js" fn svg_script_element_type_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.type"
 
 ///|
 #cfg(target="js")
-fn svg_script_element_type_ffi(obj: JsValue) -> String {
+fn svg_script_element_type_ffi(obj : JsValue) -> String {
   svg_script_element_type_ffi_js(obj).unsafe_cast()
 }
 
+///|
 #cfg(target="js")
-extern "js" fn svg_script_element_set_type_ffi(obj: JsValue, type_: JsValue) -> Unit = "(obj, type) => { obj.type = type; }"
-
-#cfg(target="js")
-extern "js" fn svg_script_element_cross_origin_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.crossOrigin"
+extern "js" fn svg_script_element_set_type_ffi(
+  obj : JsValue,
+  type_ : JsValue,
+) -> Unit = "(obj, type) => { obj.type = type; }"
 
 ///|
 #cfg(target="js")
-fn svg_script_element_cross_origin_ffi(obj: JsValue) -> String {
+extern "js" fn svg_script_element_cross_origin_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.crossOrigin"
+
+///|
+#cfg(target="js")
+fn svg_script_element_cross_origin_ffi(obj : JsValue) -> String {
   svg_script_element_cross_origin_ffi_js(obj).unsafe_cast()
 }
 
+///|
 #cfg(target="js")
-extern "js" fn svg_script_element_set_cross_origin_ffi(obj: JsValue, cross_origin: JsValue) -> Unit = "(obj, crossOrigin) => { obj.crossOrigin = crossOrigin; }"
-
-#cfg(target="js")
-extern "js" fn svg_script_element_href_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.href"
+extern "js" fn svg_script_element_set_cross_origin_ffi(
+  obj : JsValue,
+  cross_origin : JsValue,
+) -> Unit = "(obj, crossOrigin) => { obj.crossOrigin = crossOrigin; }"
 
 ///|
 #cfg(target="js")
-fn svg_script_element_href_ffi(obj: JsValue) -> SVGAnimatedString {
+extern "js" fn svg_script_element_href_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.href"
+
+///|
+#cfg(target="js")
+fn svg_script_element_href_ffi(obj : JsValue) -> SVGAnimatedString {
   svg_script_element_href_ffi_js(obj).unsafe_cast()
 }
 
+///|
 #cfg(target="wasm-gc")
-fn svg_script_element_type_ffi_wasm(obj: JsValue) -> JsValue = "webapi_SVGScriptElement" "get_type"
+fn svg_script_element_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGScriptElement" "get_type"
 
 ///|
 #cfg(target="wasm-gc")
-fn svg_script_element_type_ffi(obj: JsValue) -> String {
+fn svg_script_element_type_ffi(obj : JsValue) -> String {
   jsvalue_to_string(svg_script_element_type_ffi_wasm(obj))
 }
 
+///|
 #cfg(target="wasm-gc")
-fn svg_script_element_set_type_ffi(obj: JsValue, type_: JsValue) -> Unit = "webapi_SVGScriptElement" "set_type"
-
-#cfg(target="wasm-gc")
-fn svg_script_element_cross_origin_ffi_wasm(obj: JsValue) -> JsValue = "webapi_SVGScriptElement" "get_crossOrigin"
+fn svg_script_element_set_type_ffi(obj : JsValue, type_ : JsValue) -> Unit = "webapi_SVGScriptElement" "set_type"
 
 ///|
 #cfg(target="wasm-gc")
-fn svg_script_element_cross_origin_ffi(obj: JsValue) -> String {
+fn svg_script_element_cross_origin_ffi_wasm(obj : JsValue) -> JsValue = "webapi_SVGScriptElement" "get_crossOrigin"
+
+///|
+#cfg(target="wasm-gc")
+fn svg_script_element_cross_origin_ffi(obj : JsValue) -> String {
   jsvalue_to_string(svg_script_element_cross_origin_ffi_wasm(obj))
 }
 
+///|
 #cfg(target="wasm-gc")
-fn svg_script_element_set_cross_origin_ffi(obj: JsValue, cross_origin: JsValue) -> Unit = "webapi_SVGScriptElement" "set_crossOrigin"
+fn svg_script_element_set_cross_origin_ffi(
+  obj : JsValue,
+  cross_origin : JsValue,
+) -> Unit = "webapi_SVGScriptElement" "set_crossOrigin"
 
+///|
 #cfg(target="wasm-gc")
-fn svg_script_element_href_ffi(obj: JsValue) -> SVGAnimatedString = "webapi_SVGScriptElement" "get_href"
+fn svg_script_element_href_ffi(obj : JsValue) -> SVGAnimatedString = "webapi_SVGScriptElement" "get_href"

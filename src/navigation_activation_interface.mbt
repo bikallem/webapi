@@ -2,28 +2,45 @@
 // MoonBit type: NavigationActivation
 // Specifications: html.idl
 
+///|
 /// [NavigationActivation](https://developer.mozilla.org/en-US/docs/Web/API/NavigationActivation)
 #external
 pub type NavigationActivation
 
-pub impl TJsValue for NavigationActivation with to_js(self: NavigationActivation) -> JsValue = "%identity"
+///|
+pub impl TJsValue for NavigationActivation with to_js(
+  self : NavigationActivation,
+) -> JsValue = "%identity"
 
+///|
 pub impl FromJsAny for NavigationActivation with from_js_any(value : JsAny) -> NavigationActivation = "%identity"
 
+///|
 /// Unchecked downcast — no runtime type check is performed.
 /// Prefer `try_into()` for checked downcasts.
 #deprecated("Use unsafe_into or try_into instead")
-pub fn[T: TNavigationActivation] NavigationActivation::into(self : NavigationActivation) -> T = "%identity"
+pub fn[T : TNavigationActivation] NavigationActivation::into(
+  self : NavigationActivation,
+) -> T = "%identity"
 
+///|
 /// Unchecked downcast — no runtime type check is performed.
 /// WARNING: If the underlying JS value is not of type T, this will silently
 /// produce a value with incorrect type, leading to undefined behavior.
-pub fn[T: TNavigationActivation] NavigationActivation::unsafe_into(self : NavigationActivation) -> T = "%identity"
+pub fn[T : TNavigationActivation] NavigationActivation::unsafe_into(
+  self : NavigationActivation,
+) -> T = "%identity"
 
-pub impl HasConstructor for NavigationActivation with constructor_name() { "NavigationActivation" }
+///|
+pub impl HasConstructor for NavigationActivation with constructor_name() {
+  "NavigationActivation"
+}
 
+///|
 /// Checked downcast — returns None if the JS value is not an instance of T.
-pub fn[T : TNavigationActivation + HasConstructor] NavigationActivation::try_into(self : NavigationActivation) -> T? {
+pub fn[T : TNavigationActivation + HasConstructor] NavigationActivation::try_into(
+  self : NavigationActivation,
+) -> T? {
   if js_instanceof(TJsValue::to_js(self), T::constructor_name()) {
     Some(self.unsafe_into())
   } else {
@@ -31,8 +48,10 @@ pub fn[T : TNavigationActivation + HasConstructor] NavigationActivation::try_int
   }
 }
 
+///|
 pub impl TNavigationActivation for NavigationActivation
 
+///|
 /// [NavigationActivation](https://developer.mozilla.org/en-US/docs/Web/API/NavigationActivation) interface.
 pub trait TNavigationActivation: TJsValue {
   from(self : Self) -> NavigationHistoryEntry = _
@@ -40,59 +59,74 @@ pub trait TNavigationActivation: TJsValue {
   navigation_type(self : Self) -> NavigationType = _
 }
 
+///|
 /// [NavigationActivation.from](https://developer.mozilla.org/en-US/docs/Web/API/NavigationActivation/from)
 impl TNavigationActivation with from(self : Self) -> NavigationHistoryEntry {
   navigation_activation_from_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [NavigationActivation.entry](https://developer.mozilla.org/en-US/docs/Web/API/NavigationActivation/entry)
 impl TNavigationActivation with entry(self : Self) -> NavigationHistoryEntry {
   navigation_activation_entry_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [NavigationActivation.navigationType](https://developer.mozilla.org/en-US/docs/Web/API/NavigationActivation/navigationType)
 impl TNavigationActivation with navigation_type(self : Self) -> NavigationType {
   navigation_activation_navigation_type_ffi(TJsValue::to_js(self))
 }
 
+///|
 #cfg(target="js")
-extern "js" fn navigation_activation_from_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.from"
+extern "js" fn navigation_activation_from_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.from"
 
 ///|
 #cfg(target="js")
-fn navigation_activation_from_ffi(obj: JsValue) -> NavigationHistoryEntry {
+fn navigation_activation_from_ffi(obj : JsValue) -> NavigationHistoryEntry {
   navigation_activation_from_ffi_js(obj).unsafe_cast()
 }
 
+///|
 #cfg(target="js")
-extern "js" fn navigation_activation_entry_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.entry"
+extern "js" fn navigation_activation_entry_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.entry"
 
 ///|
 #cfg(target="js")
-fn navigation_activation_entry_ffi(obj: JsValue) -> NavigationHistoryEntry {
+fn navigation_activation_entry_ffi(obj : JsValue) -> NavigationHistoryEntry {
   navigation_activation_entry_ffi_js(obj).unsafe_cast()
 }
 
+///|
 #cfg(target="js")
-extern "js" fn navigation_activation_navigation_type_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.navigationType"
+extern "js" fn navigation_activation_navigation_type_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.navigationType"
 
 ///|
 #cfg(target="js")
-fn navigation_activation_navigation_type_ffi(obj: JsValue) -> NavigationType {
-  NavigationType::from_unchecked(navigation_activation_navigation_type_ffi_js(obj).unsafe_cast())
+fn navigation_activation_navigation_type_ffi(obj : JsValue) -> NavigationType {
+  NavigationType::from_unchecked(
+    navigation_activation_navigation_type_ffi_js(obj).unsafe_cast(),
+  )
 }
 
+///|
 #cfg(target="wasm-gc")
-fn navigation_activation_from_ffi(obj: JsValue) -> NavigationHistoryEntry = "webapi_NavigationActivation" "get_from"
-
-#cfg(target="wasm-gc")
-fn navigation_activation_entry_ffi(obj: JsValue) -> NavigationHistoryEntry = "webapi_NavigationActivation" "get_entry"
-
-#cfg(target="wasm-gc")
-fn navigation_activation_navigation_type_ffi_wasm(obj: JsValue) -> JsValue = "webapi_NavigationActivation" "get_navigationType"
+fn navigation_activation_from_ffi(obj : JsValue) -> NavigationHistoryEntry = "webapi_NavigationActivation" "get_from"
 
 ///|
 #cfg(target="wasm-gc")
-fn navigation_activation_navigation_type_ffi(obj: JsValue) -> NavigationType {
-  NavigationType::from_unchecked(jsvalue_to_string(navigation_activation_navigation_type_ffi_wasm(obj)))
+fn navigation_activation_entry_ffi(obj : JsValue) -> NavigationHistoryEntry = "webapi_NavigationActivation" "get_entry"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_activation_navigation_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_NavigationActivation" "get_navigationType"
+
+///|
+#cfg(target="wasm-gc")
+fn navigation_activation_navigation_type_ffi(obj : JsValue) -> NavigationType {
+  NavigationType::from_unchecked(
+    jsvalue_to_string(navigation_activation_navigation_type_ffi_wasm(obj)),
+  )
 }

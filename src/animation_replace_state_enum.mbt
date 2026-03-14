@@ -2,13 +2,18 @@
 // MoonBit type: AnimationReplaceState
 // Specifications: web-animations.idl
 
+///|
 pub(all) enum AnimationReplaceState {
   Active
   Removed
   Persisted
 } derive(Eq)
 
-pub impl Show for AnimationReplaceState with output(self : AnimationReplaceState, logger : &Logger) -> Unit {
+///|
+pub impl Show for AnimationReplaceState with output(
+  self : AnimationReplaceState,
+  logger : &Logger,
+) -> Unit {
   match self {
     AnimationReplaceState::Active => logger.write_string("Active")
     AnimationReplaceState::Removed => logger.write_string("Removed")
@@ -16,7 +21,10 @@ pub impl Show for AnimationReplaceState with output(self : AnimationReplaceState
   }
 }
 
-pub impl TJsValue for AnimationReplaceState with to_js(self: AnimationReplaceState) -> JsValue {
+///|
+pub impl TJsValue for AnimationReplaceState with to_js(
+  self : AnimationReplaceState,
+) -> JsValue {
   match self {
     AnimationReplaceState::Active => TJsValue::to_js("active")
     AnimationReplaceState::Removed => TJsValue::to_js("removed")
@@ -24,7 +32,8 @@ pub impl TJsValue for AnimationReplaceState with to_js(self: AnimationReplaceSta
   }
 }
 
-pub fn AnimationReplaceState::from(value: String) -> AnimationReplaceState? {
+///|
+pub fn AnimationReplaceState::from(value : String) -> AnimationReplaceState? {
   match value {
     "active" => Some(AnimationReplaceState::Active)
     "removed" => Some(AnimationReplaceState::Removed)
@@ -33,7 +42,10 @@ pub fn AnimationReplaceState::from(value: String) -> AnimationReplaceState? {
   }
 }
 
-fn AnimationReplaceState::from_unchecked(value: String) -> AnimationReplaceState {
+///|
+fn AnimationReplaceState::from_unchecked(
+  value : String,
+) -> AnimationReplaceState {
   match value {
     "active" => AnimationReplaceState::Active
     "removed" => AnimationReplaceState::Removed
@@ -42,7 +54,8 @@ fn AnimationReplaceState::from_unchecked(value: String) -> AnimationReplaceState
   }
 }
 
-pub fn AnimationReplaceState::value(self: AnimationReplaceState) -> String {
+///|
+pub fn AnimationReplaceState::value(self : AnimationReplaceState) -> String {
   match self {
     AnimationReplaceState::Active => "active"
     AnimationReplaceState::Removed => "removed"
@@ -50,6 +63,7 @@ pub fn AnimationReplaceState::value(self: AnimationReplaceState) -> String {
   }
 }
 
+///|
 pub impl FromJsAny for AnimationReplaceState with from_js_any(value : JsAny) -> AnimationReplaceState {
   AnimationReplaceState::from_unchecked(value)
 }

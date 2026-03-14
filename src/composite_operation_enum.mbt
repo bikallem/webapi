@@ -2,13 +2,18 @@
 // MoonBit type: CompositeOperation
 // Specifications: web-animations.idl
 
+///|
 pub(all) enum CompositeOperation {
   Replace
   Add
   Accumulate
 } derive(Eq)
 
-pub impl Show for CompositeOperation with output(self : CompositeOperation, logger : &Logger) -> Unit {
+///|
+pub impl Show for CompositeOperation with output(
+  self : CompositeOperation,
+  logger : &Logger,
+) -> Unit {
   match self {
     CompositeOperation::Replace => logger.write_string("Replace")
     CompositeOperation::Add => logger.write_string("Add")
@@ -16,7 +21,8 @@ pub impl Show for CompositeOperation with output(self : CompositeOperation, logg
   }
 }
 
-pub impl TJsValue for CompositeOperation with to_js(self: CompositeOperation) -> JsValue {
+///|
+pub impl TJsValue for CompositeOperation with to_js(self : CompositeOperation) -> JsValue {
   match self {
     CompositeOperation::Replace => TJsValue::to_js("replace")
     CompositeOperation::Add => TJsValue::to_js("add")
@@ -24,7 +30,8 @@ pub impl TJsValue for CompositeOperation with to_js(self: CompositeOperation) ->
   }
 }
 
-pub fn CompositeOperation::from(value: String) -> CompositeOperation? {
+///|
+pub fn CompositeOperation::from(value : String) -> CompositeOperation? {
   match value {
     "replace" => Some(CompositeOperation::Replace)
     "add" => Some(CompositeOperation::Add)
@@ -33,7 +40,8 @@ pub fn CompositeOperation::from(value: String) -> CompositeOperation? {
   }
 }
 
-fn CompositeOperation::from_unchecked(value: String) -> CompositeOperation {
+///|
+fn CompositeOperation::from_unchecked(value : String) -> CompositeOperation {
   match value {
     "replace" => CompositeOperation::Replace
     "add" => CompositeOperation::Add
@@ -42,7 +50,8 @@ fn CompositeOperation::from_unchecked(value: String) -> CompositeOperation {
   }
 }
 
-pub fn CompositeOperation::value(self: CompositeOperation) -> String {
+///|
+pub fn CompositeOperation::value(self : CompositeOperation) -> String {
   match self {
     CompositeOperation::Replace => "replace"
     CompositeOperation::Add => "add"
@@ -50,6 +59,7 @@ pub fn CompositeOperation::value(self: CompositeOperation) -> String {
   }
 }
 
+///|
 pub impl FromJsAny for CompositeOperation with from_js_any(value : JsAny) -> CompositeOperation {
   CompositeOperation::from_unchecked(value)
 }

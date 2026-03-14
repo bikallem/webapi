@@ -2,6 +2,7 @@
 // MoonBit type: NavigationType
 // Specifications: html.idl
 
+///|
 pub(all) enum NavigationType {
   Push
   Replace
@@ -9,7 +10,11 @@ pub(all) enum NavigationType {
   Traverse
 } derive(Eq)
 
-pub impl Show for NavigationType with output(self : NavigationType, logger : &Logger) -> Unit {
+///|
+pub impl Show for NavigationType with output(
+  self : NavigationType,
+  logger : &Logger,
+) -> Unit {
   match self {
     NavigationType::Push => logger.write_string("Push")
     NavigationType::Replace => logger.write_string("Replace")
@@ -18,7 +23,8 @@ pub impl Show for NavigationType with output(self : NavigationType, logger : &Lo
   }
 }
 
-pub impl TJsValue for NavigationType with to_js(self: NavigationType) -> JsValue {
+///|
+pub impl TJsValue for NavigationType with to_js(self : NavigationType) -> JsValue {
   match self {
     NavigationType::Push => TJsValue::to_js("push")
     NavigationType::Replace => TJsValue::to_js("replace")
@@ -27,7 +33,8 @@ pub impl TJsValue for NavigationType with to_js(self: NavigationType) -> JsValue
   }
 }
 
-pub fn NavigationType::from(value: String) -> NavigationType? {
+///|
+pub fn NavigationType::from(value : String) -> NavigationType? {
   match value {
     "push" => Some(NavigationType::Push)
     "replace" => Some(NavigationType::Replace)
@@ -37,7 +44,8 @@ pub fn NavigationType::from(value: String) -> NavigationType? {
   }
 }
 
-fn NavigationType::from_unchecked(value: String) -> NavigationType {
+///|
+fn NavigationType::from_unchecked(value : String) -> NavigationType {
   match value {
     "push" => NavigationType::Push
     "replace" => NavigationType::Replace
@@ -47,7 +55,8 @@ fn NavigationType::from_unchecked(value: String) -> NavigationType {
   }
 }
 
-pub fn NavigationType::value(self: NavigationType) -> String {
+///|
+pub fn NavigationType::value(self : NavigationType) -> String {
   match self {
     NavigationType::Push => "push"
     NavigationType::Replace => "replace"
@@ -56,6 +65,7 @@ pub fn NavigationType::value(self: NavigationType) -> String {
   }
 }
 
+///|
 pub impl FromJsAny for NavigationType with from_js_any(value : JsAny) -> NavigationType {
   NavigationType::from_unchecked(value)
 }

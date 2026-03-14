@@ -114,7 +114,6 @@ test "InterfaceEmitter emits union typedef args as trait refs" {
       #|input : &TRequestInfo) -> Unit {
       #|  window_fetch_ffi(TJsValue::to_js(self), input.to_js())
       #|}
-
     ),
   )
   inspect(
@@ -236,7 +235,6 @@ test "InterfaceEmitter generates MoonBit code for interface" {
       #|event : Event) -> Bool {
       #|  event_target_dispatch_event_ffi(TJsValue::to_js(self), TJsValue::to_js(event))
       #|}
-
     ),
   )
   inspect(
@@ -347,7 +345,6 @@ test "InterfaceEmitter handles interface with nested union arg types" {
       #|None => JsValue::undefined()
       #|})
       #|}
-
     ),
   )
   inspect(
@@ -456,7 +453,6 @@ test "InterfaceEmitter generates MoonBit code for union return type" {
       #|impl TTestInterface with test_method(self : Self) -> TestInterfaceTestMethod {
       #|  test_interface_test_method_ffi(TJsValue::to_js(self))
       #|}
-
     ),
   )
   inspect(
@@ -541,7 +537,6 @@ test "InterfaceEmitter generates MoonBit code for constants" {
       #|}
       #|
       #|
-
     ),
   )
   inspect(multi.js_ffi)
@@ -611,7 +606,6 @@ test "InterfaceEmitter generates MoonBit code for attributes" {
       #|impl TTestInterface with name(self : Self) -> String {
       #|  test_interface_name_ffi(TJsValue::to_js(self))
       #|}
-
     ),
   )
   inspect(
@@ -705,7 +699,6 @@ test "InterfaceEmitter generates MoonBit code for attribute setter" {
       #|last_name : String) -> Unit {
       #|  test_interface_set_last_name_ffi(TJsValue::to_js(self), TJsValue::to_js(last_name))
       #|}
-
     ),
   )
   inspect(
@@ -796,7 +789,6 @@ test "InterfaceEmitter generates MoonBit code for readonly and inherit attribute
       #|impl TParentInterface with last_name(self : Self) -> String {
       #|  parent_interface_last_name_ffi(TJsValue::to_js(self))
       #|}
-
     ),
   )
   inspect(
@@ -879,7 +871,6 @@ test "InterfaceEmitter generates MoonBit code for readonly and inherit attribute
       #|last_name : String) -> Unit {
       #|  child_interface_set_last_name_ffi(TJsValue::to_js(self), TJsValue::to_js(last_name))
       #|}
-
     ),
   )
   inspect(
@@ -967,7 +958,6 @@ test "InterfaceEmitter emits static methods" {
       #|status? : UInt) -> Response {
       #|  test_interface_redirect_ffi(TJsValue::to_js(url), opt_to_js(status))
       #|}
-
     ),
   )
   inspect(
@@ -1050,7 +1040,6 @@ test "InterfaceEmitter emits static attribute getter methods" {
       #|pub fn TestInterface::app_name() -> String {
       #|  test_interface_app_name_ffi()
       #|}
-
     ),
   )
   inspect(
@@ -1140,7 +1129,6 @@ test "mbt_code_gen_multi generates separate shared and FFI files for interface" 
       #|impl TTestInterface with name(self : Self) -> String {
       #|  test_interface_name_ffi(TJsValue::to_js(self))
       #|}
-
     ),
   )
   inspect(
@@ -1234,7 +1222,6 @@ test "mbt_code_gen_multi emits empty UnionArgTraitImpl inheriting TJsValue" {
       #|param : &TTestInterfaceTestMethodParam) -> void {
       #|  test_interface_test_method_ffi(TJsValue::to_js(self), param.to_js())
       #|}
-
     ),
   )
   inspect(
@@ -1318,7 +1305,6 @@ test "mbt_code_gen_multi generates wasm FFI for constructor" {
       #|}
       #|
       #|
-
     ),
   )
   inspect(
@@ -1468,7 +1454,6 @@ test "mbt_code_gen_multi overloads keep WebIDL member name in JS and MDN" {
       #|fill_rule : String) -> Unit {
       #|  test_interface_fill_path_ffi(TJsValue::to_js(self), TJsValue::to_js(path), TJsValue::to_js(fill_rule))
       #|}
-
     ),
   )
   inspect(
@@ -1585,7 +1570,6 @@ test "convenience method for optional interface return" {
       #|selectors : String) -> Element {
       #|  self.query_selector_opt(selectors).unwrap()
       #|}
-
     ),
   )
   // FFI should be unchanged (no _opt in FFI names)
@@ -1669,7 +1653,6 @@ test "convenience method with optional args" {
       #|selectors : String) -> Element {
       #|  self.query_selector_opt(selectors).unwrap()
       #|}
-
     ),
   )
 }
@@ -1731,7 +1714,6 @@ test "no convenience method for non-interface optional return" {
       #|impl TTestInterface with get_name(self : Self) -> String? {
       #|  test_interface_get_name_ffi(TJsValue::to_js(self)).to_option_prim()
       #|}
-
     ),
   )
 }
@@ -1802,7 +1784,6 @@ test "InterfaceEmitter resolves typedef→callback chain in attribute setter" {
       #|onclick : (Event) -> JsValue) -> Unit {
       #|  global_event_handlers_set_onclick_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onclick)))
       #|}
-
     ),
   )
   inspect(

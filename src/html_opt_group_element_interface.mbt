@@ -2,28 +2,43 @@
 // MoonBit type: HTMLOptGroupElement
 // Specifications: html.idl
 
+///|
 /// [HTMLOptGroupElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptGroupElement)
 #external
 pub type HTMLOptGroupElement
 
-pub impl TJsValue for HTMLOptGroupElement with to_js(self: HTMLOptGroupElement) -> JsValue = "%identity"
+///|
+pub impl TJsValue for HTMLOptGroupElement with to_js(self : HTMLOptGroupElement) -> JsValue = "%identity"
 
+///|
 pub impl FromJsAny for HTMLOptGroupElement with from_js_any(value : JsAny) -> HTMLOptGroupElement = "%identity"
 
+///|
 /// Unchecked downcast — no runtime type check is performed.
 /// Prefer `try_into()` for checked downcasts.
 #deprecated("Use unsafe_into or try_into instead")
-pub fn[T: THTMLOptGroupElement] HTMLOptGroupElement::into(self : HTMLOptGroupElement) -> T = "%identity"
+pub fn[T : THTMLOptGroupElement] HTMLOptGroupElement::into(
+  self : HTMLOptGroupElement,
+) -> T = "%identity"
 
+///|
 /// Unchecked downcast — no runtime type check is performed.
 /// WARNING: If the underlying JS value is not of type T, this will silently
 /// produce a value with incorrect type, leading to undefined behavior.
-pub fn[T: THTMLOptGroupElement] HTMLOptGroupElement::unsafe_into(self : HTMLOptGroupElement) -> T = "%identity"
+pub fn[T : THTMLOptGroupElement] HTMLOptGroupElement::unsafe_into(
+  self : HTMLOptGroupElement,
+) -> T = "%identity"
 
-pub impl HasConstructor for HTMLOptGroupElement with constructor_name() { "HTMLOptGroupElement" }
+///|
+pub impl HasConstructor for HTMLOptGroupElement with constructor_name() {
+  "HTMLOptGroupElement"
+}
 
+///|
 /// Checked downcast — returns None if the JS value is not an instance of T.
-pub fn[T : THTMLOptGroupElement + HasConstructor] HTMLOptGroupElement::try_into(self : HTMLOptGroupElement) -> T? {
+pub fn[T : THTMLOptGroupElement + HasConstructor] HTMLOptGroupElement::try_into(
+  self : HTMLOptGroupElement,
+) -> T? {
   if js_instanceof(TJsValue::to_js(self), T::constructor_name()) {
     Some(self.unsafe_into())
   } else {
@@ -31,20 +46,27 @@ pub fn[T : THTMLOptGroupElement + HasConstructor] HTMLOptGroupElement::try_into(
   }
 }
 
+///|
 pub impl THTMLOptGroupElement for HTMLOptGroupElement
 
+///|
 pub impl THTMLElement for HTMLOptGroupElement
 
+///|
 pub impl TElement for HTMLOptGroupElement
 
+///|
 pub impl TNode for HTMLOptGroupElement
 
+///|
 pub impl TEventTarget for HTMLOptGroupElement
 
+///|
 pub fn HTMLOptGroupElement::new() -> HTMLOptGroupElement {
   html_opt_group_element_new_ffi()
 }
 
+///|
 /// [HTMLOptGroupElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptGroupElement) interface.
 pub trait THTMLOptGroupElement: THTMLElement {
   disabled(self : Self) -> Bool = _
@@ -53,72 +75,99 @@ pub trait THTMLOptGroupElement: THTMLElement {
   set_label(self : Self, label : String) -> Unit = _
 }
 
+///|
 /// [HTMLOptGroupElement.disabled](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptGroupElement/disabled)
 impl THTMLOptGroupElement with disabled(self : Self) -> Bool {
   html_opt_group_element_disabled_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [HTMLOptGroupElement.disabled](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptGroupElement/disabled)
-impl THTMLOptGroupElement with set_disabled(self : Self, 
-disabled : Bool) -> Unit {
-  html_opt_group_element_set_disabled_ffi(TJsValue::to_js(self), TJsValue::to_js(disabled))
+impl THTMLOptGroupElement with set_disabled(self : Self, disabled : Bool) -> Unit {
+  html_opt_group_element_set_disabled_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(disabled),
+  )
 }
 
+///|
 /// [HTMLOptGroupElement.label](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptGroupElement/label)
 impl THTMLOptGroupElement with label(self : Self) -> String {
   html_opt_group_element_label_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [HTMLOptGroupElement.label](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptGroupElement/label)
-impl THTMLOptGroupElement with set_label(self : Self, 
-label : String) -> Unit {
-  html_opt_group_element_set_label_ffi(TJsValue::to_js(self), TJsValue::to_js(label))
+impl THTMLOptGroupElement with set_label(self : Self, label : String) -> Unit {
+  html_opt_group_element_set_label_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(label),
+  )
 }
 
+///|
 #cfg(target="js")
 extern "js" fn html_opt_group_element_new_ffi() -> HTMLOptGroupElement = "() => new HTMLOptGroupElement()"
 
+///|
 #cfg(target="js")
-extern "js" fn html_opt_group_element_disabled_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.disabled"
+extern "js" fn html_opt_group_element_disabled_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.disabled"
 
 ///|
 #cfg(target="js")
-fn html_opt_group_element_disabled_ffi(obj: JsValue) -> Bool {
+fn html_opt_group_element_disabled_ffi(obj : JsValue) -> Bool {
   html_opt_group_element_disabled_ffi_js(obj).unsafe_cast()
 }
 
+///|
 #cfg(target="js")
-extern "js" fn html_opt_group_element_set_disabled_ffi(obj: JsValue, disabled: JsValue) -> Unit = "(obj, disabled) => { obj.disabled = disabled; }"
-
-#cfg(target="js")
-extern "js" fn html_opt_group_element_label_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.label"
+extern "js" fn html_opt_group_element_set_disabled_ffi(
+  obj : JsValue,
+  disabled : JsValue,
+) -> Unit = "(obj, disabled) => { obj.disabled = disabled; }"
 
 ///|
 #cfg(target="js")
-fn html_opt_group_element_label_ffi(obj: JsValue) -> String {
+extern "js" fn html_opt_group_element_label_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.label"
+
+///|
+#cfg(target="js")
+fn html_opt_group_element_label_ffi(obj : JsValue) -> String {
   html_opt_group_element_label_ffi_js(obj).unsafe_cast()
 }
 
+///|
 #cfg(target="js")
-extern "js" fn html_opt_group_element_set_label_ffi(obj: JsValue, label: JsValue) -> Unit = "(obj, label) => { obj.label = label; }"
-
-#cfg(target="wasm-gc")
-fn html_opt_group_element_new_ffi() -> HTMLOptGroupElement = "webapi_HTMLOptGroupElement" "new"
-
-#cfg(target="wasm-gc")
-fn html_opt_group_element_disabled_ffi(obj: JsValue) -> Bool = "webapi_HTMLOptGroupElement" "get_disabled"
-
-#cfg(target="wasm-gc")
-fn html_opt_group_element_set_disabled_ffi(obj: JsValue, disabled: JsValue) -> Unit = "webapi_HTMLOptGroupElement" "set_disabled"
-
-#cfg(target="wasm-gc")
-fn html_opt_group_element_label_ffi_wasm(obj: JsValue) -> JsValue = "webapi_HTMLOptGroupElement" "get_label"
+extern "js" fn html_opt_group_element_set_label_ffi(
+  obj : JsValue,
+  label : JsValue,
+) -> Unit = "(obj, label) => { obj.label = label; }"
 
 ///|
 #cfg(target="wasm-gc")
-fn html_opt_group_element_label_ffi(obj: JsValue) -> String {
+fn html_opt_group_element_new_ffi() -> HTMLOptGroupElement = "webapi_HTMLOptGroupElement" "new"
+
+///|
+#cfg(target="wasm-gc")
+fn html_opt_group_element_disabled_ffi(obj : JsValue) -> Bool = "webapi_HTMLOptGroupElement" "get_disabled"
+
+///|
+#cfg(target="wasm-gc")
+fn html_opt_group_element_set_disabled_ffi(
+  obj : JsValue,
+  disabled : JsValue,
+) -> Unit = "webapi_HTMLOptGroupElement" "set_disabled"
+
+///|
+#cfg(target="wasm-gc")
+fn html_opt_group_element_label_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLOptGroupElement" "get_label"
+
+///|
+#cfg(target="wasm-gc")
+fn html_opt_group_element_label_ffi(obj : JsValue) -> String {
   jsvalue_to_string(html_opt_group_element_label_ffi_wasm(obj))
 }
 
+///|
 #cfg(target="wasm-gc")
-fn html_opt_group_element_set_label_ffi(obj: JsValue, label: JsValue) -> Unit = "webapi_HTMLOptGroupElement" "set_label"
+fn html_opt_group_element_set_label_ffi(obj : JsValue, label : JsValue) -> Unit = "webapi_HTMLOptGroupElement" "set_label"

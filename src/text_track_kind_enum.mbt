@@ -2,6 +2,7 @@
 // MoonBit type: TextTrackKind
 // Specifications: html.idl
 
+///|
 pub(all) enum TextTrackKind {
   Subtitles
   Captions
@@ -10,7 +11,11 @@ pub(all) enum TextTrackKind {
   Metadata
 } derive(Eq)
 
-pub impl Show for TextTrackKind with output(self : TextTrackKind, logger : &Logger) -> Unit {
+///|
+pub impl Show for TextTrackKind with output(
+  self : TextTrackKind,
+  logger : &Logger,
+) -> Unit {
   match self {
     TextTrackKind::Subtitles => logger.write_string("Subtitles")
     TextTrackKind::Captions => logger.write_string("Captions")
@@ -20,7 +25,8 @@ pub impl Show for TextTrackKind with output(self : TextTrackKind, logger : &Logg
   }
 }
 
-pub impl TJsValue for TextTrackKind with to_js(self: TextTrackKind) -> JsValue {
+///|
+pub impl TJsValue for TextTrackKind with to_js(self : TextTrackKind) -> JsValue {
   match self {
     TextTrackKind::Subtitles => TJsValue::to_js("subtitles")
     TextTrackKind::Captions => TJsValue::to_js("captions")
@@ -30,7 +36,8 @@ pub impl TJsValue for TextTrackKind with to_js(self: TextTrackKind) -> JsValue {
   }
 }
 
-pub fn TextTrackKind::from(value: String) -> TextTrackKind? {
+///|
+pub fn TextTrackKind::from(value : String) -> TextTrackKind? {
   match value {
     "subtitles" => Some(TextTrackKind::Subtitles)
     "captions" => Some(TextTrackKind::Captions)
@@ -41,7 +48,8 @@ pub fn TextTrackKind::from(value: String) -> TextTrackKind? {
   }
 }
 
-fn TextTrackKind::from_unchecked(value: String) -> TextTrackKind {
+///|
+fn TextTrackKind::from_unchecked(value : String) -> TextTrackKind {
   match value {
     "subtitles" => TextTrackKind::Subtitles
     "captions" => TextTrackKind::Captions
@@ -52,7 +60,8 @@ fn TextTrackKind::from_unchecked(value: String) -> TextTrackKind {
   }
 }
 
-pub fn TextTrackKind::value(self: TextTrackKind) -> String {
+///|
+pub fn TextTrackKind::value(self : TextTrackKind) -> String {
   match self {
     TextTrackKind::Subtitles => "subtitles"
     TextTrackKind::Captions => "captions"
@@ -62,6 +71,7 @@ pub fn TextTrackKind::value(self: TextTrackKind) -> String {
   }
 }
 
+///|
 pub impl FromJsAny for TextTrackKind with from_js_any(value : JsAny) -> TextTrackKind {
   TextTrackKind::from_unchecked(value)
 }

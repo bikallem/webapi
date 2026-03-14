@@ -2,6 +2,7 @@
 // MoonBit type: ClientType
 // Specifications: service-workers.idl
 
+///|
 pub(all) enum ClientType {
   Window
   Worker
@@ -9,6 +10,7 @@ pub(all) enum ClientType {
   All
 } derive(Eq)
 
+///|
 pub impl Show for ClientType with output(self : ClientType, logger : &Logger) -> Unit {
   match self {
     ClientType::Window => logger.write_string("Window")
@@ -18,7 +20,8 @@ pub impl Show for ClientType with output(self : ClientType, logger : &Logger) ->
   }
 }
 
-pub impl TJsValue for ClientType with to_js(self: ClientType) -> JsValue {
+///|
+pub impl TJsValue for ClientType with to_js(self : ClientType) -> JsValue {
   match self {
     ClientType::Window => TJsValue::to_js("window")
     ClientType::Worker => TJsValue::to_js("worker")
@@ -27,7 +30,8 @@ pub impl TJsValue for ClientType with to_js(self: ClientType) -> JsValue {
   }
 }
 
-pub fn ClientType::from(value: String) -> ClientType? {
+///|
+pub fn ClientType::from(value : String) -> ClientType? {
   match value {
     "window" => Some(ClientType::Window)
     "worker" => Some(ClientType::Worker)
@@ -37,7 +41,8 @@ pub fn ClientType::from(value: String) -> ClientType? {
   }
 }
 
-fn ClientType::from_unchecked(value: String) -> ClientType {
+///|
+fn ClientType::from_unchecked(value : String) -> ClientType {
   match value {
     "window" => ClientType::Window
     "worker" => ClientType::Worker
@@ -47,7 +52,8 @@ fn ClientType::from_unchecked(value: String) -> ClientType {
   }
 }
 
-pub fn ClientType::value(self: ClientType) -> String {
+///|
+pub fn ClientType::value(self : ClientType) -> String {
   match self {
     ClientType::Window => "window"
     ClientType::Worker => "worker"
@@ -56,6 +62,7 @@ pub fn ClientType::value(self: ClientType) -> String {
   }
 }
 
+///|
 pub impl FromJsAny for ClientType with from_js_any(value : JsAny) -> ClientType {
   ClientType::from_unchecked(value)
 }

@@ -76,7 +76,6 @@ test "typedef emitter emits union typedef" {
       #|pub impl TMyUnion for Function
       #|
       #|pub impl TMyUnion for Unit
-
     ),
   )
   inspect(multi.js_ffi)
@@ -129,7 +128,6 @@ test "typedef emitter emit interface types as trait references in union typedef"
       #|pub impl TMyUnion for MyInterface
       #|
       #|pub impl TMyUnion for String
-
     ),
   )
   inspect(multi.js_ffi)

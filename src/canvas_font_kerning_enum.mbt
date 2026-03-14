@@ -2,13 +2,18 @@
 // MoonBit type: CanvasFontKerning
 // Specifications: html.idl
 
+///|
 pub(all) enum CanvasFontKerning {
   Auto
   Normal
   None
 } derive(Eq)
 
-pub impl Show for CanvasFontKerning with output(self : CanvasFontKerning, logger : &Logger) -> Unit {
+///|
+pub impl Show for CanvasFontKerning with output(
+  self : CanvasFontKerning,
+  logger : &Logger,
+) -> Unit {
   match self {
     CanvasFontKerning::Auto => logger.write_string("Auto")
     CanvasFontKerning::Normal => logger.write_string("Normal")
@@ -16,7 +21,8 @@ pub impl Show for CanvasFontKerning with output(self : CanvasFontKerning, logger
   }
 }
 
-pub impl TJsValue for CanvasFontKerning with to_js(self: CanvasFontKerning) -> JsValue {
+///|
+pub impl TJsValue for CanvasFontKerning with to_js(self : CanvasFontKerning) -> JsValue {
   match self {
     CanvasFontKerning::Auto => TJsValue::to_js("auto")
     CanvasFontKerning::Normal => TJsValue::to_js("normal")
@@ -24,7 +30,8 @@ pub impl TJsValue for CanvasFontKerning with to_js(self: CanvasFontKerning) -> J
   }
 }
 
-pub fn CanvasFontKerning::from(value: String) -> CanvasFontKerning? {
+///|
+pub fn CanvasFontKerning::from(value : String) -> CanvasFontKerning? {
   match value {
     "auto" => Some(CanvasFontKerning::Auto)
     "normal" => Some(CanvasFontKerning::Normal)
@@ -33,7 +40,8 @@ pub fn CanvasFontKerning::from(value: String) -> CanvasFontKerning? {
   }
 }
 
-fn CanvasFontKerning::from_unchecked(value: String) -> CanvasFontKerning {
+///|
+fn CanvasFontKerning::from_unchecked(value : String) -> CanvasFontKerning {
   match value {
     "auto" => CanvasFontKerning::Auto
     "normal" => CanvasFontKerning::Normal
@@ -42,7 +50,8 @@ fn CanvasFontKerning::from_unchecked(value: String) -> CanvasFontKerning {
   }
 }
 
-pub fn CanvasFontKerning::value(self: CanvasFontKerning) -> String {
+///|
+pub fn CanvasFontKerning::value(self : CanvasFontKerning) -> String {
   match self {
     CanvasFontKerning::Auto => "auto"
     CanvasFontKerning::Normal => "normal"
@@ -50,6 +59,7 @@ pub fn CanvasFontKerning::value(self: CanvasFontKerning) -> String {
   }
 }
 
+///|
 pub impl FromJsAny for CanvasFontKerning with from_js_any(value : JsAny) -> CanvasFontKerning {
   CanvasFontKerning::from_unchecked(value)
 }

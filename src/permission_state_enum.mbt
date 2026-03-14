@@ -2,13 +2,18 @@
 // MoonBit type: PermissionState
 // Specifications: permissions.idl
 
+///|
 pub(all) enum PermissionState {
   Granted
   Denied
   Prompt
 } derive(Eq)
 
-pub impl Show for PermissionState with output(self : PermissionState, logger : &Logger) -> Unit {
+///|
+pub impl Show for PermissionState with output(
+  self : PermissionState,
+  logger : &Logger,
+) -> Unit {
   match self {
     PermissionState::Granted => logger.write_string("Granted")
     PermissionState::Denied => logger.write_string("Denied")
@@ -16,7 +21,8 @@ pub impl Show for PermissionState with output(self : PermissionState, logger : &
   }
 }
 
-pub impl TJsValue for PermissionState with to_js(self: PermissionState) -> JsValue {
+///|
+pub impl TJsValue for PermissionState with to_js(self : PermissionState) -> JsValue {
   match self {
     PermissionState::Granted => TJsValue::to_js("granted")
     PermissionState::Denied => TJsValue::to_js("denied")
@@ -24,7 +30,8 @@ pub impl TJsValue for PermissionState with to_js(self: PermissionState) -> JsVal
   }
 }
 
-pub fn PermissionState::from(value: String) -> PermissionState? {
+///|
+pub fn PermissionState::from(value : String) -> PermissionState? {
   match value {
     "granted" => Some(PermissionState::Granted)
     "denied" => Some(PermissionState::Denied)
@@ -33,7 +40,8 @@ pub fn PermissionState::from(value: String) -> PermissionState? {
   }
 }
 
-fn PermissionState::from_unchecked(value: String) -> PermissionState {
+///|
+fn PermissionState::from_unchecked(value : String) -> PermissionState {
   match value {
     "granted" => PermissionState::Granted
     "denied" => PermissionState::Denied
@@ -42,7 +50,8 @@ fn PermissionState::from_unchecked(value: String) -> PermissionState {
   }
 }
 
-pub fn PermissionState::value(self: PermissionState) -> String {
+///|
+pub fn PermissionState::value(self : PermissionState) -> String {
   match self {
     PermissionState::Granted => "granted"
     PermissionState::Denied => "denied"
@@ -50,6 +59,7 @@ pub fn PermissionState::value(self: PermissionState) -> String {
   }
 }
 
+///|
 pub impl FromJsAny for PermissionState with from_js_any(value : JsAny) -> PermissionState {
   PermissionState::from_unchecked(value)
 }

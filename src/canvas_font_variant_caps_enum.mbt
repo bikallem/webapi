@@ -2,6 +2,7 @@
 // MoonBit type: CanvasFontVariantCaps
 // Specifications: html.idl
 
+///|
 pub(all) enum CanvasFontVariantCaps {
   Normal
   SmallCaps
@@ -12,7 +13,11 @@ pub(all) enum CanvasFontVariantCaps {
   TitlingCaps
 } derive(Eq)
 
-pub impl Show for CanvasFontVariantCaps with output(self : CanvasFontVariantCaps, logger : &Logger) -> Unit {
+///|
+pub impl Show for CanvasFontVariantCaps with output(
+  self : CanvasFontVariantCaps,
+  logger : &Logger,
+) -> Unit {
   match self {
     CanvasFontVariantCaps::Normal => logger.write_string("Normal")
     CanvasFontVariantCaps::SmallCaps => logger.write_string("SmallCaps")
@@ -24,7 +29,10 @@ pub impl Show for CanvasFontVariantCaps with output(self : CanvasFontVariantCaps
   }
 }
 
-pub impl TJsValue for CanvasFontVariantCaps with to_js(self: CanvasFontVariantCaps) -> JsValue {
+///|
+pub impl TJsValue for CanvasFontVariantCaps with to_js(
+  self : CanvasFontVariantCaps,
+) -> JsValue {
   match self {
     CanvasFontVariantCaps::Normal => TJsValue::to_js("normal")
     CanvasFontVariantCaps::SmallCaps => TJsValue::to_js("small-caps")
@@ -36,7 +44,8 @@ pub impl TJsValue for CanvasFontVariantCaps with to_js(self: CanvasFontVariantCa
   }
 }
 
-pub fn CanvasFontVariantCaps::from(value: String) -> CanvasFontVariantCaps? {
+///|
+pub fn CanvasFontVariantCaps::from(value : String) -> CanvasFontVariantCaps? {
   match value {
     "normal" => Some(CanvasFontVariantCaps::Normal)
     "small-caps" => Some(CanvasFontVariantCaps::SmallCaps)
@@ -49,7 +58,10 @@ pub fn CanvasFontVariantCaps::from(value: String) -> CanvasFontVariantCaps? {
   }
 }
 
-fn CanvasFontVariantCaps::from_unchecked(value: String) -> CanvasFontVariantCaps {
+///|
+fn CanvasFontVariantCaps::from_unchecked(
+  value : String,
+) -> CanvasFontVariantCaps {
   match value {
     "normal" => CanvasFontVariantCaps::Normal
     "small-caps" => CanvasFontVariantCaps::SmallCaps
@@ -62,7 +74,8 @@ fn CanvasFontVariantCaps::from_unchecked(value: String) -> CanvasFontVariantCaps
   }
 }
 
-pub fn CanvasFontVariantCaps::value(self: CanvasFontVariantCaps) -> String {
+///|
+pub fn CanvasFontVariantCaps::value(self : CanvasFontVariantCaps) -> String {
   match self {
     CanvasFontVariantCaps::Normal => "normal"
     CanvasFontVariantCaps::SmallCaps => "small-caps"
@@ -74,6 +87,7 @@ pub fn CanvasFontVariantCaps::value(self: CanvasFontVariantCaps) -> String {
   }
 }
 
+///|
 pub impl FromJsAny for CanvasFontVariantCaps with from_js_any(value : JsAny) -> CanvasFontVariantCaps {
   CanvasFontVariantCaps::from_unchecked(value)
 }

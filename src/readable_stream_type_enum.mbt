@@ -2,42 +2,52 @@
 // MoonBit type: ReadableStreamType
 // Specifications: streams.idl
 
+///|
 pub(all) enum ReadableStreamType {
   Bytes
 } derive(Eq)
 
-pub impl Show for ReadableStreamType with output(self : ReadableStreamType, logger : &Logger) -> Unit {
+///|
+pub impl Show for ReadableStreamType with output(
+  self : ReadableStreamType,
+  logger : &Logger,
+) -> Unit {
   match self {
     ReadableStreamType::Bytes => logger.write_string("Bytes")
   }
 }
 
-pub impl TJsValue for ReadableStreamType with to_js(self: ReadableStreamType) -> JsValue {
+///|
+pub impl TJsValue for ReadableStreamType with to_js(self : ReadableStreamType) -> JsValue {
   match self {
     ReadableStreamType::Bytes => TJsValue::to_js("bytes")
   }
 }
 
-pub fn ReadableStreamType::from(value: String) -> ReadableStreamType? {
+///|
+pub fn ReadableStreamType::from(value : String) -> ReadableStreamType? {
   match value {
     "bytes" => Some(ReadableStreamType::Bytes)
     _ => None
   }
 }
 
-fn ReadableStreamType::from_unchecked(value: String) -> ReadableStreamType {
+///|
+fn ReadableStreamType::from_unchecked(value : String) -> ReadableStreamType {
   match value {
     "bytes" => ReadableStreamType::Bytes
     _ => ReadableStreamType::Bytes
   }
 }
 
-pub fn ReadableStreamType::value(self: ReadableStreamType) -> String {
+///|
+pub fn ReadableStreamType::value(self : ReadableStreamType) -> String {
   match self {
     ReadableStreamType::Bytes => "bytes"
   }
 }
 
+///|
 pub impl FromJsAny for ReadableStreamType with from_js_any(value : JsAny) -> ReadableStreamType {
   ReadableStreamType::from_unchecked(value)
 }

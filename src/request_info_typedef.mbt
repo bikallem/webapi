@@ -2,29 +2,41 @@
 // MoonBit type: RequestInfo
 // Specifications: fetch.idl
 
+///|
 /// [RequestInfo](https://developer.mozilla.org/en-US/docs/Web/API/RequestInfo)
 #external
 pub type RequestInfo
 
-pub impl TJsValue for RequestInfo with to_js(self: RequestInfo) -> JsValue = "%identity"
+///|
+pub impl TJsValue for RequestInfo with to_js(self : RequestInfo) -> JsValue = "%identity"
 
+///|
 pub impl FromJsAny for RequestInfo with from_js_any(value : JsAny) -> RequestInfo = "%identity"
 
-pub(open) trait TRequestInfo : TJsValue {}
+///|
+pub(open) trait TRequestInfo: TJsValue {}
 
+///|
 #deprecated("Use unsafe_into or try_into instead")
 pub fn[T : TRequestInfo + FromJsAny] RequestInfo::into(self : RequestInfo) -> T {
   FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
 }
 
-pub fn[T : TRequestInfo + FromJsAny] RequestInfo::unsafe_into(self : RequestInfo) -> T {
+///|
+pub fn[T : TRequestInfo + FromJsAny] RequestInfo::unsafe_into(
+  self : RequestInfo,
+) -> T {
   FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
 }
 
+///|
 pub fn[T : TRequestInfo] RequestInfo::from(value : T) -> RequestInfo = "%identity"
 
+///|
 pub impl TRequestInfo for RequestInfo
 
+///|
 pub impl TRequestInfo for Request
 
+///|
 pub impl TRequestInfo for String

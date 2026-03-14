@@ -2,6 +2,7 @@
 // MoonBit type: AnimationPlayState
 // Specifications: web-animations.idl
 
+///|
 pub(all) enum AnimationPlayState {
   Idle
   Running
@@ -9,7 +10,11 @@ pub(all) enum AnimationPlayState {
   Finished
 } derive(Eq)
 
-pub impl Show for AnimationPlayState with output(self : AnimationPlayState, logger : &Logger) -> Unit {
+///|
+pub impl Show for AnimationPlayState with output(
+  self : AnimationPlayState,
+  logger : &Logger,
+) -> Unit {
   match self {
     AnimationPlayState::Idle => logger.write_string("Idle")
     AnimationPlayState::Running => logger.write_string("Running")
@@ -18,7 +23,8 @@ pub impl Show for AnimationPlayState with output(self : AnimationPlayState, logg
   }
 }
 
-pub impl TJsValue for AnimationPlayState with to_js(self: AnimationPlayState) -> JsValue {
+///|
+pub impl TJsValue for AnimationPlayState with to_js(self : AnimationPlayState) -> JsValue {
   match self {
     AnimationPlayState::Idle => TJsValue::to_js("idle")
     AnimationPlayState::Running => TJsValue::to_js("running")
@@ -27,7 +33,8 @@ pub impl TJsValue for AnimationPlayState with to_js(self: AnimationPlayState) ->
   }
 }
 
-pub fn AnimationPlayState::from(value: String) -> AnimationPlayState? {
+///|
+pub fn AnimationPlayState::from(value : String) -> AnimationPlayState? {
   match value {
     "idle" => Some(AnimationPlayState::Idle)
     "running" => Some(AnimationPlayState::Running)
@@ -37,7 +44,8 @@ pub fn AnimationPlayState::from(value: String) -> AnimationPlayState? {
   }
 }
 
-fn AnimationPlayState::from_unchecked(value: String) -> AnimationPlayState {
+///|
+fn AnimationPlayState::from_unchecked(value : String) -> AnimationPlayState {
   match value {
     "idle" => AnimationPlayState::Idle
     "running" => AnimationPlayState::Running
@@ -47,7 +55,8 @@ fn AnimationPlayState::from_unchecked(value: String) -> AnimationPlayState {
   }
 }
 
-pub fn AnimationPlayState::value(self: AnimationPlayState) -> String {
+///|
+pub fn AnimationPlayState::value(self : AnimationPlayState) -> String {
   match self {
     AnimationPlayState::Idle => "idle"
     AnimationPlayState::Running => "running"
@@ -56,6 +65,7 @@ pub fn AnimationPlayState::value(self: AnimationPlayState) -> String {
   }
 }
 
+///|
 pub impl FromJsAny for AnimationPlayState with from_js_any(value : JsAny) -> AnimationPlayState {
   AnimationPlayState::from_unchecked(value)
 }

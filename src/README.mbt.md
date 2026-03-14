@@ -84,7 +84,9 @@ fn readme_counter() -> Unit {
   let mut count = 0
 
   // Create count display element
-  let count_display : HTMLDivElement = document().create_element("div").unsafe_into()
+  let count_display : HTMLDivElement = document()
+    .create_element("div")
+    .unsafe_into()
   count_display
   ..set_attribute("id", "count-display")
   .set_attribute("style", "font-size: 3em; margin: 0.5em 0;")
@@ -135,14 +137,19 @@ Demonstrates the Canvas 2D API with gradients, shapes, and text:
 ```moonbit nocheck
 ///|
 fn readme_canvas() -> Unit {
-  let canvas : HTMLCanvasElement = document().create_element("canvas").unsafe_into()
+  let canvas : HTMLCanvasElement = document()
+    .create_element("canvas")
+    .unsafe_into()
   canvas.set_width(800)
   canvas.set_height(500)
   let app : Element = document().get_element_by_id("app")
   app.append_child(canvas) |> ignore
 
   // Get 2D rendering context
-  let ctx : CanvasRenderingContext2D = canvas.get_context("2d").unwrap().unsafe_into()
+  let ctx : CanvasRenderingContext2D = canvas
+    .get_context("2d")
+    .unwrap()
+    .unsafe_into()
 
   // Create gradient and draw
   let gradient = ctx.create_linear_gradient(0.0, 0.0, 0.0, 300.0)
@@ -267,8 +274,13 @@ Performs no runtime type check. If the underlying JS value is not of type `T`, t
 ///|
 fn readme_unsafe_into() -> Unit {
   // Only use when you are certain of the type (e.g., you just created the element)
-  let canvas : HTMLCanvasElement = document().create_element("canvas").unsafe_into()
-  let _ctx : CanvasRenderingContext2D = canvas.get_context("2d").unwrap().unsafe_into()
+  let canvas : HTMLCanvasElement = document()
+    .create_element("canvas")
+    .unsafe_into()
+  let _ctx : CanvasRenderingContext2D = canvas
+    .get_context("2d")
+    .unwrap()
+    .unsafe_into()
 }
 ```
 

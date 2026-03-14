@@ -2,28 +2,39 @@
 // MoonBit type: AbortSignal
 // Specifications: dom.idl
 
+///|
 /// [AbortSignal](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal)
 #external
 pub type AbortSignal
 
-pub impl TJsValue for AbortSignal with to_js(self: AbortSignal) -> JsValue = "%identity"
+///|
+pub impl TJsValue for AbortSignal with to_js(self : AbortSignal) -> JsValue = "%identity"
 
+///|
 pub impl FromJsAny for AbortSignal with from_js_any(value : JsAny) -> AbortSignal = "%identity"
 
+///|
 /// Unchecked downcast — no runtime type check is performed.
 /// Prefer `try_into()` for checked downcasts.
 #deprecated("Use unsafe_into or try_into instead")
-pub fn[T: TAbortSignal] AbortSignal::into(self : AbortSignal) -> T = "%identity"
+pub fn[T : TAbortSignal] AbortSignal::into(self : AbortSignal) -> T = "%identity"
 
+///|
 /// Unchecked downcast — no runtime type check is performed.
 /// WARNING: If the underlying JS value is not of type T, this will silently
 /// produce a value with incorrect type, leading to undefined behavior.
-pub fn[T: TAbortSignal] AbortSignal::unsafe_into(self : AbortSignal) -> T = "%identity"
+pub fn[T : TAbortSignal] AbortSignal::unsafe_into(self : AbortSignal) -> T = "%identity"
 
-pub impl HasConstructor for AbortSignal with constructor_name() { "AbortSignal" }
+///|
+pub impl HasConstructor for AbortSignal with constructor_name() {
+  "AbortSignal"
+}
 
+///|
 /// Checked downcast — returns None if the JS value is not an instance of T.
-pub fn[T : TAbortSignal + HasConstructor] AbortSignal::try_into(self : AbortSignal) -> T? {
+pub fn[T : TAbortSignal + HasConstructor] AbortSignal::try_into(
+  self : AbortSignal,
+) -> T? {
   if js_instanceof(TJsValue::to_js(self), T::constructor_name()) {
     Some(self.unsafe_into())
   } else {
@@ -31,10 +42,13 @@ pub fn[T : TAbortSignal + HasConstructor] AbortSignal::try_into(self : AbortSign
   }
 }
 
+///|
 pub impl TAbortSignal for AbortSignal
 
+///|
 pub impl TEventTarget for AbortSignal
 
+///|
 /// [AbortSignal](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) interface.
 pub trait TAbortSignal: TEventTarget {
   aborted(self : Self) -> Bool = _
@@ -44,133 +58,162 @@ pub trait TAbortSignal: TEventTarget {
   set_onabort(self : Self, onabort : (Event) -> JsValue) -> Unit = _
 }
 
+///|
 /// [AbortSignal.abort](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/abort)
 pub fn AbortSignal::abort(reason? : JsValue) -> AbortSignal {
   abort_signal_abort_ffi(opt_to_js(reason))
 }
 
+///|
 /// [AbortSignal.timeout](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/timeout)
 pub fn AbortSignal::timeout(milliseconds : UInt64) -> AbortSignal {
   abort_signal_timeout_ffi(TJsValue::to_js(milliseconds))
 }
 
+///|
 /// [AbortSignal.any](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/any)
 pub fn AbortSignal::any(signals : Array[AbortSignal]) -> AbortSignal {
   abort_signal_any_ffi(TJsValue::to_js(signals))
 }
 
+///|
 /// [AbortSignal.aborted](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/aborted)
 impl TAbortSignal with aborted(self : Self) -> Bool {
   abort_signal_aborted_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [AbortSignal.reason](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/reason)
 impl TAbortSignal with reason(self : Self) -> JsValue {
   abort_signal_reason_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [AbortSignal.throwIfAborted](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/throwIfAborted)
 impl TAbortSignal with throw_if_aborted(self : Self) -> Unit {
   abort_signal_throw_if_aborted_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [AbortSignal.onabort](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/onabort)
 impl TAbortSignal with onabort(self : Self) -> EventHandler {
   abort_signal_onabort_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [AbortSignal.onabort](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/onabort)
-impl TAbortSignal with set_onabort(self : Self, 
-onabort : (Event) -> JsValue) -> Unit {
-  abort_signal_set_onabort_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onabort)))
+impl TAbortSignal with set_onabort(self : Self, onabort : (Event) -> JsValue) -> Unit {
+  abort_signal_set_onabort_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onabort)),
+  )
 }
-
-#cfg(target="js")
-extern "js" fn abort_signal_abort_ffi_js(reason: JsValue) -> JsValue = "(reason) => AbortSignal.abort(reason)"
 
 ///|
 #cfg(target="js")
-fn abort_signal_abort_ffi(reason: JsValue) -> AbortSignal {
+extern "js" fn abort_signal_abort_ffi_js(reason : JsValue) -> JsValue = "(reason) => AbortSignal.abort(reason)"
+
+///|
+#cfg(target="js")
+fn abort_signal_abort_ffi(reason : JsValue) -> AbortSignal {
   abort_signal_abort_ffi_js(reason).unsafe_cast()
 }
 
+///|
 #cfg(target="js")
-extern "js" fn abort_signal_timeout_ffi_js(milliseconds: JsValue) -> JsValue = "(milliseconds) => AbortSignal.timeout(milliseconds)"
+extern "js" fn abort_signal_timeout_ffi_js(milliseconds : JsValue) -> JsValue = "(milliseconds) => AbortSignal.timeout(milliseconds)"
 
 ///|
 #cfg(target="js")
-fn abort_signal_timeout_ffi(milliseconds: JsValue) -> AbortSignal {
+fn abort_signal_timeout_ffi(milliseconds : JsValue) -> AbortSignal {
   abort_signal_timeout_ffi_js(milliseconds).unsafe_cast()
 }
 
+///|
 #cfg(target="js")
-extern "js" fn abort_signal_any_ffi_js(signals: JsValue) -> JsValue = "(signals) => AbortSignal.any(signals)"
+extern "js" fn abort_signal_any_ffi_js(signals : JsValue) -> JsValue = "(signals) => AbortSignal.any(signals)"
 
 ///|
 #cfg(target="js")
-fn abort_signal_any_ffi(signals: JsValue) -> AbortSignal {
+fn abort_signal_any_ffi(signals : JsValue) -> AbortSignal {
   abort_signal_any_ffi_js(signals).unsafe_cast()
 }
 
+///|
 #cfg(target="js")
-extern "js" fn abort_signal_aborted_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.aborted"
+extern "js" fn abort_signal_aborted_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.aborted"
 
 ///|
 #cfg(target="js")
-fn abort_signal_aborted_ffi(obj: JsValue) -> Bool {
+fn abort_signal_aborted_ffi(obj : JsValue) -> Bool {
   abort_signal_aborted_ffi_js(obj).unsafe_cast()
 }
 
+///|
 #cfg(target="js")
-extern "js" fn abort_signal_reason_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.reason"
+extern "js" fn abort_signal_reason_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.reason"
 
 ///|
 #cfg(target="js")
-fn abort_signal_reason_ffi(obj: JsValue) -> JsValue {
+fn abort_signal_reason_ffi(obj : JsValue) -> JsValue {
   abort_signal_reason_ffi_js(obj).unsafe_cast()
 }
 
+///|
 #cfg(target="js")
-extern "js" fn abort_signal_throw_if_aborted_ffi(obj: JsValue) -> Unit = "(obj) => obj.throwIfAborted()"
-
-#cfg(target="js")
-extern "js" fn abort_signal_onabort_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.onabort"
+extern "js" fn abort_signal_throw_if_aborted_ffi(obj : JsValue) -> Unit = "(obj) => obj.throwIfAborted()"
 
 ///|
 #cfg(target="js")
-fn abort_signal_onabort_ffi(obj: JsValue) -> EventHandler {
+extern "js" fn abort_signal_onabort_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.onabort"
+
+///|
+#cfg(target="js")
+fn abort_signal_onabort_ffi(obj : JsValue) -> EventHandler {
   abort_signal_onabort_ffi_js(obj).unsafe_cast()
 }
 
+///|
 #cfg(target="js")
-extern "js" fn abort_signal_set_onabort_ffi(obj: JsValue, onabort: JsValue) -> Unit = "(obj, onabort) => { obj.onabort = onabort; }"
-
-#cfg(target="wasm-gc")
-fn abort_signal_abort_ffi(reason: JsValue) -> AbortSignal = "webapi_AbortSignal" "abort"
-
-#cfg(target="wasm-gc")
-fn abort_signal_timeout_ffi(milliseconds: JsValue) -> AbortSignal = "webapi_AbortSignal" "timeout"
-
-#cfg(target="wasm-gc")
-fn abort_signal_any_ffi(signals: JsValue) -> AbortSignal = "webapi_AbortSignal" "any"
-
-#cfg(target="wasm-gc")
-fn abort_signal_aborted_ffi(obj: JsValue) -> Bool = "webapi_AbortSignal" "get_aborted"
-
-#cfg(target="wasm-gc")
-fn abort_signal_reason_ffi(obj: JsValue) -> JsValue = "webapi_AbortSignal" "get_reason"
-
-#cfg(target="wasm-gc")
-fn abort_signal_throw_if_aborted_ffi(obj: JsValue) -> Unit = "webapi_AbortSignal" "throwIfAborted"
-
-#cfg(target="wasm-gc")
-fn abort_signal_onabort_ffi_wasm(obj: JsValue) -> JsValue = "webapi_AbortSignal" "get_onabort"
+extern "js" fn abort_signal_set_onabort_ffi(
+  obj : JsValue,
+  onabort : JsValue,
+) -> Unit = "(obj, onabort) => { obj.onabort = onabort; }"
 
 ///|
 #cfg(target="wasm-gc")
-fn abort_signal_onabort_ffi(obj: JsValue) -> EventHandler {
+fn abort_signal_abort_ffi(reason : JsValue) -> AbortSignal = "webapi_AbortSignal" "abort"
+
+///|
+#cfg(target="wasm-gc")
+fn abort_signal_timeout_ffi(milliseconds : JsValue) -> AbortSignal = "webapi_AbortSignal" "timeout"
+
+///|
+#cfg(target="wasm-gc")
+fn abort_signal_any_ffi(signals : JsValue) -> AbortSignal = "webapi_AbortSignal" "any"
+
+///|
+#cfg(target="wasm-gc")
+fn abort_signal_aborted_ffi(obj : JsValue) -> Bool = "webapi_AbortSignal" "get_aborted"
+
+///|
+#cfg(target="wasm-gc")
+fn abort_signal_reason_ffi(obj : JsValue) -> JsValue = "webapi_AbortSignal" "get_reason"
+
+///|
+#cfg(target="wasm-gc")
+fn abort_signal_throw_if_aborted_ffi(obj : JsValue) -> Unit = "webapi_AbortSignal" "throwIfAborted"
+
+///|
+#cfg(target="wasm-gc")
+fn abort_signal_onabort_ffi_wasm(obj : JsValue) -> JsValue = "webapi_AbortSignal" "get_onabort"
+
+///|
+#cfg(target="wasm-gc")
+fn abort_signal_onabort_ffi(obj : JsValue) -> EventHandler {
   abort_signal_onabort_ffi_wasm(obj).unsafe_cast()
 }
 
+///|
 #cfg(target="wasm-gc")
-fn abort_signal_set_onabort_ffi(obj: JsValue, onabort: JsValue) -> Unit = "webapi_AbortSignal" "set_onabort"
+fn abort_signal_set_onabort_ffi(obj : JsValue, onabort : JsValue) -> Unit = "webapi_AbortSignal" "set_onabort"

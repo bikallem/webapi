@@ -2,6 +2,7 @@
 // MoonBit type: CSSBoxType
 // Specifications: cssom-view.idl
 
+///|
 pub(all) enum CSSBoxType {
   Margin
   Border
@@ -9,6 +10,7 @@ pub(all) enum CSSBoxType {
   Content
 } derive(Eq)
 
+///|
 pub impl Show for CSSBoxType with output(self : CSSBoxType, logger : &Logger) -> Unit {
   match self {
     CSSBoxType::Margin => logger.write_string("Margin")
@@ -18,7 +20,8 @@ pub impl Show for CSSBoxType with output(self : CSSBoxType, logger : &Logger) ->
   }
 }
 
-pub impl TJsValue for CSSBoxType with to_js(self: CSSBoxType) -> JsValue {
+///|
+pub impl TJsValue for CSSBoxType with to_js(self : CSSBoxType) -> JsValue {
   match self {
     CSSBoxType::Margin => TJsValue::to_js("margin")
     CSSBoxType::Border => TJsValue::to_js("border")
@@ -27,7 +30,8 @@ pub impl TJsValue for CSSBoxType with to_js(self: CSSBoxType) -> JsValue {
   }
 }
 
-pub fn CSSBoxType::from(value: String) -> CSSBoxType? {
+///|
+pub fn CSSBoxType::from(value : String) -> CSSBoxType? {
   match value {
     "margin" => Some(CSSBoxType::Margin)
     "border" => Some(CSSBoxType::Border)
@@ -37,7 +41,8 @@ pub fn CSSBoxType::from(value: String) -> CSSBoxType? {
   }
 }
 
-fn CSSBoxType::from_unchecked(value: String) -> CSSBoxType {
+///|
+fn CSSBoxType::from_unchecked(value : String) -> CSSBoxType {
   match value {
     "margin" => CSSBoxType::Margin
     "border" => CSSBoxType::Border
@@ -47,7 +52,8 @@ fn CSSBoxType::from_unchecked(value: String) -> CSSBoxType {
   }
 }
 
-pub fn CSSBoxType::value(self: CSSBoxType) -> String {
+///|
+pub fn CSSBoxType::value(self : CSSBoxType) -> String {
   match self {
     CSSBoxType::Margin => "margin"
     CSSBoxType::Border => "border"
@@ -56,6 +62,7 @@ pub fn CSSBoxType::value(self: CSSBoxType) -> String {
   }
 }
 
+///|
 pub impl FromJsAny for CSSBoxType with from_js_any(value : JsAny) -> CSSBoxType {
   CSSBoxType::from_unchecked(value)
 }

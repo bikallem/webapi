@@ -2,6 +2,7 @@
 // MoonBit type: ResponseType
 // Specifications: fetch.idl
 
+///|
 pub(all) enum ResponseType {
   Basic
   Cors
@@ -11,7 +12,11 @@ pub(all) enum ResponseType {
   Opaqueredirect
 } derive(Eq)
 
-pub impl Show for ResponseType with output(self : ResponseType, logger : &Logger) -> Unit {
+///|
+pub impl Show for ResponseType with output(
+  self : ResponseType,
+  logger : &Logger,
+) -> Unit {
   match self {
     ResponseType::Basic => logger.write_string("Basic")
     ResponseType::Cors => logger.write_string("Cors")
@@ -22,7 +27,8 @@ pub impl Show for ResponseType with output(self : ResponseType, logger : &Logger
   }
 }
 
-pub impl TJsValue for ResponseType with to_js(self: ResponseType) -> JsValue {
+///|
+pub impl TJsValue for ResponseType with to_js(self : ResponseType) -> JsValue {
   match self {
     ResponseType::Basic => TJsValue::to_js("basic")
     ResponseType::Cors => TJsValue::to_js("cors")
@@ -33,7 +39,8 @@ pub impl TJsValue for ResponseType with to_js(self: ResponseType) -> JsValue {
   }
 }
 
-pub fn ResponseType::from(value: String) -> ResponseType? {
+///|
+pub fn ResponseType::from(value : String) -> ResponseType? {
   match value {
     "basic" => Some(ResponseType::Basic)
     "cors" => Some(ResponseType::Cors)
@@ -45,7 +52,8 @@ pub fn ResponseType::from(value: String) -> ResponseType? {
   }
 }
 
-fn ResponseType::from_unchecked(value: String) -> ResponseType {
+///|
+fn ResponseType::from_unchecked(value : String) -> ResponseType {
   match value {
     "basic" => ResponseType::Basic
     "cors" => ResponseType::Cors
@@ -57,7 +65,8 @@ fn ResponseType::from_unchecked(value: String) -> ResponseType {
   }
 }
 
-pub fn ResponseType::value(self: ResponseType) -> String {
+///|
+pub fn ResponseType::value(self : ResponseType) -> String {
   match self {
     ResponseType::Basic => "basic"
     ResponseType::Cors => "cors"
@@ -68,6 +77,7 @@ pub fn ResponseType::value(self: ResponseType) -> String {
   }
 }
 
+///|
 pub impl FromJsAny for ResponseType with from_js_any(value : JsAny) -> ResponseType {
   ResponseType::from_unchecked(value)
 }

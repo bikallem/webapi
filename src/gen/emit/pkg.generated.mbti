@@ -81,6 +81,8 @@ pub enum Emit {
   ImplTJsValue(TypeName)
   ImplFromJsAny(TypeName)
   IntoMethod(TypeName)
+  ImplHasConstructor(TypeName)
+  TryIntoMethod(TypeName)
   UnionIntoMethod(TypeName)
   FromMethod(TypeName)
   IsUndefinedMethod(TypeName)

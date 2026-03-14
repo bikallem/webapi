@@ -2,6 +2,7 @@
 // MoonBit type: SelectionMode
 // Specifications: html.idl
 
+///|
 pub(all) enum SelectionMode {
   Select
   Start
@@ -9,7 +10,11 @@ pub(all) enum SelectionMode {
   Preserve
 } derive(Eq)
 
-pub impl Show for SelectionMode with output(self : SelectionMode, logger : &Logger) -> Unit {
+///|
+pub impl Show for SelectionMode with output(
+  self : SelectionMode,
+  logger : &Logger,
+) -> Unit {
   match self {
     SelectionMode::Select => logger.write_string("Select")
     SelectionMode::Start => logger.write_string("Start")
@@ -18,7 +23,8 @@ pub impl Show for SelectionMode with output(self : SelectionMode, logger : &Logg
   }
 }
 
-pub impl TJsValue for SelectionMode with to_js(self: SelectionMode) -> JsValue {
+///|
+pub impl TJsValue for SelectionMode with to_js(self : SelectionMode) -> JsValue {
   match self {
     SelectionMode::Select => TJsValue::to_js("select")
     SelectionMode::Start => TJsValue::to_js("start")
@@ -27,7 +33,8 @@ pub impl TJsValue for SelectionMode with to_js(self: SelectionMode) -> JsValue {
   }
 }
 
-pub fn SelectionMode::from(value: String) -> SelectionMode? {
+///|
+pub fn SelectionMode::from(value : String) -> SelectionMode? {
   match value {
     "select" => Some(SelectionMode::Select)
     "start" => Some(SelectionMode::Start)
@@ -37,7 +44,8 @@ pub fn SelectionMode::from(value: String) -> SelectionMode? {
   }
 }
 
-fn SelectionMode::from_unchecked(value: String) -> SelectionMode {
+///|
+fn SelectionMode::from_unchecked(value : String) -> SelectionMode {
   match value {
     "select" => SelectionMode::Select
     "start" => SelectionMode::Start
@@ -47,7 +55,8 @@ fn SelectionMode::from_unchecked(value: String) -> SelectionMode {
   }
 }
 
-pub fn SelectionMode::value(self: SelectionMode) -> String {
+///|
+pub fn SelectionMode::value(self : SelectionMode) -> String {
   match self {
     SelectionMode::Select => "select"
     SelectionMode::Start => "start"
@@ -56,6 +65,7 @@ pub fn SelectionMode::value(self: SelectionMode) -> String {
   }
 }
 
+///|
 pub impl FromJsAny for SelectionMode with from_js_any(value : JsAny) -> SelectionMode {
   SelectionMode::from_unchecked(value)
 }

@@ -2,28 +2,47 @@
 // MoonBit type: NavigationPrecommitController
 // Specifications: html.idl
 
+///|
 /// [NavigationPrecommitController](https://developer.mozilla.org/en-US/docs/Web/API/NavigationPrecommitController)
 #external
 pub type NavigationPrecommitController
 
-pub impl TJsValue for NavigationPrecommitController with to_js(self: NavigationPrecommitController) -> JsValue = "%identity"
+///|
+pub impl TJsValue for NavigationPrecommitController with to_js(
+  self : NavigationPrecommitController,
+) -> JsValue = "%identity"
 
-pub impl FromJsAny for NavigationPrecommitController with from_js_any(value : JsAny) -> NavigationPrecommitController = "%identity"
+///|
+pub impl FromJsAny for NavigationPrecommitController with from_js_any(
+  value : JsAny,
+) -> NavigationPrecommitController = "%identity"
 
+///|
 /// Unchecked downcast — no runtime type check is performed.
 /// Prefer `try_into()` for checked downcasts.
 #deprecated("Use unsafe_into or try_into instead")
-pub fn[T: TNavigationPrecommitController] NavigationPrecommitController::into(self : NavigationPrecommitController) -> T = "%identity"
+pub fn[T : TNavigationPrecommitController] NavigationPrecommitController::into(
+  self : NavigationPrecommitController,
+) -> T = "%identity"
 
+///|
 /// Unchecked downcast — no runtime type check is performed.
 /// WARNING: If the underlying JS value is not of type T, this will silently
 /// produce a value with incorrect type, leading to undefined behavior.
-pub fn[T: TNavigationPrecommitController] NavigationPrecommitController::unsafe_into(self : NavigationPrecommitController) -> T = "%identity"
+pub fn[T : TNavigationPrecommitController] NavigationPrecommitController::unsafe_into(
+  self : NavigationPrecommitController,
+) -> T = "%identity"
 
-pub impl HasConstructor for NavigationPrecommitController with constructor_name() { "NavigationPrecommitController" }
+///|
+pub impl HasConstructor for NavigationPrecommitController with constructor_name() {
+  "NavigationPrecommitController"
+}
 
+///|
 /// Checked downcast — returns None if the JS value is not an instance of T.
-pub fn[T : TNavigationPrecommitController + HasConstructor] NavigationPrecommitController::try_into(self : NavigationPrecommitController) -> T? {
+pub fn[T : TNavigationPrecommitController + HasConstructor] NavigationPrecommitController::try_into(
+  self : NavigationPrecommitController,
+) -> T? {
   if js_instanceof(TJsValue::to_js(self), T::constructor_name()) {
     Some(self.unsafe_into())
   } else {
@@ -31,35 +50,68 @@ pub fn[T : TNavigationPrecommitController + HasConstructor] NavigationPrecommitC
   }
 }
 
+///|
 pub impl TNavigationPrecommitController for NavigationPrecommitController
 
+///|
 /// [NavigationPrecommitController](https://developer.mozilla.org/en-US/docs/Web/API/NavigationPrecommitController) interface.
 pub trait TNavigationPrecommitController: TJsValue {
   redirect(self : Self, url : String, options? : NavigationNavigateOptions) -> Unit = _
   add_handler(self : Self, handler : () -> JsPromise[JsValue]) -> Unit = _
 }
 
+///|
 /// [NavigationPrecommitController.redirect](https://developer.mozilla.org/en-US/docs/Web/API/NavigationPrecommitController/redirect)
-impl TNavigationPrecommitController with redirect(self : Self, 
-url : String, 
-options? : NavigationNavigateOptions) -> Unit {
-  navigation_precommit_controller_redirect_ffi(TJsValue::to_js(self), TJsValue::to_js(url), opt_to_js(options))
+impl TNavigationPrecommitController with redirect(
+  self : Self,
+  url : String,
+  options? : NavigationNavigateOptions,
+) -> Unit {
+  navigation_precommit_controller_redirect_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(url),
+    opt_to_js(options),
+  )
 }
 
+///|
 /// [NavigationPrecommitController.addHandler](https://developer.mozilla.org/en-US/docs/Web/API/NavigationPrecommitController/addHandler)
-impl TNavigationPrecommitController with add_handler(self : Self, 
-handler : () -> JsPromise[JsValue]) -> Unit {
-  navigation_precommit_controller_add_handler_ffi(TJsValue::to_js(self), TJsValue::to_js(navigation_intercept_handler_ffi(handler)))
+impl TNavigationPrecommitController with add_handler(
+  self : Self,
+  handler : () -> JsPromise[JsValue],
+) -> Unit {
+  navigation_precommit_controller_add_handler_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(navigation_intercept_handler_ffi(handler)),
+  )
 }
 
+///|
 #cfg(target="js")
-extern "js" fn navigation_precommit_controller_redirect_ffi(obj: JsValue, url: JsValue, options: JsValue) -> Unit = "(obj, url, options) => obj.redirect(url, options)"
+extern "js" fn navigation_precommit_controller_redirect_ffi(
+  obj : JsValue,
+  url : JsValue,
+  options : JsValue,
+) -> Unit = "(obj, url, options) => obj.redirect(url, options)"
 
+///|
 #cfg(target="js")
-extern "js" fn navigation_precommit_controller_add_handler_ffi(obj: JsValue, handler: JsValue) -> Unit = "(obj, handler) => obj.addHandler(handler)"
+extern "js" fn navigation_precommit_controller_add_handler_ffi(
+  obj : JsValue,
+  handler : JsValue,
+) -> Unit = "(obj, handler) => obj.addHandler(handler)"
 
+///|
 #cfg(target="wasm-gc")
-fn navigation_precommit_controller_redirect_ffi(obj: JsValue, url: JsValue, options: JsValue) -> Unit = "webapi_NavigationPrecommitController" "redirect"
+fn navigation_precommit_controller_redirect_ffi(
+  obj : JsValue,
+  url : JsValue,
+  options : JsValue,
+) -> Unit = "webapi_NavigationPrecommitController" "redirect"
 
+///|
 #cfg(target="wasm-gc")
-fn navigation_precommit_controller_add_handler_ffi(obj: JsValue, handler: JsValue) -> Unit = "webapi_NavigationPrecommitController" "addHandler"
+fn navigation_precommit_controller_add_handler_ffi(
+  obj : JsValue,
+  handler : JsValue,
+) -> Unit = "webapi_NavigationPrecommitController" "addHandler"

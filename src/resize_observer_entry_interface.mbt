@@ -2,28 +2,43 @@
 // MoonBit type: ResizeObserverEntry
 // Specifications: resize-observer.idl
 
+///|
 /// [ResizeObserverEntry](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserverEntry)
 #external
 pub type ResizeObserverEntry
 
-pub impl TJsValue for ResizeObserverEntry with to_js(self: ResizeObserverEntry) -> JsValue = "%identity"
+///|
+pub impl TJsValue for ResizeObserverEntry with to_js(self : ResizeObserverEntry) -> JsValue = "%identity"
 
+///|
 pub impl FromJsAny for ResizeObserverEntry with from_js_any(value : JsAny) -> ResizeObserverEntry = "%identity"
 
+///|
 /// Unchecked downcast — no runtime type check is performed.
 /// Prefer `try_into()` for checked downcasts.
 #deprecated("Use unsafe_into or try_into instead")
-pub fn[T: TResizeObserverEntry] ResizeObserverEntry::into(self : ResizeObserverEntry) -> T = "%identity"
+pub fn[T : TResizeObserverEntry] ResizeObserverEntry::into(
+  self : ResizeObserverEntry,
+) -> T = "%identity"
 
+///|
 /// Unchecked downcast — no runtime type check is performed.
 /// WARNING: If the underlying JS value is not of type T, this will silently
 /// produce a value with incorrect type, leading to undefined behavior.
-pub fn[T: TResizeObserverEntry] ResizeObserverEntry::unsafe_into(self : ResizeObserverEntry) -> T = "%identity"
+pub fn[T : TResizeObserverEntry] ResizeObserverEntry::unsafe_into(
+  self : ResizeObserverEntry,
+) -> T = "%identity"
 
-pub impl HasConstructor for ResizeObserverEntry with constructor_name() { "ResizeObserverEntry" }
+///|
+pub impl HasConstructor for ResizeObserverEntry with constructor_name() {
+  "ResizeObserverEntry"
+}
 
+///|
 /// Checked downcast — returns None if the JS value is not an instance of T.
-pub fn[T : TResizeObserverEntry + HasConstructor] ResizeObserverEntry::try_into(self : ResizeObserverEntry) -> T? {
+pub fn[T : TResizeObserverEntry + HasConstructor] ResizeObserverEntry::try_into(
+  self : ResizeObserverEntry,
+) -> T? {
   if js_instanceof(TJsValue::to_js(self), T::constructor_name()) {
     Some(self.unsafe_into())
   } else {
@@ -31,8 +46,10 @@ pub fn[T : TResizeObserverEntry + HasConstructor] ResizeObserverEntry::try_into(
   }
 }
 
+///|
 pub impl TResizeObserverEntry for ResizeObserverEntry
 
+///|
 /// [ResizeObserverEntry](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserverEntry) interface.
 pub trait TResizeObserverEntry: TJsValue {
   target(self : Self) -> Element = _
@@ -42,105 +59,148 @@ pub trait TResizeObserverEntry: TJsValue {
   device_pixel_content_box_size(self : Self) -> Array[ResizeObserverSize] = _
 }
 
+///|
 /// [ResizeObserverEntry.target](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserverEntry/target)
 impl TResizeObserverEntry with target(self : Self) -> Element {
   resize_observer_entry_target_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [ResizeObserverEntry.contentRect](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserverEntry/contentRect)
 impl TResizeObserverEntry with content_rect(self : Self) -> DOMRectReadOnly {
   resize_observer_entry_content_rect_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [ResizeObserverEntry.borderBoxSize](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserverEntry/borderBoxSize)
-impl TResizeObserverEntry with border_box_size(self : Self) -> Array[ResizeObserverSize] {
+impl TResizeObserverEntry with border_box_size(self : Self) -> Array[
+  ResizeObserverSize,
+] {
   resize_observer_entry_border_box_size_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [ResizeObserverEntry.contentBoxSize](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserverEntry/contentBoxSize)
-impl TResizeObserverEntry with content_box_size(self : Self) -> Array[ResizeObserverSize] {
+impl TResizeObserverEntry with content_box_size(self : Self) -> Array[
+  ResizeObserverSize,
+] {
   resize_observer_entry_content_box_size_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [ResizeObserverEntry.devicePixelContentBoxSize](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserverEntry/devicePixelContentBoxSize)
-impl TResizeObserverEntry with device_pixel_content_box_size(self : Self) -> Array[ResizeObserverSize] {
+impl TResizeObserverEntry with device_pixel_content_box_size(self : Self) -> Array[
+  ResizeObserverSize,
+] {
   resize_observer_entry_device_pixel_content_box_size_ffi(TJsValue::to_js(self))
 }
 
+///|
 #cfg(target="js")
-extern "js" fn resize_observer_entry_target_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.target"
+extern "js" fn resize_observer_entry_target_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.target"
 
 ///|
 #cfg(target="js")
-fn resize_observer_entry_target_ffi(obj: JsValue) -> Element {
+fn resize_observer_entry_target_ffi(obj : JsValue) -> Element {
   resize_observer_entry_target_ffi_js(obj).unsafe_cast()
 }
 
+///|
 #cfg(target="js")
-extern "js" fn resize_observer_entry_content_rect_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.contentRect"
+extern "js" fn resize_observer_entry_content_rect_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.contentRect"
 
 ///|
 #cfg(target="js")
-fn resize_observer_entry_content_rect_ffi(obj: JsValue) -> DOMRectReadOnly {
+fn resize_observer_entry_content_rect_ffi(obj : JsValue) -> DOMRectReadOnly {
   resize_observer_entry_content_rect_ffi_js(obj).unsafe_cast()
 }
 
+///|
 #cfg(target="js")
-extern "js" fn resize_observer_entry_border_box_size_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.borderBoxSize"
+extern "js" fn resize_observer_entry_border_box_size_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.borderBoxSize"
 
 ///|
 #cfg(target="js")
-fn resize_observer_entry_border_box_size_ffi(obj: JsValue) -> Array[ResizeObserverSize] {
+fn resize_observer_entry_border_box_size_ffi(
+  obj : JsValue,
+) -> Array[ResizeObserverSize] {
   resize_observer_entry_border_box_size_ffi_js(obj).unsafe_cast()
 }
 
+///|
 #cfg(target="js")
-extern "js" fn resize_observer_entry_content_box_size_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.contentBoxSize"
+extern "js" fn resize_observer_entry_content_box_size_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.contentBoxSize"
 
 ///|
 #cfg(target="js")
-fn resize_observer_entry_content_box_size_ffi(obj: JsValue) -> Array[ResizeObserverSize] {
+fn resize_observer_entry_content_box_size_ffi(
+  obj : JsValue,
+) -> Array[ResizeObserverSize] {
   resize_observer_entry_content_box_size_ffi_js(obj).unsafe_cast()
 }
 
+///|
 #cfg(target="js")
-extern "js" fn resize_observer_entry_device_pixel_content_box_size_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.devicePixelContentBoxSize"
+extern "js" fn resize_observer_entry_device_pixel_content_box_size_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.devicePixelContentBoxSize"
 
 ///|
 #cfg(target="js")
-fn resize_observer_entry_device_pixel_content_box_size_ffi(obj: JsValue) -> Array[ResizeObserverSize] {
+fn resize_observer_entry_device_pixel_content_box_size_ffi(
+  obj : JsValue,
+) -> Array[ResizeObserverSize] {
   resize_observer_entry_device_pixel_content_box_size_ffi_js(obj).unsafe_cast()
 }
 
+///|
 #cfg(target="wasm-gc")
-fn resize_observer_entry_target_ffi(obj: JsValue) -> Element = "webapi_ResizeObserverEntry" "get_target"
-
-#cfg(target="wasm-gc")
-fn resize_observer_entry_content_rect_ffi(obj: JsValue) -> DOMRectReadOnly = "webapi_ResizeObserverEntry" "get_contentRect"
-
-#cfg(target="wasm-gc")
-fn resize_observer_entry_border_box_size_ffi_wasm(obj: JsValue) -> JsArray = "webapi_ResizeObserverEntry" "get_borderBoxSize"
+fn resize_observer_entry_target_ffi(obj : JsValue) -> Element = "webapi_ResizeObserverEntry" "get_target"
 
 ///|
 #cfg(target="wasm-gc")
-fn resize_observer_entry_border_box_size_ffi(obj: JsValue) -> Array[ResizeObserverSize] {
+fn resize_observer_entry_content_rect_ffi(obj : JsValue) -> DOMRectReadOnly = "webapi_ResizeObserverEntry" "get_contentRect"
+
+///|
+#cfg(target="wasm-gc")
+fn resize_observer_entry_border_box_size_ffi_wasm(obj : JsValue) -> JsArray = "webapi_ResizeObserverEntry" "get_borderBoxSize"
+
+///|
+#cfg(target="wasm-gc")
+fn resize_observer_entry_border_box_size_ffi(
+  obj : JsValue,
+) -> Array[ResizeObserverSize] {
   resize_observer_entry_border_box_size_ffi_wasm(obj).to_array()
 }
 
+///|
 #cfg(target="wasm-gc")
-fn resize_observer_entry_content_box_size_ffi_wasm(obj: JsValue) -> JsArray = "webapi_ResizeObserverEntry" "get_contentBoxSize"
+fn resize_observer_entry_content_box_size_ffi_wasm(obj : JsValue) -> JsArray = "webapi_ResizeObserverEntry" "get_contentBoxSize"
 
 ///|
 #cfg(target="wasm-gc")
-fn resize_observer_entry_content_box_size_ffi(obj: JsValue) -> Array[ResizeObserverSize] {
+fn resize_observer_entry_content_box_size_ffi(
+  obj : JsValue,
+) -> Array[ResizeObserverSize] {
   resize_observer_entry_content_box_size_ffi_wasm(obj).to_array()
 }
 
+///|
 #cfg(target="wasm-gc")
-fn resize_observer_entry_device_pixel_content_box_size_ffi_wasm(obj: JsValue) -> JsArray = "webapi_ResizeObserverEntry" "get_devicePixelContentBoxSize"
+fn resize_observer_entry_device_pixel_content_box_size_ffi_wasm(
+  obj : JsValue,
+) -> JsArray = "webapi_ResizeObserverEntry" "get_devicePixelContentBoxSize"
 
 ///|
 #cfg(target="wasm-gc")
-fn resize_observer_entry_device_pixel_content_box_size_ffi(obj: JsValue) -> Array[ResizeObserverSize] {
+fn resize_observer_entry_device_pixel_content_box_size_ffi(
+  obj : JsValue,
+) -> Array[ResizeObserverSize] {
   resize_observer_entry_device_pixel_content_box_size_ffi_wasm(obj).to_array()
 }

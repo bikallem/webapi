@@ -2,6 +2,7 @@
 // MoonBit type: FrameType
 // Specifications: service-workers.idl
 
+///|
 pub(all) enum FrameType {
   Auxiliary
   TopLevel
@@ -9,6 +10,7 @@ pub(all) enum FrameType {
   None
 } derive(Eq)
 
+///|
 pub impl Show for FrameType with output(self : FrameType, logger : &Logger) -> Unit {
   match self {
     FrameType::Auxiliary => logger.write_string("Auxiliary")
@@ -18,7 +20,8 @@ pub impl Show for FrameType with output(self : FrameType, logger : &Logger) -> U
   }
 }
 
-pub impl TJsValue for FrameType with to_js(self: FrameType) -> JsValue {
+///|
+pub impl TJsValue for FrameType with to_js(self : FrameType) -> JsValue {
   match self {
     FrameType::Auxiliary => TJsValue::to_js("auxiliary")
     FrameType::TopLevel => TJsValue::to_js("top-level")
@@ -27,7 +30,8 @@ pub impl TJsValue for FrameType with to_js(self: FrameType) -> JsValue {
   }
 }
 
-pub fn FrameType::from(value: String) -> FrameType? {
+///|
+pub fn FrameType::from(value : String) -> FrameType? {
   match value {
     "auxiliary" => Some(FrameType::Auxiliary)
     "top-level" => Some(FrameType::TopLevel)
@@ -37,7 +41,8 @@ pub fn FrameType::from(value: String) -> FrameType? {
   }
 }
 
-fn FrameType::from_unchecked(value: String) -> FrameType {
+///|
+fn FrameType::from_unchecked(value : String) -> FrameType {
   match value {
     "auxiliary" => FrameType::Auxiliary
     "top-level" => FrameType::TopLevel
@@ -47,7 +52,8 @@ fn FrameType::from_unchecked(value: String) -> FrameType {
   }
 }
 
-pub fn FrameType::value(self: FrameType) -> String {
+///|
+pub fn FrameType::value(self : FrameType) -> String {
   match self {
     FrameType::Auxiliary => "auxiliary"
     FrameType::TopLevel => "top-level"
@@ -56,6 +62,7 @@ pub fn FrameType::value(self: FrameType) -> String {
   }
 }
 
+///|
 pub impl FromJsAny for FrameType with from_js_any(value : JsAny) -> FrameType {
   FrameType::from_unchecked(value)
 }

@@ -2,28 +2,43 @@
 // MoonBit type: HTMLLabelElement
 // Specifications: html.idl
 
+///|
 /// [HTMLLabelElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLabelElement)
 #external
 pub type HTMLLabelElement
 
-pub impl TJsValue for HTMLLabelElement with to_js(self: HTMLLabelElement) -> JsValue = "%identity"
+///|
+pub impl TJsValue for HTMLLabelElement with to_js(self : HTMLLabelElement) -> JsValue = "%identity"
 
+///|
 pub impl FromJsAny for HTMLLabelElement with from_js_any(value : JsAny) -> HTMLLabelElement = "%identity"
 
+///|
 /// Unchecked downcast — no runtime type check is performed.
 /// Prefer `try_into()` for checked downcasts.
 #deprecated("Use unsafe_into or try_into instead")
-pub fn[T: THTMLLabelElement] HTMLLabelElement::into(self : HTMLLabelElement) -> T = "%identity"
+pub fn[T : THTMLLabelElement] HTMLLabelElement::into(
+  self : HTMLLabelElement,
+) -> T = "%identity"
 
+///|
 /// Unchecked downcast — no runtime type check is performed.
 /// WARNING: If the underlying JS value is not of type T, this will silently
 /// produce a value with incorrect type, leading to undefined behavior.
-pub fn[T: THTMLLabelElement] HTMLLabelElement::unsafe_into(self : HTMLLabelElement) -> T = "%identity"
+pub fn[T : THTMLLabelElement] HTMLLabelElement::unsafe_into(
+  self : HTMLLabelElement,
+) -> T = "%identity"
 
-pub impl HasConstructor for HTMLLabelElement with constructor_name() { "HTMLLabelElement" }
+///|
+pub impl HasConstructor for HTMLLabelElement with constructor_name() {
+  "HTMLLabelElement"
+}
 
+///|
 /// Checked downcast — returns None if the JS value is not an instance of T.
-pub fn[T : THTMLLabelElement + HasConstructor] HTMLLabelElement::try_into(self : HTMLLabelElement) -> T? {
+pub fn[T : THTMLLabelElement + HasConstructor] HTMLLabelElement::try_into(
+  self : HTMLLabelElement,
+) -> T? {
   if js_instanceof(TJsValue::to_js(self), T::constructor_name()) {
     Some(self.unsafe_into())
   } else {
@@ -31,20 +46,27 @@ pub fn[T : THTMLLabelElement + HasConstructor] HTMLLabelElement::try_into(self :
   }
 }
 
+///|
 pub impl THTMLLabelElement for HTMLLabelElement
 
+///|
 pub impl THTMLElement for HTMLLabelElement
 
+///|
 pub impl TElement for HTMLLabelElement
 
+///|
 pub impl TNode for HTMLLabelElement
 
+///|
 pub impl TEventTarget for HTMLLabelElement
 
+///|
 pub fn HTMLLabelElement::new() -> HTMLLabelElement {
   html_label_element_new_ffi()
 }
 
+///|
 /// [HTMLLabelElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLabelElement) interface.
 pub trait THTMLLabelElement: THTMLElement {
   form(self : Self) -> HTMLFormElement = _
@@ -53,77 +75,99 @@ pub trait THTMLLabelElement: THTMLElement {
   control(self : Self) -> HTMLElement = _
 }
 
+///|
 /// [HTMLLabelElement.form](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLabelElement/form)
 impl THTMLLabelElement with form(self : Self) -> HTMLFormElement {
   html_label_element_form_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [HTMLLabelElement.htmlFor](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLabelElement/htmlFor)
 impl THTMLLabelElement with html_for(self : Self) -> String {
   html_label_element_html_for_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [HTMLLabelElement.htmlFor](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLabelElement/htmlFor)
-impl THTMLLabelElement with set_html_for(self : Self, 
-html_for : String) -> Unit {
-  html_label_element_set_html_for_ffi(TJsValue::to_js(self), TJsValue::to_js(html_for))
+impl THTMLLabelElement with set_html_for(self : Self, html_for : String) -> Unit {
+  html_label_element_set_html_for_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(html_for),
+  )
 }
 
+///|
 /// [HTMLLabelElement.control](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLabelElement/control)
 impl THTMLLabelElement with control(self : Self) -> HTMLElement {
   html_label_element_control_ffi(TJsValue::to_js(self))
 }
 
+///|
 #cfg(target="js")
 extern "js" fn html_label_element_new_ffi() -> HTMLLabelElement = "() => new HTMLLabelElement()"
 
+///|
 #cfg(target="js")
-extern "js" fn html_label_element_form_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.form"
+extern "js" fn html_label_element_form_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.form"
 
 ///|
 #cfg(target="js")
-fn html_label_element_form_ffi(obj: JsValue) -> HTMLFormElement {
+fn html_label_element_form_ffi(obj : JsValue) -> HTMLFormElement {
   html_label_element_form_ffi_js(obj).unsafe_cast()
 }
 
+///|
 #cfg(target="js")
-extern "js" fn html_label_element_html_for_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.htmlFor"
+extern "js" fn html_label_element_html_for_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.htmlFor"
 
 ///|
 #cfg(target="js")
-fn html_label_element_html_for_ffi(obj: JsValue) -> String {
+fn html_label_element_html_for_ffi(obj : JsValue) -> String {
   html_label_element_html_for_ffi_js(obj).unsafe_cast()
 }
 
+///|
 #cfg(target="js")
-extern "js" fn html_label_element_set_html_for_ffi(obj: JsValue, html_for: JsValue) -> Unit = "(obj, htmlFor) => { obj.htmlFor = htmlFor; }"
-
-#cfg(target="js")
-extern "js" fn html_label_element_control_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.control"
+extern "js" fn html_label_element_set_html_for_ffi(
+  obj : JsValue,
+  html_for : JsValue,
+) -> Unit = "(obj, htmlFor) => { obj.htmlFor = htmlFor; }"
 
 ///|
 #cfg(target="js")
-fn html_label_element_control_ffi(obj: JsValue) -> HTMLElement {
+extern "js" fn html_label_element_control_ffi_js(obj : JsValue) -> JsValue = "(obj) => obj.control"
+
+///|
+#cfg(target="js")
+fn html_label_element_control_ffi(obj : JsValue) -> HTMLElement {
   html_label_element_control_ffi_js(obj).unsafe_cast()
 }
 
+///|
 #cfg(target="wasm-gc")
 fn html_label_element_new_ffi() -> HTMLLabelElement = "webapi_HTMLLabelElement" "new"
 
+///|
 #cfg(target="wasm-gc")
-fn html_label_element_form_ffi(obj: JsValue) -> HTMLFormElement = "webapi_HTMLLabelElement" "get_form"
-
-#cfg(target="wasm-gc")
-fn html_label_element_html_for_ffi_wasm(obj: JsValue) -> JsValue = "webapi_HTMLLabelElement" "get_htmlFor"
+fn html_label_element_form_ffi(obj : JsValue) -> HTMLFormElement = "webapi_HTMLLabelElement" "get_form"
 
 ///|
 #cfg(target="wasm-gc")
-fn html_label_element_html_for_ffi(obj: JsValue) -> String {
+fn html_label_element_html_for_ffi_wasm(obj : JsValue) -> JsValue = "webapi_HTMLLabelElement" "get_htmlFor"
+
+///|
+#cfg(target="wasm-gc")
+fn html_label_element_html_for_ffi(obj : JsValue) -> String {
   jsvalue_to_string(html_label_element_html_for_ffi_wasm(obj))
 }
 
+///|
 #cfg(target="wasm-gc")
-fn html_label_element_set_html_for_ffi(obj: JsValue, html_for: JsValue) -> Unit = "webapi_HTMLLabelElement" "set_htmlFor"
+fn html_label_element_set_html_for_ffi(
+  obj : JsValue,
+  html_for : JsValue,
+) -> Unit = "webapi_HTMLLabelElement" "set_htmlFor"
 
+///|
 #cfg(target="wasm-gc")
-fn html_label_element_control_ffi(obj: JsValue) -> HTMLElement = "webapi_HTMLLabelElement" "get_control"
+fn html_label_element_control_ffi(obj : JsValue) -> HTMLElement = "webapi_HTMLLabelElement" "get_control"

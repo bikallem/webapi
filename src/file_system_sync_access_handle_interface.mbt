@@ -2,28 +2,47 @@
 // MoonBit type: FileSystemSyncAccessHandle
 // Specifications: fs.idl
 
+///|
 /// [FileSystemSyncAccessHandle](https://developer.mozilla.org/en-US/docs/Web/API/FileSystemSyncAccessHandle)
 #external
 pub type FileSystemSyncAccessHandle
 
-pub impl TJsValue for FileSystemSyncAccessHandle with to_js(self: FileSystemSyncAccessHandle) -> JsValue = "%identity"
+///|
+pub impl TJsValue for FileSystemSyncAccessHandle with to_js(
+  self : FileSystemSyncAccessHandle,
+) -> JsValue = "%identity"
 
-pub impl FromJsAny for FileSystemSyncAccessHandle with from_js_any(value : JsAny) -> FileSystemSyncAccessHandle = "%identity"
+///|
+pub impl FromJsAny for FileSystemSyncAccessHandle with from_js_any(
+  value : JsAny,
+) -> FileSystemSyncAccessHandle = "%identity"
 
+///|
 /// Unchecked downcast — no runtime type check is performed.
 /// Prefer `try_into()` for checked downcasts.
 #deprecated("Use unsafe_into or try_into instead")
-pub fn[T: TFileSystemSyncAccessHandle] FileSystemSyncAccessHandle::into(self : FileSystemSyncAccessHandle) -> T = "%identity"
+pub fn[T : TFileSystemSyncAccessHandle] FileSystemSyncAccessHandle::into(
+  self : FileSystemSyncAccessHandle,
+) -> T = "%identity"
 
+///|
 /// Unchecked downcast — no runtime type check is performed.
 /// WARNING: If the underlying JS value is not of type T, this will silently
 /// produce a value with incorrect type, leading to undefined behavior.
-pub fn[T: TFileSystemSyncAccessHandle] FileSystemSyncAccessHandle::unsafe_into(self : FileSystemSyncAccessHandle) -> T = "%identity"
+pub fn[T : TFileSystemSyncAccessHandle] FileSystemSyncAccessHandle::unsafe_into(
+  self : FileSystemSyncAccessHandle,
+) -> T = "%identity"
 
-pub impl HasConstructor for FileSystemSyncAccessHandle with constructor_name() { "FileSystemSyncAccessHandle" }
+///|
+pub impl HasConstructor for FileSystemSyncAccessHandle with constructor_name() {
+  "FileSystemSyncAccessHandle"
+}
 
+///|
 /// Checked downcast — returns None if the JS value is not an instance of T.
-pub fn[T : TFileSystemSyncAccessHandle + HasConstructor] FileSystemSyncAccessHandle::try_into(self : FileSystemSyncAccessHandle) -> T? {
+pub fn[T : TFileSystemSyncAccessHandle + HasConstructor] FileSystemSyncAccessHandle::try_into(
+  self : FileSystemSyncAccessHandle,
+) -> T? {
   if js_instanceof(TJsValue::to_js(self), T::constructor_name()) {
     Some(self.unsafe_into())
   } else {
@@ -31,103 +50,177 @@ pub fn[T : TFileSystemSyncAccessHandle + HasConstructor] FileSystemSyncAccessHan
   }
 }
 
+///|
 pub impl TFileSystemSyncAccessHandle for FileSystemSyncAccessHandle
 
+///|
 /// [FileSystemSyncAccessHandle](https://developer.mozilla.org/en-US/docs/Web/API/FileSystemSyncAccessHandle) interface.
 pub trait TFileSystemSyncAccessHandle: TJsValue {
-  read(self : Self, buffer : &TAllowSharedBufferSource, options? : FileSystemReadWriteOptions) -> UInt64 = _
-  write(self : Self, buffer : &TAllowSharedBufferSource, options? : FileSystemReadWriteOptions) -> UInt64 = _
+  read(
+    self : Self,
+    buffer : &TAllowSharedBufferSource,
+    options? : FileSystemReadWriteOptions,
+  ) -> UInt64 = _
+  write(
+    self : Self,
+    buffer : &TAllowSharedBufferSource,
+    options? : FileSystemReadWriteOptions,
+  ) -> UInt64 = _
   truncate(self : Self, new_size : UInt64) -> Unit = _
   get_size(self : Self) -> UInt64 = _
   flush(self : Self) -> Unit = _
   close(self : Self) -> Unit = _
 }
 
+///|
 /// [FileSystemSyncAccessHandle.read](https://developer.mozilla.org/en-US/docs/Web/API/FileSystemSyncAccessHandle/read)
-impl TFileSystemSyncAccessHandle with read(self : Self, 
-buffer : &TAllowSharedBufferSource, 
-options? : FileSystemReadWriteOptions) -> UInt64 {
-  file_system_sync_access_handle_read_ffi(TJsValue::to_js(self), buffer.to_js(), opt_to_js(options))
+impl TFileSystemSyncAccessHandle with read(
+  self : Self,
+  buffer : &TAllowSharedBufferSource,
+  options? : FileSystemReadWriteOptions,
+) -> UInt64 {
+  file_system_sync_access_handle_read_ffi(
+    TJsValue::to_js(self),
+    buffer.to_js(),
+    opt_to_js(options),
+  )
 }
 
+///|
 /// [FileSystemSyncAccessHandle.write](https://developer.mozilla.org/en-US/docs/Web/API/FileSystemSyncAccessHandle/write)
-impl TFileSystemSyncAccessHandle with write(self : Self, 
-buffer : &TAllowSharedBufferSource, 
-options? : FileSystemReadWriteOptions) -> UInt64 {
-  file_system_sync_access_handle_write_ffi(TJsValue::to_js(self), buffer.to_js(), opt_to_js(options))
+impl TFileSystemSyncAccessHandle with write(
+  self : Self,
+  buffer : &TAllowSharedBufferSource,
+  options? : FileSystemReadWriteOptions,
+) -> UInt64 {
+  file_system_sync_access_handle_write_ffi(
+    TJsValue::to_js(self),
+    buffer.to_js(),
+    opt_to_js(options),
+  )
 }
 
+///|
 /// [FileSystemSyncAccessHandle.truncate](https://developer.mozilla.org/en-US/docs/Web/API/FileSystemSyncAccessHandle/truncate)
-impl TFileSystemSyncAccessHandle with truncate(self : Self, 
-new_size : UInt64) -> Unit {
-  file_system_sync_access_handle_truncate_ffi(TJsValue::to_js(self), TJsValue::to_js(new_size))
+impl TFileSystemSyncAccessHandle with truncate(self : Self, new_size : UInt64) -> Unit {
+  file_system_sync_access_handle_truncate_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(new_size),
+  )
 }
 
+///|
 /// [FileSystemSyncAccessHandle.getSize](https://developer.mozilla.org/en-US/docs/Web/API/FileSystemSyncAccessHandle/getSize)
 impl TFileSystemSyncAccessHandle with get_size(self : Self) -> UInt64 {
   file_system_sync_access_handle_get_size_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [FileSystemSyncAccessHandle.flush](https://developer.mozilla.org/en-US/docs/Web/API/FileSystemSyncAccessHandle/flush)
 impl TFileSystemSyncAccessHandle with flush(self : Self) -> Unit {
   file_system_sync_access_handle_flush_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [FileSystemSyncAccessHandle.close](https://developer.mozilla.org/en-US/docs/Web/API/FileSystemSyncAccessHandle/close)
 impl TFileSystemSyncAccessHandle with close(self : Self) -> Unit {
   file_system_sync_access_handle_close_ffi(TJsValue::to_js(self))
 }
 
+///|
 #cfg(target="js")
-extern "js" fn file_system_sync_access_handle_read_ffi_js(obj: JsValue, buffer: JsValue, options: JsValue) -> JsValue = "(obj, buffer, options) => obj.read(buffer, options)"
+extern "js" fn file_system_sync_access_handle_read_ffi_js(
+  obj : JsValue,
+  buffer : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, buffer, options) => obj.read(buffer, options)"
 
 ///|
 #cfg(target="js")
-fn file_system_sync_access_handle_read_ffi(obj: JsValue, buffer: JsValue, options: JsValue) -> UInt64 {
+fn file_system_sync_access_handle_read_ffi(
+  obj : JsValue,
+  buffer : JsValue,
+  options : JsValue,
+) -> UInt64 {
   file_system_sync_access_handle_read_ffi_js(obj, buffer, options).unsafe_cast()
 }
 
+///|
 #cfg(target="js")
-extern "js" fn file_system_sync_access_handle_write_ffi_js(obj: JsValue, buffer: JsValue, options: JsValue) -> JsValue = "(obj, buffer, options) => obj.write(buffer, options)"
+extern "js" fn file_system_sync_access_handle_write_ffi_js(
+  obj : JsValue,
+  buffer : JsValue,
+  options : JsValue,
+) -> JsValue = "(obj, buffer, options) => obj.write(buffer, options)"
 
 ///|
 #cfg(target="js")
-fn file_system_sync_access_handle_write_ffi(obj: JsValue, buffer: JsValue, options: JsValue) -> UInt64 {
+fn file_system_sync_access_handle_write_ffi(
+  obj : JsValue,
+  buffer : JsValue,
+  options : JsValue,
+) -> UInt64 {
   file_system_sync_access_handle_write_ffi_js(obj, buffer, options).unsafe_cast()
 }
 
+///|
 #cfg(target="js")
-extern "js" fn file_system_sync_access_handle_truncate_ffi(obj: JsValue, new_size: JsValue) -> Unit = "(obj, new_size) => obj.truncate(new_size)"
-
-#cfg(target="js")
-extern "js" fn file_system_sync_access_handle_get_size_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.getSize()"
+extern "js" fn file_system_sync_access_handle_truncate_ffi(
+  obj : JsValue,
+  new_size : JsValue,
+) -> Unit = "(obj, new_size) => obj.truncate(new_size)"
 
 ///|
 #cfg(target="js")
-fn file_system_sync_access_handle_get_size_ffi(obj: JsValue) -> UInt64 {
+extern "js" fn file_system_sync_access_handle_get_size_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.getSize()"
+
+///|
+#cfg(target="js")
+fn file_system_sync_access_handle_get_size_ffi(obj : JsValue) -> UInt64 {
   file_system_sync_access_handle_get_size_ffi_js(obj).unsafe_cast()
 }
 
+///|
 #cfg(target="js")
-extern "js" fn file_system_sync_access_handle_flush_ffi(obj: JsValue) -> Unit = "(obj) => obj.flush()"
+extern "js" fn file_system_sync_access_handle_flush_ffi(obj : JsValue) -> Unit = "(obj) => obj.flush()"
 
+///|
 #cfg(target="js")
-extern "js" fn file_system_sync_access_handle_close_ffi(obj: JsValue) -> Unit = "(obj) => obj.close()"
+extern "js" fn file_system_sync_access_handle_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.close()"
 
+///|
 #cfg(target="wasm-gc")
-fn file_system_sync_access_handle_read_ffi(obj: JsValue, buffer: JsValue, options: JsValue) -> UInt64 = "webapi_FileSystemSyncAccessHandle" "read"
+fn file_system_sync_access_handle_read_ffi(
+  obj : JsValue,
+  buffer : JsValue,
+  options : JsValue,
+) -> UInt64 = "webapi_FileSystemSyncAccessHandle" "read"
 
+///|
 #cfg(target="wasm-gc")
-fn file_system_sync_access_handle_write_ffi(obj: JsValue, buffer: JsValue, options: JsValue) -> UInt64 = "webapi_FileSystemSyncAccessHandle" "write"
+fn file_system_sync_access_handle_write_ffi(
+  obj : JsValue,
+  buffer : JsValue,
+  options : JsValue,
+) -> UInt64 = "webapi_FileSystemSyncAccessHandle" "write"
 
+///|
 #cfg(target="wasm-gc")
-fn file_system_sync_access_handle_truncate_ffi(obj: JsValue, new_size: JsValue) -> Unit = "webapi_FileSystemSyncAccessHandle" "truncate"
+fn file_system_sync_access_handle_truncate_ffi(
+  obj : JsValue,
+  new_size : JsValue,
+) -> Unit = "webapi_FileSystemSyncAccessHandle" "truncate"
 
+///|
 #cfg(target="wasm-gc")
-fn file_system_sync_access_handle_get_size_ffi(obj: JsValue) -> UInt64 = "webapi_FileSystemSyncAccessHandle" "getSize"
+fn file_system_sync_access_handle_get_size_ffi(obj : JsValue) -> UInt64 = "webapi_FileSystemSyncAccessHandle" "getSize"
 
+///|
 #cfg(target="wasm-gc")
-fn file_system_sync_access_handle_flush_ffi(obj: JsValue) -> Unit = "webapi_FileSystemSyncAccessHandle" "flush"
+fn file_system_sync_access_handle_flush_ffi(obj : JsValue) -> Unit = "webapi_FileSystemSyncAccessHandle" "flush"
 
+///|
 #cfg(target="wasm-gc")
-fn file_system_sync_access_handle_close_ffi(obj: JsValue) -> Unit = "webapi_FileSystemSyncAccessHandle" "close"
+fn file_system_sync_access_handle_close_ffi(obj : JsValue) -> Unit = "webapi_FileSystemSyncAccessHandle" "close"

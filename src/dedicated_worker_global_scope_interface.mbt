@@ -2,28 +2,47 @@
 // MoonBit type: DedicatedWorkerGlobalScope
 // Specifications: html.idl
 
+///|
 /// [DedicatedWorkerGlobalScope](https://developer.mozilla.org/en-US/docs/Web/API/DedicatedWorkerGlobalScope)
 #external
 pub type DedicatedWorkerGlobalScope
 
-pub impl TJsValue for DedicatedWorkerGlobalScope with to_js(self: DedicatedWorkerGlobalScope) -> JsValue = "%identity"
+///|
+pub impl TJsValue for DedicatedWorkerGlobalScope with to_js(
+  self : DedicatedWorkerGlobalScope,
+) -> JsValue = "%identity"
 
-pub impl FromJsAny for DedicatedWorkerGlobalScope with from_js_any(value : JsAny) -> DedicatedWorkerGlobalScope = "%identity"
+///|
+pub impl FromJsAny for DedicatedWorkerGlobalScope with from_js_any(
+  value : JsAny,
+) -> DedicatedWorkerGlobalScope = "%identity"
 
+///|
 /// Unchecked downcast — no runtime type check is performed.
 /// Prefer `try_into()` for checked downcasts.
 #deprecated("Use unsafe_into or try_into instead")
-pub fn[T: TDedicatedWorkerGlobalScope] DedicatedWorkerGlobalScope::into(self : DedicatedWorkerGlobalScope) -> T = "%identity"
+pub fn[T : TDedicatedWorkerGlobalScope] DedicatedWorkerGlobalScope::into(
+  self : DedicatedWorkerGlobalScope,
+) -> T = "%identity"
 
+///|
 /// Unchecked downcast — no runtime type check is performed.
 /// WARNING: If the underlying JS value is not of type T, this will silently
 /// produce a value with incorrect type, leading to undefined behavior.
-pub fn[T: TDedicatedWorkerGlobalScope] DedicatedWorkerGlobalScope::unsafe_into(self : DedicatedWorkerGlobalScope) -> T = "%identity"
+pub fn[T : TDedicatedWorkerGlobalScope] DedicatedWorkerGlobalScope::unsafe_into(
+  self : DedicatedWorkerGlobalScope,
+) -> T = "%identity"
 
-pub impl HasConstructor for DedicatedWorkerGlobalScope with constructor_name() { "DedicatedWorkerGlobalScope" }
+///|
+pub impl HasConstructor for DedicatedWorkerGlobalScope with constructor_name() {
+  "DedicatedWorkerGlobalScope"
+}
 
+///|
 /// Checked downcast — returns None if the JS value is not an instance of T.
-pub fn[T : TDedicatedWorkerGlobalScope + HasConstructor] DedicatedWorkerGlobalScope::try_into(self : DedicatedWorkerGlobalScope) -> T? {
+pub fn[T : TDedicatedWorkerGlobalScope + HasConstructor] DedicatedWorkerGlobalScope::try_into(
+  self : DedicatedWorkerGlobalScope,
+) -> T? {
   if js_instanceof(TJsValue::to_js(self), T::constructor_name()) {
     Some(self.unsafe_into())
   } else {
@@ -31,17 +50,25 @@ pub fn[T : TDedicatedWorkerGlobalScope + HasConstructor] DedicatedWorkerGlobalSc
   }
 }
 
+///|
 pub impl TDedicatedWorkerGlobalScope for DedicatedWorkerGlobalScope
 
+///|
 pub impl TWorkerGlobalScope for DedicatedWorkerGlobalScope
 
+///|
 pub impl TEventTarget for DedicatedWorkerGlobalScope
 
+///|
 /// [DedicatedWorkerGlobalScope](https://developer.mozilla.org/en-US/docs/Web/API/DedicatedWorkerGlobalScope) interface.
 pub trait TDedicatedWorkerGlobalScope: TWorkerGlobalScope {
   name(self : Self) -> String = _
   post_message(self : Self, message : JsValue, transfer : Array[JsValue]) -> Unit = _
-  post_message_with_options(self : Self, message : JsValue, options? : StructuredSerializeOptions) -> Unit = _
+  post_message_with_options(
+    self : Self,
+    message : JsValue,
+    options? : StructuredSerializeOptions,
+  ) -> Unit = _
   close(self : Self) -> Unit = _
   request_animation_frame(self : Self, callback : (DOMHighResTimeStamp) -> Unit) -> UInt = _
   cancel_animation_frame(self : Self, handle : UInt) -> Unit = _
@@ -51,162 +78,279 @@ pub trait TDedicatedWorkerGlobalScope: TWorkerGlobalScope {
   set_onmessageerror(self : Self, onmessageerror : (Event) -> JsValue) -> Unit = _
 }
 
+///|
 /// [DedicatedWorkerGlobalScope.name](https://developer.mozilla.org/en-US/docs/Web/API/DedicatedWorkerGlobalScope/name)
 impl TDedicatedWorkerGlobalScope with name(self : Self) -> String {
   dedicated_worker_global_scope_name_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [DedicatedWorkerGlobalScope.postMessage](https://developer.mozilla.org/en-US/docs/Web/API/DedicatedWorkerGlobalScope/postMessage)
-impl TDedicatedWorkerGlobalScope with post_message(self : Self, 
-message : JsValue, 
-transfer : Array[JsValue]) -> Unit {
-  dedicated_worker_global_scope_post_message_ffi(TJsValue::to_js(self), TJsValue::to_js(message), TJsValue::to_js(transfer))
+impl TDedicatedWorkerGlobalScope with post_message(
+  self : Self,
+  message : JsValue,
+  transfer : Array[JsValue],
+) -> Unit {
+  dedicated_worker_global_scope_post_message_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(message),
+    TJsValue::to_js(transfer),
+  )
 }
 
+///|
 /// [DedicatedWorkerGlobalScope.postMessage](https://developer.mozilla.org/en-US/docs/Web/API/DedicatedWorkerGlobalScope/postMessage)
-impl TDedicatedWorkerGlobalScope with post_message_with_options(self : Self, 
-message : JsValue, 
-options? : StructuredSerializeOptions) -> Unit {
-  dedicated_worker_global_scope_post_message_with_options_ffi(TJsValue::to_js(self), TJsValue::to_js(message), opt_to_js(options))
+impl TDedicatedWorkerGlobalScope with post_message_with_options(
+  self : Self,
+  message : JsValue,
+  options? : StructuredSerializeOptions,
+) -> Unit {
+  dedicated_worker_global_scope_post_message_with_options_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(message),
+    opt_to_js(options),
+  )
 }
 
+///|
 /// [DedicatedWorkerGlobalScope.close](https://developer.mozilla.org/en-US/docs/Web/API/DedicatedWorkerGlobalScope/close)
 impl TDedicatedWorkerGlobalScope with close(self : Self) -> Unit {
   dedicated_worker_global_scope_close_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [DedicatedWorkerGlobalScope.requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/DedicatedWorkerGlobalScope/requestAnimationFrame)
-impl TDedicatedWorkerGlobalScope with request_animation_frame(self : Self, 
-callback : (DOMHighResTimeStamp) -> Unit) -> UInt {
-  dedicated_worker_global_scope_request_animation_frame_ffi(TJsValue::to_js(self), TJsValue::to_js(frame_request_callback_ffi(callback)))
+impl TDedicatedWorkerGlobalScope with request_animation_frame(
+  self : Self,
+  callback : (DOMHighResTimeStamp) -> Unit,
+) -> UInt {
+  dedicated_worker_global_scope_request_animation_frame_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(frame_request_callback_ffi(callback)),
+  )
 }
 
+///|
 /// [DedicatedWorkerGlobalScope.cancelAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/DedicatedWorkerGlobalScope/cancelAnimationFrame)
-impl TDedicatedWorkerGlobalScope with cancel_animation_frame(self : Self, 
-handle : UInt) -> Unit {
-  dedicated_worker_global_scope_cancel_animation_frame_ffi(TJsValue::to_js(self), TJsValue::to_js(handle))
+impl TDedicatedWorkerGlobalScope with cancel_animation_frame(
+  self : Self,
+  handle : UInt,
+) -> Unit {
+  dedicated_worker_global_scope_cancel_animation_frame_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(handle),
+  )
 }
 
+///|
 /// [DedicatedWorkerGlobalScope.onmessage](https://developer.mozilla.org/en-US/docs/Web/API/DedicatedWorkerGlobalScope/onmessage)
 impl TDedicatedWorkerGlobalScope with onmessage(self : Self) -> EventHandler {
   dedicated_worker_global_scope_onmessage_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [DedicatedWorkerGlobalScope.onmessage](https://developer.mozilla.org/en-US/docs/Web/API/DedicatedWorkerGlobalScope/onmessage)
-impl TDedicatedWorkerGlobalScope with set_onmessage(self : Self, 
-onmessage : (Event) -> JsValue) -> Unit {
-  dedicated_worker_global_scope_set_onmessage_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onmessage)))
+impl TDedicatedWorkerGlobalScope with set_onmessage(
+  self : Self,
+  onmessage : (Event) -> JsValue,
+) -> Unit {
+  dedicated_worker_global_scope_set_onmessage_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onmessage)),
+  )
 }
 
+///|
 /// [DedicatedWorkerGlobalScope.onmessageerror](https://developer.mozilla.org/en-US/docs/Web/API/DedicatedWorkerGlobalScope/onmessageerror)
 impl TDedicatedWorkerGlobalScope with onmessageerror(self : Self) -> EventHandler {
   dedicated_worker_global_scope_onmessageerror_ffi(TJsValue::to_js(self))
 }
 
+///|
 /// [DedicatedWorkerGlobalScope.onmessageerror](https://developer.mozilla.org/en-US/docs/Web/API/DedicatedWorkerGlobalScope/onmessageerror)
-impl TDedicatedWorkerGlobalScope with set_onmessageerror(self : Self, 
-onmessageerror : (Event) -> JsValue) -> Unit {
-  dedicated_worker_global_scope_set_onmessageerror_ffi(TJsValue::to_js(self), TJsValue::to_js(event_handler_non_null_ffi(onmessageerror)))
+impl TDedicatedWorkerGlobalScope with set_onmessageerror(
+  self : Self,
+  onmessageerror : (Event) -> JsValue,
+) -> Unit {
+  dedicated_worker_global_scope_set_onmessageerror_ffi(
+    TJsValue::to_js(self),
+    TJsValue::to_js(event_handler_non_null_ffi(onmessageerror)),
+  )
 }
-
-#cfg(target="js")
-extern "js" fn dedicated_worker_global_scope_name_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.name"
 
 ///|
 #cfg(target="js")
-fn dedicated_worker_global_scope_name_ffi(obj: JsValue) -> String {
+extern "js" fn dedicated_worker_global_scope_name_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.name"
+
+///|
+#cfg(target="js")
+fn dedicated_worker_global_scope_name_ffi(obj : JsValue) -> String {
   dedicated_worker_global_scope_name_ffi_js(obj).unsafe_cast()
 }
 
+///|
 #cfg(target="js")
-extern "js" fn dedicated_worker_global_scope_post_message_ffi(obj: JsValue, message: JsValue, transfer: JsValue) -> Unit = "(obj, message, transfer) => obj.postMessage(message, transfer)"
-
-#cfg(target="js")
-extern "js" fn dedicated_worker_global_scope_post_message_with_options_ffi(obj: JsValue, message: JsValue, options: JsValue) -> Unit = "(obj, message, options) => obj.postMessage(message, options)"
-
-#cfg(target="js")
-extern "js" fn dedicated_worker_global_scope_close_ffi(obj: JsValue) -> Unit = "(obj) => obj.close()"
-
-#cfg(target="js")
-extern "js" fn dedicated_worker_global_scope_request_animation_frame_ffi_js(obj: JsValue, callback: JsValue) -> JsValue = "(obj, callback) => obj.requestAnimationFrame(callback)"
+extern "js" fn dedicated_worker_global_scope_post_message_ffi(
+  obj : JsValue,
+  message : JsValue,
+  transfer : JsValue,
+) -> Unit = "(obj, message, transfer) => obj.postMessage(message, transfer)"
 
 ///|
 #cfg(target="js")
-fn dedicated_worker_global_scope_request_animation_frame_ffi(obj: JsValue, callback: JsValue) -> UInt {
+extern "js" fn dedicated_worker_global_scope_post_message_with_options_ffi(
+  obj : JsValue,
+  message : JsValue,
+  options : JsValue,
+) -> Unit = "(obj, message, options) => obj.postMessage(message, options)"
+
+///|
+#cfg(target="js")
+extern "js" fn dedicated_worker_global_scope_close_ffi(obj : JsValue) -> Unit = "(obj) => obj.close()"
+
+///|
+#cfg(target="js")
+extern "js" fn dedicated_worker_global_scope_request_animation_frame_ffi_js(
+  obj : JsValue,
+  callback : JsValue,
+) -> JsValue = "(obj, callback) => obj.requestAnimationFrame(callback)"
+
+///|
+#cfg(target="js")
+fn dedicated_worker_global_scope_request_animation_frame_ffi(
+  obj : JsValue,
+  callback : JsValue,
+) -> UInt {
   dedicated_worker_global_scope_request_animation_frame_ffi_js(obj, callback).unsafe_cast()
 }
 
+///|
 #cfg(target="js")
-extern "js" fn dedicated_worker_global_scope_cancel_animation_frame_ffi(obj: JsValue, handle: JsValue) -> Unit = "(obj, handle) => obj.cancelAnimationFrame(handle)"
-
-#cfg(target="js")
-extern "js" fn dedicated_worker_global_scope_onmessage_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.onmessage"
+extern "js" fn dedicated_worker_global_scope_cancel_animation_frame_ffi(
+  obj : JsValue,
+  handle : JsValue,
+) -> Unit = "(obj, handle) => obj.cancelAnimationFrame(handle)"
 
 ///|
 #cfg(target="js")
-fn dedicated_worker_global_scope_onmessage_ffi(obj: JsValue) -> EventHandler {
+extern "js" fn dedicated_worker_global_scope_onmessage_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.onmessage"
+
+///|
+#cfg(target="js")
+fn dedicated_worker_global_scope_onmessage_ffi(obj : JsValue) -> EventHandler {
   dedicated_worker_global_scope_onmessage_ffi_js(obj).unsafe_cast()
 }
 
+///|
 #cfg(target="js")
-extern "js" fn dedicated_worker_global_scope_set_onmessage_ffi(obj: JsValue, onmessage: JsValue) -> Unit = "(obj, onmessage) => { obj.onmessage = onmessage; }"
-
-#cfg(target="js")
-extern "js" fn dedicated_worker_global_scope_onmessageerror_ffi_js(obj: JsValue) -> JsValue = "(obj) => obj.onmessageerror"
+extern "js" fn dedicated_worker_global_scope_set_onmessage_ffi(
+  obj : JsValue,
+  onmessage : JsValue,
+) -> Unit = "(obj, onmessage) => { obj.onmessage = onmessage; }"
 
 ///|
 #cfg(target="js")
-fn dedicated_worker_global_scope_onmessageerror_ffi(obj: JsValue) -> EventHandler {
+extern "js" fn dedicated_worker_global_scope_onmessageerror_ffi_js(
+  obj : JsValue,
+) -> JsValue = "(obj) => obj.onmessageerror"
+
+///|
+#cfg(target="js")
+fn dedicated_worker_global_scope_onmessageerror_ffi(
+  obj : JsValue,
+) -> EventHandler {
   dedicated_worker_global_scope_onmessageerror_ffi_js(obj).unsafe_cast()
 }
 
+///|
 #cfg(target="js")
-extern "js" fn dedicated_worker_global_scope_set_onmessageerror_ffi(obj: JsValue, onmessageerror: JsValue) -> Unit = "(obj, onmessageerror) => { obj.onmessageerror = onmessageerror; }"
-
-#cfg(target="wasm-gc")
-fn dedicated_worker_global_scope_name_ffi_wasm(obj: JsValue) -> JsValue = "webapi_DedicatedWorkerGlobalScope" "get_name"
+extern "js" fn dedicated_worker_global_scope_set_onmessageerror_ffi(
+  obj : JsValue,
+  onmessageerror : JsValue,
+) -> Unit = "(obj, onmessageerror) => { obj.onmessageerror = onmessageerror; }"
 
 ///|
 #cfg(target="wasm-gc")
-fn dedicated_worker_global_scope_name_ffi(obj: JsValue) -> String {
+fn dedicated_worker_global_scope_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_DedicatedWorkerGlobalScope" "get_name"
+
+///|
+#cfg(target="wasm-gc")
+fn dedicated_worker_global_scope_name_ffi(obj : JsValue) -> String {
   jsvalue_to_string(dedicated_worker_global_scope_name_ffi_wasm(obj))
 }
 
+///|
 #cfg(target="wasm-gc")
-fn dedicated_worker_global_scope_post_message_ffi(obj: JsValue, message: JsValue, transfer: JsValue) -> Unit = "webapi_DedicatedWorkerGlobalScope" "postMessage"
-
-#cfg(target="wasm-gc")
-fn dedicated_worker_global_scope_post_message_with_options_ffi(obj: JsValue, message: JsValue, options: JsValue) -> Unit = "webapi_DedicatedWorkerGlobalScope" "post_message_with_options"
-
-#cfg(target="wasm-gc")
-fn dedicated_worker_global_scope_close_ffi(obj: JsValue) -> Unit = "webapi_DedicatedWorkerGlobalScope" "close"
-
-#cfg(target="wasm-gc")
-fn dedicated_worker_global_scope_request_animation_frame_ffi(obj: JsValue, callback: JsValue) -> UInt = "webapi_DedicatedWorkerGlobalScope" "requestAnimationFrame"
-
-#cfg(target="wasm-gc")
-fn dedicated_worker_global_scope_cancel_animation_frame_ffi(obj: JsValue, handle: JsValue) -> Unit = "webapi_DedicatedWorkerGlobalScope" "cancelAnimationFrame"
-
-#cfg(target="wasm-gc")
-fn dedicated_worker_global_scope_onmessage_ffi_wasm(obj: JsValue) -> JsValue = "webapi_DedicatedWorkerGlobalScope" "get_onmessage"
+fn dedicated_worker_global_scope_post_message_ffi(
+  obj : JsValue,
+  message : JsValue,
+  transfer : JsValue,
+) -> Unit = "webapi_DedicatedWorkerGlobalScope" "postMessage"
 
 ///|
 #cfg(target="wasm-gc")
-fn dedicated_worker_global_scope_onmessage_ffi(obj: JsValue) -> EventHandler {
+fn dedicated_worker_global_scope_post_message_with_options_ffi(
+  obj : JsValue,
+  message : JsValue,
+  options : JsValue,
+) -> Unit = "webapi_DedicatedWorkerGlobalScope" "post_message_with_options"
+
+///|
+#cfg(target="wasm-gc")
+fn dedicated_worker_global_scope_close_ffi(obj : JsValue) -> Unit = "webapi_DedicatedWorkerGlobalScope" "close"
+
+///|
+#cfg(target="wasm-gc")
+fn dedicated_worker_global_scope_request_animation_frame_ffi(
+  obj : JsValue,
+  callback : JsValue,
+) -> UInt = "webapi_DedicatedWorkerGlobalScope" "requestAnimationFrame"
+
+///|
+#cfg(target="wasm-gc")
+fn dedicated_worker_global_scope_cancel_animation_frame_ffi(
+  obj : JsValue,
+  handle : JsValue,
+) -> Unit = "webapi_DedicatedWorkerGlobalScope" "cancelAnimationFrame"
+
+///|
+#cfg(target="wasm-gc")
+fn dedicated_worker_global_scope_onmessage_ffi_wasm(obj : JsValue) -> JsValue = "webapi_DedicatedWorkerGlobalScope" "get_onmessage"
+
+///|
+#cfg(target="wasm-gc")
+fn dedicated_worker_global_scope_onmessage_ffi(obj : JsValue) -> EventHandler {
   dedicated_worker_global_scope_onmessage_ffi_wasm(obj).unsafe_cast()
 }
 
+///|
 #cfg(target="wasm-gc")
-fn dedicated_worker_global_scope_set_onmessage_ffi(obj: JsValue, onmessage: JsValue) -> Unit = "webapi_DedicatedWorkerGlobalScope" "set_onmessage"
-
-#cfg(target="wasm-gc")
-fn dedicated_worker_global_scope_onmessageerror_ffi_wasm(obj: JsValue) -> JsValue = "webapi_DedicatedWorkerGlobalScope" "get_onmessageerror"
+fn dedicated_worker_global_scope_set_onmessage_ffi(
+  obj : JsValue,
+  onmessage : JsValue,
+) -> Unit = "webapi_DedicatedWorkerGlobalScope" "set_onmessage"
 
 ///|
 #cfg(target="wasm-gc")
-fn dedicated_worker_global_scope_onmessageerror_ffi(obj: JsValue) -> EventHandler {
+fn dedicated_worker_global_scope_onmessageerror_ffi_wasm(
+  obj : JsValue,
+) -> JsValue = "webapi_DedicatedWorkerGlobalScope" "get_onmessageerror"
+
+///|
+#cfg(target="wasm-gc")
+fn dedicated_worker_global_scope_onmessageerror_ffi(
+  obj : JsValue,
+) -> EventHandler {
   dedicated_worker_global_scope_onmessageerror_ffi_wasm(obj).unsafe_cast()
 }
 
+///|
 #cfg(target="wasm-gc")
-fn dedicated_worker_global_scope_set_onmessageerror_ffi(obj: JsValue, onmessageerror: JsValue) -> Unit = "webapi_DedicatedWorkerGlobalScope" "set_onmessageerror"
+fn dedicated_worker_global_scope_set_onmessageerror_ffi(
+  obj : JsValue,
+  onmessageerror : JsValue,
+) -> Unit = "webapi_DedicatedWorkerGlobalScope" "set_onmessageerror"

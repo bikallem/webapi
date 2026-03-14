@@ -272,7 +272,6 @@ test "DictionaryEmitter does not emit duplicate commas for optional union args" 
       #|pub fn TestDict::method_(self : TestDict) -> String? {
       #|  test_dict_get_method_ffi(TJsValue::to_js(self)).to_option_prim()
       #|}
-
     ),
   )
   inspect(

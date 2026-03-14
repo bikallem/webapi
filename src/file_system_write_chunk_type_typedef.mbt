@@ -2,33 +2,53 @@
 // MoonBit type: FileSystemWriteChunkType
 // Specifications: fs.idl
 
+///|
 /// [FileSystemWriteChunkType](https://developer.mozilla.org/en-US/docs/Web/API/FileSystemWriteChunkType)
 #external
 pub type FileSystemWriteChunkType
 
-pub impl TJsValue for FileSystemWriteChunkType with to_js(self: FileSystemWriteChunkType) -> JsValue = "%identity"
+///|
+pub impl TJsValue for FileSystemWriteChunkType with to_js(
+  self : FileSystemWriteChunkType,
+) -> JsValue = "%identity"
 
+///|
 pub impl FromJsAny for FileSystemWriteChunkType with from_js_any(value : JsAny) -> FileSystemWriteChunkType = "%identity"
 
-pub(open) trait TFileSystemWriteChunkType : TJsValue {}
+///|
+pub(open) trait TFileSystemWriteChunkType: TJsValue {}
 
+///|
 #deprecated("Use unsafe_into or try_into instead")
-pub fn[T : TFileSystemWriteChunkType + FromJsAny] FileSystemWriteChunkType::into(self : FileSystemWriteChunkType) -> T {
+pub fn[T : TFileSystemWriteChunkType + FromJsAny] FileSystemWriteChunkType::into(
+  self : FileSystemWriteChunkType,
+) -> T {
   FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
 }
 
-pub fn[T : TFileSystemWriteChunkType + FromJsAny] FileSystemWriteChunkType::unsafe_into(self : FileSystemWriteChunkType) -> T {
+///|
+pub fn[T : TFileSystemWriteChunkType + FromJsAny] FileSystemWriteChunkType::unsafe_into(
+  self : FileSystemWriteChunkType,
+) -> T {
   FromJsAny::from_js_any(jsvalue_to_jsany(TJsValue::to_js(self)))
 }
 
-pub fn[T : TFileSystemWriteChunkType] FileSystemWriteChunkType::from(value : T) -> FileSystemWriteChunkType = "%identity"
+///|
+pub fn[T : TFileSystemWriteChunkType] FileSystemWriteChunkType::from(
+  value : T,
+) -> FileSystemWriteChunkType = "%identity"
 
+///|
 pub impl TFileSystemWriteChunkType for FileSystemWriteChunkType
 
+///|
 pub impl TFileSystemWriteChunkType for BufferSource
 
+///|
 pub impl TFileSystemWriteChunkType for Blob
 
+///|
 pub impl TFileSystemWriteChunkType for String
 
+///|
 pub impl TFileSystemWriteChunkType for WriteParams

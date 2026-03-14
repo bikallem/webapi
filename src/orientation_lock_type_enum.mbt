@@ -2,6 +2,7 @@
 // MoonBit type: OrientationLockType
 // Specifications: screen-orientation.idl
 
+///|
 pub(all) enum OrientationLockType {
   Any
   Natural
@@ -13,33 +14,46 @@ pub(all) enum OrientationLockType {
   LandscapeSecondary
 } derive(Eq)
 
-pub impl Show for OrientationLockType with output(self : OrientationLockType, logger : &Logger) -> Unit {
+///|
+pub impl Show for OrientationLockType with output(
+  self : OrientationLockType,
+  logger : &Logger,
+) -> Unit {
   match self {
     OrientationLockType::Any => logger.write_string("Any")
     OrientationLockType::Natural => logger.write_string("Natural")
     OrientationLockType::Landscape => logger.write_string("Landscape")
     OrientationLockType::Portrait => logger.write_string("Portrait")
-    OrientationLockType::PortraitPrimary => logger.write_string("PortraitPrimary")
-    OrientationLockType::PortraitSecondary => logger.write_string("PortraitSecondary")
-    OrientationLockType::LandscapePrimary => logger.write_string("LandscapePrimary")
-    OrientationLockType::LandscapeSecondary => logger.write_string("LandscapeSecondary")
+    OrientationLockType::PortraitPrimary =>
+      logger.write_string("PortraitPrimary")
+    OrientationLockType::PortraitSecondary =>
+      logger.write_string("PortraitSecondary")
+    OrientationLockType::LandscapePrimary =>
+      logger.write_string("LandscapePrimary")
+    OrientationLockType::LandscapeSecondary =>
+      logger.write_string("LandscapeSecondary")
   }
 }
 
-pub impl TJsValue for OrientationLockType with to_js(self: OrientationLockType) -> JsValue {
+///|
+pub impl TJsValue for OrientationLockType with to_js(self : OrientationLockType) -> JsValue {
   match self {
     OrientationLockType::Any => TJsValue::to_js("any")
     OrientationLockType::Natural => TJsValue::to_js("natural")
     OrientationLockType::Landscape => TJsValue::to_js("landscape")
     OrientationLockType::Portrait => TJsValue::to_js("portrait")
     OrientationLockType::PortraitPrimary => TJsValue::to_js("portrait-primary")
-    OrientationLockType::PortraitSecondary => TJsValue::to_js("portrait-secondary")
-    OrientationLockType::LandscapePrimary => TJsValue::to_js("landscape-primary")
-    OrientationLockType::LandscapeSecondary => TJsValue::to_js("landscape-secondary")
+    OrientationLockType::PortraitSecondary =>
+      TJsValue::to_js("portrait-secondary")
+    OrientationLockType::LandscapePrimary =>
+      TJsValue::to_js("landscape-primary")
+    OrientationLockType::LandscapeSecondary =>
+      TJsValue::to_js("landscape-secondary")
   }
 }
 
-pub fn OrientationLockType::from(value: String) -> OrientationLockType? {
+///|
+pub fn OrientationLockType::from(value : String) -> OrientationLockType? {
   match value {
     "any" => Some(OrientationLockType::Any)
     "natural" => Some(OrientationLockType::Natural)
@@ -53,7 +67,8 @@ pub fn OrientationLockType::from(value: String) -> OrientationLockType? {
   }
 }
 
-fn OrientationLockType::from_unchecked(value: String) -> OrientationLockType {
+///|
+fn OrientationLockType::from_unchecked(value : String) -> OrientationLockType {
   match value {
     "any" => OrientationLockType::Any
     "natural" => OrientationLockType::Natural
@@ -67,7 +82,8 @@ fn OrientationLockType::from_unchecked(value: String) -> OrientationLockType {
   }
 }
 
-pub fn OrientationLockType::value(self: OrientationLockType) -> String {
+///|
+pub fn OrientationLockType::value(self : OrientationLockType) -> String {
   match self {
     OrientationLockType::Any => "any"
     OrientationLockType::Natural => "natural"
@@ -80,6 +96,7 @@ pub fn OrientationLockType::value(self: OrientationLockType) -> String {
   }
 }
 
+///|
 pub impl FromJsAny for OrientationLockType with from_js_any(value : JsAny) -> OrientationLockType {
   OrientationLockType::from_unchecked(value)
 }

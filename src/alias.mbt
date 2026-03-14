@@ -100,4 +100,6 @@ pub impl TJsValue for OnErrorEventHandlerNonNullEvent with to_js(
 ) -> JsValue = "%identity"
 
 ///|
-pub impl FromJsAny for OnErrorEventHandlerNonNullEvent with from_js_any(value : JsAny) -> OnErrorEventHandlerNonNullEvent = "%identity"
+pub impl FromJsAny for OnErrorEventHandlerNonNullEvent with from_js_any(
+  value : JsAny,
+) -> OnErrorEventHandlerNonNullEvent = "%identity"
