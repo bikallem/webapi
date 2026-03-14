@@ -29,18 +29,18 @@ info:
 	moon info --target js
 
 build-examples:
-	moon -C src/examples build --target js --release
-	moon -C src/examples build --target wasm-gc --release
+	moon -C examples build --target js --release
+	moon -C examples build --target wasm-gc --release
 
 trim-examples:
 	@moon build src/trim --target js
-	@for wasm in src/examples/_build/wasm-gc/release/build/*/*.wasm; do \
+	@for wasm in examples/_build/wasm-gc/release/build/*/*.wasm; do \
 		node _build/js/debug/build/trim/trim.js "$(CURDIR)/$$wasm" --source "$(CURDIR)/src/webapi.mjs"; \
 	done
 
 validate-wasm:
 	@fails=0; \
-	for wasm in src/examples/_build/wasm-gc/release/build/*/*.wasm; do \
+	for wasm in examples/_build/wasm-gc/release/build/*/*.wasm; do \
 		name=$$(basename $$(dirname $$wasm)); \
 		if wasm-tools validate "$$wasm" 2>/dev/null; then \
 			echo "  OK: $$name"; \
@@ -60,7 +60,7 @@ test-playwright:
 	fi
 
 serve:
-	node tests/ws-echo-server.mjs & npx serve . -l 3000 --no-clipboard --symlinks
+	node tests/ws-echo-server.mjs & npx serve . -l 3000 --no-clipboard
 
 trim:
 	moon run src/trim -- $(WASM) -o $(OUT)

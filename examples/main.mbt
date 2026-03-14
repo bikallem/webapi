@@ -53,7 +53,7 @@ let examples : Array[(String, String, Bool)] = [
 ]
 
 ///|
-let github_base : String = "https://github.com/bikallem/webapi/tree/main/src/examples/"
+let github_base : String = "https://github.com/bikallem/webapi/tree/main/examples/"
 
 ///|
 fn strip_hash_prefix(hash : String) -> String {

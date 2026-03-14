@@ -25,8 +25,7 @@
     "docs",
     "examples",
     "tests",
-    "test-results",
-    "src/examples"
+    "test-results"
   ],
   "warn-list": "@27"
 }

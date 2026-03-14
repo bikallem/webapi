@@ -9,7 +9,7 @@ export default defineConfig({
     timeout: 5_000,
   },
   use: {
-    baseURL: 'http://localhost:3000/src/examples/',
+    baseURL: 'http://localhost:3000/examples/',
   },
   webServer: [
     {
