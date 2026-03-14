@@ -117,7 +117,7 @@ fn css_page_rule_selector_text_ffi_wasm(obj : JsValue) -> JsValue = "webapi_CSSP
 ///|
 #cfg(target="wasm-gc")
 fn css_page_rule_selector_text_ffi(obj : JsValue) -> CSSOMString {
-  css_page_rule_selector_text_ffi_wasm(obj).unsafe_cast()
+  jsvalue_to_string(css_page_rule_selector_text_ffi_wasm(obj))
 }
 
 ///|

@@ -164,6 +164,56 @@ test "emit_wasm_ffi_with_return uses string array bridge for Array[String]" {
 }
 
 ///|
+test "emit_wasm_ffi_with_return uses jsvalue_to_string for CSSOMString return" {
+  let Code(rendered) = emit_wasm_ffi_with_return(
+    "css_style_declaration_remove_property_ffi",
+    "obj : JsValue, property : JsValue",
+    ["obj", "property"],
+    "CSSOMString",
+    is_optional=false,
+    is_void=false,
+    is_string=true,
+    is_enum=false,
+    is_valid_stub=false,
+    "webapi_CSSStyleDeclaration",
+    "removeProperty",
+  )
+  inspect(
+    rendered,
+    content=(
+      #|fn css_style_declaration_remove_property_ffi_wasm(obj : JsValue, property : JsValue) -> JsValue = "webapi_CSSStyleDeclaration" "removeProperty"
+      #|
+      #|///|
+      #|fn css_style_declaration_remove_property_ffi(obj : JsValue, property : JsValue) -> CSSOMString {
+      #|  jsvalue_to_string(css_style_declaration_remove_property_ffi_wasm(obj, property))
+      #|}
+    ),
+  )
+}
+
+///|
+test "AttributeGetMethodEmit uses jsvalue_to_string for CSSOMString attribute" {
+  let Code(rendered) = AttributeGetMethodEmit::{
+    interface_name: "CSSStyleDeclaration",
+    original_name: "cssText",
+    return_type: "CSSOMString",
+    is_enum_type: false,
+    is_valid_wasm_stub: false,
+  }.ffi_emit_wasm("webapi_CSSStyleDeclaration")
+  inspect(
+    rendered,
+    content=(
+      #|fn css_style_declaration_css_text_ffi_wasm(obj: JsValue) -> JsValue = "webapi_CSSStyleDeclaration" "get_cssText"
+      #|
+      #|///|
+      #|fn css_style_declaration_css_text_ffi(obj: JsValue) -> CSSOMString {
+      #|  jsvalue_to_string(css_style_declaration_css_text_ffi_wasm(obj))
+      #|}
+    ),
+  )
+}
+
+///|
 test "AttributeGetMethodEmit uses to_option_prim for optional string returns" {
   let Code(rendered) = AttributeGetMethodEmit::{
     interface_name: "Storage",

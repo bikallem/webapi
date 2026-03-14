@@ -123,7 +123,7 @@ fn media_query_list_event_media_ffi_wasm(obj : JsValue) -> JsValue = "webapi_Med
 ///|
 #cfg(target="wasm-gc")
 fn media_query_list_event_media_ffi(obj : JsValue) -> CSSOMString {
-  media_query_list_event_media_ffi_wasm(obj).unsafe_cast()
+  jsvalue_to_string(media_query_list_event_media_ffi_wasm(obj))
 }
 
 ///|

@@ -393,7 +393,7 @@ fn css_page_descriptors_margin_ffi_wasm(obj : JsValue) -> JsValue = "webapi_CSSP
 ///|
 #cfg(target="wasm-gc")
 fn css_page_descriptors_margin_ffi(obj : JsValue) -> CSSOMString {
-  css_page_descriptors_margin_ffi_wasm(obj).unsafe_cast()
+  jsvalue_to_string(css_page_descriptors_margin_ffi_wasm(obj))
 }
 
 ///|
@@ -407,7 +407,7 @@ fn css_page_descriptors_margin_top_ffi_wasm(obj : JsValue) -> JsValue = "webapi_
 ///|
 #cfg(target="wasm-gc")
 fn css_page_descriptors_margin_top_ffi(obj : JsValue) -> CSSOMString {
-  css_page_descriptors_margin_top_ffi_wasm(obj).unsafe_cast()
+  jsvalue_to_string(css_page_descriptors_margin_top_ffi_wasm(obj))
 }
 
 ///|
@@ -424,7 +424,7 @@ fn css_page_descriptors_margin_right_ffi_wasm(obj : JsValue) -> JsValue = "webap
 ///|
 #cfg(target="wasm-gc")
 fn css_page_descriptors_margin_right_ffi(obj : JsValue) -> CSSOMString {
-  css_page_descriptors_margin_right_ffi_wasm(obj).unsafe_cast()
+  jsvalue_to_string(css_page_descriptors_margin_right_ffi_wasm(obj))
 }
 
 ///|
@@ -441,7 +441,7 @@ fn css_page_descriptors_margin_bottom_ffi_wasm(obj : JsValue) -> JsValue = "weba
 ///|
 #cfg(target="wasm-gc")
 fn css_page_descriptors_margin_bottom_ffi(obj : JsValue) -> CSSOMString {
-  css_page_descriptors_margin_bottom_ffi_wasm(obj).unsafe_cast()
+  jsvalue_to_string(css_page_descriptors_margin_bottom_ffi_wasm(obj))
 }
 
 ///|
@@ -458,7 +458,7 @@ fn css_page_descriptors_margin_left_ffi_wasm(obj : JsValue) -> JsValue = "webapi
 ///|
 #cfg(target="wasm-gc")
 fn css_page_descriptors_margin_left_ffi(obj : JsValue) -> CSSOMString {
-  css_page_descriptors_margin_left_ffi_wasm(obj).unsafe_cast()
+  jsvalue_to_string(css_page_descriptors_margin_left_ffi_wasm(obj))
 }
 
 ///|
@@ -475,7 +475,7 @@ fn css_page_descriptors_size_ffi_wasm(obj : JsValue) -> JsValue = "webapi_CSSPag
 ///|
 #cfg(target="wasm-gc")
 fn css_page_descriptors_size_ffi(obj : JsValue) -> CSSOMString {
-  css_page_descriptors_size_ffi_wasm(obj).unsafe_cast()
+  jsvalue_to_string(css_page_descriptors_size_ffi_wasm(obj))
 }
 
 ///|
@@ -489,7 +489,7 @@ fn css_page_descriptors_page_orientation_ffi_wasm(obj : JsValue) -> JsValue = "w
 ///|
 #cfg(target="wasm-gc")
 fn css_page_descriptors_page_orientation_ffi(obj : JsValue) -> CSSOMString {
-  css_page_descriptors_page_orientation_ffi_wasm(obj).unsafe_cast()
+  jsvalue_to_string(css_page_descriptors_page_orientation_ffi_wasm(obj))
 }
 
 ///|
@@ -506,7 +506,7 @@ fn css_page_descriptors_marks_ffi_wasm(obj : JsValue) -> JsValue = "webapi_CSSPa
 ///|
 #cfg(target="wasm-gc")
 fn css_page_descriptors_marks_ffi(obj : JsValue) -> CSSOMString {
-  css_page_descriptors_marks_ffi_wasm(obj).unsafe_cast()
+  jsvalue_to_string(css_page_descriptors_marks_ffi_wasm(obj))
 }
 
 ///|
@@ -520,7 +520,7 @@ fn css_page_descriptors_bleed_ffi_wasm(obj : JsValue) -> JsValue = "webapi_CSSPa
 ///|
 #cfg(target="wasm-gc")
 fn css_page_descriptors_bleed_ffi(obj : JsValue) -> CSSOMString {
-  css_page_descriptors_bleed_ffi_wasm(obj).unsafe_cast()
+  jsvalue_to_string(css_page_descriptors_bleed_ffi_wasm(obj))
 }
 
 ///|

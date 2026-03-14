@@ -117,7 +117,7 @@ fn css_style_rule_selector_text_ffi_wasm(obj : JsValue) -> JsValue = "webapi_CSS
 ///|
 #cfg(target="wasm-gc")
 fn css_style_rule_selector_text_ffi(obj : JsValue) -> CSSOMString {
-  css_style_rule_selector_text_ffi_wasm(obj).unsafe_cast()
+  jsvalue_to_string(css_style_rule_selector_text_ffi_wasm(obj))
 }
 
 ///|

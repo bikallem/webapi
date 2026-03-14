@@ -265,7 +265,7 @@ fn keyframe_effect_pseudo_element_ffi_wasm(obj : JsValue) -> JsValue = "webapi_K
 ///|
 #cfg(target="wasm-gc")
 fn keyframe_effect_pseudo_element_ffi(obj : JsValue) -> CSSOMString {
-  keyframe_effect_pseudo_element_ffi_wasm(obj).unsafe_cast()
+  jsvalue_to_string(keyframe_effect_pseudo_element_ffi_wasm(obj))
 }
 
 ///|

@@ -232,7 +232,7 @@ fn style_sheet_type_ffi_wasm(obj : JsValue) -> JsValue = "webapi_StyleSheet" "ge
 ///|
 #cfg(target="wasm-gc")
 fn style_sheet_type_ffi(obj : JsValue) -> CSSOMString {
-  style_sheet_type_ffi_wasm(obj).unsafe_cast()
+  jsvalue_to_string(style_sheet_type_ffi_wasm(obj))
 }
 
 ///|

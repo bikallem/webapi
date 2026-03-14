@@ -80,7 +80,7 @@ impl TMediaList with length(self : Self) -> UInt {
 ///|
 /// [MediaList.item](https://developer.mozilla.org/en-US/docs/Web/API/MediaList/item)
 impl TMediaList with item(self : Self, index : UInt) -> CSSOMString? {
-  media_list_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option()
+  media_list_item_ffi(TJsValue::to_js(self), TJsValue::to_js(index)).to_option_prim()
 }
 
 ///|
@@ -147,7 +147,7 @@ fn media_list_media_text_ffi_wasm(obj : JsValue) -> JsValue = "webapi_MediaList"
 ///|
 #cfg(target="wasm-gc")
 fn media_list_media_text_ffi(obj : JsValue) -> CSSOMString {
-  media_list_media_text_ffi_wasm(obj).unsafe_cast()
+  jsvalue_to_string(media_list_media_text_ffi_wasm(obj))
 }
 
 ///|

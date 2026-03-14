@@ -36,5 +36,5 @@ fn css_escape_ffi_wasm(ident : JsValue) -> JsValue = "webapi_CSS" "escape"
 ///|
 #cfg(target="wasm-gc")
 fn css_escape_ffi(ident : JsValue) -> CSSOMString {
-  css_escape_ffi_wasm(ident).unsafe_cast()
+  jsvalue_to_string(css_escape_ffi_wasm(ident))
 }

@@ -165,7 +165,7 @@ fn css_import_rule_layer_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_CSSIm
 ///|
 #cfg(target="wasm-gc")
 fn css_import_rule_layer_name_ffi(obj : JsValue) -> CSSOMString {
-  css_import_rule_layer_name_ffi_wasm(obj).unsafe_cast()
+  jsvalue_to_string(css_import_rule_layer_name_ffi_wasm(obj))
 }
 
 ///|
@@ -175,5 +175,5 @@ fn css_import_rule_supports_text_ffi_wasm(obj : JsValue) -> JsValue = "webapi_CS
 ///|
 #cfg(target="wasm-gc")
 fn css_import_rule_supports_text_ffi(obj : JsValue) -> CSSOMString {
-  css_import_rule_supports_text_ffi_wasm(obj).unsafe_cast()
+  jsvalue_to_string(css_import_rule_supports_text_ffi_wasm(obj))
 }

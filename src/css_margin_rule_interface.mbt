@@ -96,7 +96,7 @@ fn css_margin_rule_name_ffi_wasm(obj : JsValue) -> JsValue = "webapi_CSSMarginRu
 ///|
 #cfg(target="wasm-gc")
 fn css_margin_rule_name_ffi(obj : JsValue) -> CSSOMString {
-  css_margin_rule_name_ffi_wasm(obj).unsafe_cast()
+  jsvalue_to_string(css_margin_rule_name_ffi_wasm(obj))
 }
 
 ///|

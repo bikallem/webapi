@@ -104,6 +104,38 @@ test "is_wasm_valid_stub_type rejects Other unknown types" {
 }
 
 ///|
+test "is_string_type detects String and string aliases" {
+  inspect(
+    is_string_type(@type_mapping.ArgMbtType::Primitive("String")),
+    content="true",
+  )
+  inspect(
+    is_string_type(@type_mapping.ArgMbtType::Other("CSSOMString")),
+    content="true",
+  )
+  inspect(
+    is_string_type(@type_mapping.ArgMbtType::Other("JsValue")),
+    content="false",
+  )
+  inspect(
+    is_string_type(@type_mapping.ArgMbtType::Primitive("Int")),
+    content="false",
+  )
+  inspect(
+    is_string_type(@type_mapping.ArgMbtType::Interface("Element")),
+    content="false",
+  )
+}
+
+///|
+test "is_string_type_name detects String and string aliases" {
+  inspect(is_string_type_name("String"), content="true")
+  inspect(is_string_type_name("CSSOMString"), content="true")
+  inspect(is_string_type_name("JsValue"), content="false")
+  inspect(is_string_type_name("Int"), content="false")
+}
+
+///|
 test "is_array_return detects Array types" {
   inspect(is_array_return("Array[String]"), content="true")
   inspect(is_array_return("Array[DOMQuad]"), content="true")

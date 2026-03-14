@@ -100,7 +100,7 @@ fn css_namespace_rule_namespace_uri_ffi_wasm(obj : JsValue) -> JsValue = "webapi
 ///|
 #cfg(target="wasm-gc")
 fn css_namespace_rule_namespace_uri_ffi(obj : JsValue) -> CSSOMString {
-  css_namespace_rule_namespace_uri_ffi_wasm(obj).unsafe_cast()
+  jsvalue_to_string(css_namespace_rule_namespace_uri_ffi_wasm(obj))
 }
 
 ///|
@@ -110,5 +110,5 @@ fn css_namespace_rule_prefix_ffi_wasm(obj : JsValue) -> JsValue = "webapi_CSSNam
 ///|
 #cfg(target="wasm-gc")
 fn css_namespace_rule_prefix_ffi(obj : JsValue) -> CSSOMString {
-  css_namespace_rule_prefix_ffi_wasm(obj).unsafe_cast()
+  jsvalue_to_string(css_namespace_rule_prefix_ffi_wasm(obj))
 }

@@ -272,7 +272,7 @@ fn css_style_declaration_css_text_ffi_wasm(obj : JsValue) -> JsValue = "webapi_C
 ///|
 #cfg(target="wasm-gc")
 fn css_style_declaration_css_text_ffi(obj : JsValue) -> CSSOMString {
-  css_style_declaration_css_text_ffi_wasm(obj).unsafe_cast()
+  jsvalue_to_string(css_style_declaration_css_text_ffi_wasm(obj))
 }
 
 ///|
@@ -299,7 +299,7 @@ fn css_style_declaration_item_ffi(
   obj : JsValue,
   index : JsValue,
 ) -> CSSOMString {
-  css_style_declaration_item_ffi_wasm(obj, index).unsafe_cast()
+  jsvalue_to_string(css_style_declaration_item_ffi_wasm(obj, index))
 }
 
 ///|
@@ -315,7 +315,9 @@ fn css_style_declaration_get_property_value_ffi(
   obj : JsValue,
   property : JsValue,
 ) -> CSSOMString {
-  css_style_declaration_get_property_value_ffi_wasm(obj, property).unsafe_cast()
+  jsvalue_to_string(
+    css_style_declaration_get_property_value_ffi_wasm(obj, property),
+  )
 }
 
 ///|
@@ -331,7 +333,9 @@ fn css_style_declaration_get_property_priority_ffi(
   obj : JsValue,
   property : JsValue,
 ) -> CSSOMString {
-  css_style_declaration_get_property_priority_ffi_wasm(obj, property).unsafe_cast()
+  jsvalue_to_string(
+    css_style_declaration_get_property_priority_ffi_wasm(obj, property),
+  )
 }
 
 ///|
@@ -356,7 +360,9 @@ fn css_style_declaration_remove_property_ffi(
   obj : JsValue,
   property : JsValue,
 ) -> CSSOMString {
-  css_style_declaration_remove_property_ffi_wasm(obj, property).unsafe_cast()
+  jsvalue_to_string(
+    css_style_declaration_remove_property_ffi_wasm(obj, property),
+  )
 }
 
 ///|

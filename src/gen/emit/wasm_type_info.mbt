@@ -17,8 +17,29 @@ let wasm_valid_stub_other_types : Array[String] = [
 ///|
 let wasm_jsany_value_types : Array[String] = [
   "String", "Bool", "Int", "UInt", "Int64", "UInt64", "Float", "Double", "DOMHighResTimeStamp",
-  "EpochTimeStamp",
+  "EpochTimeStamp", "CSSOMString",
 ]
+
+///|
+/// String type aliases that map to String on wasm-gc and need jsvalue_to_string().
+/// CSSOMString is defined as `typedef DOMString CSSOMString` in the CSSOM spec.
+let string_alias_types : Array[String] = ["CSSOMString"]
+
+///|
+/// Check if a type name is String or a string alias (e.g. CSSOMString).
+fn is_string_type_name(name : String) -> Bool {
+  name == "String" || string_alias_types.contains(name)
+}
+
+///|
+/// Check if an ArgMbtType represents a string type (including aliases).
+fn is_string_type(type_ : @type_mapping.ArgMbtType) -> Bool {
+  match type_ {
+    Primitive("String") => true
+    Other(name) => string_alias_types.contains(name)
+    _ => false
+  }
+}
 
 ///|
 fn uses_from_jsany_value_conversion(type_name : String) -> Bool {
@@ -91,12 +112,13 @@ fn emit_wasm_ffi_with_return(
       "fn \{ffi_name}(\{ffi_args}) -> \{ffi_ret} = \"\{module_name}\" \"\{import_name}\"",
     )
   } else if is_string {
-    // String: wasm imports return externref (nullable), but String is (ref extern) (non-nullable).
+    // String/string alias: wasm imports return externref (nullable), but String is (ref extern) (non-nullable).
     // Use jsvalue_to_string wrapper: externref -> String? -> unwrap -> String.
+    // return_type_name may be "String" or a string alias like "CSSOMString".
     let raw_name = ffi_name + "_wasm"
     let call_fwd = ffi_argnames.join(", ")
     Code(
-      "fn \{raw_name}(\{ffi_args}) -> JsValue = \"\{module_name}\" \"\{import_name}\"\n\n///|\nfn \{ffi_name}(\{ffi_args}) -> String {\n  jsvalue_to_string(\{raw_name}(\{call_fwd}))\n}",
+      "fn \{raw_name}(\{ffi_args}) -> JsValue = \"\{module_name}\" \"\{import_name}\"\n\n///|\nfn \{ffi_name}(\{ffi_args}) -> \{return_type_name} {\n  jsvalue_to_string(\{raw_name}(\{call_fwd}))\n}",
     )
   } else if is_enum {
     // Enum: JS returns a string (externref), but enums are GC types on wasm-gc.

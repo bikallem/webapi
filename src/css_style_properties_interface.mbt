@@ -101,7 +101,7 @@ fn css_style_properties_css_float_ffi_wasm(obj : JsValue) -> JsValue = "webapi_C
 ///|
 #cfg(target="wasm-gc")
 fn css_style_properties_css_float_ffi(obj : JsValue) -> CSSOMString {
-  css_style_properties_css_float_ffi_wasm(obj).unsafe_cast()
+  jsvalue_to_string(css_style_properties_css_float_ffi_wasm(obj))
 }
 
 ///|
