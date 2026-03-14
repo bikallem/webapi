@@ -73,8 +73,9 @@ jobs:
 
       - name: Trim webapi.mjs for wasm-gc examples
         run: |
+          moon build src/trim --target js
           for wasm in src/examples/_build/wasm-gc/release/build/*/*.wasm; do
-            moon run src/trim -- "$(pwd)/$wasm" --source "$(pwd)/src/webapi.mjs"
+            node _build/js/debug/build/trim/trim.js "$(pwd)/$wasm" --source "$(pwd)/src/webapi.mjs"
           done
 
       - name: Install wasm-tools

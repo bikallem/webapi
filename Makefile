@@ -34,8 +34,9 @@ build-examples:
 	moon -C src/examples build --target wasm-gc --release
 
 trim-examples:
+	@moon build src/trim --target js
 	@for wasm in src/examples/_build/wasm-gc/release/build/*/*.wasm; do \
-		moon run src/trim -- "$(CURDIR)/$$wasm" --source "$(CURDIR)/src/webapi.mjs"; \
+		node _build/js/debug/build/trim/trim.js "$(CURDIR)/$$wasm" --source "$(CURDIR)/src/webapi.mjs"; \
 	done
 
 validate-wasm:
