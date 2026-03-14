@@ -40,10 +40,12 @@ Add this package to your MoonBit project:
 moon add bikallem/webapi@0.4.3
 ```
 
-To also install the `webapitrim` CLI tool (for trimming `webapi.mjs` in wasm-gc deployments):
+To also install the `trim` CLI tool (for trimming `webapi.mjs` in wasm-gc deployments):
 
 ```bash
-moon add --bin bikallem/webapi
+moon add bikallem/webapi
+moon build bikallem/webapi/trim --target native --release
+# Binary: .mooncakes/bikallem/webapi/_build/native/release/build/trim/trim.exe
 ```
 
 ## Overview
@@ -419,28 +421,31 @@ fn readme_optional() -> Unit {
 
 ## Trimming webapi.mjs for wasm-gc Production
 
-The full `src/webapi.mjs` JS runtime (~8,400 lines) contains modules for every supported Web API. For **wasm-gc** deployments, the `webapitrim` tool produces a minimal version containing only the modules your `.wasm` binary actually imports — typically 500–1,000 lines (~90% smaller).
+The full `src/webapi.mjs` JS runtime (~8,400 lines) contains modules for every supported Web API. For **wasm-gc** deployments, the `trim` tool produces a minimal version containing only the modules your `.wasm` binary actually imports — typically 500–1,000 lines (~90% smaller).
 
 > **Note:** This tool is only relevant for the wasm-gc backend. The JS backend does not use `webapi.mjs`.
 
-### Installing webapitrim
+### Installing trim
 
-Install the `webapitrim` CLI via the MoonBit package manager:
+Build the `trim` CLI from the MoonBit package:
 
 ```bash
-moon add --bin bikallem/webapi
+moon add bikallem/webapi
+moon build bikallem/webapi/trim --target native --release
 ```
 
-This installs the `webapitrim` binary to `~/.moon/bin/` (or your configured MoonBit bin directory).
+The binary is at `.mooncakes/bikallem/webapi/_build/native/release/build/trim/trim.exe`.
 
 ### Usage
 
 ```bash
+TRIM=.mooncakes/bikallem/webapi/_build/native/release/build/trim/trim.exe
+
 # Trim for a single wasm binary (output: webapi.mjs next to the .wasm file)
-webapitrim path/to/app.wasm --source path/to/webapi.mjs
+$TRIM path/to/app.wasm --source path/to/webapi.mjs
 
 # Trim with explicit output path
-webapitrim path/to/app.wasm --source path/to/webapi.mjs -o path/to/output.mjs
+$TRIM path/to/app.wasm --source path/to/webapi.mjs -o path/to/output.mjs
 ```
 
 When building from source, you can also use the Makefile targets:
@@ -472,7 +477,7 @@ Point your wasm-gc HTML page at the trimmed file instead of the full bundle:
 
 ### How It Works
 
-`webapitrim` parses the wasm binary's import section to find which `webapi_` JS modules are referenced, then extracts only those modules (plus the shared `wasmImportObject` export) from the full `webapi.mjs`. No runtime behavior changes — just fewer unused modules shipped to the browser.
+`trim` parses the wasm binary's import section to find which `webapi_` JS modules are referenced, then extracts only those modules (plus the shared `wasmImportObject` export) from the full `webapi.mjs`. No runtime behavior changes — just fewer unused modules shipped to the browser.
 
 ## WebIDL to MoonBit Conversion
 
