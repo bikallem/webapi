@@ -37,7 +37,7 @@ Type-safe MoonBit bindings for Web Platform APIs, automatically generated from W
 Add this package to your MoonBit project:
 
 ```bash
-moon add bikallem/webapi@0.4.2
+moon add bikallem/webapi@0.4.3
 ```
 
 To also install the `webapitrim` CLI tool (for trimming `webapi.mjs` in wasm-gc deployments):

@@ -2,6 +2,27 @@
 
 ## [Unreleased]
 
+## [v0.4.3] - 2026-03-14
+
+### Added
+
+- Added checked downcast method `try_into()` on all generated interface types, returning `T?` with a runtime `instanceof` check.
+- Added `HasConstructor` trait and `js_instanceof()` FFI to support runtime type checks on both JS and wasm-gc targets.
+- Added `JsObject::get()` method for dynamic property access, complementing the existing `set()`.
+
+### Changed
+
+- Renamed the unchecked downcast from `into()` to `unsafe_into()` to clarify intent.
+
+### Deprecated
+
+- Deprecated `into()` in favor of `try_into()` (safe) or `unsafe_into()` (explicit unchecked).
+
+### Fixed
+
+- Fixed deprecated `into()` call in `JsValue::as_string` template.
+- Removed accidentally committed dotfiles and stray entries.
+
 ## [v0.4.2] - 2026-03-14
 
 ### Changed
