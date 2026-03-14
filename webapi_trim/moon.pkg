@@ -8,5 +8,11 @@ import {
 }
 
 options(
+  "bin-name": "webapitrim",
+  "bin-target": "js",
   "is-main": true,
+  link: {
+    "js": { "format": "cjs" },
+    "native": { "cc": "clang", "cc-flags": "-02" },
+  },
 )
