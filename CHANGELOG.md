@@ -2,6 +2,16 @@
 
 ## [Unreleased]
 
+## [v0.4.4] - 2026-03-14
+
+### Changed
+
+- Moved examples from `src/examples/` to `examples/` at project root, removing the symlink.
+
+### Fixed
+
+- Fixed wasm-gc `externref` mismatch for `CSSOMString` returns (#18). The code generator now uses `jsvalue_to_string()` for string alias types instead of `unsafe_cast()`, which produced invalid wasm when converting nullable `externref` to non-nullable `(ref extern)`.
+
 ## [v0.4.3] - 2026-03-14
 
 ### Added
