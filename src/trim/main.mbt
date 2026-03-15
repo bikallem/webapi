@@ -17,6 +17,7 @@ priv struct TrimCliOptions {
   wasm_path : String
   output_path : String
   source_path : String
+  minify : Bool
 }
 
 ///|
@@ -24,6 +25,14 @@ fn build_cli_command() -> @argparse.Command {
   @argparse.Command(
     "webapi_trim",
     about="Trim webapi.mjs to only the modules imported by a wasm binary.",
+    flags=[
+      FlagArg(
+        "minify",
+        long="no-minify",
+        action=SetFalse,
+        about="Disable JS minification of the output.",
+      ),
+    ],
     options=[
       OptionArg(
         "output",
@@ -59,7 +68,8 @@ fn parse_cli_matches(matches : @argparse.Matches) -> TrimCliOptions {
     .get("source")
     .map(values => values[0])
     .unwrap_or(default_source_path)
-  { wasm_path, output_path, source_path }
+  let minify = matches.flags.get("minify").unwrap_or(true)
+  { wasm_path, output_path, source_path, minify }
 }
 
 ///|
@@ -168,14 +178,15 @@ fn run_with_options(options : TrimCliOptions) -> Unit raise {
     err => raise FatalError("cannot read \{options.source_path}: \{err}")
   }
   let trimmed = filter_js_modules(source, required_imports)
+  let output = if options.minify { minify_js(trimmed) } else { trimmed }
   // Default output: webapi.mjs next to the input wasm file
   let out = resolve_output_path(options)
-  @fs.write_string_to_file(out, trimmed) catch {
+  @fs.write_string_to_file(out, output) catch {
     err => raise FatalError("cannot write \{out}: \{err}")
   }
-  let src_lines = source.split("\n").fold(init=0, fn(acc, _) { acc + 1 })
-  let out_lines = trimmed.split("\n").fold(init=0, fn(acc, _) { acc + 1 })
-  println("Wrote \{out}: \{out_lines} lines (from \{src_lines})")
+  let src_bytes = source.length()
+  let out_bytes = output.length()
+  println("Wrote \{out}: \{out_bytes} bytes (from \{src_bytes})")
 }
 
 ///|

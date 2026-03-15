@@ -6,6 +6,7 @@ test "parse_cli uses default source path and empty explicit output" {
   assert_eq(options.wasm_path, "fixtures/test.wasm")
   assert_eq(options.output_path, "")
   assert_eq(options.source_path, default_source_path)
+  assert_eq(options.minify, true)
 }
 
 ///|
@@ -18,6 +19,7 @@ test "parse_cli accepts output and source options" {
   assert_eq(options.wasm_path, "fixtures/test.wasm")
   assert_eq(options.output_path, "out.mjs")
   assert_eq(options.source_path, "full.mjs")
+  assert_eq(options.minify, true)
 }
 
 ///|
@@ -26,8 +28,17 @@ test "resolve_output_path defaults next to input wasm" {
     wasm_path: "/tmp/build/sample.wasm",
     output_path: "",
     source_path: default_source_path,
+    minify: true,
   }
   assert_eq(resolve_output_path(options), "/tmp/build/webapi.mjs")
+}
+
+///|
+test "parse_cli accepts no-minify flag" {
+  let options = parse_cli(["fixtures/test.wasm", "--no-minify"]) catch {
+    err => fail(err.to_string())
+  }
+  assert_eq(options.minify, false)
 }
 
 ///|
@@ -36,6 +47,7 @@ test "build_cli_command help includes declared options" {
   inspect(help.contains("Usage: webapi_trim"), content="true")
   inspect(help.contains("-o <output>"), content="true")
   inspect(help.contains("--source <source>"), content="true")
+  inspect(help.contains("--no-minify"), content="true")
 }
 
 ///|

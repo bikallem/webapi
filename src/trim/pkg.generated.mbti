@@ -8,6 +8,8 @@ import {
 // Values
 pub fn filter_js_modules(String, Map[String, @hashset.HashSet[String]]) -> String
 
+pub fn minify_js(String) -> String
+
 pub fn parse_wasm_imports(Bytes) -> Array[(String, String)] raise WasmParseError
 
 // Errors

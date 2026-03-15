@@ -72,6 +72,7 @@ assert_exit_code "--help exits 0" 0 "$code"
 assert_stdout_contains "--help shows usage" "Usage: webapi_trim" "$TMPDIR_TEST/help.out"
 assert_stdout_contains "--help shows -o option" "-o <output>" "$TMPDIR_TEST/help.out"
 assert_stdout_contains "--help shows --source option" "--source <source>" "$TMPDIR_TEST/help.out"
+assert_stdout_contains "--help shows --no-minify flag" "--no-minify" "$TMPDIR_TEST/help.out"
 
 # --- Test: no arguments ---
 echo "# no arguments"
@@ -104,7 +105,7 @@ assert_stdout_contains "unknown option prints argparse error" "unexpected argume
 echo "# -o flag"
 $TRIM "$FIXTURES/test.wasm" --source "$FIXTURES/sample.mjs" -o "$TMPDIR_TEST/out.mjs" > "$TMPDIR_TEST/o_stdout.out" 2>/dev/null
 assert_eq "-o produces expected output" "$FIXTURES/expected.mjs" "$TMPDIR_TEST/out.mjs"
-assert_stdout_contains "-o prints summary" "Wrote" "$TMPDIR_TEST/o_stdout.out"
+assert_stdout_contains "-o prints summary with bytes" "bytes" "$TMPDIR_TEST/o_stdout.out"
 
 # --- Test: output is valid JS ---
 echo "# output validity"
@@ -141,13 +142,13 @@ if [ -f "$REAL_WASM" ] && [ -f "$REAL_SOURCE" ]; then
   fi
 
   # Output should be smaller than source
-  src_lines=$(wc -l < "$REAL_SOURCE")
-  out_lines=$(wc -l < "$TMPDIR_TEST/real.mjs")
-  if [ "$out_lines" -lt "$src_lines" ]; then
-    echo "  PASS: output is smaller ($out_lines < $src_lines lines)"
+  src_bytes=$(wc -c < "$REAL_SOURCE")
+  out_bytes=$(wc -c < "$TMPDIR_TEST/real.mjs")
+  if [ "$out_bytes" -lt "$src_bytes" ]; then
+    echo "  PASS: output is smaller ($out_bytes < $src_bytes bytes)"
     pass=$((pass + 1))
   else
-    echo "  FAIL: output not smaller ($out_lines >= $src_lines lines)"
+    echo "  FAIL: output not smaller ($out_bytes >= $src_bytes bytes)"
     fail=$((fail + 1))
   fi
 
