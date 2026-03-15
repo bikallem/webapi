@@ -2,6 +2,16 @@
 
 ## [Unreleased]
 
+## [v0.4.5] - 2026-03-15
+
+### Added
+
+- Added JS minification to the trim tool, enabled by default. Strips comments, collapses whitespace, and preserves string/template literal contents. Use `--no-minify` to disable.
+
+### Changed
+
+- Trim tool size reporting now shows bytes instead of line counts.
+
 ## [v0.4.4] - 2026-03-14
 
 ### Changed
