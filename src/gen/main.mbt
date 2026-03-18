@@ -1,6 +1,6 @@
 ///|
 /// Default config file path (run from webapi_gen/)
-let default_config_file : String = "config.toml"
+let default_config_file : String = "config.json"
 
 ///|
 let usage_exit_code : Int = 2
@@ -21,7 +21,7 @@ fn build_cli_command() -> @argparse.Command {
     positionals=[
       PositionArg(
         "config",
-        about="Path to the generator TOML config file.",
+        about="Path to the generator JSON config file.",
         default_values=[default_config_file],
         num_args=@argparse.ValueRange(lower=0, upper=1),
       ),

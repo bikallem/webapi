@@ -6,10 +6,10 @@ test "parse_cli uses default config path" {
 
 ///|
 test "parse_cli accepts explicit config path" {
-  let options = parse_cli(["custom.toml"]) catch {
+  let options = parse_cli(["custom.json"]) catch {
     err => fail(err.to_string())
   }
-  assert_eq(options.config_file, "custom.toml")
+  assert_eq(options.config_file, "custom.json")
 }
 
 ///|
@@ -21,11 +21,11 @@ test "build_cli_command help mentions optional config positional" {
 
 ///|
 test "parse_cli rejects extra positional arguments" {
-  try parse_cli(["a.toml", "b.toml"]) catch {
+  try parse_cli(["a.json", "b.json"]) catch {
     err => {
       let message = err.to_string()
       inspect(
-        message.contains("unexpected value 'b.toml' for '<config>' found"),
+        message.contains("unexpected value 'b.json' for '<config>' found"),
         content="true",
       )
       inspect(message.contains("Usage: webapi_gen"), content="true")

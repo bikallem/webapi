@@ -14,6 +14,29 @@ fn clear_test_dir(path : String) -> Unit raise {
 }
 
 ///|
+fn empty_config_json(
+  excluded_interfaces? : Array[String] = [],
+  excluded_callbacks? : Array[String] = [],
+  excluded_typedefs? : Array[String] = [],
+  excluded_dictionary_prefixes? : Array[String] = [],
+) -> String {
+  let cfg : Json = {
+    "idl_dir": "",
+    "output_dir": "",
+    "templates_dir": "",
+    "core_specs": Json::array([]),
+    "excluded_interfaces": Json::array(excluded_interfaces.map(Json::string)),
+    "excluded_callbacks": Json::array(excluded_callbacks.map(Json::string)),
+    "excluded_typedefs": Json::array(excluded_typedefs.map(Json::string)),
+    "excluded_dictionary_prefixes": Json::array(
+      excluded_dictionary_prefixes.map(Json::string),
+    ),
+    "dictionary_member_injection": {},
+  }
+  cfg.stringify()
+}
+
+///|
 test "filter_idl with empty config returns all types" {
   let widl : String =
     #|interface Element {};
@@ -22,17 +45,7 @@ test "filter_idl with empty config returns all types" {
     #|enum ScrollBehavior { "auto", "smooth" };
   let defs = @parser.parse(widl)
   let config = @config.load_config_from_string(
-    (
-      #|idl_dir = ""
-      #|output_dir = ""
-      #|templates_dir = ""
-      #|core_specs = []
-      #|excluded_interfaces = ["Element"]
-      #|excluded_callbacks = []
-      #|excluded_typedefs = []
-      #|excluded_dictionary_prefixes = []
-      #|
-    ),
+    empty_config_json(excluded_interfaces=["Element"]),
   )
   let filtered = filter_idl(config, defs)
   json_inspect(filtered, content=[
@@ -62,17 +75,7 @@ test "filter_idl filters interfaces by whitelist" {
     #|interface Document {};
   let defs = @parser.parse(widl)
   let config : @config.Config = @config.load_config_from_string(
-    (
-      #|idl_dir = ""
-      #|output_dir = ""
-      #|templates_dir = ""
-      #|core_specs = []
-      #|excluded_interfaces = ["Element", "Node"]
-      #|excluded_callbacks = []
-      #|excluded_typedefs = []
-      #|excluded_dictionary_prefixes = []
-      #|
-    ),
+    empty_config_json(excluded_interfaces=["Element", "Node"]),
   )
   let filtered = filter_idl(config, defs)
   json_inspect(filtered, content=[
@@ -90,17 +93,7 @@ test "filter_idl excludes callbacks" {
     #|callback MutationCallback = undefined (sequence<MutationRecord> mutations);
   let defs = @parser.parse(widl)
   let config : @config.Config = @config.load_config_from_string(
-    (
-      #|idl_dir = ""
-      #|output_dir = ""
-      #|templates_dir = ""
-      #|core_specs = []
-      #|excluded_interfaces = []
-      #|excluded_callbacks = ["MutationCallback"]
-      #|excluded_typedefs = []
-      #|excluded_dictionary_prefixes = []
-      #|
-    ),
+    empty_config_json(excluded_callbacks=["MutationCallback"]),
   )
   let filtered = filter_idl(config, defs)
   json_inspect(filtered, content=[
@@ -136,17 +129,9 @@ test "filter_idl excludes typedefs" {
     #|typedef unsigned long long DOMTimeStamp;
   let defs = @parser.parse(widl)
   let config : @config.Config = @config.load_config_from_string(
-    (
-      #|idl_dir = ""
-      #|output_dir = ""
-      #|templates_dir = ""
-      #|core_specs = []
-      #|excluded_interfaces = []
-      #|excluded_callbacks = ["MutationCallback"]
-      #|excluded_typedefs = ["EventHandler"]
-      #|excluded_dictionary_prefixes = []
-      #|
-    ),
+    empty_config_json(excluded_callbacks=["MutationCallback"], excluded_typedefs=[
+      "EventHandler",
+    ]),
   )
   let filtered = filter_idl(config, defs)
   json_inspect(filtered, content=[
@@ -168,16 +153,10 @@ test "filter_idl excludes dictionaries by prefix" {
     #|dictionary ElementDefinitionOptions {};
   let defs = @parser.parse(widl)
   let config : @config.Config = @config.load_config_from_string(
-    (
-      #|idl_dir = ""
-      #|output_dir = ""
-      #|templates_dir = ""
-      #|core_specs = []
-      #|excluded_interfaces = []
-      #|excluded_callbacks = ["MutationCallback"]
-      #|excluded_typedefs = ["EventHandler"]
-      #|excluded_dictionary_prefixes = ["Element"]
-      #|
+    empty_config_json(
+      excluded_callbacks=["MutationCallback"],
+      excluded_typedefs=["EventHandler"],
+      excluded_dictionary_prefixes=["Element"],
     ),
   )
   let filtered = filter_idl(config, defs)
@@ -199,17 +178,7 @@ test "filter_idl plus flatten skips dictionaries whose filtered parent is missin
     #|dictionary EventInit {};
   let defs = @parser.parse(widl)
   let config : @config.Config = @config.load_config_from_string(
-    (
-      #|idl_dir = ""
-      #|output_dir = ""
-      #|templates_dir = ""
-      #|core_specs = []
-      #|excluded_interfaces = []
-      #|excluded_callbacks = []
-      #|excluded_typedefs = []
-      #|excluded_dictionary_prefixes = ["Element"]
-      #|
-    ),
+    empty_config_json(excluded_dictionary_prefixes=["Element"]),
   )
   let filtered = filter_idl(config, defs)
   let partial_merged = @partial_merged.merge_partials(filtered)
@@ -230,7 +199,7 @@ test "filter_idl plus flatten skips dictionaries whose filtered parent is missin
 test "format_generation_summary renders compact end-of-run report" {
   inspect(
     format_generation_summary(GenerationSummary::{
-      config_file: "config.toml",
+      config_file: "config.json",
       idl_dir: "./idl",
       templates_dir: "./base.mbt",
       output_dir: "./webapi",
@@ -252,7 +221,7 @@ test "format_generation_summary renders compact end-of-run report" {
     }),
     content=(
       #|=== MoonBit WebAPI Bindings Generator Summary ===
-      #|Config: config.toml
+      #|Config: config.json
       #|Inputs: 3 IDL files from ./idl
       #|Filtered definitions: 42
       #|Templates: 5 files from ./base.mbt

@@ -1,5 +1,5 @@
 ///|
-/// Generator configuration loaded from 'config.toml'.
+/// Generator configuration loaded from 'config.json'.
 pub struct Config {
   idl_dir : String
   output_dir : String
@@ -13,121 +13,70 @@ pub struct Config {
 } derive(Show, ToJson)
 
 ///|
-/// Extract a string value from a TomlValue
-fn get_string(
-  table : Map[String, @toml.TomlValue],
-  key : String,
-) -> String raise {
-  match table.get(key) {
-    Some(TomlString(s)) => s
-    Some(_) => fail("expected string for key '\{key}'")
-    None => fail("missing required key '\{key}'")
-  }
-}
-
-///|
-/// Extract an array of strings from a TomlValue
-fn get_string_array(
-  table : Map[String, @toml.TomlValue],
-  key : String,
-) -> Array[String] raise {
-  match table.get(key) {
-    Some(TomlArray(arr)) => {
-      let result : Array[String] = []
-      for item in arr {
-        match item {
-          TomlString(s) => result.push(s)
-          _ => fail("expected string array for key '\{key}'")
-        }
-      }
-      result
-    }
-    Some(_) => fail("expected array for key '\{key}'")
-    None => fail("missing required key '\{key}'")
-  }
-}
-
-///|
-/// Extract a table of string key-value pairs from a TomlValue.
-/// Returns an empty map if the key is missing.
-fn get_string_map(
-  table : Map[String, @toml.TomlValue],
-  key : String,
-) -> Map[String, String] raise {
-  match table.get(key) {
-    Some(TomlTable(inner)) => {
-      let result : Map[String, String] = {}
-      for k, v in inner {
-        match v {
-          TomlString(s) => result[k] = s
-          _ => fail("expected string value for key '\{k}' in '\{key}'")
-        }
-      }
-      result
-    }
-    Some(_) => fail("expected table for key '\{key}'")
-    None => {}
-  }
-}
+/// Raw JSON-deserializable config before converting HashSet fields.
+priv struct RawConfig {
+  idl_dir : String
+  output_dir : String
+  templates_dir : String
+  core_specs : Array[String]
+  excluded_interfaces : Array[String]
+  excluded_callbacks : Array[String]
+  excluded_typedefs : Array[String]
+  excluded_dictionary_prefixes : Array[String]
+  dictionary_member_injection : Map[String, String]
+} derive(FromJson)
 
 ///|
 pub fn load_config_from_string(content : String) -> Config raise {
-  let toml = @toml.parse(content) catch {
-    e => fail("Invalid config TOML: \{e}")
+  let json = @json.parse(content) catch {
+    e => fail("Invalid config JSON: \{e}")
   }
-  guard toml is TomlTable(table) else {
-    fail("expected TOML table at root level")
+  let raw : RawConfig = @json.from_json(json) catch {
+    e => fail("Invalid config structure: \{e}")
   }
   {
-    idl_dir: get_string(table, "idl_dir"),
-    output_dir: get_string(table, "output_dir"),
-    templates_dir: get_string(table, "templates_dir"),
-    core_specs: @hashset.from_array(get_string_array(table, "core_specs")),
-    excluded_interfaces: @hashset.from_array(
-      get_string_array(table, "excluded_interfaces"),
-    ),
-    excluded_callbacks: @hashset.from_array(
-      get_string_array(table, "excluded_callbacks"),
-    ),
-    excluded_typedefs: @hashset.from_array(
-      get_string_array(table, "excluded_typedefs"),
-    ),
+    idl_dir: raw.idl_dir,
+    output_dir: raw.output_dir,
+    templates_dir: raw.templates_dir,
+    core_specs: @hashset.from_array(raw.core_specs),
+    excluded_interfaces: @hashset.from_array(raw.excluded_interfaces),
+    excluded_callbacks: @hashset.from_array(raw.excluded_callbacks),
+    excluded_typedefs: @hashset.from_array(raw.excluded_typedefs),
     excluded_dictionary_prefixes: @hashset.from_array(
-      get_string_array(table, "excluded_dictionary_prefixes"),
+      raw.excluded_dictionary_prefixes,
     ),
-    dictionary_member_injection: get_string_map(
-      table, "dictionary_member_injection",
-    ),
+    dictionary_member_injection: raw.dictionary_member_injection,
   }
 }
 
 ///|
-test "load_from_string with invalid TOML raises" {
-  let invalid_toml = "invalid = ["
+test "load_from_string with invalid JSON raises" {
+  let invalid_json = "{ invalid"
   try {
-    let _ : Config = load_config_from_string(invalid_toml)
+    let _ : Config = load_config_from_string(invalid_json)
     fail("expected error")
   } catch {
-    e => assert_true(e.to_string().contains("Invalid config TOML"))
+    e => assert_true(e.to_string().contains("Invalid config JSON"))
   }
 }
 
 ///|
-test "load_from_string with valid TOML" {
-  let valid_toml =
-    #|idl_dir = "node_modules/@webref/idl"
-    #|output_dir = "../src"
-    #|templates_dir = "base.mbt"
-    #|core_specs = ["dom", "html"]
-    #|excluded_interfaces = ["Element", "Node"]
-    #|excluded_callbacks = ["MutationCallback"]
-    #|excluded_typedefs = ["EventHandler"]
-    #|excluded_dictionary_prefixes = ["ElementCreationOptions"]
-    #|
-    #|[dictionary_member_injection]
-    #|EffectTiming = "OptionalEffectTiming"
-    #|
-  let cfg = load_config_from_string(valid_toml)
+test "load_from_string with valid JSON" {
+  let valid_json =
+    #|{
+    #|  "idl_dir": "node_modules/@webref/idl",
+    #|  "output_dir": "../src",
+    #|  "templates_dir": "base.mbt",
+    #|  "core_specs": ["dom", "html"],
+    #|  "excluded_interfaces": ["Element", "Node"],
+    #|  "excluded_callbacks": ["MutationCallback"],
+    #|  "excluded_typedefs": ["EventHandler"],
+    #|  "excluded_dictionary_prefixes": ["ElementCreationOptions"],
+    #|  "dictionary_member_injection": {
+    #|    "EffectTiming": "OptionalEffectTiming"
+    #|  }
+    #|}
+  let cfg = load_config_from_string(valid_json)
   json_inspect(cfg, content={
     "idl_dir": "node_modules/@webref/idl",
     "output_dir": "../src",
@@ -143,17 +92,19 @@ test "load_from_string with valid TOML" {
 
 ///|
 test "load_from_string with empty arrays" {
-  let empty_toml =
-    #|idl_dir = ""
-    #|output_dir = ""
-    #|templates_dir = ""
-    #|core_specs = []
-    #|excluded_interfaces = []
-    #|excluded_callbacks = []
-    #|excluded_typedefs = []
-    #|excluded_dictionary_prefixes = []
-    #|
-  let cfg = load_config_from_string(empty_toml)
+  let empty_json =
+    #|{
+    #|  "idl_dir": "",
+    #|  "output_dir": "",
+    #|  "templates_dir": "",
+    #|  "core_specs": [],
+    #|  "excluded_interfaces": [],
+    #|  "excluded_callbacks": [],
+    #|  "excluded_typedefs": [],
+    #|  "excluded_dictionary_prefixes": [],
+    #|  "dictionary_member_injection": {}
+    #|}
+  let cfg = load_config_from_string(empty_json)
   json_inspect(cfg, content={
     "idl_dir": "",
     "output_dir": "",

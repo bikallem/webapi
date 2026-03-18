@@ -18,8 +18,7 @@
   "source": "src",
   "deps": {
     "moonbitlang/async": "0.16.6",
-    "moonbitlang/x": "0.4.38",
-    "bobzhang/toml": "0.1.7"
+    "moonbitlang/x": "0.4.38"
   },
   "exclude": [
     "docs",

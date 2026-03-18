@@ -7,7 +7,7 @@ install:
 	cd tests && npm install
 
 gen:
-	moon run src/gen -- src/gen/config.toml
+	moon run src/gen -- src/gen/config.json
 
 gen-test:
 	moon test -p bikallem/webapi/gen
