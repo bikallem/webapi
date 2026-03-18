@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up MoonBit
         run: |
@@ -25,7 +25,7 @@ jobs:
           "$HOME/.moon/bin/moon" version --all
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 22
           cache: 'npm'
@@ -42,7 +42,7 @@ jobs:
         run: echo "version=$(moon version | head -1)" >> "$GITHUB_OUTPUT"
 
       - name: Cache MoonBit packages
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             .mooncakes
@@ -105,7 +105,7 @@ jobs:
 
       - name: Cache Playwright browsers
         id: cache-playwright
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/.cache/ms-playwright
           key: playwright-${{ runner.os }}-${{ hashFiles('tests/package-lock.json') }}
@@ -134,7 +134,7 @@ jobs:
 
       - name: Upload site artifact
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: site
           path: _site
@@ -154,7 +154,7 @@ jobs:
     needs: build-test-webapi
     steps:
       - name: Download site artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: site
           path: _site
@@ -163,7 +163,7 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Upload pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: _site
 
