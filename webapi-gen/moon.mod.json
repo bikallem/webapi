@@ -1,0 +1,9 @@
+{
+  "name": "bikallem/webapi-gen",
+  "version": "0.1.0",
+  "license": "Apache-2.0",
+  "description": "WebAPI bindings code generator",
+  "deps": {
+    "moonbitlang/x": "0.4.38"
+  }
+}

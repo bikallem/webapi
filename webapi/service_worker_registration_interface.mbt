@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: ServiceWorkerRegistration
-// Specifications: notifications.idl, service-workers.idl
+// Specifications: service-workers.idl, notifications.idl
 
 ///|
 /// [ServiceWorkerRegistration](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration)

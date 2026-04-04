@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: CompositionEventInit
-// Specifications: dom.idl, uievents.idl
+// Specifications: uievents.idl, dom.idl
 
 ///|
 /// [CompositionEventInit](https://developer.mozilla.org/en-US/docs/Web/API/CompositionEventInit)

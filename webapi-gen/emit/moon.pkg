@@ -1,0 +1,8 @@
+import {
+  "bikallem/webapi-gen/flattened_idl",
+  "bikallem/webapi-gen/partial_merged",
+  "bikallem/webapi-gen/parser",
+  "bikallem/webapi-gen/type_mapping",
+  "bikallem/webapi-gen/type_registry",
+  "moonbitlang/core/hashset",
+}

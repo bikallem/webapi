@@ -1,0 +1,20 @@
+import {
+  "bikallem/webapi-gen/parser",
+  "bikallem/webapi-gen/partial_merged",
+  "moonbitlang/core/argparse",
+  "moonbitlang/x/sys",
+  "moonbitlang/x/fs",
+  "bikallem/webapi-gen/config",
+  "bikallem/webapi-gen/flattened_idl",
+  "bikallem/webapi-gen/type_registry",
+  "bikallem/webapi-gen/emit",
+  "moonbitlang/core/hashset",
+}
+
+import {
+  "bikallem/webapi-gen/config",
+} for "wbtest"
+
+options(
+  "is-main": true,
+)

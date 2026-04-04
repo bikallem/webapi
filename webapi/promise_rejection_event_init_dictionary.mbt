@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: PromiseRejectionEventInit
-// Specifications: dom.idl, html.idl
+// Specifications: html.idl, dom.idl
 
 ///|
 /// [PromiseRejectionEventInit](https://developer.mozilla.org/en-US/docs/Web/API/PromiseRejectionEventInit)

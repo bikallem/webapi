@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: ExtendableEventInit
-// Specifications: dom.idl, service-workers.idl
+// Specifications: service-workers.idl, dom.idl
 
 ///|
 /// [ExtendableEventInit](https://developer.mozilla.org/en-US/docs/Web/API/ExtendableEventInit)

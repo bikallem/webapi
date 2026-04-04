@@ -1,5 +1,0 @@
-import {
-  "bikallem/webapi/gen/parser",
-  "bikallem/webapi/gen/type_registry",
-  "moonbitlang/core/hashset",
-}

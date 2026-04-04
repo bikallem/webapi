@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: EventModifierInit
-// Specifications: dom.idl, uievents.idl
+// Specifications: uievents.idl, dom.idl
 
 ///|
 /// [EventModifierInit](https://developer.mozilla.org/en-US/docs/Web/API/EventModifierInit)

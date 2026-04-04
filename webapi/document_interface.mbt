@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: Document
-// Specifications: SVG.idl, cssom-view.idl, selection-api.idl, dom.idl, web-animations.idl, html.idl, fullscreen.idl
+// Specifications: selection-api.idl, cssom-view.idl, web-animations.idl, dom.idl, fullscreen.idl, html.idl, SVG.idl
 
 ///|
 /// [Document](https://developer.mozilla.org/en-US/docs/Web/API/Document)

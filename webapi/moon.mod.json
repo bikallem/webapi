@@ -18,12 +18,5 @@
   "deps": {
     "moonbitlang/async": "0.16.6",
     "moonbitlang/x": "0.4.38"
-  },
-  "exclude": [
-    "docs",
-    "examples",
-    "tests",
-    "test-results"
-  ],
-  "warn-list": "@27"
+  }
 }

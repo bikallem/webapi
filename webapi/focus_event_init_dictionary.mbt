@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: FocusEventInit
-// Specifications: dom.idl, uievents.idl
+// Specifications: uievents.idl, dom.idl
 
 ///|
 /// [FocusEventInit](https://developer.mozilla.org/en-US/docs/Web/API/FocusEventInit)

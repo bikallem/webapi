@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: Navigator
-// Specifications: vibration.idl, clipboard-apis.idl, permissions.idl, pointerevents.idl, service-workers.idl, html.idl
+// Specifications: service-workers.idl, pointerevents.idl, html.idl, vibration.idl, permissions.idl, clipboard-apis.idl
 
 ///|
 /// [Navigator](https://developer.mozilla.org/en-US/docs/Web/API/Navigator)

@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: ExtendableMessageEventInit
-// Specifications: dom.idl, service-workers.idl
+// Specifications: service-workers.idl, dom.idl
 
 ///|
 /// [ExtendableMessageEventInit](https://developer.mozilla.org/en-US/docs/Web/API/ExtendableMessageEventInit)

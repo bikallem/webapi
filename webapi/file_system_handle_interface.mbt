@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: FileSystemHandle
-// Specifications: fs.idl, file-system-access.idl
+// Specifications: file-system-access.idl, fs.idl
 
 ///|
 /// [FileSystemHandle](https://developer.mozilla.org/en-US/docs/Web/API/FileSystemHandle)

@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: PageRevealEventInit
-// Specifications: dom.idl, html.idl
+// Specifications: html.idl, dom.idl
 
 ///|
 /// [PageRevealEventInit](https://developer.mozilla.org/en-US/docs/Web/API/PageRevealEventInit)

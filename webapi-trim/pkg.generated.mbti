@@ -1,0 +1,34 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bikallem/webapi-trim"
+
+import {
+  "moonbitlang/core/debug",
+  "moonbitlang/core/hashset",
+}
+
+// Values
+pub fn filter_js_modules(String, Map[String, @hashset.HashSet[String]]) -> String
+
+pub fn minify_js(String) -> String
+
+pub fn parse_wasm_imports(Bytes) -> Array[(String, String)] raise WasmParseError
+
+// Errors
+type TrimCliError derive(@debug.Debug)
+
+pub suberror WasmParseError {
+  UnexpectedEnd(String, Int)
+  InvalidMagic
+  InvalidUtf8(Int)
+  SectionPastEnd(Int, Int, Int)
+  InvalidImportKind(Int, Int)
+} derive(@debug.Debug)
+pub fn WasmParseError::message(Self) -> String
+
+// Types and methods
+type ObjectEntry
+
+// Type aliases
+
+// Traits
+
