@@ -1,6 +1,5 @@
 members = [
   "webapi",
   "webapi-gen",
-  "webapi-trim",
   "examples",
 ]

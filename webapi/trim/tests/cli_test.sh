@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # CLI integration tests for webapi_trim.
-# Run from the project root: bash webapi-trim/tests/cli_test.sh
+# Run from the project root: bash webapi/trim/tests/cli_test.sh
 #
 set -euo pipefail
 
@@ -13,11 +13,11 @@ trap 'rm -rf "$TMPDIR_TEST"' EXIT
 pass=0
 fail=0
 
-PROJECT_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+PROJECT_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
 
 # Build trim once, run via node for all tests
-(cd "$PROJECT_ROOT" && moon build webapi-trim --target js) 2>/dev/null
-TRIM="node $PROJECT_ROOT/_build/js/debug/build/bikallem/webapi-trim/webapi-trim.js"
+(cd "$PROJECT_ROOT" && moon build webapi/trim --target js) 2>/dev/null
+TRIM="node $PROJECT_ROOT/_build/js/debug/build/bikallem/webapi/trim/trim.js"
 
 run_trim() {
   $TRIM "$@" 2>/dev/null

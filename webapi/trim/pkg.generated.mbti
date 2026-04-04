@@ -1,5 +1,5 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "bikallem/webapi-trim"
+package "bikallem/webapi/trim"
 
 import {
   "moonbitlang/core/debug",

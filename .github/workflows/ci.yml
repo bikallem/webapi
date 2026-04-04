@@ -76,9 +76,9 @@ jobs:
 
       - name: Trim webapi.mjs for wasm-gc examples
         run: |
-          moon build webapi-trim --target js
+          moon build webapi/trim --target js
           for wasm in _build/wasm-gc/release/build/bikallem/webapi-examples/*/*.wasm; do
-            node _build/js/debug/build/bikallem/webapi-trim/webapi-trim.js "$(pwd)/$wasm" --source "$(pwd)/webapi/webapi.mjs"
+            node _build/js/debug/build/bikallem/webapi/trim/trim.js "$(pwd)/$wasm" --source "$(pwd)/webapi/webapi.mjs"
           done
 
       - name: Install wasm-tools
@@ -104,7 +104,7 @@ jobs:
           echo "All wasm binaries valid"
 
       - name: Run trim CLI tests
-        run: bash webapi-trim/tests/cli_test.sh
+        run: bash webapi/trim/tests/cli_test.sh
 
       - name: Cache Playwright browsers
         id: cache-playwright
