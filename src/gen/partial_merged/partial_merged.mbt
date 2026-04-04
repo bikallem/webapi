@@ -12,7 +12,7 @@ pub(all) struct PartialMergedNamespace {
   name : String
   members : Array[@parser.NamespaceMemberExtendedAttributes]
   specs : @hashset.HashSet[String]
-} derive(Show, ToJson)
+} derive(Debug, ToJson)
 
 ///|
 /// Visitor that merges partial interfaces, mixins, and dictionaries into their
@@ -27,7 +27,7 @@ pub struct PartialMerged {
   callback_functions : Map[String, @parser.CallbackFunctionDefinition]
   callback_interfaces : Map[String, @parser.CallbackInterfaceDefinition]
   include_statements : Array[@parser.IncludesStatement]
-} derive(Show, ToJson)
+} derive(Debug, ToJson)
 
 ///|
 /// Merges interface members and inheritance

@@ -1,7 +1,7 @@
 ///|
 suberror TrimCliError {
   FatalError(String)
-} derive(Show)
+} derive(Debug)
 
 ///|
 let default_source_path : String = "src/webapi.mjs"

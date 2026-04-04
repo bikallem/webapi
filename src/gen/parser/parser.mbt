@@ -6,7 +6,7 @@
 pub suberror ParseError {
   UnexpectedToken(Token, (Position, Position), Array[TokenKind])
   UnexpectedEndOfInput(Position, Array[TokenKind])
-} derive(Show)
+} derive(Debug)
 
 ///|
 priv struct Parser {
@@ -1425,7 +1425,7 @@ fn type_to_string_type(t : Type) -> StringType {
 pub suberror WebIdlError {
   Lex(LexError)
   Parse(ParseError)
-} derive(Show)
+} derive(Debug)
 
 ///|
 /// Parse WebIDL text into an array of definitions

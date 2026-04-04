@@ -5,7 +5,7 @@ pub struct PartialMergedInterface {
   members : Array[@parser.InterfaceMemberExtendedAttributes]
   inheritance : String?
   specs : @hashset.HashSet[String]
-} derive(Show, ToJson)
+} derive(Debug, ToJson)
 
 ///|
 fn PartialMergedInterface::new(

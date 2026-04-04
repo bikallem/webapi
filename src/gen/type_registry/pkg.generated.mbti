@@ -3,6 +3,7 @@ package "bikallem/webapi/gen/type_registry"
 
 import {
   "bikallem/webapi/gen/parser",
+  "moonbitlang/core/debug",
   "moonbitlang/core/hashset",
 }
 
@@ -19,9 +20,7 @@ pub enum NamedTypeKind {
   UnionTypedef
   Callback
   Unknown
-}
-pub impl Show for NamedTypeKind
-pub impl ToJson for NamedTypeKind
+} derive(ToJson, @debug.Debug)
 
 pub struct TypeRegistry {
   interface_names : @hashset.HashSet[String]
@@ -32,7 +31,7 @@ pub struct TypeRegistry {
   callback_names : @hashset.HashSet[String]
   mut callback_defs : Map[String, @parser.CallbackFunctionDefinition]
   mut typedef_defs : Map[String, @parser.TypedefDefinition]
-}
+} derive(ToJson, @debug.Debug)
 pub fn TypeRegistry::contains(Self, String) -> Bool
 pub fn TypeRegistry::get_callback_def(Self, String) -> @parser.CallbackFunctionDefinition?
 pub fn TypeRegistry::is_callback(Self, String) -> Bool
@@ -46,8 +45,6 @@ pub fn TypeRegistry::new(Array[@parser.DefinitionExtendedAttributes]) -> Self
 pub fn TypeRegistry::resolve_typedef_to_callback(Self, String) -> (String, @parser.CallbackFunctionDefinition)?
 pub fn TypeRegistry::set_callback_defs(Self, Map[String, @parser.CallbackFunctionDefinition]) -> Unit
 pub fn TypeRegistry::set_typedef_defs(Self, Map[String, @parser.TypedefDefinition]) -> Unit
-pub impl Show for TypeRegistry
-pub impl ToJson for TypeRegistry
 
 // Type aliases
 

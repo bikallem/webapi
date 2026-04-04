@@ -348,7 +348,7 @@ fn generate_moon_pkg() -> String {
     #|warnings = "-53"
     #|
     #|options(
-    #|  "supported-targets": "js+wasm-gc",
+    #|  "supported_targets": "js+wasm-gc",
     #|)
   )
 }
@@ -404,7 +404,7 @@ fn run_with_options(options : GeneratorCliOptions) -> Unit {
     type_registry.set_typedef_defs(flattened.typedefs)
 
     // Create output directory if it doesn't exist
-    if not(@fs.path_exists(output_dir)) {
+    if !@fs.path_exists(output_dir) {
       @fs.create_dir(output_dir) catch {
         e => fail("failed to create output directory: \{e}")
       }

@@ -1,6 +1,6 @@
 ///|
 /// Trait for emitting interface methods.
-trait InterfaceMethodEmit: ToJson + Show {
+trait InterfaceMethodEmit: ToJson + Debug {
   decl_emit(self : Self) -> Code // Generate method declaration code
   impl_emit(self : Self) -> Code // Generate method implementation code (no FFI)
   ffi_emit_js(self : Self) -> Code // Generate JS FFI declaration
@@ -29,7 +29,7 @@ struct RegularMethodEmit {
   webidl_name : String // Original WebIDL method name, eg "fill"
   return_type : @type_mapping.MethodReturn
   args : Array[@type_mapping.MethodArg]
-} derive(Show, ToJson)
+} derive(Debug, ToJson)
 
 ///|
 impl InterfaceMethodEmit for RegularMethodEmit with decl_emit(
@@ -143,7 +143,7 @@ struct StaticMethodEmit {
   webidl_name : String // Original WebIDL method name, eg "fill"
   return_type : @type_mapping.MethodReturn
   args : Array[@type_mapping.MethodArg]
-} derive(Show, ToJson)
+} derive(Debug, ToJson)
 
 ///|
 impl InterfaceMethodEmit for StaticMethodEmit with decl_emit(
@@ -252,7 +252,7 @@ struct AttributeGetMethodEmit {
   return_type : String
   is_enum_type : Bool // Whether the return type is an enum (needs string conversion on wasm-gc)
   is_valid_wasm_stub : Bool // Whether the return type can be used directly as a wasm-gc import return
-} derive(Show, ToJson)
+} derive(Debug, ToJson)
 
 ///|
 impl InterfaceMethodEmit for AttributeGetMethodEmit with decl_emit(
@@ -341,7 +341,7 @@ struct AttributeSetMethodEmit {
   interface_name : String // Name of the interface this method belongs to, eg. Document
   original_name : String // Original attribute name from IDL, eg "title"
   args : Array[@type_mapping.MethodArg]
-} derive(Show, ToJson)
+} derive(Debug, ToJson)
 
 ///|
 impl InterfaceMethodEmit for AttributeSetMethodEmit with decl_emit(
@@ -417,7 +417,7 @@ struct StaticAttributeGetMethodEmit {
   return_type : String
   is_enum_type : Bool // Whether the return type is an enum (needs string conversion on wasm-gc)
   is_valid_wasm_stub : Bool // Whether the return type can be used directly as a wasm-gc import return
-} derive(Show, ToJson)
+} derive(Debug, ToJson)
 
 ///|
 impl InterfaceMethodEmit for StaticAttributeGetMethodEmit with decl_emit(
@@ -509,7 +509,7 @@ struct SpecialOperationMethodEmit {
   return_type : @type_mapping.MethodReturn
   args : Array[@type_mapping.MethodArg]
   special : @parser.Special // Getter, Setter, Deleter
-} derive(Show, ToJson)
+} derive(Debug, ToJson)
 
 ///|
 impl InterfaceMethodEmit for SpecialOperationMethodEmit with decl_emit(

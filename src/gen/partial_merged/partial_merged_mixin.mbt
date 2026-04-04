@@ -4,7 +4,7 @@ pub struct PartialMergedMixin {
   name : String
   members : Array[@parser.InterfaceMemberExtendedAttributes]
   specs : @hashset.HashSet[String]
-} derive(Show, ToJson)
+} derive(Debug, ToJson)
 
 ///|
 fn PartialMergedMixin::new(

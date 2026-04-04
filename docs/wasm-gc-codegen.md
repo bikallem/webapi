@@ -132,7 +132,7 @@ guards inside those files:
 
 ```moonbit
 options(
-  "supported-targets": "js+wasm-gc",
+  "supported_targets": "js+wasm-gc",
 )
 ```
 

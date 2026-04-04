@@ -2,22 +2,22 @@
 
 ///|
 /// Represents a type name
-struct TypeName(String) derive(Show, ToJson)
+struct TypeName(String) derive(Debug, ToJson)
 
 ///|
 /// Represents a trait name
-struct TraitName(String) derive(Show, ToJson)
+struct TraitName(String) derive(Debug, ToJson)
 
 ///|
 /// Represents a constructor name, such as "new" or "new_2" for overloaded constructors
-struct ConstructorName(String) derive(Show, ToJson)
+struct ConstructorName(String) derive(Debug, ToJson)
 
 ///|
-struct ConstName(String) derive(Show, ToJson)
+struct ConstName(String) derive(Debug, ToJson)
 
 ///|
 /// WebIDL Specifications set, eg, "DOM", "HTML", "Fetch"
-struct Specs(@hashset.HashSet[String]) derive(Show, ToJson)
+struct Specs(@hashset.HashSet[String]) derive(Debug, ToJson)
 
 ///|
 fn specs_from_optional(spec : String?) -> Specs {
@@ -50,26 +50,26 @@ pub struct InterfaceDef {
   trait_name : String
   parent_trait : String
   methods : Array[&InterfaceMethodEmit]
-} derive(Show, ToJson)
+} derive(Debug, ToJson)
 
 ///|
 pub struct NamespaceDef {
   name : String
   methods : Array[&InterfaceMethodEmit]
-} derive(Show, ToJson)
+} derive(Debug, ToJson)
 
 ///|
 pub struct EnumVariantEmit {
   variant_name : String
   original_value : String
-} derive(Show, ToJson)
+} derive(Debug, ToJson)
 
 ///|
 /// Callback argument emit representation
 pub(all) struct CallbackArgEmit {
   name : String
   mbt_type : String
-} derive(Show, ToJson)
+} derive(Debug, ToJson)
 
 ///|
 /// Dictionary getter argument emit representation
@@ -80,7 +80,7 @@ pub(all) struct DictionaryGetterArg {
   is_enum_type : Bool // Needs from_unchecked conversion on wasm
   is_valid_wasm_stub : Bool // Can be used directly as wasm import return type
   is_primitive : Bool // Bool, Int, Double, etc. - need FromJsAny conversion on wasm-gc
-} derive(Show, ToJson)
+} derive(Debug, ToJson)
 
 ///|
 pub enum Emit {
@@ -108,7 +108,7 @@ pub enum Emit {
   Callback(TypeName, Array[CallbackArgEmit], TypeName) // eg. pub fn EventListener::new(f : (Event) -> Unit) -> EventListener
   Const(ConstName, TypeName, String) // eg. pub const SOME_CONST: SomeType = "some_value"
   FileHeader(TypeName, Specs) // eg. // This file is generated
-} derive(Show, ToJson)
+} derive(Debug, ToJson)
 
 ///|
 /// Convert EmitAux values from type_mapping to full Emit values.
@@ -507,12 +507,12 @@ fn render_enum(name : String, variants : Array[EnumVariantEmit]) -> String {
     buf.write_string("  \{variant.variant_name}\n")
   }
   buf.write_string("} derive(Eq)\n\n")
-  // Show
+  // Debug
   render_enum_method(
     buf,
     name,
     variants,
-    "pub impl Show for \{name} with output(self : \{name}, logger : &Logger) -> Unit {\n",
+    "pub impl Debug for \{name} with output(self : \{name}, logger : &Logger) -> Unit {\n",
     "self",
     fn(n, v) {
       "\{n}::\{v.variant_name} => logger.write_string(\"\{v.variant_name}\")"

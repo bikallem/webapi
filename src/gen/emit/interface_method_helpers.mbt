@@ -54,7 +54,7 @@ fn emit_js_ffi_with_return(
   js_expr : String,
 ) -> Code {
   let ffi_js_decl_args = ffi_argnames.map(js_safe).join(", ")
-  let needs_wrapper = not(is_optional) && not(is_void)
+  let needs_wrapper = !is_optional && !is_void
   if needs_wrapper {
     let raw_name = ffi_name + "_js"
     let call_fwd = ffi_argnames.join(", ")

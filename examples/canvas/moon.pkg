@@ -3,6 +3,8 @@ import {
   "moonbitlang/core/math",
 }
 
+supported_targets = "js+wasm-gc"
+
 options(
   "is-main": true,
   link: {
@@ -11,5 +13,4 @@ options(
       "use-js-builtin-string": true,
     },
   },
-  "supported-targets": "js+wasm-gc",
 )

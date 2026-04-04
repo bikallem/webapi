@@ -5,7 +5,7 @@ pub suberror WasmParseError {
   InvalidUtf8(Int)
   SectionPastEnd(Int, Int, Int)
   InvalidImportKind(Int, Int)
-} derive(Show)
+} derive(Debug)
 
 ///|
 pub fn WasmParseError::message(self : WasmParseError) -> String {

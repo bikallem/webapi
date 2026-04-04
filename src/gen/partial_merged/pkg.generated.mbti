@@ -3,6 +3,7 @@ package "bikallem/webapi/gen/partial_merged"
 
 import {
   "bikallem/webapi/gen/parser",
+  "moonbitlang/core/debug",
   "moonbitlang/core/hashset",
 }
 
@@ -22,44 +23,34 @@ pub struct PartialMerged {
   callback_functions : Map[String, @parser.CallbackFunctionDefinition]
   callback_interfaces : Map[String, @parser.CallbackInterfaceDefinition]
   include_statements : Array[@parser.IncludesStatement]
-}
-pub impl Show for PartialMerged
-pub impl ToJson for PartialMerged
+} derive(ToJson, @debug.Debug)
 
 pub struct PartialMergedDictionary {
   name : String
   members : Array[@parser.DictionaryMember]
   inheritance : String?
   specs : @hashset.HashSet[String]
-}
-pub impl Show for PartialMergedDictionary
-pub impl ToJson for PartialMergedDictionary
+} derive(ToJson, @debug.Debug)
 
 pub struct PartialMergedInterface {
   name : String
   members : Array[@parser.InterfaceMemberExtendedAttributes]
   inheritance : String?
   specs : @hashset.HashSet[String]
-}
+} derive(ToJson, @debug.Debug)
 pub fn PartialMergedInterface::merge(Self, Array[@parser.InterfaceMemberExtendedAttributes], String?, @hashset.HashSet[String]) -> Self
-pub impl Show for PartialMergedInterface
-pub impl ToJson for PartialMergedInterface
 
 pub struct PartialMergedMixin {
   name : String
   members : Array[@parser.InterfaceMemberExtendedAttributes]
   specs : @hashset.HashSet[String]
-}
-pub impl Show for PartialMergedMixin
-pub impl ToJson for PartialMergedMixin
+} derive(ToJson, @debug.Debug)
 
 pub(all) struct PartialMergedNamespace {
   name : String
   members : Array[@parser.NamespaceMemberExtendedAttributes]
   specs : @hashset.HashSet[String]
-}
-pub impl Show for PartialMergedNamespace
-pub impl ToJson for PartialMergedNamespace
+} derive(ToJson, @debug.Debug)
 
 // Type aliases
 

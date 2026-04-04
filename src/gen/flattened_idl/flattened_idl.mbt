@@ -5,7 +5,7 @@ pub(all) struct FlattenedInterface {
   members : Array[@parser.InterfaceMemberExtendedAttributes]
   inheritance : String?
   specs : @hashset.HashSet[String]
-} derive(Show, ToJson)
+} derive(Debug, ToJson)
 
 ///|
 /// Flattened IDL after flattening mixins, flattening dictionaries inheritance
@@ -17,7 +17,7 @@ pub struct FlattenedIdl {
   enums : Map[String, @parser.EnumDefinition]
   typedefs : Map[String, @parser.TypedefDefinition]
   callbacks : Map[String, @parser.CallbackFunctionDefinition]
-} derive(Show, ToJson)
+} derive(Debug, ToJson)
 
 ///|
 /// Merged dictionary IR with all inherited members combined.
@@ -25,7 +25,7 @@ pub(all) struct MergedDictionaryIR {
   name : String
   members : Array[@parser.DictionaryMember]
   specs : @hashset.HashSet[String]
-} derive(Show, ToJson)
+} derive(Debug, ToJson)
 
 ///|
 fn MergedDictionaryIR::new(
@@ -96,7 +96,7 @@ fn inject_dictionary_members(
           target_dict.members.iter().map(fn(m) { m.name }),
         )
         for mem in source_dict.members {
-          if not(existing.contains(mem.name)) {
+          if !existing.contains(mem.name) {
             target_dict.members.push(mem)
           }
         }
@@ -167,15 +167,17 @@ fn convert_callback_interfaces(
   logger : (String) -> Unit,
 ) -> Unit {
   for name, cbi in callback_interfaces {
-    let op = loop cbi.members.map(m => m.callback_interface_member)[:] {
-      [] => {
-        logger(
-          "CallbackInterface '\{name}' has no operation member to convert to CallbackFunction",
-        )
-        break None
+    let op = for members = cbi.members.map(m => m.callback_interface_member)[:] {
+      match members {
+        [] => {
+          logger(
+            "CallbackInterface '\{name}' has no operation member to convert to CallbackFunction",
+          )
+          break None
+        }
+        [Operation(op), ..] => break Some(op)
+        [_, .. rest] => continue rest
       }
-      [Operation(op), ..] => break Some(op)
-      [_, .. rest] => continue rest
     }
     guard op is Some(op) else { continue }
     callbacks[name] = @parser.CallbackFunctionDefinition::{
@@ -239,7 +241,7 @@ pub fn get_interface_ancestors(
   idl : FlattenedIdl,
   name : String,
 ) -> Array[String] {
-  if not(idl.interfaces.contains(name)) {
+  if !idl.interfaces.contains(name) {
     return []
   }
   let ancestors : Array[String] = []
@@ -250,7 +252,7 @@ pub fn get_interface_ancestors(
     match iface.inheritance {
       None => break
       Some(parent) if visited.contains(parent) ||
-        not(idl.interfaces.contains(parent)) => break
+        !idl.interfaces.contains(parent) => break
       Some(parent) => {
         ancestors.push(parent)
         visited.add(parent)

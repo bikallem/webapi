@@ -90,7 +90,7 @@ pub(all) enum Token {
   QUESTION
   ELLIPSIS
   STAR
-} derive(Show, ToJson)
+} derive(Debug, ToJson)
 
 ///|
 pub fn Token::kind(self : Token) -> TokenKind {
@@ -280,7 +280,7 @@ pub(all) enum TokenKind {
   TK_QUESTION
   TK_ELLIPSIS
   TK_STAR
-} derive(Eq)
+} derive(Eq, Debug)
 
 ///|
 pub impl Show for TokenKind with output(self, logger) {

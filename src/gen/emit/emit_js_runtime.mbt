@@ -312,7 +312,7 @@ fn collect_js_attributes(
             interface_name=iface.name,
           ),
         )
-        if not(attr.is_readonly) {
+        if !attr.is_readonly {
           entries.push(
             emit_js_setter(
               attr.name,

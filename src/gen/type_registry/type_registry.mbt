@@ -7,7 +7,7 @@ pub enum NamedTypeKind {
   UnionTypedef
   Callback
   Unknown
-} derive(Show, ToJson)
+} derive(Debug, ToJson)
 
 ///|
 /// Registry of known types for filtering and type resolution
@@ -20,7 +20,7 @@ pub struct TypeRegistry {
   callback_names : @hashset.HashSet[String]
   mut callback_defs : Map[String, @parser.CallbackFunctionDefinition]
   mut typedef_defs : Map[String, @parser.TypedefDefinition]
-} derive(Show, ToJson)
+} derive(Debug, ToJson)
 
 ///|
 pub fn TypeRegistry::new(

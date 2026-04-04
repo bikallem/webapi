@@ -81,7 +81,7 @@ let keywords : Map[String, Token] = {
 /// Error type for lexing
 pub suberror LexError {
   LexFailed(StringView)
-} derive(Show)
+} derive(Debug)
 
 ///|
 /// Position in the source file
@@ -89,7 +89,7 @@ pub struct Position {
   file : String
   line : Int
   column : Int
-} derive(Show)
+} derive(Debug)
 
 ///|
 /// Tokenize WebIDL input into an array of tokens with positions

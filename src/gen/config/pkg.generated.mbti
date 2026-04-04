@@ -2,6 +2,7 @@
 package "bikallem/webapi/gen/config"
 
 import {
+  "moonbitlang/core/debug",
   "moonbitlang/core/hashset",
 }
 
@@ -21,9 +22,7 @@ pub struct Config {
   excluded_typedefs : @hashset.HashSet[String]
   excluded_dictionary_prefixes : @hashset.HashSet[String]
   dictionary_member_injection : Map[String, String]
-}
-pub impl Show for Config
-pub impl ToJson for Config
+} derive(ToJson, @debug.Debug)
 
 // Type aliases
 

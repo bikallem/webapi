@@ -5,7 +5,7 @@ pub struct PartialMergedDictionary {
   members : Array[@parser.DictionaryMember]
   inheritance : String?
   specs : @hashset.HashSet[String]
-} derive(Show, ToJson)
+} derive(Debug, ToJson)
 
 ///|
 fn PartialMergedDictionary::new(

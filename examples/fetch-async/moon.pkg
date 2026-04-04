@@ -6,7 +6,8 @@ import {
 
 warnings = "-unused_package"
 
+supported_targets = "js"
+
 options(
   "is-main": true,
-  "supported-targets": "js",
 )

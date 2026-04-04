@@ -10,7 +10,7 @@ pub struct Config {
   excluded_typedefs : @hashset.HashSet[String]
   excluded_dictionary_prefixes : @hashset.HashSet[String]
   dictionary_member_injection : Map[String, String]
-} derive(Show, ToJson)
+} derive(Debug, ToJson)
 
 ///|
 /// Raw JSON-deserializable config before converting HashSet fields.

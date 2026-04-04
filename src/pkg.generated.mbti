@@ -438,24 +438,22 @@ pub(all) enum AnimationPlayState {
   Running
   Paused
   Finished
-}
+} derive(Eq)
 pub fn AnimationPlayState::from(String) -> Self?
 pub fn AnimationPlayState::value(Self) -> String
 pub impl FromJsAny for AnimationPlayState
 pub impl TJsValue for AnimationPlayState
-pub impl Eq for AnimationPlayState
 pub impl Show for AnimationPlayState
 
 pub(all) enum AnimationReplaceState {
   Active
   Removed
   Persisted
-}
+} derive(Eq)
 pub fn AnimationReplaceState::from(String) -> Self?
 pub fn AnimationReplaceState::value(Self) -> String
 pub impl FromJsAny for AnimationReplaceState
 pub impl TJsValue for AnimationReplaceState
-pub impl Eq for AnimationReplaceState
 pub impl Show for AnimationReplaceState
 
 #external
@@ -635,12 +633,11 @@ pub impl TJsValue for BigUint64Array
 pub(all) enum BinaryType {
   Blob
   Arraybuffer
-}
+} derive(Eq)
 pub fn BinaryType::from(String) -> Self?
 pub fn BinaryType::value(Self) -> String
 pub impl FromJsAny for BinaryType
 pub impl TJsValue for BinaryType
-pub impl Eq for BinaryType
 pub impl Show for BinaryType
 
 #external
@@ -776,12 +773,11 @@ pub(all) enum CSSBoxType {
   Border
   Padding
   Content
-}
+} derive(Eq)
 pub fn CSSBoxType::from(String) -> Self?
 pub fn CSSBoxType::value(Self) -> String
 pub impl FromJsAny for CSSBoxType
 pub impl TJsValue for CSSBoxType
-pub impl Eq for CSSBoxType
 pub impl Show for CSSBoxType
 
 #external
@@ -991,58 +987,53 @@ pub(all) enum CanPlayTypeResult {
   Empty
   Maybe
   Probably
-}
+} derive(Eq)
 pub fn CanPlayTypeResult::from(String) -> Self?
 pub fn CanPlayTypeResult::value(Self) -> String
 pub impl FromJsAny for CanPlayTypeResult
 pub impl TJsValue for CanPlayTypeResult
-pub impl Eq for CanPlayTypeResult
 pub impl Show for CanPlayTypeResult
 
 pub(all) enum CanvasColorType {
   Unorm8
   Float16
-}
+} derive(Eq)
 pub fn CanvasColorType::from(String) -> Self?
 pub fn CanvasColorType::value(Self) -> String
 pub impl FromJsAny for CanvasColorType
 pub impl TJsValue for CanvasColorType
-pub impl Eq for CanvasColorType
 pub impl Show for CanvasColorType
 
 pub(all) enum CanvasDirection {
   Ltr
   Rtl
   Inherit
-}
+} derive(Eq)
 pub fn CanvasDirection::from(String) -> Self?
 pub fn CanvasDirection::value(Self) -> String
 pub impl FromJsAny for CanvasDirection
 pub impl TJsValue for CanvasDirection
-pub impl Eq for CanvasDirection
 pub impl Show for CanvasDirection
 
 pub(all) enum CanvasFillRule {
   Nonzero
   Evenodd
-}
+} derive(Eq)
 pub fn CanvasFillRule::from(String) -> Self?
 pub fn CanvasFillRule::value(Self) -> String
 pub impl FromJsAny for CanvasFillRule
 pub impl TJsValue for CanvasFillRule
-pub impl Eq for CanvasFillRule
 pub impl Show for CanvasFillRule
 
 pub(all) enum CanvasFontKerning {
   Auto
   Normal
   None
-}
+} derive(Eq)
 pub fn CanvasFontKerning::from(String) -> Self?
 pub fn CanvasFontKerning::value(Self) -> String
 pub impl FromJsAny for CanvasFontKerning
 pub impl TJsValue for CanvasFontKerning
-pub impl Eq for CanvasFontKerning
 pub impl Show for CanvasFontKerning
 
 pub(all) enum CanvasFontStretch {
@@ -1055,12 +1046,11 @@ pub(all) enum CanvasFontStretch {
   Expanded
   ExtraExpanded
   UltraExpanded
-}
+} derive(Eq)
 pub fn CanvasFontStretch::from(String) -> Self?
 pub fn CanvasFontStretch::value(Self) -> String
 pub impl FromJsAny for CanvasFontStretch
 pub impl TJsValue for CanvasFontStretch
-pub impl Eq for CanvasFontStretch
 pub impl Show for CanvasFontStretch
 
 pub(all) enum CanvasFontVariantCaps {
@@ -1071,12 +1061,11 @@ pub(all) enum CanvasFontVariantCaps {
   AllPetiteCaps
   Unicase
   TitlingCaps
-}
+} derive(Eq)
 pub fn CanvasFontVariantCaps::from(String) -> Self?
 pub fn CanvasFontVariantCaps::value(Self) -> String
 pub impl FromJsAny for CanvasFontVariantCaps
 pub impl TJsValue for CanvasFontVariantCaps
-pub impl Eq for CanvasFontVariantCaps
 pub impl Show for CanvasFontVariantCaps
 
 #external
@@ -1109,24 +1098,22 @@ pub(all) enum CanvasLineCap {
   Butt
   Round
   Square
-}
+} derive(Eq)
 pub fn CanvasLineCap::from(String) -> Self?
 pub fn CanvasLineCap::value(Self) -> String
 pub impl FromJsAny for CanvasLineCap
 pub impl TJsValue for CanvasLineCap
-pub impl Eq for CanvasLineCap
 pub impl Show for CanvasLineCap
 
 pub(all) enum CanvasLineJoin {
   Round
   Bevel
   Miter
-}
+} derive(Eq)
 pub fn CanvasLineJoin::from(String) -> Self?
 pub fn CanvasLineJoin::value(Self) -> String
 pub impl FromJsAny for CanvasLineJoin
 pub impl TJsValue for CanvasLineJoin
-pub impl Eq for CanvasLineJoin
 pub impl Show for CanvasLineJoin
 
 #external
@@ -1194,12 +1181,11 @@ pub(all) enum CanvasTextAlign {
   Left
   Right
   Center
-}
+} derive(Eq)
 pub fn CanvasTextAlign::from(String) -> Self?
 pub fn CanvasTextAlign::value(Self) -> String
 pub impl FromJsAny for CanvasTextAlign
 pub impl TJsValue for CanvasTextAlign
-pub impl Eq for CanvasTextAlign
 pub impl Show for CanvasTextAlign
 
 pub(all) enum CanvasTextBaseline {
@@ -1209,12 +1195,11 @@ pub(all) enum CanvasTextBaseline {
   Alphabetic
   Ideographic
   Bottom
-}
+} derive(Eq)
 pub fn CanvasTextBaseline::from(String) -> Self?
 pub fn CanvasTextBaseline::value(Self) -> String
 pub impl FromJsAny for CanvasTextBaseline
 pub impl TJsValue for CanvasTextBaseline
-pub impl Eq for CanvasTextBaseline
 pub impl Show for CanvasTextBaseline
 
 pub(all) enum CanvasTextRendering {
@@ -1222,12 +1207,11 @@ pub(all) enum CanvasTextRendering {
   OptimizeSpeed
   OptimizeLegibility
   GeometricPrecision
-}
+} derive(Eq)
 pub fn CanvasTextRendering::from(String) -> Self?
 pub fn CanvasTextRendering::value(Self) -> String
 pub impl FromJsAny for CanvasTextRendering
 pub impl TJsValue for CanvasTextRendering
-pub impl Eq for CanvasTextRendering
 pub impl Show for CanvasTextRendering
 
 #external
@@ -1303,12 +1287,11 @@ pub(all) enum ClientType {
   Worker
   Sharedworker
   All
-}
+} derive(Eq)
 pub fn ClientType::from(String) -> Self?
 pub fn ClientType::value(Self) -> String
 pub impl FromJsAny for ClientType
 pub impl TJsValue for ClientType
-pub impl Eq for ClientType
 pub impl Show for ClientType
 
 #external
@@ -1471,12 +1454,11 @@ pub impl TJsValue for CloseWatcherOptions
 pub(all) enum ColorSpaceConversion {
   None
   Default
-}
+} derive(Eq)
 pub fn ColorSpaceConversion::from(String) -> Self?
 pub fn ColorSpaceConversion::value(Self) -> String
 pub impl FromJsAny for ColorSpaceConversion
 pub impl TJsValue for ColorSpaceConversion
-pub impl Eq for ColorSpaceConversion
 pub impl Show for ColorSpaceConversion
 
 #external
@@ -1523,12 +1505,11 @@ pub(all) enum CompositeOperation {
   Replace
   Add
   Accumulate
-}
+} derive(Eq)
 pub fn CompositeOperation::from(String) -> Self?
 pub fn CompositeOperation::value(Self) -> String
 pub impl FromJsAny for CompositeOperation
 pub impl TJsValue for CompositeOperation
-pub impl Eq for CompositeOperation
 pub impl Show for CompositeOperation
 
 pub(all) enum CompositeOperationOrAuto {
@@ -1536,14 +1517,13 @@ pub(all) enum CompositeOperationOrAuto {
   Add
   Accumulate
   Auto
-}
+} derive(Eq)
 pub fn CompositeOperationOrAuto::from(String) -> Self?
 pub fn CompositeOperationOrAuto::value(Self) -> String
 pub impl FromJsAny for CompositeOperationOrAuto
 pub impl TBasePropertyIndexedKeyframeGetComposite for CompositeOperationOrAuto
 pub impl TBasePropertyIndexedKeyframeNewComposite for CompositeOperationOrAuto
 pub impl TJsValue for CompositeOperationOrAuto
-pub impl Eq for CompositeOperationOrAuto
 pub impl Show for CompositeOperationOrAuto
 
 #external
@@ -1850,12 +1830,11 @@ pub(all) enum DOMParserSupportedType {
   ApplicationXml
   ApplicationXhtmlXml
   ImageSvgXml
-}
+} derive(Eq)
 pub fn DOMParserSupportedType::from(String) -> Self?
 pub fn DOMParserSupportedType::value(Self) -> String
 pub impl FromJsAny for DOMParserSupportedType
 pub impl TJsValue for DOMParserSupportedType
-pub impl Eq for DOMParserSupportedType
 pub impl Show for DOMParserSupportedType
 
 #external
@@ -2133,12 +2112,11 @@ pub(all) enum DocumentReadyState {
   Loading
   Interactive
   Complete
-}
+} derive(Eq)
 pub fn DocumentReadyState::from(String) -> Self?
 pub fn DocumentReadyState::value(Self) -> String
 pub impl FromJsAny for DocumentReadyState
 pub impl TJsValue for DocumentReadyState
-pub impl Eq for DocumentReadyState
 pub impl Show for DocumentReadyState
 
 #external
@@ -2178,12 +2156,11 @@ pub impl TNode for DocumentType
 pub(all) enum DocumentVisibilityState {
   Visible
   Hidden
-}
+} derive(Eq)
 pub fn DocumentVisibilityState::from(String) -> Self?
 pub fn DocumentVisibilityState::value(Self) -> String
 pub impl FromJsAny for DocumentVisibilityState
 pub impl TJsValue for DocumentVisibilityState
-pub impl Eq for DocumentVisibilityState
 pub impl Show for DocumentVisibilityState
 
 #external
@@ -2338,12 +2315,11 @@ pub impl TJsValue for ElementOuterHTML
 pub(all) enum EndingType {
   Transparent
   Native
-}
+} derive(Eq)
 pub fn EndingType::from(String) -> Self?
 pub fn EndingType::value(Self) -> String
 pub impl FromJsAny for EndingType
 pub impl TJsValue for EndingType
-pub impl Eq for EndingType
 pub impl Show for EndingType
 
 #external
@@ -2758,12 +2734,11 @@ pub impl TStartInDirectory for FileSystemHandle
 pub(all) enum FileSystemHandleKind {
   File
   Directory
-}
+} derive(Eq)
 pub fn FileSystemHandleKind::from(String) -> Self?
 pub fn FileSystemHandleKind::value(Self) -> String
 pub impl FromJsAny for FileSystemHandleKind
 pub impl TJsValue for FileSystemHandleKind
-pub impl Eq for FileSystemHandleKind
 pub impl Show for FileSystemHandleKind
 
 #external
@@ -2787,12 +2762,11 @@ pub impl TJsValue for FileSystemPermissionDescriptor
 pub(all) enum FileSystemPermissionMode {
   Read
   Readwrite
-}
+} derive(Eq)
 pub fn FileSystemPermissionMode::from(String) -> Self?
 pub fn FileSystemPermissionMode::value(Self) -> String
 pub impl FromJsAny for FileSystemPermissionMode
 pub impl TJsValue for FileSystemPermissionMode
-pub impl Eq for FileSystemPermissionMode
 pub impl Show for FileSystemPermissionMode
 
 #external
@@ -2850,12 +2824,11 @@ pub(all) enum FillMode {
   Backwards
   Both
   Auto
-}
+} derive(Eq)
 pub fn FillMode::from(String) -> Self?
 pub fn FillMode::value(Self) -> String
 pub impl FromJsAny for FillMode
 pub impl TJsValue for FillMode
-pub impl Eq for FillMode
 pub impl Show for FillMode
 
 #external
@@ -2974,24 +2947,22 @@ pub(all) enum FrameType {
   TopLevel
   Nested
   None
-}
+} derive(Eq)
 pub fn FrameType::from(String) -> Self?
 pub fn FrameType::value(Self) -> String
 pub impl FromJsAny for FrameType
 pub impl TJsValue for FrameType
-pub impl Eq for FrameType
 pub impl Show for FrameType
 
 pub(all) enum FullscreenNavigationUI {
   Auto
   Show
   Hide
-}
+} derive(Eq)
 pub fn FullscreenNavigationUI::from(String) -> Self?
 pub fn FullscreenNavigationUI::value(Self) -> String
 pub impl FromJsAny for FullscreenNavigationUI
 pub impl TJsValue for FullscreenNavigationUI
-pub impl Eq for FullscreenNavigationUI
 pub impl Show for FullscreenNavigationUI
 
 #external
@@ -4441,12 +4412,11 @@ pub(all) enum IDBCursorDirection {
   Nextunique
   Prev
   Prevunique
-}
+} derive(Eq)
 pub fn IDBCursorDirection::from(String) -> Self?
 pub fn IDBCursorDirection::value(Self) -> String
 pub impl FromJsAny for IDBCursorDirection
 pub impl TJsValue for IDBCursorDirection
-pub impl Eq for IDBCursorDirection
 pub impl Show for IDBCursorDirection
 
 #external
@@ -4621,12 +4591,11 @@ pub impl TJsValue for IDBRequest
 pub(all) enum IDBRequestReadyState {
   Pending
   Done
-}
+} derive(Eq)
 pub fn IDBRequestReadyState::from(String) -> Self?
 pub fn IDBRequestReadyState::value(Self) -> String
 pub impl FromJsAny for IDBRequestReadyState
 pub impl TJsValue for IDBRequestReadyState
-pub impl Eq for IDBRequestReadyState
 pub impl Show for IDBRequestReadyState
 
 #external
@@ -4655,24 +4624,22 @@ pub(all) enum IDBTransactionDurability {
   Default
   Strict
   Relaxed
-}
+} derive(Eq)
 pub fn IDBTransactionDurability::from(String) -> Self?
 pub fn IDBTransactionDurability::value(Self) -> String
 pub impl FromJsAny for IDBTransactionDurability
 pub impl TJsValue for IDBTransactionDurability
-pub impl Eq for IDBTransactionDurability
 pub impl Show for IDBTransactionDurability
 
 pub(all) enum IDBTransactionMode {
   Readonly
   Readwrite
   Versionchange
-}
+} derive(Eq)
 pub fn IDBTransactionMode::from(String) -> Self?
 pub fn IDBTransactionMode::value(Self) -> String
 pub impl FromJsAny for IDBTransactionMode
 pub impl TJsValue for IDBTransactionMode
-pub impl Eq for IDBTransactionMode
 pub impl Show for IDBTransactionMode
 
 #external
@@ -4826,12 +4793,11 @@ pub impl TJsValue for ImageDataArray
 pub(all) enum ImageDataPixelFormat {
   RgbaUnorm8
   RgbaFloat16
-}
+} derive(Eq)
 pub fn ImageDataPixelFormat::from(String) -> Self?
 pub fn ImageDataPixelFormat::value(Self) -> String
 pub impl FromJsAny for ImageDataPixelFormat
 pub impl TJsValue for ImageDataPixelFormat
-pub impl Eq for ImageDataPixelFormat
 pub impl Show for ImageDataPixelFormat
 
 #external
@@ -4855,24 +4821,22 @@ pub impl TJsValue for ImageEncodeOptions
 pub(all) enum ImageOrientation {
   FromImage
   FlipY
-}
+} derive(Eq)
 pub fn ImageOrientation::from(String) -> Self?
 pub fn ImageOrientation::value(Self) -> String
 pub impl FromJsAny for ImageOrientation
 pub impl TJsValue for ImageOrientation
-pub impl Eq for ImageOrientation
 pub impl Show for ImageOrientation
 
 pub(all) enum ImageSmoothingQuality {
   Low
   Medium
   High
-}
+} derive(Eq)
 pub fn ImageSmoothingQuality::from(String) -> Self?
 pub fn ImageSmoothingQuality::value(Self) -> String
 pub impl FromJsAny for ImageSmoothingQuality
 pub impl TJsValue for ImageSmoothingQuality
-pub impl Eq for ImageSmoothingQuality
 pub impl Show for ImageSmoothingQuality
 
 #external
@@ -5039,6 +5003,7 @@ pub impl TJsValue for IntersectionObserverRoot
 pub type JsArray
 pub fn[T : TJsValue] JsArray::from_array(Array[T]) -> Self
 pub fn[T] JsArray::to_array(Self) -> Array[T]
+pub fn[T : FromJsAny] JsArray::to_value_array(Self) -> Array[T]
 pub impl FromJsAny for JsArray
 pub impl TJsValue for JsArray
 
@@ -5600,24 +5565,22 @@ pub impl TNavigationDestination for NavigationDestination
 pub(all) enum NavigationFocusReset {
   AfterTransition
   Manual
-}
+} derive(Eq)
 pub fn NavigationFocusReset::from(String) -> Self?
 pub fn NavigationFocusReset::value(Self) -> String
 pub impl FromJsAny for NavigationFocusReset
 pub impl TJsValue for NavigationFocusReset
-pub impl Eq for NavigationFocusReset
 pub impl Show for NavigationFocusReset
 
 pub(all) enum NavigationHistoryBehavior {
   Auto
   Push
   Replace
-}
+} derive(Eq)
 pub fn NavigationHistoryBehavior::from(String) -> Self?
 pub fn NavigationHistoryBehavior::value(Self) -> String
 pub impl FromJsAny for NavigationHistoryBehavior
 pub impl TJsValue for NavigationHistoryBehavior
-pub impl Eq for NavigationHistoryBehavior
 pub impl Show for NavigationHistoryBehavior
 
 #external
@@ -5725,12 +5688,11 @@ pub impl TJsValue for NavigationResult
 pub(all) enum NavigationScrollBehavior {
   AfterTransition
   Manual
-}
+} derive(Eq)
 pub fn NavigationScrollBehavior::from(String) -> Self?
 pub fn NavigationScrollBehavior::value(Self) -> String
 pub impl FromJsAny for NavigationScrollBehavior
 pub impl TJsValue for NavigationScrollBehavior
-pub impl Eq for NavigationScrollBehavior
 pub impl Show for NavigationScrollBehavior
 
 #external
@@ -5749,12 +5711,11 @@ pub(all) enum NavigationType {
   Replace
   Reload
   Traverse
-}
+} derive(Eq)
 pub fn NavigationType::from(String) -> Self?
 pub fn NavigationType::value(Self) -> String
 pub impl FromJsAny for NavigationType
 pub impl TJsValue for NavigationType
-pub impl Eq for NavigationType
 pub impl Show for NavigationType
 
 #external
@@ -5887,12 +5848,11 @@ pub(all) enum NotificationDirection {
   Auto
   Ltr
   Rtl
-}
+} derive(Eq)
 pub fn NotificationDirection::from(String) -> Self?
 pub fn NotificationDirection::value(Self) -> String
 pub impl FromJsAny for NotificationDirection
 pub impl TJsValue for NotificationDirection
-pub impl Eq for NotificationDirection
 pub impl Show for NotificationDirection
 
 #external
@@ -5947,12 +5907,11 @@ pub(all) enum NotificationPermission {
   Default
   Denied
   Granted
-}
+} derive(Eq)
 pub fn NotificationPermission::from(String) -> Self?
 pub fn NotificationPermission::value(Self) -> String
 pub impl FromJsAny for NotificationPermission
 pub impl TJsValue for NotificationPermission
-pub impl Eq for NotificationPermission
 pub impl Show for NotificationPermission
 
 #external
@@ -6024,12 +5983,11 @@ pub(all) enum OffscreenRenderingContextId {
   Webgl
   Webgl2
   Webgpu
-}
+} derive(Eq)
 pub fn OffscreenRenderingContextId::from(String) -> Self?
 pub fn OffscreenRenderingContextId::value(Self) -> String
 pub impl FromJsAny for OffscreenRenderingContextId
 pub impl TJsValue for OffscreenRenderingContextId
-pub impl Eq for OffscreenRenderingContextId
 pub impl Show for OffscreenRenderingContextId
 
 #alias(OnBeforeUnloadEventHandler)
@@ -6097,12 +6055,11 @@ pub(all) enum OrientationLockType {
   PortraitSecondary
   LandscapePrimary
   LandscapeSecondary
-}
+} derive(Eq)
 pub fn OrientationLockType::from(String) -> Self?
 pub fn OrientationLockType::value(Self) -> String
 pub impl FromJsAny for OrientationLockType
 pub impl TJsValue for OrientationLockType
-pub impl Eq for OrientationLockType
 pub impl Show for OrientationLockType
 
 pub(all) enum OrientationType {
@@ -6110,12 +6067,11 @@ pub(all) enum OrientationType {
   PortraitSecondary
   LandscapePrimary
   LandscapeSecondary
-}
+} derive(Eq)
 pub fn OrientationType::from(String) -> Self?
 pub fn OrientationType::value(Self) -> String
 pub impl FromJsAny for OrientationType
 pub impl TJsValue for OrientationType
-pub impl Eq for OrientationType
 pub impl Show for OrientationType
 
 #external
@@ -6309,12 +6265,11 @@ pub(all) enum PermissionState {
   Granted
   Denied
   Prompt
-}
+} derive(Eq)
 pub fn PermissionState::from(String) -> Self?
 pub fn PermissionState::value(Self) -> String
 pub impl FromJsAny for PermissionState
 pub impl TJsValue for PermissionState
-pub impl Eq for PermissionState
 pub impl Show for PermissionState
 
 #external
@@ -6345,12 +6300,11 @@ pub(all) enum PlaybackDirection {
   Reverse
   Alternate
   AlternateReverse
-}
+} derive(Eq)
 pub fn PlaybackDirection::from(String) -> Self?
 pub fn PlaybackDirection::value(Self) -> String
 pub impl FromJsAny for PlaybackDirection
 pub impl TJsValue for PlaybackDirection
-pub impl Eq for PlaybackDirection
 pub impl Show for PlaybackDirection
 
 #external
@@ -6469,36 +6423,33 @@ pub(all) enum PredefinedColorSpace {
   SrgbLinear
   DisplayP3
   DisplayP3Linear
-}
+} derive(Eq)
 pub fn PredefinedColorSpace::from(String) -> Self?
 pub fn PredefinedColorSpace::value(Self) -> String
 pub impl FromJsAny for PredefinedColorSpace
 pub impl TJsValue for PredefinedColorSpace
-pub impl Eq for PredefinedColorSpace
 pub impl Show for PredefinedColorSpace
 
 pub(all) enum PremultiplyAlpha {
   None
   Premultiply
   Default
-}
+} derive(Eq)
 pub fn PremultiplyAlpha::from(String) -> Self?
 pub fn PremultiplyAlpha::value(Self) -> String
 pub impl FromJsAny for PremultiplyAlpha
 pub impl TJsValue for PremultiplyAlpha
-pub impl Eq for PremultiplyAlpha
 pub impl Show for PremultiplyAlpha
 
 pub(all) enum PresentationStyle {
   Unspecified
   Inline
   Attachment
-}
+} derive(Eq)
 pub fn PresentationStyle::from(String) -> Self?
 pub fn PresentationStyle::value(Self) -> String
 pub impl FromJsAny for PresentationStyle
 pub impl TJsValue for PresentationStyle
-pub impl Eq for PresentationStyle
 pub impl Show for PresentationStyle
 
 #external
@@ -6769,22 +6720,20 @@ pub impl TReadableStreamReader for ReadableStreamReader
 
 pub(all) enum ReadableStreamReaderMode {
   Byob
-}
+} derive(Eq)
 pub fn ReadableStreamReaderMode::from(String) -> Self?
 pub fn ReadableStreamReaderMode::value(Self) -> String
 pub impl FromJsAny for ReadableStreamReaderMode
 pub impl TJsValue for ReadableStreamReaderMode
-pub impl Eq for ReadableStreamReaderMode
 pub impl Show for ReadableStreamReaderMode
 
 pub(all) enum ReadableStreamType {
   Bytes
-}
+} derive(Eq)
 pub fn ReadableStreamType::from(String) -> Self?
 pub fn ReadableStreamType::value(Self) -> String
 pub impl FromJsAny for ReadableStreamType
 pub impl TJsValue for ReadableStreamType
-pub impl Eq for ReadableStreamType
 pub impl Show for ReadableStreamType
 
 #external
@@ -6806,12 +6755,11 @@ pub(all) enum ReferrerPolicy {
   OriginWhenCrossOrigin
   StrictOriginWhenCrossOrigin
   UnsafeUrl
-}
+} derive(Eq)
 pub fn ReferrerPolicy::from(String) -> Self?
 pub fn ReferrerPolicy::value(Self) -> String
 pub impl FromJsAny for ReferrerPolicy
 pub impl TJsValue for ReferrerPolicy
-pub impl Eq for ReferrerPolicy
 pub impl Show for ReferrerPolicy
 
 #external
@@ -6854,24 +6802,22 @@ pub(all) enum RequestCache {
   NoCache
   ForceCache
   OnlyIfCached
-}
+} derive(Eq)
 pub fn RequestCache::from(String) -> Self?
 pub fn RequestCache::value(Self) -> String
 pub impl FromJsAny for RequestCache
 pub impl TJsValue for RequestCache
-pub impl Eq for RequestCache
 pub impl Show for RequestCache
 
 pub(all) enum RequestCredentials {
   Omit
   SameOrigin
   Include
-}
+} derive(Eq)
 pub fn RequestCredentials::from(String) -> Self?
 pub fn RequestCredentials::value(Self) -> String
 pub impl FromJsAny for RequestCredentials
 pub impl TJsValue for RequestCredentials
-pub impl Eq for RequestCredentials
 pub impl Show for RequestCredentials
 
 pub(all) enum RequestDestination {
@@ -6896,22 +6842,20 @@ pub(all) enum RequestDestination {
   Video
   Worker
   Xslt
-}
+} derive(Eq)
 pub fn RequestDestination::from(String) -> Self?
 pub fn RequestDestination::value(Self) -> String
 pub impl FromJsAny for RequestDestination
 pub impl TJsValue for RequestDestination
-pub impl Eq for RequestDestination
 pub impl Show for RequestDestination
 
 pub(all) enum RequestDuplex {
   Half
-}
+} derive(Eq)
 pub fn RequestDuplex::from(String) -> Self?
 pub fn RequestDuplex::value(Self) -> String
 pub impl FromJsAny for RequestDuplex
 pub impl TJsValue for RequestDuplex
-pub impl Eq for RequestDuplex
 pub impl Show for RequestDuplex
 
 #external
@@ -6951,36 +6895,33 @@ pub(all) enum RequestMode {
   SameOrigin
   NoCors
   Cors
-}
+} derive(Eq)
 pub fn RequestMode::from(String) -> Self?
 pub fn RequestMode::value(Self) -> String
 pub impl FromJsAny for RequestMode
 pub impl TJsValue for RequestMode
-pub impl Eq for RequestMode
 pub impl Show for RequestMode
 
 pub(all) enum RequestPriority {
   High
   Low
   Auto
-}
+} derive(Eq)
 pub fn RequestPriority::from(String) -> Self?
 pub fn RequestPriority::value(Self) -> String
 pub impl FromJsAny for RequestPriority
 pub impl TJsValue for RequestPriority
-pub impl Eq for RequestPriority
 pub impl Show for RequestPriority
 
 pub(all) enum RequestRedirect {
   Follow
   Error
   Manual
-}
+} derive(Eq)
 pub fn RequestRedirect::from(String) -> Self?
 pub fn RequestRedirect::value(Self) -> String
 pub impl FromJsAny for RequestRedirect
 pub impl TJsValue for RequestRedirect
-pub impl Eq for RequestRedirect
 pub impl Show for RequestRedirect
 
 #external
@@ -6999,12 +6940,11 @@ pub(all) enum ResizeObserverBoxOptions {
   BorderBox
   ContentBox
   DevicePixelContentBox
-}
+} derive(Eq)
 pub fn ResizeObserverBoxOptions::from(String) -> Self?
 pub fn ResizeObserverBoxOptions::value(Self) -> String
 pub impl FromJsAny for ResizeObserverBoxOptions
 pub impl TJsValue for ResizeObserverBoxOptions
-pub impl Eq for ResizeObserverBoxOptions
 pub impl Show for ResizeObserverBoxOptions
 
 #external
@@ -7048,12 +6988,11 @@ pub(all) enum ResizeQuality {
   Low
   Medium
   High
-}
+} derive(Eq)
 pub fn ResizeQuality::from(String) -> Self?
 pub fn ResizeQuality::value(Self) -> String
 pub impl FromJsAny for ResizeQuality
 pub impl TJsValue for ResizeQuality
-pub impl Eq for ResizeQuality
 pub impl Show for ResizeQuality
 
 #external
@@ -7090,12 +7029,11 @@ pub(all) enum ResponseType {
   Error
   Opaque
   Opaqueredirect
-}
+} derive(Eq)
 pub fn ResponseType::from(String) -> Self?
 pub fn ResponseType::value(Self) -> String
 pub impl FromJsAny for ResponseType
 pub impl TJsValue for ResponseType
-pub impl Eq for ResponseType
 pub impl Show for ResponseType
 
 #external
@@ -7146,24 +7084,22 @@ pub(all) enum RouterSourceEnum {
   FetchEvent
   Network
   RaceNetworkAndFetchHandler
-}
+} derive(Eq)
 pub fn RouterSourceEnum::from(String) -> Self?
 pub fn RouterSourceEnum::value(Self) -> String
 pub impl FromJsAny for RouterSourceEnum
 pub impl TJsValue for RouterSourceEnum
 pub impl TRouterSource for RouterSourceEnum
-pub impl Eq for RouterSourceEnum
 pub impl Show for RouterSourceEnum
 
 pub(all) enum RunningStatus {
   Running
   NotRunning
-}
+} derive(Eq)
 pub fn RunningStatus::from(String) -> Self?
 pub fn RunningStatus::value(Self) -> String
 pub impl FromJsAny for RunningStatus
 pub impl TJsValue for RunningStatus
-pub impl Eq for RunningStatus
 pub impl Show for RunningStatus
 
 #external
@@ -8055,23 +7991,21 @@ pub(all) enum ScrollBehavior {
   Auto
   Instant
   Smooth
-}
+} derive(Eq)
 pub fn ScrollBehavior::from(String) -> Self?
 pub fn ScrollBehavior::value(Self) -> String
 pub impl FromJsAny for ScrollBehavior
 pub impl TJsValue for ScrollBehavior
-pub impl Eq for ScrollBehavior
 pub impl Show for ScrollBehavior
 
 pub(all) enum ScrollIntoViewContainer {
   All
   Nearest
-}
+} derive(Eq)
 pub fn ScrollIntoViewContainer::from(String) -> Self?
 pub fn ScrollIntoViewContainer::value(Self) -> String
 pub impl FromJsAny for ScrollIntoViewContainer
 pub impl TJsValue for ScrollIntoViewContainer
-pub impl Eq for ScrollIntoViewContainer
 pub impl Show for ScrollIntoViewContainer
 
 #external
@@ -8091,12 +8025,11 @@ pub(all) enum ScrollLogicalPosition {
   Center
   End
   Nearest
-}
+} derive(Eq)
 pub fn ScrollLogicalPosition::from(String) -> Self?
 pub fn ScrollLogicalPosition::value(Self) -> String
 pub impl FromJsAny for ScrollLogicalPosition
 pub impl TJsValue for ScrollLogicalPosition
-pub impl Eq for ScrollLogicalPosition
 pub impl Show for ScrollLogicalPosition
 
 #external
@@ -8110,12 +8043,11 @@ pub impl TJsValue for ScrollOptions
 pub(all) enum ScrollRestoration {
   Auto
   Manual
-}
+} derive(Eq)
 pub fn ScrollRestoration::from(String) -> Self?
 pub fn ScrollRestoration::value(Self) -> String
 pub impl FromJsAny for ScrollRestoration
 pub impl TJsValue for ScrollRestoration
-pub impl Eq for ScrollRestoration
 pub impl Show for ScrollRestoration
 
 #external
@@ -8144,12 +8076,11 @@ pub(all) enum SelectionMode {
   Start
   End
   Preserve
-}
+} derive(Eq)
 pub fn SelectionMode::from(String) -> Self?
 pub fn SelectionMode::value(Self) -> String
 pub impl FromJsAny for SelectionMode
 pub impl TJsValue for SelectionMode
-pub impl Eq for SelectionMode
 pub impl Show for SelectionMode
 
 #external
@@ -8213,24 +8144,22 @@ pub(all) enum ServiceWorkerState {
   Activating
   Activated
   Redundant
-}
+} derive(Eq)
 pub fn ServiceWorkerState::from(String) -> Self?
 pub fn ServiceWorkerState::value(Self) -> String
 pub impl FromJsAny for ServiceWorkerState
 pub impl TJsValue for ServiceWorkerState
-pub impl Eq for ServiceWorkerState
 pub impl Show for ServiceWorkerState
 
 pub(all) enum ServiceWorkerUpdateViaCache {
   Imports
   All
   None
-}
+} derive(Eq)
 pub fn ServiceWorkerUpdateViaCache::from(String) -> Self?
 pub fn ServiceWorkerUpdateViaCache::value(Self) -> String
 pub impl FromJsAny for ServiceWorkerUpdateViaCache
 pub impl TJsValue for ServiceWorkerUpdateViaCache
-pub impl Eq for ServiceWorkerUpdateViaCache
 pub impl Show for ServiceWorkerUpdateViaCache
 
 #external
@@ -8287,12 +8216,11 @@ pub impl TShadowRootInnerHTML for ShadowRootInnerHTML
 pub(all) enum ShadowRootMode {
   Open
   Closed
-}
+} derive(Eq)
 pub fn ShadowRootMode::from(String) -> Self?
 pub fn ShadowRootMode::value(Self) -> String
 pub impl FromJsAny for ShadowRootMode
 pub impl TJsValue for ShadowRootMode
-pub impl Eq for ShadowRootMode
 pub impl Show for ShadowRootMode
 
 #external
@@ -8338,12 +8266,11 @@ pub impl TJsValue for ShowPopoverOptions
 pub(all) enum SlotAssignmentMode {
   Manual
   Named
-}
+} derive(Eq)
 pub fn SlotAssignmentMode::from(String) -> Self?
 pub fn SlotAssignmentMode::value(Self) -> String
 pub impl FromJsAny for SlotAssignmentMode
 pub impl TJsValue for SlotAssignmentMode
-pub impl Eq for SlotAssignmentMode
 pub impl Show for SlotAssignmentMode
 
 #external
@@ -8673,12 +8600,11 @@ pub(all) enum TextTrackKind {
   Descriptions
   Chapters
   Metadata
-}
+} derive(Eq)
 pub fn TextTrackKind::from(String) -> Self?
 pub fn TextTrackKind::value(Self) -> String
 pub impl FromJsAny for TextTrackKind
 pub impl TJsValue for TextTrackKind
-pub impl Eq for TextTrackKind
 pub impl Show for TextTrackKind
 
 #external
@@ -8697,12 +8623,11 @@ pub(all) enum TextTrackMode {
   Disabled
   Hidden
   Showing
-}
+} derive(Eq)
 pub fn TextTrackMode::from(String) -> Self?
 pub fn TextTrackMode::value(Self) -> String
 pub impl FromJsAny for TextTrackMode
 pub impl TJsValue for TextTrackMode
-pub impl Eq for TextTrackMode
 pub impl Show for TextTrackMode
 
 #external
@@ -8854,12 +8779,11 @@ pub impl TTouchList for TouchList
 pub(all) enum TouchType {
   Direct
   Stylus
-}
+} derive(Eq)
 pub fn TouchType::from(String) -> Self?
 pub fn TouchType::value(Self) -> String
 pub impl FromJsAny for TouchType
 pub impl TJsValue for TouchType
-pub impl Eq for TouchType
 pub impl Show for TouchType
 
 #external
@@ -9457,13 +9381,12 @@ pub(all) enum WellKnownDirectory {
   Music
   Pictures
   Videos
-}
+} derive(Eq)
 pub fn WellKnownDirectory::from(String) -> Self?
 pub fn WellKnownDirectory::value(Self) -> String
 pub impl FromJsAny for WellKnownDirectory
 pub impl TJsValue for WellKnownDirectory
 pub impl TStartInDirectory for WellKnownDirectory
-pub impl Eq for WellKnownDirectory
 pub impl Show for WellKnownDirectory
 
 #external
@@ -9626,12 +9549,11 @@ pub impl TSharedWorkerNewOptions for WorkerOptions
 pub(all) enum WorkerType {
   Classic
   Module
-}
+} derive(Eq)
 pub fn WorkerType::from(String) -> Self?
 pub fn WorkerType::value(Self) -> String
 pub impl FromJsAny for WorkerType
 pub impl TJsValue for WorkerType
-pub impl Eq for WorkerType
 pub impl Show for WorkerType
 
 #external
@@ -9703,12 +9625,11 @@ pub(all) enum WriteCommandType {
   Write
   Seek
   Truncate
-}
+} derive(Eq)
 pub fn WriteCommandType::from(String) -> Self?
 pub fn WriteCommandType::value(Self) -> String
 pub impl FromJsAny for WriteCommandType
 pub impl TJsValue for WriteCommandType
-pub impl Eq for WriteCommandType
 pub impl Show for WriteCommandType
 
 #external
@@ -9792,12 +9713,11 @@ pub(all) enum XMLHttpRequestResponseType {
   Document
   Json
   Text
-}
+} derive(Eq)
 pub fn XMLHttpRequestResponseType::from(String) -> Self?
 pub fn XMLHttpRequestResponseType::value(Self) -> String
 pub impl FromJsAny for XMLHttpRequestResponseType
 pub impl TJsValue for XMLHttpRequestResponseType
-pub impl Eq for XMLHttpRequestResponseType
 pub impl Show for XMLHttpRequestResponseType
 
 #external

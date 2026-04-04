@@ -4,6 +4,7 @@ package "bikallem/webapi/gen/flattened_idl"
 import {
   "bikallem/webapi/gen/parser",
   "bikallem/webapi/gen/partial_merged",
+  "moonbitlang/core/debug",
   "moonbitlang/core/hashset",
 }
 
@@ -22,26 +23,20 @@ pub struct FlattenedIdl {
   enums : Map[String, @parser.EnumDefinition]
   typedefs : Map[String, @parser.TypedefDefinition]
   callbacks : Map[String, @parser.CallbackFunctionDefinition]
-}
-pub impl Show for FlattenedIdl
-pub impl ToJson for FlattenedIdl
+} derive(ToJson, @debug.Debug)
 
 pub(all) struct FlattenedInterface {
   name : String
   members : Array[@parser.InterfaceMemberExtendedAttributes]
   inheritance : String?
   specs : @hashset.HashSet[String]
-}
-pub impl Show for FlattenedInterface
-pub impl ToJson for FlattenedInterface
+} derive(ToJson, @debug.Debug)
 
 pub(all) struct MergedDictionaryIR {
   name : String
   members : Array[@parser.DictionaryMember]
   specs : @hashset.HashSet[String]
-}
-pub impl Show for MergedDictionaryIR
-pub impl ToJson for MergedDictionaryIR
+} derive(ToJson, @debug.Debug)
 
 // Type aliases
 

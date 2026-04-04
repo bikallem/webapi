@@ -418,109 +418,111 @@ pub impl Emitter for InterfaceEmitter with emit(
   let interface_methods : Array[&InterfaceMethodEmit] = []
   let constructor_namer = OverloadNamer::new()
   let method_namer = OverloadNamer::new()
-  loop interface.members.map(mem => mem.interface_member)[:] {
-    [] => break
-    [Constructor(ctor), .. rest] => {
-      let method_name = constructor_namer.next("new", ctor.arguments)
-      let ctor_emits = emit_constructor(
-        ctor,
-        interface.name,
-        method_name,
-        self.type_registry,
-      )
-      emits.push_iter(ctor_emits.iter())
-      continue rest
-    }
-    [RegularOperation(op), .. rest] if op.name.contains("-") => continue rest
-    [Attribute(attr), .. rest] if attr.name.contains("-") => continue rest
-    [RegularOperation(op), .. rest] => {
-      let orig_method_name = method_namer.next(op.name, op.arguments)
-      let (op_emits, meth) = emit_regular_operation(
-        op,
-        interface.name,
-        orig_method_name,
-        self.type_registry,
-      )
-      emits.push_iter(op_emits.iter())
-      interface_methods.push(meth)
-      continue rest
-    }
-    [Attribute(attr), .. rest] => {
-      if attr.static_ && !attr.is_readonly && !attr.is_inherit {
+  for members = interface.members.map(mem => mem.interface_member)[:] {
+    match members {
+      [] => break
+      [Constructor(ctor), .. rest] => {
+        let method_name = constructor_namer.next("new", ctor.arguments)
+        let ctor_emits = emit_constructor(
+          ctor,
+          interface.name,
+          method_name,
+          self.type_registry,
+        )
+        emits.push_iter(ctor_emits.iter())
         continue rest
       }
-      let (attr_emits, attr_methods) = emit_attribute(
-        attr,
-        interface.name,
-        self.type_registry,
-      )
-      emits.push_iter(attr_emits.iter())
-      interface_methods.push_iter(attr_methods.iter())
-      continue rest
-    }
-    [Const(const_val), .. rest] => {
-      let const_emits = emit_const_member(
-        const_val,
-        interface.name,
-        self.type_registry,
-      )
-      emits.push_iter(const_emits.iter())
-      continue rest
-    }
-    // Named special operations → treat as regular methods
-    [SpecialOperation(op), .. rest] if op.name is Some(_) => {
-      let name = op.name.unwrap()
-      let orig_method_name = method_namer.next(name, op.arguments)
-      let regular_op : @parser.RegularOperationMember = {
-        name,
-        return_type: op.return_type,
-        arguments: op.arguments,
-        static_: false,
+      [RegularOperation(op), .. rest] if op.name.contains("-") => continue rest
+      [Attribute(attr), .. rest] if attr.name.contains("-") => continue rest
+      [RegularOperation(op), .. rest] => {
+        let orig_method_name = method_namer.next(op.name, op.arguments)
+        let (op_emits, meth) = emit_regular_operation(
+          op,
+          interface.name,
+          orig_method_name,
+          self.type_registry,
+        )
+        emits.push_iter(op_emits.iter())
+        interface_methods.push(meth)
+        continue rest
       }
-      let (op_emits, meth) = emit_regular_operation(
-        regular_op,
-        interface.name,
-        orig_method_name,
-        self.type_registry,
-      )
-      emits.push_iter(op_emits.iter())
-      interface_methods.push(meth)
-      continue rest
-    }
-    // Unnamed special operations → bracket notation with synthetic names
-    [SpecialOperation(op), .. rest] => {
-      let base_name = op.special.base_name()
-      let orig_method_name = method_namer.next(base_name, op.arguments)
-      let (op_emits, meth) = emit_unnamed_special_operation(
-        op,
-        interface.name,
-        orig_method_name,
-        self.type_registry,
-      )
-      emits.push_iter(op_emits.iter())
-      interface_methods.push(meth)
-      continue rest
-    }
-    [
-      Setlike(_)
-      | Maplike(_)
-      | AsyncIterable(_)
-      | Iterable(_)
-      | Stringifier(Bare) as mem,
-      .. rest,
-    ] => {
-      let member_type = match mem {
-        Setlike(_) => "Setlike"
-        Maplike(_) => "Maplike"
-        AsyncIterable(_) => "AsyncIterable"
-        Iterable(_) => "Iterable"
-        Stringifier(Bare) => "Stringifier(Bare)"
-        _ => "Unknown"
+      [Attribute(attr), .. rest] => {
+        if attr.static_ && !attr.is_readonly && !attr.is_inherit {
+          continue rest
+        }
+        let (attr_emits, attr_methods) = emit_attribute(
+          attr,
+          interface.name,
+          self.type_registry,
+        )
+        emits.push_iter(attr_emits.iter())
+        interface_methods.push_iter(attr_methods.iter())
+        continue rest
       }
-      (self.log_skipped)(
-        "Skipped \{member_type} in interface \{interface.name}",
-      )
-      continue rest
+      [Const(const_val), .. rest] => {
+        let const_emits = emit_const_member(
+          const_val,
+          interface.name,
+          self.type_registry,
+        )
+        emits.push_iter(const_emits.iter())
+        continue rest
+      }
+      // Named special operations → treat as regular methods
+      [SpecialOperation(op), .. rest] if op.name is Some(_) => {
+        let name = op.name.unwrap()
+        let orig_method_name = method_namer.next(name, op.arguments)
+        let regular_op : @parser.RegularOperationMember = {
+          name,
+          return_type: op.return_type,
+          arguments: op.arguments,
+          static_: false,
+        }
+        let (op_emits, meth) = emit_regular_operation(
+          regular_op,
+          interface.name,
+          orig_method_name,
+          self.type_registry,
+        )
+        emits.push_iter(op_emits.iter())
+        interface_methods.push(meth)
+        continue rest
+      }
+      // Unnamed special operations → bracket notation with synthetic names
+      [SpecialOperation(op), .. rest] => {
+        let base_name = op.special.base_name()
+        let orig_method_name = method_namer.next(base_name, op.arguments)
+        let (op_emits, meth) = emit_unnamed_special_operation(
+          op,
+          interface.name,
+          orig_method_name,
+          self.type_registry,
+        )
+        emits.push_iter(op_emits.iter())
+        interface_methods.push(meth)
+        continue rest
+      }
+      [
+        Setlike(_)
+        | Maplike(_)
+        | AsyncIterable(_)
+        | Iterable(_)
+        | Stringifier(Bare) as mem,
+        .. rest,
+      ] => {
+        let member_type = match mem {
+          Setlike(_) => "Setlike"
+          Maplike(_) => "Maplike"
+          AsyncIterable(_) => "AsyncIterable"
+          Iterable(_) => "Iterable"
+          Stringifier(Bare) => "Stringifier(Bare)"
+          _ => "Unknown"
+        }
+        (self.log_skipped)(
+          "Skipped \{member_type} in interface \{interface.name}",
+        )
+        continue rest
+      }
     }
   }
   let parent_trait = match interface.inheritance {
