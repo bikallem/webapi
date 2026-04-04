@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: StorageManager
-// Specifications: storage.idl, fs.idl
+// Specifications: fs.idl, storage.idl
 
 ///|
 /// [StorageManager](https://developer.mozilla.org/en-US/docs/Web/API/StorageManager)

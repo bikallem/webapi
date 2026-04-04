@@ -83,6 +83,10 @@ export const wasmImportObject = {
       customElements.define(tag_name, C);
     }
   },
+
+  webapi_TryCatch: {
+    tryCatch: (f, g) => { try { f(); } catch(e) { g('' + e); } }
+  },
   webapi_FileSystemHandle: {
     get_kind: (obj) => obj.kind,
     get_name: (obj) => obj.name,

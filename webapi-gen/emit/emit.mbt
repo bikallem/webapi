@@ -607,7 +607,9 @@ fn render_file_header(
   buf.write_string("// Do not edit. This file is generated.\n")
   buf.write_string("// MoonBit type: \{type_name}\n")
   if !specs.is_empty() {
-    let specs_list = specs.to_array().join(", ")
+    let arr = specs.to_array()
+    arr.sort()
+    let specs_list = arr.join(", ")
     buf.write_string("// Specifications: \{specs_list}")
   }
   buf.to_string()

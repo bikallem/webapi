@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: ServiceWorkerGlobalScope
-// Specifications: service-workers.idl, notifications.idl
+// Specifications: notifications.idl, service-workers.idl
 
 ///|
 /// [ServiceWorkerGlobalScope](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope)

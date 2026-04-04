@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: PageTransitionEventInit
-// Specifications: html.idl, dom.idl
+// Specifications: dom.idl, html.idl
 
 ///|
 /// [PageTransitionEventInit](https://developer.mozilla.org/en-US/docs/Web/API/PageTransitionEventInit)

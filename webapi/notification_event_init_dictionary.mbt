@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: NotificationEventInit
-// Specifications: service-workers.idl, dom.idl, notifications.idl
+// Specifications: dom.idl, notifications.idl, service-workers.idl
 
 ///|
 /// [NotificationEventInit](https://developer.mozilla.org/en-US/docs/Web/API/NotificationEventInit)

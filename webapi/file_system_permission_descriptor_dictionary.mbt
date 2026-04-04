@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: FileSystemPermissionDescriptor
-// Specifications: file-system-access.idl, permissions.idl
+// Specifications: permissions.idl, file-system-access.idl
 
 ///|
 /// [FileSystemPermissionDescriptor](https://developer.mozilla.org/en-US/docs/Web/API/FileSystemPermissionDescriptor)

@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: DragEventInit
-// Specifications: html.idl, uievents.idl, dom.idl, pointerevents.idl
+// Specifications: dom.idl, html.idl, uievents.idl, pointerevents.idl
 
 ///|
 /// [DragEventInit](https://developer.mozilla.org/en-US/docs/Web/API/DragEventInit)

@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: ErrorEventInit
-// Specifications: html.idl, dom.idl
+// Specifications: dom.idl, html.idl
 
 ///|
 /// [ErrorEventInit](https://developer.mozilla.org/en-US/docs/Web/API/ErrorEventInit)

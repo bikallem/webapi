@@ -118,6 +118,10 @@ fn emit_js_preamble() -> String {
     #|      customElements.define(tag_name, C);
     #|    }
     #|  },
+    #|
+    #|  webapi_TryCatch: {
+    #|    tryCatch: (f, g) => { try { f(); } catch(e) { g('' + e); } }
+    #|  },
   preamble
 }
 

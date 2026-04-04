@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: Window
-// Specifications: selection-api.idl, file-system-access.idl, requestidlecallback.idl, cssom-view.idl, fetch.idl, dom.idl, cssom.idl, html.idl
+// Specifications: dom.idl, html.idl, cssom.idl, fetch.idl, cssom-view.idl, selection-api.idl, file-system-access.idl, requestidlecallback.idl
 
 ///|
 /// [Window](https://developer.mozilla.org/en-US/docs/Web/API/Window)

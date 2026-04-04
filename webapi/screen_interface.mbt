@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: Screen
-// Specifications: screen-orientation.idl, cssom-view.idl
+// Specifications: cssom-view.idl, screen-orientation.idl
 
 ///|
 /// [Screen](https://developer.mozilla.org/en-US/docs/Web/API/Screen)

@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: FetchEventInit
-// Specifications: service-workers.idl, dom.idl
+// Specifications: dom.idl, service-workers.idl
 
 ///|
 /// [FetchEventInit](https://developer.mozilla.org/en-US/docs/Web/API/FetchEventInit)

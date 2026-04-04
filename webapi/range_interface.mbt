@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: Range
-// Specifications: html.idl, cssom-view.idl, dom.idl
+// Specifications: dom.idl, html.idl, cssom-view.idl
 
 ///|
 /// [Range](https://developer.mozilla.org/en-US/docs/Web/API/Range)

@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: MediaQueryListEventInit
-// Specifications: cssom-view.idl, dom.idl
+// Specifications: dom.idl, cssom-view.idl
 
 ///|
 /// [MediaQueryListEventInit](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryListEventInit)

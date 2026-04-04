@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: InputEventInit
-// Specifications: uievents.idl, dom.idl
+// Specifications: dom.idl, uievents.idl
 
 ///|
 /// [InputEventInit](https://developer.mozilla.org/en-US/docs/Web/API/InputEventInit)
