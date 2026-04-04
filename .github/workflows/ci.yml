@@ -33,11 +33,11 @@ jobs:
           node-version: 22
           cache: 'npm'
           cache-dependency-path: |
-            src/gen/package-lock.json
+            webapi-gen/package-lock.json
             tests/package-lock.json
 
       - name: Install npm dependencies
-        working-directory: src/gen
+        working-directory: webapi-gen
         run: npm ci
 
       - name: Get MoonBit version
@@ -76,9 +76,9 @@ jobs:
 
       - name: Trim webapi.mjs for wasm-gc examples
         run: |
-          moon build src/trim --target js
-          for wasm in examples/_build/wasm-gc/release/build/*/*.wasm; do
-            node _build/js/debug/build/trim/trim.js "$(pwd)/$wasm" --source "$(pwd)/src/webapi.mjs"
+          moon build webapi-trim --target js
+          for wasm in _build/wasm-gc/release/build/bikallem/webapi-examples/*/*.wasm; do
+            node _build/js/debug/build/bikallem/webapi-trim/webapi-trim.js "$(pwd)/$wasm" --source "$(pwd)/webapi/webapi.mjs"
           done
 
       - name: Install wasm-tools
@@ -91,7 +91,7 @@ jobs:
       - name: Validate wasm-gc binaries
         run: |
           fails=0
-          for wasm in examples/_build/wasm-gc/release/build/*/*.wasm; do
+          for wasm in _build/wasm-gc/release/build/bikallem/webapi-examples/*/*.wasm; do
             name=$(basename $(dirname $wasm))
             if wasm-tools validate "$wasm" 2>/dev/null; then
               echo "  OK: $name"
@@ -104,7 +104,7 @@ jobs:
           echo "All wasm binaries valid"
 
       - name: Run trim CLI tests
-        run: bash src/trim/tests/cli_test.sh
+        run: bash webapi-trim/tests/cli_test.sh
 
       - name: Cache Playwright browsers
         id: cache-playwright
@@ -126,14 +126,13 @@ jobs:
       - name: Prepare site
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
-          mkdir -p _site
-          cp -r examples _site/examples
-          rm -rf _site/examples/.mooncakes _site/examples/_build
-          mkdir -p _site/examples/_build/js/release
-          cp -rL examples/_build/js/release/build _site/examples/_build/js/release/
-          mkdir -p _site/examples/_build/wasm-gc/release
-          cp -rL examples/_build/wasm-gc/release/build _site/examples/_build/wasm-gc/release/
-          echo '<meta http-equiv="refresh" content="0; url=examples/">' > _site/index.html
+          mkdir -p _site/examples
+          cp -r examples/* _site/examples/
+          rm -rf _site/examples/.mooncakes
+          mkdir -p _site/_build/js/release
+          cp -rL _build/js/release/build _site/_build/js/release/
+          mkdir -p _site/_build/wasm-gc/release
+          cp -rL _build/wasm-gc/release/build _site/_build/wasm-gc/release/
 
       - name: Upload site artifact
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
