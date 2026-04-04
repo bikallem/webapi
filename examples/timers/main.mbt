@@ -45,7 +45,9 @@ fn main {
   .set_text_content("Start")
 
   // Stop button
-  let stop_btn : @webapi.HTMLButtonElement = doc.create_element("button").unsafe_into()
+  let stop_btn : @webapi.HTMLButtonElement = doc
+    .create_element("button")
+    .unsafe_into()
   stop_btn
   ..set_attribute("id", "stop-btn")
   ..set_attribute(
@@ -62,7 +64,7 @@ fn main {
 
   // Start handler
   start_btn.add_event_listener("click", fn(_event) {
-    if not(running) {
+    if !running {
       running = true
       interval_status.set_text_content("Running")
       let handler = function_to_handler(
@@ -115,7 +117,9 @@ fn main {
 
   // Build DOM
   let app : @webapi.Element = doc.get_element_by_id("app")
-  let container : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
+  let container : @webapi.HTMLDivElement = doc
+    .create_element("div")
+    .unsafe_into()
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )

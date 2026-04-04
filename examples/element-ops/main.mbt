@@ -72,7 +72,9 @@ fn main {
   ..set_text_content("Clone")
   .add_event_listener("click", fn(_event) {
     counter = counter + 1
-    let clone : @webapi.Element = template.clone_node(subtree=true).unsafe_into()
+    let clone : @webapi.Element = template
+      .clone_node(subtree=true)
+      .unsafe_into()
     clone.set_text_content("Clone " + counter.to_string())
     clone.set_attribute("data-index", counter.to_string())
     container.append_child(clone) |> ignore

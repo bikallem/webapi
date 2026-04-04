@@ -3,17 +3,23 @@
 fn main {
   let doc = @webapi.document()
   let app : @webapi.Element = doc.get_element_by_id("app")
-  let container : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
+  let container : @webapi.HTMLDivElement = doc
+    .create_element("div")
+    .unsafe_into()
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )
 
   // Heading
-  let heading : @webapi.HTMLHeadingElement = doc.create_element("h1").unsafe_into()
+  let heading : @webapi.HTMLHeadingElement = doc
+    .create_element("h1")
+    .unsafe_into()
   heading.set_text_content("Referrer Policy")
 
   // Table of all variants
-  let table : @webapi.HTMLTableElement = doc.create_element("table").unsafe_into()
+  let table : @webapi.HTMLTableElement = doc
+    .create_element("table")
+    .unsafe_into()
   table
   ..set_attribute("id", "policy-table")
   .set_attribute(
@@ -24,14 +30,20 @@ fn main {
   let thead : @webapi.HTMLTableSectionElement = doc
     .create_element("thead")
     .unsafe_into()
-  let header_row : @webapi.HTMLTableRowElement = doc.create_element("tr").unsafe_into()
-  let th1 : @webapi.HTMLTableCellElement = doc.create_element("th").unsafe_into()
+  let header_row : @webapi.HTMLTableRowElement = doc
+    .create_element("tr")
+    .unsafe_into()
+  let th1 : @webapi.HTMLTableCellElement = doc
+    .create_element("th")
+    .unsafe_into()
   th1
   ..set_attribute(
     "style", "border: 1px solid #ddd; padding: 0.5em; text-align: left;",
   )
   .set_text_content("Variant")
-  let th2 : @webapi.HTMLTableCellElement = doc.create_element("th").unsafe_into()
+  let th2 : @webapi.HTMLTableCellElement = doc
+    .create_element("th")
+    .unsafe_into()
   th2
   ..set_attribute(
     "style", "border: 1px solid #ddd; padding: 0.5em; text-align: left;",
@@ -62,12 +74,18 @@ fn main {
   ]
   for entry in policies {
     let (name, policy) = entry
-    let row : @webapi.HTMLTableRowElement = doc.create_element("tr").unsafe_into()
-    let td1 : @webapi.HTMLTableCellElement = doc.create_element("td").unsafe_into()
+    let row : @webapi.HTMLTableRowElement = doc
+      .create_element("tr")
+      .unsafe_into()
+    let td1 : @webapi.HTMLTableCellElement = doc
+      .create_element("td")
+      .unsafe_into()
     td1
     ..set_attribute("style", "border: 1px solid #ddd; padding: 0.5em;")
     .set_text_content(name)
-    let td2 : @webapi.HTMLTableCellElement = doc.create_element("td").unsafe_into()
+    let td2 : @webapi.HTMLTableCellElement = doc
+      .create_element("td")
+      .unsafe_into()
     let val = policy.value()
     td2
     ..set_attribute("style", "border: 1px solid #ddd; padding: 0.5em;")
@@ -79,7 +97,9 @@ fn main {
   table.append_child(tbody) |> ignore
 
   // Parse section
-  let parse_label : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
+  let parse_label : @webapi.HTMLDivElement = doc
+    .create_element("div")
+    .unsafe_into()
   parse_label
   ..set_attribute("style", "margin-top: 1em;")
   .set_text_content("Parse a referrer policy string:")
@@ -95,7 +115,9 @@ fn main {
     .create_element("button")
     .unsafe_into()
   parse_btn..set_attribute("id", "parse-btn").set_text_content("Parse")
-  let parse_output : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
+  let parse_output : @webapi.HTMLDivElement = doc
+    .create_element("div")
+    .unsafe_into()
   parse_output.set_attribute("id", "parse-output")
   parse_btn.add_event_listener("click", fn(_event) {
     let input_val = parse_input.value()

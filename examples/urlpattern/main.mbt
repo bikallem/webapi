@@ -42,7 +42,9 @@ fn create_row(label : String, id : String) -> (HTMLDivElement, HTMLDivElement) {
 ///|
 fn main {
   let app : Element = document().get_element_by_id("app")
-  let container : HTMLDivElement = document().create_element("div").unsafe_into()
+  let container : HTMLDivElement = document()
+    .create_element("div")
+    .unsafe_into()
   container.set_attribute(
     "style", "max-width: 700px; margin: 2em auto; padding: 1.5em; font-family: system-ui;",
   )
@@ -145,7 +147,9 @@ fn main {
   )
   container.append_child(url_label) |> ignore
 
-  let url_input : HTMLInputElement = document().create_element("input").unsafe_into()
+  let url_input : HTMLInputElement = document()
+    .create_element("input")
+    .unsafe_into()
   url_input
   ..set_attribute("id", "url-input")
   ..set_attribute("type", "text")
@@ -156,7 +160,9 @@ fn main {
   container.append_child(url_input) |> ignore
 
   // Test button
-  let test_btn : HTMLButtonElement = document().create_element("button").unsafe_into()
+  let test_btn : HTMLButtonElement = document()
+    .create_element("button")
+    .unsafe_into()
   test_btn
   ..set_attribute("id", "test-btn")
   ..set_text_content("Test Pattern")
@@ -166,7 +172,9 @@ fn main {
   container.append_child(test_btn) |> ignore
 
   // Result area
-  let result_div : HTMLDivElement = document().create_element("div").unsafe_into()
+  let result_div : HTMLDivElement = document()
+    .create_element("div")
+    .unsafe_into()
   result_div
   ..set_attribute("id", "interactive-result")
   .set_attribute(

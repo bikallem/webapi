@@ -62,7 +62,9 @@ fn main {
   })
 
   let app : @webapi.Element = doc.get_element_by_id("app")
-  let container : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
+  let container : @webapi.HTMLDivElement = doc
+    .create_element("div")
+    .unsafe_into()
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )

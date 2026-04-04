@@ -3,18 +3,24 @@
 fn main {
   let doc = @webapi.document()
   let app : @webapi.Element = doc.get_element_by_id("app")
-  let container : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
+  let container : @webapi.HTMLDivElement = doc
+    .create_element("div")
+    .unsafe_into()
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )
   let ns = "http://www.w3.org/2000/svg"
 
   // Heading
-  let heading : @webapi.HTMLHeadingElement = doc.create_element("h1").unsafe_into()
+  let heading : @webapi.HTMLHeadingElement = doc
+    .create_element("h1")
+    .unsafe_into()
   heading.set_text_content("SVG API")
 
   // Create SVG canvas
-  let svg : @webapi.SVGSVGElement = doc.create_element_ns(ns, "svg").unsafe_into()
+  let svg : @webapi.SVGSVGElement = doc
+    .create_element_ns(ns, "svg")
+    .unsafe_into()
   svg
   ..set_attribute("id", "svg-canvas")
   ..set_attribute("width", "400")
@@ -34,7 +40,9 @@ fn main {
   svg.append_child(circle) |> ignore
 
   // Rectangle
-  let rect : @webapi.SVGRectElement = doc.create_element_ns(ns, "rect").unsafe_into()
+  let rect : @webapi.SVGRectElement = doc
+    .create_element_ns(ns, "rect")
+    .unsafe_into()
   rect
   ..set_attribute("id", "my-rect")
   ..set_attribute("x", "200")
@@ -45,7 +53,9 @@ fn main {
   svg.append_child(rect) |> ignore
 
   // Text
-  let text : @webapi.SVGTextElement = doc.create_element_ns(ns, "text").unsafe_into()
+  let text : @webapi.SVGTextElement = doc
+    .create_element_ns(ns, "text")
+    .unsafe_into()
   text
   ..set_attribute("id", "my-text")
   ..set_attribute("x", "100")
@@ -56,9 +66,13 @@ fn main {
   svg.append_child(text) |> ignore
 
   // BBox button
-  let bbox_btn : @webapi.HTMLButtonElement = doc.create_element("button").unsafe_into()
+  let bbox_btn : @webapi.HTMLButtonElement = doc
+    .create_element("button")
+    .unsafe_into()
   bbox_btn..set_attribute("id", "bbox-btn").set_text_content("Get Circle BBox")
-  let bbox_output : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
+  let bbox_output : @webapi.HTMLDivElement = doc
+    .create_element("div")
+    .unsafe_into()
   bbox_output.set_attribute("id", "bbox-output")
   bbox_btn.add_event_listener("click", fn(_event) {
     let bbox = circle.get_b_box()

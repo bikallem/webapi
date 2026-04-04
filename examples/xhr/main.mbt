@@ -3,17 +3,23 @@
 fn main {
   let doc = @webapi.document()
   let app : @webapi.Element = doc.get_element_by_id("app")
-  let container : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
+  let container : @webapi.HTMLDivElement = doc
+    .create_element("div")
+    .unsafe_into()
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )
 
   // Heading
-  let heading : @webapi.HTMLHeadingElement = doc.create_element("h1").unsafe_into()
+  let heading : @webapi.HTMLHeadingElement = doc
+    .create_element("h1")
+    .unsafe_into()
   heading.set_text_content("XMLHttpRequest")
 
   // URL input
-  let url_input : @webapi.HTMLInputElement = doc.create_element("input").unsafe_into()
+  let url_input : @webapi.HTMLInputElement = doc
+    .create_element("input")
+    .unsafe_into()
   url_input
   ..set_attribute("id", "url-input")
   ..set_attribute("type", "text")
@@ -21,15 +27,21 @@ fn main {
   .set_value("https://jsonplaceholder.typicode.com/todos/1")
 
   // Send button
-  let send_btn : @webapi.HTMLButtonElement = doc.create_element("button").unsafe_into()
+  let send_btn : @webapi.HTMLButtonElement = doc
+    .create_element("button")
+    .unsafe_into()
   send_btn..set_attribute("id", "send-btn").set_text_content("Send")
 
   // Status display
-  let status_div : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
+  let status_div : @webapi.HTMLDivElement = doc
+    .create_element("div")
+    .unsafe_into()
   status_div..set_attribute("id", "status").set_text_content("Ready")
 
   // Body display
-  let body_div : @webapi.HTMLPreElement = doc.create_element("pre").unsafe_into()
+  let body_div : @webapi.HTMLPreElement = doc
+    .create_element("pre")
+    .unsafe_into()
   body_div
   ..set_attribute("id", "body")
   .set_attribute(

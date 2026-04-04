@@ -11,7 +11,9 @@ using @webapi {
 ///|
 fn main {
   let app : Element = document().get_element_by_id("app")
-  let container : HTMLDivElement = document().create_element("div").unsafe_into()
+  let container : HTMLDivElement = document()
+    .create_element("div")
+    .unsafe_into()
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )
@@ -27,7 +29,9 @@ fn main {
   container.append_child(description) |> ignore
 
   // Pick file button
-  let pick_btn : HTMLButtonElement = document().create_element("button").unsafe_into()
+  let pick_btn : HTMLButtonElement = document()
+    .create_element("button")
+    .unsafe_into()
   pick_btn
   ..set_attribute("id", "pick-btn")
   ..set_text_content("Pick File")
@@ -37,7 +41,9 @@ fn main {
   container.append_child(pick_btn) |> ignore
 
   // File info display
-  let file_info : HTMLDivElement = document().create_element("div").unsafe_into()
+  let file_info : HTMLDivElement = document()
+    .create_element("div")
+    .unsafe_into()
   file_info
   ..set_attribute("id", "file-info")
   ..set_text_content("No file selected.")
@@ -53,7 +59,9 @@ fn main {
   .set_text_content("Contents:")
   container.append_child(content_label) |> ignore
 
-  let content_div : HTMLDivElement = document().create_element("div").unsafe_into()
+  let content_div : HTMLDivElement = document()
+    .create_element("div")
+    .unsafe_into()
   content_div
   ..set_attribute("id", "file-content")
   .set_attribute(

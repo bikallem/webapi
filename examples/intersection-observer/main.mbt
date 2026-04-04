@@ -21,7 +21,9 @@ fn main {
   .set_text_content("Scroll to see intersections...")
 
   // Scrollable container
-  let container : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
+  let container : @webapi.HTMLDivElement = doc
+    .create_element("div")
+    .unsafe_into()
   container
   ..set_attribute("id", "container")
   .set_attribute(

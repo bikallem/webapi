@@ -9,7 +9,9 @@ fn edit_word(host : @webapi.HTMLElement) -> Unit {
   style.set_text_content("span { background-color: #eef; padding: 0 2px }")
 
   let form : @webapi.HTMLFormElement = doc.create_element("form").unsafe_into()
-  let input : @webapi.HTMLInputElement = doc.create_element("input").unsafe_into()
+  let input : @webapi.HTMLInputElement = doc
+    .create_element("input")
+    .unsafe_into()
   let span : @webapi.HTMLSpanElement = doc.create_element("span").unsafe_into()
 
   shadow.append_child(style) |> ignore

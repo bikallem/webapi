@@ -174,7 +174,9 @@ fn main {
   let main = document().create_element("main")
   main.class_list().add(["content"])
 
-  let iframe : HTMLIFrameElement = document().create_element("iframe").unsafe_into()
+  let iframe : HTMLIFrameElement = document()
+    .create_element("iframe")
+    .unsafe_into()
   iframe.set_attribute("id", "demo")
   main.append_child(iframe) |> ignore
 

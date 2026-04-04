@@ -8,7 +8,9 @@ fn main {
   let app : @webapi.Element = doc.get_element_by_id("app")
 
   // Container
-  let container : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
+  let container : @webapi.HTMLDivElement = doc
+    .create_element("div")
+    .unsafe_into()
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )
@@ -18,7 +20,9 @@ fn main {
   heading.set_text_content("IndexedDB")
 
   // Key input
-  let key_input : @webapi.HTMLInputElement = doc.create_element("input").unsafe_into()
+  let key_input : @webapi.HTMLInputElement = doc
+    .create_element("input")
+    .unsafe_into()
   key_input
   ..set_attribute("id", "key-input")
   ..set_attribute("type", "text")
@@ -43,13 +47,17 @@ fn main {
   let btn_style = "padding: 0.5em 1em; margin: 0.25em; font-size: 1em;"
 
   // Buttons
-  let put_btn : @webapi.HTMLButtonElement = doc.create_element("button").unsafe_into()
+  let put_btn : @webapi.HTMLButtonElement = doc
+    .create_element("button")
+    .unsafe_into()
   put_btn
   ..set_id("put-btn")
   ..set_attribute("style", btn_style)
   .set_text_content("Put")
 
-  let get_btn : @webapi.HTMLButtonElement = doc.create_element("button").unsafe_into()
+  let get_btn : @webapi.HTMLButtonElement = doc
+    .create_element("button")
+    .unsafe_into()
   get_btn
   ..set_id("get-btn")
   ..set_attribute("style", btn_style)

@@ -21,12 +21,16 @@ fn main {
     "style", "width: 260px; height: 120px; border: 2px solid #4a90d9; border-radius: 8px; display: grid; place-items: center; margin: 1rem 0; background: #eef6ff;",
   )
 
-  let controls : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
+  let controls : @webapi.HTMLDivElement = doc
+    .create_element("div")
+    .unsafe_into()
   controls.set_attribute(
     "style", "display: flex; gap: 0.5rem; margin-bottom: 0.75rem;",
   )
 
-  let grow_btn : @webapi.HTMLButtonElement = doc.create_element("button").unsafe_into()
+  let grow_btn : @webapi.HTMLButtonElement = doc
+    .create_element("button")
+    .unsafe_into()
   grow_btn
   ..set_text_content("Grow")
   .set_attribute("style", "padding: 0.4rem 0.8rem; cursor: pointer;")

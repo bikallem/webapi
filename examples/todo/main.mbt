@@ -74,7 +74,9 @@ fn wc_todo(host : @webapi.HTMLElement) -> Unit {
   let empty_state : HTMLDivElement = shadow
     .query_selector("[data-ref=empty]")
     .unsafe_into()
-  let list : HTMLUListElement = shadow.query_selector("[data-ref=list]").unsafe_into()
+  let list : HTMLUListElement = shadow
+    .query_selector("[data-ref=list]")
+    .unsafe_into()
   let todos : Array[(Int, Bool, String)] = []
   let next_id : Ref[Int] = { val: 0 }
 
@@ -122,7 +124,9 @@ fn wc_todo(host : @webapi.HTMLElement) -> Unit {
     checkbox.set_checked(done)
     apply_done_style(done, item)
 
-    let delete_btn : HTMLButtonElement = doc.create_element("button").unsafe_into()
+    let delete_btn : HTMLButtonElement = doc
+      .create_element("button")
+      .unsafe_into()
     delete_btn..set_type_("button").set_text_content("Delete")
 
     checkbox.add_event_listener("click", fn(_event) {

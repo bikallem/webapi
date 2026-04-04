@@ -3,13 +3,17 @@
 fn main {
   let doc = @webapi.document()
   let app : @webapi.Element = doc.get_element_by_id("app")
-  let container : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
+  let container : @webapi.HTMLDivElement = doc
+    .create_element("div")
+    .unsafe_into()
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )
 
   // Heading
-  let heading : @webapi.HTMLHeadingElement = doc.create_element("h1").unsafe_into()
+  let heading : @webapi.HTMLHeadingElement = doc
+    .create_element("h1")
+    .unsafe_into()
   heading.set_text_content("Vibration API")
 
   // Note
@@ -20,7 +24,9 @@ fn main {
   .set_text_content("Note: Vibration only works on supported mobile devices.")
 
   // Status
-  let status_div : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
+  let status_div : @webapi.HTMLDivElement = doc
+    .create_element("div")
+    .unsafe_into()
   status_div..set_attribute("id", "status").set_text_content("Ready")
 
   // Single pulse button
@@ -52,7 +58,9 @@ fn main {
   })
 
   // Stop button
-  let stop_btn : @webapi.HTMLButtonElement = doc.create_element("button").unsafe_into()
+  let stop_btn : @webapi.HTMLButtonElement = doc
+    .create_element("button")
+    .unsafe_into()
   stop_btn..set_attribute("id", "stop-btn").set_text_content("Stop")
   stop_btn.add_event_listener("click", fn(_event) {
     let result = @webapi.navigator().vibrate(0U)

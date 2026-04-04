@@ -12,7 +12,9 @@ fn main {
   heading.set_text_content("Storage Example")
 
   // Key input
-  let key_input : @webapi.HTMLInputElement = doc.create_element("input").unsafe_into()
+  let key_input : @webapi.HTMLInputElement = doc
+    .create_element("input")
+    .unsafe_into()
   key_input
   ..set_attribute("id", "key-input")
   ..set_attribute("type", "text")
@@ -22,7 +24,9 @@ fn main {
   )
 
   // Value input
-  let val_input : @webapi.HTMLInputElement = doc.create_element("input").unsafe_into()
+  let val_input : @webapi.HTMLInputElement = doc
+    .create_element("input")
+    .unsafe_into()
   val_input
   ..set_attribute("id", "value-input")
   ..set_attribute("type", "text")
@@ -62,7 +66,9 @@ fn main {
   }
 
   // Set button
-  let set_btn : @webapi.HTMLButtonElement = doc.create_element("button").unsafe_into()
+  let set_btn : @webapi.HTMLButtonElement = doc
+    .create_element("button")
+    .unsafe_into()
   set_btn
   ..set_attribute("id", "set-btn")
   ..set_attribute(
@@ -80,7 +86,9 @@ fn main {
   })
 
   // Get button
-  let get_btn : @webapi.HTMLButtonElement = doc.create_element("button").unsafe_into()
+  let get_btn : @webapi.HTMLButtonElement = doc
+    .create_element("button")
+    .unsafe_into()
   get_btn
   ..set_attribute("id", "get-btn")
   ..set_attribute(
@@ -133,7 +141,9 @@ fn main {
 
   // Build DOM
   let app : @webapi.Element = doc.get_element_by_id("app")
-  let container : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
+  let container : @webapi.HTMLDivElement = doc
+    .create_element("div")
+    .unsafe_into()
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )

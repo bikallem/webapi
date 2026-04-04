@@ -19,7 +19,9 @@ fn main {
   let app : Element = document().get_element_by_id("app")
 
   // Create container
-  let container : HTMLDivElement = document().create_element("div").unsafe_into()
+  let container : HTMLDivElement = document()
+    .create_element("div")
+    .unsafe_into()
   container.set_attribute(
     "style", "max-width: 500px; margin: 2em auto; font-family: system-ui; padding: 1em;",
   )
@@ -33,11 +35,15 @@ fn main {
   form.set_attribute("id", "form")
 
   // --- Name input ---
-  let name_label : HTMLLabelElement = document().create_element("label").unsafe_into()
+  let name_label : HTMLLabelElement = document()
+    .create_element("label")
+    .unsafe_into()
   name_label
   ..set_text_content("Name: ")
   .set_attribute("style", "display: block; margin-top: 1em; font-weight: bold;")
-  let name_input : HTMLInputElement = document().create_element("input").unsafe_into()
+  let name_input : HTMLInputElement = document()
+    .create_element("input")
+    .unsafe_into()
   name_input
   ..set_type_("text")
   ..set_required(true)
@@ -45,11 +51,15 @@ fn main {
   .set_attribute("id", "name-input")
 
   // --- Checkbox ---
-  let agree_label : HTMLLabelElement = document().create_element("label").unsafe_into()
+  let agree_label : HTMLLabelElement = document()
+    .create_element("label")
+    .unsafe_into()
   agree_label.set_attribute(
     "style", "display: block; margin-top: 1em; font-weight: bold;",
   )
-  let checkbox : HTMLInputElement = document().create_element("input").unsafe_into()
+  let checkbox : HTMLInputElement = document()
+    .create_element("input")
+    .unsafe_into()
   checkbox..set_type_("checkbox").set_attribute("id", "agree-check")
   let agree_text = document().create_element("span")
   agree_text.set_text_content(" I agree to the terms")
@@ -57,18 +67,24 @@ fn main {
   agree_label.append_child(agree_text) |> ignore
 
   // --- Select dropdown ---
-  let color_label : HTMLLabelElement = document().create_element("label").unsafe_into()
+  let color_label : HTMLLabelElement = document()
+    .create_element("label")
+    .unsafe_into()
   color_label
   ..set_text_content("Favorite Color: ")
   .set_attribute("style", "display: block; margin-top: 1em; font-weight: bold;")
-  let select : HTMLSelectElement = document().create_element("select").unsafe_into()
+  let select : HTMLSelectElement = document()
+    .create_element("select")
+    .unsafe_into()
   select.set_attribute("id", "color-select")
 
   // Add options
   let colors = [("red", "Red"), ("green", "Green"), ("blue", "Blue")]
   for pair in colors {
     let (val, text) = pair
-    let option : HTMLOptionElement = document().create_element("option").unsafe_into()
+    let option : HTMLOptionElement = document()
+      .create_element("option")
+      .unsafe_into()
     option.set_value(val)
     option.set_text(text)
     select.append_child(option) |> ignore
@@ -89,7 +105,9 @@ fn main {
   .set_attribute("id", "comment-area")
 
   // --- Current values display (updated on input) ---
-  let current_values : HTMLDivElement = document().create_element("div").unsafe_into()
+  let current_values : HTMLDivElement = document()
+    .create_element("div")
+    .unsafe_into()
   current_values
   ..set_attribute("id", "current-values")
   ..set_attribute(
@@ -104,7 +122,9 @@ fn main {
   })
 
   // --- Validity status display ---
-  let validity_status : HTMLDivElement = document().create_element("div").unsafe_into()
+  let validity_status : HTMLDivElement = document()
+    .create_element("div")
+    .unsafe_into()
   validity_status
   ..set_attribute("id", "validity-status")
   ..set_attribute(
@@ -122,7 +142,9 @@ fn main {
   .set_text_content("")
 
   // --- Buttons ---
-  let button_row : HTMLDivElement = document().create_element("div").unsafe_into()
+  let button_row : HTMLDivElement = document()
+    .create_element("div")
+    .unsafe_into()
   button_row.set_attribute("style", "margin-top: 1.5em;")
 
   let validate_btn : HTMLButtonElement = document()

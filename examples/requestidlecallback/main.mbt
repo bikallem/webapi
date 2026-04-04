@@ -8,7 +8,9 @@ fn main {
   heading.set_text_content("RequestIdleCallback Demo")
 
   // Create status display
-  let status_div : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
+  let status_div : @webapi.HTMLDivElement = doc
+    .create_element("div")
+    .unsafe_into()
   status_div
   ..set_attribute("id", "idle-status")
   ..set_attribute(
@@ -17,7 +19,9 @@ fn main {
   .set_text_content("Ready")
 
   // Create time remaining display
-  let time_div : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
+  let time_div : @webapi.HTMLDivElement = doc
+    .create_element("div")
+    .unsafe_into()
   time_div
   ..set_attribute("id", "time-remaining")
   .set_attribute(
@@ -52,7 +56,9 @@ fn main {
 
   // Build DOM
   let app : @webapi.Element = doc.get_element_by_id("app")
-  let container : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
+  let container : @webapi.HTMLDivElement = doc
+    .create_element("div")
+    .unsafe_into()
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )

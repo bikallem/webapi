@@ -49,7 +49,9 @@ fn main {
   app.append_child(status) |> ignore
 
   // Create has-result display
-  let has_result : HTMLDivElement = document().create_element("div").unsafe_into()
+  let has_result : HTMLDivElement = document()
+    .create_element("div")
+    .unsafe_into()
   has_result
   ..set_attribute("id", "has-result")
   .set_attribute(
@@ -58,12 +60,16 @@ fn main {
   app.append_child(has_result) |> ignore
 
   // Create button container
-  let btn_container : HTMLDivElement = document().create_element("div").unsafe_into()
+  let btn_container : HTMLDivElement = document()
+    .create_element("div")
+    .unsafe_into()
   btn_container.set_attribute("style", "margin: 10px 0;")
   app.append_child(btn_container) |> ignore
 
   // "Add highlight" button
-  let add_btn : HTMLButtonElement = document().create_element("button").unsafe_into()
+  let add_btn : HTMLButtonElement = document()
+    .create_element("button")
+    .unsafe_into()
   add_btn
   ..set_attribute("id", "add-btn")
   ..set_attribute("style", "padding: 8px 16px; margin: 4px; font-size: 1em;")
@@ -121,7 +127,9 @@ fn main {
   btn_container.append_child(replace_btn) |> ignore
 
   // "Has highlight?" button
-  let has_btn : HTMLButtonElement = document().create_element("button").unsafe_into()
+  let has_btn : HTMLButtonElement = document()
+    .create_element("button")
+    .unsafe_into()
   has_btn
   ..set_attribute("id", "has-btn")
   ..set_attribute("style", "padding: 8px 16px; margin: 4px; font-size: 1em;")

@@ -12,7 +12,9 @@ using @webapi {
 
 ///|
 fn make_button(label : String, on_click : () -> Unit) -> HTMLButtonElement {
-  let btn : HTMLButtonElement = document().create_element("button").unsafe_into()
+  let btn : HTMLButtonElement = document()
+    .create_element("button")
+    .unsafe_into()
   btn
   ..set_text_content(label)
   ..set_attribute(
@@ -25,7 +27,9 @@ fn make_button(label : String, on_click : () -> Unit) -> HTMLButtonElement {
 ///|
 fn main {
   let app : Element = document().get_element_by_id("app")
-  let container : HTMLDivElement = document().create_element("div").unsafe_into()
+  let container : HTMLDivElement = document()
+    .create_element("div")
+    .unsafe_into()
   container.set_attribute(
     "style", "max-width: 700px; margin: 2em auto; padding: 1.5em; font-family: system-ui;",
   )

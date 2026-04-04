@@ -55,7 +55,9 @@ fn main {
 
   // Build app container
   let app : Element = document().get_element_by_id("app")
-  let container : HTMLDivElement = document().create_element("div").unsafe_into()
+  let container : HTMLDivElement = document()
+    .create_element("div")
+    .unsafe_into()
   container.set_attribute(
     "style", "max-width: 700px; margin: 2em auto; padding: 1.5em; font-family: system-ui;",
   )
@@ -127,7 +129,9 @@ fn main {
   container.append_child(create_section_heading("Modify Search Params"))
   |> ignore
 
-  let params_display : HTMLDivElement = document().create_element("div").unsafe_into()
+  let params_display : HTMLDivElement = document()
+    .create_element("div")
+    .unsafe_into()
   params_display
   ..set_attribute("id", "params-display")
   ..set_text_content(url.search())
@@ -136,7 +140,9 @@ fn main {
   )
   container.append_child(params_display) |> ignore
 
-  let add_btn : HTMLButtonElement = document().create_element("button").unsafe_into()
+  let add_btn : HTMLButtonElement = document()
+    .create_element("button")
+    .unsafe_into()
   add_btn
   ..set_attribute("id", "add-param-btn")
   ..set_text_content("Add Param")

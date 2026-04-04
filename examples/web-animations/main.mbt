@@ -17,7 +17,9 @@ fn main {
   let app : @webapi.Element = doc.get_element_by_id("app")
 
   // Container
-  let container : @webapi.HTMLDivElement = doc.create_element("div").unsafe_into()
+  let container : @webapi.HTMLDivElement = doc
+    .create_element("div")
+    .unsafe_into()
   container.set_attribute(
     "style", "font-family: system-ui; max-width: 600px; margin: 2em auto;",
   )
@@ -42,7 +44,9 @@ fn main {
   let btn_style = "padding: 0.5em 1em; margin: 0.25em; font-size: 1em;"
 
   // Play button
-  let play_btn : @webapi.HTMLButtonElement = doc.create_element("button").unsafe_into()
+  let play_btn : @webapi.HTMLButtonElement = doc
+    .create_element("button")
+    .unsafe_into()
   play_btn
   ..set_id("play-btn")
   ..set_attribute("style", btn_style)
