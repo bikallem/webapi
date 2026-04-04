@@ -4,7 +4,7 @@ pub(all) struct CallbackArgInfo {
   name : String // "EventListener"
   closure_type : String // "(Event) -> Unit"
   ffi_name : String // "event_listener_ffi"
-} derive(Show, ToJson, Eq, Hash)
+} derive(Debug, ToJson, Eq, Hash)
 
 ///|
 /// Argument MoonBit type representation
@@ -17,14 +17,28 @@ pub(all) enum ArgMbtType {
   Enum(String) // Enum type
   Dictionary(String) // Dictionary type
   Callback(CallbackArgInfo) // Callback type accepting a closure directly
-} derive(Show, ToJson, Eq, Hash)
+} derive(Debug, ToJson, Eq, Hash)
 
 ///|
 pub(all) struct UnionType {
   name : String
   has_undefined : Bool
   options : Array[ArgMbtType]
-} derive(Show, ToJson, Eq, Hash)
+} derive(Debug, ToJson, Eq, Hash)
+
+///|
+pub impl Show for ArgMbtType with output(self, logger) {
+  match self {
+    Self => logger.write_string("Self")
+    Other(t) => logger.write_string(t)
+    Primitive(t) => logger.write_string(t)
+    Union(t) => logger.write_string(t.name)
+    Interface(t) => logger.write_string(t)
+    Enum(t) => logger.write_string(t)
+    Dictionary(t) => logger.write_string(t)
+    Callback(info) => logger.write_string(info.closure_type)
+  }
+}
 
 ///|
 pub fn ArgMbtType::is_string(self : ArgMbtType) -> Bool {
@@ -58,13 +72,13 @@ pub(all) struct MethodArg {
   type_ : ArgMbtType
   optional : Bool
   variadic : Bool
-} derive(Show, ToJson)
+} derive(Debug, ToJson)
 
 ///|
 pub(all) struct MethodReturn {
   type_ : ArgMbtType
   optional : Bool
-} derive(Show, ToJson)
+} derive(Debug, ToJson)
 
 ///|
 pub fn MethodReturn::is_void(self : MethodReturn) -> Bool {
@@ -395,4 +409,4 @@ pub enum EmitAux {
   UnionArgTrait(String) // trait name
   UnionArgTraitImpl(String, String) // (type_name, trait_name)
   InlineExternal(String) // synthetic inline union type (no MDN doc)
-} derive(Show, ToJson)
+} derive(Debug, ToJson)

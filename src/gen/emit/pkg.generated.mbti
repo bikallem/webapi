@@ -5,6 +5,7 @@ import {
   "bikallem/webapi/gen/flattened_idl",
   "bikallem/webapi/gen/type_mapping",
   "bikallem/webapi/gen/type_registry",
+  "moonbitlang/core/debug",
 }
 
 // Values
@@ -23,20 +24,14 @@ pub fn merge_multi_target_code(MultiTargetCode) -> String
 // Errors
 
 // Types and methods
-type AttributeGetMethodEmit
-pub impl Show for AttributeGetMethodEmit
-pub impl ToJson for AttributeGetMethodEmit
+type AttributeGetMethodEmit derive(ToJson, @debug.Debug)
 
-type AttributeSetMethodEmit
-pub impl Show for AttributeSetMethodEmit
-pub impl ToJson for AttributeSetMethodEmit
+type AttributeSetMethodEmit derive(ToJson, @debug.Debug)
 
 pub(all) struct CallbackArgEmit {
   name : String
   mbt_type : String
-}
-pub impl Show for CallbackArgEmit
-pub impl ToJson for CallbackArgEmit
+} derive(ToJson, @debug.Debug)
 
 pub(all) struct CallbackEmitter {
   idl : @flattened_idl.FlattenedIdl
@@ -44,19 +39,13 @@ pub(all) struct CallbackEmitter {
 }
 pub impl Emitter for CallbackEmitter
 
-pub(all) struct Code(String)
+pub(all) struct Code(String) derive(ToJson)
 #deprecated
 pub fn Code::inner(Self) -> String
-pub impl Show for Code
-pub impl ToJson for Code
 
-type ConstName
-pub impl Show for ConstName
-pub impl ToJson for ConstName
+type ConstName derive(ToJson, @debug.Debug)
 
-type ConstructorName
-pub impl Show for ConstructorName
-pub impl ToJson for ConstructorName
+type ConstructorName derive(ToJson, @debug.Debug)
 
 pub(all) struct DictionaryEmitter {
   idl : @flattened_idl.FlattenedIdl
@@ -71,9 +60,7 @@ pub(all) struct DictionaryGetterArg {
   is_enum_type : Bool
   is_valid_wasm_stub : Bool
   is_primitive : Bool
-}
-pub impl Show for DictionaryGetterArg
-pub impl ToJson for DictionaryGetterArg
+} derive(ToJson, @debug.Debug)
 
 pub enum Emit {
   External(TypeName)
@@ -100,9 +87,7 @@ pub enum Emit {
   Callback(TypeName, Array[CallbackArgEmit], TypeName)
   Const(ConstName, TypeName, String)
   FileHeader(TypeName, Specs)
-}
-pub impl Show for Emit
-pub impl ToJson for Emit
+} derive(ToJson, @debug.Debug)
 
 pub(all) struct EnumEmitter {
   idl : @flattened_idl.FlattenedIdl
@@ -112,25 +97,18 @@ pub impl Emitter for EnumEmitter
 pub struct EnumVariantEmit {
   variant_name : String
   original_value : String
-}
-pub impl Show for EnumVariantEmit
-pub impl ToJson for EnumVariantEmit
+} derive(ToJson, @debug.Debug)
 
-pub(all) struct Filename(String)
+pub(all) struct Filename(String) derive(Eq, Hash, ToJson)
 #deprecated
 pub fn Filename::inner(Self) -> String
-pub impl Eq for Filename
-pub impl Hash for Filename
 pub impl Show for Filename
-pub impl ToJson for Filename
 
 pub struct InterfaceDef {
   trait_name : String
   parent_trait : String
   methods : Array[&InterfaceMethodEmit]
-}
-pub impl Show for InterfaceDef
-pub impl ToJson for InterfaceDef
+} derive(ToJson, @debug.Debug)
 
 pub(all) struct InterfaceEmitter {
   idl : @flattened_idl.FlattenedIdl
@@ -148,9 +126,7 @@ pub(all) struct MultiTargetCode {
 pub struct NamespaceDef {
   name : String
   methods : Array[&InterfaceMethodEmit]
-}
-pub impl Show for NamespaceDef
-pub impl ToJson for NamespaceDef
+} derive(ToJson, @debug.Debug)
 
 pub(all) struct NamespaceEmitter {
   idl : @flattened_idl.FlattenedIdl
@@ -158,33 +134,19 @@ pub(all) struct NamespaceEmitter {
 }
 pub impl Emitter for NamespaceEmitter
 
-type RegularMethodEmit
-pub impl Show for RegularMethodEmit
-pub impl ToJson for RegularMethodEmit
+type RegularMethodEmit derive(ToJson, @debug.Debug)
 
-type SpecialOperationMethodEmit
-pub impl Show for SpecialOperationMethodEmit
-pub impl ToJson for SpecialOperationMethodEmit
+type SpecialOperationMethodEmit derive(ToJson, @debug.Debug)
 
-type Specs
-pub impl Show for Specs
-pub impl ToJson for Specs
+type Specs derive(ToJson, @debug.Debug)
 
-type StaticAttributeGetMethodEmit
-pub impl Show for StaticAttributeGetMethodEmit
-pub impl ToJson for StaticAttributeGetMethodEmit
+type StaticAttributeGetMethodEmit derive(ToJson, @debug.Debug)
 
-type StaticMethodEmit
-pub impl Show for StaticMethodEmit
-pub impl ToJson for StaticMethodEmit
+type StaticMethodEmit derive(ToJson, @debug.Debug)
 
-type TraitName
-pub impl Show for TraitName
-pub impl ToJson for TraitName
+type TraitName derive(ToJson, @debug.Debug)
 
-type TypeName
-pub impl Show for TypeName
-pub impl ToJson for TypeName
+type TypeName derive(ToJson, @debug.Debug)
 
 pub(all) struct TypedefEmitter {
   idl : @flattened_idl.FlattenedIdl
@@ -199,5 +161,5 @@ pub(open) trait Emitter {
   emit(Self, String) -> (Filename, Array[Emit])
 }
 
-trait InterfaceMethodEmit : ToJson + Show
+trait InterfaceMethodEmit : ToJson + @debug.Debug
 

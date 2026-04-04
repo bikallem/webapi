@@ -52,7 +52,7 @@ test "EnumEmitter emits enum with multiple values" {
       #|  Smooth
       #|} derive(Eq)
       #|
-      #|pub impl Show for ScrollBehavior with output(self : ScrollBehavior, logger : &Logger) -> Unit {
+      #|pub impl Debug for ScrollBehavior with output(self : ScrollBehavior, logger : &Logger) -> Unit {
       #|  match self {
       #|    ScrollBehavior::Auto => logger.write_string("Auto")
       #|    ScrollBehavior::Instant => logger.write_string("Instant")
@@ -127,7 +127,7 @@ test "EnumEmitter emits enum with empty string value" {
       #|  Empty
       #|} derive(Eq)
       #|
-      #|pub impl Show for SelectionDirection with output(self : SelectionDirection, logger : &Logger) -> Unit {
+      #|pub impl Debug for SelectionDirection with output(self : SelectionDirection, logger : &Logger) -> Unit {
       #|  match self {
       #|    SelectionDirection::Forward => logger.write_string("Forward")
       #|    SelectionDirection::Backward => logger.write_string("Backward")
@@ -204,7 +204,7 @@ test "EnumEmitter emits enum with dash-separated values" {
       #|  Origin
       #|} derive(Eq)
       #|
-      #|pub impl Show for ReferrerPolicy with output(self : ReferrerPolicy, logger : &Logger) -> Unit {
+      #|pub impl Debug for ReferrerPolicy with output(self : ReferrerPolicy, logger : &Logger) -> Unit {
       #|  match self {
       #|    ReferrerPolicy::NoReferrer => logger.write_string("NoReferrer")
       #|    ReferrerPolicy::NoReferrerWhenDowngrade => logger.write_string("NoReferrerWhenDowngrade")

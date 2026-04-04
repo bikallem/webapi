@@ -20,7 +20,7 @@ test "arg_mbt_type identifies union types correctly" {
   inspect(
     mbt_type,
     content=(
-      #|Union({name: "TestInterfaceTestMethodParam", has_undefined: false, options: [Primitive("String"), Primitive("UInt")]})
+      #|TestInterfaceTestMethodParam
     ),
   )
   json_inspect(emits, content=[
@@ -60,7 +60,7 @@ test "arg_mbt_type identifies nested union types correctly" {
   inspect(
     mbt_type,
     content=(
-      #|Union({name: "TestInterfaceTestMethodParam", has_undefined: false, options: [Primitive("String"), Union({name: "TestInterfaceTestMethodParam2", has_undefined: false, options: [Primitive("UInt"), Primitive("Bool")]})]})
+      #|TestInterfaceTestMethodParam
     ),
   )
   json_inspect(emits, content=[
@@ -112,7 +112,7 @@ test "arg_mbt_type identifies nested union within sequence types correctly" {
   inspect(
     mbt_type,
     content=(
-      #|Union({name: "TestInterfaceTestMethodParam", has_undefined: false, options: [Primitive("String"), Other("Array[&TTestInterfaceTestMethodParam2]")]})
+      #|TestInterfaceTestMethodParam
     ),
   )
   json_inspect(emits, content=[
@@ -163,7 +163,7 @@ test "arg_mbt_type identifies union with undefined option correctly" {
   inspect(
     mbt_type,
     content=(
-      #|Union({name: "TestInterfaceTestMethodParam", has_undefined: true, options: [Primitive("String"), Other("JsUndefined")]})
+      #|TestInterfaceTestMethodParam
     ),
   )
   json_inspect(emits, content=[
@@ -203,7 +203,7 @@ test "arg_mbt_type identifies non-union types correctly" {
   inspect(
     mbt_type,
     content=(
-      #|Primitive("String")
+      #|String
     ),
   )
   json_inspect(emits, content=[]) // No emits for non-union type
@@ -244,9 +244,24 @@ test "arg_mbt_type keeps typedef and callback identifiers as concrete names" {
     op.arguments[2].name,
     type_registry,
   )
-  inspect(alias_type, content="Other(\"Alias\")")
-  inspect(callback_type, content="Other(\"MyCb\")")
-  inspect(target_type, content="Interface(\"EventTarget\")")
+  inspect(
+    alias_type,
+    content=(
+      #|Alias
+    ),
+  )
+  inspect(
+    callback_type,
+    content=(
+      #|MyCb
+    ),
+  )
+  inspect(
+    target_type,
+    content=(
+      #|EventTarget
+    ),
+  )
   json_inspect(alias_emits, content=[])
   json_inspect(callback_emits, content=[])
   json_inspect(target_emits, content=[])

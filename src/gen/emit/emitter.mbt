@@ -7,11 +7,19 @@ pub(open) trait Emitter {
 
 ///|
 /// Represents a filename for the generated code.
-pub(all) struct Filename(String) derive(Show, ToJson, Eq, Hash)
+pub(all) struct Filename(String) derive(ToJson, Eq, Hash)
+
+///|
+pub impl Show for Filename with output(self, logger) {
+  let Filename(s) = self
+  logger.write_string("Filename(\"")
+  logger.write_string(s)
+  logger.write_string("\")")
+}
 
 ///|
 /// Represents mbt code fragments emitted by an emiiter.
-pub(all) struct Code(String) derive(Show, ToJson)
+pub(all) struct Code(String) derive(ToJson)
 
 ///|
 /// Emits merged multi-target code for all given names using the provided emitter.
