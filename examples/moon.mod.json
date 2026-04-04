@@ -7,9 +7,7 @@
     "keywords": [],
     "description": "",
     "deps": {
-        "bikallem/webapi": {
-            "path": ".."
-        },
+        "bikallem/webapi": "0.4.6",
         "moonbitlang/async": "0.16.6"
     },
     "preferred-target": "js",

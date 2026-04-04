@@ -1,0 +1,29 @@
+{
+  "name": "bikallem/webapi",
+  "version": "0.4.6",
+  "readme": "src/README.mbt.md",
+  "repository": "https://github.com/bikallem/webapi.git",
+  "license": "Apache-2.0",
+  "keywords": [
+    "webapi",
+    "dom",
+    "fetch",
+    "html",
+    "xhr",
+    "url",
+    "svg",
+    "uievents"
+  ],
+  "description": "Moonbit browser WebApi - dom, fetch, html, xhr, url, svg, uievents and more",
+  "deps": {
+    "moonbitlang/async": "0.16.6",
+    "moonbitlang/x": "0.4.38"
+  },
+  "exclude": [
+    "docs",
+    "examples",
+    "tests",
+    "test-results"
+  ],
+  "warn-list": "@27"
+}

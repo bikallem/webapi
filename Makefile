@@ -3,11 +3,11 @@
 all: clean install gen check fmt info build-examples trim-examples validate-wasm test-playwright trim-test
 
 install:
-	cd src/gen && npm install
+	cd webapi/gen && npm install
 	cd tests && npm install
 
 gen:
-	moon run src/gen -- src/gen/config.json
+	moon run webapi/gen -- webapi/gen/config.json
 
 gen-test:
 	moon test -p bikallem/webapi/gen
@@ -33,9 +33,9 @@ build-examples:
 	moon -C examples build --target wasm-gc --release
 
 trim-examples:
-	@moon build src/trim --target js
+	@moon build webapi/trim --target js
 	@for wasm in _build/wasm-gc/release/build/bikallem/webapi-examples/*/*.wasm; do \
-		node _build/js/debug/build/bikallem/webapi/trim/trim.js "$(CURDIR)/$$wasm" --source "$(CURDIR)/src/webapi.mjs"; \
+		node _build/js/debug/build/bikallem/webapi/trim/trim.js "$(CURDIR)/$$wasm" --source "$(CURDIR)/webapi/webapi.mjs"; \
 	done
 
 validate-wasm:
@@ -64,12 +64,12 @@ serve:
 	node tests/ws-echo-server.mjs & npx serve . -l 3000 --no-clipboard
 
 trim:
-	moon run src/trim -- $(WASM) -o $(OUT)
+	moon run webapi/trim -- $(WASM) -o $(OUT)
 
 trim-test:
 	@mkdir -p "$${TMPDIR:-/tmp}"
 	moon test -p bikallem/webapi/trim
-	bash src/trim/tests/cli_test.sh
+	bash webapi/trim/tests/cli_test.sh
 
 clean:
 	moon clean	
