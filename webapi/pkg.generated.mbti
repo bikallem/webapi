@@ -344,6 +344,8 @@ pub fn document() -> Document
 
 pub fn navigator() -> Navigator
 
+pub fn try_catch(() -> Unit, (String) -> Unit) -> Unit
+
 pub fn window() -> Window
 
 // Errors
