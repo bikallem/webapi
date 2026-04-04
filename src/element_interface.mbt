@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: Element
-// Specifications: cssom-view.idl, pointerevents.idl, fullscreen.idl, dom.idl, html.idl
+// Specifications: pointerevents.idl, html.idl, dom.idl, cssom-view.idl, fullscreen.idl
 
 ///|
 /// [Element](https://developer.mozilla.org/en-US/docs/Web/API/Element)

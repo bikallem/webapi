@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: ClipboardPermissionDescriptor
-// Specifications: clipboard-apis.idl, permissions.idl
+// Specifications: permissions.idl, clipboard-apis.idl
 
 ///|
 /// [ClipboardPermissionDescriptor](https://developer.mozilla.org/en-US/docs/Web/API/ClipboardPermissionDescriptor)

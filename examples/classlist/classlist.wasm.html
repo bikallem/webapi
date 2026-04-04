@@ -9,9 +9,9 @@
 <body>
     <div id="app"></div>
     <script type="module">
-        import { wasmImportObject } from "../_build/wasm-gc/release/build/classlist/webapi.mjs";
+        import { wasmImportObject } from "../../_build/wasm-gc/release/build/bikallem/webapi-examples/classlist/webapi.mjs";
         const { instance } = await WebAssembly.instantiateStreaming(
-            fetch("../_build/wasm-gc/release/build/classlist/classlist.wasm"),
+            fetch("../../_build/wasm-gc/release/build/bikallem/webapi-examples/classlist/classlist.wasm"),
             wasmImportObject,
             { builtins: ["js-string"], importedStringConstants: "_" }
         );

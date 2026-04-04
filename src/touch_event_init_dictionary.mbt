@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: TouchEventInit
-// Specifications: uievents.idl, touch-events.idl, dom.idl
+// Specifications: uievents.idl, dom.idl, touch-events.idl
 
 ///|
 /// [TouchEventInit](https://developer.mozilla.org/en-US/docs/Web/API/TouchEventInit)

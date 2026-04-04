@@ -9,9 +9,9 @@
 <body>
     <div id="app"></div>
     <script type="module">
-        import { wasmImportObject } from "../_build/wasm-gc/release/build/trusted-types/webapi.mjs";
+        import { wasmImportObject } from "../../_build/wasm-gc/release/build/bikallem/webapi-examples/trusted-types/webapi.mjs";
         const { instance } = await WebAssembly.instantiateStreaming(
-            fetch("../_build/wasm-gc/release/build/trusted-types/trusted-types.wasm"),
+            fetch("../../_build/wasm-gc/release/build/bikallem/webapi-examples/trusted-types/trusted-types.wasm"),
             wasmImportObject,
             { builtins: ["js-string"], importedStringConstants: "_" }
         );

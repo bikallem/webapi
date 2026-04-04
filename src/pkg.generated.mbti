@@ -5003,7 +5003,6 @@ pub impl TJsValue for IntersectionObserverRoot
 pub type JsArray
 pub fn[T : TJsValue] JsArray::from_array(Array[T]) -> Self
 pub fn[T] JsArray::to_array(Self) -> Array[T]
-pub fn[T : FromJsAny] JsArray::to_value_array(Self) -> Array[T]
 pub impl FromJsAny for JsArray
 pub impl TJsValue for JsArray
 

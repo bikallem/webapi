@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: TrackEventInit
-// Specifications: dom.idl, html.idl
+// Specifications: html.idl, dom.idl
 
 ///|
 /// [TrackEventInit](https://developer.mozilla.org/en-US/docs/Web/API/TrackEventInit)

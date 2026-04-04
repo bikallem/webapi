@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: HTMLImageElement
-// Specifications: cssom-view.idl, html.idl
+// Specifications: html.idl, cssom-view.idl
 
 ///|
 /// [HTMLImageElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement)

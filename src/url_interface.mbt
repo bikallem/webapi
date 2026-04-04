@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: URL
-// Specifications: FileAPI.idl, url.idl
+// Specifications: url.idl, FileAPI.idl
 
 ///|
 /// [URL](https://developer.mozilla.org/en-US/docs/Web/API/URL)

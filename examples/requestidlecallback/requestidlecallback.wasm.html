@@ -9,9 +9,9 @@
 <body>
     <div id="app"></div>
     <script type="module">
-        import { wasmImportObject } from "../_build/wasm-gc/release/build/requestidlecallback/webapi.mjs";
+        import { wasmImportObject } from "../../_build/wasm-gc/release/build/bikallem/webapi-examples/requestidlecallback/webapi.mjs";
         const { instance } = await WebAssembly.instantiateStreaming(
-            fetch("../_build/wasm-gc/release/build/requestidlecallback/requestidlecallback.wasm"),
+            fetch("../../_build/wasm-gc/release/build/bikallem/webapi-examples/requestidlecallback/requestidlecallback.wasm"),
             wasmImportObject,
             { builtins: ["js-string"], importedStringConstants: "_" }
         );

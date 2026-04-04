@@ -11,9 +11,9 @@
 <body>
     <div id="app"></div>
     <script type="module">
-        import { wasmImportObject } from "../_build/wasm-gc/release/build/encoding/webapi.mjs";
+        import { wasmImportObject } from "../../_build/wasm-gc/release/build/bikallem/webapi-examples/encoding/webapi.mjs";
 
-        const wasmPath = "../_build/wasm-gc/release/build/encoding/encoding.wasm";
+        const wasmPath = "../../_build/wasm-gc/release/build/bikallem/webapi-examples/encoding/encoding.wasm";
         const { instance } = await WebAssembly.instantiateStreaming(
             fetch(wasmPath),
             wasmImportObject,

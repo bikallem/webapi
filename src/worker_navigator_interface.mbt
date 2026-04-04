@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: WorkerNavigator
-// Specifications: service-workers.idl, permissions.idl, html.idl
+// Specifications: service-workers.idl, html.idl, permissions.idl
 
 ///|
 /// [WorkerNavigator](https://developer.mozilla.org/en-US/docs/Web/API/WorkerNavigator)

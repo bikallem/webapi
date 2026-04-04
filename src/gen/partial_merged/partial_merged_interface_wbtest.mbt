@@ -62,7 +62,7 @@ test "MergedInterface::merge() combines members and inheritance" {
       },
     ],
     "inheritance": "HTMLElement",
-    "specs": ["dom.idl", "html.idl"],
+    "specs": ["html.idl", "dom.idl"],
   })
 }
 
@@ -106,6 +106,6 @@ test "MergedInterface::merge() retains existing inheritance if none provided" {
       },
     ],
     "inheritance": "Node",
-    "specs": ["dom.idl", "html.idl"],
+    "specs": ["html.idl", "dom.idl"],
   })
 }

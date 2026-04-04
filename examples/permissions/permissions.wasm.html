@@ -9,9 +9,9 @@
 <body>
     <div id="app"></div>
     <script type="module">
-        import { wasmImportObject } from "../_build/wasm-gc/release/build/permissions/webapi.mjs";
+        import { wasmImportObject } from "../../_build/wasm-gc/release/build/bikallem/webapi-examples/permissions/webapi.mjs";
         const { instance } = await WebAssembly.instantiateStreaming(
-            fetch("../_build/wasm-gc/release/build/permissions/permissions.wasm"),
+            fetch("../../_build/wasm-gc/release/build/bikallem/webapi-examples/permissions/permissions.wasm"),
             wasmImportObject,
             { builtins: ["js-string"], importedStringConstants: "_" }
         );

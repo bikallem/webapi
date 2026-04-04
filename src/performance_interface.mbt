@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: Performance
-// Specifications: hr-time.idl, performance-timeline.idl
+// Specifications: performance-timeline.idl, hr-time.idl
 
 ///|
 /// [Performance](https://developer.mozilla.org/en-US/docs/Web/API/Performance)

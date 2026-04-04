@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: DataTransferItem
-// Specifications: file-system-access.idl, html.idl
+// Specifications: html.idl, file-system-access.idl
 
 ///|
 /// [DataTransferItem](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem)

@@ -507,12 +507,12 @@ fn render_enum(name : String, variants : Array[EnumVariantEmit]) -> String {
     buf.write_string("  \{variant.variant_name}\n")
   }
   buf.write_string("} derive(Eq)\n\n")
-  // Debug
+  // Show
   render_enum_method(
     buf,
     name,
     variants,
-    "pub impl Debug for \{name} with output(self : \{name}, logger : &Logger) -> Unit {\n",
+    "pub impl Show for \{name} with output(self : \{name}, logger : &Logger) -> Unit {\n",
     "self",
     fn(n, v) {
       "\{n}::\{v.variant_name} => logger.write_string(\"\{v.variant_name}\")"

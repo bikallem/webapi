@@ -17,7 +17,7 @@ PROJECT_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
 
 # Build trim once, run via node for all tests
 (cd "$PROJECT_ROOT" && moon build src/trim --target js) 2>/dev/null
-TRIM="node $PROJECT_ROOT/_build/js/debug/build/trim/trim.js"
+TRIM="node $PROJECT_ROOT/_build/js/debug/build/bikallem/webapi/trim/trim.js"
 
 run_trim() {
   $TRIM "$@" 2>/dev/null

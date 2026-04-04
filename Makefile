@@ -34,13 +34,13 @@ build-examples:
 
 trim-examples:
 	@moon build src/trim --target js
-	@for wasm in examples/_build/wasm-gc/release/build/*/*.wasm; do \
-		node _build/js/debug/build/trim/trim.js "$(CURDIR)/$$wasm" --source "$(CURDIR)/src/webapi.mjs"; \
+	@for wasm in _build/wasm-gc/release/build/bikallem/webapi-examples/*/*.wasm; do \
+		node _build/js/debug/build/bikallem/webapi/trim/trim.js "$(CURDIR)/$$wasm" --source "$(CURDIR)/src/webapi.mjs"; \
 	done
 
 validate-wasm:
 	@fails=0; \
-	for wasm in examples/_build/wasm-gc/release/build/*/*.wasm; do \
+	for wasm in _build/wasm-gc/release/build/bikallem/webapi-examples/*/*.wasm; do \
 		name=$$(basename $$(dirname $$wasm)); \
 		if wasm-tools validate "$$wasm" 2>/dev/null; then \
 			echo "  OK: $$name"; \
@@ -53,6 +53,7 @@ validate-wasm:
 	echo "All wasm binaries valid"
 
 test-playwright:
+	@mkdir -p "$${TMPDIR:-/tmp}"
 	@cd tests && if node can_run_playwright.mjs; then \
 		npx playwright test; \
 	else \
@@ -66,6 +67,7 @@ trim:
 	moon run src/trim -- $(WASM) -o $(OUT)
 
 trim-test:
+	@mkdir -p "$${TMPDIR:-/tmp}"
 	moon test -p bikallem/webapi/trim
 	bash src/trim/tests/cli_test.sh
 

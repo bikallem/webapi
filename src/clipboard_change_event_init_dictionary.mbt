@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: ClipboardChangeEventInit
-// Specifications: clipboard-apis.idl, dom.idl
+// Specifications: dom.idl, clipboard-apis.idl
 
 ///|
 /// [ClipboardChangeEventInit](https://developer.mozilla.org/en-US/docs/Web/API/ClipboardChangeEventInit)

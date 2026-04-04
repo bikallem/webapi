@@ -1,6 +1,6 @@
 // Do not edit. This file is generated.
 // MoonBit type: PointerEventInit
-// Specifications: pointerevents.idl, uievents.idl, dom.idl
+// Specifications: uievents.idl, pointerevents.idl, dom.idl
 
 ///|
 /// [PointerEventInit](https://developer.mozilla.org/en-US/docs/Web/API/PointerEventInit)
