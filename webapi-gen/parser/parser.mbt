@@ -20,35 +20,27 @@ fn Parser::new(tokens : Array[(Token, Position, Position)]) -> Parser {
 }
 
 ///|
-fn Parser::peek(self : Parser) -> Token {
-  if self.pos < self.tokens.length() {
-    self.tokens[self.pos].0
+fn Parser::peek(self : Parser, offset? : Int = 0) -> Token {
+  if self.pos + offset < self.tokens.length() {
+    self.tokens[self.pos + offset].0
   } else {
     EOF
   }
 }
 
 ///|
-fn Parser::peek_kind(self : Parser) -> TokenKind {
-  self.peek().kind()
+fn Parser::peek_kind(self : Parser, offset? : Int) -> TokenKind {
+  self.peek(offset?).kind()
 }
 
 ///|
 fn Parser::peek2_kind(self : Parser) -> TokenKind {
-  if self.pos + 1 < self.tokens.length() {
-    self.tokens[self.pos + 1].0.kind()
-  } else {
-    TK_EOF
-  }
+  self.peek_kind(offset=1)
 }
 
 ///|
 fn Parser::peek3_kind(self : Parser) -> TokenKind {
-  if self.pos + 2 < self.tokens.length() {
-    self.tokens[self.pos + 2].0.kind()
-  } else {
-    TK_EOF
-  }
+  self.peek_kind(offset=2)
 }
 
 ///|
@@ -74,17 +66,13 @@ fn Parser::current_pos(self : Parser) -> Position {
 ///|
 fn Parser::expect(self : Parser, kind : TokenKind) -> Token raise ParseError {
   let tok = self.peek()
-  if tok.kind() == kind {
-    self.advance()
-  } else {
-    if tok.kind() == TK_EOF {
-      raise UnexpectedEndOfInput(self.current_pos(), [kind])
+  match tok.kind() {
+    k if k == kind => self.advance()
+    TK_EOF => raise UnexpectedEndOfInput(self.current_pos(), [kind])
+    _ => {
+      let (_tok, pos1, pos2) = self.tokens[self.pos]
+      raise UnexpectedToken(tok, (pos1, pos2), [kind])
     }
-    raise UnexpectedToken(
-      tok,
-      (self.tokens[self.pos].1, self.tokens[self.pos].2),
-      [kind],
-    )
   }
 }
 
