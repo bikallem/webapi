@@ -45,8 +45,7 @@ fn flatten_dictionary_members(
   name : String,
 ) -> (Array[@parser.DictionaryMember], @hashset.HashSet[String])? {
   let visited : @hashset.HashSet[String] = @hashset.new()
-  // Collect the chain from self to root
-  let chain : Array[String] = []
+  let chain : Array[String] = [] // Collect the chain from self to root
   let mut current = name
   while true {
     if visited.contains(current) {
@@ -54,18 +53,15 @@ fn flatten_dictionary_members(
     }
     visited.add(current)
     chain.push(current)
-    match dictionaries.get(current) {
-      Some(dict) =>
-        match dict.inheritance {
-          Some(parent) => current = parent
-          None => break
-        }
-      None => {
-        logger(
-          "Skipped dictionary '\{name}': inherited dictionary '\{current}' not found in chain from '\{name}'",
-        )
-        return None
-      }
+    guard dictionaries.get(current) is Some(dict) else {
+      logger(
+        "Skipped dictionary '\{name}': inherited dictionary '\{current}' not found in chain from '\{name}'",
+      )
+      return None
+    }
+    match dict.inheritance {
+      Some(parent) => current = parent
+      None => break
     }
   }
   // Reverse to get root-first order, then collect members and specs
@@ -137,25 +133,22 @@ fn merge_mixins_into_interfaces(
   logger : (String) -> Unit,
 ) -> Unit {
   for include_stmt in partial_merged.include_statements {
-    match partial_merged.mixins.get(include_stmt.mixin_name) {
-      Some(mxn) =>
-        match partial_merged.interfaces.get(include_stmt.interface_name) {
-          Some(iface) =>
-            partial_merged.interfaces[include_stmt.interface_name] = iface.merge(
-              mxn.members,
-              iface.inheritance,
-              iface.specs,
-            )
-          None =>
-            logger(
-              "Skipped includes statement: Interface '\{include_stmt.interface_name}' not found",
-            )
-        }
-      None =>
-        logger(
-          "Skipped includes statement: Mixin '\{include_stmt.mixin_name}' not found",
-        )
+    guard partial_merged.mixins.get(include_stmt.mixin_name) is Some(mxn) else {
+      logger(
+        "Skipped includes statement: Mixin '\{include_stmt.mixin_name}' not found",
+      )
     }
+    guard partial_merged.interfaces.get(include_stmt.interface_name)
+      is Some(iface) else {
+      logger(
+        "Skipped includes statement: Interface '\{include_stmt.interface_name}' not found",
+      )
+    }
+    partial_merged.interfaces[include_stmt.interface_name] = iface.merge(
+      mxn.members,
+      iface.inheritance,
+      iface.specs,
+    )
   }
 }
 
