@@ -1,6 +1,6 @@
 {
   "name": "bikallem/webapi",
-  "version": "0.4.8",
+  "version": "0.5.0",
   "readme": "src/README.mbt.md",
   "repository": "https://github.com/bikallem/webapi.git",
   "license": "Apache-2.0",
