@@ -14,7 +14,7 @@ pub impl Emitter for TypedefEmitter with emit(
   let emits = [
     Emit::FileHeader(
       TypeName(typedef_def.name),
-      specs_from_optional(typedef_def.spec),
+      @hashset.HashSet::from_array([typedef_def.spec]),
     ),
   ]
   let typedef_emits = match typedef_def.type_ {

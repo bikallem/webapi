@@ -323,7 +323,7 @@ pub(all) enum Definition {
 pub(all) struct DefinitionExtendedAttributes {
   extended_attributes : Array[ExtendedAttribute]
   definition : Definition
-  mut spec : String?
+  spec : String
 } derive(Debug, Eq, ToJson, Hash)
 
 ///|
@@ -389,7 +389,7 @@ pub(all) struct PartialDictionaryDefinition {
 pub(all) struct EnumDefinition {
   name : String
   values : Array[String]
-  mut spec : String?
+  spec : String
 } derive(Debug, Eq, ToJson, Hash)
 
 ///|
@@ -397,7 +397,7 @@ pub(all) struct EnumDefinition {
 pub(all) struct TypedefDefinition {
   type_ : Type
   name : String
-  mut spec : String?
+  spec : String
 } derive(Debug, Eq, ToJson, Hash)
 
 ///|
@@ -406,7 +406,7 @@ pub(all) struct CallbackFunctionDefinition {
   name : String
   return_type : Type
   arguments : Array[Argument]
-  mut spec : String?
+  spec : String
 } derive(Debug, Eq, ToJson, Hash)
 
 ///|
@@ -414,7 +414,7 @@ pub(all) struct CallbackFunctionDefinition {
 pub(all) struct CallbackInterfaceDefinition {
   name : String
   members : Array[CallbackInterfaceMemberExtendedAttributes]
-  mut spec : String?
+  spec : String
 } derive(Debug, Eq, ToJson, Hash)
 
 ///|

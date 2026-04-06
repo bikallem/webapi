@@ -128,21 +128,23 @@ fn Parser::expect_integer(self : Parser) -> String raise ParseError {
 pub fn definitions(
   tokens : Array[(Token, Position, Position)],
   initial_pos? : Position,
+  spec : String,
 ) -> Array[DefinitionExtendedAttributes] raise ParseError {
   ignore(initial_pos)
   let parser = Parser::new(tokens)
-  parser.parse_definitions()
+  parser.parse_definitions(spec)
 }
 
 ///|
 fn Parser::parse_definitions(
   self : Parser,
+  spec : String,
 ) -> Array[DefinitionExtendedAttributes] raise ParseError {
   let defs : Array[DefinitionExtendedAttributes] = []
   while self.peek_kind() != TK_EOF {
     let extended_attributes = self.parse_extended_attribute_list()
-    let definition = self.parse_definition()
-    defs.push({ extended_attributes, definition, spec: None })
+    let definition = self.parse_definition(spec)
+    defs.push({ extended_attributes, definition, spec })
   }
   defs
 }
@@ -152,7 +154,10 @@ fn Parser::parse_definitions(
 // ============================================================================
 
 ///|
-fn Parser::parse_definition(self : Parser) -> Definition raise ParseError {
+fn Parser::parse_definition(
+  self : Parser,
+  spec : String,
+) -> Definition raise ParseError {
   match self.peek_kind() {
     TK_INTERFACE =>
       // Could be: interface Foo {...}; or interface mixin Foo {...};
@@ -183,14 +188,14 @@ fn Parser::parse_definition(self : Parser) -> Definition raise ParseError {
       }
     }
     TK_DICTIONARY => Definition::Dictionary(self.parse_dictionary_def())
-    TK_ENUM => Definition::Enum(self.parse_enum_def())
-    TK_TYPEDEF => Definition::Typedef(self.parse_typedef_def())
+    TK_ENUM => Definition::Enum(self.parse_enum_def(spec))
+    TK_TYPEDEF => Definition::Typedef(self.parse_typedef_def(spec))
     TK_CALLBACK =>
       // callback interface or callback function
       if self.peek2_kind() == TK_INTERFACE {
-        Definition::CallbackInterface(self.parse_callback_interface_def())
+        Definition::CallbackInterface(self.parse_callback_interface_def(spec))
       } else {
-        Definition::CallbackFunction(self.parse_callback_def())
+        Definition::CallbackFunction(self.parse_callback_def(spec))
       }
     TK_NAMESPACE => Definition::Namespace(self.parse_namespace_def())
     TK_IDENTIFIER =>
@@ -329,30 +334,35 @@ fn Parser::parse_partial_dictionary_def(
 }
 
 ///|
-fn Parser::parse_enum_def(self : Parser) -> EnumDefinition raise ParseError {
+fn Parser::parse_enum_def(
+  self : Parser,
+  spec : String,
+) -> EnumDefinition raise ParseError {
   self.skip(TK_ENUM)
   let name = self.expect_identifier()
   self.skip(TK_LBRACE)
   let values = self.parse_enum_value_list()
   self.skip(TK_RBRACE)
   self.skip(TK_SEMICOLON)
-  { name, values, spec: None }
+  { name, values, spec }
 }
 
 ///|
 fn Parser::parse_typedef_def(
   self : Parser,
+  spec : String,
 ) -> TypedefDefinition raise ParseError {
   self.skip(TK_TYPEDEF)
   let type_ = self.parse_type()
   let name = self.expect_identifier()
   self.skip(TK_SEMICOLON)
-  { type_, name, spec: None }
+  { type_, name, spec }
 }
 
 ///|
 fn Parser::parse_callback_def(
   self : Parser,
+  spec : String,
 ) -> CallbackFunctionDefinition raise ParseError {
   self.skip(TK_CALLBACK)
   let name = self.expect_identifier()
@@ -362,12 +372,13 @@ fn Parser::parse_callback_def(
   let arguments = self.parse_argument_list()
   self.skip(TK_RPAREN)
   self.skip(TK_SEMICOLON)
-  { name, return_type, arguments, spec: None }
+  { name, return_type, arguments, spec }
 }
 
 ///|
 fn Parser::parse_callback_interface_def(
   self : Parser,
+  spec : String,
 ) -> CallbackInterfaceDefinition raise ParseError {
   self.skip(TK_CALLBACK)
   self.skip(TK_INTERFACE)
@@ -376,7 +387,7 @@ fn Parser::parse_callback_interface_def(
   let members = self.parse_callback_interface_members()
   self.skip(TK_RBRACE)
   self.skip(TK_SEMICOLON)
-  { name, members, spec: None }
+  { name, members, spec }
 }
 
 ///|
@@ -1421,7 +1432,7 @@ pub fn parse(
   input : String,
 ) -> Array[DefinitionExtendedAttributes] raise WebIdlError {
   let tokens = lex(input[:]) catch { e => raise Lex(e) }
-  definitions(tokens) catch {
+  definitions(tokens, "") catch {
     e => raise Parse(e)
   }
 }
@@ -1434,13 +1445,11 @@ pub fn parse_file(
   let content = @fs.read_file_to_string(filepath) catch {
     e => raise Lex(LexFailed(e.to_string()))
   }
-  let tokens = lex(content[:], file=filepath) catch { e => raise Lex(e) }
-  let definitions = definitions(tokens) catch { e => raise Parse(e) }
   let spec = @path.Path(filepath).basename().to_string()
-  for def in definitions {
-    def.spec = Some(spec)
+  let tokens = lex(content[:], file=filepath) catch { e => raise Lex(e) }
+  definitions(tokens, spec) catch {
+    e => raise Parse(e)
   }
-  definitions
 }
 
 ///|

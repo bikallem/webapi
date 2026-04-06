@@ -51,7 +51,7 @@ test "PartialMergeVisitor merges interface and partial interface" {
             ],
           },
         ],
-        "specs": [],
+        "specs": [""],
       },
     },
     "mixins": {},
@@ -106,7 +106,7 @@ test "PartialMergeVisitor merges mixin and partial mixin" {
         ],
       },
     ],
-    "specs": [],
+    "specs": [""],
   })
 }
 
@@ -139,7 +139,7 @@ test "PartialMergeVisitor merges dictionary and partial dictionary" {
         "default_value": ["ConstValue", ["Boolean", "false"]],
       },
     ],
-    "specs": [],
+    "specs": [""],
   })
 }
 
@@ -163,7 +163,7 @@ test "PartialMergeVisitor merges dictionary with inheritance" {
       },
     ],
     "inheritance": "EventInit",
-    "specs": [],
+    "specs": [""],
   })
 }
 
@@ -178,7 +178,7 @@ test "PartialMergeVisitor empty_dictionary" {
   json_inspect(merged, content={
     "name": "EmptyDict",
     "members": [],
-    "specs": [],
+    "specs": [""],
   })
 }
 
@@ -258,7 +258,7 @@ test "PartialMergeVisitor merges interfaces, mixins, dictionaries, enums, callba
             ],
           },
         ],
-        "specs": [],
+        "specs": [""],
       },
     },
     "mixins": {
@@ -291,7 +291,7 @@ test "PartialMergeVisitor merges interfaces, mixins, dictionaries, enums, callba
             ],
           },
         ],
-        "specs": [],
+        "specs": [""],
       },
     },
     "dictionaries": {
@@ -313,11 +313,13 @@ test "PartialMergeVisitor merges interfaces, mixins, dictionaries, enums, callba
           },
         ],
         "inheritance": "Event",
-        "specs": [],
+        "specs": [""],
       },
     },
     "namespaces": {},
-    "enums": { "MyEnum": { "name": "MyEnum", "values": ["value1", "value2"] } },
+    "enums": {
+      "MyEnum": { "name": "MyEnum", "values": ["value1", "value2"], "spec": "" },
+    },
     "typedefs": {},
     "callback_functions": {
       "MyCallback": {
@@ -332,6 +334,7 @@ test "PartialMergeVisitor merges interfaces, mixins, dictionaries, enums, callba
             "variadic": false,
           },
         ],
+        "spec": "",
       },
     },
     "callback_interfaces": {
@@ -362,6 +365,7 @@ test "PartialMergeVisitor merges interfaces, mixins, dictionaries, enums, callba
             ],
           },
         ],
+        "spec": "",
       },
     },
     "include_statements": [

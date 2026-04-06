@@ -1,12 +1,4 @@
 ///|
-fn hashset_from_optional(spec : String?) -> @hashset.HashSet[String] {
-  match spec {
-    Some(s) => @hashset.HashSet::from_array([s])
-    None => @hashset.HashSet::new()
-  }
-}
-
-///|
 /// Merged namespace with members from all partial namespace definitions.
 pub(all) struct PartialMergedNamespace {
   name : String
@@ -54,7 +46,7 @@ fn PartialMerged::merge_mixin(
   self : PartialMerged,
   name : String,
   members : Array[@parser.InterfaceMemberExtendedAttributes],
-  spec : String?,
+  spec : String,
 ) -> Unit {
   match self.mixins.get(name) {
     Some(current) => self.mixins[name] = current.merge(members, spec)
@@ -69,7 +61,7 @@ fn PartialMerged::merge_dictionary(
   name : String,
   members : Array[@parser.DictionaryMember],
   inheritance : String?,
-  spec : String?,
+  spec : String,
 ) -> Unit {
   match self.dictionaries.get(name) {
     Some(current) =>
@@ -119,22 +111,11 @@ pub fn merge_partials(
   }
   for def in filtered {
     match def.definition {
-      CallbackInterface(cbif) => {
+      CallbackInterface(cbif) =>
         partial_merged.callback_interfaces[cbif.name] = cbif
-        cbif.spec = def.spec
-      }
-      CallbackFunction(cbf) => {
-        partial_merged.callback_functions[cbf.name] = cbf
-        cbf.spec = def.spec
-      }
-      Typedef(td) => {
-        partial_merged.typedefs[td.name] = td
-        td.spec = def.spec
-      }
-      Enum(enm) => {
-        partial_merged.enums[enm.name] = enm
-        enm.spec = def.spec
-      }
+      CallbackFunction(cbf) => partial_merged.callback_functions[cbf.name] = cbf
+      Typedef(td) => partial_merged.typedefs[td.name] = td
+      Enum(enm) => partial_merged.enums[enm.name] = enm
       PartialDictionary(pdict) =>
         partial_merged.merge_dictionary(
           pdict.name,
@@ -157,27 +138,27 @@ pub fn merge_partials(
           piface.name,
           piface.members,
           None,
-          hashset_from_optional(def.spec),
+          @hashset.HashSet::from_array([def.spec]),
         )
       Interface(iface) =>
         partial_merged.merge_interface(
           iface.name,
           iface.members,
           iface.inheritance,
-          hashset_from_optional(def.spec),
+          @hashset.HashSet::from_array([def.spec]),
         )
       Includes(inc) => partial_merged.include_statements.push(inc)
       PartialNamespace(pns) =>
         partial_merged.merge_namespace(
           pns.name,
           pns.members,
-          hashset_from_optional(def.spec),
+          @hashset.HashSet::from_array([def.spec]),
         )
       Namespace(ns) =>
         partial_merged.merge_namespace(
           ns.name,
           ns.members,
-          hashset_from_optional(def.spec),
+          @hashset.HashSet::from_array([def.spec]),
         )
     }
   }

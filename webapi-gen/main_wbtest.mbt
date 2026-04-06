@@ -52,17 +52,20 @@ test "filter_idl with empty config returns all types" {
     {
       "extended_attributes": [],
       "definition": ["Interface", { "name": "Node", "members": [] }],
+      "spec": "",
     },
     {
       "extended_attributes": [],
       "definition": ["Dictionary", { "name": "EventInit", "members": [] }],
+      "spec": "",
     },
     {
       "extended_attributes": [],
       "definition": [
         "Enum",
-        { "name": "ScrollBehavior", "values": ["auto", "smooth"] },
+        { "name": "ScrollBehavior", "values": ["auto", "smooth"], "spec": "" },
       ],
+      "spec": "",
     },
   ])
 }
@@ -82,6 +85,7 @@ test "filter_idl filters interfaces by whitelist" {
     {
       "extended_attributes": [],
       "definition": ["Interface", { "name": "Document", "members": [] }],
+      "spec": "",
     },
   ])
 }
@@ -116,8 +120,10 @@ test "filter_idl excludes callbacks" {
               "variadic": false,
             },
           ],
+          "spec": "",
         },
       ],
+      "spec": "",
     },
   ])
 }
@@ -139,8 +145,9 @@ test "filter_idl excludes typedefs" {
       "extended_attributes": [],
       "definition": [
         "Typedef",
-        { "type_": "UnsignedLongLong", "name": "DOMTimeStamp" },
+        { "type_": "UnsignedLongLong", "name": "DOMTimeStamp", "spec": "" },
       ],
+      "spec": "",
     },
   ])
 }
@@ -164,6 +171,7 @@ test "filter_idl excludes dictionaries by prefix" {
     {
       "extended_attributes": [],
       "definition": ["Dictionary", { "name": "EventInit", "members": [] }],
+      "spec": "",
     },
   ])
 }

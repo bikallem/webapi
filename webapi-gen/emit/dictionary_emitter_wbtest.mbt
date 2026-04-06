@@ -11,20 +11,20 @@ test "DictionaryEmitter generates MoonBit code for dictionary" {
   let definitions = @parser.parse(idl)
   let predefined_color_space_enum = @parser.DefinitionExtendedAttributes::{
     extended_attributes: [],
-    spec: None,
+    spec: "",
     definition: @parser.Enum({
       name: "PredefinedColorSpace",
       values: ["srgb"],
-      spec: None,
+      spec: "",
     }),
   }
   let canvas_color_type_enum = @parser.DefinitionExtendedAttributes::{
     extended_attributes: [],
-    spec: None,
+    spec: "",
     definition: @parser.Enum({
       name: "CanvasColorType",
       values: ["unorm8"],
-      spec: None,
+      spec: "",
     }),
   }
   definitions.push(predefined_color_space_enum)
@@ -40,7 +40,7 @@ test "DictionaryEmitter generates MoonBit code for dictionary" {
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: CanvasRenderingContext2DSettings
-      #|
+      #|// Specifications: 
       #|
       #|/// [CanvasRenderingContext2DSettings](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2DSettings)
       #|#external
@@ -146,7 +146,7 @@ test "DictionaryEmitter multi-target separates FFI" {
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: SimpleDict
-      #|
+      #|// Specifications: 
       #|
       #|/// [SimpleDict](https://developer.mozilla.org/en-US/docs/Web/API/SimpleDict)
       #|#external
@@ -213,7 +213,7 @@ test "DictionaryEmitter does not emit duplicate commas for optional union args" 
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: TestDict
-      #|
+      #|// Specifications: 
       #|
       #|/// [TestDict](https://developer.mozilla.org/en-US/docs/Web/API/TestDict)
       #|#external

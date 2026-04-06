@@ -36,7 +36,10 @@ pub impl Emitter for CallbackEmitter with emit(
   )
   emits.push_iter(return_emits.iter())
   let emits = [
-    Emit::FileHeader(TypeName(name), specs_from_optional(cb_def.spec)),
+    Emit::FileHeader(
+      TypeName(name),
+      @hashset.HashSet::from_array([cb_def.spec]),
+    ),
     Emit::External(cb_def.name),
     Emit::ImplTJsValue(cb_def.name),
     Emit::ImplFromJsAny(cb_def.name),

@@ -12,9 +12,11 @@ fn PartialMergedDictionary::new(
   name : String,
   members : Array[@parser.DictionaryMember],
   inheritance : String?,
-  spec : String?,
+  spec : String,
 ) -> PartialMergedDictionary {
-  { name, inheritance, members, specs: hashset_from_optional(spec) }
+  let specs = @hashset.HashSet::new()
+  specs.add(spec)
+  { name, inheritance, members, specs }
 }
 
 ///|
@@ -22,15 +24,12 @@ fn PartialMergedDictionary::merge(
   self : PartialMergedDictionary,
   members : Array[@parser.DictionaryMember],
   inheritance : String?,
-  spec : String?,
+  spec : String,
 ) -> PartialMergedDictionary {
   let inheritance = match inheritance {
     None => self.inheritance
     Some(_) => inheritance
   }
-  let specs = match spec {
-    Some(s) => self.specs.union(@hashset.HashSet::from_array([s]))
-    None => self.specs
-  }
-  { ..self, members: self.members + members, inheritance, specs }
+  self.specs.add(spec)
+  { ..self, members: self.members + members, inheritance }
 }

@@ -44,7 +44,7 @@ test "EnumEmitter emits enum with multiple values" {
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: ScrollBehavior
-      #|
+      #|// Specifications: 
       #|
       #|pub(all) enum ScrollBehavior {
       #|  Auto
@@ -118,7 +118,7 @@ test "EnumEmitter emits enum with empty string value" {
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: SelectionDirection
-      #|
+      #|// Specifications: 
       #|
       #|pub(all) enum SelectionDirection {
       #|  Forward
@@ -196,7 +196,7 @@ test "EnumEmitter emits enum with dash-separated values" {
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: ReferrerPolicy
-      #|
+      #|// Specifications: 
       #|
       #|pub(all) enum ReferrerPolicy {
       #|  NoReferrer

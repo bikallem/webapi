@@ -14,7 +14,7 @@ test "NamespaceEmitter emits namespace with operation" {
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: Console
-      #|
+      #|// Specifications: 
       #|
       #|/// [Console](https://developer.mozilla.org/en-US/docs/Web/API/Console)
       #|#external
@@ -59,7 +59,7 @@ test "NamespaceEmitter emits namespace with attribute" {
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: Console
-      #|
+      #|// Specifications: 
       #|
       #|/// [Console](https://developer.mozilla.org/en-US/docs/Web/API/Console)
       #|#external
@@ -109,7 +109,7 @@ test "NamespaceEmitter emits namespace with const" {
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: CSS
-      #|
+      #|// Specifications: 
       #|
       #|/// [CSS](https://developer.mozilla.org/en-US/docs/Web/API/CSS)
       #|#external

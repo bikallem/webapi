@@ -43,7 +43,7 @@ test "flatten merges dictionary inheritance" {
         "default_value": ["ConstValue", ["Boolean", "false"]],
       },
     ],
-    "specs": [],
+    "specs": [""],
   })
 }
 
@@ -67,7 +67,7 @@ test "flatten handles dictionary without inheritance" {
         "required": false,
       },
     ],
-    "specs": [],
+    "specs": [""],
   })
 }
 
@@ -129,7 +129,7 @@ test "flatten merges 3-level dictionary inheritance chain" {
         "required": false,
       },
     ],
-    "specs": [],
+    "specs": [""],
   })
   // B should have members from A then B
   let flattened_b = flattened_idl.dictionaries["B"]
@@ -150,7 +150,7 @@ test "flatten merges 3-level dictionary inheritance chain" {
         "default_value": ["ConstValue", ["Boolean", "false"]],
       },
     ],
-    "specs": [],
+    "specs": [""],
   })
   // A should only have its own members
   let flattened_a = flattened_idl.dictionaries["A"]
@@ -164,7 +164,7 @@ test "flatten merges 3-level dictionary inheritance chain" {
         "required": false,
       },
     ],
-    "specs": [],
+    "specs": [""],
   })
 }
 
@@ -253,7 +253,7 @@ test "flatten merges/includes mixin members into interface" {
         ],
       },
     ],
-    "specs": [],
+    "specs": [""],
   })
 }
 
@@ -331,7 +331,7 @@ test "flatten includes merged interfaces, mixins, dictionaries, enums and callba
             ],
           },
         ],
-        "specs": [],
+        "specs": [""],
       },
       "MyInterface": {
         "name": "MyInterface",
@@ -399,7 +399,7 @@ test "flatten includes merged interfaces, mixins, dictionaries, enums and callba
           },
         ],
         "inheritance": "ParentInterface",
-        "specs": [],
+        "specs": [""],
       },
     },
     "dictionaries": {
@@ -435,7 +435,7 @@ test "flatten includes merged interfaces, mixins, dictionaries, enums and callba
             "default_value": ["ConstValue", ["Boolean", "false"]],
           },
         ],
-        "specs": [],
+        "specs": [""],
       },
       "MyEvent": {
         "name": "MyEvent",
@@ -475,11 +475,13 @@ test "flatten includes merged interfaces, mixins, dictionaries, enums and callba
             "required": true,
           },
         ],
-        "specs": [],
+        "specs": [""],
       },
     },
     "namespaces": {},
-    "enums": { "MyEnum": { "name": "MyEnum", "values": ["value1", "value2"] } },
+    "enums": {
+      "MyEnum": { "name": "MyEnum", "values": ["value1", "value2"], "spec": "" },
+    },
     "typedefs": {},
     "callbacks": {
       "MyCallback": {
@@ -494,6 +496,7 @@ test "flatten includes merged interfaces, mixins, dictionaries, enums and callba
             "variadic": false,
           },
         ],
+        "spec": "",
       },
       "MyCallbackInterface": {
         "name": "MyCallbackInterface",
@@ -510,6 +513,7 @@ test "flatten includes merged interfaces, mixins, dictionaries, enums and callba
             "variadic": false,
           },
         ],
+        "spec": "",
       },
     },
   })

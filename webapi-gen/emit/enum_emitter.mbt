@@ -21,7 +21,10 @@ pub impl Emitter for EnumEmitter with emit(self : EnumEmitter, name : String) ->
   (
     filename,
     [
-      Emit::FileHeader(TypeName(enum_.name), specs_from_optional(enum_.spec)),
+      Emit::FileHeader(
+        TypeName(enum_.name),
+        @hashset.HashSet::from_array([enum_.spec]),
+      ),
       Emit::Enum(TypeName(enum_.name), variants),
     ],
   )

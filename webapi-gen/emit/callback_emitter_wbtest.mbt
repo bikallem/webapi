@@ -17,7 +17,7 @@ test "emit_callback simple EventListener" {
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: EventListener
-      #|
+      #|// Specifications: 
       #|
       #|/// [EventListener](https://developer.mozilla.org/en-US/docs/Web/API/EventListener)
       #|#external
@@ -64,7 +64,7 @@ test "emit_callback keeps interface argument as concrete callback type" {
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: EventListener
-      #|
+      #|// Specifications: 
       #|
       #|/// [EventListener](https://developer.mozilla.org/en-US/docs/Web/API/EventListener)
       #|#external
@@ -110,7 +110,7 @@ test "emit_callback multi-arg MutationCallback" {
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: MutationCallback
-      #|
+      #|// Specifications: 
       #|
       #|/// [MutationCallback](https://developer.mozilla.org/en-US/docs/Web/API/MutationCallback)
       #|#external
@@ -165,7 +165,7 @@ test "CallbackEmitter multi-target separates FFI" {
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: EventListener
-      #|
+      #|// Specifications: 
       #|
       #|/// [EventListener](https://developer.mozilla.org/en-US/docs/Web/API/EventListener)
       #|#external
@@ -214,7 +214,7 @@ test "CallbackEmitter wasm always uses direct import" {
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: NotificationPermissionCallback
-      #|
+      #|// Specifications: 
       #|
       #|/// [NotificationPermissionCallback](https://developer.mozilla.org/en-US/docs/Web/API/NotificationPermissionCallback)
       #|#external

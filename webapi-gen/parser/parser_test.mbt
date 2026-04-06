@@ -46,6 +46,7 @@ test "parse interface with inheritance" {
         "Interface",
         { "name": "Child", "inheritance": "Parent", "members": [] },
       ],
+      "spec": "",
     },
   ])
 }
@@ -87,6 +88,7 @@ test "parse with union type" {
           ],
         },
       ],
+      "spec": "",
     },
   ])
 }
@@ -101,6 +103,7 @@ test "parse interface with extended attributes" {
     {
       "extended_attributes": [["Ident", "Exposed", "Window"]],
       "definition": ["Interface", { "name": "EventTarget", "members": [] }],
+      "spec": "",
     },
   ])
 }
@@ -184,6 +187,7 @@ test "parse dictionary with default values" {
           ],
         },
       ],
+      "spec": "",
     },
   ])
 }
@@ -197,8 +201,9 @@ test "parse enum" {
       "extended_attributes": [],
       "definition": [
         "Enum",
-        { "name": "Color", "values": ["red", "green", "blue"] },
+        { "name": "Color", "values": ["red", "green", "blue"], "spec": "" },
       ],
+      "spec": "",
     },
   ])
 }
@@ -212,8 +217,9 @@ test "parse typedef" {
       "extended_attributes": [],
       "definition": [
         "Typedef",
-        { "type_": ["Sequence", "DOMString"], "name": "StringList" },
+        { "type_": ["Sequence", "DOMString"], "name": "StringList", "spec": "" },
       ],
+      "spec": "",
     },
   ])
 }
@@ -242,8 +248,10 @@ test "parse callback function" {
               "variadic": false,
             },
           ],
+          "spec": "",
         },
       ],
+      "spec": "",
     },
   ])
 }
@@ -286,8 +294,10 @@ test "parse callback interface" {
             ],
           },
         ],
+        "spec": "",
       },
     ],
+    "spec": "",
   })
 }
 
@@ -341,6 +351,7 @@ test "parse namespace" {
           ],
         },
       ],
+      "spec": "",
     },
   ])
 }
@@ -356,6 +367,7 @@ test "parse includes statement" {
         "Includes",
         { "interface_name": "Window", "mixin_name": "GlobalEventHandlers" },
       ],
+      "spec": "",
     },
   ])
 }
@@ -390,6 +402,7 @@ test "parse interface mixin" {
           ],
         },
       ],
+      "spec": "",
     },
   ])
 }
@@ -424,6 +437,7 @@ test "parse partial interface" {
           ],
         },
       ],
+      "spec": "",
     },
   ])
 }
@@ -465,6 +479,7 @@ test "parse interface with constructor" {
           ],
         },
       ],
+      "spec": "",
     },
   ])
 }
@@ -509,6 +524,7 @@ test "parse interface with getter" {
           ],
         },
       ],
+      "spec": "",
     },
   ])
 }
@@ -534,6 +550,7 @@ test "parse interface with iterable" {
           ],
         },
       ],
+      "spec": "",
     },
   ])
 }
@@ -566,6 +583,7 @@ test "parse interface with maplike" {
           ],
         },
       ],
+      "spec": "",
     },
   ])
 }
@@ -610,6 +628,7 @@ test "parse interface with static operation" {
           ],
         },
       ],
+      "spec": "",
     },
   ])
 }
@@ -643,6 +662,7 @@ test "parse buffer type" {
           ],
         },
       ],
+      "spec": "",
     },
   ])
 }
@@ -656,6 +676,7 @@ test "parse single line comment" {
     {
       "extended_attributes": [],
       "definition": ["Interface", { "name": "Foo", "members": [] }],
+      "spec": "",
     },
   ])
 }
@@ -670,6 +691,7 @@ test "parse multi line comment" {
     {
       "extended_attributes": [],
       "definition": ["Interface", { "name": "Foo", "members": [] }],
+      "spec": "",
     },
   ])
 }

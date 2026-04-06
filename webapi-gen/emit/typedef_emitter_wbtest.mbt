@@ -15,7 +15,7 @@ test "typedef emiiter emits alias typedef" {
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: MyString
-      #|
+      #|// Specifications: 
       #|
       #|pub type MyString = String
     ),
@@ -46,7 +46,7 @@ test "typedef emitter emits union typedef" {
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: MyUnion
-      #|
+      #|// Specifications: 
       #|
       #|/// [MyUnion](https://developer.mozilla.org/en-US/docs/Web/API/MyUnion)
       #|#external
@@ -100,7 +100,7 @@ test "typedef emitter emit interface types as trait references in union typedef"
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: MyUnion
-      #|
+      #|// Specifications: 
       #|
       #|/// [MyUnion](https://developer.mozilla.org/en-US/docs/Web/API/MyUnion)
       #|#external
@@ -152,7 +152,7 @@ test "typedef emitter emits alias of nullable interface" {
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: MyNullableInterface
-      #|
+      #|// Specifications: 
       #|
       #|pub type MyNullableInterface = MyInterface
     ),

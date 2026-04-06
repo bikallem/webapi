@@ -10,20 +10,19 @@ pub struct PartialMergedMixin {
 fn PartialMergedMixin::new(
   name : String,
   members : Array[@parser.InterfaceMemberExtendedAttributes],
-  spec : String?,
+  spec : String,
 ) -> PartialMergedMixin {
-  { name, members, specs: hashset_from_optional(spec) }
+  let specs = @hashset.HashSet::new()
+  specs.add(spec)
+  { name, members, specs }
 }
 
 ///|
 fn PartialMergedMixin::merge(
   self : PartialMergedMixin,
   members : Array[@parser.InterfaceMemberExtendedAttributes],
-  spec : String?,
+  spec : String,
 ) -> PartialMergedMixin {
-  let specs = match spec {
-    Some(s) => self.specs.union(@hashset.HashSet::from_array([s]))
-    None => self.specs
-  }
-  { ..self, members: self.members + members, specs }
+  self.specs.add(spec)
+  { ..self, members: self.members + members }
 }

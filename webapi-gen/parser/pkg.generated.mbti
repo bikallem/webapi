@@ -6,7 +6,7 @@ import {
 }
 
 // Values
-pub fn definitions(Array[(Token, Position, Position)], initial_pos? : Position) -> Array[DefinitionExtendedAttributes] raise ParseError
+pub fn definitions(Array[(Token, Position, Position)], initial_pos? : Position, String) -> Array[DefinitionExtendedAttributes] raise ParseError
 
 pub fn lex(StringView, file? : String) -> Array[(Token, Position, Position)] raise LexError
 
@@ -59,13 +59,13 @@ pub(all) struct CallbackFunctionDefinition {
   name : String
   return_type : Type
   arguments : Array[Argument]
-  mut spec : String?
+  spec : String
 } derive(Eq, Hash, ToJson, @debug.Debug)
 
 pub(all) struct CallbackInterfaceDefinition {
   name : String
   members : Array[CallbackInterfaceMemberExtendedAttributes]
-  mut spec : String?
+  spec : String
 } derive(Eq, Hash, ToJson, @debug.Debug)
 
 pub(all) enum CallbackInterfaceMember {
@@ -122,7 +122,7 @@ pub(all) enum Definition {
 pub(all) struct DefinitionExtendedAttributes {
   extended_attributes : Array[ExtendedAttribute]
   definition : Definition
-  mut spec : String?
+  spec : String
 } derive(Eq, Hash, ToJson, @debug.Debug)
 
 pub(all) struct DictionaryDefinition {
@@ -142,7 +142,7 @@ pub(all) struct DictionaryMember {
 pub(all) struct EnumDefinition {
   name : String
   values : Array[String]
-  mut spec : String?
+  spec : String
 } derive(Eq, Hash, ToJson, @debug.Debug)
 
 pub(all) enum ExtendedAttribute {
@@ -531,7 +531,7 @@ pub(all) struct TypeWithExtendedAttributes {
 pub(all) struct TypedefDefinition {
   type_ : Type
   name : String
-  mut spec : String?
+  spec : String
 } derive(Eq, Hash, ToJson, @debug.Debug)
 
 // Type aliases

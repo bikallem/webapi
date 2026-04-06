@@ -71,7 +71,7 @@ test "InterfaceEmitter emits union typedef args as trait refs" {
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: Window
-      #|
+      #|// Specifications: 
       #|
       #|/// [Window](https://developer.mozilla.org/en-US/docs/Web/API/Window)
       #|#external
@@ -152,7 +152,7 @@ test "InterfaceEmitter generates MoonBit code for interface" {
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: EventTarget
-      #|
+      #|// Specifications: 
       #|
       #|/// [EventTarget](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget)
       #|#external
@@ -282,7 +282,7 @@ test "InterfaceEmitter handles interface with nested union arg types" {
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: TestInterface
-      #|
+      #|// Specifications: 
       #|
       #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface)
       #|#external
@@ -385,7 +385,7 @@ test "InterfaceEmitter generates MoonBit code for union return type" {
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: TestInterface
-      #|
+      #|// Specifications: 
       #|
       #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface)
       #|#external
@@ -494,7 +494,7 @@ test "InterfaceEmitter generates MoonBit code for constants" {
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: TestInterface
-      #|
+      #|// Specifications: 
       #|
       #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface)
       #|#external
@@ -558,7 +558,7 @@ test "InterfaceEmitter generates MoonBit code for attributes" {
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: TestInterface
-      #|
+      #|// Specifications: 
       #|
       #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface)
       #|#external
@@ -650,7 +650,7 @@ test "InterfaceEmitter generates MoonBit code for attribute setter" {
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: TestInterface
-      #|
+      #|// Specifications: 
       #|
       #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface)
       #|#external
@@ -747,7 +747,7 @@ test "InterfaceEmitter generates MoonBit code for readonly and inherit attribute
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: ParentInterface
-      #|
+      #|// Specifications: 
       #|
       #|/// [ParentInterface](https://developer.mozilla.org/en-US/docs/Web/API/ParentInterface)
       #|#external
@@ -820,7 +820,7 @@ test "InterfaceEmitter generates MoonBit code for readonly and inherit attribute
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: ChildInterface
-      #|
+      #|// Specifications: 
       #|
       #|/// [ChildInterface](https://developer.mozilla.org/en-US/docs/Web/API/ChildInterface)
       #|#external
@@ -915,7 +915,7 @@ test "InterfaceEmitter emits static methods" {
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: TestInterface
-      #|
+      #|// Specifications: 
       #|
       #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface)
       #|#external
@@ -998,7 +998,7 @@ test "InterfaceEmitter emits static attribute getter methods" {
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: TestInterface
-      #|
+      #|// Specifications: 
       #|
       #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface)
       #|#external
@@ -1081,7 +1081,7 @@ test "mbt_code_gen_multi generates separate shared and FFI files for interface" 
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: TestInterface
-      #|
+      #|// Specifications: 
       #|
       #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface)
       #|#external
@@ -1173,7 +1173,7 @@ test "mbt_code_gen_multi emits empty UnionArgTraitImpl inheriting TJsValue" {
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: TestInterface
-      #|
+      #|// Specifications: 
       #|
       #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface)
       #|#external
@@ -1262,7 +1262,7 @@ test "mbt_code_gen_multi generates wasm FFI for constructor" {
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: TestInterface
-      #|
+      #|// Specifications: 
       #|
       #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface)
       #|#external
@@ -1403,7 +1403,7 @@ test "mbt_code_gen_multi overloads keep WebIDL member name in JS and MDN" {
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: TestInterface
-      #|
+      #|// Specifications: 
       #|
       #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface)
       #|#external
@@ -1512,7 +1512,7 @@ test "convenience method for optional interface return" {
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: Document
-      #|
+      #|// Specifications: 
       #|
       #|/// [Document](https://developer.mozilla.org/en-US/docs/Web/API/Document)
       #|#external
@@ -1604,7 +1604,7 @@ test "convenience method with optional args" {
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: ParentNode
-      #|
+      #|// Specifications: 
       #|
       #|/// [ParentNode](https://developer.mozilla.org/en-US/docs/Web/API/ParentNode)
       #|#external
@@ -1672,7 +1672,7 @@ test "no convenience method for non-interface optional return" {
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: TestInterface
-      #|
+      #|// Specifications: 
       #|
       #|/// [TestInterface](https://developer.mozilla.org/en-US/docs/Web/API/TestInterface)
       #|#external
@@ -1735,7 +1735,7 @@ test "InterfaceEmitter resolves typedef→callback chain in attribute setter" {
     content=(
       #|// Do not edit. This file is generated.
       #|// MoonBit type: GlobalEventHandlers
-      #|
+      #|// Specifications: 
       #|
       #|/// [GlobalEventHandlers](https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers)
       #|#external
