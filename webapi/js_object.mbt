@@ -9,59 +9,51 @@ pub type JsObject
 pub impl FromJsAny for JsObject with from_js_any(value : JsAny) -> JsObject = "%identity"
 
 ///|
-#cfg(target="js")
 pub impl TJsValue for JsObject with to_js(self : JsObject) -> JsValue = "%identity"
 
-///|
-#cfg(target="js")
-pub extern "js" fn JsObject::new() -> JsObject = "() => ({})"
+// ---- Js mappings ----
 
 ///|
 #cfg(target="js")
-pub extern "js" fn JsObject::set(
-  self : JsObject,
+extern "js" fn js_object_new_ffi() -> JsObject = "() => ({})"
+
+///|
+#cfg(target="js")
+extern "js" fn js_object_set_ffi(
+  obj : JsObject,
   key : String,
   value : JsValue,
-) -> JsObject = "(obj, key, value) => { obj[key] = value; return obj; }"
+) -> Unit = "(obj, key, value) => obj[key] = value"
 
 ///|
 #cfg(target="js")
-pub extern "js" fn JsObject::get(self : JsObject, key : String) -> JsValue = "(obj, key) => obj[key]"
+extern "js" fn js_object_get_ffi(obj : JsObject, key : String) -> JsValue = "(obj, key) => obj[key]"
+
+// ---- Wasm mappings ----
 
 ///|
 #cfg(target="wasm-gc")
-pub impl TJsValue for JsObject with to_js(self : JsObject) -> JsValue = "%identity"
+fn js_object_new_ffi() -> JsObject = "webapi_JsObject" "create"
 
 ///|
 #cfg(target="wasm-gc")
-fn js_object_new_ffi() -> JsValue = "webapi_JsObject" "create"
+fn js_object_set_ffi(obj : JsObject, key : String, value : JsValue) -> Unit = "webapi_JsObject" "set"
 
 ///|
 #cfg(target="wasm-gc")
+fn js_object_get_ffi(obj : JsObject, key : String) -> JsValue = "webapi_JsObject" "get"
+
+///|
 pub fn JsObject::new() -> JsObject {
-  js_object_new_ffi().unsafe_cast()
+  js_object_new_ffi()
 }
 
 ///|
-#cfg(target="wasm-gc")
-fn js_object_set_ffi(obj : JsValue, key : String, value : JsValue) -> JsValue = "webapi_JsObject" "set"
-
-///|
-#cfg(target="wasm-gc")
-pub fn JsObject::set(
-  self : JsObject,
-  key : String,
-  value : JsValue,
-) -> JsObject {
-  js_object_set_ffi(TJsValue::to_js(self), key, value).unsafe_cast()
+pub fn JsObject::set(self : JsObject, key : String, value : JsValue) -> Unit {
+  js_object_set_ffi(self, key, value)
 }
 
 ///|
-#cfg(target="wasm-gc")
-fn js_object_get_ffi(obj : JsValue, key : String) -> JsValue = "webapi_JsObject" "get"
-
-///|
-#cfg(target="wasm-gc")
 pub fn JsObject::get(self : JsObject, key : String) -> JsValue {
-  js_object_get_ffi(TJsValue::to_js(self), key)
+  js_object_get_ffi(self, key)
 }

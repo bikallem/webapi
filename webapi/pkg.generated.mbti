@@ -5012,7 +5012,7 @@ pub impl TJsValue for JsArray
 pub type JsObject
 pub fn JsObject::get(Self, String) -> JsValue
 pub fn JsObject::new() -> Self
-pub fn JsObject::set(Self, String, JsValue) -> Self
+pub fn JsObject::set(Self, String, JsValue) -> Unit
 pub impl FromJsAny for JsObject
 pub impl TJsValue for JsObject
 

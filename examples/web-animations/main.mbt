@@ -4,11 +4,12 @@
 
 ///|
 fn make_keyframe(transform : String, bg : String) -> @webapi.JsValue {
-  @webapi.TJsValue::to_js(
-    @webapi.JsObject::new()
-    .set("transform", @webapi.TJsValue::to_js(transform))
-    .set("backgroundColor", @webapi.TJsValue::to_js(bg)),
-  )
+  let o = @webapi.JsObject::new()
+  o
+  ..set("transform", @webapi.TJsValue::to_js(transform))
+  .set("backgroundColor", @webapi.TJsValue::to_js(bg))
+
+  @webapi.TJsValue::to_js(o)
 }
 
 ///|
@@ -32,7 +33,7 @@ fn main {
   let box = doc.create_element("div")
   box.set_id("box")
   box.set_attribute(
-    "style", "width: 80px; height: 80px; background: #3b82f6; border-radius: 8px; margin: 1em 0;",
+    "style", "width: 80px; height: 80px; background: #24262a; border-radius: 8px; margin: 1em 0;",
   )
 
   // State display
