@@ -9,7 +9,7 @@ pub impl[T] TJsValue for JsPromise[T] with to_js(self) -> JsValue = "%identity"
 ///|
 /// Creates a resolved Promise with the given value.
 pub fn[T : TJsValue] JsPromise::resolve(value : T) -> JsPromise[T] {
-  js_promise_resolve_ffi(TJsValue::to_js(value)).unsafe_cast()
+  js_promise_resolve_ffi(value.to_js()).unsafe_cast()
 }
 
 ///|
@@ -26,9 +26,9 @@ pub fn[T : FromJsAny, U : TJsValue] JsPromise::then(
   on_fulfilled : (T) -> U,
 ) -> JsPromise[U] {
   let f : (JsAny) -> JsValue = fn(value) {
-    TJsValue::to_js(on_fulfilled(FromJsAny::from_js_any(value)))
+    on_fulfilled(FromJsAny::from_js_any(value)).to_js()
   }
-  js_promise_then_ffi(TJsValue::to_js(self), f).unsafe_cast()
+  js_promise_then_ffi(self.to_js(), f).unsafe_cast()
 }
 
 ///|
@@ -39,9 +39,9 @@ pub fn[T : TJsValue] JsPromise::catch_(
   on_rejected : (JsValue) -> T,
 ) -> JsPromise[T] {
   let f : (JsAny) -> JsValue = fn(reason) {
-    TJsValue::to_js(on_rejected(FromJsAny::from_js_any(reason)))
+    on_rejected(FromJsAny::from_js_any(reason)).to_js()
   }
-  js_promise_catch_ffi(TJsValue::to_js(self), f).unsafe_cast()
+  js_promise_catch_ffi(self.to_js(), f).unsafe_cast()
 }
 
 ///|
@@ -51,7 +51,7 @@ pub fn[T] JsPromise::finally_(
   self : JsPromise[T],
   on_finally : () -> Unit,
 ) -> JsPromise[T] {
-  js_promise_finally_ffi(TJsValue::to_js(self), on_finally).unsafe_cast()
+  js_promise_finally_ffi(self.to_js(), on_finally).unsafe_cast()
 }
 
 ///|
