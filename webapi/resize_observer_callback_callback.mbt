@@ -24,9 +24,15 @@ pub fn ResizeObserverCallback::new(
 
 ///|
 #cfg(target="js")
-extern "js" fn resize_observer_callback_ffi(
-  callback : (Array[ResizeObserverEntry], ResizeObserver) -> Unit,
+extern "js" fn resize_observer_callback_ffi_fixed(
+  callback : (FixedArray[ResizeObserverEntry], ResizeObserver) -> Unit,
 ) -> ResizeObserverCallback = "(callback) => callback"
+
+fn resize_observer_callback_ffi(
+  callback : (Array[ResizeObserverEntry], ResizeObserver) -> Unit,
+) -> ResizeObserverCallback {
+  resize_observer_callback_ffi_fixed(fn(__a1, __a2) { callback(Array::from_fixed_array(__a1), __a2) })
+}
 
 ///|
 #cfg(target="wasm-gc")
