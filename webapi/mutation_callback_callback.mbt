@@ -22,9 +22,15 @@ pub fn MutationCallback::new(
 
 ///|
 #cfg(target="js")
-extern "js" fn mutation_callback_ffi(
-  callback : (Array[MutationRecord], MutationObserver) -> Unit,
+extern "js" fn mutation_callback_ffi_fixed(
+  callback : (FixedArray[MutationRecord], MutationObserver) -> Unit,
 ) -> MutationCallback = "(callback) => callback"
+
+fn mutation_callback_ffi(
+  callback : (Array[MutationRecord], MutationObserver) -> Unit,
+) -> MutationCallback {
+  mutation_callback_ffi_fixed(fn(__a1, __a2) { callback(Array::from_fixed_array(__a1), __a2) })
+}
 
 ///|
 #cfg(target="wasm-gc")

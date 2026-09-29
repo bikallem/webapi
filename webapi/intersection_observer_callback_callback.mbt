@@ -26,9 +26,15 @@ pub fn IntersectionObserverCallback::new(
 
 ///|
 #cfg(target="js")
-extern "js" fn intersection_observer_callback_ffi(
-  callback : (Array[IntersectionObserverEntry], IntersectionObserver) -> Unit,
+extern "js" fn intersection_observer_callback_ffi_fixed(
+  callback : (FixedArray[IntersectionObserverEntry], IntersectionObserver) -> Unit,
 ) -> IntersectionObserverCallback = "(callback) => callback"
+
+fn intersection_observer_callback_ffi(
+  callback : (Array[IntersectionObserverEntry], IntersectionObserver) -> Unit,
+) -> IntersectionObserverCallback {
+  intersection_observer_callback_ffi_fixed(fn(__a1, __a2) { callback(Array::from_fixed_array(__a1), __a2) })
+}
 
 ///|
 #cfg(target="wasm-gc")
